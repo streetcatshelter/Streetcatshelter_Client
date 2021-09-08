@@ -18,6 +18,7 @@ import CatDetail from '../pages/CatDetail';
 import CommunityWrite from '../pages/CommunityWrite';
 import CommunityDetail from '../pages/CommunityDetail';
 import Community from '../pages/Community';
+import test from '../pages/test';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Route path="/communitywrite" exact component={CommunityWrite} />
       <Route path="/communitydetail" exact component={CommunityDetail} />
       <Route path="/community" exact component={Community} />
+      <Route path="/test" exact component={test} />
       <Menu />
     </ThemeProvider>
   );

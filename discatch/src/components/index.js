@@ -5,33 +5,34 @@ import Menu from "./Menu";
 /* catposts */
 import CatPost from "./catPosts/CatPost";
 import CatPostList from "./catPosts/CatPostList";
+import CatPostDetail from "./catPosts/CatPostDetail";
 import Diary from "./catPosts/Diary";
 import Gallery from "./catPosts/Gallery";
 
 /* comments */
-import Comment from "./Comment"
+import Comment from "./Comment";
 import CommentList from "./CommentList";
 
 /* community */
 import CommunityCategoryCard from "./CommunityCategoryCard.jsx";
-import CommunityPost from "./CommunityPost.jsx"
+import CommunityPost from "./CommunityPost.jsx";
 import CommunityPostList from "./CommunityPostList.jsx";
 
-export{
+export {
   /* ==Templates */
-    Header,
-    Menu,
+  Header,
+  Menu,
   /* ==catposts */
-    CatPost,
-    CatPostList,
-    Diary,
-    Gallery,
+  CatPost,
+  CatPostList,
+  Diary,
+  Gallery,
+  CatPostDetail,
   /* ==comments */
-    Comment,
-    CommentList,
-   /* ==community */ 
-   CommunityCategoryCard,
-   CommunityPost,
-   CommunityPostList,
-}
-
+  Comment,
+  CommentList,
+  /* ==community */
+  CommunityCategoryCard,
+  CommunityPost,
+  CommunityPostList,
+};

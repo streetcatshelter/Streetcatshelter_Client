@@ -19,6 +19,7 @@ const CommunityPost = () => {
 const CommunityPostStyle = styled.div`
   border-bottom: 2px solid rgb(${(props) => props.theme.palette.olive});
   margin: 10px;
+  cursor: pointer;
 `;
 
 export default CommunityPost;

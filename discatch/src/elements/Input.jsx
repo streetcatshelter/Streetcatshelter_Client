@@ -26,7 +26,7 @@ const Input = ({
 const InputStyle = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  color: ${(props) => `rgb(${props.theme.theme[props.color]})`};
+  color: ${(props) => `rgb(${props.theme.palette[props.color]})`};
   background: ${(props) => props.bgColor};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
@@ -37,8 +37,8 @@ const InputStyle = styled.input`
   ${(props) => props.addstyle()}
 
   &:focus {
-    color: ${(props) => `rgb(${props.theme.theme.black})`};
-    background: ${(props) => `rgb(${props.theme.theme.white})`};
+    color: ${(props) => `rgb(${props.theme.palette.black})`};
+    background: ${(props) => `rgb(${props.theme.palette.white})`};
     outline: none;
 
     &::placeholder {
@@ -55,15 +55,15 @@ const InputStyle = styled.input`
   }
 
   &::placeholder {
-    color: ${(props) => `rgb(${props.theme.theme.ivory})`};
+    color: ${(props) => `rgb(${props.theme.palette.ivory})`};
   }
 
   &::-webkit-input-placeholder {
-    color: ${(props) => `rgb(${props.theme.theme.ivory})`};
+    color: ${(props) => `rgb(${props.theme.palette.ivory})`};
   }
 
   &:-ms-input-placeholder {
-    color: ${(props) => `rgb(${props.theme.theme.ivory})`};
+    color: ${(props) => `rgb(${props.theme.palette.ivory})`};
   }
 `;
 

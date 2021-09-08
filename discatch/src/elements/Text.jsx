@@ -13,6 +13,7 @@ const Text = ({ children, clickEvent, ...props }) => {
 Text.defaultProps = {
   color: "black",
   size: "14px",
+  margin: "0px",
   addstyle: () => {},
   clickEvent: () => {},
 };

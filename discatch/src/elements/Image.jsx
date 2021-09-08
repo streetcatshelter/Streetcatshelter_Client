@@ -6,14 +6,12 @@ import styled from 'styled-components';
 const Image = ({ src, width, height, ...props }) => {
   return (
     <React.Fragment>
-      <AspectOutter>
         <AspectInner
           {...props}
           src={src}
           width={width}
           height={height}
         ></AspectInner>
-      </AspectOutter>
     </React.Fragment>
   );
 };
@@ -24,10 +22,6 @@ Image.defaultProps = {
   addstyle: () => {},
 };
 
-const AspectOutter = styled.div`
-  width: 100%;
-  min-width: 250px;
-`;
 
 const AspectInner = styled.div`
   position: relative;

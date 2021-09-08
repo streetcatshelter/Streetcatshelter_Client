@@ -2,12 +2,12 @@
 import React from 'react';
 
 // ELEMENTS
-import Image from '../elements/Image';
+import { Image, Grid } from '../elements/index';
 
 // STYLE
 import styled, { css } from 'styled-components';
 
-const CommunityCategoryCard = ({ src, width, height, margin }) => {
+const CommunityCategoryCard = ({ src, width, height }) => {
   return (
   <>
     <CardStyle>
@@ -24,14 +24,12 @@ const CommunityCategoryCard = ({ src, width, height, margin }) => {
       <div>
     <div style={{
       position:'relative', 
-      right:'130px',
       top:'30px', 
       width:'120px'
     }}>고양이 용품 나눔</div>
     <div style={{
       fontSize: '13px',
       position:'relative', 
-      right:'130px',
       top:'30px', 
       width:'100px'
     }}>고양이 용품 나눔</div>

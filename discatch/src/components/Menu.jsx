@@ -2,6 +2,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+// style
+import { flexBox } from '../shared/style';
+
 // route
 import { Link } from 'react-router-dom';
 
@@ -10,7 +13,6 @@ import { Grid, Text } from '../elements';
 
 // icon
 import { Home, Users, Compass, Send, User } from 'react-feather';
-import { flexBox } from '../shared/style';
 
 const Menu = () => {
   return (
@@ -122,7 +124,6 @@ const MenuStyle = styled.footer`
   height: 50px;
   background: #fbd986;
   display: flex;
-  justify-content: space-around;
   position: fixed;
   left: 0;
   bottom: 0;

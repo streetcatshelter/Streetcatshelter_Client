@@ -41,9 +41,9 @@ const CommunityCategoryCard = ({ src, width, height }) => {
 
 const CardStyle = styled.div`
   background: rgb(${(props) => props.theme.palette.ivory});
-  width: 100%;
+  width: 375px;
   height: 106px;
-  margin: 30px 0;
+  margin: 30px auto;
   display:flex;
 `;
 

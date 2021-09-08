@@ -2,12 +2,12 @@
 import React from 'react';
 
 // ELEMENTS
-import { Image, Grid } from '../elements/index';
+import { Image, Grid, Text } from '../elements/index';
 
 // STYLE
 import styled, { css } from 'styled-components';
 
-const CommunityCategoryCard = ({ src, width, height }) => {
+const CommunityCategoryCard = ({ src, width, height, title, subtitle }) => {
   return (
   <>
     <CardStyle>
@@ -21,18 +21,20 @@ const CommunityCategoryCard = ({ src, width, height }) => {
         `;
       }}
       />
-      <div>
-    <div style={{
-      position:'relative', 
-      top:'30px', 
-      width:'120px'
-    }}>고양이 용품 나눔</div>
-    <div style={{
-      fontSize: '13px',
-      position:'relative', 
-      top:'30px', 
-      width:'100px'
-    }}>고양이 용품 나눔</div>
+    <div>
+    <Text 
+      fontWeight="bold"
+      size="20px">{title}</Text>
+    <Text
+      size="14px" 
+      addstyle={() => {
+          return css`
+            position:relative;
+            top:-10px;
+          `;
+        }}>
+          {subtitle}
+    </Text>
     </div>
     </CardStyle>
   </>
@@ -42,9 +44,10 @@ const CommunityCategoryCard = ({ src, width, height }) => {
 const CardStyle = styled.div`
   background: rgb(${(props) => props.theme.palette.ivory});
   width: 375px;
-  height: 106px;
+  height: 100px;
   margin: 30px auto;
   display:flex;
+  cursor: pointer;
 `;
 
 export default CommunityCategoryCard;

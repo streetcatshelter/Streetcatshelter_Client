@@ -1,24 +1,24 @@
 // LIBRARY
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 //STYLE
-import { flexBox } from '../shared/style';
+import { flexBox } from "../shared/style";
 // ELEMENTS
-import { Grid, Input, Button } from '../elements/index';
+import { Grid, Text } from "../elements/index";
 const Comment = () => {
   return (
     <Grid
-      margin="200px 0px 15px 0px"
+      margin="0px 0px 15px 0px"
       addstyle={() => {
         return css`
           border-bottom: 1px solid rgb(${(props) => props.theme.palette.olive});
-          ${flexBox('flex-start')}
+          ${flexBox("flex-start")}
         `;
       }}
     >
-      <p style={{ margin: '2px 3px', fontWeight: 800, fontSize: '18px' }}>
+      <Text margin="2px 3px" fontWeight="700" size="16px">
         댓글
-      </p>
+      </Text>
       <Count>25</Count>
     </Grid>
   );

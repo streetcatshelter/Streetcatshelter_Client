@@ -6,6 +6,8 @@ import { ThemeProvider } from "styled-components";
 // STYLE
 import theme from "../shared/style";
 
+import { Grid } from "../elements";
+
 //COMPONENTS
 import { Header, Menu } from "../components";
 
@@ -26,21 +28,23 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/catinfowrite" exact component={CatInfoWrite} />
-        <Route
-          path="/catdetailinfowrite"
-          exact
-          component={CatDetailInfoWrite}
-        />
-        <Route path="/catdetail" exact component={CatDetail} />
-        <Route path="/communitywrite" exact component={CommunityWrite} />
-        <Route path="/communitydetail" exact component={CommunityDetail} />
-        <Route path="/community" exact component={Community} />
-        <Route path="/test" exact component={test} />
-        <Route path={"*"} exact component={NotFound} />
-      </Switch>
+      <Grid display="flex" flexDirection="column" margin="15% 0">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/catinfowrite" exact component={CatInfoWrite} />
+          <Route
+            path="/catdetailinfowrite"
+            exact
+            component={CatDetailInfoWrite}
+          />
+          <Route path="/catdetail" exact component={CatDetail} />
+          <Route path="/communitywrite" exact component={CommunityWrite} />
+          <Route path="/communitydetail" exact component={CommunityDetail} />
+          <Route path="/community" exact component={Community} />
+          <Route path="/test" exact component={test} />
+          <Route path={"*"} exact component={NotFound} />
+        </Switch>
+      </Grid>
       <Menu />
     </ThemeProvider>
   );

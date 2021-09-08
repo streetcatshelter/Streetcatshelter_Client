@@ -1,7 +1,12 @@
 import React from "react";
+import { CatPostDetail } from "../components";
 
 const CatDetail = () => {
-  return <div></div>;
+  return (
+    <React.Fragment>
+      <CatPostDetail />
+    </React.Fragment>
+  );
 };
 
 export default CatDetail;

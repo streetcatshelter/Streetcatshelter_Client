@@ -1,11 +1,11 @@
 import React from 'react';
+import styled from "styled-components";
 
 const CatPost = () => {
-  return 
-  <div stlye={{background:"cuba"}}>
+  return (
+  <div style={{background:"cuba"}}>
     <div style={{width:"20px", height:"20px", background:"green"}}/>
-
-  </div>;
+  </div>);
 };
 
 export default CatPost;

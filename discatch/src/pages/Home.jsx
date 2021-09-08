@@ -1,10 +1,11 @@
-import React from 'react';
-
+import React from "react";
+import { CatPost } from "../components";
 const Home = () => {
-  return <div>
-
-    
-  </div>;
+  return (
+    <div>
+      <CatPost />
+    </div>
+  );
 };
 
 export default Home;

@@ -20,7 +20,7 @@ import CommunityPostList from "./CommunityPostList.jsx";
 export{
   /* ==Templates */
     Header,
-    Munu,
+    Menu,
   /* ==catposts */
     CatPost,
     CatPostList,

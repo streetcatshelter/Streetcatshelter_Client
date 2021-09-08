@@ -1,7 +1,21 @@
+// LIBRARY
 import React from 'react';
+import { css } from 'styled-components';
 
-const CommunityCategoryCard = () => {
-  return <div></div>;
+// ELEMENTS
+import Image from '../elements/Image';
+
+const CommunityCategoryCard = ({ src, width, height, text }) => {
+  return (
+  <>
+    <Image
+      src={src}
+      width={width} 
+      height={height}
+      />
+    <div value={text}></div>
+  </>
+  )
 };
 
 export default CommunityCategoryCard;

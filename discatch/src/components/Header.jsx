@@ -28,10 +28,10 @@ const HeaderStyle = styled.header`
   width: 100%;
   height: 60px;
   background: olive;
-  display: flex;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 9;
 `;
 
 const SelectStyle = styled.select`

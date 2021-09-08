@@ -40,6 +40,7 @@ const theme = {
     bgColor: '254, 253, 248',
     black: '25, 25, 25',
     white: '255, 255, 255',
+    lightGray: '211,211,211',
     D_ivory: '249, 219, 155',
     D_yellow: '249, 200, 82',
     D_brown: '190, 112, 29',

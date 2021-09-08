@@ -123,8 +123,8 @@ const MenuStyle = styled.footer`
   width: 100%;
   height: 50px;
   background: #fbd986;
-  display: flex;
   position: fixed;
+  z-index: 9;
   left: 0;
   bottom: 0;
 `;

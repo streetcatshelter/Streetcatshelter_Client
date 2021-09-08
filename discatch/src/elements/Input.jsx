@@ -55,15 +55,15 @@ const InputStyle = styled.input`
   }
 
   &::placeholder {
-    color: ${(props) => `rgb(${props.theme.palette.ivory})`};
+    color: ${(props) => `rgb(${props.theme.palette.lightGray})`};
   }
 
   &::-webkit-input-placeholder {
-    color: ${(props) => `rgb(${props.theme.palette.ivory})`};
+    color: ${(props) => `rgb(${props.theme.palette.lightGray})`};
   }
 
   &:-ms-input-placeholder {
-    color: ${(props) => `rgb(${props.theme.palette.ivory})`};
+    color: ${(props) => `rgb(${props.theme.palette.lightGray})`};
   }
 `;
 

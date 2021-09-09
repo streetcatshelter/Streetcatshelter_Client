@@ -20,18 +20,14 @@ const Diary = () => {
         </Text>
         <Count>25</Count>
       </Grid>
-      <Grid height="60px" width="95%" margin="auto">
-        <Grid display="flex" height="20px" justifyContent="spaceBetween">
-          <Text width="70%">구내염이 있어보입니다ㅠㅠ </Text>
-          <Text width="30%" size="10px">
-            2021-09-02 17:34
-          </Text>
+      <Grid height="60px" width="92%" margin="auto">
+        <Grid display="flex" height="20px" justifyContent="space-between">
+          <Text>구내염이 있어보입니다ㅠㅠ </Text>
+          <Text size="10px">2021-09-02 17:34</Text>
         </Grid>
-        <Grid display="flex" height="20px" justifyContent="spaceBetween">
-          <Text width="70%">추운데 걱정되네요~ </Text>
-          <Text width="30%" size="10px">
-            몇초전
-          </Text>
+        <Grid display="flex" height="20px" justifyContent="space-between">
+          <Text>추운데 걱정되네요~ </Text>
+          <Text size="10px">몇초전</Text>
         </Grid>
       </Grid>
       <Button>더보기</Button>

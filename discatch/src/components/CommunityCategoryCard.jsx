@@ -24,13 +24,18 @@ const CommunityCategoryCard = ({ src, width, height, title, subtitle }) => {
     <div>
     <Text 
       fontWeight="bold"
-      size="20px">{title}</Text>
+      size="20px"addstyle={() => {
+        return css`
+          position:relative;
+          top: 20px;
+        `;
+      }}>{title}</Text>
     <Text
       size="14px" 
       addstyle={() => {
           return css`
             position:relative;
-            top:-10px;
+            top: 30px;
           `;
         }}>
           {subtitle}

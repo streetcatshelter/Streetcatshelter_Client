@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 import { Grid, Button, Text } from '../elements/index';
 
 // COMPONENTS
-import CommnunityPostList from '../components/CommunityPostList';
+import CommentList from '../components/CommentList';
 
 // ROUTE
 import { Link } from 'react-router-dom';
@@ -78,7 +78,7 @@ const CommunityPostDetail = () => {
             align-items:center;
             justify-content: center;
             position:relative;
-            top:-77px;
+            top:-237px;
             left:130px;
             `;
           }}>수정하기</Button>
@@ -98,13 +98,22 @@ const CommunityPostDetail = () => {
             align-items:center;
             justify-content: center;
             position:relative;
-            top:-80px;
+            top:-240px;
             left:130px;
             `;
           }}>삭제하기</Button>
           </Grid>
       </CommunityPostDetailStyle>
+      <Grid width="340px" margin="auto" addstyle={() => {
+            return css`
+            position:relative;
+            top:-180px;
+            `;
+          }}>
+      <CommentList/>
+      </Grid>
     </Grid>
+    
   );
 };
 
@@ -112,7 +121,7 @@ const CommunityPostDetail = () => {
 const CommunityPostDetailStyle = styled.div`
   border: 2px solid rgb(${(props) => props.theme.palette.olive});
   width: 350px;
-  height: 70vh;
+  height: 90vh;
   margin: 10px auto;
   border-radius: 30px;
   overflow-y:hidden;

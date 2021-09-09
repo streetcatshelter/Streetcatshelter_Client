@@ -9,7 +9,7 @@ import { Grid, Button, Input, TextArea } from '../elements/index';
 // ROUTE
 import { Link } from 'react-router-dom';
 
-const CommunityWrite = () => {
+const CommunityPostEdit = () => {
   const Options = [
     {key: 1, value:'게시글 주제를 선택해주세요!'},
     {key: 2, value:'고양이 정보글'},
@@ -23,7 +23,7 @@ const CommunityWrite = () => {
 
   return (
     <Grid 
-      bgColor="bgColor" 
+      bgColor="bgColor"
       margin="-10vh auto"
       addstyle={() => {
         return css`
@@ -32,7 +32,7 @@ const CommunityWrite = () => {
         `;
       }}
       >
-      <CommunityWriteStyle>
+      <CommunityEditStyle>
         <Grid width="335px" height="10%" margin="0 0 30px 0">
           <Select onChange={onChangeHandler} value={content}>
           {Options.map((item, index)=>(
@@ -73,7 +73,7 @@ const CommunityWrite = () => {
         >
         <Button 
           width="108px"
-          margin="auto"
+          margin="-300px auto"
           color="white"
           fontSize="14px"
           bgColor="brown"
@@ -85,14 +85,14 @@ const CommunityWrite = () => {
             align-items:center;
             justify-content: center;
             position:relative;
-            top:-80px;
+            top:80px;
             left:130px;
             `;
-          }}>작성하기</Button>
-          <Link to='/communitydetail' style={{textDecoration:'none'}}>
+          }}>완료하기</Button>
+          <Link to='/communitypostdetail' style={{textDecoration:'none'}}>
           <Button 
           width="108px"
-          margin="auto"
+          margin="-300px auto"
           color="white"
           fontSize="14px"
           bgColor="brown"
@@ -104,23 +104,25 @@ const CommunityWrite = () => {
             align-items:center;
             justify-content: center;
             position:relative;
-            top:-77px;
+            top:80px;
             left:130px;
             `;
           }}>취소하기</Button>
           </Link>
           </Grid>
-      </CommunityWriteStyle>
+      </CommunityEditStyle>
     </Grid>
   );
 };
 
-const CommunityWriteStyle = styled.div`
+const CommunityEditStyle = styled.div`
+  position:relative;
   /* border: 2px solid rgb(${(props) => props.theme.palette.olive}); */
-  width: 350px;
-  height: 60vh;
+  width: 360px;
+  height: 80vh;
   margin: 10px auto;
-  border-radius: 30px;
+  overflow:hidden;
+  left:4px;
 `;
 
 const Select = styled.select`
@@ -131,4 +133,4 @@ const Select = styled.select`
   border-radius: 10px;
 `;
 
-export default CommunityWrite;
+export default CommunityPostEdit;

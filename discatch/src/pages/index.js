@@ -3,7 +3,9 @@ import CatDetailInfoWrite from "./CatDetailInfoWrite";
 import CatInfoWrite from "./CatInfoWrite";
 import Community from "./Community";
 import CommunityDetail from "./CommunityDetail";
-import CommunityWrite from "./CommunityWrite";
+import CommunityPostDetail from "./CommunityPostDetail";
+import CommunityPostWrite from "./CommunityPostWrite";
+import CommunityPostEdit from "./CommunityPostEdit";
 import Home from "./Home";
 import test from "./test";
 import NotFound from "./NotFound";
@@ -19,5 +21,7 @@ export {
   /* == Community */
   Community,
   CommunityDetail,
-  CommunityWrite,
+  CommunityPostWrite,
+  CommunityPostEdit,
+  CommunityPostDetail,
 };

@@ -5,7 +5,7 @@ import { CatPost, Gallery, Diary, CommentList } from "..";
 const CatPostDetail = () => {
   return (
     <React.Fragment>
-      <Grid display="flex" flexDirection="column">
+      <Grid display="flex" flexDirection="column" overflow="hidden">
         <CatPost />
         <Gallery />
         <Diary />

@@ -1,6 +1,6 @@
-import React from "react";
-import Comment from "./Comment";
-import { Grid, Input, Button } from "../elements/index";
+import React from 'react';
+import Comment from './Comment';
+import { Grid, Input, Button } from '../elements/index';
 const CommentList = () => {
   return (
     <>

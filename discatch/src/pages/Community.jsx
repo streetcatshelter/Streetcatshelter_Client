@@ -1,11 +1,11 @@
 // LIBRARY
-import React from 'react';
+import React from "react";
 
 // COMPONENTS
-import CommunityCategoryCard from '../components/CommunityCategoryCard'
+import CommunityCategoryCard from "../components/CommunityCategoryCard";
 
 // ELEMENTS
-import { Grid } from '../elements/index';
+import { Grid } from "../elements/index";
 
 const Community = () => {
   return (

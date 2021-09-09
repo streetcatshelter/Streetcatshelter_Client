@@ -69,7 +69,7 @@ const InputStyle = styled.input`
 
 Input.defaultProps = {
   width: '100%',
-  padding: '6px',
+  padding: '6px 0',
   color: 'black',
   bgColor: 'none',
   fontSize: '14px',

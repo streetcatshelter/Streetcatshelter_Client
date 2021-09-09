@@ -1,50 +1,60 @@
 // library
-import React, { useMemo } from 'react';
-import styled, { css } from 'styled-components';
-import Select from 'react-select';
+import React, { useMemo, useState } from "react";
+import styled, { css } from "styled-components";
 
 // style
-import { flexBox } from '../shared/style';
+import { flexBox } from "../shared/style";
 
 // route
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 // element
-import { Grid, Text } from '../elements';
+import { Grid, Text } from "../elements";
 
 // icon
-import { Search, Bell } from 'react-feather';
+import { Search, Bell } from "react-feather";
 
 const Header = () => {
   const options = useMemo(
     () => [
-      { value: '', label: '' },
-      { value: '망원동', label: '망원동' },
-      { value: '고척동', label: '고척동' },
-      { value: '개봉동', label: '개봉동' },
+      { key: 1, value: "지역" },
+      { key: 2, value: "망원동" },
+      { key: 3, value: "고척동" },
+      { key: 4, value: "개봉동" },
     ],
     [],
   );
+
+  const [place, setPlace] = useState("");
+  const onChangeHandler = (e) => {
+    setPlace(e.target.value);
+  };
 
   return (
     <HeaderStyle>
       <Grid
         addstyle={() => {
           return css`
-            ${flexBox('space-between')}
+            ${flexBox("space-between")}
           `;
         }}
       >
-        <CustomSelect placeholder="지역" options={options} />
+        <SelectStyle onChange={onChangeHandler} value={place}>
+          {options.map((pl, idx) => (
+            <option key={pl.key} value={pl.value}>
+              {pl.value}
+            </option>
+          ))}
+        </SelectStyle>
 
-        <Link to="/" style={{ margin: '0 auto', textDecoration: 'none' }}>
+        <Link to="/" style={{ margin: "0 auto", textDecoration: "none" }}>
           <Text
             color="D_olive"
             size="26px"
             fontWeight="600"
             addstyle={() => {
               return css`
-                font-family: 'Walter Turncoat';
+                font-family: "Walter Turncoat";
                 /* font-family: 'Nunito', sans-serif; */
               `;
             }}
@@ -53,8 +63,8 @@ const Header = () => {
           </Text>
         </Link>
 
-        <Search style={{ color: 'gray' }} />
-        <Bell style={{ margin: '0 4% 0 3%', color: 'gray' }} />
+        <Search style={{ color: "gray" }} />
+        <Bell style={{ margin: "0 4% 0 3%", color: "gray" }} />
       </Grid>
     </HeaderStyle>
   );
@@ -71,24 +81,17 @@ const HeaderStyle = styled.header`
   display: flex;
 `;
 
-const CustomSelect = styled(Select)`
-  width: 95px;
-  margin-left: 3%;
-  margin-right: -6%;
+const SelectStyle = styled.select`
+  width: 60px;
+  height: 25px;
+  margin: 0 -3% 0 3%;
+  border: none;
+  color: gray;
+  font-weight: bold;
+  font-size: 12px;
 
-  // selectBox
-  .css-yk16xz-control {
-    background: none;
-    border: none;
-  }
-
-  // placeholder
-  .css-1wa3eu0-placeholder {
-    color: lightgray;
-  }
-
-  // arrow
-  .css-tlfecz-indicatorContainer {
+  &:focus {
+    outline: none;
   }
 `;
 

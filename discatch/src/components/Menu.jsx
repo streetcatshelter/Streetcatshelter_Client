@@ -29,90 +29,58 @@ const Menu = () => {
           style={{
             textDecoration: "none",
             color: "black",
-            fontSize: "10px",
-            textAlign: "center",
           }}
         >
           <Home />
-          <p
-            style={{
-              margin: "0",
-            }}
-          >
+          <Text textAlign="center" size="12px">
             홈
-          </p>
+          </Text>
         </Link>
         <Link
           to="/community"
           style={{
             textDecoration: "none",
             color: "black",
-            fontSize: "10px",
             textAlign: "center",
           }}
         >
           <Users />
-          <p
-            style={{
-              margin: "0",
-            }}
-          >
-            커뮤니티
-          </p>
+          <Text size="12px">커뮤니티</Text>
         </Link>
         <Link
           to="/map"
           style={{
             textDecoration: "none",
             color: "black",
-            fontSize: "10px",
-            textAlign: "center",
           }}
         >
           <Compass />
-          <p
-            style={{
-              margin: "0",
-            }}
-          >
+          <Text textAlign="center" size="12px">
             지도
-          </p>
+          </Text>
         </Link>
         <Link
           to="/chat"
           style={{
             textDecoration: "none",
             color: "black",
-            fontSize: "10px",
-            textAlign: "center",
           }}
         >
           <Send />
-          <p
-            style={{
-              margin: "0",
-            }}
-          >
+          <Text textAlign="center" size="12px">
             채팅
-          </p>
+          </Text>
         </Link>
         <Link
           to="/mypage"
           style={{
             textDecoration: "none",
             color: "black",
-            fontSize: "10px",
             textAlign: "center",
           }}
         >
           <User />
-          <p
-            style={{
-              margin: "0",
-            }}
-          >
-            내정보
-          </p>
+          <Text size="12px">내정보</Text>
         </Link>
       </Grid>
     </MenuStyle>

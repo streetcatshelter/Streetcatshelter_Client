@@ -10,7 +10,7 @@ import { Grid } from '../elements/index';
 const Community = () => {
   return (
   <>
-  <Grid margin="20vh 0 0 0">
+  <Grid margin="10vh 0 0 0">
     <CommunityCategoryCard 
     width='60px' 
     height='60px'

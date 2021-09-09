@@ -15,7 +15,8 @@ import { Link } from 'react-router-dom';
 const CommunityDetail = () => {
   return (
     <Grid 
-      bgColor="bgColor" 
+      bgColor="bgColor"
+      margin="-10vh 0 0 0" 
       addstyle={() => {
         return css`
           position:relative;

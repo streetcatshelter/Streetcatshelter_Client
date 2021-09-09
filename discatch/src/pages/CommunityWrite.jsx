@@ -24,7 +24,7 @@ const CommunityWrite = () => {
   return (
     <Grid 
       bgColor="bgColor" 
-      margin="auto"
+      margin="-10vh auto"
       addstyle={() => {
         return css`
           position:relative;

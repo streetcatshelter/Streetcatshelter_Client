@@ -18,7 +18,9 @@ import {
   CatInfoWrite,
   CatDetailInfoWrite,
   CatDetail,
-  CommunityWrite,
+  CommunityPostWrite,
+  CommunityPostEdit,
+  CommunityPostDetail,
   CommunityDetail,
   Community,
   NotFound,
@@ -38,8 +40,10 @@ function App() {
             component={CatDetailInfoWrite}
           />
           <Route path="/catdetail" exact component={CatDetail} />
-          <Route path="/communitywrite" exact component={CommunityWrite} />
+          <Route path="/communitypostwrite" exact component={CommunityPostWrite} />
+          <Route path="/communitypostedit" exact component={CommunityPostEdit} />
           <Route path="/communitydetail" exact component={CommunityDetail} />
+          <Route path="/communitypostdetail" exact component={CommunityPostDetail} />
           <Route path="/community" exact component={Community} />
           <Route path="/test" exact component={test} />
           <Route path={"*"} exact component={NotFound} />

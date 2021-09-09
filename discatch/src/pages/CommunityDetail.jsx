@@ -46,7 +46,7 @@ const CommunityDetail = () => {
         </Grid>
           
       </CommunityDetailStyle>
-      <Link to="/communitywrite" style={{textDecoration:'none'}}>
+      <Link to="/communitypostwrite" style={{textDecoration:'none'}}>
       <Button 
         width="55px"
         margin="auto"

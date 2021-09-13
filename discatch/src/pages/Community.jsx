@@ -14,7 +14,7 @@ const Community = () => {
   return (
   <>
   <Grid margin="10vh 0 0 0">
-    <Link to='/communitydetail' style={{textDecoration:'none'}}>
+    <Link to='/community/catinfo' style={{textDecoration:'none'}}>
     <CommunityCategoryCard 
     width='60px' 
     height='60px'
@@ -22,7 +22,7 @@ const Community = () => {
     subtitle="고양이는 츄르를 좋아해요~"
     />
     </Link>
-    <Link to='/communitydetail' style={{textDecoration:'none'}}>
+    <Link to='/community/gathering' style={{textDecoration:'none'}}>
      <CommunityCategoryCard 
     width='60px' 
     height='60px'
@@ -30,7 +30,7 @@ const Community = () => {
     subtitle="동네 고양이님들에 대해 얘기 나눠 보아요~"
     />
     </Link>
-    <Link to='/communitydetail' style={{textDecoration:'none'}}>
+    <Link to='/community/sharing' style={{textDecoration:'none'}}>
      <CommunityCategoryCard 
     width='60px' 
     height='60px'

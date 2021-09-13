@@ -8,9 +8,10 @@ import { Grid, Button, Text, Image } from '../elements/index';
 
 // COMPONENTS
 import CommentList from '../components/CommentList';
+import EditDeleteModal from '../components/EditDeleteModal';
 
-// ROUTE
-import { Link } from 'react-router-dom';
+// ICON
+import { MoreHorizontal } from "react-feather";
 
 const CommunityPostDetail = () => {
   return (
@@ -24,14 +25,12 @@ const CommunityPostDetail = () => {
         `;
       }}
       >
-      
-
       <Grid 
         width="350px" 
         height="auto" 
         addstyle={() => {
         return css`
-          margin: 10px auto;
+          margin: auto;
           font-size: 18px;
           font-weight: bold;
         `;
@@ -43,6 +42,8 @@ const CommunityPostDetail = () => {
         addstyle={() => {
           return css`
             display:flex;
+            position:relative;
+            top:10px;
           `;
         }}
       > 
@@ -74,6 +75,8 @@ const CommunityPostDetail = () => {
             addstyle={() => {
               return css`
               display:flex;
+              position:relative;
+              right:10px;
               `;
             }}>
           <Text 
@@ -86,15 +89,16 @@ const CommunityPostDetail = () => {
               `;
             }}
             >2021-09-03 18:00</Text>
-          <Text 
-            size="12px"
+          <Grid
+            width="30px"
             addstyle={() => {
               return css`
               position:relative;
-              left: 30px;
+              left: 10px;
+              top: -11px;
               `;
             }}
-            >...</Text>
+            ><EditDeleteModal/></Grid>
           </Grid>
         </Grid>
       </Grid>

@@ -10,9 +10,25 @@ import { Grid, Button, Text } from '../elements/index';
 import CommnunityPostList from '../components/CommunityPostList';
 
 // ROUTE
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const CommunityDetail = () => {
+  const path = useLocation();
+  console.log(path.pathname);
+  let title = null;
+  if (path.pathname === '/community/catinfo') {
+    title = '고양이 정보글'
+    console.log(123);
+  } else if (path.pathname === '/community/gathering') {
+    title = '평창동 동네 모임'
+  } else if (path.pathname === '/community/sharing') {
+    title = '평창동 고양이 용품 나눔'
+  }
   return (
     <Grid 
       bgColor="bgColor"
@@ -41,33 +57,19 @@ const CommunityDetail = () => {
         `;
       }}
       > 
-      평창동 동네 모임
+      <Text size="18px">{title}</Text>
       </Grid>
         <Grid margin="30px 0 0 0">
           <CommnunityPostList/>
         </Grid>
           
       </CommunityDetailStyle>
-      <Link to="/communitypostwrite" style={{textDecoration:'none'}}>
-      <Button 
-        width="55px"
-        margin="auto"
-        color="white"
-        fontSize="40px"
-        bgColor="olive"
-        addstyle={() => {
-          return css`
-          display: flex;
-          height: 55px;
-          border-radius: 50px;
-          align-items:center;
-          justify-content: center;
-          position:fixed;
-          top:540px;
-          left:290px;
-          `;
-        }}
-      >+</Button>
+      <Link to="/communitypostwrite">
+      <Button
+        is_float="is_float"
+      >
+        <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+      </Button>
       </Link>
     </Grid>
   );

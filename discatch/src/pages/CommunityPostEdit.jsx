@@ -4,10 +4,13 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 // ELEMENTS
-import { Grid, Button, Input, TextArea } from '../elements/index';
+import { Grid, Button, Input, TextArea, Text } from '../elements/index';
 
 // ROUTE
 import { Link } from 'react-router-dom';
+
+// ICON
+import { Camera } from "react-feather";
 
 const CommunityPostEdit = () => {
   const Options = [
@@ -23,7 +26,7 @@ const CommunityPostEdit = () => {
 
   return (
     <Grid 
-      bgColor="bgColor"
+      bgColor="bgColor" 
       margin="-10vh auto"
       addstyle={() => {
         return css`
@@ -33,33 +36,139 @@ const CommunityPostEdit = () => {
       }}
       >
       <CommunityEditStyle>
-        <Grid width="335px" height="10%" margin="0 0 30px 0">
-          <Select onChange={onChangeHandler} value={content}>
+      <Grid width="335px" height="auto" margin="0 0 16px 0">
+          <Select 
+            onChange={onChangeHandler} 
+            value={content}
+            style={{height:"32px"}}>
           {Options.map((item, index)=>(
               <option key={item.key} value={item.value}>{item.value}</option>
             ))}
           </Select>
         </Grid>
         <Grid width="335px" height="10%">
-          <Input 
+        <Input 
             placeholder="제목을 입력해주세요."
+            width="103%"
             addstyle={() => {
               return css`
                 border-radius: 10px;
+                margin: 0 0 16px 2px;
               `;
             }}
             />
-        </Grid>
-        <Grid width="325px">
+          <Grid
+              margin="0 0 0 12px"
+              addstyle={() => {
+                return css`
+                /* display:flex; */
+                white-space:nowrap; 
+                overflow-x: auto; 
+                height:120px;
+                -ms-overflow-style: none;
+                &::-webkit-scrollbar { 
+                  display: none; 
+                }
+              `;
+            }}
+            >
+              
+            <Grid
+              width={'90px'} 
+              height={'90px'} 
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  position:relative;
+                  background:lightgray;
+                  display:inline-block;
+                  text-align:center;
+                  top:-34px;
+                  cursor:pointer;
+                `;
+              }}>
+                <Grid
+                addstyle={() => {
+                  return css`
+                    display:flex;
+                    flex-direction:column;
+                    justify-content:center;
+                    align-items:center;
+                  `;
+                }}>
+                <Camera width="50%" height="50%"color="white"/>
+                <Text 
+                  size="9px" 
+                  fontWeight="bold"
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      top:5px;
+                    `;
+                  }}>
+                  0/5
+                </Text>
+                </Grid>
+            </Grid>
+            <Grid
+              width={'90px'} 
+              height={'90px'} 
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block; 
+                `;
+              }}></Grid>
+            <Grid
+              width={'90px'} 
+              height={'90px'} 
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block; 
+                `;
+              }}></Grid>
+            <Grid
+              width={'90px'} 
+              height={'90px'}
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block; 
+                `;
+              }}></Grid>
+            <Grid
+              width={'90px'} 
+              height={'90px'}
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block; 
+                `;
+              }}></Grid>
+              
+              
+          </Grid>
           <TextArea 
             placeholder="내용을 입력해주세요." 
-            height="300px"
+            height="221px"
+            width="90%"
             addstyle={() => {
               return css`
                 resize: none;
+                margin: -4px 10px;
               `;
             }}
             />
+          
+        </Grid>
+        
+        <Grid width="325px">
+          
         </Grid>
         <Grid 
           width="225px"
@@ -67,45 +176,45 @@ const CommunityPostEdit = () => {
           addstyle={() => {
             return css`
             display: flex;
-            margin: 30px 0 0 -60px;
+            margin: 60px 0 0 -70px;
             `;
           }}
         >
         <Button 
           width="108px"
-          margin="-300px auto"
-          color="white"
+          margin="auto"
           fontSize="14px"
-          bgColor="brown"
+          bgColor="D_yellow"
+          fontWeight="bold"
           addstyle={() => {
             return css`
             display: flex;
             height: 24px;
-            border-radius: 50px;
+            border-radius: 10px;
             align-items:center;
             justify-content: center;
             position:relative;
-            top:80px;
+            top:-65px;
             left:130px;
             `;
           }}>완료하기</Button>
-          <Link to='/communitypostdetail' style={{textDecoration:'none'}}>
+          <Link to='/communitydetail' style={{textDecoration:'none'}}>
           <Button 
           width="108px"
-          margin="-300px auto"
-          color="white"
+          margin="auto"
           fontSize="14px"
-          bgColor="brown"
+          fontWeight="bold"
+          bgColor="D_yellow"
           addstyle={() => {
             return css`
             display: flex;
             height: 24px;
-            border-radius: 50px;
+            border-radius: 10px;
             align-items:center;
             justify-content: center;
             position:relative;
-            top:80px;
-            left:130px;
+            top:-62px;
+            left:137px;
             `;
           }}>취소하기</Button>
           </Link>
@@ -119,9 +228,8 @@ const CommunityEditStyle = styled.div`
   position:relative;
   /* border: 2px solid rgb(${(props) => props.theme.palette.olive}); */
   width: 360px;
-  height: 80vh;
+  height: 60vh;
   margin: 10px auto;
-  overflow:hidden;
   left:4px;
 `;
 

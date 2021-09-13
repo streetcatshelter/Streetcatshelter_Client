@@ -4,7 +4,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 // ELEMENTS
-import { Grid, Button } from '../elements/index';
+import { Grid, Button, Text } from '../elements/index';
 
 // COMPONENTS
 import CommnunityPostList from '../components/CommunityPostList';
@@ -26,21 +26,23 @@ const CommunityDetail = () => {
       >
       
 
+      
+      
+      <CommunityDetailStyle>
       <Grid 
         width="350px" 
-        height="auto" 
         addstyle={() => {
         return css`
+          position:relative;
           margin: 10px auto;
           font-size: 18px;
           font-weight: bold;
+          top:90px;
         `;
       }}
       > 
       평창동 동네 모임
       </Grid>
-      
-      <CommunityDetailStyle>
         <Grid margin="30px 0 0 0">
           <CommnunityPostList/>
         </Grid>
@@ -60,9 +62,9 @@ const CommunityDetail = () => {
           border-radius: 50px;
           align-items:center;
           justify-content: center;
-          position:relative;
-          top:-80px;
-          left:130px;
+          position:fixed;
+          top:540px;
+          left:290px;
           `;
         }}
       >+</Button>
@@ -73,11 +75,8 @@ const CommunityDetail = () => {
 
 
 const CommunityDetailStyle = styled.div`
-  border: 2px solid rgb(${(props) => props.theme.palette.olive});
-  width: 350px;
-  height: 70vh;
-  margin: 10px auto;
-  border-radius: 30px;
+  width: 100%;
+  margin: -100px auto;
   overflow-y:scroll;
   overflow-x:hidden;
   -ms-overflow-style: none;

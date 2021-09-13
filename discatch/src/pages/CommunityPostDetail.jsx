@@ -4,7 +4,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 // ELEMENTS
-import { Grid, Button, Text } from '../elements/index';
+import { Grid, Button, Text, Image } from '../elements/index';
 
 // COMPONENTS
 import CommentList from '../components/CommentList';
@@ -39,12 +39,88 @@ const CommunityPostDetail = () => {
       > 
       평창동 동네 모임
       </Grid>
-      
+      <Grid
+        addstyle={() => {
+          return css`
+            display:flex;
+          `;
+        }}
+      > 
+        <Grid>
+          <Image
+          width="30px"
+          height="30px"
+          addstyle={() => {
+            return css`
+            border-radius:30px;
+            margin:10px 13px;
+            `;
+          }}/>
+        </Grid>
+        <Grid 
+          margin="10px 220px 0 0"
+          addstyle={() => {
+            return css`
+            display:flex;
+            `;
+          }}>
+          <Grid>
+          <Text fontWeight="bold">뽀삐맘</Text>
+          <Text size="12px">평창동</Text>
+          </Grid>
+          <Grid 
+            width="300px"
+            margin="20px 0 0 0"
+            addstyle={() => {
+              return css`
+              display:flex;
+              `;
+            }}>
+          <Text 
+            fontWeight="bold"
+            size="10px"
+            addstyle={() => {
+              return css`
+              position:relative;
+              left: 20px;
+              `;
+            }}
+            >2021-09-03 18:00</Text>
+          <Text 
+            size="12px"
+            addstyle={() => {
+              return css`
+              position:relative;
+              left: 30px;
+              `;
+            }}
+            >...</Text>
+          </Grid>
+        </Grid>
+      </Grid>
       <CommunityPostDetailStyle>
         <Grid margin="30px 0 0 0">
-            <Text margin="0 0 0 30px" size="18px">9월 8일 (수) 18:00 망원 2동 순찰돕니다.</Text>
+            <Text 
+              margin="-20px 4px 4px 4px"
+              size="17px" 
+              fontWeight="bold"
+              addstyle={() => {
+                return css`
+                line-height:40px;
+                padding: 4px;
+                border-top: 1px solid rgb(${(props) => props.theme.palette.olive});
+                `;
+              }}>
+                9월 8일 (수) 18:00 망원 2동 순찰돕니다.
+            </Text>
             <ContentStyle>
-                <Text margin="30px">
+                <Text
+                  addstyle={() => {
+                    return css`
+                    position:relative;
+                    left:-30px;
+                    `;
+                }}>
                 망원동 고양이 너무 귀여운것같아요~
                 8일 저녁 6시에 망원2동 순찰 도실분 2분 구해요!
                 같이 고양이 순찰 돌고 너랑나랑호프에서 가볍게 맥주한잔해요!! ^^ 
@@ -52,63 +128,15 @@ const CommunityPostDetail = () => {
                 </Text>
             </ContentStyle>
         </Grid>
-        <Grid 
-          width="225px"
-          height="30px"
-          addstyle={() => {
-            return css`
-            display: flex;
-            margin: -30px 0 0 -60px;
-            `;
-          }}
-        >
-
-        <Link to="communitypostedit" style={{textDecoration:'none'}}>
-        <Button 
-          width="108px"
-          margin="auto"
-          color="white"
-          fontSize="14px"
-          bgColor="brown"
-          addstyle={() => {
-            return css`
-            display: flex;
-            height: 24px;
-            border-radius: 50px;
-            align-items:center;
-            justify-content: center;
-            position:relative;
-            top:-237px;
-            left:130px;
-            `;
-          }}>수정하기</Button>
-          </Link>
-          
-          <Button 
-          width="108px"
-          margin="auto"
-          color="white"
-          fontSize="14px"
-          bgColor="brown"
-          addstyle={() => {
-            return css`
-            display: flex;
-            height: 24px;
-            border-radius: 50px;
-            align-items:center;
-            justify-content: center;
-            position:relative;
-            top:-240px;
-            left:130px;
-            `;
-          }}>삭제하기</Button>
-          </Grid>
       </CommunityPostDetailStyle>
-      <Grid width="340px" margin="auto" addstyle={() => {
-            return css`
-            position:relative;
-            top:-180px;
-            `;
+      <Grid 
+        width="340px" 
+        margin="auto" 
+        addstyle={() => {
+              return css`
+              position:relative;
+              top:-180px;
+              `;
           }}>
       <CommentList/>
       </Grid>
@@ -119,33 +147,15 @@ const CommunityPostDetail = () => {
 
 
 const CommunityPostDetailStyle = styled.div`
-  border: 2px solid rgb(${(props) => props.theme.palette.olive});
   width: 350px;
-  height: 90vh;
+  height: 70vh;
   margin: 10px auto;
-  border-radius: 30px;
-  overflow-y:hidden;
-  overflow-x:hidden;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar { 
-    display: none; 
-  }
 `;
 
 const ContentStyle = styled.div`
-  border: 2px solid rgb(${(props) => props.theme.palette.olive});
   width: 300px;
   height: 40vh;
-  margin: 30px auto;
-  border-radius: 30px;
-  overflow-y:scroll;
-  overflow-x:hidden;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar { 
-    display: none; 
-  }
+  margin: 30px 0 0 40px;
 `;
 
 export default CommunityPostDetail;

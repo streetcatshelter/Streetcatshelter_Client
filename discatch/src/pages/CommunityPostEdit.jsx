@@ -198,7 +198,7 @@ const CommunityPostEdit = () => {
             left:130px;
             `;
           }}>완료하기</Button>
-          <Link to='/communitydetail' style={{textDecoration:'none'}}>
+          <Link to='/communitypostdetail' style={{textDecoration:'none'}}>
           <Button 
           width="108px"
           margin="auto"

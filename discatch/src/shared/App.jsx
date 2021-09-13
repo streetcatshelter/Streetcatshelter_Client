@@ -42,7 +42,9 @@ function App() {
           <Route path="/catdetail" exact component={CatDetail} />
           <Route path="/communitypostwrite" exact component={CommunityPostWrite} />
           <Route path="/communitypostedit" exact component={CommunityPostEdit} />
-          <Route path="/communitydetail" exact component={CommunityDetail} />
+          <Route path="/community/catinfo" exact component={CommunityDetail} />
+          <Route path="/community/gathering" exact component={CommunityDetail} />
+          <Route path="/community/sharing" exact component={CommunityDetail} />
           <Route path="/communitypostdetail" exact component={CommunityPostDetail} />
           <Route path="/community" exact component={Community} />
           <Route path="/test" exact component={test} />

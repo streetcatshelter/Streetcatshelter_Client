@@ -29,6 +29,7 @@ const GridStyle = styled.div`
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   border: ${(props) => props.border};
+  align-items: ${(props) => props.alignItems};
   justify-content: ${(props) => props.justifyContent};
   background: ${(props) =>
     props.bgColor &&

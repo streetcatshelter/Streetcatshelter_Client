@@ -1,6 +1,8 @@
 /* Templates */
 import Header from "./Header";
 import Menu from "./Menu";
+import Login from "./Login";
+import Slide from "./Slide";
 
 /* catposts */
 import CatPost from "./catPosts/CatPost";
@@ -22,6 +24,8 @@ export {
   /* ==Templates */
   Header,
   Menu,
+  Login,
+  Slide,
   /* ==catposts */
   CatPost,
   CatPostList,

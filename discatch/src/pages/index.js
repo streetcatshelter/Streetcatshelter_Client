@@ -9,11 +9,15 @@ import CommunityPostEdit from "./CommunityPostEdit";
 import Home from "./Home";
 import test from "./test";
 import NotFound from "./NotFound";
+import Slider from "./Slider";
+import UserInfoWrite from "./UserInfoWrite";
 
 export {
   Home,
   test,
   NotFound,
+  Slider,
+  UserInfoWrite,
   /* == Catpost */
   CatDetail,
   CatDetailInfoWrite,

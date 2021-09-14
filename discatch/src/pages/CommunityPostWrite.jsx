@@ -1,10 +1,15 @@
-import React from 'react';
+// LIBRARY
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 // STYLE
 import styled, { css } from 'styled-components';
 
 // ELEMENTS
-import { Grid, Button, Input, TextArea, Text } from '../elements/index';
+import { Grid, Button, Input, TextArea, Text, Image } from '../elements/index';
+
+// REDUX
+import { imgActions } from '../redux/modules/image';
 
 // ROUTE
 import { Link } from 'react-router-dom';
@@ -12,7 +17,18 @@ import { Link } from 'react-router-dom';
 // ICON
 import { Camera } from "react-feather";
 
+
+
 const CommunityPostWrite = () => {
+  const dispatch = useDispatch();
+  // S3
+  const handleInputFile = (e) => {
+    const file = e.target.files[0]
+    dispatch(imgActions.setInitialState());
+    dispatch(imgActions.setFile([file]));
+    console.log(file);
+  };
+
   const Options = [
     {key: 1, value:'게시글 주제를 선택해주세요!'},
     {key: 2, value:'고양이 정보글'},
@@ -83,7 +99,7 @@ const CommunityPostWrite = () => {
                   background:lightgray;
                   display:inline-block;
                   text-align:center;
-                  top:-34px;
+                  top:-12px;
                   cursor:pointer;
                 `;
               }}>
@@ -96,8 +112,31 @@ const CommunityPostWrite = () => {
                     align-items:center;
                   `;
                 }}>
-                <Camera width="50%" height=" 50%" color="white"/>
-                <Text size="9px" fontWeight="bold">0/5</Text>
+                <Grid width="95%">
+                  <UploadButton htmlFor="imgFile">
+                    <Camera width="50%" height=" 50%" color="white"/>
+                  </UploadButton> 
+                </Grid>
+                <Upload
+                  id="imgFile"
+                  name="imgFile"
+                  multiple
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  style={{ display: 'none' }}
+                  onChange={handleInputFile}
+                />
+                <Text 
+                  size="9px" 
+                  fontWeight="bold"
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      top:-12px;
+                    `;
+                  }}>
+                    0/5
+                </Text>
                 </Grid>
             </Grid>
             <Grid
@@ -109,7 +148,7 @@ const CommunityPostWrite = () => {
                   background:lightgray;
                   display:inline-block; 
                 `;
-              }}></Grid>
+              }}><Image width="100%" height="100%"/></Grid>
             <Grid
               width={'90px'} 
               height={'90px'} 
@@ -119,7 +158,7 @@ const CommunityPostWrite = () => {
                   background:lightgray;
                   display:inline-block; 
                 `;
-              }}></Grid>
+              }}><Image width="100%" height="100%"/></Grid>
             <Grid
               width={'90px'} 
               height={'90px'}
@@ -129,7 +168,7 @@ const CommunityPostWrite = () => {
                   background:lightgray;
                   display:inline-block; 
                 `;
-              }}></Grid>
+              }}><Image width="100%" height="100%"/></Grid>
             <Grid
               width={'90px'} 
               height={'90px'}
@@ -137,9 +176,9 @@ const CommunityPostWrite = () => {
               addstyle={() => {
                 return css`
                   background:lightgray;
-                  display:inline-block; 
+                  display:inline-block;
                 `;
-              }}></Grid>
+              }}><Image width="100%" height="100%"/></Grid>
               
               
           </Grid>
@@ -228,6 +267,31 @@ const Select = styled.select`
   border: 1px solid rgb(${(props) => props.theme.palette.olive});
   width: 350px;
   border-radius: 10px;
+`;
+
+const Upload = styled.input`
+  background-color: white;
+  width: 100%;
+  border: 2px solid white;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+`;
+
+const UploadButton = styled.label`
+  position:relative;
+  top:16px;
+  left:16px;
+  width: 120px;
+  text-align: center;
+  background-color: rgb(${(props) => props.theme.palette.buttonColor});
+  color: white;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  float: right;
+  margin-bottom: 40px;
 `;
 
 export default CommunityPostWrite;

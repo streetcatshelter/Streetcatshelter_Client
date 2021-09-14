@@ -1,5 +1,5 @@
 import React from "react";
-import onboadingImg from "../styles/images/onboadingImg(1).svg";
+import onboadingImg from "../../styles/images/onboadingImg(1).svg";
 const Slide = () => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>

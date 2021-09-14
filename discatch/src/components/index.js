@@ -1,8 +1,21 @@
 /* Templates */
+import Router from "./Router";
 import Header from "./Header";
 import Menu from "./Menu";
-import Login from "./Login";
-import Slide from "./Slide";
+
+/* ==Slider */
+import Slide from "./slider/Slide";
+import Login from "./slider/Login";
+/* ==myPages */
+
+import Calendar from "./myPage/Calendar";
+import MyPageCat from "./myPage/MyPageCat";
+import Notice from "./myPage/Notice";
+import Profile from "./myPage/Profile";
+import ProgressBar from "./myPage/ProgressBar";
+import UserInfoEdit from "./myPage/UserInfoEdit";
+import MyPageDetail from "./myPage/MyPageDetail";
+import MyWork from "./myPage/MyWork";
 
 /* catposts */
 import CatPost from "./catPosts/CatPost";
@@ -22,10 +35,21 @@ import CommunityPostList from "./CommunityPostList.jsx";
 
 export {
   /* ==Templates */
+  Router,
   Header,
   Menu,
-  Login,
+  /* ==Slider */
   Slide,
+  Login,
+  /* ==myPages */
+  Calendar,
+  MyPageCat,
+  Notice,
+  Profile,
+  ProgressBar,
+  UserInfoEdit,
+  MyWork,
+  MyPageDetail,
   /* ==catposts */
   CatPost,
   CatPostList,

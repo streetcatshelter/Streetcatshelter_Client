@@ -6,31 +6,17 @@ import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import Slide from '@material-ui/core/Slide';
 
-// ELEMENTS
-import { Grid } from '../elements/index';
-
 // ICON
 import { MoreHorizontal } from "react-feather";
 
 // ROUTE
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    position: 'relative',
-  },
-  title: {
-    marginLeft: theme.spacing(2),
-    flex: 1,
-  },
-}));
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditDeleteModal() {
-  const classes = useStyles();
+const EditDeleteModal = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -95,3 +81,5 @@ export default function EditDeleteModal() {
     </div>
   );
 }
+
+export default EditDeleteModal;

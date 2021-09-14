@@ -57,7 +57,7 @@ const CommunityDetail = () => {
         `;
       }}
       > 
-      <Text size="18px">{title}</Text>
+      <Text size="18px" margin="20px 0 0 0">{title}</Text>
       </Grid>
         <Grid margin="30px 0 0 0">
           <CommnunityPostList/>

@@ -10,9 +10,6 @@ import { Grid, Button, Text, Image } from '../elements/index';
 import CommentList from '../components/CommentList';
 import EditDeleteModal from '../components/EditDeleteModal';
 
-// ICON
-import { MoreHorizontal } from "react-feather";
-
 const CommunityPostDetail = () => {
   return (
     <Grid 
@@ -27,10 +24,9 @@ const CommunityPostDetail = () => {
       >
       <Grid 
         width="350px" 
-        height="auto" 
         addstyle={() => {
         return css`
-          margin: auto;
+          margin: 0 0 0 15px;
           font-size: 18px;
           font-weight: bold;
         `;
@@ -39,6 +35,7 @@ const CommunityPostDetail = () => {
       평창동 동네 모임
       </Grid>
       <Grid
+        margin="0 0 -35px 0"
         addstyle={() => {
           return css`
             display:flex;
@@ -54,7 +51,7 @@ const CommunityPostDetail = () => {
           addstyle={() => {
             return css`
             border-radius:30px;
-            margin:10px 13px;
+            margin: 10px 13px;
             `;
           }}/>
         </Grid>

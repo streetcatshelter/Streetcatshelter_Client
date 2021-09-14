@@ -27,6 +27,8 @@ const AspectInner = styled.div`
   background-image: url("${(props) => props.src}");
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  border-radius: ${(props) => props.borderRadius};
+  margin: ${(props) => props.margin};
   background-position: center;
   background-size: cover;
   ${(props) => props.addstyle()};

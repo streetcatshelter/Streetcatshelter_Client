@@ -3,10 +3,10 @@ import { MyPageDetail, Profile } from "../components";
 
 const MyPage = () => {
   return (
-    <React.Fragment>
+    <div style={{ overflowX: "hidden" }}>
       <Profile />
       <MyPageDetail />
-    </React.Fragment>
+    </div>
   );
 };
 

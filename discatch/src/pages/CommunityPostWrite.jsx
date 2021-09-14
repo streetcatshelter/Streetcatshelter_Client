@@ -96,7 +96,7 @@ const CommunityPostWrite = () => {
                     align-items:center;
                   `;
                 }}>
-                <Camera width="50%" height="50%"color="white"/>
+                <Camera width="50%" height=" 50%" color="white"/>
                 <Text size="9px" fontWeight="bold">0/5</Text>
                 </Grid>
             </Grid>

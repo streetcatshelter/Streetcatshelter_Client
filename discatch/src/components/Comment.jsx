@@ -50,7 +50,7 @@ const Comment = () => {
           `;
       }}>
       <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/>
-      <Text fontWeight="bold">10</Text>
+      <Text fontWeight="bold" margin="0 0 0 4px">10</Text>
       </Grid>
       </Grid>
 

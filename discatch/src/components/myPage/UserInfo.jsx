@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { MoreHorizontal } from "react-feather";
 import { history } from "../../redux/configureStore";
-const UserInfo = () => {
+const UserInfo = (edit) => {
+  const [NickName, setNickName] = useState(edit === "edit" ? "NickName" : "");
+  const [MyTown, setMyTown] = useState(edit === "edit" ? "MyTown" : "");
+  const changeNickName = (e) => {
+    setNickName(e.target.value);
+  };
+
+  const changeMyTown = (e) => {
+    setMyTown(e.target.value);
+  };
+
   return (
     <React.Fragment>
       <Wrapper>
         <Inner>
           <p>닉네임</p>
-          <input />
+          <input
+            type="text"
+            placeholder="닉네임을 입력해주세요!"
+            onChange={changeNickName}
+            defaultValue={NickName}
+          />
         </Inner>
         <Inner>
           <p>내동네</p>
-          <input />
+          <input
+            type="text"
+            placeholder="동네를 입력해주세요!"
+            onChange={changeMyTown}
+            defaultValue={MyTown}
+          />
         </Inner>
         <Inner>
           <button

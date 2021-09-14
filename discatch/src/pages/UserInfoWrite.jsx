@@ -1,9 +1,11 @@
 import React from "react";
 import { UserInfo } from "../components";
-const UserInfoWrite = () => {
+const UserInfoWrite = (props) => {
+  const edit = props.match.path === "/userinfoedit" ? "edit" : "";
+  console.log(edit);
   return (
     <React.Fragment>
-      <UserInfo />
+      <UserInfo edit={edit} />
     </React.Fragment>
   );
 };

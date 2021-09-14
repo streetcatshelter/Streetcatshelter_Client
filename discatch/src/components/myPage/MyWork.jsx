@@ -16,7 +16,7 @@ const Mywork = () => {
 
 const Wrapper = styled.div`
   width: 90%;
-  margin: auto;
+  margin: 10px auto;
 
   p {
     font-weight: bold;

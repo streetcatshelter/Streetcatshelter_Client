@@ -2,6 +2,7 @@ import React from "react";
 import { Image, Grid, Text } from "../../elements";
 import { MoreHorizontal } from "react-feather";
 import styled from "styled-components";
+import { history } from "../../redux/configureStore";
 const Profile = () => {
   return (
     <Wrapper>
@@ -10,7 +11,12 @@ const Profile = () => {
         <Grid>
           <Grid display="flex" justifyContent="space-between" width="100%">
             <Text fontWeight="800">채병훈하트정진우</Text>
-            <MoreHorizontal color="#B5BB19" />
+            <MoreHorizontal
+              color="#B5BB19"
+              onClick={() => {
+                history.push("/userinfoedit");
+              }}
+            />
           </Grid>
         </Grid>
         <Grid>
@@ -25,7 +31,6 @@ const Profile = () => {
 };
 const Wrapper = styled.div`
   display: flex;
-  margin: 20px 10px;
 `;
 
 export default Profile;

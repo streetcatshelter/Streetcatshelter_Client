@@ -1,21 +1,11 @@
-// LIBRARY
-import axios from 'axios';
+export const getToken = () => {
+  return localStorage.getItem('token');
+};
 
-// FUNCTION
-import { getToken } from './token';
+export const setToken = (TOKEN) => {
+  localStorage.setItem('token', TOKEN);
+};
 
-axios.defaults.withCredentials = true;
-
-const instance = axios.create({
-  baseURL: 'http://52.78.241.50/',
-});
-
-instance.interceptors.request.use((config) => {
-  config.headers['Content-Type'] = 'application/json; charset=utf-8';
-  config.headers['X-Requested-With'] = 'XMLHttpRequest';
-  config.headers['Accept'] = '*/*';
-  config.headers['Authorization'] = getToken();
-  return config;
-});
-
-export default instance;
+export const removeToken = () => {
+  localStorage.removeItem('token');
+};

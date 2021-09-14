@@ -3,10 +3,12 @@ import { MyPageDetail, Profile } from "../components";
 
 const MyPage = () => {
   return (
-    <React.Fragment>
-      <Profile />
+    <div style={{ overflowX: "hidden", width: "90%", margin: "auto" }}>
+      <div style={{ margin: "10px auto" }}>
+        <Profile />
+      </div>
       <MyPageDetail />
-    </React.Fragment>
+    </div>
   );
 };
 

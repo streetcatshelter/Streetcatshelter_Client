@@ -13,9 +13,10 @@ import MyPageCat from "./myPage/MyPageCat";
 import Notice from "./myPage/Notice";
 import Profile from "./myPage/Profile";
 import ProgressBar from "./myPage/ProgressBar";
-import UserInfoEdit from "./myPage/UserInfoEdit";
+import UserInfo from "./myPage/UserInfo";
 import MyPageDetail from "./myPage/MyPageDetail";
 import MyWork from "./myPage/MyWork";
+import MyPageContent from "./myPage/MyPageContent";
 
 /* catposts */
 import CatPost from "./catPosts/CatPost";
@@ -47,9 +48,10 @@ export {
   Notice,
   Profile,
   ProgressBar,
-  UserInfoEdit,
+  UserInfo,
   MyWork,
   MyPageDetail,
+  MyPageContent,
   /* ==catposts */
   CatPost,
   CatPostList,

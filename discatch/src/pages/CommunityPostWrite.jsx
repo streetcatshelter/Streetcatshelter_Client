@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 // STYLE
@@ -10,6 +10,7 @@ import { Grid, Button, Input, TextArea, Text, Image } from '../elements/index';
 
 // REDUX
 import { imgActions } from '../redux/modules/image';
+import { addCommunityDB } from '../redux/modules/community';
 
 // ROUTE
 import { Link } from 'react-router-dom';
@@ -19,8 +20,11 @@ import { Camera } from "react-feather";
 
 
 
-const CommunityPostWrite = () => {
+const CommunityPostWrite = ({ history }) => {
   const dispatch = useDispatch();
+
+  const location = '망원동'; // Header에서 가져오기
+
   // S3
   const handleInputFile = (e) => {
     const file = e.target.files[0]
@@ -35,9 +39,23 @@ const CommunityPostWrite = () => {
     {key: 3, value:'평창동 동네 모임'},
     {key: 4, value:'평창동 고양이 용품 나눔'},
   ]
-  const [content, setContent] = React.useState('게시글 주제를 선택해주세요!');
+  const [category, setCategory] = React.useState('게시글 주제를 선택해주세요!');
   const onChangeHandler=(e)=> {
-    setContent(e.currentTarget.value);
+    setCategory(e.currentTarget.value);
+  }
+
+  const [title, setTitle] = React.useState();
+  const $title = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const [contents, setContents] = React.useState();
+  const $contents = (e) => {
+    setContents(e.target.value);
+  };
+
+  const writeBtn = () => {
+    dispatch(addCommunityDB(category,contents,location,title))
   }
 
   return (
@@ -55,7 +73,7 @@ const CommunityPostWrite = () => {
       <Grid width="335px" height="auto" margin="0 0 16px 0">
           <Select 
             onChange={onChangeHandler} 
-            value={content}
+            value={category}
             style={{height:"32px"}}>
           {Options.map((item, index)=>(
               <option key={item.key} value={item.value}>{item.value}</option>
@@ -63,7 +81,8 @@ const CommunityPostWrite = () => {
           </Select>
         </Grid>
         <Grid width="335px" height="10%">
-        <Input 
+        <Input
+            onChange={$title} 
             placeholder="제목을 입력해주세요."
             width="103%"
             addstyle={() => {
@@ -182,7 +201,8 @@ const CommunityPostWrite = () => {
               
               
           </Grid>
-          <TextArea 
+          <TextArea
+            onChange={$contents}  
             placeholder="내용을 입력해주세요." 
             height="221px"
             width="90%"
@@ -215,6 +235,7 @@ const CommunityPostWrite = () => {
           fontSize="14px"
           bgColor="D_yellow"
           fontWeight="bold"
+          onClick={writeBtn}
           addstyle={() => {
             return css`
             display: flex;
@@ -227,13 +248,13 @@ const CommunityPostWrite = () => {
             left:130px;
             `;
           }}>작성하기</Button>
-          <Link to='/communitydetail' style={{textDecoration:'none'}}>
           <Button 
           width="108px"
           margin="auto"
           fontSize="14px"
           fontWeight="bold"
           bgColor="D_yellow"
+          onClick={()=>history.goBack()}
           addstyle={() => {
             return css`
             display: flex;
@@ -246,7 +267,6 @@ const CommunityPostWrite = () => {
             left:137px;
             `;
           }}>취소하기</Button>
-          </Link>
           </Grid>
       </CommunityWriteStyle>
     </Grid>
@@ -254,7 +274,6 @@ const CommunityPostWrite = () => {
 };
 
 const CommunityWriteStyle = styled.div`
-  /* border: 2px solid rgb(${(props) => props.theme.palette.olive}); */
   width: 350px;
   height: 60vh;
   margin: 10px auto;

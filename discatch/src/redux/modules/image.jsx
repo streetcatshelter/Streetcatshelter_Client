@@ -4,7 +4,7 @@ import AWS from 'aws-sdk';
 AWS.config.update({
   region: 'ap-northeast-2',
   credentials: new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'ap-northeast-2:a1d4d779-9019-4fa7-81e5-cecef26997bc',
+    IdentityPoolId: 'ap-northeast-2:668d98f4-0b26-4a2d-b594-f3ac6da473fc',
   }),
 });
 
@@ -41,7 +41,7 @@ const uploadImageDB = (callNext) => {
 
       const upload = new AWS.S3.ManagedUpload({
         params: {
-          Bucket: 's3-animan',
+          Bucket: 'discatch',
           Key: img.name,
           Body: img,
         },

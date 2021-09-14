@@ -1,19 +1,39 @@
-import React from "react";
-import { MyPageCat, MyWork, Notice } from "..";
+import React, { useState } from "react";
+import { MyPageContent } from "..";
 import { Grid } from "../../elements";
 import styled from "styled-components";
 const MyPageDetail = () => {
+  const [menu, SetMenu] = useState("");
   return (
     <Wrapper>
       <Grid>
-        <MenuBtn>내고양이보기</MenuBtn>
-        <MenuBtn>내활동 </MenuBtn>
-        <MenuBtn>공지사항</MenuBtn>
+        <MenuBtn
+          onClick={() => {
+            SetMenu("myCat");
+          }}
+          color={menu === "myCat" ? " #B5BB19" : "black"}
+        >
+          내고양이보기
+        </MenuBtn>
+        <MenuBtn
+          onClick={() => {
+            SetMenu("myWork");
+          }}
+          color={menu === "myWork" ? " #B5BB19" : "black"}
+        >
+          내활동
+        </MenuBtn>
+        <MenuBtn
+          onClick={() => {
+            SetMenu("notice");
+          }}
+          color={menu === "notice" ? " #B5BB19" : "black"}
+        >
+          공지사항
+        </MenuBtn>
       </Grid>
-      <Grid>
-        <MyPageCat />
-        <MyWork />
-        <Notice />
+      <Grid width="95%" margin="20px auto ">
+        <MyPageContent menu={menu} />
       </Grid>
     </Wrapper>
   );
@@ -25,6 +45,7 @@ const MenuBtn = styled.button`
   font-weight: 800;
   font-size: 14px;
   cursor: pointer;
+  color: ${(props) => props.color};
   &:hover {
     color: #b5bb19;
   }

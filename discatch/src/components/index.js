@@ -8,7 +8,6 @@ import Slide from "./slider/Slide";
 import Login from "./slider/Login";
 /* ==myPages */
 
-import Calendar from "./myPage/Calendar";
 import MyPageCat from "./myPage/MyPageCat";
 import Notice from "./myPage/Notice";
 import Profile from "./myPage/Profile";
@@ -17,6 +16,13 @@ import UserInfo from "./myPage/UserInfo";
 import MyPageDetail from "./myPage/MyPageDetail";
 import MyWork from "./myPage/MyWork";
 import MyPageContent from "./myPage/MyPageContent";
+
+/* ==myPages-calendar */
+import Calendar from "./myPage/calendar/Calendar";
+import CalendarBody from "./myPage/calendar/CalendarBody";
+import CalendarHead from "./myPage/calendar/CalendarHead";
+import CalendarDates from "./myPage/calendar/CalendarDates";
+import CalendarModal from "./myPage/calendar/CalendarModal";
 
 /* catposts */
 import CatPost from "./catPosts/CatPost";
@@ -43,7 +49,6 @@ export {
   Slide,
   Login,
   /* ==myPages */
-  Calendar,
   MyPageCat,
   Notice,
   Profile,
@@ -52,6 +57,12 @@ export {
   MyWork,
   MyPageDetail,
   MyPageContent,
+  /* ==myPages-calendar */
+  Calendar,
+  CalendarBody,
+  CalendarHead,
+  CalendarDates,
+  CalendarModal,
   /* ==catposts */
   CatPost,
   CatPostList,

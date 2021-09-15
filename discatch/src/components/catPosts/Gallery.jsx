@@ -1,40 +1,65 @@
-import React from "react";
-import { Grid, Text, Image, Button } from "../../elements";
-import styled, { css } from "styled-components";
-//STYLE
-import { flexBox } from "../../shared/style";
+// library
+import React from 'react';
+import styled, { css } from 'styled-components';
+
+// element
+import { Grid, Image } from '../../elements';
+
+// style
+import { flexBox } from '../../shared/style';
+
 const Gallery = () => {
+  // map 돌리기
   return (
-    <React.Fragment>
+    <Grid>
       <Grid
         addstyle={() => {
           return css`
-            border-bottom: 1px solid
-              rgb(${(props) => props.theme.palette.olive});
-            ${flexBox("flex-start")}
+            ${flexBox()}
           `;
         }}
       >
-        <Text margin="2px 3px" fontWeight="700" size="16px">
-          갤러리
-        </Text>
-        <Count>25</Count>
+        <Image width="100%" height="120px" />
+        <Image width="100%" height="120px" />
+        <Image width="100%" height="120px" />
       </Grid>
-      <div
-        style={{
-          height: "100px",
-          display: "grid",
-          margin: "5px",
-          gridTemplate: "repeat(2, auto)/repeat(6,auto)",
+      <Grid
+        addstyle={() => {
+          return css`
+            ${flexBox()}
+          `;
         }}
       >
-        <Image /> <Image /> <Image /> <Image /> <Image /> <Image /> <Image />
-        <Image /> <Image /> <Image /> <Image /> <Image />
-      </div>
-      <Button>더보기</Button>
-    </React.Fragment>
+        <Image width="100%" height="120px" />
+        <Image width="100%" height="120px" />
+        <Image width="100%" height="120px" />
+      </Grid>
+      <Grid
+        addstyle={() => {
+          return css`
+            ${flexBox()}
+          `;
+        }}
+      >
+        <Image width="100%" height="120px" />
+        <Image width="100%" height="120px" />
+        <Image width="100%" height="120px" />
+      </Grid>
+      <Grid
+        addstyle={() => {
+          return css`
+            ${flexBox()}
+          `;
+        }}
+      >
+        <Image width="100%" height="120px" />
+        <Image width="100%" height="120px" />
+        <Image width="100%" height="120px" />
+      </Grid>
+    </Grid>
   );
 };
+
 const Count = styled.div`
   width: 20px;
   height: 20px;

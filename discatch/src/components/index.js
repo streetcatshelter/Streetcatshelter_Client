@@ -17,12 +17,12 @@ import MyPageDetail from "./myPage/MyPageDetail";
 import MyWork from "./myPage/MyWork";
 import MyPageContent from "./myPage/MyPageContent";
 
-/* ==myPages-calendar */
-import Calendar from "./myPage/calendar/Calendar";
-import CalendarBody from "./myPage/calendar/CalendarBody";
-import CalendarHead from "./myPage/calendar/CalendarHead";
-import CalendarDates from "./myPage/calendar/CalendarDates";
-import CalendarModal from "./myPage/calendar/CalendarModal";
+/*==calendar */
+import Calendar from "./calendar/Calendar";
+import CalendarBody from "./calendar/CalendarBody";
+import CalendarHead from "./calendar/CalendarHead";
+import CalendarDates from "./calendar/CalendarDates";
+import CalendarModal from "./calendar/CalendarModal";
 
 /* catposts */
 import CatPost from "./catPosts/CatPost";
@@ -58,7 +58,7 @@ export {
   MyWork,
   MyPageDetail,
   MyPageContent,
-  /* ==myPages-calendar */
+  /* ==calendar */
   Calendar,
   CalendarBody,
   CalendarHead,

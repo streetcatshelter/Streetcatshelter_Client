@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CalendarDates from "./CalendarDates";
-// import axios from "axios";
 
 const CalendarBody = (props) => {
   const { totalDate, today, month, year, YEAR } = props;
   const lastDate = totalDate.indexOf(1);
   const firstDate = totalDate.indexOf(1, 7);
-  const [holiday, setHoliday] = useState([0]);
 
   //today
   const findToday = year === YEAR ? totalDate.indexOf(today) : "";
@@ -26,7 +24,6 @@ const CalendarBody = (props) => {
             findToday={findToday === idx && month === getMonth && findToday}
             month={month}
             year={year}
-            holiday={holiday.item}
           ></CalendarDates>
         );
       })}

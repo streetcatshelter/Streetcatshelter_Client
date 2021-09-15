@@ -60,7 +60,7 @@ const CommentList = () => {
           2021-09-02 17:34
         </p>
       </Grid>
-      <Button>더보기</Button>
+      <Button width="100%">더보기</Button>
     </>
   );
 };

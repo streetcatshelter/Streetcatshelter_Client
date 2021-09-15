@@ -84,6 +84,7 @@ const Calendar = () => {
         today={today}
         month={month}
         year={year}
+        YEAR={YEAR}
       />
     </div>
   );

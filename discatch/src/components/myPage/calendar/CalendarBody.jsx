@@ -4,13 +4,13 @@ import CalendarDates from "./CalendarDates";
 // import axios from "axios";
 
 const CalendarBody = (props) => {
-  const { totalDate, today, month, year } = props;
+  const { totalDate, today, month, year, YEAR } = props;
   const lastDate = totalDate.indexOf(1);
   const firstDate = totalDate.indexOf(1, 7);
   const [holiday, setHoliday] = useState([0]);
 
   //today
-  const findToday = totalDate.indexOf(today);
+  const findToday = year === YEAR ? totalDate.indexOf(today) : "";
   const getMonth = new Date().getMonth() + 1;
 
   return (

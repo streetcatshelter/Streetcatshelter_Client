@@ -2,11 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Image, Text } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
-
+import { history } from "../../redux/configureStore";
 const MyPageCat = () => {
   return (
     <div>
-      <CatPost>
+      <CatPost
+        onClick={() => {
+          history.push("/catdetail");
+        }}
+      >
         <Image width="80px" height="80px" margin="0px 20px 0px 0px" />
         <CatInfo>
           <p style={{ fontWeight: "800", fontSize: "14px" }}>뽀삐</p>

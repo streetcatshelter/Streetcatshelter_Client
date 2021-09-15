@@ -1,8 +1,18 @@
-import React from "react";
-import { Grid, Text, Image } from "../../elements";
-import { history } from "../../redux/configureStore";
+// library
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import { history } from '../../redux/configureStore';
+
+// element
+import { Grid, Text, Image } from '../../elements';
+
+// icon
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
 const CatPost = (props) => {
   const margin = props.margin;
+  const path = useLocation().pathname;
+
   return (
     <React.Fragment>
       <Grid
@@ -13,7 +23,7 @@ const CatPost = (props) => {
         padding="10px 0px 0px 10px"
         margin={margin}
         clickEvent={() => {
-          history.push("/catdetail");
+          history.push('/catdetail');
         }}
         cursor="pointer"
       >
@@ -21,20 +31,29 @@ const CatPost = (props) => {
         <Grid
           width="70%"
           height="70px"
-          display="flex"
           flexDirection="column"
           padding="0px 0px 0px 10px"
         >
           <Grid display="flex" height="35%">
-            <Text fontWeight="700" color="black" margin="0px" width="40%">
+            <Text fontWeight="700" color="black" width="40%">
               CatName
-            </Text>{" "}
-            <Text fontWeight="700" color="black" margin="0px" width="50%">
+            </Text>{' '}
+            <Text fontWeight="700" color="black" width="50%">
               중성화: Y
             </Text>
+            {path === '/catdetail' ? (
+              <FavoriteIcon
+                style={{
+                  color: 'red',
+                  position: 'relative',
+                  bottom: '3px',
+                  right: '-20%',
+                }}
+              />
+            ) : null}
           </Grid>
           <Grid height="65%">
-            <Text margin="0px" size="12px">
+            <Text margin="0px" size="12px" fontWeight="bold">
               #해쉬태그 #해쉬태그 #해쉬태그 #해쉬태그
             </Text>
           </Grid>

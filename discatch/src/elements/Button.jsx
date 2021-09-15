@@ -1,9 +1,9 @@
 // LIBRARY
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 // STYLE
-import { borderBox } from "../shared/style";
+import { borderBox } from '../shared/style';
 
 const Button = ({ is_float, children, clickEvent, ...props }) => {
   if (is_float) {
@@ -21,10 +21,10 @@ const Button = ({ is_float, children, clickEvent, ...props }) => {
 };
 
 Button.defaultProps = {
-  color: "black",
-  bgColor: "white",
-  fontSize: "14px",
-  padding: "12px 0px",
+  color: 'black',
+  bgColor: 'white',
+  fontSize: '14px',
+  padding: '12px 0px',
   addstyle: () => {},
   clickEvent: () => {},
 };
@@ -40,6 +40,7 @@ const ButtonStyle = styled.button`
   cursor: pointer;
   ${(props) => borderBox(props.radius, props.padding)}
   ${(props) => props.addstyle()};
+  align-items: ${(props) => props.alignItems};
 `;
 
 const FloatButton = styled.button`

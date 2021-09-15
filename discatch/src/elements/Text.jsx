@@ -1,6 +1,6 @@
 // LIBRARY
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Text = ({ children, clickEvent, ...props }) => {
   return (
@@ -11,16 +11,18 @@ const Text = ({ children, clickEvent, ...props }) => {
 };
 
 Text.defaultProps = {
-  color: "black",
-  size: "14px",
-  margin: "0px",
+  color: 'black',
+  size: '14px',
+  margin: '0px',
   addstyle: () => {},
   clickEvent: () => {},
 };
 
 const TextStyle = styled.p`
+  padding: ${(props) => props.padding};
   width: ${(props) => props.width};
   margin: ${(props) => props.margin};
+  background: ${(props) => `rgb(${props.theme.palette[props.bgColor]})`};
   color: ${(props) => `rgb(${props.theme.palette[props.color]})`};
   font-size: ${(props) => props.size};
   font-weight: ${(props) => props.fontWeight};

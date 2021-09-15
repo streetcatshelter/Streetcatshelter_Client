@@ -6,8 +6,8 @@ import Menu from "./Menu";
 /* ==Slider */
 import Slide from "./slider/Slide";
 import Login from "./slider/Login";
-/* ==myPages */
 
+/* ==myPages */
 import MyPageCat from "./myPage/MyPageCat";
 import Notice from "./myPage/Notice";
 import Profile from "./myPage/Profile";
@@ -28,6 +28,7 @@ import CalendarModal from "./myPage/calendar/CalendarModal";
 import CatPost from "./catPosts/CatPost";
 import CatPostList from "./catPosts/CatPostList";
 import CatPostDetail from "./catPosts/CatPostDetail";
+import CatCalendar from "./catPosts/CatCalendar";
 import Diary from "./catPosts/Diary";
 import Gallery from "./catPosts/Gallery";
 
@@ -69,6 +70,7 @@ export {
   Diary,
   Gallery,
   CatPostDetail,
+  CatCalendar,
   /* ==comments */
   Comment,
   CommentList,

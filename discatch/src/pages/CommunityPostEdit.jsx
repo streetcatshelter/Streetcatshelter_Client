@@ -177,11 +177,13 @@ const CommunityPostEdit = (props) => {
                 <Grid
                   width={"90px"}
                   height={"90px"}
-                  margin={"5.5px"}
+                  margin={"0 5.5px"}
                   addstyle={() => {
                     return css`
+                      position:relative;
                       background: lightgray;
                       display: inline-block;
+                      top:5px;
                     `;
                   }}
                 >

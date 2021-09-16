@@ -6,7 +6,6 @@ import Template from "./Template";
 
 /* ==Slider */
 import Slide from "./slider/Slide";
-import Login from "./slider/Login";
 
 /* ==myPages */
 import MyPageCat from "./myPage/MyPageCat";
@@ -51,7 +50,6 @@ export {
   Template,
   /* ==Slider */
   Slide,
-  Login,
   /* ==myPages */
   MyPageCat,
   Notice,

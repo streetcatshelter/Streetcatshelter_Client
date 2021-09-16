@@ -12,9 +12,12 @@ import { Link } from "react-router-dom";
 import { Grid, Text } from "../elements";
 
 // icon
-import { Search, Bell } from "react-feather";
+import { Search, Bell, ArrowLeft } from "react-feather";
 
-const Header = () => {
+import { history } from "../redux/configureStore";
+
+const Header = (props) => {
+  const path = props.path;
   const options = useMemo(
     () => [
       { key: 1, value: "지역" },
@@ -22,7 +25,7 @@ const Header = () => {
       { key: 3, value: "고척동" },
       { key: 4, value: "개봉동" },
     ],
-    [],
+    []
   );
 
   const [place, setPlace] = useState("");
@@ -39,13 +42,22 @@ const Header = () => {
           `;
         }}
       >
-        <SelectStyle onChange={onChangeHandler} value={place}>
-          {options.map((pl, idx) => (
-            <option key={pl.key} value={pl.value}>
-              {pl.value}
-            </option>
-          ))}
-        </SelectStyle>
+        {path === "/" || path === "/community" ? (
+          <SelectStyle onChange={onChangeHandler} value={place}>
+            {options.map((pl, idx) => (
+              <option key={pl.key} value={pl.value}>
+                {pl.value}
+              </option>
+            ))}
+          </SelectStyle>
+        ) : (
+          <ArrowLeft
+            style={{ marginLeft: "25px", color: "gray" }}
+            onClick={() => {
+              history.goBack();
+            }}
+          />
+        )}
 
         <Link to="/" style={{ margin: "0 auto", textDecoration: "none" }}>
           <Text

@@ -1,6 +1,7 @@
-// LIBRARY
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+
+/* == Library - style */
+import styled from "styled-components";
 
 const Text = ({ children, clickEvent, ...props }) => {
   return (
@@ -11,9 +12,9 @@ const Text = ({ children, clickEvent, ...props }) => {
 };
 
 Text.defaultProps = {
-  color: 'black',
-  size: '14px',
-  margin: '0px',
+  color: "black",
+  size: "14px",
+  margin: "0px",
   addstyle: () => {},
   clickEvent: () => {},
 };

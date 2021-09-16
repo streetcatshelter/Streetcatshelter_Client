@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import CalendarHead from "./CalendarHead";
-import CalendarBody from "./CalendarBody";
+
+/* == components*/
+import { CalendarHead, CalendarBody } from "..";
 
 const Calendar = () => {
   let DATE = new Date();

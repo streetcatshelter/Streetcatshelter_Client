@@ -1,11 +1,13 @@
 import React from "react";
-import { Grid } from "../elements";
-import { CatPostList } from "../components";
-const Home = () => {
+
+/* == components*/
+import { CatPostList, Template } from "../components";
+
+const Home = (props) => {
   return (
-    <Grid>
+    <Template props={props}>
       <CatPostList />
-    </Grid>
+    </Template>
   );
 };
 

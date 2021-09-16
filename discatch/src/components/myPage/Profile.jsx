@@ -1,8 +1,15 @@
 import React from "react";
+
+/* == Custom - Elements*/
 import { Image, Grid, Text } from "../../elements";
-import { MoreHorizontal } from "react-feather";
+
+/* == Library - style */
 import styled from "styled-components";
+import { MoreHorizontal } from "react-feather";
+
+/* == Redux */
 import { history } from "../../redux/configureStore";
+
 const Profile = () => {
   return (
     <Wrapper>

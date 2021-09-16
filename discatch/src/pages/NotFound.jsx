@@ -1,20 +1,25 @@
 import React from "react";
+
+/* == components*/
+import { Template } from "../components";
+
 /* == Custom - Elements*/
 import { Button, Text } from "../elements";
+
 /* == Custom - Image */
 import NotFoundCatImage from "../styles/images/NotFoundCat.svg";
+
 /* == Redux  */
 import { history } from "../redux/configureStore";
 
-const NotFound = () => {
+const NotFound = (props) => {
   return (
-    <>
+    <Template props={props}>
       <Text size="30px" fontWeight="700">
         {" "}
         404 Error!!!
       </Text>
       <img src={NotFoundCatImage} alt={NotFoundCatImage} />
-
       <Button
         bgColor="yellow"
         clickEvent={() => {
@@ -23,7 +28,7 @@ const NotFound = () => {
       >
         <Text fontWeight="700">메인으로 돌아가기</Text>
       </Button>
-    </>
+    </Template>
   );
 };
 

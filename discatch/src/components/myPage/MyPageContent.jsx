@@ -1,5 +1,8 @@
 import React from "react";
+
+/* == components*/
 import { MyPageCat, MyWork, Notice } from "..";
+
 const MyPageContent = (props) => {
   return (
     <div>

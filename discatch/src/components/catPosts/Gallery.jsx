@@ -1,12 +1,14 @@
 // library
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+
+/* == Library - style */
+import styled, { css } from "styled-components";
 
 // element
-import { Grid, Image } from '../../elements';
+import { Grid, Image } from "../../elements";
 
 // style
-import { flexBox } from '../../shared/style';
+import { flexBox } from "../../shared/style";
 
 const Gallery = () => {
   // map 돌리기

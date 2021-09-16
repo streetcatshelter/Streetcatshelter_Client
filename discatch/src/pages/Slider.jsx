@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
 
-import { Login, Slide } from "../components";
+/* == components*/
+import { Login, Slide, Template } from "../components";
+
+/* == Library - style */
+import styled from "styled-components";
 
 const TOTAL_SLIDES = 1;
 
-const Slider = () => {
+const Slider = (props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
   const nextSlide = () => {
@@ -29,7 +32,7 @@ const Slider = () => {
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
   }, [currentSlide]);
   return (
-    <div>
+    <Template props={props}>
       <Container>
         <SliderContainer ref={slideRef}>
           <Slide />
@@ -40,7 +43,7 @@ const Slider = () => {
         <Button onClick={prevSlide} />
         <Button onClick={nextSlide} />
       </BtnWrap>
-    </div>
+    </Template>
   );
 };
 

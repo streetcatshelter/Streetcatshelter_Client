@@ -2,6 +2,7 @@
 import Router from "./Router";
 import Header from "./Header";
 import Menu from "./Menu";
+import Template from "./Template";
 
 /* ==Slider */
 import Slide from "./slider/Slide";
@@ -37,15 +38,17 @@ import Comment from "./Comment";
 import CommentList from "./CommentList";
 
 /* community */
-import CommunityCategoryCard from "./CommunityCategoryCard.jsx";
-import CommunityPost from "./CommunityPost.jsx";
-import CommunityPostList from "./CommunityPostList.jsx";
+import CommunityCategoryCard from "./CommunityCategoryCard";
+import CommunityPost from "./CommunityPost";
+import CommunityPostList from "./CommunityPostList";
+import EditDeleteModal from "./EditDeleteModal";
 
 export {
   /* ==Templates */
   Router,
   Header,
   Menu,
+  Template,
   /* ==Slider */
   Slide,
   Login,
@@ -78,4 +81,5 @@ export {
   CommunityCategoryCard,
   CommunityPost,
   CommunityPostList,
+  EditDeleteModal,
 };

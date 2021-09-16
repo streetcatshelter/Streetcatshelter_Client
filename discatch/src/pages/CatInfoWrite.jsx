@@ -1,14 +1,21 @@
-import React from 'react';
-import { Grid, Image, TextArea, Input, Button } from '../elements/index';
-import styled, { css } from 'styled-components';
-const CatInfoWrite = () => {
+import React from "react";
+/* == components*/
+import { Template } from "../components";
+
+/* == Custom - Elements*/
+import { Grid, Image, TextArea, Input, Button } from "../elements/index";
+
+/* == Library - style */
+import styled, { css } from "styled-components";
+
+const CatInfoWrite = (props) => {
   const Options = [
-    { key: 1, value: 'Y' },
-    { key: 2, value: 'N' },
-    { key: 3, value: '?' },
+    { key: 1, value: "Y" },
+    { key: 2, value: "N" },
+    { key: 3, value: "?" },
   ];
   return (
-    <>
+    <Template props={props}>
       <Grid width="65%" margin="40px auto">
         <Image
           src="https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.jpg"
@@ -61,7 +68,7 @@ const CatInfoWrite = () => {
           작성하기
         </Button>
       </Grid>
-    </>
+    </Template>
   );
 };
 

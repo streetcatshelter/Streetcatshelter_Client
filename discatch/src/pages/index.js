@@ -5,6 +5,7 @@ import NotFound from "./NotFound";
 import Slider from "./Slider";
 import UserInfoWrite from "./UserInfoWrite";
 import MyPage from "./MyPage";
+import Login from "./Login";
 
 import CatDetail from "./CatDetail";
 import CatDetailInfoWrite from "./CatDetailInfoWrite";
@@ -23,6 +24,7 @@ export {
   Slider,
   UserInfoWrite,
   MyPage,
+  Login,
   /* == Catpost */
   CatDetail,
   CatDetailInfoWrite,

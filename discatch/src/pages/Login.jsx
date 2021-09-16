@@ -4,9 +4,9 @@ import React from "react";
 import styled from "styled-components";
 
 /* == Custom - Icon */
-import Kakao from "../../styles/images/icon-Kakao.png";
-import Naver from "../../styles/images/icon-Naver(G).png";
-import Google from "../../styles/images/icon-google.png";
+import Kakao from "../styles/images/icon-Kakao.png";
+import Naver from "../styles/images/icon-Naver(G).png";
+import Google from "../styles/images/icon-google.png";
 
 const login = () => {
   return (

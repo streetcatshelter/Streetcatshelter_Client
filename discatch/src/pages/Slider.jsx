@@ -1,16 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 
 /* == components*/
-import { Login, Slide, Template } from "../components";
+import { Slide } from "../components";
 
 /* == Library - style */
 import styled from "styled-components";
+import { ChevronLeft, ChevronRight, X } from "react-feather";
 
-const TOTAL_SLIDES = 1;
+/* == Redux  */
+import { history } from "../redux/configureStore";
+
+const TOTAL_SLIDES = 2;
 
 const Slider = (props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
+
   const nextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
       // 더 이상 넘어갈 슬라이드가 없으면 슬라이드를 초기화합니다.
@@ -32,22 +37,35 @@ const Slider = (props) => {
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
   }, [currentSlide]);
   return (
-    <Template props={props}>
+    <>
       <Container>
+        <CloseButton
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          <X />
+        </CloseButton>
         <SliderContainer ref={slideRef}>
           <Slide />
-          <Login />
+          <Slide number="2" />
+          <Slide number="3" />
         </SliderContainer>
       </Container>
       <BtnWrap>
-        <Button onClick={prevSlide} />
-        <Button onClick={nextSlide} />
+        <Button onClick={prevSlide}>
+          <ChevronLeft />
+        </Button>
+        <Dot background={currentSlide === 0 ? "#D19B61" : "#FBD986"} />
+        <Dot background={currentSlide === 1 ? "#D19B61" : "#FBD986"} />
+        <Dot background={currentSlide === 2 ? "#D19B61" : "#FBD986"} />
+        <Button onClick={nextSlide}>
+          <ChevronRight />
+        </Button>
       </BtnWrap>
-    </Template>
+    </>
   );
 };
-
-export default Slider;
 
 const Container = styled.div`
   width: 100%;
@@ -60,15 +78,17 @@ const BtnWrap = styled.div`
   align-items: center;
 `;
 const Button = styled.button`
-  width: 10px;
-  height: 10px;
-  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
   border: none;
-  background: green;
-  margin: 5px;
+  background: #fbd986;
+  margin: auto;
+  padding: 2px;
+
   &:hover {
     transition: all 0.3s ease-in-out;
-    background-color: coral;
+    background-color: #cbcf52;
     color: #fff;
   }
 `;
@@ -76,3 +96,31 @@ const SliderContainer = styled.div`
   width: 100%;
   display: flex; //이미지들을 가로로 나열합니다.
 `;
+
+const Dot = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: ${(props) => props.background};
+  margin: 5px;
+`;
+
+const CloseButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  background: #fbd986;
+  margin: auto;
+  padding: 2px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: #cbcf52;
+    color: #fff;
+  }
+`;
+export default Slider;

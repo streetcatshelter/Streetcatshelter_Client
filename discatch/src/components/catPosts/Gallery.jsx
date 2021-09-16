@@ -1,52 +1,19 @@
 // library
-import React from "react";
+import React from 'react';
 
 /* == Library - style */
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 // element
-import { Grid, Image } from "../../elements";
+import { Grid, Image } from '../../elements';
 
 // style
-import { flexBox } from "../../shared/style";
+import { flexBox } from '../../shared/style';
 
 const Gallery = () => {
   // map 돌리기
   return (
     <Grid>
-      <Grid
-        addstyle={() => {
-          return css`
-            ${flexBox()}
-          `;
-        }}
-      >
-        <Image width="100%" height="120px" />
-        <Image width="100%" height="120px" />
-        <Image width="100%" height="120px" />
-      </Grid>
-      <Grid
-        addstyle={() => {
-          return css`
-            ${flexBox()}
-          `;
-        }}
-      >
-        <Image width="100%" height="120px" />
-        <Image width="100%" height="120px" />
-        <Image width="100%" height="120px" />
-      </Grid>
-      <Grid
-        addstyle={() => {
-          return css`
-            ${flexBox()}
-          `;
-        }}
-      >
-        <Image width="100%" height="120px" />
-        <Image width="100%" height="120px" />
-        <Image width="100%" height="120px" />
-      </Grid>
       <Grid
         addstyle={() => {
           return css`

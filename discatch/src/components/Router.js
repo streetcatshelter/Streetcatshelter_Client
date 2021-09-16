@@ -16,6 +16,7 @@ import {
   NotFound,
   CommunityPostDetail,
   Community,
+  Login,
 } from "../pages";
 // 배포 시 해당 라우트 삭제 예정
 import test from "../pages/test";
@@ -27,6 +28,7 @@ const Router = () => {
       <Route path="/" exact component={Home} />
       <Route path="/slider" exact component={Slider} />
       <Route path="/mypage" exact component={MyPage} />
+      <Route path="/login" exact component={Login} />
       <Route path="/userinfowrite" exact component={UserInfoWrite} />
       <Route path="/userinfoedit" exact component={UserInfoWrite} />
       <Route path="/catinfowrite" exact component={CatInfoWrite} />
@@ -37,7 +39,11 @@ const Router = () => {
       <Route path="/community/catinfo" exact component={CommunityDetail} />
       <Route path="/community/gathering" exact component={CommunityDetail} />
       <Route path="/community/sharing" exact component={CommunityDetail} />
-      <Route path="/communitypostdetail" exact component={CommunityPostDetail}/>
+      <Route
+        path="/communitypostdetail"
+        exact
+        component={CommunityPostDetail}
+      />
       <Route path="/community" exact component={Community} />
       <Route path="/test" exact component={test} />
       <Route path={"*"} exact component={NotFound} />

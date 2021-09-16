@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 /* == components*/
 import CalendarModal from "./CalendarModal";
 
+import { Gitlab } from "react-feather";
 /* == Library - style */
 import styled from "styled-components";
 
@@ -27,6 +28,12 @@ const CalendarDates = (props) => {
           <TodayCSS findToday={findToday}>
             <span>{elm}</span>
           </TodayCSS>
+          <Dots>
+            <Gitlab width="5px" height="5px" />
+            <Dot background="#D19B61" />
+            <Dot background="skyblue" />
+            <Dot background="#CBCF52" />
+          </Dots>
         </DateNum>
         {openModal && (
           <CalendarModal
@@ -64,7 +71,20 @@ const Form = styled.li`
   }
   :
 `;
-
+const Dots = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  p {
+    font-size: 12px;
+  }
+`;
+const Dot = styled.div`
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: ${(props) => props.background};
+  margin: 2px;
+`;
 const DateNum = styled.div`
   padding: auto;
   ${(props) => props.idx < props.lastDate && `color: #969696;`};

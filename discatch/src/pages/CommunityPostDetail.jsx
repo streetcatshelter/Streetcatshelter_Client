@@ -9,9 +9,9 @@ import styled, { css } from "styled-components";
 // ELEMENTS
 import { Grid, Text, Image } from "../elements/index";
 
-const CommunityPostDetail = () => {
+const CommunityPostDetail = (props) => {
   return (
-    <Template>
+    <Template props={props}>
       <Grid
         bgColor="bgColor"
         margin="-10vh 0 0 0"

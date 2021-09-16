@@ -1,8 +1,15 @@
 import React from "react";
+
+/* == Library - style */
 import styled from "styled-components";
+
+/* == Custom - Elements*/
 import { Image, Text } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
+
+/* == Redux */
 import { history } from "../../redux/configureStore";
+
 const MyPageCat = () => {
   return (
     <div>

@@ -1,5 +1,8 @@
 import React from "react";
+
+/* == Custom - Icon */
 import onboadingImg from "../../styles/images/onboadingImg(1).svg";
+
 const Slide = () => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>

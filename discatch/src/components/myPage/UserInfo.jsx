@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+
+/* == Library - style */
 import styled from "styled-components";
 import { MoreHorizontal } from "react-feather";
+
+/* == Redux */
 import { history } from "../../redux/configureStore";
+
 const UserInfo = (edit) => {
   const [NickName, setNickName] = useState(edit === "edit" ? "NickName" : "");
   const [MyTown, setMyTown] = useState(edit === "edit" ? "MyTown" : "");

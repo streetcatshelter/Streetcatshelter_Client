@@ -1,5 +1,8 @@
 import React from "react";
+
+/* == Library - style */
 import styled from "styled-components";
+
 const ProgressBar = () => {
   const workPercent = (20 / 30) * 100 + "%";
   console.log(workPercent);

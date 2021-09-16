@@ -1,14 +1,18 @@
 import React from "react";
-import { MyPageDetail, Profile } from "../components";
 
-const MyPage = () => {
+/* == components*/
+import { MyPageDetail, Profile, Template } from "../components";
+
+const MyPage = (props) => {
   return (
-    <div style={{ overflowX: "hidden", width: "90%", margin: "auto" }}>
-      <div style={{ margin: "10px auto" }}>
-        <Profile />
+    <Template props={props}>
+      <div style={{ overflowX: "hidden", width: "90%", margin: "auto" }}>
+        <div style={{ margin: "10px auto" }}>
+          <Profile />
+        </div>
+        <MyPageDetail />
       </div>
-      <MyPageDetail />
-    </div>
+    </Template>
   );
 };
 

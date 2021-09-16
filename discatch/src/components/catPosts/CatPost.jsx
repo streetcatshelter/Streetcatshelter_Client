@@ -1,13 +1,13 @@
 // library
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { history } from '../../redux/configureStore';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { history } from "../../redux/configureStore";
 
 // element
-import { Grid, Text, Image } from '../../elements';
+import { Grid, Text, Image } from "../../elements";
 
 // icon
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const CatPost = (props) => {
   const margin = props.margin;
@@ -23,7 +23,7 @@ const CatPost = (props) => {
         padding="10px 0px 0px 10px"
         margin={margin}
         clickEvent={() => {
-          history.push('/catdetail');
+          history.push("/catdetail");
         }}
         cursor="pointer"
       >
@@ -37,17 +37,17 @@ const CatPost = (props) => {
           <Grid display="flex" height="35%">
             <Text fontWeight="700" color="black" width="40%">
               CatName
-            </Text>{' '}
+            </Text>{" "}
             <Text fontWeight="700" color="black" width="50%">
               중성화: Y
             </Text>
-            {path === '/catdetail' ? (
+            {path === "/catdetail" ? (
               <FavoriteIcon
                 style={{
-                  color: 'red',
-                  position: 'relative',
-                  bottom: '3px',
-                  right: '-20%',
+                  color: "red",
+                  position: "relative",
+                  bottom: "3px",
+                  right: "-20%",
                 }}
               />
             ) : null}

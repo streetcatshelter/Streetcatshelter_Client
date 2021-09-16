@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+
+/* == components*/
 import { MyPageContent } from "..";
+
+/* == Custom - Elements*/
 import { Grid } from "../../elements";
+
+/* == Library - style */
 import styled from "styled-components";
+
 const MyPageDetail = () => {
   const [menu, SetMenu] = useState("");
   return (

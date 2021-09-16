@@ -1,12 +1,21 @@
 import React from "react";
-import { CatPostDetail } from "../components";
+
+/* == components*/
+import { CatPostDetail, Template } from "../components";
+
+/* == Custom - Elements*/
 import { Button } from "../elements";
+
+/* == Library - style */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+
+/* == Redux */
 import { history } from "../redux/configureStore";
-const CatDetail = () => {
+
+const CatDetail = (props) => {
   return (
-    <React.Fragment>
+    <Template props={props}>
       <CatPostDetail />
       <Button
         is_float="is_float"
@@ -16,7 +25,7 @@ const CatDetail = () => {
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
       </Button>
-    </React.Fragment>
+    </Template>
   );
 };
 

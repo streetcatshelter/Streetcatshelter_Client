@@ -1,12 +1,15 @@
 import React from "react";
-import { UserInfo } from "../components";
+
+/* == components*/
+import { UserInfo, Template } from "../components";
+
 const UserInfoWrite = (props) => {
   const edit = props.match.path === "/userinfoedit" ? "edit" : "";
   console.log(edit);
   return (
-    <React.Fragment>
+    <Template props={props}>
       <UserInfo edit={edit} />
-    </React.Fragment>
+    </Template>
   );
 };
 

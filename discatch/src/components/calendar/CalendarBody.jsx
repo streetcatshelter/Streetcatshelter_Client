@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+
+/* == components*/
 import CalendarDates from "./CalendarDates";
+
+/* == Library - style */
+import styled from "styled-components";
 
 const CalendarBody = (props) => {
   const { totalDate, today, month, year, YEAR } = props;

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+
+/* == components*/
 import CalendarModal from "./CalendarModal";
+
+/* == Library - style */
+import styled from "styled-components";
 
 const CalendarDates = (props) => {
   const { lastDate, firstDate, elm, findToday, month, year, idx, holiday } =

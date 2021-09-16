@@ -1,5 +1,5 @@
 // LIBRARY
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 // COMPONENTS
@@ -21,26 +21,34 @@ import { Link, useLocation } from "react-router-dom";
 // ICON
 import { Camera } from "react-feather";
 
-const CommunityPostEdit = ({ history, props }) => {
-  const dispatch = useDispatch();
+import { history } from "../redux/configureStore";
 
+const CommunityPostEdit = (props) => {
+  const dispatch = useDispatch();
+  
   const location = "망원동"; // Header에서 가져오기
+  const [fileUrl, setFileUrl] = useState(null);
+  const [fileNum, setFileNum] = useState(0);
 
   // S3
   const handleInputFile = (e) => {
+    e.preventDefault();
     const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
     dispatch(imgActions.setInitialState());
     dispatch(imgActions.setFile([file]));
-    console.log(file);
+    setFileUrl(imageUrl);
+    if (!fileUrl) {
+      setFileNum(1);
+    }
   };
 
   const Options = [
     { key: 1, value: "게시글 주제를 선택해주세요!" },
     { key: 2, value: "고양이 정보글" },
-    { key: 3, value: "동네 모임" },
-    { key: 4, value: "고양이 용품 나눔" },
+    { key: 3, value: "평창동 동네 모임" },
+    { key: 4, value: "평창동 고양이 용품 나눔" },
   ];
-
   const [category, setCategory] = React.useState("게시글 주제를 선택해주세요!");
   const onChangeHandler = (e) => {
     setCategory(e.currentTarget.value);
@@ -72,7 +80,7 @@ const CommunityPostEdit = ({ history, props }) => {
           `;
         }}
       >
-        <CommunityWriteStyle>
+        <CommunityEditStyle>
           <Grid width="335px" height="auto" margin="0 0 16px 0">
             <Select
               onChange={onChangeHandler}
@@ -123,7 +131,6 @@ const CommunityPostEdit = ({ history, props }) => {
                     background: lightgray;
                     display: inline-block;
                     text-align: center;
-                    top: -12px;
                     cursor: pointer;
                   `;
                 }}
@@ -162,62 +169,56 @@ const CommunityPostEdit = ({ history, props }) => {
                       `;
                     }}
                   >
-                    0/5
+                    {fileNum}/1
                   </Text>
                 </Grid>
               </Grid>
-              <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
-                addstyle={() => {
-                  return css`
-                    background: lightgray;
-                    display: inline-block;
-                  `;
-                }}
-              >
-                <Image width="100%" height="100%" />
-              </Grid>
-              <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
-                addstyle={() => {
-                  return css`
-                    background: lightgray;
-                    display: inline-block;
-                  `;
-                }}
-              >
-                <Image width="100%" height="100%" />
-              </Grid>
-              <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
-                addstyle={() => {
-                  return css`
-                    background: lightgray;
-                    display: inline-block;
-                  `;
-                }}
-              >
-                <Image width="100%" height="100%" />
-              </Grid>
-              <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
-                addstyle={() => {
-                  return css`
-                    background: lightgray;
-                    display: inline-block;
-                  `;
-                }}
-              >
-                <Image width="100%" height="100%" />
-              </Grid>
+              {fileUrl && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"5.5px"}
+                  addstyle={() => {
+                    return css`
+                      background: lightgray;
+                      display: inline-block;
+                    `;
+                  }}
+                >
+                  <Image src={fileUrl} width="100%" height="100%" />
+                </Grid>
+              )}
+
+              {/* <Grid
+              width={'90px'} 
+              height={'90px'} 
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block; 
+                `;
+              }}><Image width="100%" height="100%"/></Grid>
+            <Grid
+              width={'90px'} 
+              height={'90px'}
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block; 
+                `;
+              }}><Image width="100%" height="100%"/></Grid>
+            <Grid
+              width={'90px'} 
+              height={'90px'}
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block;
+                `;
+              }}><Image width="100%" height="100%"/></Grid> */}
             </Grid>
             <TextArea
               onChange={$contents}
@@ -281,7 +282,7 @@ const CommunityPostEdit = ({ history, props }) => {
                   align-items: center;
                   justify-content: center;
                   position: relative;
-                  top: -62px;
+                  top: -65px;
                   left: 137px;
                 `;
               }}
@@ -289,13 +290,13 @@ const CommunityPostEdit = ({ history, props }) => {
               취소하기
             </Button>
           </Grid>
-        </CommunityWriteStyle>
+        </CommunityEditStyle>
       </Grid>
     </Template>
   );
 };
 
-const CommunityWriteStyle = styled.div`
+const CommunityEditStyle = styled.div`
   width: 350px;
   height: 60vh;
   margin: 10px auto;

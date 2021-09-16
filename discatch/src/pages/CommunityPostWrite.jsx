@@ -21,9 +21,11 @@ import { Link } from "react-router-dom";
 // ICON
 import { Camera } from "react-feather";
 
-const CommunityPostWrite = ({ history, props }) => {
-  const dispatch = useDispatch();
+import { history } from "../redux/configureStore";
 
+const CommunityPostWrite = (props) => {
+  const dispatch = useDispatch();
+  
   const location = "망원동"; // Header에서 가져오기
   const [fileUrl, setFileUrl] = useState(null);
   const [fileNum, setFileNum] = useState(0);
@@ -175,11 +177,13 @@ const CommunityPostWrite = ({ history, props }) => {
                 <Grid
                   width={"90px"}
                   height={"90px"}
-                  margin={"5.5px"}
+                  margin={"0 5.5px"}
                   addstyle={() => {
                     return css`
+                      position:relative;
                       background: lightgray;
                       display: inline-block;
+                      top:5px;
                     `;
                   }}
                 >
@@ -280,7 +284,7 @@ const CommunityPostWrite = ({ history, props }) => {
                   align-items: center;
                   justify-content: center;
                   position: relative;
-                  top: -62px;
+                  top: -65px;
                   left: 137px;
                 `;
               }}

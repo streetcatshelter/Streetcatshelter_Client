@@ -1,15 +1,15 @@
 // library
-import React, { useState } from 'react';
-import { css } from 'styled-components';
+import React, { useState } from "react";
+import { css } from "styled-components";
 
 // element
-import { Grid, Button } from '../../elements';
+import { Grid, Button } from "../../elements";
 
 // component
-import { CatPost, CatCalendar, Gallery, Diary } from '..';
+import { CatPost, CatCalendar, Gallery, Diary } from "..";
 
 const CatPostDetail = () => {
-  const [menu, setMenu] = useState('캘린더');
+  const [menu, setMenu] = useState("캘린더");
 
   return (
     <Grid display="flex" flexDirection="column" overflow="hidden">
@@ -25,9 +25,9 @@ const CatPostDetail = () => {
       >
         <Button
           clickEvent={() => {
-            setMenu('캘린더');
+            setMenu("캘린더");
           }}
-          color={menu === '캘린더' ? 'olive' : 'black'}
+          color={menu === "캘린더" ? "olive" : "black"}
           margin="2% 8% 0 5%"
           fontSize="1em"
           fontWeight="800"
@@ -36,9 +36,9 @@ const CatPostDetail = () => {
         </Button>
         <Button
           clickEvent={() => {
-            setMenu('집사일기');
+            setMenu("집사일기");
           }}
-          color={menu === '집사일기' ? 'olive' : 'black'}
+          color={menu === "집사일기" ? "olive" : "black"}
           fontSize="1em"
           fontWeight="800"
         >
@@ -46,9 +46,9 @@ const CatPostDetail = () => {
         </Button>
         <Button
           clickEvent={() => {
-            setMenu('갤러리');
+            setMenu("갤러리");
           }}
-          color={menu === '갤러리' ? 'olive' : 'black'}
+          color={menu === "갤러리" ? "olive" : "black"}
           margin="0 8%"
           fontSize="1em"
           fontWeight="800"
@@ -57,11 +57,11 @@ const CatPostDetail = () => {
         </Button>
       </Grid>
 
-      {menu === '캘린더' ? (
+      {menu === "캘린더" ? (
         <CatCalendar />
-      ) : menu === '집사일기' ? (
+      ) : menu === "집사일기" ? (
         <Diary />
-      ) : menu === '갤러리' ? (
+      ) : menu === "갤러리" ? (
         <Gallery />
       ) : null}
     </Grid>

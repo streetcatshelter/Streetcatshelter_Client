@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 /* == components*/
-import { Slide } from "../components";
+import { Slide, Template } from "../components";
 
 /* == Library - style */
 import styled from "styled-components";
@@ -37,15 +37,17 @@ const Slider = (props) => {
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
   }, [currentSlide]);
   return (
-    <>
+    <Template props={props} page="slider">
       <Container>
-        <CloseButton
-          onClick={() => {
-            history.push("/");
-          }}
-        >
-          <X />
-        </CloseButton>
+        <ButtonWrap>
+          <CloseButton
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            <X />
+          </CloseButton>
+        </ButtonWrap>
         <SliderContainer ref={slideRef}>
           <Slide />
           <Slide number="2" />
@@ -63,9 +65,16 @@ const Slider = (props) => {
           <ChevronRight />
         </Button>
       </BtnWrap>
-    </>
+    </Template>
   );
 };
+
+const ButtonWrap = styled.div`
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -106,17 +115,17 @@ const Dot = styled.div`
 `;
 
 const CloseButton = styled.button`
+  display: flex;
+  align-items:"
+
   width: 30px;
   height: 30px;
   border-radius: 15px;
   border: none;
   background: #fbd986;
-  margin: auto;
   padding: 2px;
-  position: fixed;
-  top: 20px;
-  right: 20px;
   z-index: 999;
+  margin: 10px;
   &:hover {
     transition: all 0.3s ease-in-out;
     background-color: #cbcf52;

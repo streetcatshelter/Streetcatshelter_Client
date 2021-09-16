@@ -33,13 +33,15 @@ const CommunityPostWrite = (props) => {
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();
-    const file = e.target.files[0];
-    const imageUrl = URL.createObjectURL(file);
-    dispatch(imgActions.setInitialState());
-    dispatch(imgActions.setFile([file]));
-    setFileUrl(imageUrl);
-    if (!fileUrl) {
-      setFileNum(1);
+    if (fileNum < 5) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      dispatch(imgActions.setInitialState());
+      dispatch(imgActions.setFile([file]));
+      setFileUrl(imageUrl);
+      setFileNum(fileNum+1);
+    } else {
+      alert('사진은 5장을 초과할 수 없어요!');
     }
   };
 

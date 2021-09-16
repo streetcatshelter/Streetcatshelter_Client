@@ -11,9 +11,9 @@ export const addCommunityDB = (category, contents, location, title) => {
     const imgFile = getState().image.file;
     // const username = getState().user; // 나중에 가져오기
     const username = '뽀삐맘';
-    console.log(imgFile);
+    console.log(imgFile.length);
     console.log(username);
-    if (imgFile.length) {
+    if (imgFile.length<6) {
       dispatch(
         imgActions.uploadImageDB(() => {
           const imageUrl = getState().image.imageUrl;
@@ -37,8 +37,11 @@ export const addCommunityDB = (category, contents, location, title) => {
             });
         }),
       );
+    } else if (imgFile.length>5) {
+      alert('사진은 최대 5장까지 등록할 수 있어요!');
+    } else {
+      return;
     }
-    return;
   };
 };
 

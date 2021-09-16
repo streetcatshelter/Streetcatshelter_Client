@@ -1,5 +1,5 @@
 // LIBRARY
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 // COMPONENTS
@@ -25,13 +25,20 @@ const CommunityPostWrite = ({ history, props }) => {
   const dispatch = useDispatch();
 
   const location = "망원동"; // Header에서 가져오기
+  const [fileUrl, setFileUrl] = useState(null);
+  const [fileNum, setFileNum] = useState(0);
 
   // S3
   const handleInputFile = (e) => {
+    e.preventDefault();
     const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
     dispatch(imgActions.setInitialState());
     dispatch(imgActions.setFile([file]));
-    console.log(file);
+    setFileUrl(imageUrl);
+    if (!fileUrl) {
+      setFileNum(1);
+    }
   };
 
   const Options = [
@@ -122,7 +129,6 @@ const CommunityPostWrite = ({ history, props }) => {
                     background: lightgray;
                     display: inline-block;
                     text-align: center;
-                    top: -12px;
                     cursor: pointer;
                   `;
                 }}
@@ -161,62 +167,56 @@ const CommunityPostWrite = ({ history, props }) => {
                       `;
                     }}
                   >
-                    0/5
+                    {fileNum}/1
                   </Text>
                 </Grid>
               </Grid>
-              <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
-                addstyle={() => {
-                  return css`
-                    background: lightgray;
-                    display: inline-block;
-                  `;
-                }}
-              >
-                <Image width="100%" height="100%" />
-              </Grid>
-              <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
-                addstyle={() => {
-                  return css`
-                    background: lightgray;
-                    display: inline-block;
-                  `;
-                }}
-              >
-                <Image width="100%" height="100%" />
-              </Grid>
-              <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
-                addstyle={() => {
-                  return css`
-                    background: lightgray;
-                    display: inline-block;
-                  `;
-                }}
-              >
-                <Image width="100%" height="100%" />
-              </Grid>
-              <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
-                addstyle={() => {
-                  return css`
-                    background: lightgray;
-                    display: inline-block;
-                  `;
-                }}
-              >
-                <Image width="100%" height="100%" />
-              </Grid>
+              {fileUrl && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"5.5px"}
+                  addstyle={() => {
+                    return css`
+                      background: lightgray;
+                      display: inline-block;
+                    `;
+                  }}
+                >
+                  <Image src={fileUrl} width="100%" height="100%" />
+                </Grid>
+              )}
+
+              {/* <Grid
+              width={'90px'} 
+              height={'90px'} 
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block; 
+                `;
+              }}><Image width="100%" height="100%"/></Grid>
+            <Grid
+              width={'90px'} 
+              height={'90px'}
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block; 
+                `;
+              }}><Image width="100%" height="100%"/></Grid>
+            <Grid
+              width={'90px'} 
+              height={'90px'}
+              margin={'5.5px'} 
+              addstyle={() => {
+                return css`
+                  background:lightgray;
+                  display:inline-block;
+                `;
+              }}><Image width="100%" height="100%"/></Grid> */}
             </Grid>
             <TextArea
               onChange={$contents}

@@ -1,27 +1,30 @@
 // library
-import React from "react";
-
-/* == Library - style */
-import styled, { css } from "styled-components";
+import React from 'react';
+import { css } from 'styled-components';
 
 // element
-import { Grid, Text, Button, Image } from "../../elements";
-import { flexBox } from "../../shared/style";
+import { Grid, Text, Button, Image } from '../../elements';
+import { flexBox } from '../../shared/style';
 
 // icon
-import { Eye, MessageCircle } from "react-feather";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import { Eye, MessageCircle } from 'react-feather';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const Diary = () => {
   return (
-    <Grid bgColor="diaryColor" padding="6px" width="95%" margin="0 auto">
+    <Grid
+      bgColor="diaryColor"
+      padding="6px"
+      width="95%"
+      margin="0 auto 2% auto"
+    >
       <Grid
         margin="0 0 3% 0"
         display="flex"
         alignItems="center"
         addstyle={() => {
           return css`
-            ${flexBox("space-between")}
+            ${flexBox('space-between')}
           `;
         }}
       >
@@ -48,7 +51,7 @@ const Diary = () => {
         bgcolor="diaryColor"
         addstyle={() => {
           return css`
-            ${flexBox("flex-end")}
+            ${flexBox('flex-end')}
           `;
         }}
       >
@@ -84,7 +87,7 @@ const Diary = () => {
             `;
           }}
         >
-          <FavoriteIcon style={{ fontSize: "18", color: "red" }} />
+          <FavoriteIcon style={{ fontSize: '18', color: 'red' }} />
           10
         </Button>
       </Grid>

@@ -6,7 +6,7 @@ import { css } from 'styled-components';
 import { Grid, Button } from '../../elements';
 
 // component
-import { CatPost, CatCalendar, Gallery, Diary } from '..';
+import { CatPost, CatCalendar, CatDiary, CatGallery } from '..';
 
 const CatPostDetail = () => {
   const [menu, setMenu] = useState('캘린더');
@@ -60,9 +60,9 @@ const CatPostDetail = () => {
       {menu === '캘린더' ? (
         <CatCalendar />
       ) : menu === '집사일기' ? (
-        <Diary />
+        <CatDiary />
       ) : menu === '갤러리' ? (
-        <Gallery />
+        <CatGallery />
       ) : null}
     </Grid>
   );

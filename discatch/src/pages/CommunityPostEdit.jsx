@@ -1,6 +1,6 @@
 // LIBRARY
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import { Template } from "../components";
@@ -24,23 +24,29 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 
 const CommunityPostEdit = (props) => {
+  const imageList = useSelector((state) => state.image.file[0])
+  console.log(imageList);
   const dispatch = useDispatch();
-  
+
   const location = "망원동"; // Header에서 가져오기
   const [fileUrl, setFileUrl] = useState(null);
   const [fileNum, setFileNum] = useState(0);
 
+
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();
-    const file = e.target.files[0];
-    const imageUrl = URL.createObjectURL(file);
-    dispatch(imgActions.setInitialState());
-    dispatch(imgActions.setFile([file]));
-    setFileUrl(imageUrl);
-    if (!fileUrl) {
+    // if (fileNum < 5) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      dispatch(imgActions.setInitialState());
+      dispatch(imgActions.setFile([file]));
+      setFileUrl(imageUrl);
       setFileNum(1);
-    }
+
+    // } else {
+    //   alert('사진은 5장을 초과할 수 없어요!');
+    // }
   };
 
   const Options = [
@@ -67,6 +73,12 @@ const CommunityPostEdit = (props) => {
   const editBtn = () => {
     dispatch(editCommunityDB(category, contents, location, title));
   };
+
+  React.useEffect(() => {
+      console.log(fileNum);
+    },
+    [fileNum],
+  );
 
   return (
     <Template props={props}>

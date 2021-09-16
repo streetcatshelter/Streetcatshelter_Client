@@ -113,7 +113,7 @@ const CommunityPost = () => {
 const CommunityPostStyle = styled.div`
   position: relative;
   top: 20px;
-  background: rgb(${(props) => props.theme.palette.lightIvory});
+  background: rgb(${(props) => props.theme.palette.diaryColor});
   width:100%;
   height: 77px;
   margin: 80px 0;

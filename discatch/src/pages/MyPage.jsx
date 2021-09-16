@@ -6,7 +6,13 @@ import { MyPageDetail, Profile, Template } from "../components";
 const MyPage = (props) => {
   return (
     <Template props={props}>
-      <div style={{ overflowX: "hidden", width: "90%", margin: "auto" }}>
+      <div
+        style={{
+          overflowX: "hidden",
+          width: "100%",
+          height: "100%",
+        }}
+      >
         <div style={{ margin: "10px auto" }}>
           <Profile />
         </div>

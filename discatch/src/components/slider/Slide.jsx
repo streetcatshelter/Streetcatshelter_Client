@@ -20,11 +20,7 @@ const Slide = (props) => {
             background: "#FEFDF8",
           }}
         >
-          <img
-            style={{ width: "100vw", height: "100%" }}
-            src={onboadingImg}
-            alt={onboadingImg}
-          />
+          <SlideImage src={onboadingImg} alt={onboadingImg} />
 
           <Button
             onClick={() => {
@@ -43,11 +39,7 @@ const Slide = (props) => {
             background: "#FEFDF8",
           }}
         >
-          <img
-            style={{ width: "100vw", height: "100%" }}
-            src={onboadingImg}
-            alt={onboadingImg}
-          />
+          <SlideImage src={onboadingImg} alt={onboadingImg} />
           <p
             style={{
               position: "absolute",
@@ -69,11 +61,7 @@ const Slide = (props) => {
             background: "#FEFDF8",
           }}
         >
-          <img
-            style={{ width: "100vw", height: "100%" }}
-            src={onboadingImg}
-            alt={onboadingImg}
-          />
+          <SlideImage src={onboadingImg} alt={onboadingImg} />
           <p
             style={{
               position: "absolute",
@@ -106,6 +94,12 @@ const Button = styled.button`
   &:hover {
     background: #fbd986;
   }
+`;
+
+const SlideImage = styled.img`
+  width: 100vw;
+  height: 100%;
+  max-width: 420px;
 `;
 
 export default Slide;

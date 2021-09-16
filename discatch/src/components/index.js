@@ -6,21 +6,29 @@ import Menu from "./Menu";
 /* ==Slider */
 import Slide from "./slider/Slide";
 import Login from "./slider/Login";
-/* ==myPages */
 
-import Calendar from "./myPage/Calendar";
+/* ==myPages */
 import MyPageCat from "./myPage/MyPageCat";
 import Notice from "./myPage/Notice";
 import Profile from "./myPage/Profile";
 import ProgressBar from "./myPage/ProgressBar";
-import UserInfoEdit from "./myPage/UserInfoEdit";
+import UserInfo from "./myPage/UserInfo";
 import MyPageDetail from "./myPage/MyPageDetail";
 import MyWork from "./myPage/MyWork";
+import MyPageContent from "./myPage/MyPageContent";
+
+/*==calendar */
+import Calendar from "./calendar/Calendar";
+import CalendarBody from "./calendar/CalendarBody";
+import CalendarHead from "./calendar/CalendarHead";
+import CalendarDates from "./calendar/CalendarDates";
+import CalendarModal from "./calendar/CalendarModal";
 
 /* catposts */
 import CatPost from "./catPosts/CatPost";
 import CatPostList from "./catPosts/CatPostList";
 import CatPostDetail from "./catPosts/CatPostDetail";
+import CatCalendar from "./catPosts/CatCalendar";
 import Diary from "./catPosts/Diary";
 import Gallery from "./catPosts/Gallery";
 
@@ -42,20 +50,27 @@ export {
   Slide,
   Login,
   /* ==myPages */
-  Calendar,
   MyPageCat,
   Notice,
   Profile,
   ProgressBar,
-  UserInfoEdit,
+  UserInfo,
   MyWork,
   MyPageDetail,
+  MyPageContent,
+  /* ==calendar */
+  Calendar,
+  CalendarBody,
+  CalendarHead,
+  CalendarDates,
+  CalendarModal,
   /* ==catposts */
   CatPost,
   CatPostList,
   Diary,
   Gallery,
   CatPostDetail,
+  CatCalendar,
   /* ==comments */
   Comment,
   CommentList,

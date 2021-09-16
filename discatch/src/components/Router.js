@@ -28,6 +28,7 @@ const Router = () => {
       <Route path="/slider" exact component={Slider} />
       <Route path="/mypage" exact component={MyPage} />
       <Route path="/userinfowrite" exact component={UserInfoWrite} />
+      <Route path="/userinfoedit" exact component={UserInfoWrite} />
       <Route path="/catinfowrite" exact component={CatInfoWrite} />
       <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
       <Route path="/catdetail" exact component={CatDetail} />

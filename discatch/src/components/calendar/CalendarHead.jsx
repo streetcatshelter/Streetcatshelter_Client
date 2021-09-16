@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 /* == Library - style */
 import styled from "styled-components";
 
+import { Gitlab } from "react-feather";
+
 const CalendarHead = (props) => {
   const { year, month, goToday, setMonth, setYear } = props;
   const DAY = ["일", "월", "화", "수", "목", "금", "토"];
@@ -29,6 +31,16 @@ const CalendarHead = (props) => {
           <Btn onClick={next}>&gt;</Btn>
         </BtnBox>
       </Nav>
+      <Dots>
+        <Gitlab width="10px" />
+        <p>발견</p>
+        <Dot background="#D19B61" />
+        <p>먹이</p>
+        <Dot background="skyblue" />
+        <p>급수</p>
+        <Dot background="#CBCF52" />
+        <p>간식</p>
+      </Dots>
       <Days>
         {DAY.map((elm, idx) => {
           return <Day key={idx}>{elm}</Day>;
@@ -38,6 +50,20 @@ const CalendarHead = (props) => {
   );
 };
 
+const Dots = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  p {
+    font-size: 12px;
+  }
+`;
+const Dot = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: ${(props) => props.background};
+  margin: 5px;
+`;
 const Form = styled.section`
   display: flex;
   flex-direction: column;

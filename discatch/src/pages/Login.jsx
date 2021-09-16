@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Template } from "../components";
+
 /* == Library - style */
 import styled from "styled-components";
 
@@ -8,9 +10,9 @@ import Kakao from "../styles/images/icon-Kakao.png";
 import Naver from "../styles/images/icon-Naver(G).png";
 import Google from "../styles/images/icon-google.png";
 
-const login = () => {
+const login = (props) => {
   return (
-    <React.Fragment>
+    <Template props={props} page="login">
       <Wrapper>
         <Inner>
           <Header>1초만에 로그인!</Header>
@@ -23,14 +25,12 @@ const login = () => {
           />
         </Inner>
       </Wrapper>
-    </React.Fragment>
+    </Template>
   );
 };
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100vw;
   height: 80vh;
 `;
 const Inner = styled.div`

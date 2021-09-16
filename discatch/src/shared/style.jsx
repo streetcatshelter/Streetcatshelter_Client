@@ -45,6 +45,7 @@ const theme = {
     D_yellow: '249, 200, 82',
     D_brown: '190, 112, 29',
     D_olive: '181, 187, 25',
+    lightIvory: '252, 247, 230'
   },
 
   size: {

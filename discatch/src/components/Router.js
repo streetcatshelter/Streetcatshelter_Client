@@ -36,11 +36,7 @@ const Router = () => {
       <Route path="/community/catinfo" exact component={CommunityDetail} />
       <Route path="/community/gathering" exact component={CommunityDetail} />
       <Route path="/community/sharing" exact component={CommunityDetail} />
-      <Route
-        path="/communitypostdetail"
-        exact
-        component={CommunityPostDetail}
-      />
+      <Route path="/communitypostdetail" exact component={CommunityPostDetail}/>
       <Route path="/community" exact component={Community} />
       <Route path="/test" exact component={test} />
       <Route path={"*"} exact component={NotFound} />

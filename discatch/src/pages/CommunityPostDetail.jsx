@@ -36,8 +36,8 @@ const CommunityPostDetail = (props, community) => {
   //   title: state.community.list.title,
   //   username: state.community.list.username,
   // }));
-  const image = '수정 필요'
-  const communityId = "수정 필요"
+  const image='수정 필요'
+  const communityId="수정 필요"
   
   return (
     <Template props={props}>
@@ -196,14 +196,13 @@ const CommunityPostDetail = (props, community) => {
                   `;
                 }}
               >
+                
                 망원동 고양이 너무 귀여운것같아요~ 8일 저녁 6시에 망원2동 순찰
                 도실분 2분 구해요! 같이 고양이 순찰 돌고 너랑나랑호프에서 가볍게
                 맥주한잔해요!! ^^ 9월 8일 수요일 18:00 망원2동 그린마트앞
                 {/* {contents} */}
               </Text>
-              <Grid margin="0 0 10vh 0">
-                <CommentList />
-              </Grid>
+          <CommentList />
         </Grid>
       </Grid>
     </Template>

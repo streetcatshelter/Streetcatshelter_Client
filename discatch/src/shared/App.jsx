@@ -4,7 +4,6 @@ import { ThemeProvider } from "styled-components";
 
 // STYLE
 import theme from "../shared/style";
-import './App.css'
 
 //COMPONENTS
 import { Router } from "../components";

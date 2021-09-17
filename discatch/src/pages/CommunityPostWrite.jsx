@@ -16,7 +16,7 @@ import { imgActions } from "../redux/modules/image";
 import { addCommunityDB } from "../redux/modules/community";
 
 // ROUTE
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // ICON
 import { Camera } from "react-feather";
@@ -24,6 +24,7 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 
 const CommunityPostWrite = (props) => {
+  const selectedCategory = useLocation();
   const dispatch = useDispatch();
   
   const location = "망원동"; // Header에서 가져오기
@@ -46,7 +47,7 @@ const CommunityPostWrite = (props) => {
   };
 
   const Options = [
-    { key: 1, value: "게시글 주제를 선택해주세요!" },
+    { key: 1, value: selectedCategory.category },
     { key: 2, value: "고양이 정보글" },
     { key: 3, value: "평창동 동네 모임" },
     { key: 4, value: "평창동 고양이 용품 나눔" },
@@ -112,7 +113,6 @@ const CommunityPostWrite = (props) => {
               margin="0 0 0 12px"
               addstyle={() => {
                 return css`
-                  /* display:flex; */
                   white-space: nowrap;
                   overflow-x: auto;
                   height: 120px;

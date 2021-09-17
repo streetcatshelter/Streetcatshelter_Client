@@ -49,6 +49,7 @@ const CalendarDates = (props) => {
   );
 };
 const Form = styled.li`
+  background: #fefdf8;
   list-style: none;
   position: relative;
   display: inline-block;
@@ -57,11 +58,16 @@ const Form = styled.li`
   height: 55px;
   text-align: left;
   border-top: 1px solid #e4e3e6;
-  :nth-child(1),:nth-child(2),:nth-child(3),:nth-child(4),:nth-child(5),:nth-child(6),:nth-child(7) {
-
+  :nth-child(1),
+  :nth-child(2),
+  :nth-child(3),
+  :nth-child(4),
+  :nth-child(5),
+  :nth-child(6),
+  :nth-child(7) {
     border-top: none;
   }
-  
+
   :nth-child(7n + 1) {
     background-color: #f5f5f5;
     border-left: none;
@@ -69,7 +75,9 @@ const Form = styled.li`
   :nth-child(7n) {
     background-color: #f5f5f5;
   }
-  :
+  &:hover {
+    filter: brightness(90%);
+  }
 `;
 const Dots = styled.div`
   display: flex;

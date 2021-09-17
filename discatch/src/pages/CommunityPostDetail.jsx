@@ -202,7 +202,9 @@ const CommunityPostDetail = (props, community) => {
                 맥주한잔해요!! ^^ 9월 8일 수요일 18:00 망원2동 그린마트앞
                 {/* {contents} */}
               </Text>
-          <CommentList />
+              <Grid margin="0 0 12vh 0">
+                <CommentList />
+              </Grid>
         </Grid>
       </Grid>
     </Template>

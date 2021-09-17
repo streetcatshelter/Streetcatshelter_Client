@@ -1,7 +1,8 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CommunityPostList } from "../components";
+import { Template, CommunityPostList, CommunityPost } from "../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -16,18 +17,41 @@ import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
+// FUNCTION
+import InfinityScroll from "../shared/InfinityScroll";
+import { getCommunityDB } from "../redux/modules/community";
+
+// REDUX
+import { history } from "../redux/configureStore";
+
 const CommunityDetail = (props) => {
+  const location2 = useLocation();
+  console.log(location2.state);
+  const dispatch = useDispatch();
+  // const category1 = 'category1';
+  // const category2 = 'category2';
+  // const category3 = 'category3';
+  //
+  const location = "망원동";
+
+  // const communityList = useSelector((state) =>
+  //   state.community.list ? state.community.list : Array(0, 2, 34),
+  // );
+
   const path = useLocation();
-  console.log(path.pathname);
-  let title = null;
+  let category = null;
   if (path.pathname === "/community/catinfo") {
-    title = "고양이 정보글";
-    console.log(123);
+    category = "고양이 정보글";
   } else if (path.pathname === "/community/gathering") {
-    title = "평창동 동네 모임";
+    category = `${location} 동네 모임`;
   } else if (path.pathname === "/community/sharing") {
-    title = "평창동 고양이 용품 나눔";
+    category = `${location} 고양이 용품 나눔`;
   }
+
+  // React.useEffect(() => {
+  //   dispatch(getCommunityDB(category, location));
+  // }, []);
+
   return (
     <Template props={props}>
       <Grid
@@ -53,19 +77,36 @@ const CommunityDetail = (props) => {
               `;
             }}
           >
-            <Text size="18px" margin="20px 0 0 0">
-              {title}
+            <Text size="18px" margin="-80px 0 0 0">
+              {category}
             </Text>
           </Grid>
-          <Grid margin="30px 0 0 0">
-            <CommunityPostList />
+          <Grid margin="-570px 0 0 0">
+            {/* {communityList.length ? (
+          communityList.map((community, idx) => {
+            return <CommunityPost key={idx} {...community} />;
+          })
+        ) : (
+          <></>
+        )} */}
+            <CommunityPost category={category} />
+            <CommunityPost category={category} />
+            <CommunityPost category={category} />
           </Grid>
         </CommunityDetailStyle>
-        <Link to="/communitypostwrite">
-          <Button is_float="is_float">
-            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-          </Button>
-        </Link>
+        {/* <Link to="/communitypostwrite"> */}
+        <Button
+          clickEvent={() =>
+            history.push({
+              pathname: "/communitypostwrite",
+              category: category,
+            })
+          }
+          is_float="is_float"
+        >
+          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+        </Button>
+        {/* </Link> */}
       </Grid>
     </Template>
   );
@@ -73,14 +114,14 @@ const CommunityDetail = (props) => {
 
 const CommunityDetailStyle = styled.div`
   width: 100%;
-  margin: -100px auto;
-  overflow-y: scroll;
   overflow-x: hidden;
+  height: 90vh;
+  /* overflow-y: scroll;
   -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
     display: none;
-  }
+  } */
 `;
 
 export default CommunityDetail;

@@ -1,10 +1,12 @@
+// LIBRARY
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import Slide from '@material-ui/core/Slide';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../redux/configureStore';
 
 // ICON
 import { MoreHorizontal } from "react-feather";
@@ -12,11 +14,16 @@ import { MoreHorizontal } from "react-feather";
 // ROUTE
 import { Link } from 'react-router-dom';
 
+// REDUX
+import { deleteCommunityDB } from '../redux/modules/community';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const EditDeleteModal = () => {
+const EditDeleteModal = (communityId) => {
+  const dispatch = useDispatch();
+  console.log(communityId);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -25,6 +32,10 @@ const EditDeleteModal = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const deleteCommunity = () => {
+    dispatch(deleteCommunityDB(communityId));
   };
 
   return (
@@ -43,7 +54,14 @@ const EditDeleteModal = () => {
                 fontSize:'24px',
                 fontWeight:'bold',
                 backgroundColor:'rgb(249, 200, 82)',
-                }}>
+                }}
+          //   onClick={() => {
+          //     history.push({
+          //       pathname: `/communitypostedit/${communityId.communityId}`,
+          //       state: { communityId: communityId.communityId },
+          //   });
+          // }}
+          >
             게시글 수정
           </ListItem>
           </Link>
@@ -53,6 +71,7 @@ const EditDeleteModal = () => {
           <ListItem 
             button
             onClick={()=>alert('삭제 완료!')} 
+            // onClick={deleteCommunity}
             style={{
                 height:'11vh', 
                 justifyContent:'center',

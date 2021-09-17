@@ -36,17 +36,22 @@ const Notice = () => {
 const Wrapper = styled.div``;
 const Content = styled.div`
   height: 40px;
-  border-bottom: 1px solid #b5bb19;
+  border-bottom: 0.5px solid #b5bb19;
   line-height: 16px;
-  margin: 10px 0px;
+  margin: 12px 0px;
+  cursor: pointer;
+  &:hover {
+    color: #be701d;
+  }
   p {
     font-weight: bold;
     font-size: 14px;
-    margin: 0px;
+    margin: 0px 10px;
   }
   span {
     font-weight: normal;
     font-size: 10px;
+    margin: 0px 10px;
   }
 `;
 export default Notice;

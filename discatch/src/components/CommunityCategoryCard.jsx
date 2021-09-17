@@ -2,15 +2,15 @@
 import React from 'react';
 
 // ELEMENTS
-import { Image, Grid, Text } from '../elements/index';
+import { Image, Grid, Text, Button } from '../elements/index';
 
 // STYLE
 import styled, { css } from 'styled-components';
 
-const CommunityCategoryCard = ({ src, width, height, title, subtitle }) => {
+const CommunityCategoryCard = ({ src, width, height, title, subtitle, clickEvent }) => {
   return (
   <>
-    <CardStyle>
+    <CardStyle onClick={clickEvent}>
     <Image
       src={src}
       width={width} 
@@ -44,6 +44,10 @@ const CommunityCategoryCard = ({ src, width, height, title, subtitle }) => {
     </CardStyle>
   </>
   )
+};
+
+CommunityCategoryCard.defaultProps = {
+  clickEvent: () => {},
 };
 
 const CardStyle = styled.div`

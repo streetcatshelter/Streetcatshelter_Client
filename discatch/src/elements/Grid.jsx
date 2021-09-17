@@ -27,6 +27,7 @@ const GridStyle = styled.div`
   width: ${(props) => props.width};
   display: ${(props) => props.display};
   height: ${(props) => props.height};
+  cursor: ${(props) => props.cursor};
   margin: ${(props) => props.margin};
   border: ${(props) => props.border};
   align-items: ${(props) => props.alignItems};
@@ -38,6 +39,9 @@ const GridStyle = styled.div`
   color: ${(props) =>
     props.color &&
     `rgba(${props.theme.palette[props.color]}, ${props.opacity})`};
+  &:hover {
+    ${(props) => props.hover};
+  }
   overflow: ${(props) => props.overflow};
   ${(props) => borderBox(props.radius, props.padding)};
   ${(props) => props.addstyle()};

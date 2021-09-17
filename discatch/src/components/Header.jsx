@@ -42,41 +42,44 @@ const Header = (props) => {
           `;
         }}
       >
-        {path === "/" || path === "/community" ? (
-          <SelectStyle onChange={onChangeHandler} value={place}>
-            {options.map((pl, idx) => (
-              <option key={pl.key} value={pl.value}>
-                {pl.value}
-              </option>
-            ))}
-          </SelectStyle>
-        ) : (
-          <ArrowLeft
-            style={{ marginLeft: "25px", color: "gray" }}
-            onClick={() => {
-              history.goBack();
-            }}
-          />
-        )}
+        <Grid width="20%" height="100%" margin="auto">
+          {path === "/" || path === "/community" ? (
+            <SelectStyle onChange={onChangeHandler} value={place}>
+              {options.map((pl, idx) => (
+                <option key={pl.key} value={pl.value}>
+                  {pl.value}
+                </option>
+              ))}
+            </SelectStyle>
+          ) : (
+            <ArrowLeft
+              style={{ margin: "20px", color: "gray" }}
+              onClick={() => {
+                history.goBack();
+              }}
+            />
+          )}
+        </Grid>
 
-        <Link to="/" style={{ margin: "0 auto", textDecoration: "none" }}>
-          <Text
-            color="D_olive"
-            size="26px"
-            fontWeight="600"
-            addstyle={() => {
-              return css`
-                font-family: "Walter Turncoat";
-                /* font-family: 'Nunito', sans-serif; */
-              `;
-            }}
+        <Head>
+          <Link
+            to="/"
+            style={{ margin: "0 auto", width: "60%", textDecoration: "none" }}
           >
-            disCATch
-          </Text>
-        </Link>
+            <p>
+              dis<span>C</span>
+              <span>A</span>
+              <span>T</span>ch
+            </p>{" "}
+          </Link>
+        </Head>
 
-        <Search style={{ color: "gray" }} />
-        <Bell style={{ margin: "0 4% 0 3%", color: "gray" }} />
+        <Grid width="20%" height="100%" margin="auto">
+          <Grid margin="20px 10px" height="25px" width="60px">
+            <Search style={{ color: "gray" }} />
+            <Bell style={{ margin: "auto 0px auto 10px", color: "gray" }} />
+          </Grid>
+        </Grid>
       </Grid>
     </HeaderStyle>
   );
@@ -97,7 +100,7 @@ const HeaderStyle = styled.header`
 const SelectStyle = styled.select`
   width: 60px;
   height: 25px;
-  margin: 0 -3% 0 3%;
+  margin: 20px 10px;
   border: none;
   color: gray;
   font-weight: bold;
@@ -107,5 +110,21 @@ const SelectStyle = styled.select`
     outline: none;
   }
 `;
-
+const Head = styled.div`
+  margin: auto;
+  p {
+    margin: 0px auto;
+    font-size: 35px;
+    font-weight: 700;
+    color: #fbd986;
+  }
+  span {
+    font-size: 45px;
+    font-weight: 800;
+    color: #cbcf52;
+    :nth-child(2) {
+      color: #d19b61;
+    }
+  }
+`;
 export default Header;

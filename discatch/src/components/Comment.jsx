@@ -14,7 +14,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 const Comment = () => {
   return (
     <Grid
-      margin="0px 0px 15px 0px"
+      margin="20px 0px 15px 0px"
       addstyle={() => {
         return css`
           display: flex;

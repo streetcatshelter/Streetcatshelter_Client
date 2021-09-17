@@ -83,12 +83,13 @@ const Header = (props) => {
 };
 
 const HeaderStyle = styled.header`
+  max-width: 420px;
   width: 100%;
   height: 60px;
-  background: white;
+  background: #fefdf8;
   position: fixed;
   top: 0;
-  left: 0;
+
   z-index: 9;
   display: flex;
 `;
@@ -101,7 +102,7 @@ const SelectStyle = styled.select`
   color: gray;
   font-weight: bold;
   font-size: 12px;
-
+  background: #fefdf8;
   &:focus {
     outline: none;
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import { Template, CommunityPostList, CommunityPost } from "../components";
@@ -18,21 +18,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // FUNCTION
-import InfinityScroll from '../shared/InfinityScroll';
-import { getCommunityDB } from '../redux/modules/community';
+import InfinityScroll from "../shared/InfinityScroll";
+import { getCommunityDB } from "../redux/modules/community";
 
 // REDUX
 import { history } from "../redux/configureStore";
 
 const CommunityDetail = (props) => {
-  const location2 = useLocation()
+  const location2 = useLocation();
   console.log(location2.state);
   const dispatch = useDispatch();
   // const category1 = 'category1';
   // const category2 = 'category2';
   // const category3 = 'category3';
   //
-  const location = '망원동';
+  const location = "망원동";
 
   // const communityList = useSelector((state) =>
   //   state.community.list ? state.community.list : Array(0, 2, 34),
@@ -82,29 +82,30 @@ const CommunityDetail = (props) => {
             </Text>
           </Grid>
           <Grid margin="-570px 0 0 0">
-
-          {/* {communityList.length ? (
+            {/* {communityList.length ? (
           communityList.map((community, idx) => {
             return <CommunityPost key={idx} {...community} />;
           })
         ) : (
           <></>
         )} */}
-            <CommunityPost category={category}/>
-            <CommunityPost category={category}/>
-            <CommunityPost category={category}/>
-            
+            <CommunityPost category={category} />
+            <CommunityPost category={category} />
+            <CommunityPost category={category} />
           </Grid>
         </CommunityDetailStyle>
         {/* <Link to="/communitypostwrite"> */}
-          <Button 
-            clickEvent={()=>history.push({
-              pathname: '/communitypostwrite',
+        <Button
+          clickEvent={() =>
+            history.push({
+              pathname: "/communitypostwrite",
               category: category,
-            })} 
-            is_float="is_float">
-            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-          </Button>
+            })
+          }
+          is_float="is_float"
+        >
+          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+        </Button>
         {/* </Link> */}
       </Grid>
     </Template>
@@ -114,7 +115,7 @@ const CommunityDetail = (props) => {
 const CommunityDetailStyle = styled.div`
   width: 100%;
   overflow-x: hidden;
-  height:90vh;
+  height: 90vh;
   /* overflow-y: scroll;
   -ms-overflow-style: none;
 

@@ -3,9 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./shared/App";
 import reportWebVitals from "./reportWebVitals";
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
-import store, { history } from './redux/configureStore';
+import store, { history } from "./redux/configureStore";
+import "./styles/fonts/notosanskr/notosanskr.css";
 
 ReactDOM.render(
   <Provider store={store}>

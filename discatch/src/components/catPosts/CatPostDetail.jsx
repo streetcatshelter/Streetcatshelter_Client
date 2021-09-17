@@ -8,17 +8,12 @@ import { Grid, Button } from '../../elements';
 // component
 import { CatPost, CatCalendar, CatDiary, CatGallery } from '..';
 
-// route
-import { Link } from 'react-router-dom';
-
 const CatPostDetail = () => {
   const [menu, setMenu] = useState('캘린더');
 
   return (
     <Grid display="flex" flexDirection="column" overflow="hidden">
-      <Link to="catdetailinfo" style={{ textDecoration: 'none' }}>
-        <CatPost />
-      </Link>
+      <CatPost />
 
       <Grid
         margin="0 0 3% 0"

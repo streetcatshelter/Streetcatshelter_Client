@@ -16,7 +16,7 @@ import { imgActions } from "../redux/modules/image";
 import { editCommunityDB } from "../redux/modules/community";
 
 // ROUTE
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // ICON
 import { Camera } from "react-feather";

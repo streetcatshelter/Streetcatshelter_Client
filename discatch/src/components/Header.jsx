@@ -43,7 +43,7 @@ const Header = (props) => {
         }}
       >
         <Grid width="20%" height="100%" margin="auto">
-          {path === "/" || path === "/community" ? (
+          {path === "/" || path === "/community" || path === "/map" ? (
             <SelectStyle onChange={onChangeHandler} value={place}>
               {options.map((pl, idx) => (
                 <option key={pl.key} value={pl.value}>

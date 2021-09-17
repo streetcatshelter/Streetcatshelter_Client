@@ -1,22 +1,24 @@
 /* == Catpost */
-import Home from './Home';
-import test from './test';
-import NotFound from './NotFound';
-import Slider from './Slider';
-import UserInfoWrite from './UserInfoWrite';
-import MyPage from './MyPage';
-import Login from './Login';
+import Home from "./Home";
+import test from "./test";
+import NotFound from "./NotFound";
+import Slider from "./Slider";
+import UserInfoWrite from "./UserInfoWrite";
+import MyPage from "./MyPage";
+import Login from "./Login";
 
-import CatDetail from './CatDetail';
-import CatDetailInfo from './CatDetailInfo';
-import CatDetailInfoWrite from './CatDetailInfoWrite';
-import CatInfoWrite from './CatInfoWrite';
+import CatDetail from "./CatDetail";
+import CatDetailInfo from "./CatDetailInfo";
+import CatDetailInfoWrite from "./CatDetailInfoWrite";
+import CatInfoWrite from "./CatInfoWrite";
 /* == Community */
-import Community from './Community';
-import CommunityDetail from './CommunityDetail';
-import CommunityPostDetail from './CommunityPostDetail';
-import CommunityPostWrite from './CommunityPostWrite';
-import CommunityPostEdit from './CommunityPostEdit';
+import Community from "./Community";
+import CommunityDetail from "./CommunityDetail";
+import CommunityPostDetail from "./CommunityPostDetail";
+import CommunityPostWrite from "./CommunityPostWrite";
+import CommunityPostEdit from "./CommunityPostEdit";
+/* == Map */
+import Map from "./Map";
 
 export {
   Home,
@@ -37,4 +39,6 @@ export {
   CommunityPostWrite,
   CommunityPostEdit,
   CommunityPostDetail,
+  /* == Map */
+  Map,
 };

@@ -21,15 +21,44 @@ import { Link, useLocation } from "react-router-dom";
 // ICON
 import { Camera } from "react-feather";
 
+// REDUX
 import { history } from "../redux/configureStore";
+import { getOneCommunityDB } from '../redux/modules/community';
 
-const CommunityPostEdit = (props) => {
+const CommunityPostEdit = (props, community) => {
+  // const communityId = community.match.params;
+  // console.log(community);
+
+  // React.useEffect(() => {
+  //   dispatch(getOneCommunityDB(communityId));
+  // }, []);
+
+  // const { category, contents, image, location, title, username } = useSelector((state) => ({
+  //   categoty: state.community.list.categoty,
+  //   contents: state.community.list.contents,
+  //   image: state.community.list.image,
+  //   location: state.community.list.location,
+  //   title: state.community.list.title,
+  //   username: state.community.list.username,
+  // }));
+
+  const image = '수정 필요';
+  // const image = null;
+  const communityId = "수정 필요";
+  const category = "수정 필요";
+  const title = "수정 필요";
+  const contents = "수정 필요"
+
+
+
   const imageList = useSelector((state) => state.image.file[0])
   console.log(imageList);
   const dispatch = useDispatch();
 
-  const location = "망원동"; // Header에서 가져오기
-  const [fileUrl, setFileUrl] = useState(null);
+  const location = "망원동, 수정"; // Header에서 가져오기?
+  // const location2 = "망원동"; // 유저 정보에서 가져오기??
+
+  const [fileUrl, setFileUrl] = useState(image);
   const [fileNum, setFileNum] = useState(0);
 
 
@@ -49,29 +78,18 @@ const CommunityPostEdit = (props) => {
     // }
   };
 
-  const Options = [
-    { key: 1, value: "게시글 주제를 선택해주세요!" },
-    { key: 2, value: "고양이 정보글" },
-    { key: 3, value: "평창동 동네 모임" },
-    { key: 4, value: "평창동 고양이 용품 나눔" },
-  ];
-  const [category, setCategory] = React.useState("게시글 주제를 선택해주세요!");
-  const onChangeHandler = (e) => {
-    setCategory(e.currentTarget.value);
-  };
-
-  const [title, setTitle] = React.useState();
+  const [editTitle, setEditTitle] = React.useState(title);
   const $title = (e) => {
-    setTitle(e.target.value);
+    setEditTitle(e.target.value);
   };
 
-  const [contents, setContents] = React.useState();
+  const [editcontents, setEditContents] = React.useState(contents);
   const $contents = (e) => {
-    setContents(e.target.value);
+    setEditContents(e.target.value);
   };
 
   const editBtn = () => {
-    dispatch(editCommunityDB(category, contents, location, title));
+    dispatch(editCommunityDB(communityId, category, contents, location, title));
   };
 
   React.useEffect(() => {
@@ -94,22 +112,23 @@ const CommunityPostEdit = (props) => {
       >
         <CommunityEditStyle>
           <Grid width="335px" height="auto" margin="0 0 16px 0">
-            <Select
-              onChange={onChangeHandler}
+          <Input
+              disabled
               value={category}
-              style={{ height: "32px" }}
-            >
-              {Options.map((item, index) => (
-                <option key={item.key} value={item.value}>
-                  {item.value}
-                </option>
-              ))}
-            </Select>
+              width="103%"
+              addstyle={() => {
+                return css`
+                  border-radius: 10px;
+                  margin: 0 0 16px 2px;
+                `;
+              }}
+            />
           </Grid>
           <Grid width="335px" height="10%">
             <Input
               onChange={$title}
-              placeholder="제목을 입력해주세요."
+              placeholder='제목을 입력해주세요.'
+              value={editTitle}
               width="103%"
               addstyle={() => {
                 return css`
@@ -181,11 +200,11 @@ const CommunityPostEdit = (props) => {
                       `;
                     }}
                   >
-                    {fileNum}/1
+                    {image && 1 || fileNum}/1
                   </Text>
                 </Grid>
               </Grid>
-              {fileUrl && (
+              {fileUrl&& (
                 <Grid
                   width={"90px"}
                   height={"90px"}
@@ -199,43 +218,13 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={fileUrl} width="100%" height="100%" />
+                  <Image src={image || fileUrl} width="100%" height="100%" />
                 </Grid>
               )}
-
-              {/* <Grid
-              width={'90px'} 
-              height={'90px'} 
-              margin={'5.5px'} 
-              addstyle={() => {
-                return css`
-                  background:lightgray;
-                  display:inline-block; 
-                `;
-              }}><Image width="100%" height="100%"/></Grid>
-            <Grid
-              width={'90px'} 
-              height={'90px'}
-              margin={'5.5px'} 
-              addstyle={() => {
-                return css`
-                  background:lightgray;
-                  display:inline-block; 
-                `;
-              }}><Image width="100%" height="100%"/></Grid>
-            <Grid
-              width={'90px'} 
-              height={'90px'}
-              margin={'5.5px'} 
-              addstyle={() => {
-                return css`
-                  background:lightgray;
-                  display:inline-block;
-                `;
-              }}><Image width="100%" height="100%"/></Grid> */}
             </Grid>
             <TextArea
               onChange={$contents}
+              value={editcontents}
               placeholder="내용을 입력해주세요."
               height="221px"
               width="90%"
@@ -315,14 +304,6 @@ const CommunityEditStyle = styled.div`
   height: 60vh;
   margin: 10px auto;
   border-radius: 30px;
-`;
-
-const Select = styled.select`
-  background: rgb(${(props) => props.theme.palette.bgColor});
-  height: 50px;
-  border: 1px solid rgb(${(props) => props.theme.palette.olive});
-  width: 350px;
-  border-radius: 10px;
 `;
 
 const Upload = styled.input`

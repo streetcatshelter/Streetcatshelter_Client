@@ -38,14 +38,12 @@ const Router = () => {
       <Route path="/catdetailinfo" exact component={CatDetailInfo} />
       <Route path="/communitypostwrite" exact component={CommunityPostWrite} />
       <Route path="/communitypostedit" exact component={CommunityPostEdit} />
+      <Route path="/communitypostedit/:communityId" exact component={CommunityPostEdit} />
       <Route path="/community/catinfo" exact component={CommunityDetail} />
       <Route path="/community/gathering" exact component={CommunityDetail} />
       <Route path="/community/sharing" exact component={CommunityDetail} />
-      <Route
-        path="/communitypostdetail"
-        exact
-        component={CommunityPostDetail}
-      />
+      <Route path="/communitypostdetail" exact component={CommunityPostDetail}/>
+      <Route path="/communitypostdetail/:communityId" exact component={CommunityPostDetail}/>
       <Route path="/community" exact component={Community} />
       <Route path="/test" exact component={test} />
       <Route path={'*'} exact component={NotFound} />

@@ -41,7 +41,6 @@ import CommentList from './CommentList';
 /* community */
 import CommunityCategoryCard from './CommunityCategoryCard';
 import CommunityPost from './CommunityPost';
-import CommunityPostList from './CommunityPostList';
 import EditDeleteModal from './EditDeleteModal';
 
 export {
@@ -82,6 +81,5 @@ export {
   /* ==community */
   CommunityCategoryCard,
   CommunityPost,
-  CommunityPostList,
   EditDeleteModal,
 };

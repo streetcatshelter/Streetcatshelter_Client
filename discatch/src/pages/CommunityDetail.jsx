@@ -11,7 +11,7 @@ import styled, { css } from "styled-components";
 import { Grid, Button, Text } from "../elements/index";
 
 // ROUTE
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 //ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,10 +28,7 @@ const CommunityDetail = (props) => {
   const location2 = useLocation();
   console.log(location2.state);
   const dispatch = useDispatch();
-  // const category1 = 'category1';
-  // const category2 = 'category2';
-  // const category3 = 'category3';
-  //
+
   const location = "망원동";
 
   // const communityList = useSelector((state) =>
@@ -94,7 +91,6 @@ const CommunityDetail = (props) => {
             <CommunityPost category={category} />
           </Grid>
         </CommunityDetailStyle>
-        {/* <Link to="/communitypostwrite"> */}
         <Button
           clickEvent={() =>
             history.push({
@@ -106,7 +102,6 @@ const CommunityDetail = (props) => {
         >
           <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
         </Button>
-        {/* </Link> */}
       </Grid>
     </Template>
   );
@@ -116,12 +111,6 @@ const CommunityDetailStyle = styled.div`
   width: 100%;
   overflow-x: hidden;
   height: 90vh;
-  /* overflow-y: scroll;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  } */
 `;
 
 export default CommunityDetail;

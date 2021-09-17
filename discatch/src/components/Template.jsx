@@ -14,17 +14,15 @@ const Template = (props) => {
     <>
       <Background />
       <Wrapper>
-        <Content>
-          {props.page === "slider" || props.page === "login" ? (
-            <> {props.children}</>
-          ) : (
-            <>
-              <Header path={path} />
-              <>{props.children}</>
-              <Menu />
-            </>
-          )}
-        </Content>
+        {props.page === "slider" || props.page === "login" ? (
+          <Content margin="0px auto"> {props.children} </Content>
+        ) : (
+          <Content margin="60px auto">
+            <Header path={path} />
+            <>{props.children}</>
+            <Menu />
+          </Content>
+        )}
       </Wrapper>
     </>
   );
@@ -37,7 +35,7 @@ const Background = styled.div`
   z-index: -1;
   width: 100vw;
   height: 100%;
-  background-color: #ffffff;
+  background: #fefdf8;
 `;
 
 const Wrapper = styled.div`
@@ -47,7 +45,7 @@ const Wrapper = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 60px auto;
+  margin: ${(props) => props.margin};
   max-width: 420px;
   width: 100vw;
   height: 100%;

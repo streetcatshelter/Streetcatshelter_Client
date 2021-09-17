@@ -2,14 +2,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-//STYLE
-import { flexBox } from '../shared/style';
-
 // ELEMENTS
 import { Grid, Text } from '../elements/index';
-
-// ICON
-import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const Comment = () => {
   return (
@@ -33,29 +27,6 @@ const Comment = () => {
           댓글
         </Text>
         <Count>25</Count>
-      </Grid>
-
-      <Grid
-        addstyle={() => {
-          return css`
-            display: flex;
-          `;
-        }}
-      >
-        <Grid></Grid>
-        <Grid
-          addstyle={() => {
-            return css`
-              display: flex;
-              margin: 0 0 0 60px;
-            `;
-          }}
-        >
-          {/* <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/> */}
-          {/* <Text fontWeight="bold" margin="0 0 0 4px">
-            10
-          </Text> */}
-        </Grid>
       </Grid>
     </Grid>
   );

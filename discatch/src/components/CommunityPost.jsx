@@ -6,19 +6,22 @@ import { Grid, Text, Image } from '../elements/index';
 // STYLE
 import styled, { css } from 'styled-components';
 
-// ROUTE
-import { Link } from 'react-router-dom';
-
 // ICON
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { MessageCircle, Eye } from "react-feather";
 
-const CommunityPost = () => {
+// REDUX
+import { history } from "../redux/configureStore";
+
+const CommunityPost = ({community, category}) => {
+  console.log(category);
   return (
     <Grid height="30px">
-      <Link to='/communitypostdetail' style={{textDecoration:'none', color:'black'}}>
       <CommunityPostStyle>
-        <Grid>
+        <Grid clickEvent={()=>history.push({
+              pathname: '/communitypostdetail',
+              category: category,
+            })} >
             <Grid 
             addstyle={() => {
               return css`
@@ -42,6 +45,7 @@ const CommunityPost = () => {
                 }}/>
             <Text margin="4px" fontWeight={'bold'}>
             뽀삐맘
+            {/* {community.username} */}
             </Text>
             <Text margin="0 10px 0 170px">
             2021-09-03 15:23
@@ -51,6 +55,7 @@ const CommunityPost = () => {
         <Grid margin="-50px 0">
           <Text fontWeight={'bold'} margin={'4px 0 0 0'}>
           9월 8일 (수) 18:00 망원 2동 순찰돕니다.
+          {/* {community.title} */}
           </Text>
           <Grid 
             addstyle={() => {
@@ -105,7 +110,6 @@ const CommunityPost = () => {
         </Grid>
         </Grid>
       </CommunityPostStyle>
-      </Link>
     </Grid>
   );
 };
@@ -118,6 +122,7 @@ const CommunityPostStyle = styled.div`
   height: 77px;
   margin: 80px 0;
   padding: 4px;
+  cursor: pointer;
 `;
 
 export default CommunityPost;

@@ -14,7 +14,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 const Comment = () => {
   return (
     <Grid
-      margin="0px 0px 15px 0px"
+      margin="20px 0px 15px 0px"
       addstyle={() => {
         return css`
           display: flex;
@@ -51,10 +51,10 @@ const Comment = () => {
             `;
           }}
         >
-          {/* <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/> */}
-          {/* <Text fontWeight="bold" margin="0 0 0 4px">
+          <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/>
+          <Text fontWeight="bold" margin="0 0 0 4px">
             10
-          </Text> */}
+          </Text>
         </Grid>
       </Grid>
     </Grid>

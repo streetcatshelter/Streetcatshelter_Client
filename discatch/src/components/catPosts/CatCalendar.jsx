@@ -1,17 +1,16 @@
-import React from "react";
+// library
+import React from 'react';
 
 // component
-import { CommentList } from "..";
+import { CommentList, Calendar } from '..';
 
 // element
-import { Grid } from "../../elements/index";
-
-/* == Library - style */
-import styled, { css } from "styled-components";
+import { Grid } from '../../elements/index';
 
 const CatCalendar = () => {
   return (
     <Grid>
+      <Calendar />
       <CommentList />
     </Grid>
   );

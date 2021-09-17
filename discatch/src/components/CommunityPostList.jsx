@@ -29,7 +29,6 @@ const CommunityPostList = () => {
       <CommunityPost />
       <CommunityPost />
       <CommunityPost />
-      <CommunityPost />
     </Grid>
   );
 };

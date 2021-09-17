@@ -66,6 +66,7 @@ export const getCommunityDB = (limit = 10,location,category) => {
   };
 };
 
+
 // 커뮤니티 상세 가져오기
 export const getOneCommunityDB = (communityId = '') => {
   return function (dispatch, getState, { history }) {

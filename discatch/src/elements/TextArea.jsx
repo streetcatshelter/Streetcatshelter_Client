@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 /* == Library - style */
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const TextArea = ({ value, placeholder, changeEvent, keyPress, ...props }) => {
   return (
@@ -16,6 +16,7 @@ const TextArea = ({ value, placeholder, changeEvent, keyPress, ...props }) => {
 };
 
 const TextAreaStyle = styled.textarea`
+  margin: ${(props) => props.margin};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background: ${(props) => props.bgColor};
@@ -32,13 +33,13 @@ const TextAreaStyle = styled.textarea`
 `;
 
 TextArea.defaultProps = {
-  width: "100%",
-  height: "100px",
-  bgColor: "none",
-  color: "black",
-  padding: "12px",
-  radius: "12px",
-  fontSize: "12px",
+  width: '100%',
+  height: '100px',
+  bgColor: 'none',
+  color: 'black',
+  padding: '12px',
+  radius: '12px',
+  fontSize: '12px',
   keyPress: () => {},
   changeEvent: () => {},
   addstyle: () => {},

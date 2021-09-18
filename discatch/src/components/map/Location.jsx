@@ -1,17 +1,18 @@
 /*global kakao*/
 import React, { useEffect, useState } from "react";
-
+import { useSelector } from "react-redux";
 const Location = (props) => {
   //위도 저장
   const [latitude, setLatitude] = useState();
   //경도 저장
   const [longitude, setLongitude] = useState();
-
+  // const keyword = useSelector((state) => state.map.list[0]);
+  // console.log(keyword);
   useEffect(() => {
     var mapContainer = document.getElementById("map"), // 지도를 표시할 div
       mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
+        level: 5, // 지도의 확대 레벨
       };
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -27,47 +28,7 @@ const Location = (props) => {
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-    //geolocation을 통해 현재 위치 보여주기 //
-    // // HTML5의 geolocaiton으로 사용할 수 있는지 확인합니다.
-    // if (navigator.geolocation) {
-    //   // GeoLocation을 이용해서 접속 위치를 얻어옵니다.
-    //   navigator.geolocation.getCurrentPosition(function (position) {
-    //     var lat = position.coords.latitude, // 위도
-    //       lon = position.coords.longitude; // 경도
-
-    //     var locPostion = new kakao.maps.LatLng(lat, lon), //마커가 표시될 위치를 geolocation 좌표로 생성합니다.
-    //       message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다.
-
-    //     // 마커와 인포윈도우를 표시합니다.
-    //     displayMarker(locPostion, message);
-    //   });
-    // } else {
-    // }
-
-    // // 지도에 마커와 인포윈도우를 표시하는 함수입니다.
-    // function displayMarker(locPostion, message) {
-    //   // 마커를 생성합니다.
-    //   var marker = new kakao.maps.Marker({
-    //     map: map,
-    //     position: locPostion,
-    //   });
-
-    //   var iwContent = message, // 인포윈도우에 표시할 내용
-    //     iwRemoveable = true;
-
-    //   // 인포윈도우를 생성합니다.
-    //   var infowindow = new kakao.maps.InfoWindow({
-    //     content: iwContent,
-    //     removable: iwRemoveable,
-    //   });
-
-    //   // 인포윈도우를 마커위에 표시합니다.
-    //   infowindow.open(map, marker);
-
-    //   지도 중심좌표를 접속위치로 변경합니다.
-    //   map.setCenter(locPostion);
-    // }
-
+    //지도 마커 표시하기//
     const marker = new kakao.maps.Marker({ position: map.getCenter() });
 
     // 지도에 마커를 표시합니다.
@@ -82,6 +43,30 @@ const Location = (props) => {
       //마커를 지도상에 보여줍니다.
       marker.setMap(map);
     });
+
+    const ps = new kakao.maps.services.Places();
+
+    ps.keywordSearch("망원동", placesSearchCB);
+
+    function placesSearchCB(data, status, pagination) {
+      if (status === kakao.maps.services.Status.OK) {
+        let bounds = new kakao.maps.LatLngBounds();
+
+        for (let i = 0; i < data.length; i++) {
+          // displayMarker(data[i]);
+          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }
+
+        map.setBounds(bounds);
+      }
+    }
+    //해당 키워드에 마커를 표시//
+    // function displayMarker(place) {
+    //   let marker = new kakao.maps.Marker({
+    //     map: map,
+    //     position: new kakao.maps.LatLng(place.y, place.x),
+    //   });
+    // }
   }, []);
 
   return (

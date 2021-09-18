@@ -1,77 +1,38 @@
-// library
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import styled, { css } from 'styled-components';
 
-// component
+/* == components*/
 import { Template } from '../components';
 
-// element
-import { Grid, TextArea, Button, Input, Image } from '../elements';
+/* == Custom - Elements*/
+import { Grid, TextArea, Button } from '../elements';
 
-// style
+/* == Library - style */
+import styled, { css } from 'styled-components';
 import { flexBox } from '../shared/style';
-
-// icon
-import { Camera } from 'react-feather';
-
-// redux
-import { imgActions } from '../redux/modules/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 const CatDetailInfoWrite = (props) => {
-  const dispatch = useDispatch();
   const [works, setWorks] = useState([]);
   const changeWorks = (e) => {
     setWorks([...works, e.target.value]);
   };
   // console.log(works);
-
-  const [fileUrl, setFileUrl] = useState(null);
-  // S3
-  const handleInputFile = (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    const imageUrl = URL.createObjectURL(file);
-    dispatch(imgActions.setInitialState());
-    dispatch(imgActions.setFile([file]));
-    setFileUrl(imageUrl);
-  };
-
   return (
     <Template props={props}>
-      <Grid width="80%" bgColor="lightGray" padding="12px" margin="5% auto">
-        <label htmlFor="imgFile">
-          <Camera width="100%" height="100" color="white" />
-        </label>
-
-        <Input
-          id="imgFile"
-          name="imgFile"
-          type="file"
-          accept="image/png, image/jpeg"
-          changeEvent={handleInputFile}
-          addstyle={() => {
-            return css`
-              display: none;
-            `;
-          }}
-        />
+      <Grid
+        width="90%"
+        height="150px"
+        background="#d3d3d3"
+        margin="5% auto"
+        addstyle={() => {
+          return css`
+            ${flexBox('center')}
+          `;
+        }}
+      >
+        <FontAwesomeIcon icon={faCamera} size="3x" style={{ color: 'white' }} />
       </Grid>
-
-      {fileUrl && (
-        <Grid
-          width="60%"
-          height="200px"
-          margin="3% auto"
-          addstyle={() => {
-            return css`
-              ${flexBox()}
-            `;
-          }}
-        >
-          <Image src={fileUrl} width="100%" height="100%" />
-        </Grid>
-      )}
 
       <Grid
         display="flex"
@@ -121,13 +82,17 @@ const CatDetailInfoWrite = (props) => {
       />
 
       <Button
-        width="120px"
+        width="140px"
         margin="2% auto"
         color="white"
         bgColor="olive"
         fontSize="18px"
         fontWeight="800"
-        radius="15px"
+        addstyle={() => {
+          return css`
+            border-radius: 20px;
+          `;
+        }}
       >
         작성하기
       </Button>

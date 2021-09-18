@@ -11,6 +11,7 @@ import Slide from "./slider/Slide";
 import MyPageCat from "./myPage/MyPageCat";
 import Notice from "./myPage/Notice";
 import Profile from "./myPage/Profile";
+import ProfileEdit from "./myPage/ProfileEdit";
 import ProgressBar from "./myPage/ProgressBar";
 import UserInfo from "./myPage/UserInfo";
 import MyPageDetail from "./myPage/MyPageDetail";
@@ -58,6 +59,7 @@ export {
   MyPageCat,
   Notice,
   Profile,
+  ProfileEdit,
   ProgressBar,
   UserInfo,
   MyWork,

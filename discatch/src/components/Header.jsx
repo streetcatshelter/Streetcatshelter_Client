@@ -1,5 +1,5 @@
 // library
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
 // style
@@ -15,23 +15,30 @@ import { Grid, Text } from "../elements";
 import { Search, Bell, ArrowLeft } from "react-feather";
 
 import { history } from "../redux/configureStore";
-
+import { useDispatch } from "react-redux";
+import { searchMap } from "../redux/modules/map";
 const Header = (props) => {
+  const dispatch = useDispatch();
   const path = props.path;
+
   const options = useMemo(
     () => [
-      { key: 1, value: "지역" },
-      { key: 2, value: "망원동" },
-      { key: 3, value: "고척동" },
-      { key: 4, value: "개봉동" },
+      { key: 1, value: "망원동" },
+      { key: 2, value: "고척동" },
+      { key: 3, value: "개봉동" },
     ],
     []
   );
 
-  const [place, setPlace] = useState("");
+  const [place, setPlace] = useState("망원동");
   const onChangeHandler = (e) => {
     setPlace(e.target.value);
   };
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(searchMap(place));
+  //   };
+  // }, [place]);
 
   return (
     <HeaderStyle>
@@ -43,7 +50,7 @@ const Header = (props) => {
         }}
       >
         <Grid width="20%" height="100%" margin="auto">
-          {path === "/" || path === "/community" ? (
+          {path === "/" || path === "/community" || path === "/map" ? (
             <SelectStyle onChange={onChangeHandler} value={place}>
               {options.map((pl, idx) => (
                 <option key={pl.key} value={pl.value}>

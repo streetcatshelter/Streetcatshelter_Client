@@ -35,16 +35,16 @@ const CalendarDates = (props) => {
             <Dot background="#CBCF52" />
           </Dots>
         </DateNum>
-        {openModal && (
-          <CalendarModal
-            elm={elm}
-            month={month}
-            year={year}
-            openModal={openModal}
-            setOpenModal={setOpenModal}
-          />
-        )}
       </Form>
+      {openModal && (
+        <CalendarModal
+          elm={elm}
+          month={month}
+          year={year}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
+      )}
     </>
   );
 };

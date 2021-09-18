@@ -10,13 +10,15 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
 // reducer
-import image from './modules/image';
+import image from "./modules/image";
+import map from "./modules/map";
 
 const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-  router: connectRouter(history),
   image: image,
+  map: map.reducer,
+  router: connectRouter(history),
 });
 
 // history 넣기, 로거사용

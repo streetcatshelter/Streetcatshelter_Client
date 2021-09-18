@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const Input = ({
   id,
+  name,
+  multiple,
   type,
   placeholder,
   value,
@@ -13,6 +15,8 @@ const Input = ({
   return (
     <InputStyle
       id={id}
+      name={name}
+      multiple
       type={type}
       placeholder={placeholder}
       value={value}

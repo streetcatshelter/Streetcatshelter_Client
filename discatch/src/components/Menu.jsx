@@ -1,18 +1,18 @@
 // library
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 // style
-import { flexBox } from "../shared/style";
+import { flexBox } from '../shared/style';
 
 // route
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 // element
-import { Grid, Text } from "../elements";
+import { Grid, Text } from '../elements';
 
 // icon
-import { Home, Users, Compass, Send, User } from "react-feather";
+import { Home, Users, Compass, Send, User } from 'react-feather';
 
 const Menu = () => {
   return (
@@ -20,15 +20,15 @@ const Menu = () => {
       <Grid
         addstyle={() => {
           return css`
-            ${flexBox("space-around")}
+            ${flexBox('space-around')}
           `;
         }}
       >
         <Link
           to="/"
           style={{
-            textDecoration: "none",
-            color: "black",
+            textDecoration: 'none',
+            color: 'black',
           }}
         >
           <Home />
@@ -39,9 +39,9 @@ const Menu = () => {
         <Link
           to="/community"
           style={{
-            textDecoration: "none",
-            color: "black",
-            textAlign: "center",
+            textDecoration: 'none',
+            color: 'black',
+            textAlign: 'center',
           }}
         >
           <Users />
@@ -50,8 +50,8 @@ const Menu = () => {
         <Link
           to="/map"
           style={{
-            textDecoration: "none",
-            color: "black",
+            textDecoration: 'none',
+            color: 'black',
           }}
         >
           <Compass />
@@ -62,8 +62,8 @@ const Menu = () => {
         <Link
           to="/chat"
           style={{
-            textDecoration: "none",
-            color: "black",
+            textDecoration: 'none',
+            color: 'black',
           }}
         >
           <Send />
@@ -74,9 +74,9 @@ const Menu = () => {
         <Link
           to="/mypage"
           style={{
-            textDecoration: "none",
-            color: "black",
-            textAlign: "center",
+            textDecoration: 'none',
+            color: 'black',
+            textAlign: 'center',
           }}
         >
           <User />
@@ -88,7 +88,7 @@ const Menu = () => {
 };
 
 const MenuStyle = styled.footer`
-  max-width: 420px;
+  max-width: 450px;
   width: 100%;
   height: 50px;
   background: #fbd986;

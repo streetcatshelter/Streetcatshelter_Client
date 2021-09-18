@@ -24,10 +24,12 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 
 const CommunityPostWrite = (props) => {
-  const selectedCategory = useLocation();
   const dispatch = useDispatch();
+  const path = useLocation();
+  console.log(path.pathname)
+  let pathName = path.pathname;
   
-  const location = "망원동"; // Header에서 가져오기
+  const location = "망원동"; // Header에서 가져오기 or 유저 정보에서 가져오기
   const [fileUrl, setFileUrl] = useState(null);
   const [fileNum, setFileNum] = useState(0);
 
@@ -45,19 +47,23 @@ const CommunityPostWrite = (props) => {
       alert('사진은 5장을 초과할 수 없어요!');
     }
   };
-
-  const Options = [
-    { key: 1, value: selectedCategory.category },
-    { key: 2, value: "고양이 정보글" },
-    { key: 3, value: "평창동 동네 모임" },
-    { key: 4, value: "평창동 고양이 용품 나눔" },
-  ];
   
   const [category, setCategory] = React.useState("게시글 주제를 선택해주세요!");
+
+  const Options = [
+    { key: 1, value: "게시글 주제를 선택해주세요!"},
+    { key: 2, value: "고양이 정보글"},
+    { key: 3, value:`${location} 동네 모임` },
+    { key: 4, value: `${location} 고양이 용품 나눔` },
+  ];
+  console.log(Options[0].value);
+  let k = Options.indexOf(Options[0])
+  console.log(k);
+  console.log(Options);
+
   const onChangeHandler = (e) => {
     setCategory(e.currentTarget.value);
   };
-
 
   const [title, setTitle] = React.useState();
   const $title = (e) => {

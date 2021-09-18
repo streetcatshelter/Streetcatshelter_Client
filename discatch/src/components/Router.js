@@ -36,7 +36,9 @@ const Router = () => {
       <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
       <Route path="/catdetail" exact component={CatDetail} />
       <Route path="/catdetailinfo" exact component={CatDetailInfo} />
-      <Route path="/communitypostwrite" exact component={CommunityPostWrite} />
+      <Route path="/community/catinfo/write" exact component={CommunityPostWrite} />
+      <Route path="/community/gathering/write" exact component={CommunityPostWrite} />
+      <Route path="/community/sharing/write" exact component={CommunityPostWrite} />
       <Route path="/communitypostedit" exact component={CommunityPostEdit} />
       <Route path="/communitypostedit/:communityId" exact component={CommunityPostEdit} />
       <Route path="/community/catinfo" exact component={CommunityDetail} />

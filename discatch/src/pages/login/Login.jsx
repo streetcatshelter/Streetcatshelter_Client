@@ -1,14 +1,14 @@
 import React from "react";
 
-import { Template } from "../components";
+import { Template } from "../../components";
 
 /* == Library - style */
 import styled from "styled-components";
 
 /* == Custom - Icon */
-import Kakao from "../styles/images/icon-Kakao.png";
-import Naver from "../styles/images/icon-Naver(G).png";
-import Google from "../styles/images/icon-Google.png";
+import Kakao from "../../styles/images/icon-Kakao.png";
+import Naver from "../../styles/images/icon-Naver(G).png";
+import Google from "../../styles/images/icon-Google.png";
 
 const login = (props) => {
   return (

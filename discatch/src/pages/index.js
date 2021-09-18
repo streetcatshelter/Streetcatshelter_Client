@@ -1,12 +1,15 @@
-/* == Catpost */
 import Home from "./Home";
 import test from "./test";
 import NotFound from "./NotFound";
 import Slider from "./Slider";
 import UserInfoWrite from "./UserInfoWrite";
 import MyPage from "./MyPage";
-import Login from "./Login";
 
+/* == Login */
+import Login from "./login/Login";
+import LoginRedirect from "./login/LoginRedirect";
+
+/* == Catpost */
 import CatDetail from "./CatDetail";
 import CatDetailInfo from "./CatDetailInfo";
 import CatDetailInfoWrite from "./CatDetailInfoWrite";
@@ -27,7 +30,9 @@ export {
   Slider,
   UserInfoWrite,
   MyPage,
+  /* == Login */
   Login,
+  LoginRedirect,
   /* == Catpost */
   CatDetail,
   CatDetailInfo,

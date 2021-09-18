@@ -1,11 +1,40 @@
 // LIBRARY
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 // ELEMENTS
 import { Grid, Text } from '../elements/index';
 
-const Comment = () => {
+// ROUTE
+import { useLocation } from 'react-router-dom';
+
+// ICON
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+// REDUX
+import { getCommunityDB } from '../redux/modules/community';
+
+const Comment = (props) => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location.pathname);
+  // console.log(props.communityId.communityId);
+  // const communityId = props.communityId.communityId
+  // const commentList = useSelector((state) => state.community);
+
+  // React.useEffect(() => {
+  //   dispatch(getCommunityDB(communityId));
+  // }, [commentList.length]);
+  React.useEffect(() => {
+      if (location.pathname === '/communitypostdetail') {
+        console.log('커뮤니티 가져오기');
+        // dispatch(getCommunityDB(communityId));
+      } else {
+        console.log('캣 가져오기');
+      }
+    }, []);
+
   return (
     <Grid
       margin="20px 0px 15px 0px"
@@ -28,6 +57,29 @@ const Comment = () => {
         </Text>
         <Count>25</Count>
       </Grid>
+    
+      {location.pathname === '/communitypostdetail' && <Grid
+        addstyle={() => {
+          return css`
+            display: flex;
+          `;
+        }}
+      >
+        <Grid></Grid>
+        <Grid
+          addstyle={() => {
+            return css`
+              display: flex;
+              margin: 0 0 0 60px;
+            `;
+          }}
+        >
+          <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/>
+          <Text fontWeight="bold" margin="0 0 0 4px">
+            10
+          </Text>
+        </Grid>
+      </Grid>}
     </Grid>
   );
 };

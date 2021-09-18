@@ -1,7 +1,9 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 /* == components*/
 import Comment from './Comment';
+import CommentCard from './CommentCard';
 
 /* == Library - style */
 import styled, { css } from 'styled-components';
@@ -10,7 +12,45 @@ import styled, { css } from 'styled-components';
 import { Grid, Input, Button } from '../elements/index';
 import { flexBox, flexHoz } from '../shared/style';
 
-const CommentList = () => {
+// ROUTE
+import { useLocation } from 'react-router-dom';
+
+// REDUX
+import { getCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } from '../redux/modules/community';
+
+const CommentList = (props) => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  // const communityId = props.communityId.communityId;
+  const communityId = '테스트'
+  // console.log(community);
+  const [comments, setComment] = React.useState('');
+  // const commentList = useSelector((state) => state.community.list);
+
+  // React.useEffect(() => {
+  //   dispatch(getCommunityDB(communityId));
+  // }, [commentList.length]);
+  React.useEffect(() => {
+    if (location.pathname === '/communitypostdetail') {
+      console.log('커뮤니티 가져오기');
+      // dispatch(getCommunityDB(communityId));
+    } else {
+      console.log('캣 가져오기');
+    }
+  }, []);
+
+  const $comment = (event) => {
+    setComment(event.target.value);
+  };
+
+  const addCommentBtn = () => {
+    dispatch(addCommunityCommentDB(comments, communityId));
+  };
+
+  const deleteBtn = () => {
+    dispatch(deleteCommunityCommentDB(communityId));
+  };
+
   return (
     <>
       <Comment />
@@ -19,11 +59,12 @@ const CommentList = () => {
         margin="auto"
         addstyle={() => {
           return css`
-            ${flexBox()}
+            ${flexBox('flex-start')}
           `;
         }}
       >
         <Input
+          onChange={$comment}
           type="text"
           placeholder="댓글 달기..."
           addstyle={() => {
@@ -38,36 +79,21 @@ const CommentList = () => {
           bgColor="yellow"
           padding="0.4rem"
           margin="0 0 0 -38px"
+          clickEvent={addCommentBtn}
         >
           작성
         </Button>
       </Grid>
-      <Grid
-        margin="0 10px"
-        addstyle={() => {
-          return css`
-            ${flexBox('flex-start')};
-            font-size: 14px;
-          `;
-        }}
-      >
-        <p style={{}}>망원동 왕집사:</p>
-        <p style={{ marginLeft: '4px', width: '160px' }}>왕 귀엽습니다!!</p>
-      </Grid>
-      <Grid
-        addstyle={() => {
-          return css`
-            ${flexHoz('flex-end')}
-          `;
-        }}
-      >
-        <p
-          style={{ fontSize: '10px', marginTop: '-28px', marginRight: '10px' }}
-        >
-          2021-09-02 17:34
-        </p>
-      </Grid>
-      <Button>더보기</Button>
+
+
+      <CommentCard/>
+
+      {/* {commentList.map((comment, idx) => {
+          return <CommentCard key={idx} comment={comment} />;
+        })} */}
+
+
+      <Button width="100%">더보기</Button>
     </>
   );
 };

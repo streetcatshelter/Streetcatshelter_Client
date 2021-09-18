@@ -5,41 +5,34 @@ import { User } from "react-feather";
 import styled from "styled-components";
 
 const CalendarModal = (props) => {
-  const { elm, month, year, openModal } = props;
-  const [OpenModal, SetOpenModal] = useState(false);
-  useEffect(() => {
-    openModal ? SetOpenModal(true) : SetOpenModal(false);
-  }, []);
+  const { elm, month, year, setOpenModal } = props;
+
   return (
     <>
-      {OpenModal ? (
-        <Background>
-          <Form>
-            <Header>
-              disCATch<span>활동일지</span>
-            </Header>
-            <ViewDate>
-              {year}-{month}-{elm}
-            </ViewDate>
-            <Events>
-              <ul>
-                <li>또또 밥주기</li>
-                <li>초코 급수</li>
-              </ul>
-            </Events>
+      <Background>
+        <Form>
+          <Header>
+            disCATch<span>활동일지</span>
+          </Header>
+          <ViewDate>
+            {year}-{month}-{elm}
+          </ViewDate>
+          <Events>
+            <ul>
+              <li>또또 밥주기</li>
+              <li>초코 급수</li>
+            </ul>
+          </Events>
 
-            <Close
-              onClick={() => {
-                SetOpenModal(false);
-              }}
-            >
-              닫기
-            </Close>
-          </Form>
-        </Background>
-      ) : (
-        ""
-      )}
+          <Close
+            onClick={() => {
+              setOpenModal(false);
+            }}
+          >
+            닫기
+          </Close>
+        </Form>
+      </Background>
     </>
   );
 };
@@ -66,7 +59,7 @@ const Form = styled.div`
   background-color: #fef7ea;
   text-align: center;
   color: black;
-  z-index: 100;
+  z-index: 99;
 `;
 const Header = styled.div`
   font-weight: 700;

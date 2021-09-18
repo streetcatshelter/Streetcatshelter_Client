@@ -26,7 +26,8 @@ import { history } from "../redux/configureStore";
 
 const CommunityDetail = (props) => {
   const location2 = useLocation();
-  console.log(location2.state);
+  console.log(location2.pathname);
+  const pathName = location2.pathname;
   const dispatch = useDispatch();
 
   const location = "망원동";
@@ -91,17 +92,39 @@ const CommunityDetail = (props) => {
             <CommunityPost category={category} />
           </Grid>
         </CommunityDetailStyle>
-        <Button
+        {pathName === '/community/sharing' && <Button
           clickEvent={() =>
             history.push({
-              pathname: "/communitypostwrite",
+              pathname: "/community/sharing/write",
               category: category,
             })
           }
           is_float="is_float"
         >
           <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-        </Button>
+        </Button>}
+        {pathName === '/community/catinfo' && <Button
+          clickEvent={() =>
+            history.push({
+              pathname: "/community/catinfo/write",
+              category: category,
+            })
+          }
+          is_float="is_float"
+        >
+          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+        </Button>}
+        {pathName === '/community/gathering' && <Button
+          clickEvent={() =>
+            history.push({
+              pathname: "/community/gathering/write",
+              category: category,
+            })
+          }
+          is_float="is_float"
+        >
+          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+        </Button>}
       </Grid>
     </Template>
   );

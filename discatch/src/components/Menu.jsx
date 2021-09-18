@@ -88,7 +88,7 @@ const Menu = () => {
 };
 
 const MenuStyle = styled.footer`
-  max-width: 450px;
+  max-width: 420px;
   width: 100%;
   height: 50px;
   background: #fbd986;

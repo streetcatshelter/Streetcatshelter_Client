@@ -5,7 +5,16 @@ import styled, { css } from 'styled-components';
 // ELEMENTS
 import { Grid, Text } from '../elements/index';
 
+// ROUTE
+import { useLocation } from 'react-router-dom';
+
+// ICON
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
 const Comment = () => {
+  const location = useLocation();
+  console.log(location.pathname);
+  console.log('comment')
   return (
     <Grid
       margin="20px 0px 15px 0px"
@@ -28,6 +37,29 @@ const Comment = () => {
         </Text>
         <Count>25</Count>
       </Grid>
+    
+      {location.pathname === '/communitypostdetail' && <Grid
+        addstyle={() => {
+          return css`
+            display: flex;
+          `;
+        }}
+      >
+        <Grid></Grid>
+        <Grid
+          addstyle={() => {
+            return css`
+              display: flex;
+              margin: 0 0 0 60px;
+            `;
+          }}
+        >
+          <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/>
+          <Text fontWeight="bold" margin="0 0 0 4px">
+            10
+          </Text>
+        </Grid>
+      </Grid>}
     </Grid>
   );
 };

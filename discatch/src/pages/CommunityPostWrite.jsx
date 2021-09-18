@@ -52,10 +52,12 @@ const CommunityPostWrite = (props) => {
     { key: 3, value: "평창동 동네 모임" },
     { key: 4, value: "평창동 고양이 용품 나눔" },
   ];
+  
   const [category, setCategory] = React.useState("게시글 주제를 선택해주세요!");
   const onChangeHandler = (e) => {
     setCategory(e.currentTarget.value);
   };
+
 
   const [title, setTitle] = React.useState();
   const $title = (e) => {

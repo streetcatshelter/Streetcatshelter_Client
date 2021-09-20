@@ -9,10 +9,10 @@ import { flexBox } from '../shared/style';
 import { Grid, Text, Image, Button } from '../elements';
 
 // component
-import { Template, CommentList } from '../components';
+import { Template, CommentList, EditModal } from '../components';
 
 // icon
-import { MoreHorizontal, CheckSquare } from 'react-feather';
+import { CheckSquare } from 'react-feather';
 
 const CatDetailInfo = (props) => {
   return (
@@ -35,9 +35,7 @@ const CatDetailInfo = (props) => {
           2021-09-10-17:55
         </Text>
 
-        <Button>
-          <MoreHorizontal color="#cbcf5e" />
-        </Button>
+        <EditModal />
       </Grid>
 
       <Image margin="auto" width="300px" height="140px" />

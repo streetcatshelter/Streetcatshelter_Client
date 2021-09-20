@@ -46,7 +46,7 @@ export const addCommunityDB = (category, contents, location, title) => {
 };
 
 // 커뮤니티 글 가져오기
-export const getCommunityDB = (limit = 10,location,category) => {
+export const getCommunityDB = (limit = 5, location, category) => {
   return function (dispatch, getState, { history }) {
     instance
       .get(`/community/location/${location}?categoty=${category}&?page=0&?size=${limit}`)
@@ -61,6 +61,34 @@ export const getCommunityDB = (limit = 10,location,category) => {
       })
       .catch((err) => {
         window.alert('페이지에 오류가 있어요!');
+        console.log(err);
+      });
+  };
+};
+
+export const getMoreCommunityDB = (limit = 6, location, category) => {
+  return function (dispatch, getState, { history }) {
+    let start = getState().community.start;
+
+    if (start === null) {
+      return;
+    } else {
+      start += 1;
+    }
+
+    instance
+      .get(`/community/location/${location}?categoty=${category}&?page=${start}&?size=${limit}`)
+      .then((res) => {
+        const communityList = res.data;
+
+        if (communityList.length < limit + 1) {
+          dispatch(getMoreCommunity(communityList, null));
+          return;
+        }
+        communityList.content.pop();
+        dispatch(getMoreCommunity(communityList, start + limit));
+      })
+      .catch((err) => {
         console.log(err);
       });
   };

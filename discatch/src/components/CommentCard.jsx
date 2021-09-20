@@ -12,7 +12,7 @@ import styled, { css } from 'styled-components';
 import { Trash2 } from "react-feather";
 
 // REDUX
-import { deleteCommunityCommentDB } from '../redux/modules/community';
+import { deleteCommunityCommentDB } from '../redux/modules/comment';
 
 const CommentCard = ({comment}) => {
     // const commentId = comment.commentId

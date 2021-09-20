@@ -7,7 +7,10 @@ import { Image, Grid, Text } from "../../elements";
 import styled from "styled-components";
 
 import ProfileEdit from "./ProfileEdit";
+import { EditModalSlide } from "..";
 
+/* == Redux */
+import { history } from "../../redux/configureStore";
 const Profile = () => {
   return (
     <Wrapper>
@@ -22,7 +25,13 @@ const Profile = () => {
           >
             <Text fontWeight="800">채병훈하트정진우</Text>
 
-            <ProfileEdit />
+            <EditModalSlide
+              FirstBtn="프로필수정"
+              SecondBtn="로그아웃"
+              FirstClick={() => {
+                history.push("/userinfoedit");
+              }}
+            />
           </Grid>
         </Grid>
         <Grid>

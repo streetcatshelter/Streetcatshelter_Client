@@ -34,8 +34,8 @@ const CommentList = (props) => {
   // }, [commentList.length]);
   React.useEffect(() => {
     if (location.pathname === '/communitypostdetail') {
-      console.log('커뮤니티 가져오기');
       // dispatch(getCommunityDB(communityId));
+      console.log('커뮤니티 가져오기');
     } else {
       console.log('캣 가져오기');
     }
@@ -46,11 +46,19 @@ const CommentList = (props) => {
   };
 
   const addCommentBtn = () => {
+    if (location.pathname === '/communitypostdetail') {
     dispatch(addCommunityCommentDB(comments, communityId));
+    } else {
+      console.log('캣 댓글 추가');
+    }
   };
 
   const deleteBtn = () => {
-    dispatch(deleteCommunityCommentDB(communityId));
+    if (location.pathname === '/communitypostdetail') {
+      dispatch(deleteCommunityCommentDB(communityId));
+      } else {
+        console.log('캣 댓글 삭제');
+      }
   };
 
   return (

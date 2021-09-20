@@ -32,6 +32,7 @@ const CommunityDetail = (props) => {
   const dispatch = useDispatch();
 
   const location = "망원동";
+    // const currentLocation = useSelector((state) => state.map.keywordList[0]);
 
   // const communityList = useSelector((state) =>
   //   state.community.list ? state.community.list : Array(0, 2, 34),

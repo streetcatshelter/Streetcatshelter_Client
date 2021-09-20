@@ -1,16 +1,18 @@
+// LIBRARY
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-/* == components*/
+// COMPONENTS
 import Comment from './Comment';
 import CommentCard from './CommentCard';
 
-/* == Library - style */
+// STYLE
 import styled, { css } from 'styled-components';
-
-/* == Custom - Elements*/
-import { Grid, Input, Button } from '../elements/index';
 import { flexBox, flexHoz } from '../shared/style';
+
+
+// ELEMENTS
+import { Grid, Input, Button } from '../elements/index';
 
 // ROUTE
 import { useLocation } from 'react-router-dom';

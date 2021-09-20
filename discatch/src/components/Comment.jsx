@@ -74,9 +74,13 @@ const Comment = (props) => {
             `;
           }}
         >
+          <Grid
+            clickEvent={()=>alert('좋아요!')}
+          >
           <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/>
-          <Text fontWeight="bold" margin="0 0 0 4px">
-            10
+          </Grid>
+          <Text fontWeight="bold" margin="0 0 0 -25px" width="32px">
+            999
           </Text>
         </Grid>
       </Grid>}

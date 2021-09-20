@@ -47,7 +47,7 @@ const CommunityPost = ({community, category}) => {
             뽀삐맘
             {/* {community.username} */}
             </Text>
-            <Text margin="0 10px 0 170px">
+            <Text size="10px" margin="0 10px 0 197px">
             2021-09-03 15:23
             </Text>
             </Grid>
@@ -68,8 +68,10 @@ const CommunityPost = ({community, category}) => {
               <Grid addstyle={() => {
               return css`
               display: flex;
+              position:relative;
               justify-content:space-between;
               margin: 10px 0 0 120px;
+              left: -10px;
               `;
             }}>
               <Grid 
@@ -79,8 +81,11 @@ const CommunityPost = ({community, category}) => {
                   `;
               }}>
                 <Eye style={{width:'13px', margin:'-4px 3px 0 0'}}/>
-                <Text size={'12px'} fontWeight={'bold'}>
-                  1
+                <Text 
+                  size={'12px'} 
+                  fontWeight={'bold'}
+                >
+                  99
                 </Text>
               </Grid>
               <Grid 
@@ -91,7 +96,7 @@ const CommunityPost = ({community, category}) => {
               }}>
                 <MessageCircle style={{width:'13px', margin:'-4px 3px 0 0'}}/>
                 <Text size={'12px'} fontWeight={'bold'}>
-                  1
+                  99
                 </Text>
               </Grid>
               <Grid 
@@ -102,7 +107,7 @@ const CommunityPost = ({community, category}) => {
               }}>
                 <FavoriteIcon style={{width:'13px', margin:'-4px 3px 0 0', color:'red'}}/>
                 <Text size={'12px'} fontWeight={'bold'}>
-                  1
+                  99
                 </Text>
               </Grid>
               </Grid>

@@ -19,13 +19,14 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // FUNCTION
 import InfinityScroll from "../shared/InfinityScroll";
-import { getCommunityDB } from "../redux/modules/community";
+import { getCommunityDB, getMoreCommunityDB } from "../redux/modules/community";
 
 // REDUX
 import { history } from "../redux/configureStore";
 
 const CommunityDetail = (props) => {
   const location2 = useLocation();
+  const query = window.location.search;
   console.log(location2.pathname);
   const pathName = location2.pathname;
   const dispatch = useDispatch();
@@ -48,6 +49,18 @@ const CommunityDetail = (props) => {
 
   // React.useEffect(() => {
   //   dispatch(getCommunityDB(category, location));
+  // }, []);
+
+  // const getMoreCommunity = () => {
+  //   dispatch(getMoreCommunityDB());
+  // };
+
+  // React.useEffect(() => {
+  //   if (!query) dispatch(getCommunityDB());
+
+  //   return () => {
+  //     dispatch(getCommunityDB());
+  //   };
   // }, []);
 
   return (
@@ -80,13 +93,26 @@ const CommunityDetail = (props) => {
             </Text>
           </Grid>
           <Grid margin="-570px 0 0 0">
-            {/* {communityList.length ? (
-          communityList.map((community, idx) => {
-            return <CommunityPost key={idx} {...community} />;
-          })
-        ) : (
-          <></>
-        )} */}
+
+          {/* {communityList.length ? (
+            communityList.map((community, idx) => {
+              return (
+                <InfinityScroll
+                  next={getMoreCommunity}
+                  index={idx}
+                  length={communityList.length}
+                  key={community.communityId}
+                >
+                  <CommunityPost community={community} />
+                </InfinityScroll>
+              );
+            })
+          ) : (
+            <></>
+          )} */}
+
+            <CommunityPost category={category} />
+            <CommunityPost category={category} />
             <CommunityPost category={category} />
             <CommunityPost category={category} />
             <CommunityPost category={category} />

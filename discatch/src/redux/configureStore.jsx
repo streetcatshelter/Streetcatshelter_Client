@@ -19,10 +19,10 @@ import user from "./modules/user";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+  comment: comment.reducer,
   image: image.reducer,
   map: map.reducer,
   community: community.reducer,
-  comment: comment.reducer,
   user: user.reducer,
   router: connectRouter(history),
 });

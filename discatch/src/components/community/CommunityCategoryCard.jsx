@@ -2,7 +2,7 @@
 import React from 'react';
 
 // ELEMENTS
-import { Image, Grid, Text, Button } from '../elements/index';
+import { Image, Grid, Text, Button } from '../../elements/index';
 
 // STYLE
 import styled, { css } from 'styled-components';

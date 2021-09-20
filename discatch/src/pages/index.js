@@ -7,7 +7,6 @@ import MyPage from "./MyPage";
 
 /* == Login */
 import Login from "./login/Login";
-import LoginRedirect from "./login/LoginRedirect";
 
 /* == Catpost */
 import CatDetail from "./CatDetail";
@@ -32,7 +31,6 @@ export {
   MyPage,
   /* == Login */
   Login,
-  LoginRedirect,
   /* == Catpost */
   CatDetail,
   CatDetailInfo,

@@ -14,14 +14,16 @@ import image from "./modules/image";
 import map from "./modules/map";
 import community from './modules/community';
 import comment from './modules/comment';
+import user from "./modules/user";
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-  image: image,
+  image: image.reducer,
   map: map.reducer,
   community: community.reducer,
   commnet: comment.reducer,
+  user: user.reducer,
   router: connectRouter(history),
 });
 
@@ -30,6 +32,5 @@ const middleware = [thunk.withExtraArgument({ history }), logger];
 
 // 미들웨어와 리듀서 묶어서 store생성
 const store = createStore(rootReducer, applyMiddleware(...middleware));
-export { history };
 
 export default store;

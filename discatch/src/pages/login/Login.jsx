@@ -10,7 +10,10 @@ import Kakao from "../../styles/images/icon-Kakao.png";
 import Naver from "../../styles/images/icon-Naver(G).png";
 import Google from "../../styles/images/icon-Google.png";
 
-const login = (props) => {
+import { useDispatch } from "react-redux";
+import { userActions } from "../../redux/modules/user";
+const Login = (props) => {
+  const dispatch = useDispatch();
   return (
     <Template props={props} page="login">
       <Wrapper>
@@ -22,10 +25,17 @@ const login = (props) => {
               <span>T</span>ch
             </p>
           </Head>
-          <Header>1초만에 우리동네 집사되기 !</Header>
+          <Header>
+            <p>1초만에 우리동네 집사되기 !</p>
+          </Header>
           <Body>
             <LoginWrap>
-              <Login background="#F7E600">
+              <LoginBtn
+                background="#F7E600"
+                onClick={() => {
+                  dispatch(userActions._loginKakao());
+                }}
+              >
                 <Img
                   src={Kakao}
                   alt={Kakao}
@@ -34,8 +44,13 @@ const login = (props) => {
                   borderRadius="10px"
                 />
                 <p>카카오로 로그인하기</p>
-              </Login>
-              <Login background="#03c75a">
+              </LoginBtn>
+              <LoginBtn
+                background="#03c75a"
+                onClick={() => {
+                  dispatch(userActions._loginNaver());
+                }}
+              >
                 <Img
                   src={Naver}
                   alt={Naver}
@@ -44,8 +59,13 @@ const login = (props) => {
                   borderRadius="10px"
                 />
                 <p style={{ color: "#ffffff" }}>네이버로 로그인하기</p>
-              </Login>
-              <Login background="#FFFFFF">
+              </LoginBtn>
+              <LoginBtn
+                background="#FFFFFF"
+                onClick={() => {
+                  dispatch(userActions._loginGoogle());
+                }}
+              >
                 <Img
                   src={Google}
                   alt={Google}
@@ -54,7 +74,7 @@ const login = (props) => {
                   margin="auto 11px"
                 />
                 <p>구글로 로그인하기 </p>
-              </Login>
+              </LoginBtn>
             </LoginWrap>
           </Body>
         </Inner>
@@ -77,7 +97,7 @@ const Inner = styled.div`
   width: 90%;
   height: 600px;
   margin: auto;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
 `;
 const Head = styled.div`
   height: 35%;
@@ -97,11 +117,19 @@ const Head = styled.div`
     }
   }
 `;
-const Header = styled.p`
-  color: #b5bb19;
-  font-weight: 800;
-  font-size: 14px;
+const Header = styled.div`
+  width: 180px;
+  height: 20px;
   margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #b5bb19;
+  p {
+    color: #b5bb19;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+    margin: auto;
+  }
 `;
 const Img = styled.img`
   width: ${(props) => props.width};
@@ -115,14 +143,14 @@ const LoginWrap = styled.div`
   flex-direction: column;
 `;
 
-const Login = styled.div`
+const LoginBtn = styled.div`
   display: flex;
   width: 250px;
   height: 50px;
   margin: 10px 0px;
   background: ${(props) => props.background};
   border-radius: 10px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
   cursor: pointer;
   &:hover {
     filter: brightness(90%);
@@ -138,4 +166,4 @@ const Body = styled.div`
   height: 65%;
 `;
 
-export default login;
+export default Login;

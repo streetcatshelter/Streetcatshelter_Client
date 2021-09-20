@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 /* == Library - style */
-import { User } from "react-feather";
+import { CheckSquare } from "react-feather";
 import styled from "styled-components";
 
 const CalendarModal = (props) => {
@@ -11,26 +11,40 @@ const CalendarModal = (props) => {
     <>
       <Background>
         <Form>
-          <Header>
-            disCATch<span>활동일지</span>
-          </Header>
-          <ViewDate>
-            {year}-{month}-{elm}
-          </ViewDate>
+          <Head>
+            <Header>
+              <p>
+                dis<span>C</span>
+                <span>A</span>
+                <span>T</span>ch
+              </p>{" "}
+            </Header>
+            <ViewDate>
+              {year}년{month}월{elm}일 <span>활동일지</span>
+            </ViewDate>
+          </Head>
+
           <Events>
             <ul>
-              <li>또또 밥주기</li>
-              <li>초코 급수</li>
+              <li>
+                <CheckSquare />
+                또또 밥주기
+              </li>
+              <li>
+                <CheckSquare />
+                초코 급수
+              </li>
             </ul>
           </Events>
-
-          <Close
-            onClick={() => {
-              setOpenModal(false);
-            }}
-          >
-            닫기
-          </Close>
+          <Footer>
+            <Close
+              onClick={() => {
+                setOpenModal(false);
+              }}
+            >
+              닫기
+            </Close>
+          </Footer>
         </Form>
       </Background>
     </>
@@ -65,24 +79,60 @@ const Header = styled.div`
   font-weight: 700;
   font-size: 24px;
   border-bottom: 0.5 px solid #d3d3d3;
+  height: 30px;
   margin: auto;
-  padding-top: 10px;
+  padding-top: 20px;
   color: #b5bb19;
-  span {
-    color: #191919;
+  p {
+    margin: 0px auto;
     font-size: 25px;
+    font-weight: 700;
+    color: #fbd986;
   }
+  span {
+    font-size: 30px;
+    font-weight: 800;
+    margin-left: -1.5px;
+    color: #cbcf52;
+    :nth-child(2) {
+      color: #d19b61;
+    }
+  }
+`;
+const Head = styled.div`
+  height: 30%;
 `;
 
 const ViewDate = styled.div`
-  padding: 5px;
+  padding-top: 5px;
+  span {
+    font-size: 15px;
+    margin-left: -2px;
+    font-weight: 700;
+  }
 `;
 const Events = styled.div`
+  height: 50%;
   text-align: left;
+  font-weight: 700;
+  ul {
+    padding: 0px 20px;
+
+    li {
+      list-style: none;
+      margin: 10px auto;
+    }
+    svg {
+      margin: auto 4px -4px auto;
+    }
+  }
+`;
+const Footer = styled.div`
+  height: 20%;
 `;
 
 const Close = styled.div`
-  margin: 120px auto;
+  margin: auto;
   padding: auto;
   width: 80px;
   height: 30px;
@@ -91,6 +141,6 @@ const Close = styled.div`
   background-color: #cbcf52;
   border-radius: 10px;
   text-align: center;
-  //   cursor: pointer;
+  cursor: pointer;
 `;
 export default CalendarModal;

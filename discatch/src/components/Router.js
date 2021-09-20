@@ -19,7 +19,6 @@ import {
   Community,
   Login,
   Map,
-  LoginRedirect,
 } from "../pages";
 // 배포 시 해당 라우트 삭제 예정
 import test from "../pages/test";
@@ -32,7 +31,7 @@ const Router = () => {
       <Route path="/slider" exact component={Slider} />
       <Route path="/mypage" exact component={MyPage} />
       <Route path="/login" exact component={Login} />
-      <Route path="/user/kakao/callback" exact component={LoginRedirect} />
+
       {/* <Route path="/login" component={Auth(Login, false)} exact /> */}
       {/* <Route
         path="/user/kakao/callback"
@@ -45,9 +44,21 @@ const Router = () => {
       <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
       <Route path="/catdetail" exact component={CatDetail} />
       <Route path="/catdetailinfo" exact component={CatDetailInfo} />
-      <Route path="/community/catinfo/write" exact component={CommunityPostWrite} />
-      <Route path="/community/gathering/write" exact component={CommunityPostWrite} />
-      <Route path="/community/sharing/write" exact component={CommunityPostWrite} />
+      <Route
+        path="/community/catinfo/write"
+        exact
+        component={CommunityPostWrite}
+      />
+      <Route
+        path="/community/gathering/write"
+        exact
+        component={CommunityPostWrite}
+      />
+      <Route
+        path="/community/sharing/write"
+        exact
+        component={CommunityPostWrite}
+      />
       <Route path="/communitypostedit" exact component={CommunityPostEdit} />
       <Route
         path="/communitypostedit/:communityId"

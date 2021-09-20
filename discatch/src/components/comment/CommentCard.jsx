@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 /* == Custom - Elements*/
-import { Grid, Input, Button, Text } from '../elements/index';
-import { flexBox, flexHoz } from '../shared/style';
+import { Grid, Input, Button, Text } from '../../elements/index';
+import { flexBox, flexHoz } from '../../shared/style';
 
 /* == Library - style */
 import styled, { css } from 'styled-components';
@@ -12,7 +12,7 @@ import styled, { css } from 'styled-components';
 import { Trash2 } from "react-feather";
 
 // REDUX
-import { deleteCommunityCommentDB } from '../redux/modules/comment';
+import { deleteCommunityCommentDB } from '../../redux/modules/comment';
 
 const CommentCard = ({comment}) => {
     // const commentId = comment.commentId

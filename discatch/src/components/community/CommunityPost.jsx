@@ -1,7 +1,7 @@
 import React from 'react';
 
 // ELEMENTS
-import { Grid, Text, Image } from '../elements/index';
+import { Grid, Text, Image } from '../../elements/index';
 
 // STYLE
 import styled, { css } from 'styled-components';
@@ -11,7 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { MessageCircle, Eye } from "react-feather";
 
 // REDUX
-import { history } from "../redux/configureStore";
+import { history } from "../../redux/configureStore";
 
 const CommunityPost = ({community, category}) => {
   console.log(category);

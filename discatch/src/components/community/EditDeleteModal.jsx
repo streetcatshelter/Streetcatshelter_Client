@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import Slide from '@material-ui/core/Slide';
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../redux/configureStore';
+import { history } from '../../redux/configureStore';
 
 // ICON
 import { MoreHorizontal } from "react-feather";
@@ -15,7 +15,7 @@ import { MoreHorizontal } from "react-feather";
 import { Link } from 'react-router-dom';
 
 // REDUX
-import { deleteCommunityDB } from '../redux/modules/community';
+import { deleteCommunityDB } from '../../redux/modules/community';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;

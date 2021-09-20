@@ -36,13 +36,13 @@ import Diary from "./catPosts/Diary";
 import Gallery from "./catPosts/Gallery";
 
 /* comments */
-import Comment from "./Comment";
-import CommentList from "./CommentList";
+import Comment from "./comment/Comment";
+import CommentList from "./comment/CommentList";
 
 /* community */
-import CommunityCategoryCard from "./CommunityCategoryCard";
-import CommunityPost from "./CommunityPost";
-import EditDeleteModal from "./EditDeleteModal";
+import CommunityCategoryCard from "./community/CommunityCategoryCard";
+import CommunityPost from "./community/CommunityPost";
+import EditDeleteModal from "./community/EditDeleteModal";
 
 /* map */
 import Location from "./map/Location";

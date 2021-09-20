@@ -8,17 +8,17 @@ import CommentCard from './CommentCard';
 
 // STYLE
 import styled, { css } from 'styled-components';
-import { flexBox, flexHoz } from '../shared/style';
+import { flexBox, flexHoz } from '../../shared/style';
 
 
 // ELEMENTS
-import { Grid, Input, Button } from '../elements/index';
+import { Grid, Input, Button } from '../../elements/index';
 
 // ROUTE
 import { useLocation } from 'react-router-dom';
 
 // REDUX
-import { getCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } from '../redux/modules/community';
+import { getCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentList = (props) => {
   const location = useLocation();

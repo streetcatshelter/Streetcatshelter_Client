@@ -8,7 +8,11 @@ import { imgActions } from './image';
 // 커뮤니티 글 등록
 export const addCommunityDB = (category, contents, location, title) => {
   return function (dispatch, getState, { history }) {
-    const imgFile = getState().image.file;
+    console.log(getState())
+    const imgFile = getState().image.file
+    console.log(imgFile);
+    const imgUrl = getState().image.imageUrl
+    console.log(imgUrl);
     // const username = getState().user; // 나중에 가져오기
     const username = '뽀삐맘';
     console.log(imgFile.length);
@@ -16,25 +20,27 @@ export const addCommunityDB = (category, contents, location, title) => {
     if (imgFile.length<6) {
       dispatch(
         imgActions.uploadImageDB(() => {
-          const imageUrl = getState().image.imageUrl;
+          // const imageUrl = getState().image.imageUrl;
+          const imageUrl = getState().image;
+          console.log(imageUrl);
           const postInfo = {
             categoty: category, 
             contents: contents, 
-            image: imageUrl, 
+            image: [imageUrl], 
             location: location, 
             title: title, 
             username: username,
           };
-          instance
-            .post('/community/create', postInfo)
-            .then((res) => {
-              dispatch(addCommunity(postInfo));
-              dispatch(imgActions.setInitialState());
-              history.goBack();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          // instance
+          //   .post('/community/create', postInfo)
+          //   .then((res) => {
+          //     dispatch(addCommunity(postInfo));
+          //     dispatch(imgActions.setInitialState());
+          //     history.goBack();
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
         }),
       );
     } else if (imgFile.length>5) {

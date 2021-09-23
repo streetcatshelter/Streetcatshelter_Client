@@ -51,8 +51,8 @@ const CommunityPostEdit = (props, community) => {
 
 
 
-  const imageList = useSelector((state) => state.image.file[0])
-  console.log(imageList);
+  // const imageList = useSelector((state) => state.image.file[0])
+  // console.log(imageList);
   const dispatch = useDispatch();
 
   const location = "망원동, 수정"; // Header에서 가져오기?

@@ -44,7 +44,6 @@ import CommentList from "./comment/CommentList";
 /* community */
 import CommunityCategoryCard from "./community/CommunityCategoryCard";
 import CommunityPost from "./community/CommunityPost";
-import EditDeleteModal from "./community/EditDeleteModal";
 
 /* map */
 import Location from "./map/Location";
@@ -90,7 +89,6 @@ export {
   /* ==community */
   CommunityCategoryCard,
   CommunityPost,
-  EditDeleteModal,
   /* map */
   Location,
 };

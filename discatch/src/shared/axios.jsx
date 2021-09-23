@@ -7,7 +7,8 @@ import { getToken } from "./token";
 axios.defaults.withCredentials = true;
 
 const instance = axios.create({
-  baseURL: "http://cc60-175-123-124-9.ngrok.io",
+  baseURL: "http://52.78.241.50/",
+  // baseURL: "http://cc60-175-123-124-9.ngrok.io",
 });
 
 instance.interceptors.request.use((config) => {

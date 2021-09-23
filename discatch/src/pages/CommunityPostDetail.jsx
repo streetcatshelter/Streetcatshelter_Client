@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../redux/configureStore';
 
 // COMPONENTS
-import { Template, CommentList, EditDeleteModal } from "../components";
+import { Template, CommentList, EditDeleteModal, EditModalSlide } from "../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -11,7 +12,7 @@ import styled, { css } from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
 
 // REDUX
-import { getOneCommunityDB } from '../redux/modules/community';
+import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
 
 // ROUTE
 import { useLocation } from 'react-router-dom';
@@ -38,6 +39,10 @@ const CommunityPostDetail = (props, community) => {
   // }));
   const image='수정 필요'
   const communityId="수정 필요"
+
+  const deleteCommunity = () => {
+    dispatch(deleteCommunityDB(communityId));
+  };
   
   return (
     <Template props={props}>
@@ -138,7 +143,18 @@ const CommunityPostDetail = (props, community) => {
                   `;
                 }}
               >
-                <EditDeleteModal communityId={communityId}/>
+                <EditModalSlide 
+                FirstBtn={'게시글 수정'} 
+                SecondBtn={'삭제'} 
+                FirstClick={()=>history.push('/communitypostedit')}
+                // onClick={() => {
+                  //     history.push({
+                  //       pathname: `/communitypostedit/${communityId.communityId}`,
+                  //       state: { communityId: communityId.communityId },
+                  //   });
+                  // }}
+                SecondClick={deleteCommunityDB}
+                />
               </Grid>
             </Grid>
           </Grid>

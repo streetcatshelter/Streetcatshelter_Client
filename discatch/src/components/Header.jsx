@@ -15,30 +15,32 @@ import { Grid, Text } from "../elements";
 import { Search, Bell, ArrowLeft } from "react-feather";
 
 import { history } from "../redux/configureStore";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchMap } from "../redux/modules/map";
+
 const Header = (props) => {
   const dispatch = useDispatch();
   const path = props.path;
+  const village = useSelector((state) => state.map.villageList);
 
+  useEffect(() => {
+    dispatch(searchMap(village[0]));
+  }, []);
   const options = useMemo(
     () => [
-      { key: 1, value: "망원동" },
-      { key: 2, value: "고척동" },
-      { key: 3, value: "개봉동" },
+      { key: 1, value: village[0] },
+      { key: 2, value: village[1] },
+      { key: 3, value: village[2] },
     ],
     []
   );
 
-  const [place, setPlace] = useState("망원동");
+  const [place, setPlace] = useState(village[0]);
   const onChangeHandler = (e) => {
     setPlace(e.target.value);
+    const keyword = e.target.value;
+    dispatch(searchMap(keyword));
   };
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(searchMap(place));
-  //   };
-  // }, [place]);
 
   return (
     <HeaderStyle>

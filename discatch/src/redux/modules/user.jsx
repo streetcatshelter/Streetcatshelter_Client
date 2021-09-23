@@ -47,10 +47,10 @@ const user = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // loginKaKao: (state, action) => {
-    //   const keyword = action.payload;
-    //   state.list.unshift(keyword);
-    // },
+    loginKaKao: (state, action) => {
+      const keyword = action.payload;
+      state.list.unshift(keyword);
+    },
   },
 });
 

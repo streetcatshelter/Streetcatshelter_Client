@@ -13,13 +13,11 @@ import { connectRouter } from "connected-react-router";
 import image from "./modules/image";
 import map from "./modules/map";
 import community from './modules/community';
-import comment from './modules/comment';
 import user from "./modules/user";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-  comment: comment.reducer,
   image: image.reducer,
   map: map.reducer,
   community: community.reducer,

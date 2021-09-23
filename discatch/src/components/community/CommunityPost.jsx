@@ -52,7 +52,14 @@ const CommunityPost = ({community, category}) => {
             </Text>
             </Grid>
         </Grid>
-        <Grid margin="-50px 0">
+        <Grid 
+          addstyle={() => {
+            return css`
+              position:relative;
+              height:30px;
+              top:-50px;
+            `;
+          }}>
           <Text fontWeight={'bold'} margin={'4px 0 0 0'}>
           9월 8일 (수) 18:00 망원 2동 순찰돕니다.
           {/* {community.title} */}

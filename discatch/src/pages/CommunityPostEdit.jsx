@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -26,6 +26,7 @@ import { history } from "../redux/configureStore";
 import { getOneCommunityDB } from '../redux/modules/community';
 
 const CommunityPostEdit = (props, community) => {
+  const preview = useSelector((state) => state.image.preview)
   // const communityId = community.match.params;
   // console.log(community);
 
@@ -42,40 +43,36 @@ const CommunityPostEdit = (props, community) => {
   //   username: state.community.list.username,
   // }));
 
-  const image = '수정 필요';
-  // const image = null;
+  const imageList = ['asdasd', 'asdasd123123','asdasdasdaaa'];
+  // const imageList = [];
+  const imageNum = imageList.length;
   const communityId = "수정 필요";
   const category = "수정 필요";
   const title = "수정 필요";
   const contents = "수정 필요"
 
 
-
-  // const imageList = useSelector((state) => state.image.file[0])
-  // console.log(imageList);
   const dispatch = useDispatch();
 
   const location = "망원동, 수정"; // Header에서 가져오기?
   // const location2 = "망원동"; // 유저 정보에서 가져오기??
 
-  const [fileUrl, setFileUrl] = useState(image);
-  const [fileNum, setFileNum] = useState(0);
+  const [fileNum, setFileNum] = useState(imageNum);
 
 
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();
-    // if (fileNum < 5) {
+
+    if (fileNum < 5) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setInitialState());
+      dispatch(imgActions.setPreview(imageUrl));
       dispatch(imgActions.setFile([file]));
-      setFileUrl(imageUrl);
-      setFileNum(1);
-
-    // } else {
-    //   alert('사진은 5장을 초과할 수 없어요!');
-    // }
+      setFileNum(fileNum+1);
+    } else {
+      alert('사진은 최대 5장까지 등록할 수 있어요!');
+    }
   };
 
   const [editTitle, setEditTitle] = React.useState(title);
@@ -89,7 +86,8 @@ const CommunityPostEdit = (props, community) => {
   };
 
   const editBtn = () => {
-    dispatch(editCommunityDB(communityId, category, contents, location, title));
+    dispatch(imgActions.setFile(imageList));
+    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle));
   };
 
   React.useEffect(() => {
@@ -141,7 +139,6 @@ const CommunityPostEdit = (props, community) => {
               margin="0 0 0 12px"
               addstyle={() => {
                 return css`
-                  /* display:flex; */
                   white-space: nowrap;
                   overflow-x: auto;
                   height: 120px;
@@ -200,11 +197,11 @@ const CommunityPostEdit = (props, community) => {
                       `;
                     }}
                   >
-                    {image && 1 || fileNum}/1
+                    {fileNum}/5
                   </Text>
                 </Grid>
               </Grid>
-              {fileUrl&& (
+              {(imageList[0] || preview[0]) && (
                 <Grid
                   width={"90px"}
                   height={"90px"}
@@ -218,7 +215,75 @@ const CommunityPostEdit = (props, community) => {
                     `;
                   }}
                 >
-                  <Image src={image || fileUrl} width="100%" height="100%" />
+                  <Image src={imageList[0] || preview[0]} width="100%" height="100%" />
+                </Grid>
+              )}
+              {(imageList[1] || preview[1 - imageNum]) && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"0 5.5px"}
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      background: lightgray;
+                      display: inline-block;
+                      top:5px;
+                    `;
+                  }}
+                >
+                  <Image src={imageList[1] || preview[1 - imageNum]} width="100%" height="100%" />
+                </Grid>
+              )}
+              {(imageList[2] || preview[2 - imageNum]) && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"0 5.5px"}
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      background: lightgray;
+                      display: inline-block;
+                      top:5px;
+                    `;
+                  }}
+                >
+                  <Image src={imageList[2] || preview[2 - imageNum]} width="100%" height="100%" />
+                </Grid>
+              )}
+              {(imageList[3] || preview[3 - imageNum]) && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"0 5.5px"}
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      background: lightgray;
+                      display: inline-block;
+                      top:5px;
+                    `;
+                  }}
+                >
+                  <Image src={imageList[3] || preview[3 - imageNum]} width="100%" height="100%" />
+                </Grid>
+              )}
+              {(imageList[4] || preview[4 - imageNum]) && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"0 5.5px"}
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      background: lightgray;
+                      display: inline-block;
+                      top:5px;
+                    `;
+                  }}
+                >
+                  <Image src={imageList[4] || preview[4 - imageNum]} width="100%" height="100%" />
                 </Grid>
               )}
             </Grid>

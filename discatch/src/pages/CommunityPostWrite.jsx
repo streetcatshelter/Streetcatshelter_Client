@@ -36,14 +36,12 @@ const CommunityPostWrite = (props) => {
     e.preventDefault();
     if (fileNum < 5) {
       const file = e.target.files[0];
-      console.log(file);
       const imageUrl = URL.createObjectURL(file);
       dispatch(imgActions.setPreview(imageUrl));
-      console.log(preview);
       dispatch(imgActions.setFile([file]));
       setFileNum(fileNum+1);
     } else {
-      alert('사진은 5장을 초과할 수 없어요!');
+      alert('사진은 최대 5장까지 등록할 수 있어요!');
     }
   };
   
@@ -159,6 +157,7 @@ const CommunityPostWrite = (props) => {
                       <Camera width="50%" height=" 50%" color="white" />
                     </UploadButton>
                   </Grid>
+
                   <Upload
                     id="imgFile"
                     name="imgFile"

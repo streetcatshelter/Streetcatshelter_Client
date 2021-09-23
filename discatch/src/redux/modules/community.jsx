@@ -117,21 +117,22 @@ export const getOneCommunityDB = (communityId = '') => {
 };
 
 // 커뮤니티 수정
-export const editCommunityDB = (communityId, category, contents, location, title) => {
+export const editCommunityDB = (communityId, category, editcontents, location, editTitle) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
     const username = '뽀삐맘'; // 나중에 수정
-    if (imgFile.length) {
+    if (imgFile.length<6) {
       dispatch(
         imgActions.uploadImageDB(() => {
           const imageUrl = getState().image.imageUrl;
+          const newimgFile = imageUrl.filter((element, i) => element != null); // null 값 제거
           instance
             .put(`/community/${communityId}`, {
               category: category,
-              contents: contents,
-              image: imageUrl,
+              contents: editcontents,
+              image: newimgFile,
               location:location,
-              title: title,
+              title: editTitle,
               username: username,
             })
             .then((res) => {
@@ -139,12 +140,15 @@ export const editCommunityDB = (communityId, category, contents, location, title
               history.goBack();
             })
             .catch((err) => {
-              console.error(err);
+              console.log(err);
             });
         }),
       );
+    } else if (imgFile.length>5) {
+      alert('사진은 최대 5장까지 등록할 수 있어요!');
+    } else {
+      return;
     }
-    return;
   };
 };
 

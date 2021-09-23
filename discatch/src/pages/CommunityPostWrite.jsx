@@ -36,10 +36,8 @@ const CommunityPostWrite = (props) => {
     e.preventDefault();
     if (fileNum < 5) {
       const file = e.target.files[0];
-      console.log(file);
       const imageUrl = URL.createObjectURL(file);
       dispatch(imgActions.setPreview(imageUrl));
-      console.log(preview);
       dispatch(imgActions.setFile([file]));
       setFileNum(fileNum+1);
     } else {

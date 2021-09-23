@@ -20,27 +20,26 @@ export const addCommunityDB = (category, contents, location, title) => {
     if (imgFile.length<6) {
       dispatch(
         imgActions.uploadImageDB(() => {
-          // const imageUrl = getState().image.imageUrl;
-          const imageUrl = getState().image;
+          const imageUrl = getState().image.imageUrl;
           console.log(imageUrl);
           const postInfo = {
             categoty: category, 
             contents: contents, 
-            image: [imageUrl], 
+            image: imageUrl, 
             location: location, 
             title: title, 
             username: username,
           };
-          // instance
-          //   .post('/community/create', postInfo)
-          //   .then((res) => {
-          //     dispatch(addCommunity(postInfo));
-          //     dispatch(imgActions.setInitialState());
-          //     history.goBack();
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //   });
+          instance
+            .post('/community/create', postInfo)
+            .then((res) => {
+              dispatch(addCommunity(postInfo));
+              dispatch(imgActions.setInitialState());
+              history.goBack();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }),
       );
     } else if (imgFile.length>5) {

@@ -117,6 +117,9 @@ const CommunityDetail = (props) => {
             <CommunityPost category={category} />
             <CommunityPost category={category} />
             <CommunityPost category={category} />
+            <CommunityPost category={category} />
+            <CommunityPost category={category} />
+            <CommunityPost category={category} />
           </Grid>
         </CommunityDetailStyle>
         {pathName === '/community/sharing' && <Button
@@ -161,6 +164,7 @@ const CommunityDetailStyle = styled.div`
   width: 100%;
   overflow-x: hidden;
   height: 90vh;
+  margin: 0 0 10vh;
 `;
 
 export default CommunityDetail;

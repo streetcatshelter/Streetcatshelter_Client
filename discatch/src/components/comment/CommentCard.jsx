@@ -12,14 +12,14 @@ import { css } from 'styled-components';
 import { Trash2 } from 'react-feather';
 
 // REDUX
-import { deleteCommunityCommentDB } from '../../redux/modules/comment';
+import { deleteCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentCard = ({ comment }) => {
   // const commentId = comment.commentId
   const commentId = '테스트';
   const dispatch = useDispatch();
   //   const userName = useSelctor((state) => state.user); // 유저 정보에서 받아오기
-  // username >> community.username에서 받아오기
+  // username >> community.commentList.username에서 받아오기
   const userName = 'test';
   const username = 'test2';
 

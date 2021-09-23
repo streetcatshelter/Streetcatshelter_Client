@@ -18,7 +18,7 @@ import { Grid, Input, Button } from '../../elements/index';
 import { useLocation } from 'react-router-dom';
 
 // REDUX
-import { getCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } from '../../redux/modules/community';
+import { getOneCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentList = (props) => {
   const location = useLocation();
@@ -27,15 +27,15 @@ const CommentList = (props) => {
   const communityId = '테스트'
   // console.log(community);
   const [comments, setComment] = React.useState('');
-  // const commentList = useSelector((state) => state.community.list);
+  // const commentList = useSelector((state) => state.community.commentList);
 
   // React.useEffect(() => {
-  //   dispatch(getCommunityDB(communityId));
+  //   dispatch(getOneCommunityDB(communityId));
   // }, [commentList.length]);
   React.useEffect(() => {
     if (location.pathname === '/communitypostdetail') {
-      // dispatch(getCommunityDB(communityId));
-      console.log('커뮤니티 가져오기');
+      // dispatch(getOneCommunityDB(communityId));
+      console.log('커뮤니티 상세 가져오기');
     } else {
       console.log('캣 가져오기');
     }

@@ -1,6 +1,6 @@
 // LIBRARY
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import { Template } from "../components";
@@ -24,13 +24,11 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 
 const CommunityPostWrite = (props) => {
+  const preview = useSelector((state) => state.image.preview)
+
   const dispatch = useDispatch();
-  const path = useLocation();
-  console.log(path.pathname)
-  let pathName = path.pathname;
   
   const location = "망원동"; // Header에서 가져오기 or 유저 정보에서 가져오기
-  const [fileUrl, setFileUrl] = useState(null);
   const [fileNum, setFileNum] = useState(0);
 
   // S3
@@ -38,10 +36,11 @@ const CommunityPostWrite = (props) => {
     e.preventDefault();
     if (fileNum < 5) {
       const file = e.target.files[0];
+      console.log(file);
       const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setInitialState());
+      dispatch(imgActions.setPreview(imageUrl));
+      console.log(preview);
       dispatch(imgActions.setFile([file]));
-      setFileUrl(imageUrl);
       setFileNum(fileNum+1);
     } else {
       alert('사진은 5장을 초과할 수 없어요!');
@@ -179,11 +178,11 @@ const CommunityPostWrite = (props) => {
                       `;
                     }}
                   >
-                    {fileNum}/1
+                    {fileNum}/5
                   </Text>
                 </Grid>
               </Grid>
-              {fileUrl && (
+              {preview[0] && (
                 <Grid
                   width={"90px"}
                   height={"90px"}
@@ -197,40 +196,77 @@ const CommunityPostWrite = (props) => {
                     `;
                   }}
                 >
-                  <Image src={fileUrl} width="100%" height="100%" />
+                  <Image src={preview[0]} width="100%" height="100%" />
                 </Grid>
               )}
-
-              {/* <Grid
-              width={'90px'} 
-              height={'90px'} 
-              margin={'5.5px'} 
-              addstyle={() => {
-                return css`
-                  background:lightgray;
-                  display:inline-block; 
-                `;
-              }}><Image width="100%" height="100%"/></Grid>
-            <Grid
-              width={'90px'} 
-              height={'90px'}
-              margin={'5.5px'} 
-              addstyle={() => {
-                return css`
-                  background:lightgray;
-                  display:inline-block; 
-                `;
-              }}><Image width="100%" height="100%"/></Grid>
-            <Grid
-              width={'90px'} 
-              height={'90px'}
-              margin={'5.5px'} 
-              addstyle={() => {
-                return css`
-                  background:lightgray;
-                  display:inline-block;
-                `;
-              }}><Image width="100%" height="100%"/></Grid> */}
+              {preview[1] && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"0 5.5px"}
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      background: lightgray;
+                      display: inline-block;
+                      top:5px;
+                    `;
+                  }}
+                >
+                  <Image src={preview[1]} width="100%" height="100%" />
+                </Grid>
+              )}
+              {preview[2] && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"0 5.5px"}
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      background: lightgray;
+                      display: inline-block;
+                      top:5px;
+                    `;
+                  }}
+                >
+                  <Image src={preview[2]} width="100%" height="100%" />
+                </Grid>
+              )}
+              {preview[3] && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"0 5.5px"}
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      background: lightgray;
+                      display: inline-block;
+                      top:5px;
+                    `;
+                  }}
+                >
+                  <Image src={preview[3]} width="100%" height="100%" />
+                </Grid>
+              )}
+              {preview[4] && (
+                <Grid
+                  width={"90px"}
+                  height={"90px"}
+                  margin={"0 5.5px"}
+                  addstyle={() => {
+                    return css`
+                      position:relative;
+                      background: lightgray;
+                      display: inline-block;
+                      top:5px;
+                    `;
+                  }}
+                >
+                  <Image src={preview[4]} width="100%" height="100%" />
+                </Grid>
+              )}
             </Grid>
             <TextArea
               onChange={$contents}

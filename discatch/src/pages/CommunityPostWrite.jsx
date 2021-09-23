@@ -41,7 +41,7 @@ const CommunityPostWrite = (props) => {
       dispatch(imgActions.setFile([file]));
       setFileNum(fileNum+1);
     } else {
-      alert('사진은 5장을 초과할 수 없어요!');
+      alert('사진은 최대 5장까지 등록할 수 있어요!');
     }
   };
   
@@ -157,6 +157,7 @@ const CommunityPostWrite = (props) => {
                       <Camera width="50%" height=" 50%" color="white" />
                     </UploadButton>
                   </Grid>
+
                   <Upload
                     id="imgFile"
                     name="imgFile"

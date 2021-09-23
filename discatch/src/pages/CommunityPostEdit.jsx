@@ -26,8 +26,6 @@ import { history } from "../redux/configureStore";
 import { getOneCommunityDB } from '../redux/modules/community';
 
 const CommunityPostEdit = (props, community) => {
-
-  
   const preview = useSelector((state) => state.image.preview)
   // const communityId = community.match.params;
   // console.log(community);
@@ -45,23 +43,15 @@ const CommunityPostEdit = (props, community) => {
   //   username: state.community.list.username,
   // }));
 
-  const image = '수정 필요';
   const imageList = ['asdasd', 'asdasd123123','asdasdasdaaa'];
+  // const imageList = [];
   const imageNum = imageList.length;
-  // const image = null;
   const communityId = "수정 필요";
   const category = "수정 필요";
   const title = "수정 필요";
   const contents = "수정 필요"
-  // useEffect(() => {
-  //   console.log(imageNum, imageList);
-  //   dispatch(imgActions.setFile(imageList));
-  // }, [imageList]);
 
 
-
-  // const imageList = useSelector((state) => state.image.file[0])
-  // console.log(imageList);
   const dispatch = useDispatch();
 
   const location = "망원동, 수정"; // Header에서 가져오기?
@@ -81,7 +71,7 @@ const CommunityPostEdit = (props, community) => {
       dispatch(imgActions.setFile([file]));
       setFileNum(fileNum+1);
     } else {
-      alert('사진은 5장을 초과할 수 없어요!');
+      alert('사진은 최대 5장까지 등록할 수 있어요!');
     }
   };
 
@@ -96,7 +86,8 @@ const CommunityPostEdit = (props, community) => {
   };
 
   const editBtn = () => {
-    dispatch(editCommunityDB(communityId, category, contents, location, title));
+    dispatch(imgActions.setFile(imageList));
+    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle));
   };
 
   React.useEffect(() => {
@@ -148,7 +139,6 @@ const CommunityPostEdit = (props, community) => {
               margin="0 0 0 12px"
               addstyle={() => {
                 return css`
-                  /* display:flex; */
                   white-space: nowrap;
                   overflow-x: auto;
                   height: 120px;

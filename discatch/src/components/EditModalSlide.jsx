@@ -7,6 +7,7 @@ import Divider from "@material-ui/core/Divider";
 import Slide from "@material-ui/core/Slide";
 import { useDispatch } from "react-redux";
 
+import styled from "styled-components";
 // ICON
 import { MoreHorizontal } from "react-feather";
 
@@ -30,7 +31,7 @@ const EditDeleteModal = (props) => {
   return (
     <div>
       <Button style={{ color: "rgb(249, 200, 82)" }} onClick={handleClickOpen}>
-        <MoreHorizontal />
+        <MoreHorizontalBtn />
       </Button>
       <Dialog
         style={{
@@ -93,5 +94,11 @@ const EditDeleteModal = (props) => {
     </div>
   );
 };
+
+const MoreHorizontalBtn = styled(MoreHorizontal)`
+  &:hover {
+    color: #cbcf52;
+  }
+`;
 
 export default EditDeleteModal;

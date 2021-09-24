@@ -23,6 +23,8 @@ const Header = (props) => {
   const path = props.path;
   const village = useSelector((state) => state.map.villageList);
 
+  const [searchModal, setSearchModal] = useState(false);
+
   useEffect(() => {
     dispatch(searchMap(village[0]));
   }, []);
@@ -45,6 +47,7 @@ const Header = (props) => {
   return (
     <HeaderStyle>
       <Grid
+        display="flex"
         addstyle={() => {
           return css`
             ${flexBox("space-between")}
@@ -85,14 +88,61 @@ const Header = (props) => {
 
         <Grid width="20%" height="100%" margin="auto">
           <Grid margin="20px 10px" height="25px" width="60px">
-            <Search style={{ color: "gray" }} />
+            <SearchBtn
+              style={{ color: "gray" }}
+              onClick={() => {
+                setSearchModal(!searchModal);
+              }}
+            />
             <Bell style={{ margin: "auto 0px auto 10px", color: "gray" }} />
           </Grid>
         </Grid>
       </Grid>
+      {searchModal ? (
+        <Grid width="100%" height="45px" background="#fefdf8">
+          <SearchBar>
+            <SearchInput />
+            <SearchBarBtn>
+              <p>검색</p>
+            </SearchBarBtn>
+          </SearchBar>
+        </Grid>
+      ) : (
+        ""
+      )}
     </HeaderStyle>
   );
 };
+const SearchInput = styled.input`
+  width: 90%;
+  height: 30px;
+  border: none;
+  margin-left: 10px;
+`;
+const SearchBarBtn = styled.div`
+  width: 50px;
+  height: 35px;
+  border-radius: 15px;
+
+  background: #fbd986;
+  margin: auto;
+  p {
+    margin: 5px;
+    font-weight: 900;
+  }
+`;
+const SearchBar = styled.div`
+  width: 90%;
+  height: 35px;
+  border-radius: 15px;
+  border: 1px solid #fbd986;
+  margin: auto;
+  display: flex;
+  background: #fefdf8;
+`;
+const SearchBtn = styled(Search)`
+  cursor: pointer;
+`;
 
 const HeaderStyle = styled.header`
   max-width: 420px;
@@ -101,9 +151,7 @@ const HeaderStyle = styled.header`
   background: #fefdf8;
   position: fixed;
   top: 0;
-
   z-index: 9;
-  display: flex;
 `;
 
 const SelectStyle = styled.select`

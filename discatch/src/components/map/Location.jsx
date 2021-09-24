@@ -6,18 +6,22 @@ import { searchMap, searchKeywordMap } from "../../redux/modules/map";
 /* == Library - style */
 import styled from "styled-components";
 import { Place } from "@material-ui/icons";
+import { Map } from "react-feather";
 
 const Location = (props) => {
   const dispatch = useDispatch();
   //리덕스에서 키워드를 받아옵니다.
   const villageKeyword = useSelector((state) => state.map.keywordList[0]);
   const typeKeyword = useSelector((state) => state.map.typeKeywordList[0]);
+  const typeVillageKeyword = villageKeyword + typeKeyword;
 
   const [searchKeyword, setSearchKeyword] = useState();
   const [Pagination, SetPagination] = useState("");
-
   const [Places, setPlaces] = useState([]);
+
   const PlaceVisible = Places.length === 0 ? false : true;
+  const [listVisible, setListVisible] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const ChangeKeyword = (e) => {
     setSearchKeyword(e.target.value);
@@ -29,6 +33,8 @@ const Location = (props) => {
       return;
     }
     dispatch(searchKeywordMap(searchKeyword));
+    setModal(true);
+    setListVisible(true);
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
     var markers = [];
     const container = document.getElementById("myMap");
@@ -40,7 +46,7 @@ const Location = (props) => {
 
     const ps = new kakao.maps.services.Places();
 
-    ps.keywordSearch(typeKeyword, placesSearchCB);
+    ps.keywordSearch(typeVillageKeyword, placesSearchCB);
 
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
@@ -215,37 +221,45 @@ const Location = (props) => {
         id="myMap"
         style={{ width: "100%", height: "500px", margin: "auto" }}
       />
-
-      <ListWrap visible={PlaceVisible}>
-        {Pagination === "" ? (
-          ""
-        ) : (
-          <TotalPage>
-            총<span> {Pagination.totalCount}</span> 개의 결과가 있습니다.
-          </TotalPage>
-        )}
-        <div id="result-list">
-          {Places.map((item, i) => (
-            <List props={Places} key={i}>
-              <ListNum>{i + 1}</ListNum>
-              <ListDesc>
-                <p>{item.place_name}</p>
-                {item.road_address_name ? (
-                  <div>
-                    <span>{item.road_address_name}</span>
+      <MapIcon
+        listVisible={listVisible}
+        onClick={() => {
+          setModal(!modal);
+        }}
+      />
+      {modal ? (
+        <ListWrap visible={PlaceVisible}>
+          {Pagination === "" ? (
+            ""
+          ) : (
+            <TotalPage>
+              총<span> {Pagination.totalCount}</span> 개의 결과가 있습니다.
+            </TotalPage>
+          )}
+          <div id="result-list">
+            {Places.map((item, i) => (
+              <List props={Places} key={i}>
+                <ListNum>{i + 1}</ListNum>
+                <ListDesc>
+                  <p>{item.place_name}</p>
+                  {item.road_address_name ? (
+                    <div>
+                      <span>{item.road_address_name}</span>
+                      <span>{item.address_name}</span>
+                    </div>
+                  ) : (
                     <span>{item.address_name}</span>
-                  </div>
-                ) : (
-                  <span>{item.address_name}</span>
-                )}
-                <span>{item.phone}</span>
-              </ListDesc>
-            </List>
-          ))}
-          <PagenationWrap id="pagination"></PagenationWrap>
-        </div>
-      </ListWrap>
-
+                  )}
+                  <span>{item.phone}</span>
+                </ListDesc>
+              </List>
+            ))}
+            <PagenationWrap id="pagination"></PagenationWrap>
+          </div>
+        </ListWrap>
+      ) : (
+        ""
+      )}
       <div>
         여기는 경도 {latitude} 위도{longitude}입니다!
       </div>
@@ -253,10 +267,24 @@ const Location = (props) => {
   );
 };
 
+const MapIcon = styled(Map)`
+  display: ${(props) => (props.listVisible ? "block" : "none")};
+  position: fixed;
+  top: 110px;
+  margin: 10px;
+  background: #fbd986;
+  padding: 5px;
+  border-radius: 10px;
+  z-index: 1;
+  cursor: pointer;
+  &:hover {
+    background: #cbcf52;
+  }
+`;
 const ListWrap = styled.div`
   display: ${(props) => (props.visible ? "block" : "none")};
   position: fixed;
-  top: 135px;
+  top: 150px;
   width: 200px;
   height: 400px;
   margin: 10px 0 30px 10px;
@@ -276,6 +304,11 @@ const MapWrap = styled.div`
 const List = styled.div`
   margin-top: 20px;
   display: flex;
+  cursor: pointer;
+  &:hover {
+    background: rgba(251, 216, 134, 0.7);
+    border-radius: 10px;
+  }
 `;
 
 const ListNum = styled.span`

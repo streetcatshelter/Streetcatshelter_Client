@@ -28,7 +28,7 @@ import { getOneCommunityDB } from '../redux/modules/community';
 const CommunityPostEdit = (props) => {
   const preview = useSelector((state) => state.image.preview)
   const communityId = props.location.state.communityId;
-
+  console.log(communityId);
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, []);
@@ -36,18 +36,16 @@ const CommunityPostEdit = (props) => {
   const { category, contents, imageList, location, title, username } = useSelector((state) => ({
     category: state.community.list.category,
     contents: state.community.list.contents,
-    imageList: state.community.list.image ? state.community.list.image : Array(),
+    imageList: state.community.list.communityImageList ? state.community.list.communityImageList : Array(),
     location: state.community.list.location,
     title: state.community.list.title,
     username: state.community.list.username,
   }));
-
   const imageNum = imageList?.length;
 
   const dispatch = useDispatch();
 
   const [fileNum, setFileNum] = useState(imageNum);
-
 
   // S3
   const handleInputFile = (e) => {
@@ -76,14 +74,8 @@ const CommunityPostEdit = (props) => {
 
   const editBtn = () => {
     dispatch(imgActions.setFile(imageList));
-    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle));
+    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, imageList));
   };
-
-  React.useEffect(() => {
-      console.log(fileNum);
-    },
-    [fileNum],
-  );
 
   return (
     <Template props={props}>
@@ -204,7 +196,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[0] || preview[0]} width="100%" height="100%" />
+                  <Image src={preview[0-imageNum] || imageList[0]?.image} width="100%" height="100%" />
                 </Grid>
               )}
               {(imageList[1] || preview[1 - imageNum]) && (
@@ -221,7 +213,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[1] || preview[1 - imageNum]} width="100%" height="100%" />
+                  <Image src={preview[1-imageNum] || imageList[1]?.image} width="100%" height="100%" />
                 </Grid>
               )}
               {(imageList[2] || preview[2 - imageNum]) && (
@@ -238,7 +230,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[2] || preview[2 - imageNum]} width="100%" height="100%" />
+                  <Image src={preview[2 - imageNum] || imageList[2]?.image} width="100%" height="100%" />
                 </Grid>
               )}
               {(imageList[3] || preview[3 - imageNum]) && (
@@ -255,7 +247,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[3] || preview[3 - imageNum]} width="100%" height="100%" />
+                  <Image src={preview[3 - imageNum] || imageList[3]?.image} width="100%" height="100%" />
                 </Grid>
               )}
               {(imageList[4] || preview[4 - imageNum]) && (
@@ -272,7 +264,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[4] || preview[4 - imageNum]} width="100%" height="100%" />
+                  <Image src={preview[4 - imageNum] || imageList[4]?.image} width="100%" height="100%" />
                 </Grid>
               )}
             </Grid>

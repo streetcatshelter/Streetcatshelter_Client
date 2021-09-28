@@ -13,9 +13,8 @@ export const addCommunityDB = (category, contents, location, title) => {
     const username = '뽀삐맘';
     if (imgFile.length<6) {
       dispatch(
-        imgActions.uploadImageDB(() => {
-          const imageUrl = getState().image.imageUrl;
-          console.log(imageUrl);
+        imgActions.uploadImagesDB(() => {
+          const imageUrl = getState().image.imageUrls;
           const postInfo = {
             category: category, 
             contents: contents, 
@@ -65,7 +64,7 @@ export const getCommunityDB = (category, location, limit = 5) => {
   };
 };
 
-export const getMoreCommunityDB = (category, location, limit = 6, ) => {
+export const getMoreCommunityDB = (category, location, limit = 6) => {
   return function (dispatch, getState, { history }) {
     let start = getState().community.start;
 
@@ -110,26 +109,44 @@ export const getOneCommunityDB = (communityId = '') => {
 };
 
 // 커뮤니티 수정
-export const editCommunityDB = (communityId, category, editcontents, location, editTitle) => {
+export const editCommunityDB = (communityId, category, editcontents, location, editTitle, username, imageList) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
-    const username = '뽀삐맘'; // 나중에 수정
+    let newImageUrl = [];
+    let newImages = []
+    // const username = '뽀삐맘'; // 나중에 수정
     if (imgFile.length<6) {
       dispatch(
-        imgActions.uploadImageDB(() => {
-          const imageUrl = getState().image.imageUrl;
-          const newimgFile = imageUrl.filter((element, i) => element != null); // null 값 제거
+        imgActions.uploadImagesDB(() => {
+          let imageUrl = getState().image.imageUrls;
+          newImageUrl.push(
+            imageList[0]?.image,
+            imageList[1]?.image,
+            imageList[2]?.image,
+            imageList[3]?.image,
+            imageList[4]?.image
+            );
+
+          newImages = newImageUrl.filter(
+            (element, i) => element !== undefined
+          );
+          newImages.push(imageUrl[0],imageUrl[1],imageUrl[2],imageUrl[3],imageUrl[4])
+          const editImageList = newImages.filter(
+            (element, i) => element !== undefined
+          );
+
           instance
             .put(`/community/${communityId}`, {
               category: category,
               contents: editcontents,
-              image: newimgFile,
+              image: editImageList,
               location:location,
               title: editTitle,
               username: username,
             })
             .then((res) => {
               window.alert('게시글 수정 완료');
+              // history.push(`/communitypostedit/${res.data.id}`);
               history.goBack();
             })
             .catch((err) => {
@@ -137,7 +154,7 @@ export const editCommunityDB = (communityId, category, editcontents, location, e
             });
         }),
       );
-    } else if (imgFile.length>5) {
+    } else if (newImages.length>5) {
       alert('사진은 최대 5장까지 등록할 수 있어요!');
     } else {
       return;
@@ -146,14 +163,23 @@ export const editCommunityDB = (communityId, category, editcontents, location, e
 };
 
 // 커뮤니티 글 삭제
-export const deleteCommunityDB = (communityId) => {
+export const deleteCommunityDB = (communityId, category) => {
   return function (dispatch, getState, { history }) {
+    const path = category.split(' ');
+    let pathName = null
+    if (path.length === 2) {
+      pathName = 'catinfo'
+    } else if (path.length === 3) {
+      pathName = 'gathering'
+    } else {
+      pathName = 'sharing'
+    }
     instance
-      .delete(`/community/${communityId.communityId}`)
+      .delete(`/community/${communityId}`)
       .then((res) => {
         dispatch(deleteCommunity(communityId));
-        window.alert('게시물 삭제 완료');
-        history.push('/community');
+        // window.alert('게시물 삭제 완료');
+        history.push(`/community/${pathName}`);
       })
       .catch((err) => {
         console.log(err);

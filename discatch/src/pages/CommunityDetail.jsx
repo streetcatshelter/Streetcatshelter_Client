@@ -34,7 +34,6 @@ const CommunityDetail = (props) => {
     // const currentLocation = useSelector((state) => state.map.keywordList[0]);
 
 
-
   const path = useLocation();
   let category = null;
   if (path.pathname === "/community/catinfo") {
@@ -44,10 +43,6 @@ const CommunityDetail = (props) => {
   } else if (path.pathname === "/community/sharing") {
     category = `${location} 고양이 용품 나눔`;
   }
-
-  // React.useEffect(() => {
-  //   dispatch(getCommunityDB(location, category));
-  // }, []);
 
   const getMoreCommunity = () => {
     dispatch(getMoreCommunityDB(category, location));
@@ -65,6 +60,9 @@ const CommunityDetail = (props) => {
     const communityList = useSelector((state) =>
     state.community.list ? state.community.list : Array(0, 2, 34),
   );
+
+  console.log(communityList);
+
 
   return (
     <Template props={props}>
@@ -124,7 +122,7 @@ const CommunityDetail = (props) => {
                   next={getMoreCommunity}
                   index={idx}
                   length={communityList.length}
-                  key={community.communityId}
+                  key={community.id}
                 >
                   <CommunityPost community={community} />
                 </InfinityScroll>

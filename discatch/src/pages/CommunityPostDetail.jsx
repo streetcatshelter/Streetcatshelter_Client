@@ -26,7 +26,7 @@ const CommunityPostDetail = (props) => {
   }, []);
 
   const { category, contents, imageList, location, title, username, createdAt } = useSelector((state) => ({
-    categoty: state.community.list.category,
+    category: state.community.list.category,
     contents: state.community.list.contents,
     imageList: state.community.list.communityImageList ? state.community.list.communityImageList : Array(1,2,3),
     location: state.community.list.location,
@@ -36,7 +36,7 @@ const CommunityPostDetail = (props) => {
   }));
 
   const deleteCommunity = () => {
-    dispatch(deleteCommunityDB(communityId));
+    dispatch(deleteCommunityDB(communityId, category));
   };
   
   return (
@@ -144,7 +144,7 @@ const CommunityPostDetail = (props) => {
                         state: { communityId: communityId },
                     });
                   }}
-                SecondClick={deleteCommunityDB}
+                SecondClick={deleteCommunity}
                 />
               </Grid>
             </Grid>

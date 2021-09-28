@@ -22,10 +22,12 @@ import { getOneCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } fr
 
 const CommentList = (props) => {
   const path = useLocation();
+  console.log(path);
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
-
-  let communityId = props.props.location.community?.id;
+  let communityId = community.id;
+  console.log(communityId)
+  console.log(community)
 
   if (path.pathname === '/catdetail') {
     communityId = 1
@@ -42,6 +44,7 @@ const CommentList = (props) => {
       dispatch(getOneCommunityDB(communityId));
     } else {
       console.log('캣 가져오기');
+      console.log(path.pathname)
     }
   }, []);
 
@@ -54,6 +57,7 @@ const CommentList = (props) => {
     dispatch(addCommunityCommentDB(comments, communityId));
     } else {
       console.log('캣 댓글 추가');
+      console.log(path.pathname);
     }
   };
 

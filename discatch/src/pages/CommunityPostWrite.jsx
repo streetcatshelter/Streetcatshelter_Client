@@ -25,12 +25,10 @@ import { history } from "../redux/configureStore";
 
 const CommunityPostWrite = (props) => {
   const preview = useSelector((state) => state.image.preview ? state.image.preview : Array(1,2,3))
-
   const dispatch = useDispatch();
   
   const location = "망원동"; // Header에서 가져오기 or 유저 정보에서 가져오기
   const [fileNum, setFileNum] = useState(0);
-  
 
   // S3
   const handleInputFile = (e) => {
@@ -46,7 +44,7 @@ const CommunityPostWrite = (props) => {
     }
   };
   
-  const [category, setCategory] = React.useState("게시글 주제를 선택해주세요!");
+  const [category, setCategory] = React.useState(props.location.category);
 
   const Options = [
     { key: 1, value: "게시글 주제를 선택해주세요!"},

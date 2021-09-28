@@ -8,22 +8,16 @@ import { imgActions } from './image';
 // 커뮤니티 글 등록
 export const addCommunityDB = (category, contents, location, title) => {
   return function (dispatch, getState, { history }) {
-    console.log(getState())
     const imgFile = getState().image.file
-    console.log(imgFile);
-    const imgUrl = getState().image.imageUrl
-    console.log(imgUrl);
     // const username = getState().user; // 나중에 가져오기
     const username = '뽀삐맘';
-    console.log(imgFile.length);
-    console.log(username);
     if (imgFile.length<6) {
       dispatch(
         imgActions.uploadImageDB(() => {
           const imageUrl = getState().image.imageUrl;
           console.log(imageUrl);
           const postInfo = {
-            categoty: category, 
+            category: category, 
             contents: contents, 
             image: imageUrl, 
             location: location, 
@@ -51,10 +45,10 @@ export const addCommunityDB = (category, contents, location, title) => {
 };
 
 // 커뮤니티 글 가져오기
-export const getCommunityDB = (limit = 5, location, category) => {
+export const getCommunityDB = (category, location, limit = 5) => {
   return function (dispatch, getState, { history }) {
     instance
-      .get(`/community/location/${location}?categoty=${category}&?page=0&?size=${limit}`)
+      .get(`/community/category/${category}?page=1&size=${limit}&location=${location}`)
       .then((res) => {
         let communityList = res.data;
         if (communityList.length < limit + 1) {
@@ -71,7 +65,7 @@ export const getCommunityDB = (limit = 5, location, category) => {
   };
 };
 
-export const getMoreCommunityDB = (limit = 6, location, category) => {
+export const getMoreCommunityDB = (category, location, limit = 6, ) => {
   return function (dispatch, getState, { history }) {
     let start = getState().community.start;
 
@@ -82,10 +76,9 @@ export const getMoreCommunityDB = (limit = 6, location, category) => {
     }
 
     instance
-      .get(`/community/location/${location}?categoty=${category}&?page=${start}&?size=${limit}`)
+      .get(`/community/category/${category}?page=${start}&size=${limit}&location=${location}`)
       .then((res) => {
         const communityList = res.data;
-
         if (communityList.length < limit + 1) {
           dispatch(getMoreCommunity(communityList, null));
           return;
@@ -104,7 +97,7 @@ export const getMoreCommunityDB = (limit = 6, location, category) => {
 export const getOneCommunityDB = (communityId = '') => {
   return function (dispatch, getState, { history }) {
     instance
-      .get(`/community/${communityId.communityId}`)
+      .get(`/community/${communityId}`)
       .then((res) => {
         let detailCommunity = res.data;
         dispatch(getOneCommunity(detailCommunity));
@@ -169,14 +162,15 @@ export const deleteCommunityDB = (communityId) => {
 };
 
 // 커뮤니티 댓글 작성
-export const addCommunityCommentDB = (commentContents, communityId) => {
+export const addCommunityCommentDB = (contents, communityId) => {
   return function (dispatch, getState, { history }) {
     const username = '뽀삐맘'; // 수정 필요
     // const username = getState().user; // 나중에 가져오기
     instance
-      .post(`/community/comment/${communityId}`, { commentContents, username })
+      .post(`/community/comment/${communityId}`, { contents, username })
       .then((res) => {
-        dispatch(addCommunityComment(commentContents));
+        dispatch(addCommunityComment({ contents, username }));
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
@@ -246,8 +240,7 @@ const community = createSlice({
       console.log('삭제 요청 완료!');
     },
     addCommunityComment: (state, action) => {
-      const comments = action.payload;
-      state.list.push(comments);
+      state.list = action.payload;
     },
 
     getCommunityComment: (state, action) => {
@@ -255,10 +248,7 @@ const community = createSlice({
     },
 
     deleteCommunityComment: (state, action) => {
-      const deleteList = state.list.filter(
-        (comment) => comment.commentId !== action.commentId,
-      );
-      state.list = deleteList;
+      state.list = action.payload;
     },
   },
 });

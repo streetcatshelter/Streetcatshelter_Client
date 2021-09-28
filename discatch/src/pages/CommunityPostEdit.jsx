@@ -25,37 +25,26 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 import { getOneCommunityDB } from '../redux/modules/community';
 
-const CommunityPostEdit = (props, community) => {
+const CommunityPostEdit = (props) => {
   const preview = useSelector((state) => state.image.preview)
-  // const communityId = community.match.params;
-  // console.log(community);
+  const communityId = props.location.state.communityId;
 
-  // React.useEffect(() => {
-  //   dispatch(getOneCommunityDB(communityId));
-  // }, []);
+  React.useEffect(() => {
+    dispatch(getOneCommunityDB(communityId));
+  }, []);
 
-  // const { category, contents, image, location, title, username } = useSelector((state) => ({
-  //   categoty: state.community.list.categoty,
-  //   contents: state.community.list.contents,
-  //   image: state.community.list.image,
-  //   location: state.community.list.location,
-  //   title: state.community.list.title,
-  //   username: state.community.list.username,
-  // }));
+  const { category, contents, imageList, location, title, username } = useSelector((state) => ({
+    category: state.community.list.category,
+    contents: state.community.list.contents,
+    imageList: state.community.list.image ? state.community.list.image : Array(),
+    location: state.community.list.location,
+    title: state.community.list.title,
+    username: state.community.list.username,
+  }));
 
-  const imageList = ['asdasd', 'asdasd123123','asdasdasdaaa'];
-  // const imageList = [];
-  const imageNum = imageList.length;
-  const communityId = "수정 필요";
-  const category = "수정 필요";
-  const title = "수정 필요";
-  const contents = "수정 필요"
-
+  const imageNum = imageList?.length;
 
   const dispatch = useDispatch();
-
-  const location = "망원동, 수정"; // Header에서 가져오기?
-  // const location2 = "망원동"; // 유저 정보에서 가져오기??
 
   const [fileNum, setFileNum] = useState(imageNum);
 
@@ -150,9 +139,9 @@ const CommunityPostEdit = (props, community) => {
               }}
             >
               <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
+                width="90px"
+                height="90px"
+                margin="5.5px"
                 addstyle={() => {
                   return css`
                     position: relative;

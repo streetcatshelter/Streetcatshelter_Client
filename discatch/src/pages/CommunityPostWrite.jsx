@@ -24,12 +24,13 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 
 const CommunityPostWrite = (props) => {
-  const preview = useSelector((state) => state.image.preview)
+  const preview = useSelector((state) => state.image.preview ? state.image.preview : Array(1,2,3))
 
   const dispatch = useDispatch();
   
   const location = "망원동"; // Header에서 가져오기 or 유저 정보에서 가져오기
   const [fileNum, setFileNum] = useState(0);
+  
 
   // S3
   const handleInputFile = (e) => {
@@ -53,10 +54,6 @@ const CommunityPostWrite = (props) => {
     { key: 3, value:`${location} 동네 모임` },
     { key: 4, value: `${location} 고양이 용품 나눔` },
   ];
-  console.log(Options[0].value);
-  let k = Options.indexOf(Options[0])
-  console.log(k);
-  console.log(Options);
 
   const onChangeHandler = (e) => {
     setCategory(e.currentTarget.value);
@@ -89,7 +86,7 @@ const CommunityPostWrite = (props) => {
         }}
       >
         <CommunityWriteStyle>
-          <Grid width="335px" height="auto" margin="0 0 16px 0">
+          <Grid height="auto" margin="0 0 16px 0">
             <Select
               onChange={onChangeHandler}
               value={category}
@@ -110,7 +107,7 @@ const CommunityPostWrite = (props) => {
               addstyle={() => {
                 return css`
                   border-radius: 10px;
-                  margin: 0 0 16px 2px;
+                  margin: 0 0 16px 0;
                 `;
               }}
             />
@@ -129,9 +126,9 @@ const CommunityPostWrite = (props) => {
               }}
             >
               <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
+                width="90px"
+                height="90px"
+                margin="5.5px"
                 addstyle={() => {
                   return css`
                     position: relative;
@@ -183,9 +180,9 @@ const CommunityPostWrite = (props) => {
               </Grid>
               {preview[0] && (
                 <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
+                  width="90px"
+                  height="90px"
+                  margin="0 5.5px"
                   addstyle={() => {
                     return css`
                       position:relative;
@@ -200,9 +197,9 @@ const CommunityPostWrite = (props) => {
               )}
               {preview[1] && (
                 <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
+                  width="90px"
+                  height="90px"
+                  margin="0 5.5px"
                   addstyle={() => {
                     return css`
                       position:relative;
@@ -217,9 +214,9 @@ const CommunityPostWrite = (props) => {
               )}
               {preview[2] && (
                 <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
+                  width="90px"
+                  height="90px"
+                  margin="0 5.5px"
                   addstyle={() => {
                     return css`
                       position:relative;
@@ -234,9 +231,9 @@ const CommunityPostWrite = (props) => {
               )}
               {preview[3] && (
                 <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
+                  width="90px"
+                  height="90px"
+                  margin="0 5.5px"
                   addstyle={() => {
                     return css`
                       position:relative;
@@ -251,9 +248,9 @@ const CommunityPostWrite = (props) => {
               )}
               {preview[4] && (
                 <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
+                  width="90px"
+                  height="90px"
+                  margin="0 5.5px"
                   addstyle={() => {
                     return css`
                       position:relative;

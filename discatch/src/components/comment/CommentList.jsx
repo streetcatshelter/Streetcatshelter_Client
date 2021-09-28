@@ -21,21 +21,25 @@ import { useLocation } from 'react-router-dom';
 import { getOneCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentList = (props) => {
-  const location = useLocation();
+  const path = useLocation();
   const dispatch = useDispatch();
-  // const communityId = props.communityId.communityId;
-  const communityId = '테스트'
-  // console.log(community);
-  const [comments, setComment] = React.useState('');
-  // const commentList = useSelector((state) => state.community.commentList);
+  const community = useSelector((state) => state.community.list);
 
-  // React.useEffect(() => {
-  //   dispatch(getOneCommunityDB(communityId));
-  // }, [commentList.length]);
+  let communityId = props.props.location.community?.id;
+
+  if (path.pathname === '/catdetail') {
+    communityId = 1
+  } else {
+    communityId = props.props?.location.community?.id;
+  }
+
+  const [comments, setComment] = React.useState('');
+
+  const commentList = community.commentList;
+
   React.useEffect(() => {
-    if (location.pathname === '/communitypostdetail') {
-      // dispatch(getOneCommunityDB(communityId));
-      console.log('커뮤니티 상세 가져오기');
+    if (path.pathname === `/communitypostdetail/${communityId}`) {
+      dispatch(getOneCommunityDB(communityId));
     } else {
       console.log('캣 가져오기');
     }
@@ -46,19 +50,11 @@ const CommentList = (props) => {
   };
 
   const addCommentBtn = () => {
-    if (location.pathname === '/communitypostdetail') {
+    if (path.pathname === `/communitypostdetail/${communityId}`) {
     dispatch(addCommunityCommentDB(comments, communityId));
     } else {
       console.log('캣 댓글 추가');
     }
-  };
-
-  const deleteBtn = () => {
-    if (location.pathname === '/communitypostdetail') {
-      dispatch(deleteCommunityCommentDB(communityId));
-      } else {
-        console.log('캣 댓글 삭제');
-      }
   };
 
   return (
@@ -66,7 +62,7 @@ const CommentList = (props) => {
       <Comment />
       <Grid
         width="85%"
-        margin="auto"
+        margin="0 auto"
         addstyle={() => {
           return css`
             ${flexBox('flex-start')}
@@ -96,11 +92,10 @@ const CommentList = (props) => {
       </Grid>
 
 
-      <CommentCard/>
 
-      {/* {commentList.map((comment, idx) => {
-          return <CommentCard key={idx} comment={comment} />;
-        })} */}
+      {commentList && commentList.map((comment, idx) => {
+          return <CommentCard key={idx} comment={comment} />
+        })}
 
 
       <Button width="100%">더보기</Button>

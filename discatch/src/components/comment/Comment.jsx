@@ -18,22 +18,8 @@ import { getCommunityDB } from '../../redux/modules/community';
 const Comment = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location.pathname);
-  // console.log(props.communityId.communityId);
-  // const communityId = props.communityId.communityId
-  // const commentList = useSelector((state) => state.community);
-
-  // React.useEffect(() => {
-  //   dispatch(getCommunityDB(communityId));
-  // }, [commentList.length]);
-  React.useEffect(() => {
-      if (location.pathname === '/communitypostdetail') {
-        console.log('커뮤니티 가져오기');
-        // dispatch(getCommunityDB(communityId));
-      } else {
-        console.log('캣 가져오기');
-      }
-    }, []);
+  const community = useSelector((state) => state.community.list);
+  const communityId = community.id;
 
   return (
     <Grid
@@ -55,10 +41,10 @@ const Comment = (props) => {
         <Text margin="2px 3px" fontWeight="700" size="16px">
           댓글
         </Text>
-        <Count>25</Count>
+        <Count>{community.cntComment}</Count>
       </Grid>
     
-      {location.pathname === '/communitypostdetail' && <Grid
+      {location.pathname === `/communitypostdetail/${communityId}` && <Grid
         addstyle={() => {
           return css`
             display: flex;
@@ -80,7 +66,7 @@ const Comment = (props) => {
           <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/>
           </Grid>
           <Text fontWeight="bold" margin="0 0 0 -25px" width="32px">
-            999
+            {community.cntLikeIt}
           </Text>
         </Grid>
       </Grid>}

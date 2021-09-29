@@ -25,40 +25,27 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 import { getOneCommunityDB } from '../redux/modules/community';
 
-const CommunityPostEdit = (props, community) => {
+const CommunityPostEdit = (props) => {
   const preview = useSelector((state) => state.image.preview)
-  // const communityId = community.match.params;
-  // console.log(community);
+  const communityId = props.location.state.communityId;
+  console.log(communityId);
+  React.useEffect(() => {
+    dispatch(getOneCommunityDB(communityId));
+  }, []);
 
-  // React.useEffect(() => {
-  //   dispatch(getOneCommunityDB(communityId));
-  // }, []);
-
-  // const { category, contents, image, location, title, username } = useSelector((state) => ({
-  //   categoty: state.community.list.categoty,
-  //   contents: state.community.list.contents,
-  //   image: state.community.list.image,
-  //   location: state.community.list.location,
-  //   title: state.community.list.title,
-  //   username: state.community.list.username,
-  // }));
-
-  const imageList = ['asdasd', 'asdasd123123','asdasdasdaaa'];
-  // const imageList = [];
-  const imageNum = imageList.length;
-  const communityId = "수정 필요";
-  const category = "수정 필요";
-  const title = "수정 필요";
-  const contents = "수정 필요"
-
+  const { category, contents, imageList, location, title, username } = useSelector((state) => ({
+    category: state.community.list.category,
+    contents: state.community.list.contents,
+    imageList: state.community.list.communityImageList ? state.community.list.communityImageList : Array(),
+    location: state.community.list.location,
+    title: state.community.list.title,
+    username: state.community.list.username,
+  }));
+  const imageNum = imageList?.length;
 
   const dispatch = useDispatch();
 
-  const location = "망원동, 수정"; // Header에서 가져오기?
-  // const location2 = "망원동"; // 유저 정보에서 가져오기??
-
   const [fileNum, setFileNum] = useState(imageNum);
-
 
   // S3
   const handleInputFile = (e) => {
@@ -87,14 +74,8 @@ const CommunityPostEdit = (props, community) => {
 
   const editBtn = () => {
     dispatch(imgActions.setFile(imageList));
-    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle));
+    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, imageList));
   };
-
-  React.useEffect(() => {
-      console.log(fileNum);
-    },
-    [fileNum],
-  );
 
   return (
     <Template props={props}>
@@ -150,9 +131,9 @@ const CommunityPostEdit = (props, community) => {
               }}
             >
               <Grid
-                width={"90px"}
-                height={"90px"}
-                margin={"5.5px"}
+                width="90px"
+                height="90px"
+                margin="5.5px"
                 addstyle={() => {
                   return css`
                     position: relative;
@@ -215,7 +196,7 @@ const CommunityPostEdit = (props, community) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[0] || preview[0]} width="100%" height="100%" />
+                  <Image src={preview[0-imageNum] || imageList[0]?.image} width="100%" height="100%" />
                 </Grid>
               )}
               {(imageList[1] || preview[1 - imageNum]) && (
@@ -232,7 +213,7 @@ const CommunityPostEdit = (props, community) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[1] || preview[1 - imageNum]} width="100%" height="100%" />
+                  <Image src={preview[1-imageNum] || imageList[1]?.image} width="100%" height="100%" />
                 </Grid>
               )}
               {(imageList[2] || preview[2 - imageNum]) && (
@@ -249,7 +230,7 @@ const CommunityPostEdit = (props, community) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[2] || preview[2 - imageNum]} width="100%" height="100%" />
+                  <Image src={preview[2 - imageNum] || imageList[2]?.image} width="100%" height="100%" />
                 </Grid>
               )}
               {(imageList[3] || preview[3 - imageNum]) && (
@@ -266,7 +247,7 @@ const CommunityPostEdit = (props, community) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[3] || preview[3 - imageNum]} width="100%" height="100%" />
+                  <Image src={preview[3 - imageNum] || imageList[3]?.image} width="100%" height="100%" />
                 </Grid>
               )}
               {(imageList[4] || preview[4 - imageNum]) && (
@@ -283,7 +264,7 @@ const CommunityPostEdit = (props, community) => {
                     `;
                   }}
                 >
-                  <Image src={imageList[4] || preview[4 - imageNum]} width="100%" height="100%" />
+                  <Image src={preview[4 - imageNum] || imageList[4]?.image} width="100%" height="100%" />
                 </Grid>
               )}
             </Grid>

@@ -14,13 +14,15 @@ import { MessageCircle, Eye } from "react-feather";
 import { history } from "../../redux/configureStore";
 
 const CommunityPost = ({community, category}) => {
-  console.log(category);
+  // console.log(community);
+  const communityId = community.id
   return (
     <Grid height="30px">
       <CommunityPostStyle>
         <Grid clickEvent={()=>history.push({
-              pathname: '/communitypostdetail',
+              pathname: `/communitypostdetail/${communityId}`,
               category: category,
+              community: community,
             })} >
             <Grid 
             addstyle={() => {
@@ -44,11 +46,10 @@ const CommunityPost = ({community, category}) => {
                   `;
                 }}/>
             <Text margin="4px" fontWeight={'bold'}>
-            뽀삐맘
-            {/* {community.username} */}
+            {community.username}
             </Text>
-            <Text size="10px" margin="0 10px 0 197px">
-            2021-09-03 15:23
+            <Text size="10px" margin="0 10px 0 165px">
+            {community.createdAt}
             </Text>
             </Grid>
         </Grid>
@@ -61,8 +62,7 @@ const CommunityPost = ({community, category}) => {
             `;
           }}>
           <Text fontWeight={'bold'} margin={'4px 0 0 0'}>
-          9월 8일 (수) 18:00 망원 2동 순찰돕니다.
-          {/* {community.title} */}
+          {community.title}
           </Text>
           <Grid 
             addstyle={() => {
@@ -92,7 +92,7 @@ const CommunityPost = ({community, category}) => {
                   size={'12px'} 
                   fontWeight={'bold'}
                 >
-                  99
+                  {community.cntView}
                 </Text>
               </Grid>
               <Grid 
@@ -103,7 +103,7 @@ const CommunityPost = ({community, category}) => {
               }}>
                 <MessageCircle style={{width:'13px', margin:'-4px 3px 0 0'}}/>
                 <Text size={'12px'} fontWeight={'bold'}>
-                  99
+                {community.cntComment}
                 </Text>
               </Grid>
               <Grid 
@@ -114,7 +114,7 @@ const CommunityPost = ({community, category}) => {
               }}>
                 <FavoriteIcon style={{width:'13px', margin:'-4px 3px 0 0', color:'red'}}/>
                 <Text size={'12px'} fontWeight={'bold'}>
-                  99
+                {community.cntLikeIt}
                 </Text>
               </Grid>
               </Grid>

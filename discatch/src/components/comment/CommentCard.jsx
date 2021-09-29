@@ -15,12 +15,12 @@ import { Trash2 } from 'react-feather';
 import { deleteCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentCard = ({ comment }) => {
-  // const commentId = comment.commentId
-  const commentId = '테스트';
+  const commentId = comment.id
+  // const commentId = '테스트';
   const dispatch = useDispatch();
   //   const userName = useSelctor((state) => state.user); // 유저 정보에서 받아오기
   // username >> community.commentList.username에서 받아오기
-  const userName = 'test';
+  const userName = 'test2';
   const username = 'test2';
 
   const deleteBtn = () => {
@@ -34,15 +34,15 @@ const CommentCard = ({ comment }) => {
         addstyle={() => {
           return css`
             ${flexBox('space-evenly')};
-            margin-top: 3%;
+            margin: 3% 0 0 0;
           `;
         }}
       >
-        <Text>망원동 왕집사:</Text>
-        <Text margin="0 5% 0 -6%">왕 귀엽습니다!!</Text>
+        <Text>{comment.username}:</Text>
+        <Text margin="0 5% 0 -6%">{comment.contents}</Text>
 
         <Text margin="0 -2% 0 0" size="10px">
-          2021-09-02 17:34
+          {comment.createdAt}
         </Text>
 
         {userName === username && (

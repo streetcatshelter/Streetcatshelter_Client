@@ -125,9 +125,9 @@ function image(state = initialState, action) {
 
       return { ...state, file: fileList };
     case SET_INITIAL_STATE:
-      return { imageUrl: [], file: [] };
+      return { imageUrl: [], file: [], imageUrls: []};
     case SET_PREVIEW:
-      return { ...state, preview: [...state.preview, action.preview] };
+      return { ...state, preview: [...state.preview, action.preview], };
 
     default:
       return state;

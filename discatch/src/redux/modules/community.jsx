@@ -9,6 +9,16 @@ import { imgActions } from './image';
 export const addCommunityDB = (category, contents, location, title) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file
+    const path = category.split(' ');
+    let pathName = null
+    if (path.length === 2) {
+      pathName = 'catinfo'
+    } else if (path.length === 3) {
+      pathName = 'gathering'
+    } else {
+      pathName = 'sharing'
+    }
+
     // const username = getState().user; // 나중에 가져오기
     const username = '뽀삐맘';
     if (imgFile.length<6) {
@@ -29,6 +39,7 @@ export const addCommunityDB = (category, contents, location, title) => {
               dispatch(addCommunity(postInfo));
               dispatch(imgActions.setInitialState());
               history.goBack();
+              window.location.replace(`/community/${pathName}`)
             })
             .catch((err) => {
               console.log(err);
@@ -50,11 +61,11 @@ export const getCommunityDB = (category, location, limit = 5) => {
       .get(`/community/category/${category}?page=1&size=${limit}&location=${location}`)
       .then((res) => {
         let communityList = res.data;
+        console.log(communityList);
         if (communityList.length < limit + 1) {
           dispatch(getCommunity(communityList, null));
           return;
         }
-
         dispatch(getCommunity(communityList, limit));
       })
       .catch((err) => {
@@ -67,17 +78,19 @@ export const getCommunityDB = (category, location, limit = 5) => {
 export const getMoreCommunityDB = (category, location, limit = 6) => {
   return function (dispatch, getState, { history }) {
     let start = getState().community.start;
-
+    console.log(start);
     if (start === null) {
       return;
     } else {
       start += 1;
     }
-
+    console.log(start);
     instance
       .get(`/community/category/${category}?page=${start}&size=${limit}&location=${location}`)
       .then((res) => {
+        console.log(res);
         const communityList = res.data;
+        console.log(communityList);
         if (communityList.length < limit + 1) {
           dispatch(getMoreCommunity(communityList, null));
           return;
@@ -232,13 +245,13 @@ const community = createSlice({
   initialState,
   reducers: {
     addCommunity: (state, action) => {
-      const categoty = action.payload.category;
+      const category = action.payload.category;
       const contents = action.payload.contents;
       const image = action.payload.image;
       const location = action.payload.location;
       const title = action.payload.title
       const username = action.payload.username
-      state.list.push(categoty, contents, image, location, title, username);
+      state.list.push(category, contents, image, location, title, username);
     },
 
     getCommunity: (state, action) => {

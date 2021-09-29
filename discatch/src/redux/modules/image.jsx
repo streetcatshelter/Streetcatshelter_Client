@@ -20,7 +20,7 @@ const uploadImage = (imageUrl) => ({ type: UPLOAD_IMAGE, imageUrl });
 const setFile = (file) => ({ type: SET_FILE, file });
 const delFile = (postId) => ({ type: DEL_FILE, postId });
 const setInitialState = () => ({ type: SET_INITIAL_STATE });
-const setPreview = (preview) => ({ type: SET_PREVIEW , preview });
+const setPreview = (preview) => ({ type: SET_PREVIEW, preview });
 
 // initial state
 const initialState = {
@@ -72,8 +72,8 @@ const uploadImageDB = (callNext) => {
 function image(state = initialState, action) {
   switch (action.type) {
     case UPLOAD_IMAGE:
-      // return { ...state, imageUrl: action.imageUrl };
-      return { ...state, imageUrl: [...state.imageUrl, action.imageUrl] };
+      return { ...state, imageUrl: action.imageUrl };
+    // return { ...state, imageUrl: [...state.imageUrl, action.imageUrl] };
     case SET_FILE:
       return { ...state, file: [...state.file, ...action.file] };
     case DEL_FILE:

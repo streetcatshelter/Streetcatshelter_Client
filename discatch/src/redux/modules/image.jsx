@@ -22,7 +22,7 @@ const uploadImages = (imageUrls) => ({ type: UPLOAD_IMAGES, imageUrls });
 const setFile = (file) => ({ type: SET_FILE, file });
 const delFile = (postId) => ({ type: DEL_FILE, postId });
 const setInitialState = () => ({ type: SET_INITIAL_STATE });
-const setPreview = (preview) => ({ type: SET_PREVIEW , preview });
+const setPreview = (preview) => ({ type: SET_PREVIEW, preview });
 
 // initial state
 const initialState = {

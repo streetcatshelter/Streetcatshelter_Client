@@ -1,6 +1,7 @@
 // library
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 // element
 import { Grid, Text, Image } from '../../elements';
@@ -11,9 +12,14 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 // redux
 import { history } from '../../redux/configureStore';
 
-const CatPost = (props) => {
+const CatPost = (props, { cat, location }) => {
+  const dispatch = useDispatch();
+
   const margin = props.margin;
   const path = useLocation().pathname;
+
+  const catPostList = useSelector((state) => state.cat.list);
+  console.log(catPostList);
 
   return (
     <React.Fragment>

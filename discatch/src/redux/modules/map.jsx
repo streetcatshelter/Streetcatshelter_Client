@@ -16,7 +16,6 @@ const map = createSlice({
   reducers: {
     searchMap: (state, action) => {
       const keyword = action.payload;
-      console.log(keyword);
       state.keywordList.unshift(keyword);
     },
     searchKeywordMap: (state, action) => {

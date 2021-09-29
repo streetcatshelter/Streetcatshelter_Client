@@ -48,8 +48,8 @@ import CommunityPost from './community/CommunityPost';
 import Location from './map/Location';
 
 /* chat */
-import ChatBoxs from "./ChatBoxs";
-
+import ChatBoxs from "./chat/ChatBoxs";
+import ChatWrite from "./chat/ChatWrite";
 export {
   /* ==Templates */
   Router,
@@ -94,4 +94,5 @@ export {
   Location,
   /* chat */
   ChatBoxs,
+  ChatWrite,
 };

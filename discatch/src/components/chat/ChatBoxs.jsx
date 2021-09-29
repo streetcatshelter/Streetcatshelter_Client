@@ -44,6 +44,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px;
+  overflow: auto;
   span {
     font-weight: 900;
   }

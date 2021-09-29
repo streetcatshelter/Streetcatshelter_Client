@@ -27,7 +27,7 @@ export const loginApi = {
 
 export const catApi = {
   getCatLocation: (location, limit) =>
-    instance.get(`/cat/${location}?page=0&size=${limit}`),
+    instance.get(`/cat/${location}?page=1&size=${limit}`),
   getCatCalendar: (catId) => instance.get(`/cat/calendar/${catId}`),
   getCatGallery: (catId, size) =>
     instance.get(`/cat/gallery/${catId}?page=0&size=${size}`),

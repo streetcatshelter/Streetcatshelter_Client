@@ -10,11 +10,11 @@ import { imgActions } from './image';
 export const __createCatInfo = (
   catName,
   catTag,
-  latitude,
-  location,
-  longitude,
   neutering,
+  location,
   username,
+  latitude,
+  longitude,
 ) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
@@ -22,11 +22,6 @@ export const __createCatInfo = (
       dispatch(
         imgActions.uploadImageDB(() => {
           const imageUrl = getState().image.imageUrl;
-          const latitude = 0;
-          const location = '하안동';
-          const longitude = 0;
-          // const neutering = 'YES';
-          const username = '냥냥이맘';
 
           const catInfo = {
             catImage: imageUrl,
@@ -93,15 +88,14 @@ export const __getcatLocation =
   (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.getCatLocation();
-      let catPostList = data;
+      const data = await catApi.getCatLocation();
+      // let catPostList = data.data;
+      // if (catPostList.length < limit + 1) {
+      //   dispatch(getCatLocation(catPostList, null));
+      //   return;
+      // }
       console.log(data);
-      if (catPostList.length < limit + 1) {
-        dispatch(getCatLocation(catPostList, null));
-        return;
-      }
-
-      dispatch(getCatLocation(catPostList, limit));
+      dispatch(getCatLocation(data.data, limit));
     } catch (err) {
       console.error(err);
     }
@@ -134,14 +128,14 @@ const cat = createSlice({
   initialState,
   reducers: {
     createCatInfo: (state, action) => {
-      const image = action.payload.image;
+      const image = action.payload.imageUrl;
       const catName = action.payload.catName;
       const catTag = action.payload.catTag;
       const latitude = action.payload.latitude;
       const location = action.payload.location;
-      const longitude = action.payload.location;
+      const longitude = action.payload.longitude;
       const neutering = action.payload.neutering;
-      const username = action.payload.usernamer;
+      const username = action.payload.username;
       state.list.push(
         image,
         catName,
@@ -156,8 +150,7 @@ const cat = createSlice({
     },
 
     getCatLocation: (state, action) => {
-      state.list = action.payload.content;
-      state.start = action.payload.number;
+      state.list = action.payload;
     },
   },
 });

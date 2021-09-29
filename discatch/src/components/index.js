@@ -47,6 +47,9 @@ import CommunityPost from './community/CommunityPost';
 /* map */
 import Location from './map/Location';
 
+/* chat */
+import ChatBoxs from "./ChatBoxs";
+
 export {
   /* ==Templates */
   Router,
@@ -89,4 +92,6 @@ export {
   CommunityPost,
   /* map */
   Location,
+  /* chat */
+  ChatBoxs,
 };

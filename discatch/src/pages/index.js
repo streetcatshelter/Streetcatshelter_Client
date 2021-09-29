@@ -23,6 +23,9 @@ import CommunityPostEdit from './CommunityPostEdit';
 /* == Map */
 import Map from './Map';
 
+/* == Chat */
+import Chat from "./Chat";
+
 export {
   Home,
   test,
@@ -46,4 +49,6 @@ export {
   CommunityPostDetail,
   /* == Map */
   Map,
+  /* == Chat */
+  Chat,
 };

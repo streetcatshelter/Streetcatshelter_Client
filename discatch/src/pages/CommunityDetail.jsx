@@ -27,16 +27,12 @@ import { history } from "../redux/configureStore";
 const CommunityDetail = (props) => {
   const location2 = useLocation();
   const query = window.location.search;
-  console.log(location2.pathname);
   const pathName = location2.pathname;
   const dispatch = useDispatch();
 
   const location = "망원동";
     // const currentLocation = useSelector((state) => state.map.keywordList[0]);
 
-  // const communityList = useSelector((state) =>
-  //   state.community.list ? state.community.list : Array(0, 2, 34),
-  // );
 
   const path = useLocation();
   let category = null;
@@ -48,21 +44,25 @@ const CommunityDetail = (props) => {
     category = `${location} 고양이 용품 나눔`;
   }
 
-  // React.useEffect(() => {
-  //   dispatch(getCommunityDB(category, location));
-  // }, []);
+  const getMoreCommunity = () => {
+    dispatch(getMoreCommunityDB(category, location));
+  };
 
-  // const getMoreCommunity = () => {
-  //   dispatch(getMoreCommunityDB());
-  // };
 
-  // React.useEffect(() => {
-  //   if (!query) dispatch(getCommunityDB());
+  React.useEffect(() => {
+    if (!query) dispatch(getCommunityDB(category, location));
 
-  //   return () => {
-  //     dispatch(getCommunityDB());
-  //   };
-  // }, []);
+    return () => {
+      dispatch(getCommunityDB(category, location));
+    };
+  }, []);
+
+    const communityList = useSelector((state) =>
+    state.community.list ? state.community.list : Array(0, 2, 34),
+  );
+
+  console.log(communityList);
+
 
   return (
     <Template props={props}>
@@ -78,31 +78,51 @@ const CommunityDetail = (props) => {
       >
         <CommunityDetailStyle>
           <Grid
-            width="350px"
             addstyle={() => {
               return css`
                 position: relative;
-                margin: 10px auto;
+                margin: 0 auto;
                 font-size: 18px;
                 font-weight: bold;
                 top: 90px;
               `;
             }}
           >
-            <Text size="18px" margin="-80px 0 0 0">
+            <Text 
+              size="18px" 
+              margin="0 0 0 3vw"
+              addstyle={() => {
+                return css`
+                  @media screen and (min-height: 1024px) {
+                    margin: 12% 0 0 8%;
+                  }
+                `;
+                }}
+              >
               {category}
             </Text>
           </Grid>
-          <Grid margin="-570px 0 0 0">
+          <Grid 
+            margin="-85vh 0 0 0"
+            addstyle={() => {
+              return css`
+                @media screen and (min-height: 1024px) {
+                  margin: -96vh 0 0 0;
+                }
+                @media screen and (min-height: 812px) {
+                  margin: -93vh 0 0 0;
+                }
+              `;
+            }}>
 
-          {/* {communityList.length ? (
+          {communityList.length ? (
             communityList.map((community, idx) => {
               return (
                 <InfinityScroll
                   next={getMoreCommunity}
                   index={idx}
                   length={communityList.length}
-                  key={community.communityId}
+                  key={community.id}
                 >
                   <CommunityPost community={community} />
                 </InfinityScroll>
@@ -110,16 +130,7 @@ const CommunityDetail = (props) => {
             })
           ) : (
             <></>
-          )} */}
-
-            <CommunityPost category={category} />
-            <CommunityPost category={category} />
-            <CommunityPost category={category} />
-            <CommunityPost category={category} />
-            <CommunityPost category={category} />
-            <CommunityPost category={category} />
-            <CommunityPost category={category} />
-            <CommunityPost category={category} />
+          )}
           </Grid>
         </CommunityDetailStyle>
         {pathName === '/community/sharing' && <Button
@@ -163,8 +174,14 @@ const CommunityDetail = (props) => {
 const CommunityDetailStyle = styled.div`
   width: 100%;
   overflow-x: hidden;
-  height: 90vh;
-  margin: 0 0 10vh;
+  height: 92vh;
+  margin: -10vh 0 0;
+  @media screen and (min-height: 1024px) {
+    height: 102vh;
+  }
+  @media screen and (min-height: 812px) {
+    height: 97vh;
+  }
 `;
 
 export default CommunityDetail;

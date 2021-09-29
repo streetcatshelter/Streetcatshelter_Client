@@ -17,31 +17,26 @@ import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community
 // ROUTE
 import { useLocation } from 'react-router-dom';
 
-const CommunityPostDetail = (props, community) => {
-  const selectedCategory = useLocation();
-  console.log(selectedCategory.category);
+const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
   
-  // const communityId = community.match.params;
-  // console.log(community);
+  const communityId = props.match.params.communityId;
+  React.useEffect(() => {
+    dispatch(getOneCommunityDB(communityId));
+  }, []);
 
-  // React.useEffect(() => {
-  //   dispatch(getOneCommunityDB(communityId));
-  // }, []);
-
-  // const { category, contents, image, location, title, username } = useSelector((state) => ({
-  //   categoty: state.community.list.categoty,
-  //   contents: state.community.list.contents,
-  //   image: state.community.list.image,
-  //   location: state.community.list.location,
-  //   title: state.community.list.title,
-  //   username: state.community.list.username,
-  // }));
-  const image='수정 필요'
-  const communityId="수정 필요"
+  const { category, contents, imageList, location, title, username, createdAt } = useSelector((state) => ({
+    category: state.community.list.category,
+    contents: state.community.list.contents,
+    imageList: state.community.list.communityImageList ? state.community.list.communityImageList : Array(1,2,3),
+    location: state.community.list.location,
+    title: state.community.list.title,
+    username: state.community.list.username,
+    createdAt: state.community.list.createdAt,
+  }));
 
   const deleteCommunity = () => {
-    dispatch(deleteCommunityDB(communityId));
+    dispatch(deleteCommunityDB(communityId, category));
   };
   
   return (
@@ -60,15 +55,13 @@ const CommunityPostDetail = (props, community) => {
           width="350px"
           addstyle={() => {
             return css`
-              margin: 0 0 0 15px;
+              margin: 0 0 0 4vw;
               font-size: 18px;
               font-weight: bold;
             `;
           }}
         >
-          {/* 평창동 동네 모임 */}
-          {selectedCategory.category}
-          {/* {category} */}
+          {category}
         </Grid>
         <Grid
           margin="0 0 -35px 0"
@@ -102,12 +95,10 @@ const CommunityPostDetail = (props, community) => {
           >
             <Grid>
               <Text fontWeight="bold">
-                뽀삐맘
-                {/* {username} */}
+                {username}
               </Text>
               <Text size="12px">
-                평창동
-                {/* {location} */}
+                {location}
               </Text>
             </Grid>
             <Grid
@@ -124,21 +115,22 @@ const CommunityPostDetail = (props, community) => {
               <Text
                 fontWeight="bold"
                 size="10px"
+                width="140px"
                 addstyle={() => {
                   return css`
                     position: relative;
-                    left: 20px;
+                    left: -30px;
                   `;
                 }}
               >
-                2021-09-03 18:00
+                {createdAt}
               </Text>
               <Grid
                 width="30px"
                 addstyle={() => {
                   return css`
                     position: relative;
-                    left: 10px;
+                    left: -40px;
                     top: -11px;
                   `;
                 }}
@@ -146,14 +138,13 @@ const CommunityPostDetail = (props, community) => {
                 <EditModalSlide 
                 FirstBtn={'게시글 수정'} 
                 SecondBtn={'삭제'} 
-                FirstClick={()=>history.push('/communitypostedit')}
-                // onClick={() => {
-                  //     history.push({
-                  //       pathname: `/communitypostedit/${communityId.communityId}`,
-                  //       state: { communityId: communityId.communityId },
-                  //   });
-                  // }}
-                SecondClick={deleteCommunityDB}
+                FirstClick={() => {
+                      history.push({
+                        pathname: `/communitypostedit/${communityId}`,
+                        state: { communityId: communityId },
+                    });
+                  }}
+                SecondClick={deleteCommunity}
                 />
               </Grid>
             </Grid>
@@ -174,8 +165,7 @@ const CommunityPostDetail = (props, community) => {
                 `;
               }}
             >
-              9월 8일 (수) 18:00 망원 2동 순찰돕니다.
-              {/* {title} */}
+              {title}
             </Text>
               
           </Grid>
@@ -190,12 +180,64 @@ const CommunityPostDetail = (props, community) => {
             `;
           }}
         >
-        {image &&
+              {imageList[0] &&
               <Image 
               width="286px" 
               height="286px"
-              margin="auto"
-              // src={image}
+              margin="10px auto"
+              src={imageList[0].image}
+              addstyle={() => {
+                return css`
+                position:relative;
+                top:-20px;
+                `;
+              }}
+              />}
+              {imageList[1] &&
+              <Image 
+              width="286px" 
+              height="286px"
+              margin="10px auto"
+              src={imageList[1].image}
+              addstyle={() => {
+                return css`
+                position:relative;
+                top:-20px;
+                `;
+              }}
+              />}
+              {imageList[2] &&
+              <Image 
+              width="286px" 
+              height="286px"
+              margin="10px auto"
+              src={imageList[2].image}
+              addstyle={() => {
+                return css`
+                position:relative;
+                top:-20px;
+                `;
+              }}
+              />}
+              {imageList[3] &&
+              <Image 
+              width="286px" 
+              height="286px"
+              margin="10px auto"
+              src={imageList[3].image}
+              addstyle={() => {
+                return css`
+                position:relative;
+                top:-20px;
+                `;
+              }}
+              />}
+              {imageList[4] &&
+              <Image 
+              width="286px" 
+              height="286px"
+              margin="10px auto"
+              src={imageList[4].image}
               addstyle={() => {
                 return css`
                 position:relative;
@@ -212,14 +254,10 @@ const CommunityPostDetail = (props, community) => {
                   `;
                 }}
               >
-                
-                망원동 고양이 너무 귀여운것같아요~ 8일 저녁 6시에 망원2동 순찰
-                도실분 2분 구해요! 같이 고양이 순찰 돌고 너랑나랑호프에서 가볍게
-                맥주한잔해요!! ^^ 9월 8일 수요일 18:00 망원2동 그린마트앞
-                {/* {contents} */}
+                {contents}
               </Text>
               <Grid margin="0 0 12vh 0">
-                <CommentList />
+                <CommentList props={props}/>
               </Grid>
         </Grid>
       </Grid>
@@ -228,7 +266,7 @@ const CommunityPostDetail = (props, community) => {
 };
 
 const CommunityPostDetailStyle = styled.div`
-  width: 350px;
+  width: 320px;
   margin: 10px auto;
 `;
 

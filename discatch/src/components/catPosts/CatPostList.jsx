@@ -1,27 +1,11 @@
-import React from "react";
+import React from 'react';
 
 /* == components*/
-import { CatPost } from "..";
+import { CatPost } from '..';
 
 const CatPostList = () => {
   return (
     <React.Fragment>
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
       <CatPost margin="5px 0px" />
       <CatPost margin="5px 0px" />
       <CatPost margin="5px 0px" />

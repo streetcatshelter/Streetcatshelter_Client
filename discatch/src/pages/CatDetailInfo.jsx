@@ -1,15 +1,16 @@
 // library
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { history } from '../redux/configureStore';
 
 // style
 import { flexBox } from '../shared/style';
 
 // element
-import { Grid, Text, Image, Button } from '../elements';
+import { Grid, Text, Image } from '../elements';
 
 // component
-import { Template, CommentList, EditModal } from '../components';
+import { Template, CommentList, EditModalSlide } from '../components';
 
 // icon
 import { CheckSquare } from 'react-feather';
@@ -27,15 +28,19 @@ const CatDetailInfo = (props) => {
       >
         <Image width="35px" height="35px" borderRadius="25px" />
 
-        <Text margin="0 15% 0 -6%" fontWeight="bold">
+        <Text margin="0 10% 0 -7%" fontWeight="bold">
           뽀삐맘
         </Text>
 
-        <Text size="12px" fontWeight="bold">
+        <Text margin="0 -10% 0 0" size="12px" fontWeight="bold">
           2021-09-10-17:55
         </Text>
 
-        <EditModal />
+        <EditModalSlide
+          FirstBtn={'게시글 수정'}
+          SecondBtn={'삭제'}
+          FirstClick={() => history.push('/catdetailedit')}
+        />
       </Grid>
 
       <Image margin="auto" width="300px" height="140px" />

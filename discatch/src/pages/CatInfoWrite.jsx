@@ -1,14 +1,15 @@
+// library
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import styled, { css } from 'styled-components';
 
-/* == components*/
+// component
 import { Template } from '../components';
 
-/* == Custom - Elements*/
+// element
 import { Grid, Image, TextArea, Input, Button } from '../elements/index';
 
-/* == Library - style */
-import styled, { css } from 'styled-components';
+// stlye
 import { flexBox } from '../shared/style';
 
 // icon
@@ -16,28 +17,51 @@ import { Camera } from 'react-feather';
 
 // redux
 import { imgActions } from '../redux/modules/image';
+import { __createCatInfo } from '../redux/modules/cat';
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
 
-  const Options = [
-    { key: 1, value: '중성화 여부' },
-    { key: 2, value: 'Y' },
-    { key: 3, value: 'N' },
-    { key: 4, value: '?' },
-  ];
-
   const [fileUrl, setFileUrl] = useState(null);
+  const [catName, setCatName] = useState('');
+  const [neutering, setNeutering] = useState('중성화 여부');
+  const [catTag, setCatTag] = useState([]);
+
+  const $catName = (e) => {
+    setCatName(e.target.value);
+  };
+
+  const $catTag = (e) => {
+    setCatTag([e.target.value]);
+  };
+
+  const $neutering = (e) => {
+    setNeutering(e.currentTarget.value);
+    // console.log(e.target.options[e.target.selectedIndex].text);
+    // target.options[target.selectedIndex].text
+  };
 
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();
     const file = e.target.files[0];
     const imageUrl = URL.createObjectURL(file);
-    dispatch(imgActions.setInitialState());
+    dispatch(imgActions.setInitialState(imageUrl));
     dispatch(imgActions.setFile([file]));
     setFileUrl(imageUrl);
   };
+
+  const createBtn = () => {
+    dispatch(__createCatInfo(catName, catTag, neutering));
+    console.log(catName, catTag, neutering);
+  };
+
+  const Options = [
+    { key: 1, value: '중성화 여부' },
+    { key: 2, value: 'YES' },
+    { key: 3, value: 'NO' },
+    { key: 4, value: 'UNDEFINED' },
+  ];
 
   return (
     <Template props={props}>
@@ -50,6 +74,7 @@ const CatInfoWrite = (props) => {
           <Input
             id="imgFile"
             name="imgFile"
+            multiple
             type="file"
             accept="image/png, image/jpeg"
             changeEvent={handleInputFile}
@@ -77,9 +102,15 @@ const CatInfoWrite = (props) => {
         )}
 
         <Grid width="80%" margin="10% auto">
-          <Input padding="6px" width="96%" radius="10px" placeholder="이름" />
+          <Input
+            padding="6px"
+            width="96%"
+            radius="10px"
+            placeholder="이름"
+            changeEvent={$catName}
+          />
 
-          <Select>
+          <Select value={neutering} onChange={$neutering}>
             {Options.map((item, index) => (
               <option key={item.key} value={item.value}>
                 {item.value}
@@ -87,9 +118,15 @@ const CatInfoWrite = (props) => {
             ))}
           </Select>
 
-          <TextArea width="91%" placeholder="#태그명" />
+          <TextArea
+            margin="5% 0 0 0"
+            width="91%"
+            placeholder="#태그명"
+            changeEvent={$catTag}
+          ></TextArea>
 
           <Button
+            clickEvent={createBtn}
             bgColor="olive"
             color="white"
             width="120px"

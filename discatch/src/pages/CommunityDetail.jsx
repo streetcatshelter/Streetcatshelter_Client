@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CommunityPostList, CommunityPost } from "../components";
+import { Template, CommunityPost } from "../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -48,6 +48,7 @@ const CommunityDetail = (props) => {
     dispatch(getMoreCommunityDB(category, location));
   };
 
+  const communityList = useSelector((state) => state.community.list);
 
   React.useEffect(() => {
     if (!query) dispatch(getCommunityDB(category, location));
@@ -56,13 +57,6 @@ const CommunityDetail = (props) => {
       dispatch(getCommunityDB(category, location));
     };
   }, []);
-
-    const communityList = useSelector((state) =>
-    state.community.list ? state.community.list : Array(0, 2, 34),
-  );
-
-  console.log(communityList);
-
 
   return (
     <Template props={props}>

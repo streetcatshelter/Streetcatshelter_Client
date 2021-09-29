@@ -24,7 +24,7 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 
 const CommunityPostWrite = (props) => {
-  const preview = useSelector((state) => state.image.preview ? state.image.preview : Array(1,2,3))
+  const preview = useSelector((state) => state.image.preview ? state.image.preview : Array())
   const dispatch = useDispatch();
   
   const location = "망원동"; // Header에서 가져오기 or 유저 정보에서 가져오기
@@ -176,7 +176,7 @@ const CommunityPostWrite = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-              {preview[0] && (
+              {preview && preview[0] && (
                 <Grid
                   width="90px"
                   height="90px"
@@ -193,7 +193,7 @@ const CommunityPostWrite = (props) => {
                   <Image src={preview[0]} width="100%" height="100%" />
                 </Grid>
               )}
-              {preview[1] && (
+              {preview && preview[1] && (
                 <Grid
                   width="90px"
                   height="90px"
@@ -210,7 +210,7 @@ const CommunityPostWrite = (props) => {
                   <Image src={preview[1]} width="100%" height="100%" />
                 </Grid>
               )}
-              {preview[2] && (
+              {preview && preview[2] && (
                 <Grid
                   width="90px"
                   height="90px"
@@ -227,7 +227,7 @@ const CommunityPostWrite = (props) => {
                   <Image src={preview[2]} width="100%" height="100%" />
                 </Grid>
               )}
-              {preview[3] && (
+              {preview && preview[3] && (
                 <Grid
                   width="90px"
                   height="90px"
@@ -244,7 +244,7 @@ const CommunityPostWrite = (props) => {
                   <Image src={preview[3]} width="100%" height="100%" />
                 </Grid>
               )}
-              {preview[4] && (
+              {preview && preview[4] && (
                 <Grid
                   width="90px"
                   height="90px"

@@ -9,8 +9,6 @@ const CatPostList = () => {
       <CatPost margin="5px 0px" />
       <CatPost margin="5px 0px" />
       <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
     </React.Fragment>
   );
 };

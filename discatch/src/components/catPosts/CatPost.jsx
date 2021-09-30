@@ -11,15 +11,20 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // redux
 import { history } from '../../redux/configureStore';
+import { getCatLocation } from '../../redux/modules/cat';
 
-const CatPost = (props, { cat, location }) => {
+const CatPost = (props) => {
   const dispatch = useDispatch();
 
   const margin = props.margin;
   const path = useLocation().pathname;
 
-  const catPostList = useSelector((state) => state.cat.list);
+  const catPostList = useSelector((state) => state.cat);
   console.log(catPostList);
+
+  useEffect(() => {
+    dispatch(getCatLocation(catPostList));
+  }, []);
 
   return (
     <React.Fragment>

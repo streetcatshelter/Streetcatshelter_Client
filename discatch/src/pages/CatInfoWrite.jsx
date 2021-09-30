@@ -21,11 +21,29 @@ import { __createCatInfo } from '../redux/modules/cat';
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
-
   const [fileUrl, setFileUrl] = useState(null);
   const [catName, setCatName] = useState('');
   const [neutering, setNeutering] = useState('중성화 여부');
   const [catTag, setCatTag] = useState([]);
+
+  const location = '면목동';
+  const username = '냥냥이맘';
+  const latitude = 0;
+  const longitude = 0;
+
+  const Options = [
+    { key: 1, value: '중성화 여부' },
+    { key: 2, value: 'YES' },
+    { key: 3, value: 'NO' },
+    { key: 4, value: 'UNDEFINED' },
+  ];
+
+  const $neutering = (e) => {
+    setNeutering(e.target.value);
+    console.log(e.target.value);
+    // console.log(e.target.options[e.target.selectedIndex].text);
+    // target.options[target.selectedIndex].text
+  };
 
   const $catName = (e) => {
     setCatName(e.target.value);
@@ -33,12 +51,6 @@ const CatInfoWrite = (props) => {
 
   const $catTag = (e) => {
     setCatTag([e.target.value]);
-  };
-
-  const $neutering = (e) => {
-    setNeutering(e.currentTarget.value);
-    // console.log(e.target.options[e.target.selectedIndex].text);
-    // target.options[target.selectedIndex].text
   };
 
   // S3
@@ -52,16 +64,18 @@ const CatInfoWrite = (props) => {
   };
 
   const createBtn = () => {
-    dispatch(__createCatInfo(catName, catTag, neutering));
-    console.log(catName, catTag, neutering);
+    dispatch(
+      __createCatInfo(
+        catName,
+        catTag,
+        neutering,
+        location,
+        username,
+        latitude,
+        longitude,
+      ),
+    );
   };
-
-  const Options = [
-    { key: 1, value: '중성화 여부' },
-    { key: 2, value: 'YES' },
-    { key: 3, value: 'NO' },
-    { key: 4, value: 'UNDEFINED' },
-  ];
 
   return (
     <Template props={props}>

@@ -84,18 +84,19 @@ export const _catFavorite =
 
 // GET ✅
 // 지역에 따라 cat 가져오기 ✅
-export const __getcatLocation =
-  (location, limit = 10) =>
+export const __getCatLocation =
+  (location, page = 1, size = 30) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.getCatLocation();
-      // let catPostList = data.data;
-      // if (catPostList.length < limit + 1) {
-      //   dispatch(getCatLocation(catPostList, null));
+      const { data } = await catApi.getCatLocation(location, page, size);
+      let catList = data.content;
+      // console.log(catList);
+      // if (catList.length < size + 1) {
+      //   dispatch(getCatLocation(catList, null));
       //   return;
       // }
-      console.log(data);
-      dispatch(getCatLocation(data.data, limit));
+      // dispatch(getCatLocation(catList, size));
+      dispatch(getCatLocation(catList));
     } catch (err) {
       console.error(err);
     }
@@ -119,7 +120,8 @@ export const __getcatLocation =
 
 const initialState = {
   list: [],
-  page: 0,
+  page: 1,
+  size: 10,
   start: 0,
 };
 
@@ -128,29 +130,22 @@ const cat = createSlice({
   initialState,
   reducers: {
     createCatInfo: (state, action) => {
-      const image = action.payload.imageUrl;
-      const catName = action.payload.catName;
-      const catTag = action.payload.catTag;
-      const latitude = action.payload.latitude;
-      const location = action.payload.location;
-      const longitude = action.payload.longitude;
-      const neutering = action.payload.neutering;
-      const username = action.payload.username;
-      state.list.push(
-        image,
-        catName,
-        catTag,
-        latitude,
-        location,
-        longitude,
-        neutering,
-        username,
-      );
-      console.log(action.payload);
+      const catInfo = {
+        image: action.payload.catImage,
+        catName: action.payload.catName,
+        catTag: action.payload.catTag,
+        latitude: action.payload.latitude,
+        location: action.payload.location,
+        longitude: action.payload.longitude,
+        neutering: action.payload.neutering,
+        username: action.payload.username,
+      };
+      state.list.push(catInfo);
     },
 
     getCatLocation: (state, action) => {
       state.list = action.payload;
+      // state.start = action.payload.number;
     },
   },
 });

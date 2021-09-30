@@ -16,7 +16,6 @@ const CatPostDetail = () => {
       <CatPost />
 
       <Grid
-        margin="0 0 3% 0"
         addstyle={() => {
           return css`
             border-bottom: 2px solid #cbcf5e;

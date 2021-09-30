@@ -1,14 +1,33 @@
+// library
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-/* == components*/
+// component
 import { CatPost } from '..';
 
+// redux
+import { __getCatLocation } from '../../redux/modules/cat';
+
 const CatPostList = () => {
+  const dispatch = useDispatch();
+  const location = '망원동';
+
+  const catList = useSelector((state) => state.cat.list);
+  // console.log(catList);
+
+  React.useEffect(() => {
+    dispatch(__getCatLocation(location));
+  }, []);
+
   return (
     <React.Fragment>
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
-      <CatPost margin="5px 0px" />
+      {catList.length ? (
+        catList.map((post, idx) => {
+          return <CatPost key={idx} {...post} />;
+        })
+      ) : (
+        <></>
+      )}
     </React.Fragment>
   );
 };

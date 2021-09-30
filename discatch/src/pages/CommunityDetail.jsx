@@ -49,6 +49,7 @@ const CommunityDetail = (props) => {
   };
 
   const communityList = useSelector((state) => state.community.list);
+  console.log(query);
 
   React.useEffect(() => {
     if (!query) dispatch(getCommunityDB(category, location));

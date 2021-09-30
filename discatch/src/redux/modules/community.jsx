@@ -61,7 +61,6 @@ export const getCommunityDB = (category, location, limit = 5) => {
       .get(`/community/category/${category}?page=1&size=${limit}&location=${location}`)
       .then((res) => {
         let communityList = res.data;
-        console.log(communityList);
         if (communityList.length < limit + 1) {
           dispatch(getCommunity(communityList, null));
           return;
@@ -78,19 +77,15 @@ export const getCommunityDB = (category, location, limit = 5) => {
 export const getMoreCommunityDB = (category, location, limit = 6) => {
   return function (dispatch, getState, { history }) {
     let start = getState().community.start;
-    console.log(start);
     if (start === null) {
       return;
     } else {
       start += 1;
     }
-    console.log(start);
     instance
-      .get(`/community/category/${category}?page=${start}&size=${limit}&location=${location}`)
+      .get(`/community/category/${category}?page=${start+1}&size=${limit}&location=${location}`)
       .then((res) => {
-        console.log(res);
         const communityList = res.data;
-        console.log(communityList);
         if (communityList.length < limit + 1) {
           dispatch(getMoreCommunity(communityList, null));
           return;
@@ -116,7 +111,6 @@ export const getOneCommunityDB = (communityId = '') => {
       })
       .catch((err) => {
         console.error(err);
-        console.log(communityId);
       });
   };
 };
@@ -158,8 +152,7 @@ export const editCommunityDB = (communityId, category, editcontents, location, e
               username: username,
             })
             .then((res) => {
-              window.alert('게시글 수정 완료');
-              // history.push(`/communitypostedit/${res.data.id}`);
+              window.alert('게시글 수정 완료!');
               history.goBack();
             })
             .catch((err) => {
@@ -191,7 +184,7 @@ export const deleteCommunityDB = (communityId, category) => {
       .delete(`/community/${communityId}`)
       .then((res) => {
         dispatch(deleteCommunity(communityId));
-        // window.alert('게시물 삭제 완료');
+        window.alert('게시물 삭제 완료!');
         history.push(`/community/${pathName}`);
       })
       .catch((err) => {
@@ -204,6 +197,7 @@ export const deleteCommunityDB = (communityId, category) => {
 export const addCommunityCommentDB = (contents, communityId) => {
   return function (dispatch, getState, { history }) {
     const username = '뽀삐맘'; // 수정 필요
+    console.log(communityId)
     // const username = getState().user; // 나중에 가져오기
     instance
       .post(`/community/comment/${communityId}`, { contents, username })

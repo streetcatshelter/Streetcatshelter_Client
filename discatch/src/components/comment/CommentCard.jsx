@@ -22,6 +22,7 @@ const CommentCard = ({ comment }) => {
   // username >> community.commentList.username에서 받아오기
   const userName = 'test2';
   const username = 'test2';
+  console.log(comment.createdAt)
 
   const deleteBtn = () => {
     dispatch(deleteCommunityCommentDB(commentId));
@@ -38,10 +39,10 @@ const CommentCard = ({ comment }) => {
           `;
         }}
       >
-        <Text>{comment.username}:</Text>
-        <Text margin="0 5% 0 -6%">{comment.contents}</Text>
+        <Text>{comment.username} : {comment.contents}</Text>
+        {/* <Text margin="0 5% 0 -6%">{comment.contents}</Text> */}
 
-        <Text margin="0 -2% 0 0" size="10px">
+        <Text margin="0 -2% 0 0" size="10px" width="60px">
           {comment.createdAt}
         </Text>
 

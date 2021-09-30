@@ -26,13 +26,11 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
   let communityId = community.id;
-  console.log(communityId)
-  console.log(community)
 
   if (path.pathname === '/catdetail') {
     communityId = 1
   } else {
-    communityId = props.props?.location.community?.id;
+    communityId = community.id;
   }
 
   const [comments, setComment] = React.useState('');
@@ -52,6 +50,9 @@ const CommentList = (props) => {
     setComment(event.target.value);
   };
 
+  console.log(path)
+  console.log(comments)
+  console.log(communityId)
   const addCommentBtn = () => {
     if (path.pathname === `/communitypostdetail/${communityId}`) {
     dispatch(addCommunityCommentDB(comments, communityId));

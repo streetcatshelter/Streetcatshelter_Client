@@ -18,6 +18,7 @@ import { flexBox } from '../../shared/style';
 
 const CatPost = (props) => {
   const path = useLocation().pathname;
+  // console.log(props.catTagList.tag);
 
   return (
     <React.Fragment>

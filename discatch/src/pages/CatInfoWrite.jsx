@@ -24,7 +24,7 @@ const CatInfoWrite = (props) => {
   const [fileUrl, setFileUrl] = useState(null);
   const [catName, setCatName] = useState('');
   const [neutering, setNeutering] = useState('중성화 여부');
-  const [catTag, setCatTag] = useState('');
+  const [catTag, setCatTag] = useState();
 
   const location = '망원동';
   const username = '냥냥이맘';
@@ -47,7 +47,7 @@ const CatInfoWrite = (props) => {
   };
 
   const $catTag = (e) => {
-    setCatTag([e.target.value]);
+    setCatTag(e.target.value);
   };
 
   // S3
@@ -64,7 +64,7 @@ const CatInfoWrite = (props) => {
     dispatch(
       __createCatInfo(
         catName,
-        catTag,
+        [catTag],
         neutering,
         location,
         username,

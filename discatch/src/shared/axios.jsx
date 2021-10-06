@@ -28,24 +28,25 @@ export const loginApi = {
 };
 
 export const catApi = {
-  getCatLocation: (location, limit) =>
-    instance.get(`/cat/${location}?page=1&size=${limit}`),
+  getCatLocation: (location, page, size) =>
+    instance.get(`/cat/${location}?page=${page}&size=${size}`),
   getCatCalendar: (catId) => instance.get(`/cat/calendar/${catId}`),
-  getCatGallery: (catId, size) =>
-    instance.get(`/cat/gallery/${catId}?page=0&size=${size}`),
-  getCatDiary: (catId, size) =>
-    instance.get(`/cat/diary/${catId}?page=0&size=${size}`),
+  getCatGallery: (catId, page, size) =>
+    instance.get(`/cat/gallery/${catId}?page=${page}&size=${size}`),
+  getCatDiary: (catId, page, size) =>
+    instance.get(`/cat/diary/${catId}?page=${page}&size=${size}`),
 
   getCatComment: (catId, size) =>
     instance.get(`/cat/comment/${catId}?page=0&size=${size}`), // cat 댓글 더보기 -> 작업 후 모든 주석 제거 예정 ✅
   createCatComment: () => instance.post('/cat/comment'),
   deleteCatComment: () => instance.delete('/cat/comment'),
 
-  createCatDetail: () => instance.post('cat/detailCreate'), // cat 상세정보 작성
+  createCatDetail: (catId, newPost) =>
+    instance.post(`/cat/detailCreate/${catId}`, newPost), // cat 상세정보 작성
   updateCatDetail: () => instance.put('/cat/detailUpdate'), // cat 상세정보 수정
-  deleteCatDetail: () => instance.delete('cat/detailDelete'),
+  deleteCatDetail: () => instance.delete('/cat/detailDelete'),
 
-  catFavorite: () => instance.post('cat/favorite'),
+  catFavorite: () => instance.post('/cat/favorite'),
 };
 
 export const communityApi = {

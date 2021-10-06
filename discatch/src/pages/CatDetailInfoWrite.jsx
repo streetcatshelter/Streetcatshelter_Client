@@ -17,14 +17,16 @@ import { Camera } from 'react-feather';
 
 // redux
 import { imgActions } from '../redux/modules/image';
+import { __createCatDetailInfo } from '../redux/modules/cat';
 
 const CatDetailInfoWrite = (props) => {
-  const dispatch = useDispatch();
-  const [works, setWorks] = useState([]);
-  const changeWorks = (e) => {
-    setWorks([...works, e.target.value]);
-  };
+  // const [works, setWorks] = useState([]);
+  // const changeWorks = (e) => {
+  //   setWorks([...works, e.target.value]);
+  // };
   // console.log(works);
+
+  const dispatch = useDispatch();
 
   const [fileUrl, setFileUrl] = useState(null);
   // S3
@@ -35,6 +37,37 @@ const CatDetailInfoWrite = (props) => {
     dispatch(imgActions.setInitialState());
     dispatch(imgActions.setFile([file]));
     setFileUrl(imageUrl);
+  };
+
+  const [water, setWater] = useState(false);
+  const [feed, setFeed] = useState(false);
+  const [snack, setSnack] = useState(false);
+
+  const [diary, setDiary] = useState('');
+  const $diary = (e) => {
+    setDiary(e.target.value);
+  };
+
+  const [tag, setTag] = useState('');
+  const $tag = (e) => {
+    setTag(e.target.value);
+  };
+
+  const latitude = 0;
+  const longitude = 0;
+
+  const createBtn = () => {
+    dispatch(
+      __createCatDetailInfo(
+        water,
+        feed,
+        snack,
+        diary,
+        [tag],
+        latitude,
+        longitude,
+      ),
+    );
   };
 
   return (
@@ -80,20 +113,42 @@ const CatDetailInfoWrite = (props) => {
         width="90%"
       >
         <CheckGrid>
-          <CheckBox type="checkbox" value="water" onClick={changeWorks} />
+          <CheckBox
+            type="checkbox"
+            value="water"
+            onChange={(e) => {
+              setWater(e.target.checked);
+              console.log(e.target.checked);
+            }}
+          />
           <CheckText>급수</CheckText>
         </CheckGrid>
         <CheckGrid>
-          <CheckBox type="checkbox" value="feed" onClick={changeWorks} />
+          <CheckBox
+            type="checkbox"
+            value="feed"
+            onChange={(e) => {
+              setFeed(e.target.checked);
+              console.log(e.target.checked);
+            }}
+          />
           <CheckText>사료</CheckText>
         </CheckGrid>
         <CheckGrid>
-          <CheckBox type="checkbox" value="treat" onClick={changeWorks} />
+          <CheckBox
+            type="checkbox"
+            value="treat"
+            onChange={(e) => {
+              setSnack(e.target.checked);
+              console.log(e.target.checked);
+            }}
+          />
           <CheckText>간식</CheckText>
         </CheckGrid>
       </Grid>
 
       <TextArea
+        changeEvent={$diary}
         margin="3% auto"
         width="85%"
         type="text"
@@ -107,6 +162,7 @@ const CatDetailInfoWrite = (props) => {
       />
 
       <TextArea
+        changeEvent={$tag}
         margin="3% auto"
         width="85%"
         height="50px"
@@ -121,6 +177,7 @@ const CatDetailInfoWrite = (props) => {
       />
 
       <Button
+        clickEvent={createBtn}
         width="120px"
         margin="2% auto"
         color="white"

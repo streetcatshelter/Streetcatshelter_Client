@@ -50,15 +50,52 @@ export const __createCatInfo = (
 };
 
 // Cat 상세 정보 작성
-export const _catDetailInfoCreate =
-  () =>
+export const __createCatDetailInfo =
+  (catId, newPost) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.catDetailCreate();
+      const { data } = await catApi.createCatDetail(catId, newPost);
+      dispatch(createCatDetailInfo(data));
     } catch (err) {
       console.error(err);
     }
   };
+
+// export const __createCatDetailInfo = (
+//   catId,   water,feed,snack, diary, catTags, latitude, longitude
+// ) => {
+//   return function (dispatch, getState, { history }) {
+//     const imgFile = getState().image.file;
+//     if (imgFile.length) {
+//       dispatch(
+//         imgActions.uploadImageDB(() => {
+//           const imageUrl = getState().image.imageUrl;
+
+//           const catInfo = {
+//             catImage: imageUrl,
+//             catName: catName,
+//             catTag: catTag,
+//             latitude: latitude,
+//             location: location,
+//             longitude: longitude,
+//             neutering: neutering,
+//             username: username,
+//           };
+//           instance
+//             .post('/cat/create', catInfo)
+//             .then((res) => {
+//               dispatch(createCatInfo(catInfo));
+//               dispatch(imgActions.setInitialState());
+//               history.push('/');
+//             })
+//             .catch((err) => {
+//               console.error(err);
+//             });
+//         }),
+//       );
+//     }
+//   };
+// };
 
 // Cat 댓글 생성
 export const _catCommentCreate =
@@ -72,30 +109,16 @@ export const _catCommentCreate =
   };
 
 // Cat 즐겨찾기
-export const _catFavorite =
-  () =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const { data } = await catApi.catFavorite();
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
 // GET ✅
 // 지역에 따라 cat 가져오기 ✅
-export const __getcatLocation =
-  (location, limit = 10) =>
+export const __getCatLocation =
+  (location, page = 1, size = 10) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.getCatLocation();
-      // let catPostList = data.data;
-      // if (catPostList.length < limit + 1) {
-      //   dispatch(getCatLocation(catPostList, null));
-      //   return;
-      // }
-      console.log(data);
-      dispatch(getCatLocation(data.data, limit));
+      const { data } = await catApi.getCatLocation(location, page, size);
+      // console.log(data);
+      dispatch(getCatLocation(data.content));
     } catch (err) {
       console.error(err);
     }
@@ -119,6 +142,7 @@ export const __getcatLocation =
 
 const initialState = {
   list: [],
+  details: [],
   page: 0,
   start: 0,
 };
@@ -128,25 +152,24 @@ const cat = createSlice({
   initialState,
   reducers: {
     createCatInfo: (state, action) => {
-      const image = action.payload.imageUrl;
-      const catName = action.payload.catName;
-      const catTag = action.payload.catTag;
-      const latitude = action.payload.latitude;
-      const location = action.payload.location;
-      const longitude = action.payload.longitude;
-      const neutering = action.payload.neutering;
-      const username = action.payload.username;
-      state.list.push(
-        image,
-        catName,
-        catTag,
-        latitude,
-        location,
-        longitude,
-        neutering,
-        username,
-      );
-      console.log(action.payload);
+      const catInfo = {
+        image: action.payload.catImage,
+        catName: action.payload.catName,
+        catTag: action.payload.catTag,
+        latitude: action.payload.latitude,
+        location: action.payload.location,
+        longitude: action.payload.longitude,
+        neutering: action.payload.neutering,
+        username: action.payload.username,
+      };
+      state.list.push(catInfo);
+    },
+
+    createCatDetailInfo: (state, action) => {
+      const detailInfo = {
+        image: action.payload.catImage,
+      };
+      state.details.push(detailInfo);
     },
 
     getCatLocation: (state, action) => {
@@ -155,6 +178,7 @@ const cat = createSlice({
   },
 });
 
-export const { createCatInfo, getCatLocation } = cat.actions;
+export const { createCatInfo, createCatDetailInfo, getCatLocation } =
+  cat.actions;
 
 export default cat;

@@ -22,49 +22,35 @@ import { getOneCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } fr
 
 const CommentList = (props) => {
   const path = useLocation();
-  console.log(path);
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
-  let communityId = community.id;
 
+  let communityId = props.props.match.params.communityId;
   if (path.pathname === '/catdetail') {
     communityId = 1
   } else {
-    communityId = community.id;
+    communityId = props.props.match.params.communityId;
   }
 
   const [comments, setComment] = React.useState('');
 
   const commentList = community.commentList;
 
-  React.useEffect(() => {
-    if (path.pathname === `/communitypostdetail/${communityId}`) {
-      dispatch(getOneCommunityDB(communityId));
-    } else {
-      console.log('캣 가져오기');
-      console.log(path.pathname)
-    }
-  }, []);
-
   const $comment = (event) => {
     setComment(event.target.value);
   };
 
-  console.log(path)
-  console.log(comments)
-  console.log(communityId)
   const addCommentBtn = () => {
     if (path.pathname === `/communitypostdetail/${communityId}`) {
     dispatch(addCommunityCommentDB(comments, communityId));
     } else {
       console.log('캣 댓글 추가');
-      console.log(path.pathname);
     }
   };
 
   return (
     <>
-      <Comment />
+      <Comment/>
       <Grid
         width="85%"
         margin="0 auto"
@@ -103,7 +89,7 @@ const CommentList = (props) => {
         })}
 
 
-      <Button width="100%">더보기</Button>
+      {/* <Button width="100%">더보기</Button> */}
     </>
   );
 };

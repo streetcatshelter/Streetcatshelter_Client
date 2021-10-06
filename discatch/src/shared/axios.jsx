@@ -2,20 +2,22 @@
 import axios from 'axios';
 
 // FUNCTION
-import { getToken } from './token';
+import { getToken, setToken } from './token';
 
 axios.defaults.withCredentials = true;
 
 const instance = axios.create({
   baseURL: 'http://52.78.241.50/',
-  // baseURL: "http://cc60-175-123-124-9.ngrok.io",
 });
+
+setToken('');
 
 instance.interceptors.request.use((config) => {
   config.headers['Content-Type'] = 'application/json; charset=utf-8';
   config.headers['X-Requested-With'] = 'XMLHttpRequest';
   config.headers['Accept'] = '*/*';
-  config.headers['Authorization'] = getToken();
+  // config.headers['Authorization'] = getToken();
+  config.headers['Authorization'] = `Bearer ${getToken()}`;
   return config;
 });
 
@@ -45,5 +47,25 @@ export const catApi = {
 
   catFavorite: () => instance.post('cat/favorite'),
 };
+
+export const communityApi = {
+  createCommunity: (postInfo) => instance.post('/community/create', postInfo),
+  getCommunity: (category, location, limit) => 
+    instance.get(`/community/category/${category}?page=1&size=${limit}&location=${location}`),
+  getMoreCommunity: (category, start, limit, location) => 
+    instance.get(`/community/category/${category}?page=${start+1}&size=${limit}&location=${location}`),
+  getDetailCommunity: (communityId) => instance.get(`/community/${communityId}`),
+  updateCommunity: (category, editcontents, editImageList, location, editTitle, username, communityId) => instance.put(`/community/${communityId}`, {
+    category: category,
+    contents: editcontents,
+    image: editImageList,
+    location:location,
+    title: editTitle,
+    username: username,
+  }),
+  deleteCommunity: (communityId) => instance.delete(`/community/${communityId}`),
+  createCommunityComment: (contents, communityId) => instance.post(`/community/comment/${communityId}`, { contents }),
+  deleteCommunityComment: (communityId) => instance.delete(`/community/comment/${communityId}`),
+}
 
 export default instance;

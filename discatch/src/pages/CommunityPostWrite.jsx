@@ -24,6 +24,10 @@ import { Camera } from "react-feather";
 import { history } from "../redux/configureStore";
 
 const CommunityPostWrite = (props) => {
+  const path = useLocation();
+  const pathName = path.pathname.split('/');
+  const backPath = `/${pathName[1]}/${pathName[2]}`
+  console.log(backPath);
   const preview = useSelector((state) => state.image.preview ? state.image.preview : Array())
   const dispatch = useDispatch();
   
@@ -315,7 +319,7 @@ const CommunityPostWrite = (props) => {
               fontSize="14px"
               fontWeight="bold"
               bgColor="D_yellow"
-              onClick={() => history.goBack()}
+              onClick={() => window.location.replace(`${backPath}`)}
               addstyle={() => {
                 return css`
                   display: flex;

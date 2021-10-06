@@ -22,7 +22,6 @@ const CommentCard = ({ comment }) => {
   // username >> community.commentList.username에서 받아오기
   const userName = 'test2';
   const username = 'test2';
-  console.log(comment.createdAt)
 
   const deleteBtn = () => {
     dispatch(deleteCommunityCommentDB(commentId));

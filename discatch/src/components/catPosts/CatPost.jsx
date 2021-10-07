@@ -1,14 +1,13 @@
+/* eslint-disable */
 // library
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { css } from 'styled-components';
 
 // element
-import { Grid, Text, Image } from '../../elements';
+import { Grid, Text, Image, Button } from '../../elements';
 
-// icon
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// component
+import { Like } from '..';
 
 // redux
 import { history } from '../../redux/configureStore';
@@ -16,9 +15,9 @@ import { history } from '../../redux/configureStore';
 // style
 import { flexBox } from '../../shared/style';
 
-const CatPost = (props) => {
-  const path = useLocation().pathname;
-  // console.log(props.catTagList.tag);
+const CatPost = (cat) => {
+  // console.log(cat);
+  const catId = cat.catId;
 
   return (
     <React.Fragment>
@@ -27,13 +26,11 @@ const CatPost = (props) => {
         bgColor="diaryColor"
         display="flex"
         padding="8px"
-        clickEvent={() => {
-          history.push('/catdetail');
-        }}
+        alignItems="center"
         cursor="pointer"
       >
-        <Image src={props.catImage} borderRadius="10px" />
-        <Grid padding="6px">
+        <Image src={cat.catImage} borderRadius="10px" />
+        <Grid padding="6px" alignItems="center">
           <Grid
             height="auto"
             addstyle={() => {
@@ -43,37 +40,45 @@ const CatPost = (props) => {
             }}
           >
             <Text fontWeight="bold" size="12px">
-              {props.catName}
-            </Text>{' '}
-            <Text fontWeight="bold" size="12px" width="45%">
-              중성화: {props.neutering}
+              {cat.catName}
             </Text>
-            {path === '/catdetail' ? (
-              <FavoriteIcon
-                style={{
-                  color: 'red',
-                  // position: 'relative',
-                  // bottom: '3px',
-                  // right: '-20%',
+            <Text fontWeight="bold" size="12px" margin="0 5% 0 0" width="45%">
+              중성화: {cat.neutering}
+            </Text>
+
+            {catId === catId ? <Like /> : null}
+          </Grid>
+          {cat.catTagList ? (
+            <Grid
+              margin="2% 0 0 0"
+              addstyle={() => {
+                return css`
+                  ${flexBox('space-between')}
+                `;
+              }}
+            >
+              {cat.catTagList.map((tag, idx) => {
+                return (
+                  <Text key={idx} size="12px" fontWeight="bold">
+                    #{tag.tag}
+                  </Text>
+                );
+              })}
+
+              <Button
+                clickEvent={() => {
+                  history.push({
+                    pathname: `/catdetail/${catId}`,
+                  });
                 }}
-              />
-            ) : null}
-          </Grid>
-          <Grid
-            margin="2% 0 0 0"
-            addstyle={() => {
-              return css`
-                ${flexBox('space-between')}
-              `;
-            }}
-          >
-            <Text size="12px" fontWeight="bold">
-              #태그 #태그2{}
-            </Text>
-            <Text size="10px" fontWeight="bold" width="45%">
-              {props.createdAt}
-            </Text>
-          </Grid>
+                fontWeight="bold"
+                padding="0"
+                bgColor="diaryColor"
+              >
+                자세히보기
+              </Button>
+            </Grid>
+          ) : null}
         </Grid>
       </Grid>
     </React.Fragment>

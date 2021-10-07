@@ -1,8 +1,9 @@
 // library
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // component
-import { CatPostList, Template } from '../components';
+import { Template, CatPost } from '../components';
 
 // element
 import { Button } from '../elements';
@@ -13,11 +14,28 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 // redux
 import { history } from '../redux/configureStore';
+import { __getCatLocation } from '../redux/modules/cat';
 
 const Home = (props) => {
+  const dispatch = useDispatch();
+  const location = '망원동';
+
+  const catList = useSelector((state) => state.cat.list);
+
+  React.useEffect(() => {
+    dispatch(__getCatLocation(location));
+  }, []);
+
   return (
     <Template props={props}>
-      <CatPostList />
+      {catList.length ? (
+        catList.map((cat, idx) => {
+          return <CatPost key={idx} {...cat} />;
+        })
+      ) : (
+        <></>
+      )}
+
       <Button
         is_float="is_float"
         clickEvent={() => {

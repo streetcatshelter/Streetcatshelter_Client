@@ -28,13 +28,13 @@ import CalendarModal from './calendar/CalendarModal';
 
 /* catposts */
 import CatPost from './catPosts/CatPost';
-import CatPostList from './catPosts/CatPostList';
 import CatPostDetail from './catPosts/CatPostDetail';
 import CatCalendar from './catPosts/CatCalendar';
 import CatDiary from './catPosts/CatDiary';
 import CatGallery from './catPosts/CatGallery';
 import Diary from './catPosts/Diary';
 import Gallery from './catPosts/Gallery';
+import Like from './catPosts/Like';
 
 /* comments */
 import Comment from './comment/Comment';
@@ -48,8 +48,8 @@ import CommunityPost from './community/CommunityPost';
 import Location from './map/Location';
 
 /* chat */
-import ChatBoxs from "./chat/ChatBoxs";
-import ChatWrite from "./chat/ChatWrite";
+import ChatBoxs from './chat/ChatBoxs';
+import ChatWrite from './chat/ChatWrite';
 export {
   /* ==Templates */
   Router,
@@ -77,13 +77,13 @@ export {
   CalendarModal,
   /* ==catposts */
   CatPost,
-  CatPostList,
   CatPostDetail,
   CatCalendar,
   CatDiary,
   CatGallery,
   Diary,
   Gallery,
+  Like,
   /* ==comments */
   Comment,
   CommentList,

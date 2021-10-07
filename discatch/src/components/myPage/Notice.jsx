@@ -1,33 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 /* == Library - style */
 import styled from "styled-components";
 
+import { useDispatch } from "react-redux";
+import { mypageActions } from "../../redux/modules/mypage";
+
 const Notice = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(mypageActions._setNotice());
+  }, []);
   return (
     <Wrapper>
       <Content>
         <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>회원 탈퇴 방법 </p>
         <span>2021-09-10</span>
       </Content>
     </Wrapper>

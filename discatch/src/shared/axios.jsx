@@ -10,7 +10,9 @@ const instance = axios.create({
   baseURL: "http://52.78.241.50/",
 });
 
-setToken("");
+setToken(
+  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTMyNjIyMDczIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTYzMzYyNjk3N30.kGsYlH7Rs5KbFwRuwmTCY3F6gpTqnrfHXJwduNqw_GM"
+);
 
 instance.interceptors.request.use((config) => {
   config.headers["Content-Type"] = "application/json; charset=utf-8";
@@ -22,7 +24,9 @@ instance.interceptors.request.use((config) => {
 });
 
 export const userApi = {};
-
+export const myPageApi = {
+  getNotice: () => instance.get("/mypage/notice"),
+};
 export const catApi = {
   getCatLocation: (location, page, size) =>
     instance.get(`/cat/${location}?page=${page}&size=${size}`),

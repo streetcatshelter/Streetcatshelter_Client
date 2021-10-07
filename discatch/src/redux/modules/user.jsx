@@ -1,12 +1,14 @@
 // LIBRARY
 import { createSlice } from "@reduxjs/toolkit";
-import { loginApi } from "../../shared/axios";
+import { userApi } from "../../shared/axios";
 
 const _loginKakao =
-  () =>
+  (authorization_code) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await loginApi.getKakao();
+      // const { data } = await userApi.getKakao(authorization_code);
+      console.log(authorization_code);
+      history.push("/");
     } catch (e) {
       console.log(e);
       window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
@@ -14,29 +16,29 @@ const _loginKakao =
     }
   };
 
-const _loginNaver =
-  () =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const { data } = await loginApi.getNaver();
-    } catch (e) {
-      console.log(e);
-      window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
-      history.push("/login");
-    }
-  };
+// const _loginNaver =
+//   () =>
+//   async (dispatch, getState, { history }) => {
+//     try {
+//       const { data } = await loginApi.getNaver();
+//     } catch (e) {
+//       console.log(e);
+//       window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
+//       history.push("/login");
+//     }
+//   };
 
-const _loginGoogle =
-  () =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const { data } = await loginApi.getGoogle();
-    } catch (e) {
-      console.log(e);
-      window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
-      history.push("/login");
-    }
-  };
+// const _loginGoogle =
+//   () =>
+//   async (dispatch, getState, { history }) => {
+//     try {
+//       const { data } = await loginApi.getGoogle();
+//     } catch (e) {
+//       console.log(e);
+//       window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
+//       history.push("/login");
+//     }
+//   };
 
 const initialState = {
   list: [],
@@ -55,9 +57,7 @@ const user = createSlice({
 });
 
 export const userActions = {
-  _loginGoogle,
   _loginKakao,
-  _loginNaver,
 };
 
 export default user;

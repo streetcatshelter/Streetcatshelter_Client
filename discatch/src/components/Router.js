@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
 // import Auth from "../shared/auth";
 /* == Pages */
 import {
@@ -21,10 +21,11 @@ import {
   Login,
   Map,
   Chat,
-} from '../pages';
+  LoginRedirect,
+} from "../pages";
 
 // 배포 시 해당 라우트 삭제 예정
-import test from '../pages/test';
+import test from "../pages/test";
 
 // * == ( Router ) -------------------- * //
 const Router = () => {
@@ -34,13 +35,14 @@ const Router = () => {
       <Route path="/slider" exact component={Slider} />
       <Route path="/mypage" exact component={MyPage} />
       <Route path="/login" exact component={Login} />
-
+      <Route path="/user/kakao/callback" exact component={LoginRedirect} />
       {/* <Route path="/login" component={Auth(Login, false)} exact /> */}
       {/* <Route
         path="/user/kakao/callback"
         component={Auth(LoginRedirect, false)}
         exact
       /> */}
+
       <Route path="/userinfowrite" exact component={UserInfoWrite} />
       <Route path="/userinfoedit" exact component={UserInfoWrite} />
       <Route path="/catinfowrite" exact component={CatInfoWrite} />
@@ -86,7 +88,7 @@ const Router = () => {
       <Route path="/map" exact component={Map} />
       <Route path="/chat" exact component={Chat} />
       <Route path="/test" exact component={test} />
-      <Route path={'*'} exact component={NotFound} />
+      <Route path={"*"} exact component={NotFound} />
     </Switch>
   );
 };

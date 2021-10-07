@@ -13,13 +13,20 @@ import { useLocation } from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // REDUX
-import { getCommunityDB } from '../../redux/modules/community';
+import { communityLikeToggleDB } from '../../redux/modules/community';
 
 const Comment = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
+
   const community = useSelector((state) => state.community.list);
   const communityId = community.id;
+
+  const userLike = community.liked;
+
+  const updateLikes = () => {
+      dispatch(communityLikeToggleDB(communityId));
+  };
 
   return (
     <Grid
@@ -60,13 +67,17 @@ const Comment = (props) => {
             `;
           }}
         >
-          <Grid
-            clickEvent={()=>alert('좋아요!')}
-          >
-          <FavoriteIcon style={{color:'red', position:'relative', bottom:'2px'}}/>
+          <Grid>
+          <FavoriteIcon
+            onClick={updateLikes}
+            style={{
+              color: userLike ? 'red' : 'gray',
+              position:'relative',
+              bottom:'2px'}}
+          />
           </Grid>
           <Text fontWeight="bold" margin="0 0 0 -25px" width="32px">
-            {community.cntLikeIt}
+            {community.cntLikeit}
           </Text>
         </Grid>
       </Grid>}

@@ -13,17 +13,15 @@ import { MessageCircle, Eye } from "react-feather";
 // REDUX
 import { history } from "../../redux/configureStore";
 
-const CommunityPost = ({community, category}) => {
-  // console.log(community);
-  const communityId = community.id
+const CommunityPost = ({community}) => {
+  const communityId = community.communityId
   return (
     <Grid height="30px">
       <CommunityPostStyle>
-        <Grid clickEvent={()=>history.push({
-              pathname: `/communitypostdetail/${communityId}`,
-              category: category,
-              community: community,
-            })} >
+        <Grid 
+          clickEvent={()=>
+            history.push(`/communitypostdetail/${communityId}`
+            )}>
             <Grid 
             addstyle={() => {
               return css`
@@ -46,10 +44,10 @@ const CommunityPost = ({community, category}) => {
                   `;
                 }}/>
             <Text margin="4px" fontWeight={'bold'}>
-            {community.username}
+            {community.nickname}
             </Text>
-            <Text size="10px" margin="0 10px 0 165px">
-            {community.createdAt}
+            <Text size="10px" margin="0 10px 0 60vw" fontWeight={'bold'}>
+            {community.createdAt[0]}.{community.createdAt[1]}.{community.createdAt[2]} {community.createdAt[3]}시 {community.createdAt[4]}분
             </Text>
             </Grid>
         </Grid>
@@ -114,7 +112,7 @@ const CommunityPost = ({community, category}) => {
               }}>
                 <FavoriteIcon style={{width:'13px', margin:'-4px 3px 0 0', color:'red'}}/>
                 <Text size={'12px'} fontWeight={'bold'}>
-                {community.cntLikeIt}
+                {community.cntLikeit}
                 </Text>
               </Grid>
               </Grid>

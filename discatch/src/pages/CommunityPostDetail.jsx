@@ -12,19 +12,17 @@ import styled, { css } from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
 
 // REDUX
-import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
+import community, { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
 
 // ROUTE
 import { useLocation } from 'react-router-dom';
 
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
-  
   const communityId = props.match.params.communityId;
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, []);
-
   const { category, contents, imageList, location, title, username, createdAt } = useSelector((state) => ({
     category: state.community.list.category,
     contents: state.community.list.contents,
@@ -34,7 +32,6 @@ const CommunityPostDetail = (props) => {
     username: state.community.list.username,
     createdAt: state.community.list.createdAt,
   }));
-
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category));
   };

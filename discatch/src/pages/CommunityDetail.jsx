@@ -33,7 +33,6 @@ const CommunityDetail = (props) => {
   const location = "망원동";
     // const currentLocation = useSelector((state) => state.map.keywordList[0]);
 
-
   const path = useLocation();
   let category = null;
   if (path.pathname === "/community/catinfo") {
@@ -48,8 +47,7 @@ const CommunityDetail = (props) => {
     dispatch(getMoreCommunityDB(category, location));
   };
 
-  const communityList = useSelector((state) => state.community.list);
-  console.log(query);
+  const communityList = useSelector((state) => state.community.list)
 
   React.useEffect(() => {
     if (!query) dispatch(getCommunityDB(category, location));
@@ -110,14 +108,14 @@ const CommunityDetail = (props) => {
               `;
             }}>
 
-          {communityList.length ? (
+          {communityList?.length ? (
             communityList.map((community, idx) => {
               return (
                 <InfinityScroll
                   next={getMoreCommunity}
                   index={idx}
                   length={communityList.length}
-                  key={community.id}
+                  key={community.communityId}
                 >
                   <CommunityPost community={community} />
                 </InfinityScroll>

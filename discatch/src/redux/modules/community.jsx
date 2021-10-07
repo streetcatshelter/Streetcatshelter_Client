@@ -1,6 +1,6 @@
 // LIBRARY
 import { createSlice } from '@reduxjs/toolkit';
-import instance from '../../shared/axios';
+import instance, { communityApi } from '../../shared/axios';
 
 // REDUX
 import { imgActions } from './image';
@@ -18,7 +18,6 @@ export const addCommunityDB = (category, contents, location, title) => {
     } else {
       pathName = 'sharing'
     }
-
     // const username = getState().user; // 나중에 가져오기
     const username = '뽀삐맘';
     if (imgFile.length<6) {
@@ -55,64 +54,57 @@ export const addCommunityDB = (category, contents, location, title) => {
 };
 
 // 커뮤니티 글 가져오기
-export const getCommunityDB = (category, location, limit = 5) => {
-  return function (dispatch, getState, { history }) {
-    instance
-      .get(`/community/category/${category}?page=1&size=${limit}&location=${location}`)
-      .then((res) => {
-        let communityList = res.data;
+export const getCommunityDB = (category, location, limit = 5) => 
+  async (dispatch, getState, { history }) => {
+    try {
+      const data = await communityApi.getCommunity(category, location, limit);
+      let communityList = data.data;
         if (communityList.length < limit + 1) {
           dispatch(getCommunity(communityList, null));
           return;
         }
         dispatch(getCommunity(communityList, limit));
-      })
-      .catch((err) => {
+      } catch (err) {
         window.alert('페이지에 오류가 있어요!');
-        console.log(err);
-      });
-  };
+        console.error(err);
+      }
 };
 
-export const getMoreCommunityDB = (category, location, limit = 6) => {
-  return function (dispatch, getState, { history }) {
+export const getMoreCommunityDB = (category, location, limit = 6) => 
+  async (dispatch, getState, { history }) => {
     let start = getState().community.start;
+
     if (start === null) {
       return;
     } else {
       start += 1;
     }
-    instance
-      .get(`/community/category/${category}?page=${start+1}&size=${limit}&location=${location}`)
-      .then((res) => {
-        const communityList = res.data;
+    try {
+      const data = await communityApi.getMoreCommunity(category, start, limit, location);
+      const communityList = data.data;
         if (communityList.length < limit + 1) {
           dispatch(getMoreCommunity(communityList, null));
           return;
         }
         communityList.content.pop();
         dispatch(getMoreCommunity(communityList, start + limit));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    } catch (err) {
+      console.error(err);
+    }
   };
-};
-
 
 // 커뮤니티 상세 가져오기
-export const getOneCommunityDB = (communityId = '') => {
-  return function (dispatch, getState, { history }) {
-    instance
-      .get(`/community/${communityId}`)
-      .then((res) => {
-        let detailCommunity = res.data;
-        dispatch(getOneCommunity(detailCommunity));
-      })
-      .catch((err) => {
+export const getOneCommunityDB = (communityId = '') => 
+  async (dispatch, getState, { history }) => {
+    try {
+      const data = await communityApi.getDetailCommunity(communityId);
+      let detailCommunity = data.data.community; // 딕셔너리
+      let liked = data.data.liked;
+      detailCommunity['liked'] = liked;
+      dispatch(getOneCommunity(detailCommunity));
+      } catch (err) {
         console.error(err);
-      });
-  };
+      }
 };
 
 // 커뮤니티 수정
@@ -169,8 +161,8 @@ export const editCommunityDB = (communityId, category, editcontents, location, e
 };
 
 // 커뮤니티 글 삭제
-export const deleteCommunityDB = (communityId, category) => {
-  return function (dispatch, getState, { history }) {
+export const deleteCommunityDB = (communityId, category) => 
+  async (dispatch, getState, { history }) => {
     const path = category.split(' ');
     let pathName = null
     if (path.length === 2) {
@@ -180,52 +172,71 @@ export const deleteCommunityDB = (communityId, category) => {
     } else {
       pathName = 'sharing'
     }
-    instance
-      .delete(`/community/${communityId}`)
-      .then((res) => {
-        dispatch(deleteCommunity(communityId));
-        window.alert('게시물 삭제 완료!');
-        history.push(`/community/${pathName}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    try {
+      const data = await communityApi.deleteCommunity(communityId);
+      dispatch(deleteCommunity(communityId));
+      window.alert('게시물 삭제 완료!');
+      history.push(`/community/${pathName}`);
+    } catch (err) {
+      console.error(err);
+    }
 };
 
+// 커뮤니티 댓글 작성 (확인 필요)
+// export const addCommunityCommentDB = (contents, communityId) => {
+//   return function (dispatch, getState, { history }) {
+//     // const username = '뽀삐맘'; // 수정 필요
+//     console.log(communityId)
+//     // const username = getState().user; // 나중에 가져오기
+//     instance
+//       .post(`/community/comment/${communityId}`, { contents })
+//       .then((res) => {
+//         dispatch(addCommunityComment({ contents }));
+//         window.location.reload();
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//       });
+//   };
+// };
+
 // 커뮤니티 댓글 작성
-export const addCommunityCommentDB = (contents, communityId) => {
-  return function (dispatch, getState, { history }) {
-    const username = '뽀삐맘'; // 수정 필요
-    console.log(communityId)
-    // const username = getState().user; // 나중에 가져오기
-    instance
-      .post(`/community/comment/${communityId}`, { contents, username })
-      .then((res) => {
-        dispatch(addCommunityComment({ contents, username }));
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+export const addCommunityCommentDB = (contents, communityId) => 
+  async (dispatch, getState, { history }) => {
+    try {
+      const data = await communityApi.createCommunityComment(contents, communityId);
+      dispatch(addCommunityComment({ contents }));
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+    }
 };
 
 // 커뮤니티 댓글 삭제
-export const deleteCommunityCommentDB = (communityId) => {
-  return function (dispatch, getState, { history }) {
-    instance
-      .delete(`/community/comment/${communityId}`)
-      .then((res) => {
-        dispatch(deleteCommunityComment(communityId));
-        window.location.reload();
-        window.alert('댓글을 삭제했습니다.');
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+export const deleteCommunityCommentDB = (communityId) => 
+  async (dispatch, getState, { history }) => {
+    try {
+      const data = await communityApi.deleteCommunityComment(communityId);
+      window.location.reload();
+      window.alert('댓글을 삭제했습니다.');
+    } catch (err) {
+      console.error(err);
+    }
 };
+
+// 커뮤니티 글 좋아요
+export const communityLikeToggleDB = (communityId) => {
+  return function (dispatch, getState, {history}) {
+      instance
+        .post(`/community/likeit/${communityId}`)
+        .then((res) => {
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  }
+}
 
 const initialState = {
   list: [],
@@ -249,15 +260,14 @@ const community = createSlice({
     },
 
     getCommunity: (state, action) => {
-      state.list = action.payload.content;
-      state.start = action.payload.number;
+      state.list = action.payload;
     },
 
     getMoreCommunity: (state, action) => {
       return {
         ...state,
-        list: [...state.list, ...action.payload.content],
-        start: action.payload.number,
+        list: [...state.list, ...action.payload],
+        start: state.start+1,
       };
     },
 

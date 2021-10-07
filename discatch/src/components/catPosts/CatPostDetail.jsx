@@ -1,14 +1,28 @@
 // library
 import React, { useState } from 'react';
 import { css } from 'styled-components';
+import { useLocation } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
 // element
-import { Grid, Button } from '../../elements';
+import { Grid, Button, Text, Image } from '../../elements';
 
 // component
 import { CatPost, CatCalendar, CatDiary, CatGallery } from '..';
 
+// redux
+import { history } from '../../redux/configureStore';
+import { __getCatCalendar } from '../../redux/modules/cat';
+
+// Icon
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+// style
+import { flexBox } from '../../shared/style';
+
 const CatPostDetail = () => {
+  const dispatch = useDispatch();
+  const path = useLocation().pathname;
   const [menu, setMenu] = useState('캘린더');
 
   return (

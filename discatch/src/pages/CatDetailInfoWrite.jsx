@@ -1,13 +1,13 @@
 // library
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
 // component
 import { Template } from '../components';
 
 // element
-import { Grid, TextArea, Button, Input, Image } from '../elements';
+import { Grid, TextArea, Button, Input, Image, Text } from '../elements';
 
 // style
 import { flexBox } from '../shared/style';
@@ -25,33 +25,42 @@ const CatDetailInfoWrite = (props) => {
   //   setWorks([...works, e.target.value]);
   // };
   // console.log(works);
-
   const dispatch = useDispatch();
 
-  const [fileUrl, setFileUrl] = useState(null);
+  const catId = useSelector((state) => state.cat.list[0].catId);
+  console.log(catId);
+
+  const preview = useSelector((state) =>
+    state.image.preview ? state.image.preview : Array(),
+  );
+  const [fileNum, setFileNum] = useState(0);
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();
-    const file = e.target.files[0];
-    const imageUrl = URL.createObjectURL(file);
-    dispatch(imgActions.setInitialState());
-    dispatch(imgActions.setFile([file]));
-    setFileUrl(imageUrl);
+    if (fileNum < 3) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      dispatch(imgActions.setPreview(imageUrl));
+      dispatch(imgActions.setFile([file]));
+      setFileNum(fileNum + 1);
+    } else {
+      alert('사진은 최대 3장까지 등록할 수 있어요!');
+    }
   };
 
-  const [water, setWater] = useState(false);
-  const [feed, setFeed] = useState(false);
-  const [snack, setSnack] = useState(false);
+  const [tag, setTag] = useState('');
+  const $tag = (e) => {
+    setTag([e.target.value]);
+  };
 
   const [diary, setDiary] = useState('');
   const $diary = (e) => {
     setDiary(e.target.value);
   };
 
-  const [tag, setTag] = useState('');
-  const $tag = (e) => {
-    setTag(e.target.value);
-  };
+  const [food, setFood] = useState(false);
+  const [snack, setSnack] = useState(false);
+  const [water, setWater] = useState(false);
 
   const latitude = 0;
   const longitude = 0;
@@ -59,22 +68,23 @@ const CatDetailInfoWrite = (props) => {
   const createBtn = () => {
     dispatch(
       __createCatDetailInfo(
-        water,
-        feed,
-        snack,
+        tag,
         diary,
-        [tag],
+        food,
         latitude,
         longitude,
+        snack,
+        water,
+        catId,
       ),
     );
   };
 
   return (
     <Template props={props}>
-      <Grid width="80%" bgColor="lightGray" padding="12px" margin="5% auto">
+      <Grid width="70%" bgColor="lightGray" padding="12px" margin="5% auto">
         <label htmlFor="imgFile">
-          <Camera width="100%" height="100" color="white" />
+          <Camera width="100%" height="80" color="white" />
         </label>
 
         <Input
@@ -91,7 +101,51 @@ const CatDetailInfoWrite = (props) => {
         />
       </Grid>
 
-      {fileUrl && (
+      <Grid
+        padding="14px"
+        addstyle={() => {
+          return css`
+            ${flexBox('space-between')}
+          `;
+        }}
+      >
+        {preview && preview[0] && (
+          <Grid width="100px">
+            <Image
+              borderRadius="10px"
+              src={preview[0]}
+              width="100px"
+              height="100px"
+            />
+          </Grid>
+        )}
+
+        {preview && preview[1] && (
+          <Grid width="100px">
+            <Image
+              borderRadius="10px"
+              src={preview[1]}
+              width="100px"
+              height="100px"
+            />
+          </Grid>
+        )}
+
+        {preview && preview[2] && (
+          <Grid width="100px">
+            <Image
+              borderRadius="10px"
+              src={preview[2]}
+              width="100px"
+              height="100px"
+            />
+          </Grid>
+        )}
+      </Grid>
+
+      <Text margin="0 auto 3% auto">{fileNum}/3</Text>
+
+      {/* {fileUrl && (
         <Grid
           width="60%"
           height="200px"
@@ -104,7 +158,7 @@ const CatDetailInfoWrite = (props) => {
         >
           <Image src={fileUrl} width="100%" height="100%" />
         </Grid>
-      )}
+      )} */}
 
       <Grid
         display="flex"
@@ -115,25 +169,15 @@ const CatDetailInfoWrite = (props) => {
         <CheckGrid>
           <CheckBox
             type="checkbox"
-            value="water"
-            onChange={(e) => {
-              setWater(e.target.checked);
-              console.log(e.target.checked);
-            }}
-          />
-          <CheckText>급수</CheckText>
-        </CheckGrid>
-        <CheckGrid>
-          <CheckBox
-            type="checkbox"
             value="feed"
             onChange={(e) => {
-              setFeed(e.target.checked);
+              setFood(e.target.checked);
               console.log(e.target.checked);
             }}
           />
           <CheckText>사료</CheckText>
         </CheckGrid>
+
         <CheckGrid>
           <CheckBox
             type="checkbox"
@@ -145,6 +189,17 @@ const CatDetailInfoWrite = (props) => {
           />
           <CheckText>간식</CheckText>
         </CheckGrid>
+        <CheckGrid>
+          <CheckBox
+            type="checkbox"
+            value="water"
+            onChange={(e) => {
+              setWater(e.target.checked);
+              console.log(e.target.checked);
+            }}
+          />
+          <CheckText>급수</CheckText>
+        </CheckGrid>
       </Grid>
 
       <TextArea
@@ -152,14 +207,14 @@ const CatDetailInfoWrite = (props) => {
         margin="3% auto"
         width="85%"
         type="text"
-        placeholder="일기를 입력해주세요. "
+        placeholder="일기를 입력해주세요."
         addstyle={() => {
           return css`
             border: 2px solid rgb(${(props) => props.theme.palette.olive});
             border-radius: 10px;
           `;
         }}
-      />
+      ></TextArea>
 
       <TextArea
         changeEvent={$tag}
@@ -174,7 +229,7 @@ const CatDetailInfoWrite = (props) => {
             border-radius: 10px;
           `;
         }}
-      />
+      ></TextArea>
 
       <Button
         clickEvent={createBtn}

@@ -10,7 +10,7 @@ const instance = axios.create({
   baseURL: 'http://52.78.241.50/',
 });
 
-setToken('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTI5ODgwMjgyIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTYzMzYyMDAzOX0.PzaoVZnmGQxwqs9v4q_ZaXpoe6_Q1sKnZ3uqZG5mNEY');
+setToken('');
 
 instance.interceptors.request.use((config) => {
   config.headers['Content-Type'] = 'application/json; charset=utf-8';

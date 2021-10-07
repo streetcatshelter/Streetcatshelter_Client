@@ -132,7 +132,7 @@ const CatInfoWrite = (props) => {
           <TextArea
             margin="5% 0 0 0"
             width="91%"
-            placeholder="#태그명"
+            placeholder="태그"
             changeEvent={$catTag}
           ></TextArea>
 

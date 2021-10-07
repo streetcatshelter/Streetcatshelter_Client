@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // FUNCTION
-import { getToken } from './token';
+import { getToken, setToken } from './token';
 
 axios.defaults.withCredentials = true;
 
@@ -11,11 +11,13 @@ const instance = axios.create({
   // baseURL: "http://cc60-175-123-124-9.ngrok.io",
 });
 
+setToken('');
+
 instance.interceptors.request.use((config) => {
   config.headers['Content-Type'] = 'application/json; charset=utf-8';
   config.headers['X-Requested-With'] = 'XMLHttpRequest';
   config.headers['Accept'] = '*/*';
-  config.headers['Authorization'] = getToken();
+  config.headers['Authorization'] = `Bearer ${getToken()}`;
   return config;
 });
 
@@ -26,8 +28,8 @@ export const loginApi = {
 };
 
 export const catApi = {
-  getCatLocation: (location, page, size) =>
-    instance.get(`/cat/${location}?page=${page}&size=${size}`),
+  getCatLocation: (location, size) =>
+    instance.get(`/cat/${location}?page=1&size=${size}`),
   getCatCalendar: (catId) => instance.get(`/cat/calendar/${catId}`),
   getCatGallery: (catId, page, size) =>
     instance.get(`/cat/gallery/${catId}?page=${page}&size=${size}`),
@@ -39,8 +41,8 @@ export const catApi = {
   createCatComment: () => instance.post('/cat/comment'),
   deleteCatComment: () => instance.delete('/cat/comment'),
 
-  createCatDetail: (catId, newPost) =>
-    instance.post(`/cat/detailCreate/${catId}`, newPost), // cat 상세정보 작성
+  // createCatDetail: (catId, newPost) =>
+  //   instance.post(`/cat/detailCreate/${catId}`, newPost), // cat 상세정보 작성
   updateCatDetail: () => instance.put('/cat/detailUpdate'), // cat 상세정보 수정
   deleteCatDetail: () => instance.delete('/cat/detailDelete'),
 

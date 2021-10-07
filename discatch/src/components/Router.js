@@ -45,7 +45,14 @@ const Router = () => {
       <Route path="/userinfoedit" exact component={UserInfoWrite} />
       <Route path="/catinfowrite" exact component={CatInfoWrite} />
       <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
+      <Route
+        path="/catdetailinfowrite/:catId"
+        exact
+        component={CatDetailInfoWrite}
+      />
       <Route path="/catdetail" exact component={CatDetail} />
+      <Route path="/catdetail/:catId" exact component={CatDetail} />
+
       <Route path="/catdetailinfo" exact component={CatDetailInfo} />
       <Route path="/catdetailedit" exact component={CatDetailEdit} />
       <Route

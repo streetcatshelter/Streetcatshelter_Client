@@ -13,16 +13,18 @@ const UPLOAD_IMAGE = 'IMAGE';
 const UPLOAD_IMAGES = 'IMAGES';
 const SET_FILE = 'SET_FILE';
 const DEL_FILE = 'DEL_FILE';
+const DEL_PREVIEW = 'DEL_PREVIEW';
 const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
 const SET_PREVIEW = 'SET_PREVIEW';
 
 // action creator
 const uploadImage = (imageUrl) => ({ type: UPLOAD_IMAGE, imageUrl });
 const uploadImages = (imageUrls) => ({ type: UPLOAD_IMAGES, imageUrls });
-const setFile = (file) => ({ type: SET_FILE, file });
-const delFile = (postId) => ({ type: DEL_FILE, postId });
+const setFile = (file, fileId) => ({ type: SET_FILE, file: {file, fileId} });
+const delFile = (fileId) => ({ type: DEL_FILE, fileId });
+const delPreview = (previewId) => ({ type: DEL_PREVIEW, previewId });
 const setInitialState = () => ({ type: SET_INITIAL_STATE });
-const setPreview = (preview) => ({ type: SET_PREVIEW, preview });
+const setPreview = (preview, previewId) => ({ type: SET_PREVIEW, preview: {preview, previewId} });
 
 // initial state
 const initialState = {
@@ -38,10 +40,12 @@ const uploadImagesDB = (callNext) => {
   return async function (dispatch, getState) {
     const imgList = getState().image.file;
     const imgUrl = getState().image.imageUrls;
+    console.log(imgList)
 
     for (let i = 0; i < imgList.length; i++) {
-      const img = imgList[i];
+      const img = imgList[i].file;
       const url = imgUrl[i];
+      console.log(img, url)
 
       if (typeof img !== 'object') {
         dispatch(uploadImages(img));
@@ -65,7 +69,6 @@ const uploadImagesDB = (callNext) => {
         })
         .catch((error) => {
           console.log(error);
-          // return alert('오류가 발생했습니다: ', error.message);
         });
     }
     callNext();
@@ -104,7 +107,6 @@ const uploadImageDB = (callNext) => {
         })
         .catch((error) => {
           console.log(error);
-          // return alert('오류가 발생했습니다: ', error.message);
         });
     }
     callNext();
@@ -119,16 +121,17 @@ function image(state = initialState, action) {
     case UPLOAD_IMAGE:
       return { ...state, imageUrl: action.imageUrl };
     case SET_FILE:
-      return { ...state, file: [...state.file, ...action.file] };
+      return { ...state, file: [...state.file, action.file] };
     case DEL_FILE:
-      const fileList = state.file.filter((img, idx) => action.index !== idx);
-
+      const fileList = state.file.filter((i, idx) => i.fileId !== action.fileId);
       return { ...state, file: fileList };
+    case DEL_PREVIEW:
+      const previewList = state.preview.filter((p, idx) => p.previewId !== action.previewId)
+      return { ...state, preview: previewList };
     case SET_INITIAL_STATE:
       return { imageUrl: [], file: [], imageUrls: []};
     case SET_PREVIEW:
       return { ...state, preview: [...state.preview, action.preview], };
-
     default:
       return state;
   }
@@ -145,4 +148,7 @@ export const imgActions = {
   uploadImagesDB,
   uploadImageDB,
   setPreview,
+  delPreview,
+  // delImages,
+  // delImage,
 };

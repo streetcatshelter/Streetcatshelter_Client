@@ -12,7 +12,7 @@ import styled, { css } from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
 
 // REDUX
-import community, { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
+import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
 
 // ROUTE
 import { useLocation } from 'react-router-dom';
@@ -24,17 +24,19 @@ const CommunityPostDetail = (props) => {
     dispatch(getOneCommunityDB(communityId));
   }, []);
   const { category, contents, imageList, location, title, username, createdAt } = useSelector((state) => ({
-    category: state.community.list.category,
-    contents: state.community.list.contents,
-    imageList: state.community.list.communityImageList ? state.community.list.communityImageList : Array(1,2,3),
-    location: state.community.list.location,
-    title: state.community.list.title,
-    username: state.community.list.username,
-    createdAt: state.community.list.createdAt,
+    category: state.community.list.data?.category,
+    contents: state.community.list.data?.contents,
+    imageList: state.community.list.data?.communityImageList ? state.community.list.data.communityImageList : Array(1,2,3),
+    location: state.community.list.data?.location,
+    title: state.community.list.data?.title,
+    username: state.community.list.data?.username,
+    createdAt: state.community.list.data?.createdAt,
   }));
+
   const deleteCommunity = () => {
-    dispatch(deleteCommunityDB(communityId, category));
+    dispatch(deleteCommunityDB(communityId, category, location));
   };
+  console.log(category)
   
   return (
     <Template props={props}>
@@ -77,7 +79,7 @@ const CommunityPostDetail = (props) => {
               addstyle={() => {
                 return css`
                   border-radius: 30px;
-                  margin: 10px 13px;
+                  margin: 3vw 2vw 3vw 6vw;
                 `;
               }}
             />

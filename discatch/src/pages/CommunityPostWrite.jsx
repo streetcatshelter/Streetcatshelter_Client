@@ -26,12 +26,21 @@ import { history } from "../redux/configureStore";
 const CommunityPostWrite = (props) => {
   const path = useLocation();
   const pathName = path.pathname.split('/');
-  const backPath = `/${pathName[1]}/${pathName[2]}`
-  console.log(backPath);
+  const backPath = `/${pathName[1]}/${pathName[2]}/${pathName[3]}`
+  const location = pathName[2]
   const preview = useSelector((state) => state.image.preview ? state.image.preview : Array())
+  const imageList = useSelector((state) => state.image.file ? state.image.file : Array())
   const dispatch = useDispatch();
+
+  let firstCategory = null;
+  if (pathName[3] === 'catinfo') {
+    firstCategory = '고양이 정보글';
+  } else if (pathName[3] === 'gathering') {
+    firstCategory = `${location} 동네 모임`;
+  } else {
+    firstCategory = `${location} 고양이 용품 나눔`;
+  }
   
-  const location = "망원동"; // Header에서 가져오기 or 유저 정보에서 가져오기
   const [fileNum, setFileNum] = useState(0);
 
   // S3
@@ -40,21 +49,20 @@ const CommunityPostWrite = (props) => {
     if (fileNum < 5) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setPreview(imageUrl));
-      dispatch(imgActions.setFile([file]));
+      dispatch(imgActions.setPreview(imageUrl,fileNum));
+      dispatch(imgActions.setFile(file, fileNum));
       setFileNum(fileNum+1);
     } else {
       alert('사진은 최대 5장까지 등록할 수 있어요!');
     }
   };
   
-  const [category, setCategory] = React.useState(props.location.category);
+  const [category, setCategory] = React.useState(firstCategory);
 
   const Options = [
-    { key: 1, value: "게시글 주제를 선택해주세요!"},
-    { key: 2, value: "고양이 정보글"},
-    { key: 3, value:`${location} 동네 모임` },
-    { key: 4, value: `${location} 고양이 용품 나눔` },
+    { key: 1, value: '고양이 정보글'},
+    { key: 2, value:`${location} 동네 모임`},
+    { key: 3, value: `${location} 고양이 용품 나눔`},
   ];
 
   const onChangeHandler = (e) => {
@@ -74,6 +82,15 @@ const CommunityPostWrite = (props) => {
   const writeBtn = () => {
     dispatch(addCommunityDB(category, contents, location, title));
   };
+
+  // const previewId = imageList.length-1
+
+  const delImageBtn = (previewId, fileId) => {
+    console.log(imageList);
+    dispatch(imgActions.delPreview(previewId));
+    dispatch(imgActions.delFile(fileId));
+    setFileNum(fileNum-1)
+  }
 
   return (
     <Template props={props}>
@@ -190,11 +207,22 @@ const CommunityPostWrite = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[0]} width="100%" height="100%" />
+                  
+                  <Image 
+                    src={preview[0].preview} 
+                    width="100%" 
+                    height="100%" 
+                    addstyle={() => {
+                      return css`
+                        position:relative;
+                      `;
+                    }}>
+                  <DeleteButton onClick={()=>delImageBtn(0,0)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
               {preview && preview[1] && (
@@ -207,11 +235,22 @@ const CommunityPostWrite = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[1]} width="100%" height="100%" />
+                  
+                  <Image 
+                    src={preview[1].preview} 
+                    width="100%" 
+                    height="100%" 
+                    addstyle={() => {
+                      return css`
+                        position:relative;
+                      `;
+                    }}>
+                  <DeleteButton onClick={()=>delImageBtn(1,1)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
               {preview && preview[2] && (
@@ -224,11 +263,22 @@ const CommunityPostWrite = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[2]} width="100%" height="100%" />
+                  
+                  <Image 
+                    src={preview[2].preview} 
+                    width="100%" 
+                    height="100%" 
+                    addstyle={() => {
+                      return css`
+                        position:relative;
+                      `;
+                    }}>
+                  <DeleteButton onClick={()=>delImageBtn(2,2)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
               {preview && preview[3] && (
@@ -241,11 +291,22 @@ const CommunityPostWrite = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[3]} width="100%" height="100%" />
+                  
+                  <Image 
+                    src={preview[3].preview} 
+                    width="100%" 
+                    height="100%" 
+                    addstyle={() => {
+                      return css`
+                        position:relative;
+                      `;
+                    }}>
+                  <DeleteButton onClick={()=>delImageBtn(3,3)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
               {preview && preview[4] && (
@@ -258,11 +319,22 @@ const CommunityPostWrite = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[4]} width="100%" height="100%" />
+                  
+                  <Image 
+                    src={preview[4].preview} 
+                    width="100%" 
+                    height="100%" 
+                    addstyle={() => {
+                      return css`
+                        position:relative;
+                      `;
+                    }}>
+                  <DeleteButton onClick={()=>delImageBtn(4,4)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
             </Grid>
@@ -380,6 +452,18 @@ const UploadButton = styled.label`
   display: block;
   float: right;
   margin-bottom: 40px;
+`;
+
+const DeleteButton = styled.button`
+  width: 13px;
+  height: 13px;
+  font-size: 10px;
+  align-items: center;
+  justify-content: center;
+  display:flex;
+  border-radius: 13px;
+  border: 0;
+  background-color: lightgray;
 `;
 
 export default CommunityPostWrite;

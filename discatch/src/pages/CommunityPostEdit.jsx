@@ -34,14 +34,15 @@ const CommunityPostEdit = (props) => {
   }, []);
 
   const { category, contents, imageList, location, title, username } = useSelector((state) => ({
-    category: state.community.list.category,
-    contents: state.community.list.contents,
-    imageList: state.community.list.communityImageList ? state.community.list.communityImageList : Array(),
-    location: state.community.list.location,
-    title: state.community.list.title,
-    username: state.community.list.username,
+    category: state.community.list.data.category,
+    contents: state.community.list.data.contents,
+    imageList: state.community.list.data.communityImageList ? state.community.list.data.communityImageList : Array(1,2,3),
+    location: state.community.list.data.location,
+    title: state.community.list.data.title,
+    username: state.community.list.data.username,
   }));
   const imageNum = imageList?.length;
+  console.log(imageList)
 
   const dispatch = useDispatch();
 
@@ -54,8 +55,8 @@ const CommunityPostEdit = (props) => {
     if (fileNum < 5) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setPreview(imageUrl));
-      dispatch(imgActions.setFile([file]));
+      dispatch(imgActions.setPreview(imageUrl,fileNum));
+      dispatch(imgActions.setFile(file, fileNum));
       setFileNum(fileNum+1);
     } else {
       alert('사진은 최대 5장까지 등록할 수 있어요!');
@@ -73,9 +74,16 @@ const CommunityPostEdit = (props) => {
   };
 
   const editBtn = () => {
-    dispatch(imgActions.setFile(imageList));
+    dispatch(imgActions.setFile(imageList, imageNum));
     dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, imageList));
   };
+
+  const delImageBtn = (previewId, fileId) => {
+    console.log(imageList);
+    dispatch(imgActions.delPreview(previewId));
+    dispatch(imgActions.delFile(fileId));
+    setFileNum(fileNum-1)
+  }
 
   return (
     <Template props={props}>
@@ -192,11 +200,13 @@ const CommunityPostEdit = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[0-imageNum] || imageList[0]?.image} width="100%" height="100%" />
+                  <Image src={preview[0-imageNum] || imageList[0]?.image} width="100%" height="100%">
+                  <DeleteButton onClick={()=>delImageBtn(0,0)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
               {(imageList[1] || preview[1 - imageNum]) && (
@@ -209,11 +219,13 @@ const CommunityPostEdit = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[1-imageNum] || imageList[1]?.image} width="100%" height="100%" />
+                  <Image src={preview[1-imageNum] || imageList[1]?.image} width="100%" height="100%">
+                  <DeleteButton onClick={()=>delImageBtn(1,1)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
               {(imageList[2] || preview[2 - imageNum]) && (
@@ -226,11 +238,13 @@ const CommunityPostEdit = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[2 - imageNum] || imageList[2]?.image} width="100%" height="100%" />
+                  <Image src={preview[2-imageNum] || imageList[2]?.image} width="100%" height="100%">
+                  <DeleteButton onClick={()=>delImageBtn(2,2)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
               {(imageList[3] || preview[3 - imageNum]) && (
@@ -243,11 +257,13 @@ const CommunityPostEdit = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[3 - imageNum] || imageList[3]?.image} width="100%" height="100%" />
+                  <Image src={preview[3-imageNum] || imageList[3]?.image} width="100%" height="100%">
+                  <DeleteButton onClick={()=>delImageBtn(3,3)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
               {(imageList[4] || preview[4 - imageNum]) && (
@@ -260,11 +276,13 @@ const CommunityPostEdit = (props) => {
                       position:relative;
                       background: lightgray;
                       display: inline-block;
-                      top:5px;
+                      bottom: 75px;
                     `;
                   }}
                 >
-                  <Image src={preview[4 - imageNum] || imageList[4]?.image} width="100%" height="100%" />
+                  <Image src={preview[4-imageNum] || imageList[4]?.image} width="100%" height="100%">
+                  <DeleteButton onClick={()=>delImageBtn(4,4)}>X</DeleteButton>
+                  </Image>
                 </Grid>
               )}
             </Grid>
@@ -375,6 +393,18 @@ const UploadButton = styled.label`
   display: block;
   float: right;
   margin-bottom: 40px;
+`;
+
+const DeleteButton = styled.button`
+  width: 13px;
+  height: 13px;
+  font-size: 10px;
+  align-items: center;
+  justify-content: center;
+  display:flex;
+  border-radius: 13px;
+  border: 0;
+  background-color: lightgray;
 `;
 
 export default CommunityPostEdit;

@@ -37,8 +37,8 @@ export const addCommunityDB = (category, contents, location, title) => {
             .then((res) => {
               dispatch(addCommunity(postInfo));
               dispatch(imgActions.setInitialState());
-              // history.goBack();
-              // window.location.replace(`/community/${location}/${pathName}`);
+              history.goBack();
+              window.location.replace(`/community/${location}/${pathName}`);
             })
             .catch((err) => {
               console.log(err);
@@ -98,10 +98,6 @@ export const getOneCommunityDB = (communityId = '') =>
   async (dispatch, getState, { history }) => {
     try {
       const data = await communityApi.getDetailCommunity(communityId);
-      console.log(data);
-      // let detailCommunity = data.data.community; // 딕셔너리
-      // let liked = data.data.liked;
-      // detailCommunity['liked'] = liked;
       dispatch(getOneCommunity(data));
       } catch (err) {
         console.error(err);

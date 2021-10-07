@@ -55,40 +55,16 @@ const Router = () => {
 
       <Route path="/catdetailinfo" exact component={CatDetailInfo} />
       <Route path="/catdetailedit" exact component={CatDetailEdit} />
-      <Route
-        path="/community/catinfo/write"
-        exact
-        component={CommunityPostWrite}
-      />
-      <Route
-        path="/community/gathering/write"
-        exact
-        component={CommunityPostWrite}
-      />
-      <Route
-        path="/community/sharing/write"
-        exact
-        component={CommunityPostWrite}
-      />
+      <Route path="/community/:village/catinfo/write" exact component={CommunityPostWrite} />
+      <Route path="/community/:village/gathering/write" exact component={CommunityPostWrite} />
+      <Route path="/community/:village/sharing/write" exact component={CommunityPostWrite} />
       <Route path="/communitypostedit" exact component={CommunityPostEdit} />
-      <Route
-        path="/communitypostedit/:communityId"
-        exact
-        component={CommunityPostEdit}
-      />
-      <Route path="/community/catinfo" exact component={CommunityDetail} />
-      <Route path="/community/gathering" exact component={CommunityDetail} />
-      <Route path="/community/sharing" exact component={CommunityDetail} />
-      <Route
-        path="/communitypostdetail"
-        exact
-        component={CommunityPostDetail}
-      />
-      <Route
-        path="/communitypostdetail/:communityId"
-        exact
-        component={CommunityPostDetail}
-      />
+      <Route path="/communitypostedit/:communityId" exact component={CommunityPostEdit} />
+      <Route path="/community/:village/catinfo" exact component={CommunityDetail} />
+      <Route path="/community/:village/gathering" exact component={CommunityDetail} />
+      <Route path="/community/:village/sharing" exact component={CommunityDetail} />
+      <Route path="/communitypostdetail" exact component={CommunityPostDetail} />
+      <Route path="/communitypostdetail/:communityId" exact component={CommunityPostDetail} />
       <Route path="/community" exact component={Community} />
       <Route path="/map" exact component={Map} />
       <Route path="/chat" exact component={Chat} />

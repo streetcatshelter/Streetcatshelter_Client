@@ -20,9 +20,9 @@ const Comment = (props) => {
   const location = useLocation();
 
   const community = useSelector((state) => state.community.list);
-  const communityId = community.id;
+  const communityId = community.data?.communityId;
 
-  const userLike = community.liked;
+  const userLike = community.data?.liked;
 
   const updateLikes = () => {
       dispatch(communityLikeToggleDB(communityId));
@@ -48,7 +48,7 @@ const Comment = (props) => {
         <Text margin="2px 3px" fontWeight="700" size="16px">
           댓글
         </Text>
-        <Count>{community.cntComment}</Count>
+        <Count>{community.data?.cntComment}</Count>
       </Grid>
     
       {location.pathname === `/communitypostdetail/${communityId}` && <Grid
@@ -77,7 +77,7 @@ const Comment = (props) => {
           />
           </Grid>
           <Text fontWeight="bold" margin="0 0 0 -25px" width="32px">
-            {community.cntLikeit}
+            {community.data.cntLikeit}
           </Text>
         </Grid>
       </Grid>}

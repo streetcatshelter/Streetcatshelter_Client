@@ -12,7 +12,7 @@ import styled, { css } from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
 
 // REDUX
-import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
+import community, { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
 
 // ROUTE
 import { useLocation } from 'react-router-dom';
@@ -32,7 +32,6 @@ const CommunityPostDetail = (props) => {
     username: state.community.list.data?.username,
     createdAt: state.community.list.data?.createdAt,
   }));
-
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };

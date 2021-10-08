@@ -56,7 +56,7 @@ const CatInfoWrite = (props) => {
     const file = e.target.files[0];
     const imageUrl = URL.createObjectURL(file);
     dispatch(imgActions.setInitialState(imageUrl));
-    dispatch(imgActions.setFile([file]));
+    dispatch(imgActions.setFile(file));
     setFileUrl(imageUrl);
   };
 

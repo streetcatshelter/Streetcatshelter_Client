@@ -67,9 +67,8 @@ const CatPost = (cat) => {
 
               <Button
                 clickEvent={() => {
-                  history.push({
-                    pathname: `/catdetail/${catId}`,
-                  });
+                  history.push(`/catdetail/${catId}`);
+                  cat = { cat };
                 }}
                 fontWeight="bold"
                 padding="0"

@@ -35,7 +35,6 @@ const CommunityPostDetail = (props) => {
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
-  console.log(category)
   
   return (
     <Template props={props}>

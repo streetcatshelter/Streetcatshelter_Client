@@ -27,22 +27,31 @@ import { getOneCommunityDB } from '../redux/modules/community';
 
 const CommunityPostEdit = (props) => {
   const preview = useSelector((state) => state.image.preview)
-  const communityId = props.location.state.communityId;
-  console.log(communityId);
+  const communityId = props.location.state?.communityId;
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, []);
 
   const { category, contents, imageList, location, title, username } = useSelector((state) => ({
-    category: state.community.list.data.category,
-    contents: state.community.list.data.contents,
-    imageList: state.community.list.data.communityImageList ? state.community.list.data.communityImageList : Array(1,2,3),
-    location: state.community.list.data.location,
-    title: state.community.list.data.title,
-    username: state.community.list.data.username,
+    category: state.community.list.data?.category,
+    contents: state.community.list.data?.contents,
+    imageList: state.community.list.data?.communityImageList ? state.community.list.data?.communityImageList : Array(),
+    location: state.community.list.data?.location,
+    title: state.community.list.data?.title,
+    username: state.community.list.data?.username,
   }));
   const imageNum = imageList?.length;
-  console.log(imageList)
+  console.log(imageList);
+  console.log(preview);
+  let newImageList = [...imageList];
+  console.log(newImageList.splice(1,1))
+  console.log(newImageList);
+
+  // const a = imageList.splice(1,1);
+  // console.log(a);
+  const a = [{1:1, 2:2},{2:2},{3:3}]
+  console.log(a.splice(1,1))
+  console.log(a);
 
   const dispatch = useDispatch();
 
@@ -74,15 +83,16 @@ const CommunityPostEdit = (props) => {
   };
 
   const editBtn = () => {
-    dispatch(imgActions.setFile(imageList, imageNum));
-    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, imageList));
+    dispatch(imgActions.setFile(newImageList, imageNum));
+    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, newImageList));
   };
 
   const delImageBtn = (previewId, fileId) => {
-    console.log(imageList);
     dispatch(imgActions.delPreview(previewId));
     dispatch(imgActions.delFile(fileId));
     setFileNum(fileNum-1)
+    newImageList.splice(fileId, 1)
+    console.log(newImageList);
   }
 
   return (
@@ -204,7 +214,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={preview[0-imageNum] || imageList[0]?.image} width="100%" height="100%">
+                  <Image src={imageList[0]?.image || preview[0-imageNum].preview } width="100%" height="100%">
                   <DeleteButton onClick={()=>delImageBtn(0,0)}>X</DeleteButton>
                   </Image>
                 </Grid>
@@ -223,7 +233,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={preview[1-imageNum] || imageList[1]?.image} width="100%" height="100%">
+                  <Image src={imageList[1]?.image || preview[1-imageNum].preview} width="100%" height="100%">
                   <DeleteButton onClick={()=>delImageBtn(1,1)}>X</DeleteButton>
                   </Image>
                 </Grid>
@@ -242,7 +252,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={preview[2-imageNum] || imageList[2]?.image} width="100%" height="100%">
+                  <Image src={imageList[2]?.image || preview[2-imageNum].preview} width="100%" height="100%">
                   <DeleteButton onClick={()=>delImageBtn(2,2)}>X</DeleteButton>
                   </Image>
                 </Grid>
@@ -261,7 +271,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={preview[3-imageNum] || imageList[3]?.image} width="100%" height="100%">
+                  <Image src={imageList[3]?.image || preview[3-imageNum].preview} width="100%" height="100%">
                   <DeleteButton onClick={()=>delImageBtn(3,3)}>X</DeleteButton>
                   </Image>
                 </Grid>
@@ -280,7 +290,7 @@ const CommunityPostEdit = (props) => {
                     `;
                   }}
                 >
-                  <Image src={preview[4-imageNum] || imageList[4]?.image} width="100%" height="100%">
+                  <Image src={imageList[4]?.image || preview[4-imageNum].preview} width="100%" height="100%">
                   <DeleteButton onClick={()=>delImageBtn(4,4)}>X</DeleteButton>
                   </Image>
                 </Grid>

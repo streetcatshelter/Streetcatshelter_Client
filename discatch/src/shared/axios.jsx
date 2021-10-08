@@ -10,15 +10,15 @@ const instance = axios.create({
   baseURL: 'http://52.78.241.50/',
 });
 
-setToken('');
+// setToken('');
 //
 
 instance.interceptors.request.use((config) => {
   config.headers['Content-Type'] = 'application/json; charset=utf-8';
   config.headers['X-Requested-With'] = 'XMLHttpRequest';
   config.headers['Accept'] = '*/*';
-  // config.headers['Authorization'] = getToken();
-  config.headers['Authorization'] = `Bearer ${getToken()}`;
+  config.headers['Authorization'] = getToken();
+  // config.headers['Authorization'] = `Bearer ${getToken()}`;
   return config;
 });
 

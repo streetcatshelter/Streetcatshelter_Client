@@ -16,7 +16,7 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../redux/configureStore';
 
 const CatDetail = (props) => {
-  const catId = useSelector((state) => state.cat.list[0].catId);
+  const catId = useSelector((state) => state.cat.list);
   console.log(catId);
   return (
     <Template props={props}>

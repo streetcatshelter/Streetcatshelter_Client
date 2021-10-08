@@ -140,7 +140,7 @@ function image(state = initialState, action) {
       );
       return { ...state, preview: previewList };
     case SET_INITIAL_STATE:
-      return { imageUrl: [], file: [], imageUrls: [] };
+      return { imageUrl: [], file: [], imageUrls: [], preview: []};
     case SET_PREVIEW:
       return { ...state, preview: [...state.preview, action.preview] };
     default:

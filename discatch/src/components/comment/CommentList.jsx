@@ -37,7 +37,7 @@ const CommentList = (props) => {
 
   const [comments, setComment] = React.useState('');
 
-  const commentList = community.commentList;
+  const commentList = community.data?.commentList;
 
   const $comment = (event) => {
     setComment(event.target.value);

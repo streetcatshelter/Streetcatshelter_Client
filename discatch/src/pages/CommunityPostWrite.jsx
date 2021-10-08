@@ -50,7 +50,7 @@ const CommunityPostWrite = (props) => {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
       dispatch(imgActions.setPreview(imageUrl,fileNum));
-      dispatch(imgActions.setFile(file, fileNum));
+      dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum+1);
     } else {
       alert('사진은 최대 5장까지 등록할 수 있어요!');

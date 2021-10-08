@@ -1,20 +1,21 @@
 // library
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from "redux";
 
 // middleware
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 
 // redux router
-import { createBrowserHistory } from 'history';
-import { connectRouter } from 'connected-react-router';
+import { createBrowserHistory } from "history";
+import { connectRouter } from "connected-react-router";
 
 // reducer
-import image from './modules/image';
-import map from './modules/map';
-import community from './modules/community';
-import user from './modules/user';
-import cat from './modules/cat';
+import image from "./modules/image";
+import map from "./modules/map";
+import community from "./modules/community";
+import user from "./modules/user";
+import cat from "./modules/cat";
+import mypage from "./modules/mypage";
 
 export const history = createBrowserHistory();
 
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   image: image,
   router: connectRouter(history),
   cat: cat.reducer,
+  mypage: mypage.reducer,
 });
 
 // history 넣기, 로거사용

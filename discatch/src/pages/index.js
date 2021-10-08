@@ -3,7 +3,11 @@ import test from "./test";
 import NotFound from "./NotFound";
 import Slider from "./Slider";
 import UserInfoWrite from "./UserInfoWrite";
-import MyPage from "./MyPage";
+
+import MyPageCat from "./mypage/MyPageCat";
+import MyPageNoticeList from "./mypage/MyPageNoticeList";
+import MyPageNotices from "./mypage/MyPageNotices";
+import MyPageWork from "./mypage/MyPageWork";
 
 /* == Login */
 import Login from "./login/Login";
@@ -33,7 +37,11 @@ export {
   NotFound,
   Slider,
   UserInfoWrite,
-  MyPage,
+  /* == MyPage */
+  MyPageCat,
+  MyPageNoticeList,
+  MyPageNotices,
+  MyPageWork,
   /* == Login */
   Login,
   LoginRedirect,

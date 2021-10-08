@@ -11,9 +11,9 @@ export const addCommunityDB = (category, contents, location, title) => {
     const imgFile = getState().image.file
     const path = category.split(' ');
     let pathName = null
-    if (path.length === 2) {
+    if (path[1] === '정보글') {
       pathName = 'catinfo'
-    } else if (path.length === 3) {
+    } else if (path[2] === '모임') {
       pathName = 'gathering'
     } else {
       pathName = 'sharing'
@@ -38,7 +38,7 @@ export const addCommunityDB = (category, contents, location, title) => {
               dispatch(addCommunity(postInfo));
               dispatch(imgActions.setInitialState());
               history.goBack();
-              window.location.replace(`/community/${pathName}`)
+              window.location.replace(`/community/${location}/${pathName}`);
             })
             .catch((err) => {
               console.log(err);
@@ -98,10 +98,7 @@ export const getOneCommunityDB = (communityId = '') =>
   async (dispatch, getState, { history }) => {
     try {
       const data = await communityApi.getDetailCommunity(communityId);
-      let detailCommunity = data.data.community; // 딕셔너리
-      let liked = data.data.liked;
-      detailCommunity['liked'] = liked;
-      dispatch(getOneCommunity(detailCommunity));
+      dispatch(getOneCommunity(data));
       } catch (err) {
         console.error(err);
       }
@@ -161,7 +158,7 @@ export const editCommunityDB = (communityId, category, editcontents, location, e
 };
 
 // 커뮤니티 글 삭제
-export const deleteCommunityDB = (communityId, category) => 
+export const deleteCommunityDB = (communityId, category, location) => 
   async (dispatch, getState, { history }) => {
     const path = category.split(' ');
     let pathName = null
@@ -176,29 +173,11 @@ export const deleteCommunityDB = (communityId, category) =>
       const data = await communityApi.deleteCommunity(communityId);
       dispatch(deleteCommunity(communityId));
       window.alert('게시물 삭제 완료!');
-      history.push(`/community/${pathName}`);
+      history.push(`/community/${location}/${pathName}`);
     } catch (err) {
       console.error(err);
     }
 };
-
-// 커뮤니티 댓글 작성 (확인 필요)
-// export const addCommunityCommentDB = (contents, communityId) => {
-//   return function (dispatch, getState, { history }) {
-//     // const username = '뽀삐맘'; // 수정 필요
-//     console.log(communityId)
-//     // const username = getState().user; // 나중에 가져오기
-//     instance
-//       .post(`/community/comment/${communityId}`, { contents })
-//       .then((res) => {
-//         dispatch(addCommunityComment({ contents }));
-//         window.location.reload();
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//       });
-//   };
-// };
 
 // 커뮤니티 댓글 작성
 export const addCommunityCommentDB = (contents, communityId) => 

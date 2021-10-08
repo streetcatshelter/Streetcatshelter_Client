@@ -10,6 +10,7 @@ import CommentCard from './CommentCard';
 import styled, { css } from 'styled-components';
 import { flexBox, flexHoz } from '../../shared/style';
 
+
 // ELEMENTS
 import { Grid, Input, Button } from '../../elements/index';
 
@@ -17,59 +18,39 @@ import { Grid, Input, Button } from '../../elements/index';
 import { useLocation } from 'react-router-dom';
 
 // REDUX
-import {
-  getOneCommunityDB,
-  addCommunityCommentDB,
-  deleteCommunityCommentDB,
-} from '../../redux/modules/community';
+import { getOneCommunityDB, addCommunityCommentDB, deleteCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentList = (props) => {
   const path = useLocation();
-
-  // console.log(path);
-
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
 
-  // let communityId = props.props.match.params.communityId;
-  // if (path.pathname === '/catdetail') {
-  //   communityId = 1;
-  // } else {
-  //   communityId = props.props.match.params.communityId;
-  // }
+  let communityId = props.props.match.params.communityId;
+  if (path.pathname === '/catdetail') {
+    communityId = 1
+  } else {
+    communityId = props.props.match.params.communityId;
+  }
 
   const [comments, setComment] = React.useState('');
 
   const commentList = community.commentList;
 
-  // React.useEffect(() => {
-  //   if (path.pathname === `/communitypostdetail/${communityId}`) {
-  //     dispatch(getOneCommunityDB(communityId));
-  //   } else {
-  //     console.log('캣 가져오기');
-  //     console.log(path.pathname);
-  //   }
-  // }, []);
-
   const $comment = (event) => {
     setComment(event.target.value);
   };
 
-  // console.log(path);
-  // console.log(comments);
-  // console.log(communityId);
-
-  // const addCommentBtn = () => {
-  //   if (path.pathname === `/communitypostdetail/${communityId}`) {
-  //     dispatch(addCommunityCommentDB(comments, communityId));
-  //   } else {
-  //     console.log('캣 댓글 추가');
-  //   }
-  // };
+  const addCommentBtn = () => {
+    if (path.pathname === `/communitypostdetail/${communityId}`) {
+    dispatch(addCommunityCommentDB(comments, communityId));
+    } else {
+      console.log('캣 댓글 추가');
+    }
+  };
 
   return (
     <>
-      <Comment />
+      <Comment/>
       <Grid
         width="85%"
         margin="0 auto"
@@ -95,16 +76,18 @@ const CommentList = (props) => {
           bgColor="yellow"
           padding="0.4rem"
           margin="0 0 0 -38px"
-          // clickEvent={addCommentBtn}
+          clickEvent={addCommentBtn}
         >
           작성
         </Button>
       </Grid>
 
-      {commentList &&
-        commentList.map((comment, idx) => {
-          return <CommentCard key={idx} comment={comment} />;
+
+
+      {commentList && commentList.map((comment, idx) => {
+          return <CommentCard key={idx} comment={comment} />
         })}
+
 
       {/* <Button width="100%">더보기</Button> */}
     </>

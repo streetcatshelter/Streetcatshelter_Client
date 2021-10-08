@@ -4,7 +4,7 @@ import { Template } from "../../components";
 
 /* == Library - style */
 import styled from "styled-components";
-
+import { dev_oauthURL } from "../../shared/oauthenv";
 /* == Custom - Icon */
 import Kakao from "../../styles/images/icon-Kakao.png";
 import Naver from "../../styles/images/icon-Naver(G).png";
@@ -33,7 +33,7 @@ const Login = (props) => {
               <LoginBtn
                 background="#F7E600"
                 onClick={() => {
-                  dispatch(userActions._loginKakao());
+                  window.location.href = dev_oauthURL;
                 }}
               >
                 <Img

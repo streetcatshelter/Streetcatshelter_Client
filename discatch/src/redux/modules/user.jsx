@@ -1,6 +1,6 @@
 // LIBRARY
-import { createSlice } from '@reduxjs/toolkit';
-import { userApi } from '../../shared/axios';
+import { createSlice } from "@reduxjs/toolkit";
+import { userApi } from "../../shared/axios";
 
 const _loginKakao =
   (authorization_code) =>
@@ -8,11 +8,11 @@ const _loginKakao =
     try {
       // const { data } = await userApi.getKakao(authorization_code);
       // console.log(authorization_code);
-      history.push('/');
+      history.push("/");
     } catch (e) {
       console.log(e);
-      window.alert('로그인에 실패하였습니다. 다시 로그인 해 주세요.');
-      history.push('/login');
+      window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
+      history.push("/login");
     }
   };
 
@@ -46,7 +46,7 @@ const initialState = {
 
 // 리듀서
 const user = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     loginKaKao: (state, action) => {

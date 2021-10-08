@@ -25,22 +25,22 @@ import { getCommunityDB, getMoreCommunityDB } from "../redux/modules/community";
 import { history } from "../redux/configureStore";
 
 const CommunityDetail = (props) => {
-  const location2 = useLocation();
   const query = window.location.search;
-  const pathName = location2.pathname;
   const dispatch = useDispatch();
-
-  const location = "망원동";
-    // const currentLocation = useSelector((state) => state.map.keywordList[0]);
+  const location = props.match.params.village
 
   const path = useLocation();
   let category = null;
-  if (path.pathname === "/community/catinfo") {
-    category = "고양이 정보글";
-  } else if (path.pathname === "/community/gathering") {
+  let nextPath = null
+  if (path.pathname === `/community/${location}/catinfo`) {
+    category = '고양이 정보글';
+    nextPath = 'catinfo'
+  } else if (path.pathname === `/community/${location}/gathering`) {
     category = `${location} 동네 모임`;
-  } else if (path.pathname === "/community/sharing") {
+    nextPath = 'gathering'
+  } else if (path.pathname === `/community/${location}/sharing`) {
     category = `${location} 고양이 용품 나눔`;
+    nextPath = 'sharing'
   }
 
   const getMoreCommunity = () => {
@@ -126,39 +126,15 @@ const CommunityDetail = (props) => {
           )}
           </Grid>
         </CommunityDetailStyle>
-        {pathName === '/community/sharing' && <Button
+        <Button
           clickEvent={() =>
-            history.push({
-              pathname: "/community/sharing/write",
-              category: category,
-            })
+              history.push(`/community/${location}/${nextPath}/write`)
           }
           is_float="is_float"
         >
           <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-        </Button>}
-        {pathName === '/community/catinfo' && <Button
-          clickEvent={() =>
-            history.push({
-              pathname: "/community/catinfo/write",
-              category: category,
-            })
-          }
-          is_float="is_float"
-        >
-          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-        </Button>}
-        {pathName === '/community/gathering' && <Button
-          clickEvent={() =>
-            history.push({
-              pathname: "/community/gathering/write",
-              category: category,
-            })
-          }
-          is_float="is_float"
-        >
-          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-        </Button>}
+        </Button>
+        
       </Grid>
     </Template>
   );

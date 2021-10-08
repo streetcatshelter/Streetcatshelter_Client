@@ -105,7 +105,7 @@ export const getOneCommunityDB = (communityId = '') =>
 };
 
 // 커뮤니티 수정
-export const editCommunityDB = (communityId, category, editcontents, location, editTitle, username, imageList) => {
+export const editCommunityDB = (communityId, category, editcontents, location, editTitle, username, newImageList) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
     let newImageUrl = [];
@@ -116,11 +116,11 @@ export const editCommunityDB = (communityId, category, editcontents, location, e
         imgActions.uploadImagesDB(() => {
           let imageUrl = getState().image.imageUrls;
           newImageUrl.push(
-            imageList[0]?.image,
-            imageList[1]?.image,
-            imageList[2]?.image,
-            imageList[3]?.image,
-            imageList[4]?.image
+            newImageList[0]?.image,
+            newImageList[1]?.image,
+            newImageList[2]?.image,
+            newImageList[3]?.image,
+            newImageList[4]?.image
             );
 
           newImages = newImageUrl.filter(

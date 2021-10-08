@@ -4,8 +4,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import instance, { catApi } from '../../shared/axios';
 // redux
 import { imgActions } from './image';
-import { getToken } from '../../shared/token';
-import user from './user';
 
 // POST
 // Cat 기본 정보 작성 ✅
@@ -24,6 +22,7 @@ export const __createCatInfo = (
       dispatch(
         imgActions.uploadImageDB(() => {
           const imageUrl = getState().image.imageUrl;
+          // console.log(imageUrl);
 
           const catInfo = {
             catImage: imageUrl,
@@ -116,7 +115,7 @@ export const _catCommentCreate =
 // GET
 // 지역에 따라 cat 가져오기 ✅
 export const __getCatLocation =
-  (location, size = 10) =>
+  (location, size = 15) =>
   async (dispatch, getState, { history }) => {
     try {
       const data = await catApi.getCatLocation(location, size);

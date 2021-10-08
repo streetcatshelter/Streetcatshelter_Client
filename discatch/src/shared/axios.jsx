@@ -26,6 +26,7 @@ instance.interceptors.request.use((config) => {
 export const userApi = {};
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),
+  getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),
 };
 export const catApi = {
   getCatLocation: (location, size) =>

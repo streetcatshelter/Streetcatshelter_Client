@@ -5,7 +5,10 @@ import { Switch, Route } from "react-router-dom";
 import {
   Home,
   Slider,
-  MyPage,
+  MyPageCat,
+  MyPageWork,
+  MyPageNoticeList,
+  MyPageNotices,
   UserInfoWrite,
   CatInfoWrite,
   CatDetailInfoWrite,
@@ -33,7 +36,10 @@ const Router = () => {
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/slider" exact component={Slider} />
-      <Route path="/mypage" exact component={MyPage} />
+      <Route path="/mypage" exact component={MyPageCat} />
+      <Route path="/mypage/notice" exact component={MyPageNoticeList} />
+      <Route path="/mypage/notice/:noticeId" exact component={MyPageNotices} />
+      <Route path="/mypage/work" exact component={MyPageWork} />
       <Route path="/login" exact component={Login} />
       <Route path="/user/kakao/callback" exact component={LoginRedirect} />
       {/* <Route path="/login" component={Auth(Login, false)} exact /> */}
@@ -57,16 +63,52 @@ const Router = () => {
 
       <Route path="/catdetailinfo" exact component={CatDetailInfo} />
       <Route path="/catdetailedit" exact component={CatDetailEdit} />
-      <Route path="/community/:village/catinfo/write" exact component={CommunityPostWrite} />
-      <Route path="/community/:village/gathering/write" exact component={CommunityPostWrite} />
-      <Route path="/community/:village/sharing/write" exact component={CommunityPostWrite} />
+      <Route
+        path="/community/:village/catinfo/write"
+        exact
+        component={CommunityPostWrite}
+      />
+      <Route
+        path="/community/:village/gathering/write"
+        exact
+        component={CommunityPostWrite}
+      />
+      <Route
+        path="/community/:village/sharing/write"
+        exact
+        component={CommunityPostWrite}
+      />
       <Route path="/communitypostedit" exact component={CommunityPostEdit} />
-      <Route path="/communitypostedit/:communityId" exact component={CommunityPostEdit} />
-      <Route path="/community/:village/catinfo" exact component={CommunityDetail} />
-      <Route path="/community/:village/gathering" exact component={CommunityDetail} />
-      <Route path="/community/:village/sharing" exact component={CommunityDetail} />
-      <Route path="/communitypostdetail" exact component={CommunityPostDetail} />
-      <Route path="/communitypostdetail/:communityId" exact component={CommunityPostDetail} />
+      <Route
+        path="/communitypostedit/:communityId"
+        exact
+        component={CommunityPostEdit}
+      />
+      <Route
+        path="/community/:village/catinfo"
+        exact
+        component={CommunityDetail}
+      />
+      <Route
+        path="/community/:village/gathering"
+        exact
+        component={CommunityDetail}
+      />
+      <Route
+        path="/community/:village/sharing"
+        exact
+        component={CommunityDetail}
+      />
+      <Route
+        path="/communitypostdetail"
+        exact
+        component={CommunityPostDetail}
+      />
+      <Route
+        path="/communitypostdetail/:communityId"
+        exact
+        component={CommunityPostDetail}
+      />
       <Route path="/community" exact component={Community} />
       <Route path="/map" exact component={Map} />
       <Route path="/chat" exact component={Chat} />

@@ -8,39 +8,35 @@ import { Grid } from "../../elements";
 
 /* == Library - style */
 import styled from "styled-components";
-
-const MyPageDetail = () => {
-  const [menu, SetMenu] = useState("");
+import { history } from "../../redux/configureStore";
+const MyPageDetail = (props) => {
   return (
     <Wrapper>
       <Grid>
         <MenuBtn
           onClick={() => {
-            SetMenu("myCat");
+            history.push("/mypage");
           }}
-          color={menu === "myCat" ? " #B5BB19" : "black"}
+          color={props.menu === "myCat" ? " #B5BB19" : "black"}
         >
           내고양이보기
         </MenuBtn>
         <MenuBtn
           onClick={() => {
-            SetMenu("myWork");
+            history.push("/mypage/work");
           }}
-          color={menu === "myWork" ? " #B5BB19" : "black"}
+          color={props.menu === "myWork" ? " #B5BB19" : "black"}
         >
           내활동
         </MenuBtn>
         <MenuBtn
           onClick={() => {
-            SetMenu("notice");
+            history.push("/mypage/notice");
           }}
-          color={menu === "notice" ? " #B5BB19" : "black"}
+          color={props.menu === "notice" ? " #B5BB19" : "black"}
         >
           공지사항
         </MenuBtn>
-      </Grid>
-      <Grid margin="10px auto ">
-        <MyPageContent menu={menu} />
       </Grid>
     </Wrapper>
   );

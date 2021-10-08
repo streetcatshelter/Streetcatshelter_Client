@@ -1,35 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 /* == Library - style */
 import styled from "styled-components";
 
+import { useDispatch, useSelector } from "react-redux";
+import { mypageActions } from "../../redux/modules/mypage";
+import { history } from "../../redux/configureStore";
 const Notice = () => {
+  const NoticeList = useSelector((state) => state.mypage.noticelist);
+  console.log(NoticeList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(mypageActions._setNotice());
+  }, []);
   return (
     <Wrapper>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>⭐disCATch 첫유저를 위한 가이드 </p>
-        <span>2021-09-10</span>
-      </Content>
-      <Content>
-        <p>회원 탈퇴 방법 </p>
-        <span>2021-09-10</span>
-      </Content>
+      {NoticeList.map((notice, index) => {
+        return (
+          <Content
+            onClick={() => {
+              history.push(`/mypage/notice/${notice.notice.id}`);
+            }}
+          >
+            <p>
+              {notice.notice.id}.{notice.notice.title}
+            </p>
+            <span>{notice.notice.createdAt}</span>
+          </Content>
+        );
+      })}
     </Wrapper>
   );
 };
@@ -44,7 +43,7 @@ const Content = styled.div`
     color: #be701d;
   }
   p {
-    font-weight: bold;
+    font-weight: 900;
     font-size: 14px;
     margin: 0px 10px;
   }

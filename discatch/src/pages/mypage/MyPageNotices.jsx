@@ -1,9 +1,6 @@
 import React from "react";
-
-/* == components*/
-import { MyPageDetail, Profile, Template } from "../components";
-
-const MyPage = (props) => {
+import { MyPageDetail, Profile, Template, NoticeDesc } from "../../components";
+const MyPageNotices = (props) => {
   return (
     <Template props={props}>
       <div
@@ -16,10 +13,11 @@ const MyPage = (props) => {
         <div style={{ margin: "10px auto" }}>
           <Profile />
         </div>
-        <MyPageDetail />
+        <MyPageDetail menu="notice" />
+        <NoticeDesc id={props.match.params.noticeId} />
       </div>
     </Template>
   );
 };
 
-export default MyPage;
+export default MyPageNotices;

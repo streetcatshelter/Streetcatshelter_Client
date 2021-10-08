@@ -28,8 +28,8 @@ export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),
 };
 export const catApi = {
-  getCatLocation: (location, page, size) =>
-    instance.get(`/cat/${location}?page=${page}&size=${size}`),
+  getCatLocation: (location, size) =>
+    instance.get(`/cat/${location}?page=1&size=${size}`),
   getCatCalendar: (catId) => instance.get(`/cat/calendar/${catId}`),
   getCatGallery: (catId, page, size) =>
     instance.get(`/cat/gallery/${catId}?page=${page}&size=${size}`),

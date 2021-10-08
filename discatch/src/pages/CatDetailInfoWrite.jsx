@@ -27,9 +27,6 @@ const CatDetailInfoWrite = (props) => {
   // console.log(works);
   const dispatch = useDispatch();
 
-  const catId = useSelector((state) => state.cat.list[0].catId);
-  console.log(catId);
-
   const preview = useSelector((state) =>
     state.image.preview ? state.image.preview : Array(),
   );
@@ -75,7 +72,6 @@ const CatDetailInfoWrite = (props) => {
         longitude,
         snack,
         water,
-        catId,
       ),
     );
   };
@@ -169,7 +165,7 @@ const CatDetailInfoWrite = (props) => {
         <CheckGrid>
           <CheckBox
             type="checkbox"
-            value="feed"
+            value="food"
             onChange={(e) => {
               setFood(e.target.checked);
               console.log(e.target.checked);
@@ -181,7 +177,7 @@ const CatDetailInfoWrite = (props) => {
         <CheckGrid>
           <CheckBox
             type="checkbox"
-            value="treat"
+            value="snack"
             onChange={(e) => {
               setSnack(e.target.checked);
               console.log(e.target.checked);

@@ -26,11 +26,11 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../redux/configureStore';
 
 const CatDetail = (props) => {
-  const [menu, setMenu] = useState('캘린더');
-
   const catId = props.match.params.catId;
 
-  const catInfo = useSelector((state) => state.cat.list);
+  const [menu, setMenu] = useState('캘린더');
+
+  const catInfo = useSelector((state) => state.cat);
   console.log(catInfo);
 
   return (
@@ -120,7 +120,12 @@ const CatDetail = (props) => {
         <CatGallery />
       ) : null}
 
-      <Button is_float="is_float" clickEvent={() => {}}>
+      <Button
+        is_float="is_float"
+        clickEvent={() => {
+          history.push(`/catdetailinfowrite/${catId}`);
+        }}
+      >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />
       </Button>
     </Template>

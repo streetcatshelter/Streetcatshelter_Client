@@ -20,25 +20,25 @@ import { imgActions } from '../redux/modules/image';
 import { __createCatDetailInfo } from '../redux/modules/cat';
 
 const CatDetailInfoWrite = (props) => {
-  // const [works, setWorks] = useState([]);
-  // const changeWorks = (e) => {
-  //   setWorks([...works, e.target.value]);
-  // };
-  // console.log(works);
   const dispatch = useDispatch();
 
+  const catId = props.match.params.catId;
+
   const preview = useSelector((state) =>
+    /* eslint-disable */
     state.image.preview ? state.image.preview : Array(),
   );
+
   const [fileNum, setFileNum] = useState(0);
+
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();
     if (fileNum < 3) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setPreview(imageUrl));
-      dispatch(imgActions.setFile([file]));
+      dispatch(imgActions.setPreview(imageUrl, fileNum));
+      dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum + 1);
     } else {
       alert('사진은 최대 3장까지 등록할 수 있어요!');
@@ -72,6 +72,7 @@ const CatDetailInfoWrite = (props) => {
         longitude,
         snack,
         water,
+        catId,
       ),
     );
   };
@@ -109,7 +110,7 @@ const CatDetailInfoWrite = (props) => {
           <Grid width="100px">
             <Image
               borderRadius="10px"
-              src={preview[0]}
+              src={preview[0].preview}
               width="100px"
               height="100px"
             />
@@ -120,7 +121,7 @@ const CatDetailInfoWrite = (props) => {
           <Grid width="100px">
             <Image
               borderRadius="10px"
-              src={preview[1]}
+              src={preview[1].preview}
               width="100px"
               height="100px"
             />
@@ -131,7 +132,7 @@ const CatDetailInfoWrite = (props) => {
           <Grid width="100px">
             <Image
               borderRadius="10px"
-              src={preview[2]}
+              src={preview[2].preview}
               width="100px"
               height="100px"
             />

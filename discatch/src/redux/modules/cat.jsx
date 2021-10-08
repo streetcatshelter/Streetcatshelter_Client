@@ -115,7 +115,7 @@ export const _catCommentCreate =
 // GET
 // 지역에 따라 cat 가져오기 ✅
 export const __getCatLocation =
-  (location, size = 10) =>
+  (location, size = 15) =>
   async (dispatch, getState, { history }) => {
     try {
       const data = await catApi.getCatLocation(location, size);

@@ -16,7 +16,6 @@ import { history } from '../../redux/configureStore';
 import { flexBox } from '../../shared/style';
 
 const CatPost = (cat) => {
-  // console.log(cat);
   const catId = cat.catId;
 
   return (
@@ -68,7 +67,6 @@ const CatPost = (cat) => {
               <Button
                 clickEvent={() => {
                   history.push(`/catdetail/${catId}`);
-                  cat = { cat };
                 }}
                 fontWeight="bold"
                 padding="0"

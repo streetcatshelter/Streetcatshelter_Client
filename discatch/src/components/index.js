@@ -29,7 +29,6 @@ import CalendarModal from "./calendar/CalendarModal";
 
 /* catposts */
 import CatPost from "./catPosts/CatPost";
-import CatPostDetail from "./catPosts/CatPostDetail";
 import CatCalendar from "./catPosts/CatCalendar";
 import CatDiary from "./catPosts/CatDiary";
 import CatGallery from "./catPosts/CatGallery";
@@ -81,7 +80,6 @@ export {
   CalendarModal,
   /* ==catposts */
   CatPost,
-  CatPostDetail,
   CatCalendar,
   CatDiary,
   CatGallery,

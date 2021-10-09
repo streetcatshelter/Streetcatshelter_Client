@@ -22,12 +22,8 @@ import { __createCatDetailInfo } from '../redux/modules/cat';
 const CatDetailInfoWrite = (props) => {
   const dispatch = useDispatch();
 
+  const preview = useSelector((state) => state.image.preview);
   const catId = props.match.params.catId;
-
-  const preview = useSelector((state) =>
-    /* eslint-disable */
-    state.image.preview ? state.image.preview : Array(),
-  );
 
   const [fileNum, setFileNum] = useState(0);
 
@@ -141,21 +137,6 @@ const CatDetailInfoWrite = (props) => {
       </Grid>
 
       <Text margin="0 auto 3% auto">{fileNum}/3</Text>
-
-      {/* {fileUrl && (
-        <Grid
-          width="60%"
-          height="200px"
-          margin="3% auto"
-          addstyle={() => {
-            return css`
-              ${flexBox()}
-            `;
-          }}
-        >
-          <Image src={fileUrl} width="100%" height="100%" />
-        </Grid>
-      )} */}
 
       <Grid
         display="flex"

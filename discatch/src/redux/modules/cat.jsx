@@ -79,9 +79,10 @@ export const __createCatDetailInfo = (
             longitude: longitude,
             snack: snack,
             water: water,
+            catId: catId,
           };
           instance
-            .post(`/cat/detail/${catId}`, (detailInfo, catId))
+            .post(`/cat/detail/${catId}`, detailInfo)
             .then((res) => {
               dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());

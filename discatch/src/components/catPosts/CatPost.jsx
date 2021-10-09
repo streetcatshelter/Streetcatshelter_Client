@@ -1,4 +1,3 @@
-/* eslint-disable */
 // library
 import React from 'react';
 import { css } from 'styled-components';
@@ -38,14 +37,14 @@ const CatPost = (cat) => {
               `;
             }}
           >
-            <Text fontWeight="bold" size="12px">
+            <Text fontWeight="bold" size="12px" width="40%">
               {cat.catName}
             </Text>
-            <Text fontWeight="bold" size="12px" margin="0 5% 0 0" width="45%">
+            <Text fontWeight="bold" size="12px" margin="0 0 0 0" width="60%">
               중성화: {cat.neutering}
             </Text>
 
-            {catId === catId ? <Like /> : null}
+            {catId ? <Like /> : null}
           </Grid>
           {cat.catTagList ? (
             <Grid

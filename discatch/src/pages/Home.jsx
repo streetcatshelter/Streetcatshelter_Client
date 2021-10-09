@@ -20,13 +20,12 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   const catList = useSelector((state) => state.cat.list);
-
-  const location = '망원동';
+  const location = useSelector((state) => state.map.keywordList[0]);
 
   useEffect(() => {
     /* eslint-disable */
     dispatch(__getCatLocation(location));
-  }, []);
+  }, [location]);
 
   return (
     <Template props={props}>

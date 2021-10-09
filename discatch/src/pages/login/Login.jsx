@@ -1,10 +1,10 @@
 import React from "react";
 
-import { Template } from "../../components";
+import { Template, GoogleLoginBtn } from "../../components";
 
 /* == Library - style */
 import styled from "styled-components";
-import { dev_oauthURL } from "../../shared/oauthenv";
+import { dev_oauthKaKaoURL, dev_oauthNaverURL } from "../../shared/oauthenv";
 /* == Custom - Icon */
 import Kakao from "../../styles/images/icon-Kakao.png";
 import Naver from "../../styles/images/icon-Naver(G).png";
@@ -12,6 +12,7 @@ import Google from "../../styles/images/icon-Google.png";
 
 import { useDispatch } from "react-redux";
 import { userActions } from "../../redux/modules/user";
+
 const Login = (props) => {
   const dispatch = useDispatch();
   return (
@@ -33,7 +34,7 @@ const Login = (props) => {
               <LoginBtn
                 background="#F7E600"
                 onClick={() => {
-                  window.location.href = dev_oauthURL;
+                  window.location.href = dev_oauthKaKaoURL;
                 }}
               >
                 <Img
@@ -48,7 +49,7 @@ const Login = (props) => {
               <LoginBtn
                 background="#03c75a"
                 onClick={() => {
-                  dispatch(userActions._loginNaver());
+                  window.location.href = dev_oauthNaverURL;
                 }}
               >
                 <Img
@@ -60,7 +61,7 @@ const Login = (props) => {
                 />
                 <p style={{ color: "#ffffff" }}>네이버로 로그인하기</p>
               </LoginBtn>
-              <LoginBtn
+              {/* <LoginBtn
                 background="#FFFFFF"
                 onClick={() => {
                   dispatch(userActions._loginGoogle());
@@ -74,7 +75,8 @@ const Login = (props) => {
                   margin="auto 11px"
                 />
                 <p>구글로 로그인하기 </p>
-              </LoginBtn>
+              </LoginBtn> */}
+              <GoogleLoginBtn />
             </LoginWrap>
           </Body>
         </Inner>

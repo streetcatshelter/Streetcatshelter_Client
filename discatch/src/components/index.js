@@ -51,6 +51,8 @@ import Location from "./map/Location";
 /* chat */
 import ChatBoxs from "./chat/ChatBoxs";
 import ChatWrite from "./chat/ChatWrite";
+
+import GoogleLoginBtn from "./GoogleLoginBtn";
 export {
   /* ==Templates */
   Router,
@@ -97,4 +99,5 @@ export {
   /* chat */
   ChatBoxs,
   ChatWrite,
+  GoogleLoginBtn,
 };

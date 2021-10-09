@@ -41,7 +41,7 @@ const Router = () => {
       <Route path="/mypage/notice/:noticeId" exact component={MyPageNotices} />
       <Route path="/mypage/work" exact component={MyPageWork} />
       <Route path="/login" exact component={Login} />
-      <Route path="/user/kakao/callback" exact component={LoginRedirect} />
+      <Route path="/user/login/callback" exact component={LoginRedirect} />
       {/* <Route path="/login" component={Auth(Login, false)} exact /> */}
       {/* <Route
         path="/user/kakao/callback"

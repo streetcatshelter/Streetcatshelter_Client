@@ -17,23 +17,19 @@ import { Grid, Input, Button } from '../../elements/index';
 import { useLocation } from 'react-router-dom';
 
 // REDUX
-import {
-  getOneCommunityDB,
-  addCommunityCommentDB,
-  deleteCommunityCommentDB,
-} from '../../redux/modules/community';
+import { addCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentList = (props) => {
   const path = useLocation();
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
 
-  // let communityId = props.props.match.params.communityId;
-  // if (path.pathname === '/catdetail') {
-  //   communityId = 1;
-  // } else {
-  //   communityId = props.props.match.params.communityId;
-  // }
+  let communityId = props.props.match.params.communityId;
+  if (path.pathname === '/catdetail') {
+    communityId = 1;
+  } else {
+    communityId = props.props.match.params.communityId;
+  }
 
   const [comments, setComment] = React.useState('');
 
@@ -44,11 +40,11 @@ const CommentList = (props) => {
   };
 
   const addCommentBtn = () => {
-    // if (path.pathname === `/communitypostdetail/${communityId}`) {
-    //   dispatch(addCommunityCommentDB(comments, communityId));
-    // } else {
-    //   console.log('캣 댓글 추가');
-    // }
+    if (path.pathname === `/communitypostdetail/${communityId}`) {
+      dispatch(addCommunityCommentDB(comments, communityId));
+    } else {
+      console.log('캣 댓글 추가');
+    }
   };
 
   return (

@@ -21,34 +21,8 @@ import { __createCatInfo } from '../redux/modules/cat';
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
+
   const [fileUrl, setFileUrl] = useState(null);
-  const [catName, setCatName] = useState('');
-  const [neutering, setNeutering] = useState('중성화 여부');
-  const [catTag, setCatTag] = useState();
-
-  const location = '망원동';
-  const username = '냥냥이맘';
-  const latitude = 0;
-  const longitude = 0;
-
-  const Options = [
-    { key: 1, value: '중성화 여부' },
-    { key: 2, value: 'YES' },
-    { key: 3, value: 'NO' },
-    { key: 4, value: 'UNDEFINED' },
-  ];
-
-  const $neutering = (e) => {
-    setNeutering(e.target.value);
-  };
-
-  const $catName = (e) => {
-    setCatName(e.target.value);
-  };
-
-  const $catTag = (e) => {
-    setCatTag(e.target.value);
-  };
 
   // S3
   const handleInputFile = (e) => {
@@ -60,6 +34,41 @@ const CatInfoWrite = (props) => {
     setFileUrl(imageUrl);
   };
 
+  const Options = [
+    { key: 1, value: '중성화 여부' },
+    { key: 2, value: 'YES' },
+    { key: 3, value: 'NO' },
+    { key: 4, value: 'UNDEFINED' },
+  ];
+
+  const [userName, setUserName] = useState('');
+  const $userName = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const [catName, setCatName] = useState('');
+  const $catName = (e) => {
+    setCatName(e.target.value);
+  };
+
+  const [location, setLocation] = useState('');
+  const $location = (e) => {
+    setLocation(e.target.value);
+  };
+
+  const [neutering, setNeutering] = useState('중성화 여부');
+  const $neutering = (e) => {
+    setNeutering(e.target.value);
+  };
+
+  const [catTag, setCatTag] = useState();
+  const $catTag = (e) => {
+    setCatTag(e.target.value);
+  };
+
+  const latitude = 0;
+  const longitude = 0;
+
   const createBtn = () => {
     dispatch(
       __createCatInfo(
@@ -67,7 +76,7 @@ const CatInfoWrite = (props) => {
         [catTag],
         neutering,
         location,
-        username,
+        userName,
         latitude,
         longitude,
       ),
@@ -117,8 +126,25 @@ const CatInfoWrite = (props) => {
             padding="6px"
             width="96%"
             radius="10px"
-            placeholder="이름"
+            placeholder="닉네임"
+            changeEvent={$userName}
+          />
+
+          <Input
+            margin="5% 0"
+            padding="6px"
+            width="96%"
+            radius="10px"
+            placeholder="고양이 이름"
             changeEvent={$catName}
+          />
+
+          <Input
+            padding="6px"
+            width="96%"
+            radius="10px"
+            placeholder="지역"
+            changeEvent={$location}
           />
 
           <Select value={neutering} onChange={$neutering}>
@@ -165,7 +191,7 @@ const Select = styled.select`
   width: 100%;
   border-radius: 10px;
   padding: 6px;
-  margin: 6% 0;
+  margin-top: 5%;
   outline: none;
 `;
 export default CatInfoWrite;

@@ -69,8 +69,9 @@ export const __createCatDetailInfo = (
       dispatch(
         imgActions.uploadImagesDB(() => {
           const imageUrl = getState().image.imageUrls;
+
           const detailInfo = {
-            catImage: imageUrl,
+            catImages: imageUrl,
             catTags: catTags,
             diary: diary,
             food: food,
@@ -78,13 +79,14 @@ export const __createCatDetailInfo = (
             longitude: longitude,
             snack: snack,
             water: water,
+            catId: catId,
           };
           instance
             .post(`/cat/detail/${catId}`, detailInfo)
             .then((res) => {
               dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());
-              // history.push(`/catdetail/${catId}`);
+              history.push('/');
             })
             .catch((err) => {
               console.error(err);
@@ -156,7 +158,7 @@ export const __getCatCalendar =
 
 const initialState = {
   list: [],
-  detailList: [],
+  catdetail: [],
   page: 0,
   start: 0,
 };
@@ -190,7 +192,7 @@ const cat = createSlice({
         snack: action.payload.snack,
         water: action.payload.water,
       };
-      state.list.push(detailInfo);
+      state.catdetail.push(detailInfo);
     },
 
     getCatLocation: (state, action) => {

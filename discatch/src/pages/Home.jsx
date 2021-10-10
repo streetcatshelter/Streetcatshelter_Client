@@ -18,13 +18,14 @@ import { __getCatLocation } from '../redux/modules/cat';
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const location = '망원동';
 
   const catList = useSelector((state) => state.cat.list);
+  const location = useSelector((state) => state.map.keywordList[0]);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    /* eslint-disable */
     dispatch(__getCatLocation(location));
-  }, []);
+  }, [location]);
 
   return (
     <Template props={props}>

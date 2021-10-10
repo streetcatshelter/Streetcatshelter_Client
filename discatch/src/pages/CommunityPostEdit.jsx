@@ -41,17 +41,6 @@ const CommunityPostEdit = (props) => {
     username: state.community.list.data?.username,
   }));
   const imageNum = imageList?.length;
-  console.log(imageList);
-  console.log(preview);
-  let newImageList = [...imageList];
-  console.log(newImageList.splice(1,1))
-  console.log(newImageList);
-
-  // const a = imageList.splice(1,1);
-  // console.log(a);
-  const a = [{1:1, 2:2},{2:2},{3:3}]
-  console.log(a.splice(1,1))
-  console.log(a);
 
   const dispatch = useDispatch();
 
@@ -83,16 +72,14 @@ const CommunityPostEdit = (props) => {
   };
 
   const editBtn = () => {
-    dispatch(imgActions.setFile(newImageList, imageNum));
-    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, newImageList));
+    dispatch(imgActions.setFiles(imageList, imageNum));
+    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, imageList));
   };
 
   const delImageBtn = (previewId, fileId) => {
     dispatch(imgActions.delPreview(previewId));
     dispatch(imgActions.delFile(fileId));
     setFileNum(fileNum-1)
-    newImageList.splice(fileId, 1)
-    console.log(newImageList);
   }
 
   return (
@@ -200,7 +187,7 @@ const CommunityPostEdit = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-              {(imageList[0] || preview[0]) && (
+              {(imageList[0] || preview[0 - imageNum]) && (
                 <Grid
                   width={"90px"}
                   height={"90px"}
@@ -215,7 +202,9 @@ const CommunityPostEdit = (props) => {
                   }}
                 >
                   <Image src={imageList[0]?.image || preview[0-imageNum].preview } width="100%" height="100%">
-                  <DeleteButton onClick={()=>delImageBtn(0,0)}>X</DeleteButton>
+                  {(preview[0-imageNum]) ? 
+                  (<DeleteButton onClick={()=>delImageBtn(0,0)}>X</DeleteButton>) : 
+                  (<EmptyButton>null</EmptyButton>)}
                   </Image>
                 </Grid>
               )}
@@ -234,7 +223,9 @@ const CommunityPostEdit = (props) => {
                   }}
                 >
                   <Image src={imageList[1]?.image || preview[1-imageNum].preview} width="100%" height="100%">
-                  <DeleteButton onClick={()=>delImageBtn(1,1)}>X</DeleteButton>
+                  {(preview[1-imageNum]) ? 
+                  (<DeleteButton onClick={()=>delImageBtn(1,1)}>X</DeleteButton>) : 
+                  (<EmptyButton>null</EmptyButton>)}
                   </Image>
                 </Grid>
               )}
@@ -253,7 +244,9 @@ const CommunityPostEdit = (props) => {
                   }}
                 >
                   <Image src={imageList[2]?.image || preview[2-imageNum].preview} width="100%" height="100%">
-                  <DeleteButton onClick={()=>delImageBtn(2,2)}>X</DeleteButton>
+                  {(preview[2-imageNum]) ? 
+                  (<DeleteButton onClick={()=>delImageBtn(2,2)}>X</DeleteButton>) : 
+                  (<EmptyButton>null</EmptyButton>)}
                   </Image>
                 </Grid>
               )}
@@ -272,7 +265,9 @@ const CommunityPostEdit = (props) => {
                   }}
                 >
                   <Image src={imageList[3]?.image || preview[3-imageNum].preview} width="100%" height="100%">
-                  <DeleteButton onClick={()=>delImageBtn(3,3)}>X</DeleteButton>
+                  {(preview[3-imageNum]) ? 
+                  (<DeleteButton onClick={()=>delImageBtn(3,3)}>X</DeleteButton>) : 
+                  (<EmptyButton>null</EmptyButton>)}
                   </Image>
                 </Grid>
               )}
@@ -291,7 +286,9 @@ const CommunityPostEdit = (props) => {
                   }}
                 >
                   <Image src={imageList[4]?.image || preview[4-imageNum].preview} width="100%" height="100%">
-                  <DeleteButton onClick={()=>delImageBtn(4,4)}>X</DeleteButton>
+                  {(preview[4-imageNum]) ? 
+                  (<DeleteButton onClick={()=>delImageBtn(4,4)}>X</DeleteButton>) : 
+                  (<EmptyButton>null</EmptyButton>)}
                   </Image>
                 </Grid>
               )}
@@ -415,6 +412,19 @@ const DeleteButton = styled.button`
   border-radius: 13px;
   border: 0;
   background-color: lightgray;
+`;
+
+const EmptyButton = styled.button`
+  width: 13px;
+  height: 13px;
+  font-size: 10px;
+  align-items: center;
+  justify-content: center;
+  display:flex;
+  border-radius: 13px;
+  border: 0;
+  background-color: transparent;
+  color: transparent;
 `;
 
 export default CommunityPostEdit;

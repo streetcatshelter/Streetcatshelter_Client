@@ -16,7 +16,6 @@ const _setNotice =
 const _getOneNotice =
   (id) =>
   async (dispatch, getState, { history }) => {
-    console.log(id);
     try {
       const { data } = await myPageApi.getOneNotice(id);
       dispatch(getNoticeDetail(data));
@@ -36,10 +35,10 @@ const mypage = createSlice({
   initialState,
   reducers: {
     setNotice: (state, action) => {
-      state.noticelist = action.payload;
+      state.noticelist = [...action.payload];
     },
     getNoticeDetail: (state, action) => {
-      state.noticedetail = action.payload;
+      state.noticedetail = [...action.payload];
     },
   },
 });

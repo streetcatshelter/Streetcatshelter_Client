@@ -11,7 +11,7 @@ const instance = axios.create({
 });
 
 setToken(
-  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTMyNjIyMDczIiwiaWF0IjoxNjMzOTQ3MjY4LCJleHAiOjE2MzM5NTQ0Njh9.KHejLHOcUoKsJhBxLEkvVsU9QQYMCKUmXtUSHPWMaAk"
+  ""
 );
 
 instance.interceptors.request.use((config) => {

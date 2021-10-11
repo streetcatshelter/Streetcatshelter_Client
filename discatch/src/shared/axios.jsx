@@ -1,29 +1,31 @@
 // LIBRARY
-import axios from 'axios';
+import axios from "axios";
 
 // FUNCTION
-import { getToken, setToken } from './token';
+import { getToken, setToken } from "./token";
 
 axios.defaults.withCredentials = true;
 
 const instance = axios.create({
-  baseURL: 'http://52.78.241.50/',
+  baseURL: "http://52.78.241.50/",
 });
 
-// setToken('');
+setToken(
+  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTMyNjIyMDczIiwiaWF0IjoxNjMzOTQ3MjY4LCJleHAiOjE2MzM5NTQ0Njh9.KHejLHOcUoKsJhBxLEkvVsU9QQYMCKUmXtUSHPWMaAk"
+);
 
 instance.interceptors.request.use((config) => {
-  config.headers['Content-Type'] = 'application/json; charset=utf-8';
-  config.headers['X-Requested-With'] = 'XMLHttpRequest';
-  config.headers['Accept'] = '*/*';
-  config.headers['Authorization'] = getToken();
+  config.headers["Content-Type"] = "application/json; charset=utf-8";
+  config.headers["X-Requested-With"] = "XMLHttpRequest";
+  config.headers["Accept"] = "*/*";
+  config.headers["Authorization"] = getToken();
   // config.headers['Authorization'] = `Bearer ${getToken()}`;
   return config;
 });
 
 export const userApi = {};
 export const myPageApi = {
-  getNotice: () => instance.get('/mypage/notice'),
+  getNotice: () => instance.get("/mypage/notice"),
   getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),
 };
 
@@ -37,25 +39,25 @@ export const catApi = {
     instance.get(`/cat/diary/${catId}?page=${page}&size=${size}`),
   getCatComment: (catId, size) =>
     instance.get(`/cat/comment/${catId}?page=0&size=${size}`),
-  createCatComment: () => instance.post('/cat/comment'),
-  deleteCatComment: () => instance.delete('/cat/comment'),
+  createCatComment: () => instance.post("/cat/comment"),
+  deleteCatComment: () => instance.delete("/cat/comment"),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
-  updateCatDetail: () => instance.put('/cat/detailUpdate'),
-  deleteCatDetail: () => instance.delete('/cat/detailDelete'),
-  catFavorite: () => instance.post('/cat/favorite'),
+  updateCatDetail: () => instance.put("/cat/detailUpdate"),
+  deleteCatDetail: () => instance.delete("/cat/detailDelete"),
+  catFavorite: () => instance.post("/cat/favorite"),
 };
 
 export const communityApi = {
-  createCommunity: (postInfo) => instance.post('/community/create', postInfo),
+  createCommunity: (postInfo) => instance.post("/community/create", postInfo),
   getCommunity: (category, location, limit) =>
     instance.get(
-      `/community/category/${category}?page=1&size=${limit}&location=${location}`,
+      `/community/category/${category}?page=1&size=${limit}&location=${location}`
     ),
   getMoreCommunity: (category, start, limit, location) =>
     instance.get(
       `/community/category/${category}?page=${
         start + 1
-      }&size=${limit}&location=${location}`,
+      }&size=${limit}&location=${location}`
     ),
   getDetailCommunity: (communityId) =>
     instance.get(`/community/${communityId}`),
@@ -66,7 +68,7 @@ export const communityApi = {
     location,
     editTitle,
     username,
-    communityId,
+    communityId
   ) =>
     instance.put(`/community/${communityId}`, {
       category: category,

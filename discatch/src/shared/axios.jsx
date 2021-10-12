@@ -10,9 +10,7 @@ const instance = axios.create({
   baseURL: "http://52.78.241.50/",
 });
 
-
 setToken("");
-
 
 instance.interceptors.request.use((config) => {
   config.headers["Content-Type"] = "application/json; charset=utf-8";

@@ -315,7 +315,7 @@ const CommunityPostEdit = (props) => {
               fontSize="14px"
               fontWeight="bold"
               bgColor="D_yellow"
-              onClick={() => history.goBack()}
+              onClick={() => window.location.replace(`/communitypostdetail/${communityId}`)}
               addstyle={() => {
                 return css`
                   display: flex;

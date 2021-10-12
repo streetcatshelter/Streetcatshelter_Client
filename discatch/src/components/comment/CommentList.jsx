@@ -24,12 +24,7 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
 
-  let communityId = props.props.match.params.communityId;
-  if (path.pathname === '/catdetail') {
-    communityId = 1;
-  } else {
-    communityId = props.props.match.params.communityId;
-  }
+  let communityId = props.props?.match.params.communityId
 
   const [comments, setComment] = React.useState('');
 
@@ -76,6 +71,11 @@ const CommentList = (props) => {
           padding="0.4rem"
           margin="0 0 0 -38px"
           clickEvent={addCommentBtn}
+          addstyle={() => {
+            return css`
+              z-index:1;
+            `;
+          }}
         >
           작성
         </Button>
@@ -85,8 +85,6 @@ const CommentList = (props) => {
         commentList.map((comment, idx) => {
           return <CommentCard key={idx} comment={comment} />;
         })}
-
-      {/* <Button width="100%">더보기</Button> */}
     </>
   );
 };

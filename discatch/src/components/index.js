@@ -43,6 +43,7 @@ import CommentList from "./comment/CommentList";
 /* community */
 import CommunityCategoryCard from "./community/CommunityCategoryCard";
 import CommunityPost from "./community/CommunityPost";
+import CommunityPreview from './community/CommunityPreview';
 
 /* map */
 import Location from "./map/Location";
@@ -92,6 +93,7 @@ export {
   /* ==community */
   CommunityCategoryCard,
   CommunityPost,
+  CommunityPreview,
   /* map */
   Location,
   /* chat */

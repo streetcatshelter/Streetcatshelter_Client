@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template } from "../components";
+import { CommunityPreview, Template } from "../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -14,9 +14,6 @@ import { Grid, Button, Input, TextArea, Text, Image } from "../elements/index";
 // REDUX
 import { imgActions } from "../redux/modules/image";
 import { editCommunityDB } from "../redux/modules/community";
-
-// ROUTE
-import { useLocation } from "react-router-dom";
 
 // ICON
 import { Camera } from "react-feather";
@@ -76,10 +73,32 @@ const CommunityPostEdit = (props) => {
     dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, imageList));
   };
 
-  const delImageBtn = (previewId, fileId) => {
-    dispatch(imgActions.delPreview(previewId));
-    dispatch(imgActions.delFile(fileId));
-    setFileNum(fileNum-1)
+  const delLastImageBtn = () => {
+    if (preview.lentgh === 5) {
+      dispatch(imgActions.delPreview(fileNum-1));
+      dispatch(imgActions.delFile(fileNum-1));
+      setFileNum(fileNum-1)
+    } else if (preview.length === 4) {
+      dispatch(imgActions.delPreview(fileNum-1));
+      dispatch(imgActions.delFile(fileNum-1));
+      setFileNum(fileNum-1)
+    } else if (preview.length === 3) {
+      dispatch(imgActions.delPreview(fileNum-1));
+      dispatch(imgActions.delFile(fileNum-1));
+      setFileNum(fileNum-1)
+    } else if (preview.length === 2) {
+      dispatch(imgActions.delPreview(fileNum-1));
+      dispatch(imgActions.delFile(fileNum-1));
+      setFileNum(fileNum-1)
+    } else if (preview.length === 1) {
+      dispatch(imgActions.delPreview(fileNum-1));
+      dispatch(imgActions.delFile(fileNum-1));
+      setFileNum(fileNum-1)
+    } else if (preview.length === 0 && imageNum !== 0){
+      alert('이전에 추가한 사진은 삭제할 수 없어요!');
+    } else {
+      alert('삭제할 사진이 없어요!');
+    }
   }
 
   return (
@@ -103,7 +122,6 @@ const CommunityPostEdit = (props) => {
               addstyle={() => {
                 return css`
                   border-radius: 10px;
-                  margin: 0 0 16px 2px;
                 `;
               }}
             />
@@ -117,10 +135,25 @@ const CommunityPostEdit = (props) => {
               addstyle={() => {
                 return css`
                   border-radius: 10px;
-                  margin: 0 0 16px 2px;
+                  margin: 0 0 10px 0;
                 `;
               }}
             />
+            <Button
+              bgColor="lightGray"
+              onClick={()=>delLastImageBtn()}
+              addstyle={() => {
+                return css`
+                  display:flex;
+                  justify-content:center;
+                  align-items:center;
+                  height: 20px;
+                  width:120px;
+                  position: relative;
+                  top: 3px;
+                  left:4vw;
+                `;
+              }}>마지막 사진 삭제</Button>
             <Grid
               margin="0 0 0 12px"
               addstyle={() => {
@@ -188,109 +221,44 @@ const CommunityPostEdit = (props) => {
                 </Grid>
               </Grid>
               {(imageList[0] || preview[0 - imageNum]) && (
-                <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
-                  addstyle={() => {
-                    return css`
-                      position:relative;
-                      background: lightgray;
-                      display: inline-block;
-                      bottom: 75px;
-                    `;
-                  }}
-                >
-                  <Image src={imageList[0]?.image || preview[0-imageNum].preview } width="100%" height="100%">
-                  {(preview[0-imageNum]) ? 
-                  (<DeleteButton onClick={()=>delImageBtn(0,0)}>X</DeleteButton>) : 
-                  (<EmptyButton>null</EmptyButton>)}
-                  </Image>
-                </Grid>
+                <CommunityPreview
+                  preview={preview} 
+                  imageList={imageList}
+                  imageNum={imageNum}
+                  previewNum={0}
+                />
               )}
               {(imageList[1] || preview[1 - imageNum]) && (
-                <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
-                  addstyle={() => {
-                    return css`
-                      position:relative;
-                      background: lightgray;
-                      display: inline-block;
-                      bottom: 75px;
-                    `;
-                  }}
-                >
-                  <Image src={imageList[1]?.image || preview[1-imageNum].preview} width="100%" height="100%">
-                  {(preview[1-imageNum]) ? 
-                  (<DeleteButton onClick={()=>delImageBtn(1,1)}>X</DeleteButton>) : 
-                  (<EmptyButton>null</EmptyButton>)}
-                  </Image>
-                </Grid>
+                <CommunityPreview
+                  preview={preview} 
+                  imageList={imageList}
+                  imageNum={imageNum}
+                  previewNum={1}
+                />
               )}
               {(imageList[2] || preview[2 - imageNum]) && (
-                <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
-                  addstyle={() => {
-                    return css`
-                      position:relative;
-                      background: lightgray;
-                      display: inline-block;
-                      bottom: 75px;
-                    `;
-                  }}
-                >
-                  <Image src={imageList[2]?.image || preview[2-imageNum].preview} width="100%" height="100%">
-                  {(preview[2-imageNum]) ? 
-                  (<DeleteButton onClick={()=>delImageBtn(2,2)}>X</DeleteButton>) : 
-                  (<EmptyButton>null</EmptyButton>)}
-                  </Image>
-                </Grid>
+                <CommunityPreview
+                  preview={preview} 
+                  imageList={imageList}
+                  imageNum={imageNum}
+                  previewNum={2}
+                />
               )}
               {(imageList[3] || preview[3 - imageNum]) && (
-                <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
-                  addstyle={() => {
-                    return css`
-                      position:relative;
-                      background: lightgray;
-                      display: inline-block;
-                      bottom: 75px;
-                    `;
-                  }}
-                >
-                  <Image src={imageList[3]?.image || preview[3-imageNum].preview} width="100%" height="100%">
-                  {(preview[3-imageNum]) ? 
-                  (<DeleteButton onClick={()=>delImageBtn(3,3)}>X</DeleteButton>) : 
-                  (<EmptyButton>null</EmptyButton>)}
-                  </Image>
-                </Grid>
+                <CommunityPreview
+                  preview={preview} 
+                  imageList={imageList}
+                  imageNum={imageNum}
+                  previewNum={3}
+                />
               )}
               {(imageList[4] || preview[4 - imageNum]) && (
-                <Grid
-                  width={"90px"}
-                  height={"90px"}
-                  margin={"0 5.5px"}
-                  addstyle={() => {
-                    return css`
-                      position:relative;
-                      background: lightgray;
-                      display: inline-block;
-                      bottom: 75px;
-                    `;
-                  }}
-                >
-                  <Image src={imageList[4]?.image || preview[4-imageNum].preview} width="100%" height="100%">
-                  {(preview[4-imageNum]) ? 
-                  (<DeleteButton onClick={()=>delImageBtn(4,4)}>X</DeleteButton>) : 
-                  (<EmptyButton>null</EmptyButton>)}
-                  </Image>
-                </Grid>
+                <CommunityPreview
+                  preview={preview} 
+                  imageList={imageList}
+                  imageNum={imageNum}
+                  previewNum={4}
+                />
               )}
             </Grid>
             <TextArea
@@ -400,31 +368,6 @@ const UploadButton = styled.label`
   display: block;
   float: right;
   margin-bottom: 40px;
-`;
-
-const DeleteButton = styled.button`
-  width: 13px;
-  height: 13px;
-  font-size: 10px;
-  align-items: center;
-  justify-content: center;
-  display:flex;
-  border-radius: 13px;
-  border: 0;
-  background-color: lightgray;
-`;
-
-const EmptyButton = styled.button`
-  width: 13px;
-  height: 13px;
-  font-size: 10px;
-  align-items: center;
-  justify-content: center;
-  display:flex;
-  border-radius: 13px;
-  border: 0;
-  background-color: transparent;
-  color: transparent;
 `;
 
 export default CommunityPostEdit;

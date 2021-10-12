@@ -1,19 +1,66 @@
 import React, { useEffect } from "react";
+/* == Library - style */
+import styled from "styled-components";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
 const NoticeDesc = (props) => {
-  const NoticeDetail = useSelector((state) => state.mypage.noticedetail);
-
+  const NoticeDetail = useSelector((state) => state.mypage.noticedetail.notice);
+  console.log(NoticeDetail);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(mypageActions._setNotice(props.id));
+    dispatch(mypageActions._getOneNotice(props.id));
   }, []);
+  // const modifiedAt = NoticeDetail.modifiedAt.split('일)[3];
+
+  if (!NoticeDetail) {
+    return <div></div>;
+  }
   return (
-    <div>
-      <p>{NoticeDetail.title}</p>
-      <p>{NoticeDetail.contents}</p>
-    </div>
+    <Wrap>
+      <Title>
+        <p>disCATch 공지사항🐈</p>
+      </Title>
+      <Header>
+        <p>{NoticeDetail.title}</p>
+        <small>{NoticeDetail.modifiedAt}</small>
+      </Header>
+      <Body>
+        <p>{NoticeDetail.contents}</p>
+      </Body>
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  width: 100%;
+`;
+const Title = styled.div`
+  height: 50px;
+  margin: auto;
+  p {
+    text-align: center;
+    font-weight: 900;
+    font-size: 24px;
+  }
+`;
+const Header = styled.div`
+  height: 30px;
+  border-bottom: 0.5px solid #b5bb19;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+  p {
+    margin: 0px;
+    font-size: 16px;
+  }
+`;
+const Body = styled.div`
+  padding: 10px;
+  p {
+    margin: 0px;
+    font-size: 14px;
+  }
+`;
 
 export default NoticeDesc;

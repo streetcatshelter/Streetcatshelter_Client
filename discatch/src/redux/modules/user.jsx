@@ -6,8 +6,8 @@ const _loginKakao =
   (authorization_code) =>
   async (dispatch, getState, { history }) => {
     try {
-      // const { data } = await userApi.getKakao(authorization_code);
-      // console.log(authorization_code);
+      const { data } = await userApi.getKakao(authorization_code);
+      console.log(data);
       history.push("/");
     } catch (e) {
       console.log(e);

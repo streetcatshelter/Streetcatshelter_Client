@@ -13,9 +13,7 @@ import { useLocation } from "react-router-dom";
 const CommunityPreview = (preview) => {
     const previewImage = preview.preview[preview.previewNum]?.preview;
     const path = useLocation();
-    console.log(preview);
     const pathLength = path.pathname.split('/').length
-    console.log(path);
     let editImage = null;
     if (pathLength === 3) {
       editImage = preview?.preview[preview.previewNum-preview.imageNum]?.preview || preview?.imageList[preview.previewNum]?.image;
@@ -66,30 +64,5 @@ const CommunityPreview = (preview) => {
         </>
     )
 }
-
-const DeleteButton = styled.button`
-  width: 13px;
-  height: 13px;
-  font-size: 10px;
-  align-items: center;
-  justify-content: center;
-  display:flex;
-  border-radius: 13px;
-  border: 0;
-  background-color: lightgray;
-`;
-
-const EmptyButton = styled.button`
-  width: 13px;
-  height: 13px;
-  font-size: 10px;
-  align-items: center;
-  justify-content: center;
-  display:flex;
-  border-radius: 13px;
-  border: 0;
-  background-color: transparent;
-  color: transparent;
-`;
 
 export default CommunityPreview;

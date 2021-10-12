@@ -161,6 +161,4 @@ export const imgActions = {
   uploadImageDB,
   setPreview,
   delPreview,
-  // delImages,
-  // delImage,
 };

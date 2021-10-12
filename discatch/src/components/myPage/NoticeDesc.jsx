@@ -5,13 +5,13 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
 const NoticeDesc = (props) => {
-  const NoticeDetail = useSelector((state) => state.mypage.noticedetail.notice);
+  const NoticeDetail = useSelector((state) => state.mypage.noticedetail);
   console.log(NoticeDetail);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(mypageActions._getOneNotice(props.id));
   }, []);
-  // const modifiedAt = NoticeDetail.modifiedAt.split('일)[3];
+  const modifiedAt = moment(NoticeDetail.modifiedAt).format("YYYY-M-D");
 
   if (!NoticeDetail) {
     return <div></div>;
@@ -23,7 +23,7 @@ const NoticeDesc = (props) => {
       </Title>
       <Header>
         <p>{NoticeDetail.title}</p>
-        <small>{NoticeDetail.modifiedAt}</small>
+        <small>{modifiedAt}</small>
       </Header>
       <Body>
         <p>{NoticeDetail.contents}</p>

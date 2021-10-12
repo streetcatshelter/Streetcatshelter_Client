@@ -21,7 +21,10 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
-export const userApi = {};
+export const userApi = {
+  getKakao: (authorization_code) =>
+    instance.get(`/user/kakao/callback?code=${authorization_code}}`),
+};
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),
   getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),

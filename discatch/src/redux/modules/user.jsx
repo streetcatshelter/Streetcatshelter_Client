@@ -1,13 +1,31 @@
 // LIBRARY
 import { createSlice } from "@reduxjs/toolkit";
 import { userApi } from "../../shared/axios";
-
+import jwtDecode from "jwt-decode";
+import { setCookie } from "../../shared/token";
+// import { setCookie, deleteCookie } from "../shared/cookie";
 const _loginKakao =
   (authorization_code) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await userApi.getKakao(authorization_code);
+      // window.localStorage.setItem(
+      //   "token",
+      //   JSON.stringify({
+      //     access_token: data,
+      //   })
+      // );
+
+      // str 변환 후 decode
       console.log(data);
+      const str_data = JSON.stringify(data);
+      console.log(str_data);
+      const decoded = jwtDecode(str_data);
+      console.log(decoded);
+
+      // setCookie("TOKEN", 값)
+      setCookie("TOKEN", str_data);
+      // 메인페이지 이동
       history.push("/");
     } catch (e) {
       console.log(e);
@@ -40,8 +58,16 @@ const _loginKakao =
 //     }
 //   };
 
+const _setLogin =
+  () =>
+  (dispatch, getState, { history }) => {
+    const token = document.cookie;
+    if (token !== "") {
+      dispatch(setLogin());
+    }
+  };
 const initialState = {
-  list: [],
+  isLoggedIn: true,
 };
 
 // 리듀서
@@ -53,11 +79,18 @@ const user = createSlice({
       const keyword = action.payload;
       state.list.unshift(keyword);
     },
+    setLogin: (state, action) => {
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
+    },
   },
 });
 
 export const userActions = {
   _loginKakao,
+  _setLogin,
 };
-
+export const { setLogin } = user.actions;
 export default user;

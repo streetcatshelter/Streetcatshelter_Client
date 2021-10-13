@@ -13,17 +13,19 @@ const instance = axios.create({
 setToken("");
 
 instance.interceptors.request.use((config) => {
+  const TOKEN = document.cookie.split("=")[1];
+  if (TOKEN) {
+    config.headers["TOKEN"] = TOKEN;
+  }
   config.headers["Content-Type"] = "application/json; charset=utf-8";
   config.headers["X-Requested-With"] = "XMLHttpRequest";
   config.headers["Accept"] = "*/*";
-  config.headers["Authorization"] = getToken();
-  // config.headers['Authorization'] = `Bearer ${getToken()}`;
   return config;
 });
 
 export const userApi = {
   getKakao: (authorization_code) =>
-    instance.get(`/user/kakao/callback?code=${authorization_code}}`),
+    instance.get(`/user/kakao/callback/?code=${authorization_code}`),
 };
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),

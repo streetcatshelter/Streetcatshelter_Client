@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-// import Auth from "../shared/auth";
+import Auth from "../shared/auth";
 /* == Pages */
 import {
   Home,
@@ -34,20 +34,18 @@ import test from "../pages/test";
 const Router = () => {
   return (
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/slider" exact component={Slider} />
-      <Route path="/mypage" exact component={MyPageCat} />
-      <Route path="/mypage/notice" exact component={MyPageNoticeList} />
+      <Route path="/" component={Auth(Home, false)} exact />
+      <Route path="/slider" component={Auth(Slider, false)} exact />
+      <Route path="/mypage" component={Auth(MyPageCat, false)} exact />
+      <Route
+        path="/mypage/notice"
+        component={Auth(MyPageNoticeList, false)}
+        exact
+      />
       <Route path="/mypage/notice/:noticeId" exact component={MyPageNotices} />
       <Route path="/mypage/work" exact component={MyPageWork} />
       <Route path="/login" exact component={Login} />
       <Route path="/user/login/callback" exact component={LoginRedirect} />
-      {/* <Route path="/login" component={Auth(Login, false)} exact /> */}
-      {/* <Route
-        path="/user/kakao/callback"
-        component={Auth(LoginRedirect, false)}
-        exact
-      /> */}
 
       <Route path="/userinfowrite" exact component={UserInfoWrite} />
       <Route path="/userinfoedit" exact component={UserInfoWrite} />

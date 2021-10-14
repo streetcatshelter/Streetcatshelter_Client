@@ -21,6 +21,7 @@ import { __createCatInfo } from '../redux/modules/cat';
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
+  const location = props.match.params.location;
 
   const [fileUrl, setFileUrl] = useState(null);
 
@@ -49,11 +50,6 @@ const CatInfoWrite = (props) => {
   const [catName, setCatName] = useState('');
   const $catName = (e) => {
     setCatName(e.target.value);
-  };
-
-  const [location, setLocation] = useState('');
-  const $location = (e) => {
-    setLocation(e.target.value);
   };
 
   const [neutering, setNeutering] = useState('중성화 여부');
@@ -137,14 +133,6 @@ const CatInfoWrite = (props) => {
             radius="10px"
             placeholder="고양이 이름"
             changeEvent={$catName}
-          />
-
-          <Input
-            padding="6px"
-            width="96%"
-            radius="10px"
-            placeholder="지역"
-            changeEvent={$location}
           />
 
           <Select value={neutering} onChange={$neutering}>

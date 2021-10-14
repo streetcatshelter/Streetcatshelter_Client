@@ -1,5 +1,6 @@
 // library
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { css } from 'styled-components';
 
 // element
@@ -16,6 +17,10 @@ import { flexBox } from '../../shared/style';
 
 const CatPost = (cat) => {
   const catId = cat.catId;
+  console.log(catId);
+  // console.log(cat);
+
+  const location = useSelector((state) => state.map.keywordList[0]);
 
   return (
     <React.Fragment>
@@ -55,9 +60,9 @@ const CatPost = (cat) => {
                 `;
               }}
             >
-              {cat.catTagList.map((tag, idx) => {
+              {cat.catTagList.map((tag) => {
                 return (
-                  <Text key={idx} size="12px" fontWeight="bold">
+                  <Text key={catId} size="12px" fontWeight="bold">
                     #{tag.tag}
                   </Text>
                 );
@@ -65,7 +70,7 @@ const CatPost = (cat) => {
 
               <Button
                 clickEvent={() => {
-                  history.push(`/catdetail/${catId}`);
+                  history.push(`/catdetail/${catId}/${location}`);
                 }}
                 fontWeight="bold"
                 padding="0"

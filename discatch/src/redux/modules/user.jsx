@@ -9,8 +9,17 @@ const _loginKakao =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await userApi.getKakao(authorization_code);
-      const str_data = JSON.stringify(data);
-      setToken(str_data);
+
+      const userInfo = {
+        userId: data.userId,
+        name: data.username,
+        picture: data.profileImage,
+      };
+
+      dispatch(loginKakao(userInfo));
+      setToken(data.token);
+      const str_userInfo = JSON.stringify(userInfo);
+      localStorage.setItem("userInfo", str_userInfo);
       // 메인페이지 이동
       history.push("/");
     } catch (e) {
@@ -65,7 +74,10 @@ const _setLogin =
   };
 
 const initialState = {
-  isLoggedIn: true,
+  name: "",
+  userId: "",
+  picture: "",
+  isLoggedIn: false,
 };
 
 // 리듀서
@@ -73,10 +85,16 @@ const user = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // loginKaKao: (state, action) => {
-    //   const keyword = action.payload;
-    //   state.list.unshift(keyword);
-    // },
+    loginKakao: (state, action) => {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoggedIn: true,
+        userId: action.payload.userId,
+        name: action.payload.name,
+        picture: action.payload.picture,
+      };
+    },
 
     logout: (state, action) => {
       return {
@@ -98,5 +116,5 @@ export const userActions = {
   _setLogin,
   _logout,
 };
-export const { setLogin, logout } = user.actions;
+export const { setLogin, logout, loginKakao } = user.actions;
 export default user;

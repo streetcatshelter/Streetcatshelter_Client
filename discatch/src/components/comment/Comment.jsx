@@ -51,7 +51,7 @@ const Comment = (props) => {
         <Count>{community.data?.cntComment}</Count>
       </Grid>
     
-      {location.pathname === `/communitypostdetail/${communityId}` && <Grid
+      {location.pathname.split('/')[1] === 'community' && <Grid
         addstyle={() => {
           return css`
             display: flex;
@@ -77,7 +77,7 @@ const Comment = (props) => {
           />
           </Grid>
           <Text fontWeight="bold" margin="0 0 0 -25px" width="32px">
-            {community.data.cntLikeit}
+            {community.data?.cntLikeit}
           </Text>
         </Grid>
       </Grid>}

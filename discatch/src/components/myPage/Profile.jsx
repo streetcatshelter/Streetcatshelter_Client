@@ -6,15 +6,29 @@ import { Image, Grid, Text } from "../../elements";
 /* == Library - style */
 import styled from "styled-components";
 
-import ProfileEdit from "./ProfileEdit";
 import { EditModalSlide } from "..";
 
 /* == Redux */
+import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
+import { userActions } from "../../redux/modules/user";
 const Profile = () => {
+  const userInfo = localStorage.getItem("userInfo");
+  const userInfoParse = JSON.parse(userInfo);
+
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(userActions._logout());
+  };
   return (
     <Wrapper>
-      <Image width="70px" height="70px" borderRadius="35px" margin="auto" />
+      <Image
+        width="70px"
+        height="70px"
+        borderRadius="35px"
+        margin="auto"
+        src={userInfoParse.picture}
+      />
       <Grid margin="0px 0px 0px 20px" width="70%">
         <Grid>
           <Grid
@@ -23,7 +37,7 @@ const Profile = () => {
             width="95%"
             positon="relative"
           >
-            <Text fontWeight="800">채병훈하트정진우</Text>
+            <Text fontWeight="800">{userInfoParse.name}</Text>
 
             <EditModalSlide
               FirstBtn="프로필수정"
@@ -31,6 +45,7 @@ const Profile = () => {
               FirstClick={() => {
                 history.push("/userinfoedit");
               }}
+              SecondClick={logout}
             />
           </Grid>
         </Grid>

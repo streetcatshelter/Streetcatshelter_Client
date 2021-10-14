@@ -1,13 +1,26 @@
 // LIBRARY
 import { createSlice } from "@reduxjs/toolkit";
 import { userApi } from "../../shared/axios";
-
+import jwtDecode from "jwt-decode";
+import { setToken, removeToken } from "../../shared/token";
+// import { setCookie, deleteCookie } from "../shared/cookie";
 const _loginKakao =
   (authorization_code) =>
   async (dispatch, getState, { history }) => {
     try {
-      // const { data } = await userApi.getKakao(authorization_code);
-      // console.log(authorization_code);
+      const { data } = await userApi.getKakao(authorization_code);
+
+      const userInfo = {
+        userId: data.userId,
+        name: data.username,
+        picture: data.profileImage,
+      };
+
+      dispatch(loginKakao(userInfo));
+      setToken(data.token);
+      const str_userInfo = JSON.stringify(userInfo);
+      localStorage.setItem("userInfo", str_userInfo);
+      // 메인페이지 이동
       history.push("/");
     } catch (e) {
       console.log(e);
@@ -39,9 +52,32 @@ const _loginKakao =
 //       history.push("/login");
 //     }
 //   };
+const _logout =
+  () =>
+  (dispatch, getState, { history }) => {
+    try {
+      removeToken("TOKEN");
+      dispatch(logout());
+      history.push("/login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+const _setLogin =
+  () =>
+  (dispatch, getState, { history }) => {
+    const token = localStorage.getItem("token");
+    if (token !== "") {
+      dispatch(setLogin());
+    }
+  };
 
 const initialState = {
-  list: [],
+  name: "",
+  userId: "",
+  picture: "",
+  isLoggedIn: false,
 };
 
 // 리듀서
@@ -49,15 +85,36 @@ const user = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginKaKao: (state, action) => {
-      const keyword = action.payload;
-      state.list.unshift(keyword);
+    loginKakao: (state, action) => {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoggedIn: true,
+        userId: action.payload.userId,
+        name: action.payload.name,
+        picture: action.payload.picture,
+      };
+    },
+
+    logout: (state, action) => {
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    },
+    setLogin: (state, action) => {
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
     },
   },
 });
 
 export const userActions = {
   _loginKakao,
+  _setLogin,
+  _logout,
 };
-
+export const { setLogin, logout, loginKakao } = user.actions;
 export default user;

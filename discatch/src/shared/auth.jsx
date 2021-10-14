@@ -11,14 +11,15 @@ import { userActions } from "../redux/modules/user";
 export default (Page, checkAuth) => {
   const AuthCheck = (props) => {
     const dispatch = useDispatch();
-    const token = document.cookie;
+    const token = localStorage.getItem("token");
     console.log(token);
-    const isLoggedIn = token !== undefined ? true : false;
+    const isLoggedIn =
+      token !== undefined && token !== "" && token !== null ? true : false;
 
     useEffect(() => {
       dispatch(userActions._setLogin());
       // 로그인을 하지 않았는데 로그인 필요한 페이지에 있을 경우
-      if (isLoggedIn && checkAuth) {
+      if (!isLoggedIn && checkAuth) {
         props.history.push("/login");
       }
       // 로그인을 이미 했는데 로그인 페이지 / 로그인 랜딩 페이지에 있을 경우 메인페이지로 이동

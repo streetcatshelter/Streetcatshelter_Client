@@ -10,8 +10,6 @@ const instance = axios.create({
   baseURL: "http://52.78.241.50/",
 });
 
-setToken("");
-
 instance.interceptors.request.use((config) => {
   const TOKEN = document.cookie.split("=")[1];
   if (TOKEN) {

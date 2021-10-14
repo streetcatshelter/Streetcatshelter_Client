@@ -34,83 +34,113 @@ import test from "../pages/test";
 const Router = () => {
   return (
     <Switch>
-      <Route path="/" component={Auth(Home, false)} exact />
-      <Route path="/slider" component={Auth(Slider, false)} exact />
-      <Route path="/mypage" component={Auth(MyPageCat, false)} exact />
+      <Route path="/login" component={Auth(Login, false)} exact />
+      <Route
+        path="/user/login/callback"
+        component={Auth(LoginRedirect, false)}
+        exact
+      />
+      <Route path="/" component={Auth(Home, true)} exact />
+      <Route path="/slider" exact component={Slider} />
+      <Route path="/mypage" component={Auth(MyPageCat, true)} exact />
       <Route
         path="/mypage/notice"
-        component={Auth(MyPageNoticeList, false)}
+        component={Auth(MyPageNoticeList, true)}
         exact
       />
-      <Route path="/mypage/notice/:noticeId" exact component={MyPageNotices} />
-      <Route path="/mypage/work" exact component={MyPageWork} />
-      <Route path="/login" exact component={Login} />
-      <Route path="/user/login/callback" exact component={LoginRedirect} />
+      <Route
+        path="/mypage/notice/:noticeId"
+        component={Auth(MyPageNotices, true)}
+        exact
+      />
+      <Route path="/mypage/work" component={Auth(MyPageWork, true)} exact />
 
-      <Route path="/userinfowrite" exact component={UserInfoWrite} />
-      <Route path="/userinfoedit" exact component={UserInfoWrite} />
-      <Route path="/catinfowrite" exact component={CatInfoWrite} />
-      <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
+      <Route
+        path="/userinfowrite"
+        component={Auth(UserInfoWrite, true)}
+        exact
+      />
+      <Route path="/userinfoedit" component={Auth(UserInfoWrite, true)} exact />
+      <Route path="/catinfowrite" component={Auth(CatInfoWrite, true)} exact />
+      <Route
+        path="/catdetailinfowrite"
+        component={Auth(CatDetailInfoWrite, true)}
+        exact
+      />
       <Route
         path="/catdetailinfowrite/:catId"
+        component={Auth(CatDetailInfoWrite, true)}
         exact
-        component={CatDetailInfoWrite}
       />
-      <Route path="/catdetail" exact component={CatDetail} />
-      <Route path="/catdetail/:catId" exact component={CatDetail} />
+      <Route path="/catdetail" component={Auth(CatDetail, true)} exact />
+      <Route path="/catdetail/:catId" component={Auth(CatDetail, true)} exact />
 
-      <Route path="/catdetailinfo" exact component={CatDetailInfo} />
-      <Route path="/catdetailedit" exact component={CatDetailEdit} />
+      <Route
+        path="/catdetailinfo"
+        component={Auth(CatDetailInfo, true)}
+        exact
+      />
+      <Route
+        path="/catdetailedit"
+        component={Auth(CatDetailEdit, true)}
+        exact
+      />
       <Route
         path="/community/:village/catinfo/write"
+        component={Auth(CommunityPostWrite, true)}
         exact
-        component={CommunityPostWrite}
       />
+
       <Route
         path="/community/:village/gathering/write"
+        component={Auth(CommunityPostWrite, true)}
         exact
-        component={CommunityPostWrite}
       />
       <Route
         path="/community/:village/sharing/write"
+        component={Auth(CommunityPostWrite, true)}
         exact
-        component={CommunityPostWrite}
       />
-      <Route path="/communitypostedit" exact component={CommunityPostEdit} />
+
+      <Route
+        path="/communitypostedit"
+        component={Auth(CommunityPostWrite, true)}
+        exact
+      />
       <Route
         path="/communitypostedit/:communityId"
+        component={Auth(CommunityPostWrite, true)}
         exact
-        component={CommunityPostEdit}
       />
       <Route
         path="/community/:village/catinfo"
+        component={Auth(CommunityDetail, true)}
         exact
-        component={CommunityDetail}
       />
       <Route
         path="/community/:village/gathering"
+        component={Auth(CommunityDetail, true)}
         exact
-        component={CommunityDetail}
       />
       <Route
         path="/community/:village/sharing"
+        component={Auth(CommunityDetail, true)}
         exact
-        component={CommunityDetail}
       />
       <Route
         path="/communitypostdetail"
+        component={Auth(CommunityPostDetail, true)}
         exact
-        component={CommunityPostDetail}
       />
       <Route
         path="/communitypostdetail/:communityId"
+        component={Auth(CommunityPostDetail, true)}
         exact
-        component={CommunityPostDetail}
       />
-      <Route path="/community" exact component={Community} />
-      <Route path="/map" exact component={Map} />
-      <Route path="/chat" exact component={Chat} />
-      <Route path="/test" exact component={test} />
+      <Route path="/community" component={Auth(Community, true)} exact />
+      <Route path="/map" component={Auth(Map, true)} exact />
+      <Route path="/chat" component={Auth(Chat, true)} exact />
+      <Route path="/test" component={Auth(test, true)} exact />
       <Route path={"*"} exact component={NotFound} />
     </Switch>
   );

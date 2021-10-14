@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configureStore';
 
 // COMPONENTS
-import { Template, CommentList, EditDeleteModal, EditModalSlide } from "../components";
+import { Template, CommentList, EditModalSlide } from "../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -12,10 +12,7 @@ import styled, { css } from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
 
 // REDUX
-import community, { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
-
-// ROUTE
-import { useLocation } from 'react-router-dom';
+import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
 
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
@@ -35,6 +32,9 @@ const CommunityPostDetail = (props) => {
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
+
+  const userInfo = localStorage.getItem("userInfo");
+  const userName = userInfo.split('"')[5];
   
   return (
     <Template props={props}>
@@ -132,17 +132,16 @@ const CommunityPostDetail = (props) => {
                   `;
                 }}
               >
-                <EditModalSlide 
-                FirstBtn={'게시글 수정'} 
-                SecondBtn={'삭제'} 
-                FirstClick={() => {
-                      history.push({
-                        pathname: `/communitypostedit/${communityId}`,
-                        state: { communityId: communityId },
-                    });
-                  }}
-                SecondClick={deleteCommunity}
-                />
+                {username === userName ? (
+                  <EditModalSlide 
+                  FirstBtn={'게시글 수정'} 
+                  SecondBtn={'삭제'} 
+                  FirstClick={() => {
+                        history.push(`/community/${location}/${category}/postedit/${communityId}`);
+                    }}
+                  SecondClick={deleteCommunity}
+                  />
+                ) : (<Grid height="36px"></Grid>)}
               </Grid>
             </Grid>
           </Grid>

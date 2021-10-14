@@ -19,12 +19,15 @@ import { editCommunityDB } from "../redux/modules/community";
 import { Camera } from "react-feather";
 
 // REDUX
-import { history } from "../redux/configureStore";
 import { getOneCommunityDB } from '../redux/modules/community';
 
+// ROUTE
+import { useLocation } from 'react-router-dom';
+
 const CommunityPostEdit = (props) => {
+  const path = useLocation();
   const preview = useSelector((state) => state.image.preview)
-  const communityId = props.location.state?.communityId;
+  const communityId = path.pathname.split('/')[5];
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, []);
@@ -315,7 +318,7 @@ const CommunityPostEdit = (props) => {
               fontSize="14px"
               fontWeight="bold"
               bgColor="D_yellow"
-              onClick={() => window.location.replace(`/communitypostdetail/${communityId}`)}
+              onClick={() => window.location.replace(`/community/${location}/${category}/postdetail/${communityId}`)}
               addstyle={() => {
                 return css`
                   display: flex;

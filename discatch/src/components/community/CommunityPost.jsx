@@ -13,14 +13,21 @@ import { MessageCircle, Eye } from "react-feather";
 // REDUX
 import { history } from "../../redux/configureStore";
 
+// ROUTE
+import { useLocation } from 'react-router-dom';
+
 const CommunityPost = ({community}) => {
+  const path = useLocation();
+  const location = path.pathname.split('/')[2];
   const communityId = community.communityId
+  const category = path.pathname.split('/')[3];
+
   return (
     <Grid height="30px">
       <CommunityPostStyle>
         <Grid 
           clickEvent={()=>
-            history.push(`/communitypostdetail/${communityId}`
+            history.push(`/community/${location}/${category}/postdetail/${communityId}`
             )}>
             <Grid 
             addstyle={() => {

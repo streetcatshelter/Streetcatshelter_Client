@@ -24,7 +24,7 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
 
-  let communityId = props.props?.match.params.communityId
+  let communityId = props.props?.match.params.communityId;
 
   const [comments, setComment] = React.useState('');
 
@@ -35,7 +35,7 @@ const CommentList = (props) => {
   };
 
   const addCommentBtn = () => {
-    if (path.pathname === `/communitypostdetail/${communityId}`) {
+    if (path.pathname.split('/')[1] === 'community') {
       dispatch(addCommunityCommentDB(comments, communityId));
     } else {
       console.log('캣 댓글 추가');

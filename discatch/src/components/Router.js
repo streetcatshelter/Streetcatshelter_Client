@@ -1,5 +1,5 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 // import Auth from "../shared/auth";
 /* == Pages */
 import {
@@ -25,10 +25,10 @@ import {
   Map,
   Chat,
   LoginRedirect,
-} from "../pages";
+} from '../pages';
 
 // 배포 시 해당 라우트 삭제 예정
-import test from "../pages/test";
+import test from '../pages/test';
 
 // * == ( Router ) -------------------- * //
 const Router = () => {
@@ -51,7 +51,7 @@ const Router = () => {
 
       <Route path="/userinfowrite" exact component={UserInfoWrite} />
       <Route path="/userinfoedit" exact component={UserInfoWrite} />
-      <Route path="/catinfowrite" exact component={CatInfoWrite} />
+      <Route path="/catinfowrite/:location" exact component={CatInfoWrite} />
       <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
       <Route
         path="/catdetailinfowrite/:catId"
@@ -59,9 +59,14 @@ const Router = () => {
         component={CatDetailInfoWrite}
       />
       <Route path="/catdetail" exact component={CatDetail} />
-      <Route path="/catdetail/:catId" exact component={CatDetail} />
+      <Route path="/catdetail/:catId/:locaiton" exact component={CatDetail} />
 
       <Route path="/catdetailinfo" exact component={CatDetailInfo} />
+      <Route
+        path="/catdetailinfo/:catDetailId"
+        exact
+        component={CatDetailInfo}
+      />
       <Route path="/catdetailedit" exact component={CatDetailEdit} />
       <Route
         path="/community/:village/catinfo/write"
@@ -113,7 +118,7 @@ const Router = () => {
       <Route path="/map" exact component={Map} />
       <Route path="/chat" exact component={Chat} />
       <Route path="/test" exact component={test} />
-      <Route path={"*"} exact component={NotFound} />
+      <Route path={'*'} exact component={NotFound} />
     </Switch>
   );
 };

@@ -1,5 +1,5 @@
 // library
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { css } from 'styled-components';
 
@@ -13,6 +13,7 @@ import {
   CatDiary,
   CatGallery,
   Like,
+  CatPost,
 } from '../components';
 
 // element
@@ -24,18 +25,31 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 // redux
 import { history } from '../redux/configureStore';
+import { __getCatLocation, __getCatDetail } from '../redux/modules/cat';
+import { useDispatch } from 'react-redux';
 
 const CatDetail = (props) => {
-  const catId = props.match.params.catId;
+  const dispatch = useDispatch();
 
   const [menu, setMenu] = useState('캘린더');
 
-  const catInfo = useSelector((state) => state.cat);
-  console.log(catInfo);
+  const catId = props.match.params.catId;
+  const location = props.match.params.location;
+
+  const info = useSelector((state) => state.cat.list);
+  console.log(info);
+
+  useEffect(() => {
+    dispatch(__getCatDetail(catId));
+  }, []);
 
   return (
     <Template props={props}>
-      <Grid
+      <Grid clickEvent={() => history.push(`/catdetailinfo/${catId}`)}>
+        <CatPost catId={catId} />
+      </Grid>
+      {/* <Grid */}
+      {/* clickEvent={() => history.push(`/catdetailinfo/${catId}`)}
         bgColor="diaryColor"
         alignItems="center"
         padding="8px"
@@ -43,33 +57,52 @@ const CatDetail = (props) => {
           return css`
             ${flexBox()}
           `;
-        }}
-      >
-        <Image borderRadius="10px" />
-        <Grid padding="6px" alignItems="center">
-          <Grid
-            addstyle={() => {
+        }} */}
+      {/* > */}
+      {/* <Image borderRadius="10px" /> */}
+      {/* <Grid padding="6px" alignItems="center"> */}
+      {/* <Grid */}
+      {/* addstyle={() => {
               return css`
                 ${flexBox('space-between')}
               `;
-            }}
-          >
-            <Text fontWeight="bold" size="12px">
-              이름
-            </Text>
-            <Text fontWeight="bold" size="12px" width="45%">
-              중성화
-            </Text>
-            <Like />
-          </Grid>
+            }} */}
+      {/* > */}
+      {/* <Text fontWeight="bold" size="12px"> */}
+      {/* {catName} */}
+      {/* </Text>
+            <Text fontWeight="bold" size="12px" width="45%"> */}
+      {/* {neutering} */}
+      {/* </Text> */}
+      {/* <Like /> */}
+      {/* </Grid> */}
 
-          <Grid>
+      {/* {catTags ? (
+            <Grid
+              margin="2% 0 0 0"
+              addstyle={() => {
+                return css`
+                  ${flexBox('space-between')}
+                `;
+              }}
+            >
+              {catTags.map((tag, idx) => {
+                return (
+                  <Text key={idx} size="12px" fontWeight="bold">
+                    #{tag.tag}
+                  </Text>
+                );
+              })}
+            </Grid>
+          ) : null} */}
+
+      {/* <Grid>
             <Text fontWeight="bold" size="12px">
               태그
             </Text>
-          </Grid>
-        </Grid>
-      </Grid>
+          </Grid> */}
+      {/* </Grid> */}
+      {/* </Grid> */}
 
       <Grid
         addstyle={() => {

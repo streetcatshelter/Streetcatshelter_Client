@@ -31,8 +31,8 @@ export const catApi = {
   getCatLocation: (location, size) =>
     instance.get(`/cat/${location}?page=1&size=${size}`),
   getCatCalendar: (catId) => instance.get(`/cat/calendar/${catId}`),
-  getCatGallery: (catId, page, size) =>
-    instance.get(`/cat/gallery/${catId}?page=${page}&size=${size}`),
+  getCatGallery: (catId, size) =>
+    instance.get(`/cat/gallery/${catId}?page=1&size=${size}`),
   getCatDiary: (catId, page, size) =>
     instance.get(`/cat/diary/${catId}?page=${page}&size=${size}`),
   getCatComment: (catId, size) =>

@@ -16,6 +16,9 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../redux/configureStore';
 import { __getCatLocation } from '../redux/modules/cat';
 
+// function
+import InfinityScroll from '../shared/InfinityScroll';
+
 const Home = (props) => {
   const dispatch = useDispatch();
 
@@ -31,16 +34,31 @@ const Home = (props) => {
     <Template props={props}>
       {catList.length ? (
         catList.map((cat, idx) => {
-          return <CatPost key={idx} {...cat} />;
+          return <CatPost {...cat} cat={cat} key={idx} />;
         })
       ) : (
         <></>
       )}
 
+      {/* {catList.length
+        ? catList.map((cat, idx) => {
+            return (
+              <InfinityScroll
+                next={}
+                index={idx}
+                length={catList.length}
+                key={cat.catId}
+              >
+                <CatPost cat={cat} />
+              </InfinityScroll>
+            );
+          })
+        : null} */}
+
       <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push('/catinfowrite');
+          history.push(`/catinfowrite/${location}`);
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />

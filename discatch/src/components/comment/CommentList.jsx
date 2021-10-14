@@ -24,12 +24,12 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
 
-  let communityId = props.props.match.params.communityId;
-  if (path.pathname === '/catdetail') {
-    communityId = 1;
-  } else {
-    communityId = props.props.match.params.communityId;
-  }
+  // let communityId = props.props.match.params.communityId;
+  // if (path.pathname === '/catdetail') {
+  //   communityId = 1;
+  // } else {
+  //   communityId = props.props.match.params.communityId;
+  // }
 
   const [comments, setComment] = React.useState('');
 
@@ -39,13 +39,13 @@ const CommentList = (props) => {
     setComment(event.target.value);
   };
 
-  const addCommentBtn = () => {
-    if (path.pathname === `/communitypostdetail/${communityId}`) {
-      dispatch(addCommunityCommentDB(comments, communityId));
-    } else {
-      console.log('캣 댓글 추가');
-    }
-  };
+  // const addCommentBtn = () => {
+  //   if (path.pathname === `/communitypostdetail/${communityId}`) {
+  //     dispatch(addCommunityCommentDB(comments, communityId));
+  //   } else {
+  //     console.log('캣 댓글 추가');
+  //   }
+  // };
 
   return (
     <>
@@ -75,7 +75,7 @@ const CommentList = (props) => {
           bgColor="yellow"
           padding="0.4rem"
           margin="0 0 0 -38px"
-          clickEvent={addCommentBtn}
+          // clickEvent={addCommentBtn}
         >
           작성
         </Button>

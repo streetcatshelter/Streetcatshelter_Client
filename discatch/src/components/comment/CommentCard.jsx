@@ -16,12 +16,11 @@ import { deleteCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentCard = ({ comment }) => {
   const commentId = comment.commentId
-  // const commentId = '테스트';
   const dispatch = useDispatch();
-  //   const userName = useSelctor((state) => state.user); // 유저 정보에서 받아오기
-  // username >> community.commentList.username에서 받아오기
-  const userName = 'test2';
+  // username >> community.commentList.username에서 받아오기 (댓글 작성한 사람)
   const username = 'test2';
+  const userInfo = localStorage.getItem("userInfo");
+  const userName = userInfo.split('"')[5];
 
   const deleteBtn = () => {
     dispatch(deleteCommunityCommentDB(commentId));
@@ -39,7 +38,6 @@ const CommentCard = ({ comment }) => {
         }}
       >
         <Text>{comment.username} : {comment.contents}</Text>
-        {/* <Text margin="0 5% 0 -6%">{comment.contents}</Text> */}
 
         <Text margin="0 -2% 0 0" size="10px" width="60px">
           {comment.createdAt[0]}.{comment.createdAt[1]}.{comment.createdAt[2]} <br></br>

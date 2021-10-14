@@ -86,44 +86,22 @@ const Router = () => {
         exact
       />
       <Route
-        path="/community/:village/catinfo/write"
+        path="/community/:village/:category/write"
         component={Auth(CommunityPostWrite, true)}
         exact
       />
-
-      <Route
-        path="/community/:village/gathering/write"
-        component={Auth(CommunityPostWrite, true)}
-        exact
-      />
-      <Route
-        path="/community/:village/sharing/write"
-        component={Auth(CommunityPostWrite, true)}
-        exact
-      />
-
       <Route
         path="/communitypostedit"
-        component={Auth(CommunityPostWrite, true)}
+        component={Auth(CommunityPostEdit, true)}
         exact
       />
       <Route
-        path="/communitypostedit/:communityId"
-        component={Auth(CommunityPostWrite, true)}
+        path="/community/:village/:category/postedit/:communityId"
+        component={Auth(CommunityPostEdit, true)}
         exact
       />
       <Route
-        path="/community/:village/catinfo"
-        component={Auth(CommunityDetail, true)}
-        exact
-      />
-      <Route
-        path="/community/:village/gathering"
-        component={Auth(CommunityDetail, true)}
-        exact
-      />
-      <Route
-        path="/community/:village/sharing"
+        path="/community/:village/:category"
         component={Auth(CommunityDetail, true)}
         exact
       />
@@ -133,7 +111,7 @@ const Router = () => {
         exact
       />
       <Route
-        path="/communitypostdetail/:communityId"
+        path="/community/:village/:category/postdetail/:communityId"
         component={Auth(CommunityPostDetail, true)}
         exact
       />

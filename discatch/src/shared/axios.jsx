@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // FUNCTION
-import { getToken, setToken } from "./token";
+import { getToken } from "./token";
 
 axios.defaults.withCredentials = true;
 

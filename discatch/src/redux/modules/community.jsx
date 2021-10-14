@@ -9,6 +9,7 @@ import { imgActions } from './image';
 export const addCommunityDB = (category, contents, location, title) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file
+    const userInfo = localStorage.getItem("userInfo");
     const path = category.split(' ');
     let pathName = null
     if (path[1] === '정보글') {
@@ -18,8 +19,7 @@ export const addCommunityDB = (category, contents, location, title) => {
     } else {
       pathName = 'sharing'
     }
-    // const username = getState().user; // 나중에 가져오기
-    const username = '뽀삐맘';
+    const username = userInfo.split('"')[5];
     if (imgFile.length<6) {
       dispatch(
         imgActions.uploadImagesDB(() => {

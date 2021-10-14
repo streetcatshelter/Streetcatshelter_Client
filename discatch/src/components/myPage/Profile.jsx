@@ -6,12 +6,17 @@ import { Image, Grid, Text } from "../../elements";
 /* == Library - style */
 import styled from "styled-components";
 
-import ProfileEdit from "./ProfileEdit";
 import { EditModalSlide } from "..";
 
 /* == Redux */
+import { useDispatch } from "react-redux";
 import { history } from "../../redux/configureStore";
+import { userActions } from "../../redux/modules/user";
 const Profile = () => {
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(userActions._logout());
+  };
   return (
     <Wrapper>
       <Image width="70px" height="70px" borderRadius="35px" margin="auto" />
@@ -31,6 +36,7 @@ const Profile = () => {
               FirstClick={() => {
                 history.push("/userinfoedit");
               }}
+              SecondClick={logout}
             />
           </Grid>
         </Grid>

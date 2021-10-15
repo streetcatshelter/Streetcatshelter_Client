@@ -60,9 +60,9 @@ const CatPost = (cat) => {
                 `;
               }}
             >
-              {cat.catTagList.map((tag) => {
+              {cat.catTagList.map((tag, idx) => {
                 return (
-                  <Text key={catId} size="12px" fontWeight="bold">
+                  <Text key={idx} size="12px" fontWeight="bold">
                     #{tag.tag}
                   </Text>
                 );

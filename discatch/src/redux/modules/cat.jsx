@@ -50,7 +50,7 @@ export const __createCatInfo = (
   };
 };
 
-// Cat 상세 정보 작성
+// Cat 상세 정보 작성 ✅
 export const __createCatDetailInfo = (
   catTags,
   diary,
@@ -86,7 +86,7 @@ export const __createCatDetailInfo = (
             .then((res) => {
               dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());
-              history.push('/');
+              history.push(`/catdetailinfo/${catId}`);
             })
             .catch((err) => {
               console.error(err);
@@ -120,29 +120,49 @@ export const __getCatLocation =
   (location, size = 15) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.getCatLocation(location, size);
-      let catList = data.data;
+      const { data } = await catApi.getCatLocation(location, size);
 
-      dispatch(getCatLocation(catList));
+      dispatch(getCatLocation(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+// catPost 상세 정보 ✅
+export const __getCatDetail =
+  (catDetailId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await catApi.getCatDetail(catDetailId);
+      dispatch(getCatDetail(data));
     } catch (err) {
       console.error(err);
     }
   };
 
 // Cat 상세 페이지(캘린더)
-export const __getCatCalendar =
+export const __getCalendar =
   (catId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.getCatCalendar(catId);
-      const catDetail = data.data;
-      dispatch(getCatCalendar(catDetail));
+      const { data } = await catApi.getCatCalendar(catId);
+      dispatch(getCalendar(data));
     } catch (err) {
       console.error(err);
     }
   };
 
 // Cat 상세 페이지(갤러리)
+export const __getGallery =
+  (catId, size = 15) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await catApi.getCatGallery(catId, size);
+      dispatch(getCalendar(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
 // Cat 상세 페이지(집사일기)
 
@@ -199,9 +219,17 @@ const cat = createSlice({
       state.list = action.payload;
     },
 
-    getCatCalendar: (state, action) => {
+    getCatDetail: (state, action) => {
+      state.catdetail = action.payload;
+    },
+
+    getCalendar: (state, action) => {
       state.list = action.payload;
       // console.log(action.payload);
+    },
+
+    getGallery: (state, action) => {
+      state.list = action.payload;
     },
   },
 });
@@ -210,7 +238,9 @@ export const {
   createCatInfo,
   createCatDetailInfo,
   getCatLocation,
-  getCatCalendar,
+  getCatDetail,
+  getCalendar,
+  getGallery,
 } = cat.actions;
 
 export default cat;

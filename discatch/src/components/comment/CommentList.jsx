@@ -7,11 +7,11 @@ import Comment from './Comment';
 import CommentCard from './CommentCard';
 
 // STYLE
-import styled, { css } from 'styled-components';
-import { flexBox, flexHoz } from '../../shared/style';
+import { css } from 'styled-components';
+import { flexBox } from '../../shared/style';
 
 // ELEMENTS
-import { Grid, Input, Button } from '../../elements/index';
+import { Grid, Button, TextArea } from '../../elements/index';
 
 // ROUTE
 import { useLocation } from 'react-router-dom';
@@ -46,7 +46,7 @@ const CommentList = (props) => {
     <>
       <Comment />
       <Grid
-        width="85%"
+        width="95%"
         margin="0 auto"
         addstyle={() => {
           return css`
@@ -54,7 +54,7 @@ const CommentList = (props) => {
           `;
         }}
       >
-        <Input
+        <TextArea
           onChange={$comment}
           type="text"
           placeholder="댓글 달기..."
@@ -62,18 +62,22 @@ const CommentList = (props) => {
             return css`
               border: 1px solid rgb(${(props) => props.theme.palette.yellow});
               border-radius: 10px;
+              resize:none;
             `;
           }}
         />
         <Button
           width="40px"
           bgColor="yellow"
-          padding="0.4rem"
-          margin="0 0 0 -38px"
+          margin="4px"
           clickEvent={addCommentBtn}
           addstyle={() => {
             return css`
-              z-index:1;
+              display: flex;
+              position:sticky;
+              height: 30px;
+              align-items: center;
+              justify-content: center;
             `;
           }}
         >

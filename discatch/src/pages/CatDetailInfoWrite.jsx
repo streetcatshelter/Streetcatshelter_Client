@@ -43,7 +43,7 @@ const CatDetailInfoWrite = (props) => {
 
   const [tag, setTag] = useState('');
   const $tag = (e) => {
-    setTag([e.target.value]);
+    setTag(e.target.value);
   };
 
   const [diary, setDiary] = useState('');
@@ -61,7 +61,7 @@ const CatDetailInfoWrite = (props) => {
   const createBtn = () => {
     dispatch(
       __createCatDetailInfo(
-        tag,
+        [tag],
         diary,
         food,
         latitude,

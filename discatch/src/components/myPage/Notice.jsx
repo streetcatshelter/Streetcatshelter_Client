@@ -12,7 +12,7 @@ const Notice = () => {
   console.log(NoticeList);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(mypageActions._setNotice());
+    dispatch(mypageActions._getNotice());
   }, []);
   return (
     <Wrapper>

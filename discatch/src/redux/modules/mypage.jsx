@@ -2,7 +2,48 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { myPageApi } from "../../shared/axios";
 
-const _setNotice =
+const _getUserInfo =
+  () =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await myPageApi.getUserInfo();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+const _editUserInfo =
+  () =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await myPageApi.putUserInfo();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+const _getCalender =
+  () =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await myPageApi.getCalendar();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+const _getLikedAllCat =
+  () =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await myPageApi.getLikedAllCat();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+const _getNotice =
   () =>
   async (dispatch, getState, { history }) => {
     try {
@@ -19,7 +60,7 @@ const _getOneNotice =
     console.log(id);
     try {
       const { data } = await myPageApi.getOneNotice(id);
-      dispatch(getNoticeDetail(data));
+      dispatch(setOneNotice(data));
     } catch (e) {
       console.log(e);
     }
@@ -38,12 +79,19 @@ const mypage = createSlice({
     setNotice: (state, action) => {
       state.noticelist = action.payload;
     },
-    getNoticeDetail: (state, action) => {
+    setOneNotice: (state, action) => {
       state.noticedetail = action.payload;
     },
   },
 });
 
-export const mypageActions = { _setNotice, _getOneNotice };
-export const { setNotice, getNoticeDetail } = mypage.actions;
+export const mypageActions = {
+  _getNotice,
+  _getOneNotice,
+  _getCalender,
+  _getLikedAllCat,
+  _getUserInfo,
+  _editUserInfo,
+};
+export const { setNotice, setOneNotice } = mypage.actions;
 export default mypage;

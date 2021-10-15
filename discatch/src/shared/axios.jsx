@@ -11,9 +11,9 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const TOKEN = document.cookie.split("=")[1];
-  if (TOKEN) {
-    config.headers["TOKEN"] = TOKEN;
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers["Authorization"] = getToken();
   }
   config.headers["Content-Type"] = "application/json; charset=utf-8";
   config.headers["X-Requested-With"] = "XMLHttpRequest";
@@ -28,6 +28,10 @@ export const userApi = {
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),
   getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),
+  getCalendar: () => instance.get("/mypage/calendar"),
+  getLikedAllCat: () => instance.get("/mypage/mycat"),
+  getUserInfo: () => instance.get("/mypage/user/information"),
+  putUserInfo: () => instance.get("/mypage/user/information"),
 };
 
 export const catApi = {

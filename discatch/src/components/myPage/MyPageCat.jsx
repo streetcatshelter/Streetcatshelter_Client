@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 /* == Library - style */
 import styled from "styled-components";
@@ -8,9 +8,15 @@ import { Image, Text } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
 
 /* == Redux */
+import { useDispatch, useSelector } from "react-redux";
+import { mypageActions } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
 
 const MyPageCat = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(mypageActions._getLikedAllCat());
+  }, []);
   return (
     <div>
       <CatPost

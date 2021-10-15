@@ -58,7 +58,6 @@ const Calendar = () => {
     let TODAY = new Date().getDate();
     let goMonth = new Date().getMonth() + 1;
     let goYear = new Date().getFullYear();
-    console.log(TODAY);
     setYear(goYear);
     setMonth(goMonth);
     setToday(TODAY);

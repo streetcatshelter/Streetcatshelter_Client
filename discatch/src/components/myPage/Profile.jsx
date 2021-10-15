@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 /* == Custom - Elements*/
 import { Image, Grid, Text } from "../../elements";
@@ -12,10 +12,13 @@ import { EditModalSlide } from "..";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { userActions } from "../../redux/modules/user";
+import { mypageActions } from "../../redux/modules/mypage";
 const Profile = () => {
   const userInfo = localStorage.getItem("userInfo");
   const userInfoParse = JSON.parse(userInfo);
-
+  useEffect(() => {
+    dispatch(mypageActions._getUserInfo());
+  }, []);
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(userActions._logout());

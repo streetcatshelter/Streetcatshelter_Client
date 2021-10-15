@@ -27,15 +27,14 @@ const CommunityPostDetail = (props) => {
     location: state.community.list.data?.location,
     title: state.community.list.data?.title,
     username: state.community.list.data?.username,
-    createdAt: state.community.list.data?.createdAt,
+    createdAt: state.community.list.data?.createdAt ? state.community.list.data?.createdAt : Array(1,3,4),
   }));
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
-
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo.split('"')[5];
-  
+
   return (
     <Template props={props}>
       <Grid
@@ -120,7 +119,7 @@ const CommunityPostDetail = (props) => {
                   `;
                 }}
               >
-                {createdAt}
+                {createdAt[0]}년 {createdAt[1]}월 {createdAt[2]}일 {createdAt[3]}시 {createdAt[4]}분
               </Text>
               <Grid
                 width="30px"

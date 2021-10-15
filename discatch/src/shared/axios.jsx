@@ -12,8 +12,11 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   const TOKEN = document.cookie.split("=")[1];
+  const token = localStorage.getItem("token");
   if (TOKEN) {
     config.headers["TOKEN"] = TOKEN;
+  } else if (token) {
+    config.headers["Authorization"] = getToken();
   }
   config.headers["Content-Type"] = "application/json; charset=utf-8";
   config.headers["X-Requested-With"] = "XMLHttpRequest";

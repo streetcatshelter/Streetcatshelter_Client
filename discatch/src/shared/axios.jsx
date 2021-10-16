@@ -24,6 +24,8 @@ instance.interceptors.request.use((config) => {
 export const userApi = {
   getKakao: (authorization_code) =>
     instance.get(`/user/kakao/callback/?code=${authorization_code}`),
+  getNaver: (authorization_code) =>
+    instance.get(`/user/naver/callback?code=${authorization_code}`),
 };
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),

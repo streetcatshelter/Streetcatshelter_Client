@@ -13,7 +13,7 @@ import MyPageCat from "./myPage/MyPageCat";
 import Notice from "./myPage/Notice";
 import NoticeDesc from "./myPage/NoticeDesc";
 import Profile from "./myPage/Profile";
-import ProfileEdit from "./myPage/ProfileEdit";
+
 import ProgressBar from "./myPage/ProgressBar";
 import UserInfo from "./myPage/UserInfo";
 import MyPageDetail from "./myPage/MyPageDetail";
@@ -43,7 +43,7 @@ import CommentList from "./comment/CommentList";
 /* community */
 import CommunityCategoryCard from "./community/CommunityCategoryCard";
 import CommunityPost from "./community/CommunityPost";
-import CommunityPreview from './community/CommunityPreview';
+import CommunityPreview from "./community/CommunityPreview";
 
 /* map */
 import Location from "./map/Location";
@@ -67,7 +67,6 @@ export {
   Notice,
   NoticeDesc,
   Profile,
-  ProfileEdit,
   ProgressBar,
   UserInfo,
   MyWork,

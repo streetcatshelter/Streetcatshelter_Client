@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 /* == Custom - Elements*/
 import { Image, Grid, Text } from "../../elements";
@@ -12,10 +12,12 @@ import { EditModalSlide } from "..";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { userActions } from "../../redux/modules/user";
+import { mypageActions } from "../../redux/modules/mypage";
 const Profile = () => {
-  const userInfo = localStorage.getItem("userInfo");
-  const userInfoParse = JSON.parse(userInfo);
-
+  const UserInfo = useSelector((state) => state.mypage.userInfo);
+  useEffect(() => {
+    dispatch(mypageActions._getUserInfo());
+  }, []);
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(userActions._logout());
@@ -27,7 +29,7 @@ const Profile = () => {
         height="70px"
         borderRadius="35px"
         margin="auto"
-        src={userInfoParse.picture}
+        src={UserInfo.profileImageUrl}
       />
       <Grid margin="0px 0px 0px 20px" width="70%">
         <Grid>
@@ -37,7 +39,7 @@ const Profile = () => {
             width="95%"
             positon="relative"
           >
-            <Text fontWeight="800">{userInfoParse.name}</Text>
+            <Text fontWeight="800">{UserInfo.username}</Text>
 
             <EditModalSlide
               FirstBtn="프로필수정"
@@ -50,10 +52,12 @@ const Profile = () => {
           </Grid>
         </Grid>
         <Grid>
-          <Text fontWeight="800">👑 대장냥</Text>
+          <Text fontWeight="800">{UserInfo.userLevel}</Text>
         </Grid>
         <Grid>
-          <Text size="12px">평창동,망원동,하안동</Text>
+          <Text size="12px">
+            {UserInfo.location},{UserInfo.location2},{UserInfo.location3}
+          </Text>
         </Grid>
       </Grid>
     </Wrapper>

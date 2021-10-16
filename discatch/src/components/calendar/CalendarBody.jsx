@@ -5,8 +5,11 @@ import CalendarDates from "./CalendarDates";
 
 /* == Library - style */
 import styled from "styled-components";
-
+import { useSelector } from "react-redux";
 const CalendarBody = (props) => {
+  // const Calendar = useSelector((state) => state.mypage.calendar);
+  // console.log(Calendar[0].createdAt.substr(8, 2));
+
   const { totalDate, today, month, year, YEAR } = props;
   const lastDate = totalDate.indexOf(1);
   const firstDate = totalDate.indexOf(1, 7);

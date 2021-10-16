@@ -2,12 +2,17 @@ import React from "react";
 
 /* == Library - style */
 import styled from "styled-components";
-
+import { useSelector } from "react-redux";
 const ProgressBar = () => {
-  const workPercent = (20 / 30) * 100 + "%";
+  const UserInfo = useSelector((state) => state.mypage.userInfo);
+  const workPercent = (UserInfo.cntActivity / 30) * 100 + "%";
   console.log(workPercent);
   return (
     <div>
+      <p>
+        이달의 disCATch : {UserInfo.cntActivity}일
+        <span>아주 멋져요 !!!😻👍</span>
+      </p>
       <BarWrap>
         <Bar width={workPercent}></Bar>
       </BarWrap>

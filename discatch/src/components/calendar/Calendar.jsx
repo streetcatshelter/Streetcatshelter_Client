@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { CalendarHead, CalendarBody } from "..";
 import { useDispatch, useSelector } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
-const Calendar = () => {
+const Calendar = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(mypageActions._getCalender());
@@ -85,6 +85,7 @@ const Calendar = () => {
         goToday={goToday}
       />
       <CalendarBody
+        path={props.path}
         totalDate={totalDate}
         today={today}
         month={month}

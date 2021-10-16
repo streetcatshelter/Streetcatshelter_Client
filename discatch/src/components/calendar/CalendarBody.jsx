@@ -23,6 +23,7 @@ const CalendarBody = (props) => {
       {totalDate.map((elm, idx) => {
         return (
           <CalendarDates
+            path={props.path}
             key={idx}
             idx={idx}
             lastDate={lastDate}

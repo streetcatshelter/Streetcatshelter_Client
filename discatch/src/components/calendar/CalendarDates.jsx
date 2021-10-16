@@ -32,30 +32,43 @@ const CalendarDates = (props) => {
           <TodayCSS findToday={findToday}>
             <span>{elm}</span>
           </TodayCSS>
-          <Dots>
-            {Calendar.filter(
-              (workDate) => workDate.createdAt.substr(8, 2) == elm
-            )
-              .sort()
-              .map((workDate) => {
-                const food = workDate.food;
-                const water = workDate.water;
-                const snack = workDate.snack;
-                return (
-                  <div
-                    style={{
-                      display: "flex",
-                      margin: "auto",
-                    }}
-                  >
-                    <Gitlab width="5px" height="5px" />
-                    <Dot background="#D19B61" work={food ? "block" : "none"} />
-                    <Dot background="skyblue" work={water ? "block" : "none"} />
-                    <Dot background="#CBCF52" work={snack ? "block" : "none"} />
-                  </div>
-                );
-              })}
-          </Dots>
+          {props.path === "mypage" ? (
+            <Dots>
+              {Calendar.filter(
+                (workDate) => workDate.createdAt.substr(8, 2) == elm
+              )
+                .sort()
+                .map((workDate) => {
+                  const food = workDate.food;
+                  const water = workDate.water;
+                  const snack = workDate.snack;
+                  return (
+                    <div
+                      style={{
+                        display: "flex",
+                        margin: "auto",
+                      }}
+                    >
+                      <Gitlab width="5px" height="5px" />
+                      <Dot
+                        background="#D19B61"
+                        work={food ? "block" : "none"}
+                      />
+                      <Dot
+                        background="skyblue"
+                        work={water ? "block" : "none"}
+                      />
+                      <Dot
+                        background="#CBCF52"
+                        work={snack ? "block" : "none"}
+                      />
+                    </div>
+                  );
+                })}
+            </Dots>
+          ) : (
+            ""
+          )}
         </DateNum>
       </Form>
       {openModal && (

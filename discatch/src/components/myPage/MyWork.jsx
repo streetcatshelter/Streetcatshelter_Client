@@ -15,7 +15,7 @@ const Mywork = () => {
   return (
     <Wrapper>
       <ProgressBar />
-      <Calendar />
+      <Calendar path="mypage" />
     </Wrapper>
   );
 };

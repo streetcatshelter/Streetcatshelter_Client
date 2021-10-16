@@ -11,7 +11,9 @@ import MyPageWork from "./mypage/MyPageWork";
 
 /* == Login */
 import Login from "./login/Login";
-import LoginRedirect from "./login/LoginRedirect";
+import LoginRedirectGoogle from "./login/LoginRedirectGoogle";
+import LoginRedirectNaver from "./login/LoginRedirectNaver";
+import LoginRedirectKakao from "./login/LoginRedirectKakao";
 
 /* == Catpost */
 import CatDetail from "./CatDetail";
@@ -44,7 +46,9 @@ export {
   MyPageWork,
   /* == Login */
   Login,
-  LoginRedirect,
+  LoginRedirectGoogle,
+  LoginRedirectNaver,
+  LoginRedirectKakao,
   /* == Catpost */
   CatDetail,
   CatDetailInfo,

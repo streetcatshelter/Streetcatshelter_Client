@@ -25,11 +25,13 @@ import {
   Login,
   Map,
   Chat,
-  LoginRedirect,
-} from '../pages';
+  LoginRedirectKakao,
+  LoginRedirectNaver,
+  LoginRedirectGoogle,
+} from "../pages";
 
 // 배포 시 해당 라우트 삭제 예정
-import test from '../pages/test';
+import test from "../pages/test";
 
 // * == ( Router ) -------------------- * //
 const Router = () => {
@@ -37,8 +39,18 @@ const Router = () => {
     <Switch>
       <Route path="/login" component={Auth(Login, false)} exact />
       <Route
-        path="/user/login/callback"
-        component={Auth(LoginRedirect, false)}
+        path="/user/kakao/callback"
+        component={Auth(LoginRedirectKakao, false)}
+        exact
+      />
+      <Route
+        path="/user/naver/callback"
+        component={Auth(LoginRedirectNaver, false)}
+        exact
+      />
+      <Route
+        path="/user/google/callback"
+        component={Auth(LoginRedirectGoogle, false)}
         exact
       />
       <Route path="/" component={Auth(Home, true)} exact />
@@ -49,7 +61,6 @@ const Router = () => {
       <Route path="/userinfoedit" exact component={UserInfoWrite} />
       <Route path="/catinfowrite/:location" exact component={CatInfoWrite} />
       <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
-
 
       <Route
         path="/mypage/notice"

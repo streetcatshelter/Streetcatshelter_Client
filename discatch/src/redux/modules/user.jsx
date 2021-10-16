@@ -29,29 +29,55 @@ const _loginKakao =
     }
   };
 
-// const _loginNaver =
-//   () =>
-//   async (dispatch, getState, { history }) => {
-//     try {
-//       const { data } = await loginApi.getNaver();
-//     } catch (e) {
-//       console.log(e);
-//       window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
-//       history.push("/login");
-//     }
-//   };
+const _loginNaver =
+  (authorization_code) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await userApi.getNaver(authorization_code);
 
-// const _loginGoogle =
-//   () =>
-//   async (dispatch, getState, { history }) => {
-//     try {
-//       const { data } = await loginApi.getGoogle();
-//     } catch (e) {
-//       console.log(e);
-//       window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
-//       history.push("/login");
-//     }
-//   };
+      const userInfo = {
+        userId: data.userId,
+        name: data.username,
+        picture: data.profileImage,
+      };
+
+      dispatch(loginNaver(userInfo));
+      setToken(data.token);
+      const str_userInfo = JSON.stringify(userInfo);
+      localStorage.setItem("userInfo", str_userInfo);
+      // 메인페이지 이동
+      history.push("/");
+    } catch (e) {
+      console.log(e);
+      window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
+      history.push("/login");
+    }
+  };
+
+const _loginGoogle =
+  (authorization_code) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await userApi.getGoogle(authorization_code);
+
+      const userInfo = {
+        userId: data.userId,
+        name: data.username,
+        picture: data.profileImage,
+      };
+
+      dispatch(loginNaver(userInfo));
+      setToken(data.token);
+      const str_userInfo = JSON.stringify(userInfo);
+      localStorage.setItem("userInfo", str_userInfo);
+      // 메인페이지 이동
+      history.push("/");
+    } catch (e) {
+      console.log(e);
+      window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
+      history.push("/login");
+    }
+  };
 const _logout =
   () =>
   (dispatch, getState, { history }) => {
@@ -86,6 +112,15 @@ const user = createSlice({
   initialState,
   reducers: {
     loginKakao: (state, action) => {
+      return {
+        ...state,
+        isLoggedIn: true,
+        userId: action.payload.userId,
+        name: action.payload.name,
+        picture: action.payload.picture,
+      };
+    },
+    loginNaver: (state, action) => {
       console.log(action.payload);
       return {
         ...state,
@@ -115,6 +150,9 @@ export const userActions = {
   _loginKakao,
   _setLogin,
   _logout,
+  _loginNaver,
+  _loginGoogle,
 };
-export const { setLogin, logout, loginKakao } = user.actions;
+export const { setLogin, logout, loginKakao, loginNaver, loginGoogle } =
+  user.actions;
 export default user;

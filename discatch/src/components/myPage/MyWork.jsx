@@ -6,19 +6,14 @@ import { ProgressBar, Calendar } from "..";
 /* == Library - style */
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { mypageActions } from "../../redux/modules/mypage";
+
 const Mywork = () => {
   // const NoticeList = useSelector((state) => state.mypage.noticelist);
   // console.log(NoticeList);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(mypageActions._getCalender());
-  }, []);
+
   return (
     <Wrapper>
-      <p>
-        이달의 disCATch : 20일 <span>아주 멋져요 !!!😻👍</span>
-      </p>
       <ProgressBar />
       <Calendar />
     </Wrapper>

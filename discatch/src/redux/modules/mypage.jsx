@@ -7,7 +7,7 @@ const _getUserInfo =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await myPageApi.getUserInfo();
-      console.log(data);
+      dispatch(setUserInfo(data));
     } catch (e) {
       console.log(e);
     }
@@ -27,7 +27,7 @@ const _getCalender =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await myPageApi.getCalendar();
-      console.log(data);
+      dispatch(setCalendar(data));
     } catch (e) {
       console.log(e);
     }
@@ -38,7 +38,7 @@ const _getLikedAllCat =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await myPageApi.getLikedAllCat();
-      console.log(data);
+      dispatch(setLikedAllCat(data));
     } catch (e) {
       console.log(e);
     }
@@ -69,6 +69,9 @@ const _getOneNotice =
 const initialState = {
   noticelist: [],
   noticedetail: [],
+  likedAllCat: [],
+  userInfo: [],
+  calendar: [],
 };
 
 // 리듀서
@@ -82,6 +85,15 @@ const mypage = createSlice({
     setOneNotice: (state, action) => {
       state.noticedetail = action.payload;
     },
+    setLikedAllCat: (state, action) => {
+      state.likedAllCat = action.payload;
+    },
+    setUserInfo: (state, action) => {
+      state.userInfo = action.payload;
+    },
+    setCalendar: (state, action) => {
+      state.calendar = action.payload;
+    },
   },
 });
 
@@ -93,5 +105,11 @@ export const mypageActions = {
   _getUserInfo,
   _editUserInfo,
 };
-export const { setNotice, setOneNotice } = mypage.actions;
+export const {
+  setNotice,
+  setOneNotice,
+  setLikedAllCat,
+  setUserInfo,
+  setCalendar,
+} = mypage.actions;
 export default mypage;

@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 
 /* == components*/
 import { CalendarHead, CalendarBody } from "..";
-
+import { useDispatch, useSelector } from "react-redux";
+import { mypageActions } from "../../redux/modules/mypage";
 const Calendar = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(mypageActions._getCalender());
+  }, []);
   let DATE = new Date();
   const YEAR = DATE.getFullYear();
   const MONTH = DATE.getMonth();

@@ -1,16 +1,16 @@
 // library
-import React from 'react';
+import React from "react";
 
 // component
-import { CommentList, Calendar } from '..';
+import { CommentList, Calendar } from "..";
 
 // element
-import { Grid } from '../../elements/index';
+import { Grid } from "../../elements/index";
 
 const CatCalendar = () => {
   return (
     <Grid>
-      <Calendar />
+      <Calendar path="CatCalendar" />
       <CommentList />
     </Grid>
   );

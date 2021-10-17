@@ -21,6 +21,13 @@ const CommunityPost = ({community}) => {
   const location = path.pathname.split('/')[2];
   const communityId = community.communityId
   const category = path.pathname.split('/')[3];
+  let name;
+  if (community.nickname === null) {
+    name = community.username;
+  } else {
+    name = community.nickname;
+  }
+  console.log(community)
   return (
     <Grid height="30px">
       <CommunityPostStyle>
@@ -50,7 +57,7 @@ const CommunityPost = ({community}) => {
                   `;
                 }}/>
             <Text width="100px" margin="4px" fontWeight={'bold'}>
-            {community.username}
+            {name}
             </Text>
             <Text size="10px" margin="0 10px 0 32vw" fontWeight={'bold'}>
             {community.createdAt[0]}.{community.createdAt[1]}.{community.createdAt[2]} {community.createdAt[3]}시 {community.createdAt[4]}분

@@ -27,7 +27,6 @@ const CommunityPost = ({community}) => {
   } else {
     name = community.nickname;
   }
-  console.log(community)
   return (
     <Grid height="30px">
       <CommunityPostStyle>
@@ -51,6 +50,7 @@ const CommunityPost = ({community}) => {
               <Image 
                 width={'25px'} 
                 height={'25px'}
+                src={community.profileImageUrl}
                 addstyle={() => {
                   return css`
                   border-radius:25px;

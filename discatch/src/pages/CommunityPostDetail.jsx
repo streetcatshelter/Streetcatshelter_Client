@@ -20,7 +20,7 @@ const CommunityPostDetail = (props) => {
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, []);
-  const { category, contents, imageList, location, title, username, createdAt, nickname } = useSelector((state) => ({
+  const { category, contents, imageList, location, title, username, createdAt, nickname, profileImageUrl } = useSelector((state) => ({
     category: state.community.list.data?.category,
     contents: state.community.list.data?.contents,
     imageList: state.community.list.data?.communityImageList ? state.community.list.data.communityImageList : Array(1,2,3),
@@ -28,6 +28,7 @@ const CommunityPostDetail = (props) => {
     title: state.community.list.data?.title,
     username: state.community.list.data?.username,
     nickname: state.community.list.data?.nickname,
+    profileImageUrl: state.community.list.data?.profileImageUrl,
     createdAt: state.community.list.data?.createdAt ? state.community.list.data?.createdAt : Array(1,3,4),
   }));
   const deleteCommunity = () => {
@@ -80,6 +81,7 @@ const CommunityPostDetail = (props) => {
             <Image
               width="30px"
               height="30px"
+              src={profileImageUrl}
               addstyle={() => {
                 return css`
                   border-radius: 30px;

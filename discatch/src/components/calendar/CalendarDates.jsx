@@ -35,7 +35,9 @@ const CalendarDates = (props) => {
           {props.path === "mypage" ? (
             <Dots>
               {Calendar.filter(
-                (workDate) => workDate.createdAt.substr(8, 2) == elm
+                (workDate) =>
+                  workDate.createdAt.substr(8, 2) == elm &&
+                  workDate.createdAt.substr(5, 2) == month
               )
                 .sort()
                 .map((workDate) => {

@@ -14,11 +14,11 @@ import { history } from "../../redux/configureStore";
 import { userActions } from "../../redux/modules/user";
 import { mypageActions } from "../../redux/modules/mypage";
 const Profile = () => {
+  const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, []);
-  const dispatch = useDispatch();
   const logout = () => {
     dispatch(userActions._logout());
   };

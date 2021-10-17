@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 
+import styled from "styled-components";
+
+import { saveVillage } from "../../redux/modules/mypage";
+import { useDispatch } from "react-redux";
+import { Search } from "react-feather";
 const SearchAddress = () => {
+  const dispatch = useDispatch();
   const [address, setAddress] = useState(""); // 주소
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
 
@@ -28,9 +34,9 @@ const SearchAddress = () => {
 
     setAddress(data.zonecode);
     setAddressDetail(fullAddr);
-    console.log(data);
-    console.log(fullAddr);
-    console.log(data.zonecode);
+    console.log(data.sigungu);
+    console.log(data.bname);
+    dispatch(saveVillage(data.bname));
     setIsOpenPost(false);
   };
 
@@ -45,7 +51,10 @@ const SearchAddress = () => {
 
   return (
     <>
-      <button onClick={onChangeOpenPost}>검색</button>
+      <SearchButton onClick={onChangeOpenPost}>
+        <p>동네검색하기</p>
+        <Search />
+      </SearchButton>
       {isOpenPost ? (
         <DaumPostcode
           style={postCodeStyle}
@@ -56,4 +65,28 @@ const SearchAddress = () => {
     </>
   );
 };
+
+const SearchButton = styled.div`
+  background: #f9c852;
+  width: 75%;
+  height: 32px;
+  border: none;
+  border-radius: 10px;
+  justify-content: center;
+  margin: 10px auto 0px;
+  display: flex;
+  cursor: pointer;
+  p {
+    width: 100px;
+    margin: auto;
+    font-size: 16px;
+    font-weight: 900;
+    text-align: center;
+  }
+  svg {
+    width: 16px;
+    margin: auto;
+  }
+`;
+
 export default SearchAddress;

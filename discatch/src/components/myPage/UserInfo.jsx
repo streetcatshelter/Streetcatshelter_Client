@@ -5,16 +5,19 @@ import styled from "styled-components";
 import SearchAddress from "./SearchAddress";
 /* == Redux */
 import { history } from "../../redux/configureStore";
-
+import { useDispatch, useSelector } from "react-redux";
+import { deleteVillage } from "../../redux/modules/mypage";
+import { XCircle } from "react-feather";
 const UserInfo = (edit) => {
+  const dispatch = useDispatch();
   const [NickName, setNickName] = useState(edit === "edit" ? "NickName" : "");
-  const [MyTown, setMyTown] = useState(edit === "edit" ? "MyTown" : "");
+  const Village = useSelector((state) => state.mypage.userVillage);
   const changeNickName = (e) => {
     setNickName(e.target.value);
   };
 
-  const changeMyTown = (e) => {
-    setMyTown(e.target.value);
+  const VillageDelete = (town) => {
+    dispatch(deleteVillage(town));
   };
 
   return (
@@ -31,14 +34,24 @@ const UserInfo = (edit) => {
         </Inner>
         <Inner>
           <p>내동네</p>
-          <input
-            type="text"
-            placeholder="동네를 입력해주세요."
-            onChange={changeMyTown}
-            defaultValue={MyTown}
-          />
+          <VillageWrap>
+            {Village.map((town, index) => {
+              return (
+                <div style={{ display: "flex", width: "90px", height: "20px" }}>
+                  <div>{town}</div>
+                  <XCircle
+                    width="18px"
+                    height="18px"
+                    style={{ cursor: "pointer" }}
+                    onClick={VillageDelete(town)}
+                  />
+                </div>
+              );
+            })}
+          </VillageWrap>
         </Inner>
         <SearchAddress />
+
         <Inner>
           <button
             onClick={() => {
@@ -71,7 +84,7 @@ const Inner = styled.div`
     border-radius: 10px;
   }
   button {
-    background: #f9c852;
+    background: #cbcf52;
     width: 114px;
     height: 32px;
     font-size: 20px;
@@ -81,6 +94,14 @@ const Inner = styled.div`
     justify-content: center;
     margin: 30px auto 0px;
   }
+`;
+
+const VillageWrap = styled.div`
+  height: 35px;
+  border: 1px solid #b5bb19;
+  border-radius: 10px;
+  padding: 2px;
+  display: flex;
 `;
 
 const Wrapper = styled.div`

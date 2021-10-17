@@ -11,11 +11,8 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const TOKEN = document.cookie.split("=")[1];
   const token = localStorage.getItem("token");
-  if (TOKEN) {
-    config.headers["TOKEN"] = TOKEN;
-  } else if (token) {
+  if (token) {
     config.headers["Authorization"] = getToken();
   }
   config.headers["Content-Type"] = "application/json; charset=utf-8";
@@ -27,10 +24,16 @@ instance.interceptors.request.use((config) => {
 export const userApi = {
   getKakao: (authorization_code) =>
     instance.get(`/user/kakao/callback/?code=${authorization_code}`),
+  getNaver: (authorization_code) =>
+    instance.get(`/user/naver/callback?code=${authorization_code}`),
 };
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),
   getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),
+  getCalendar: () => instance.get("/mypage/calendar"),
+  getLikedAllCat: () => instance.get("/mypage/mycat"),
+  getUserInfo: () => instance.get("/mypage/user/information"),
+  putUserInfo: () => instance.get("/mypage/user/information"),
 };
 
 export const catApi = {

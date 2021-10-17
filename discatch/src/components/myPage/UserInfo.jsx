@@ -2,8 +2,7 @@ import React, { useState } from "react";
 
 /* == Library - style */
 import styled from "styled-components";
-import { MoreHorizontal } from "react-feather";
-
+import SearchAddress from "./SearchAddress";
 /* == Redux */
 import { history } from "../../redux/configureStore";
 
@@ -25,7 +24,7 @@ const UserInfo = (edit) => {
           <p>닉네임</p>
           <input
             type="text"
-            placeholder="닉네임을 입력해주세요!"
+            placeholder="닉네임을 입력해주세요."
             onChange={changeNickName}
             defaultValue={NickName}
           />
@@ -34,15 +33,16 @@ const UserInfo = (edit) => {
           <p>내동네</p>
           <input
             type="text"
-            placeholder="동네를 입력해주세요!"
+            placeholder="동네를 입력해주세요."
             onChange={changeMyTown}
             defaultValue={MyTown}
           />
         </Inner>
+        <SearchAddress />
         <Inner>
           <button
             onClick={() => {
-              history.push("/");
+              history.push("/mypage");
             }}
           >
             등록

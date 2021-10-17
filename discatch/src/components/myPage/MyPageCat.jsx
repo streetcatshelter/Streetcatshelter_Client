@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 /* == Library - style */
 import styled from "styled-components";
@@ -8,99 +8,48 @@ import { Image, Text } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
 
 /* == Redux */
+import { useDispatch, useSelector } from "react-redux";
+import { mypageActions } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
 
 const MyPageCat = () => {
+  const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
+  console.log(LikedAllCat);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(mypageActions._getLikedAllCat());
+  }, []);
   return (
     <div>
-      <CatPost
-        onClick={() => {
-          history.push("/catdetail");
-        }}
-      >
-        <Image width="80px" height="80px" margin="0px 20px 0px 0px" />
-        <CatInfo>
-          <p style={{ fontWeight: "800", fontSize: "14px" }}>뽀삐</p>
-          <p>최근활동:2021-09-10</p>
-          <p>나의 최근활동: 2021-09-03</p>
-          <InfoIcon>
-            <FileText width="15px" height="15px" /> <p>8</p>
-            <MessageCircle width="15px" height="15px" /> <p>10</p>
-          </InfoIcon>
-        </CatInfo>
-      </CatPost>
-      <CatPost>
-        <Image width="80px" height="80px" margin="0px 20px 0px 0px" />
-        <CatInfo>
-          <p style={{ fontWeight: "800", fontSize: "14px" }}>뽀삐</p>
-          <p>최근활동:2021-09-10</p>
-          <p>나의 최근활동: 2021-09-03</p>
-          <InfoIcon>
-            <FileText width="15px" height="15px" /> <p>8</p>
-            <MessageCircle width="15px" height="15px" /> <p>10</p>
-          </InfoIcon>
-        </CatInfo>
-      </CatPost>
-      <CatPost>
-        <Image width="80px" height="80px" margin="0px 20px 0px 0px" />
-        <CatInfo>
-          <p style={{ fontWeight: "800", fontSize: "14px" }}>뽀삐</p>
-          <p>최근활동:2021-09-10</p>
-          <p>나의 최근활동: 2021-09-03</p>
-          <InfoIcon>
-            <FileText width="15px" height="15px" /> <p>8</p>
-            <MessageCircle width="15px" height="15px" /> <p>10</p>
-          </InfoIcon>
-        </CatInfo>
-      </CatPost>
-      <CatPost>
-        <Image width="80px" height="80px" margin="0px 20px 0px 0px" />
-        <CatInfo>
-          <p style={{ fontWeight: "800", fontSize: "14px" }}>뽀삐</p>
-          <p>최근활동:2021-09-10</p>
-          <p>나의 최근활동: 2021-09-03</p>
-          <InfoIcon>
-            <FileText width="15px" height="15px" /> <p>8</p>
-            <MessageCircle width="15px" height="15px" /> <p>10</p>
-          </InfoIcon>
-        </CatInfo>
-      </CatPost>
-      <CatPost>
-        <Image width="80px" height="80px" margin="0px 20px 0px 0px" />
-        <CatInfo>
-          <p style={{ fontWeight: "800", fontSize: "14px" }}>뽀삐</p>
-          <p>최근활동:2021-09-10</p>
-          <p>나의 최근활동: 2021-09-03</p>
-          <InfoIcon>
-            <FileText width="15px" height="15px" /> <p>8</p>
-            <MessageCircle width="15px" height="15px" /> <p>10</p>
-          </InfoIcon>
-        </CatInfo>
-      </CatPost>
-      <CatPost>
-        <Image width="80px" height="80px" margin="0px 20px 0px 0px" />
-        <CatInfo>
-          <p style={{ fontWeight: "800", fontSize: "14px" }}>뽀삐</p>
-          <p>최근활동:2021-09-10</p>
-          <p>나의 최근활동: 2021-09-03</p>
-          <InfoIcon>
-            <FileText width="15px" height="15px" /> <p>8</p>
-            <MessageCircle width="15px" height="15px" /> <p>10</p>
-          </InfoIcon>
-        </CatInfo>
-      </CatPost>
-      <CatPost>
-        <Image width="80px" height="80px" margin="0px 20px 0px 0px" />
-        <CatInfo>
-          <p style={{ fontWeight: "800", fontSize: "14px" }}>뽀삐</p>
-          <p>최근활동:2021-09-10</p>
-          <p>나의 최근활동: 2021-09-03</p>
-          <InfoIcon>
-            <FileText width="15px" height="15px" /> <p>8</p>
-            <MessageCircle width="15px" height="15px" /> <p>10</p>
-          </InfoIcon>
-        </CatInfo>
-      </CatPost>
+      {LikedAllCat.map((LikedCat, index) => {
+        return (
+          <CatPost
+            onClick={() => {
+              history.push("/catdetail");
+            }}
+          >
+            <Image
+              width="80px"
+              height="80px"
+              margin="0px 20px 0px 0px"
+              src={LikedCat.catImage}
+            />
+            <CatInfo>
+              <p style={{ fontWeight: "800", fontSize: "14px" }}>
+                {LikedCat.catName}
+              </p>
+              <p>최근활동:{LikedCat.lastActivity}</p>
+              <p>나의 최근활동:{LikedCat.myActivity}</p>
+              <InfoIcon>
+                <FileText width="15px" height="15px" />{" "}
+                <p>{LikedCat.cntCatDetail}</p>
+                <MessageCircle width="15px" height="15px" />{" "}
+                <p>{LikedCat.cntComment}</p>
+              </InfoIcon>
+            </CatInfo>
+          </CatPost>
+        );
+      })}
     </div>
   );
 };

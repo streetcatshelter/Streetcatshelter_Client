@@ -6,12 +6,16 @@ import CalendarModal from "./CalendarModal";
 import { Gitlab } from "react-feather";
 /* == Library - style */
 import styled from "styled-components";
-
+import { useSelector } from "react-redux";
+import { Calendar } from "..";
 const CalendarDates = (props) => {
   const { lastDate, firstDate, elm, findToday, month, year, idx, holiday } =
     props;
 
   const [openModal, setOpenModal] = useState(false);
+
+  const Calendar = useSelector((state) => state.mypage.calendar);
+  console.log(Calendar);
   return (
     <>
       <Form
@@ -28,12 +32,43 @@ const CalendarDates = (props) => {
           <TodayCSS findToday={findToday}>
             <span>{elm}</span>
           </TodayCSS>
-          <Dots>
-            <Gitlab width="5px" height="5px" />
-            <Dot background="#D19B61" />
-            <Dot background="skyblue" />
-            <Dot background="#CBCF52" />
-          </Dots>
+          {props.path === "mypage" ? (
+            <Dots>
+              {Calendar.filter(
+                (workDate) => workDate.createdAt.substr(8, 2) == elm
+              )
+                .sort()
+                .map((workDate) => {
+                  const food = workDate.food;
+                  const water = workDate.water;
+                  const snack = workDate.snack;
+                  return (
+                    <div
+                      style={{
+                        display: "flex",
+                        margin: "auto",
+                      }}
+                    >
+                      <Gitlab width="5px" height="5px" />
+                      <Dot
+                        background="#D19B61"
+                        work={food ? "block" : "none"}
+                      />
+                      <Dot
+                        background="skyblue"
+                        work={water ? "block" : "none"}
+                      />
+                      <Dot
+                        background="#CBCF52"
+                        work={snack ? "block" : "none"}
+                      />
+                    </div>
+                  );
+                })}
+            </Dots>
+          ) : (
+            ""
+          )}
         </DateNum>
       </Form>
       {openModal && (
@@ -92,7 +127,9 @@ const Dot = styled.div`
   border-radius: 50%;
   background: ${(props) => props.background};
   margin: 2px;
+  display: ${(props) => props.work};
 `;
+
 const DateNum = styled.div`
   padding: auto;
   ${(props) => props.idx < props.lastDate && `color: #969696;`};

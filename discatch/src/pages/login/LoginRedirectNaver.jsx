@@ -16,8 +16,9 @@ const LoginRedirect = (props) => {
   console.log(authorization_code);
 
   useEffect(() => {
-    dispatch(userActions._loginNaver(authorization_code));
+    dispatch(userActions._login(authorization_code));
   }, []);
+
 
   return <div></div>;
 };

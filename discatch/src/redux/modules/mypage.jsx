@@ -72,6 +72,7 @@ const initialState = {
   likedAllCat: [],
   userInfo: [],
   calendar: [],
+  userVillage: [],
 };
 
 // 리듀서
@@ -94,6 +95,18 @@ const mypage = createSlice({
     setCalendar: (state, action) => {
       state.calendar = action.payload;
     },
+    saveVillage: (state, action) => {
+      const Village = action.payload;
+      state.userVillage.unshift(Village);
+    },
+    deleteVillage: (state, action) => {
+      return {
+        ...state,
+        userVillage: state.userVillage.filter(
+          (village) => village !== action.payload
+        ),
+      };
+    },
   },
 });
 
@@ -111,5 +124,7 @@ export const {
   setLikedAllCat,
   setUserInfo,
   setCalendar,
+  saveVillage,
+  deleteVillage,
 } = mypage.actions;
 export default mypage;

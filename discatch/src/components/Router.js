@@ -56,12 +56,6 @@ const Router = () => {
       <Route path="/" component={Auth(Home, true)} exact />
       <Route path="/slider" exact component={Slider} />
       <Route path="/mypage" component={Auth(MyPageCat, true)} exact />
-
-      <Route path="/userinfowrite" exact component={UserInfoWrite} />
-      <Route path="/userinfoedit" exact component={UserInfoWrite} />
-      <Route path="/catinfowrite/:location" exact component={CatInfoWrite} />
-      <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
-
       <Route
         path="/mypage/notice"
         component={Auth(MyPageNoticeList, true)}
@@ -73,7 +67,10 @@ const Router = () => {
         exact
       />
       <Route path="/mypage/work" component={Auth(MyPageWork, true)} exact />
-
+      <Route path="/userinfowrite" exact component={UserInfoWrite} />
+      <Route path="/userinfoedit" exact component={UserInfoWrite} />
+      <Route path="/catinfowrite/:location" exact component={CatInfoWrite} />
+      <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
       <Route path="/catdetail" exact component={CatDetail} />
       <Route path="/catdetail/:catId/:locaiton" exact component={CatDetail} />
 

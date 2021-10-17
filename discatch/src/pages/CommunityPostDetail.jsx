@@ -20,13 +20,14 @@ const CommunityPostDetail = (props) => {
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, []);
-  const { category, contents, imageList, location, title, username, createdAt } = useSelector((state) => ({
+  const { category, contents, imageList, location, title, username, createdAt, nickname } = useSelector((state) => ({
     category: state.community.list.data?.category,
     contents: state.community.list.data?.contents,
     imageList: state.community.list.data?.communityImageList ? state.community.list.data.communityImageList : Array(1,2,3),
     location: state.community.list.data?.location,
     title: state.community.list.data?.title,
     username: state.community.list.data?.username,
+    nickname: state.community.list.data?.nickname,
     createdAt: state.community.list.data?.createdAt ? state.community.list.data?.createdAt : Array(1,3,4),
   }));
   const deleteCommunity = () => {
@@ -35,6 +36,12 @@ const CommunityPostDetail = (props) => {
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo.split('"')[5];
 
+  let name;
+  if (nickname === null) {
+    name = username;
+  } else {
+    name = nickname;
+  }
   return (
     <Template props={props}>
       <Grid
@@ -91,7 +98,7 @@ const CommunityPostDetail = (props) => {
           >
             <Grid>
               <Text fontWeight="bold">
-                {username}
+                {name}
               </Text>
               <Text size="12px">
                 {location}

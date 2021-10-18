@@ -9,7 +9,7 @@ const _loginKakao =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await userApi.getKakao(authorization_code);
-
+      console.log(data);
       const userInfo = {
         userId: data.userId,
         name: data.username,
@@ -34,7 +34,13 @@ const _loginNaver =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await userApi.getNaver(authorization_code);
-
+      console.log(data);
+      if (data === "") {
+        console.log("데이터가없음");
+        window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
+        history.push("/login");
+        return;
+      }
       const userInfo = {
         userId: data.userId,
         name: data.username,

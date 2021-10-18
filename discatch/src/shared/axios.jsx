@@ -33,7 +33,7 @@ export const myPageApi = {
   getCalendar: () => instance.get("/mypage/calendar"),
   getLikedAllCat: () => instance.get("/mypage/mycat"),
   getUserInfo: () => instance.get("/mypage/user/information"),
-  putUserInfo: () => instance.get("/mypage/user/information"),
+  putUserInfo: (userInfo) => instance.put("/mypage/user/information", userInfo),
 };
 
 export const catApi = {

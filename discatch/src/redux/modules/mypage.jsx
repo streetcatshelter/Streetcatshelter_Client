@@ -66,6 +66,27 @@ const _getOneNotice =
     }
   };
 
+const _editMyInfo =
+  (NickName, Village) =>
+  async (dispatch, getState, { history }) => {
+    console.log(NickName, Village);
+    const userInfo = {
+      location: Village[0],
+      location2: Village[1],
+      location3: Village[2],
+      nickname: NickName,
+      profileUrl: "string",
+    };
+    console.log(userInfo);
+    try {
+      const { data } = await myPageApi.putUserInfo(userInfo);
+      console.log(data);
+      // dispatch(editMyInfo(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
 const initialState = {
   noticelist: [],
   noticedetail: [],
@@ -117,6 +138,7 @@ export const mypageActions = {
   _getLikedAllCat,
   _getUserInfo,
   _editUserInfo,
+  _editMyInfo,
 };
 export const {
   setNotice,

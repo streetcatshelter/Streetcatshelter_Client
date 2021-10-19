@@ -16,6 +16,8 @@ import { mypageActions } from "../../redux/modules/mypage";
 const Profile = () => {
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
+  const NickName = UserInfo.nickname === "string" ? "" : UserInfo.nickname;
+  console.log(UserInfo);
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, []);
@@ -39,7 +41,9 @@ const Profile = () => {
             width="95%"
             positon="relative"
           >
-            <Text fontWeight="800">{UserInfo.username}</Text>
+            <Text fontWeight="800">
+              {UserInfo.username}({NickName})
+            </Text>
 
             <EditModalSlide
               FirstBtn="프로필수정"

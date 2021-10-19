@@ -6,7 +6,8 @@ import SearchAddress from "./SearchAddress";
 /* == Redux */
 import { history } from "../../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteVillage } from "../../redux/modules/mypage";
+import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
+
 import { XCircle } from "react-feather";
 const UserInfo = (edit) => {
   const dispatch = useDispatch();
@@ -20,6 +21,10 @@ const UserInfo = (edit) => {
     dispatch(deleteVillage(town));
   };
 
+  const EditMyInfo = () => {
+    console.log(NickName, Village);
+    dispatch(mypageActions._editMyInfo(NickName, Village));
+  };
   return (
     <React.Fragment>
       <Wrapper>
@@ -35,7 +40,7 @@ const UserInfo = (edit) => {
         <Inner>
           <p>내동네</p>
           <VillageWrap>
-            {Village.map((town, index) => {
+            {Village.map((town, idx) => {
               return (
                 <div style={{ display: "flex", width: "90px", height: "20px" }}>
                   <div>{town}</div>
@@ -43,7 +48,7 @@ const UserInfo = (edit) => {
                     width="18px"
                     height="18px"
                     style={{ cursor: "pointer" }}
-                    onClick={VillageDelete(town)}
+                    // onClick={VillageDelete(town)}
                   />
                 </div>
               );
@@ -53,13 +58,7 @@ const UserInfo = (edit) => {
         <SearchAddress />
 
         <Inner>
-          <button
-            onClick={() => {
-              history.push("/mypage");
-            }}
-          >
-            등록
-          </button>
+          <button onClick={EditMyInfo}>등록</button>
         </Inner>
       </Wrapper>
     </React.Fragment>

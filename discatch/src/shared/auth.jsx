@@ -14,7 +14,9 @@ export default (Page, checkAuth) => {
     const token = localStorage.getItem("token");
     console.log(token);
     const isLoggedIn =
-      token !== undefined && token !== "" && token !== null ? true : false;
+      token !== undefined && token !== "" && token !== null && token !== {}
+        ? true
+        : false;
 
     useEffect(() => {
       dispatch(userActions._setLogin());

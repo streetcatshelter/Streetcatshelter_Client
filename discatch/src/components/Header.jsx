@@ -1,18 +1,18 @@
 // library
-import React, { useMemo, useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import React, { useMemo, useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
 
 // style
-import { flexBox } from "../shared/style";
+import { flexBox } from '../shared/style';
 
 // route
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 // element
-import { Grid, Text } from "../elements";
+import { Grid, Text } from '../elements';
 
 // icon
-import { Search, Bell, ArrowLeft } from "react-feather";
+import { Search, Bell, ArrowLeft } from 'react-feather';
 
 // REDUX
 import { history } from "../redux/configureStore";
@@ -45,7 +45,7 @@ const Header = (props) => {
       { key: 2, value: location2 },
       { key: 3, value: location3 },
     ],
-    []
+    [],
   );
 
   const [place, setPlace] = useState(village[0]);
@@ -61,12 +61,12 @@ const Header = (props) => {
         display="flex"
         addstyle={() => {
           return css`
-            ${flexBox("space-between")}
+            ${flexBox('space-between')}
           `;
         }}
       >
         <Grid width="20%" height="100%" margin="auto">
-          {path === "/" || path === "/community" || path === "/map" ? (
+          {path === '/' || path === '/community' || path === '/map' ? (
             <SelectStyle onChange={onChangeHandler} value={place}>
               {options.map((pl, idx) => (
                 <option key={pl.key} value={pl.value}>
@@ -76,7 +76,7 @@ const Header = (props) => {
             </SelectStyle>
           ) : (
             <ArrowLeft
-              style={{ margin: "20px", color: "gray" }}
+              style={{ margin: '20px', color: 'gray' }}
               onClick={() => {
                 history.goBack();
               }}
@@ -87,25 +87,25 @@ const Header = (props) => {
         <Head>
           <Link
             to="/"
-            style={{ margin: "0 auto", width: "60%", textDecoration: "none" }}
+            style={{ margin: '0 auto', width: '60%', textDecoration: 'none' }}
           >
             <p>
               dis<span>C</span>
               <span>A</span>
               <span>T</span>ch
-            </p>{" "}
+            </p>{' '}
           </Link>
         </Head>
 
         <Grid width="20%" height="100%" margin="auto">
           <Grid margin="20px 10px" height="25px" width="60px">
             <SearchBtn
-              style={{ color: "gray" }}
+              style={{ color: 'gray' }}
               onClick={() => {
                 setSearchModal(!searchModal);
               }}
             />
-            <Bell style={{ margin: "auto 0px auto 10px", color: "gray" }} />
+            <Bell style={{ margin: 'auto 0px auto 10px', color: 'gray' }} />
           </Grid>
         </Grid>
       </Grid>
@@ -119,7 +119,7 @@ const Header = (props) => {
           </SearchBar>
         </Grid>
       ) : (
-        ""
+        ''
       )}
     </HeaderStyle>
   );

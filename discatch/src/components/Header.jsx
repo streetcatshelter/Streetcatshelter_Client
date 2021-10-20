@@ -14,25 +14,36 @@ import { Grid, Text } from "../elements";
 // icon
 import { Search, Bell, ArrowLeft } from "react-feather";
 
+// REDUX
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { searchMap } from "../redux/modules/map";
+import { mypageActions } from "../redux/modules/mypage";
 
 const Header = (props) => {
   const dispatch = useDispatch();
   const path = props.path;
   const village = useSelector((state) => state.map.villageList);
+  const userInfo = useSelector((state) => state.mypage.userInfo);
+  const location1 = userInfo?.location;
+  const location2 = userInfo?.location2;
+  const location3 = userInfo?.location3;
+  
 
   const [searchModal, setSearchModal] = useState(false);
-
+  
   useEffect(() => {
-    dispatch(searchMap(village[0]));
+    dispatch(mypageActions._getUserInfo());
   }, []);
+  useEffect(() => {
+    dispatch(searchMap(location1));
+  }, []);
+    
   const options = useMemo(
     () => [
-      { key: 1, value: village[0] },
-      { key: 2, value: village[1] },
-      { key: 3, value: village[2] },
+      { key: 1, value: location1 },
+      { key: 2, value: location2 },
+      { key: 3, value: location3 },
     ],
     []
   );

@@ -1,12 +1,11 @@
 import React from "react";
-import { Template, ChatBoxs, ChatWrite } from "../components";
+import { Template, ChatBoxs, ChatWrite, ChatTest } from "../components";
 import styled from "styled-components";
 const Chat = (props) => {
   return (
     <Template props={props} page="map">
       <Wrapper>
-        <ChatBoxs />
-        <ChatWrite />
+        <ChatTest />
       </Wrapper>
     </Template>
   );

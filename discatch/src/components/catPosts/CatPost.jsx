@@ -31,6 +31,9 @@ const CatPost = ({ cat }) => {
         padding="8px"
         alignItems="center"
         cursor="pointer"
+        clickEvent={() => {
+          history.push(`/catdetail/${catId}`);
+        }}
       >
         <Image src={cat.catImage} borderRadius="10px" />
         <Grid padding="6px" alignItems="center">
@@ -68,14 +71,7 @@ const CatPost = ({ cat }) => {
                 );
               })}
 
-              <Button
-                clickEvent={() => {
-                  history.push(`/catdetail/${catId}`);
-                }}
-                fontWeight="bold"
-                padding="0"
-                bgColor="diaryColor"
-              >
+              <Button fontWeight="bold" padding="0" bgColor="diaryColor">
                 자세히보기
               </Button>
             </Grid>

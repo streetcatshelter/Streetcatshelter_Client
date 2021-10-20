@@ -22,11 +22,12 @@ const CommunityPost = ({community}) => {
   const communityId = community.communityId
   const category = path.pathname.split('/')[3];
   let name;
-  if (community.nickname === null) {
+  if (community.nickname === "") {
     name = community.username;
   } else {
     name = community.nickname;
   }
+  console.log(community);
   return (
     <Grid height="30px">
       <CommunityPostStyle>

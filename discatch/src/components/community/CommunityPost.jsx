@@ -27,7 +27,6 @@ const CommunityPost = ({community}) => {
   } else {
     name = community.nickname;
   }
-  console.log(community);
   return (
     <Grid height="30px">
       <CommunityPostStyle>
@@ -57,10 +56,10 @@ const CommunityPost = ({community}) => {
                   border-radius:25px;
                   `;
                 }}/>
-            <Text width="100px" margin="4px" fontWeight={'bold'}>
+            <Text width="100px" margin="4px" fontWeight="bold">
             {name}
             </Text>
-            <Text size="10px" margin="0 10px 0 32vw" fontWeight={'bold'}>
+            <Text size="10px" margin="0 10px 0 32vw" fontWeight="bold">
             {community.createdAt[0]}.{community.createdAt[1]}.{community.createdAt[2]} {community.createdAt[3]}시 {community.createdAt[4]}분
             </Text>
             </Grid>
@@ -69,11 +68,10 @@ const CommunityPost = ({community}) => {
           addstyle={() => {
             return css`
               position:relative;
-              height:30px;
               top:-50px;
             `;
           }}>
-          <Text fontWeight={'bold'} margin={'4px 0 0 0'}>
+          <Text fontWeight={'bold'} margin={'8px 0 -4px 0'}>
           {community.title}
           </Text>
           <Grid 
@@ -90,7 +88,6 @@ const CommunityPost = ({community}) => {
               position:relative;
               justify-content:space-between;
               margin: 10px 0 0 120px;
-              left: -10px;
               `;
             }}>
               <Grid 

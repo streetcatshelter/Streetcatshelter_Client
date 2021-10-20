@@ -63,6 +63,7 @@ const CommentList = (props) => {
               border: 1px solid rgb(${(props) => props.theme.palette.yellow});
               border-radius: 10px;
               resize:none;
+              overflow-y: hidden;
             `;
           }}
         />

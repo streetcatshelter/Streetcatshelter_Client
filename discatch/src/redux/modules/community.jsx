@@ -142,7 +142,7 @@ export const editCommunityDB = (communityId, category, editcontents, location, e
             .then((res) => {
               window.alert('게시글 수정 완료!');
               history.goBack();
-              window.location.replace(`/communitypostdetail/${communityId}`);
+              window.location.replace(`/community/${location}/${category}/postdetail/${communityId}`);
             })
             .catch((err) => {
               console.log(err);

@@ -23,26 +23,26 @@ const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
 
   const catDetailId = props.match.params.catDetailId;
-  console.log(catDetailId);
-  // const location = useSelector((state) => state.map.keywordList[0]);
 
   const deleteCatInfo = () => {
     dispatch(__deleteCatInfo(catDetailId));
   };
 
-  const { image, diary, water, food, snack, createdAt, tags } = useSelector(
-    (state) => ({
-      image: state.cat.catdetail.catImages,
-      diary: state.cat.catdetail.diary,
-      water: state.cat.catdetail.water,
-      food: state.cat.catdetail.food,
-      snack: state.cat.catdetail.snack,
-      createdAt: state.cat.catdetail.createdAt,
-      tags: state.cat.catdetail.catTags,
-    }),
-    shallowEqual,
-  );
-  // console.log(image);
+  const { image, diary, water, food, snack, createdAt, tags, data } =
+    useSelector(
+      (state) => ({
+        image: state.cat.list.catImages,
+        diary: state.cat.list.diary,
+        water: state.cat.list.water,
+        food: state.cat.list.food,
+        snack: state.cat.list.snack,
+        createdAt: state.cat.list.createdAt,
+        tags: state.cat.list.catTags,
+        data: state.cat,
+      }),
+      shallowEqual,
+    );
+  console.log(data);
 
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));

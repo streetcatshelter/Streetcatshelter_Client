@@ -85,7 +85,7 @@ export const __createCatDetailInfo = (
               dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());
               history.goBack();
-              // window.location.replace(`/catdetailinfo/${catId}`);
+              window.location.replace(`/catdetailinfo/${catId}`);
             })
             .catch((err) => {
               console.error(err);
@@ -101,11 +101,26 @@ export const __createCatDetailInfo = (
 };
 
 // Cat 댓글 생성
-export const _catCommentCreate =
-  () =>
+export const __createCatComment =
+  (contents, catId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.catCommentCreate();
+      const data = await catApi.createCatComment(contents, catId);
+      dispatch(createCatComment({ contents }));
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+// CatDetail 댓글 생성
+export const __createCatDetailComment =
+  (contents, catDetailId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const data = await catApi.createCatDetailComment(contents, catDetailId);
+      dispatch(createCatDetailComment({ contents }));
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -158,7 +173,7 @@ export const __getOnePost =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getDetail(catId);
-      console.log(data);
+
       dispatch(getOneCat(data));
     } catch (err) {
       console.error(err);
@@ -238,7 +253,7 @@ export const __deleteCatInfo =
 
 const initialState = {
   list: [],
-  catdetail: [],
+  detail: [],
   page: 0,
   start: 0,
 };
@@ -272,7 +287,16 @@ const cat = createSlice({
         snack: action.payload.snack,
         water: action.payload.water,
       };
-      state.list.push(detailInfo);
+      state.detail.push(detailInfo);
+      console.log(action.payload);
+    },
+
+    createCatComment: (state, action) => {
+      state.list = action.payload;
+    },
+
+    createCatDetailComment: (state, action) => {
+      state.list = action.payload;
     },
 
     getCatLocation: (state, action) => {
@@ -316,6 +340,8 @@ const cat = createSlice({
 export const {
   createCatInfo,
   createCatDetailInfo,
+  createCatComment,
+  createCatDetailComment,
   getCatLocation,
   getMoreCat,
   getOneCat,

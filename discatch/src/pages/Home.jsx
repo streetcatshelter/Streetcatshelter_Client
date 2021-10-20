@@ -14,46 +14,47 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 // redux
 import { history } from '../redux/configureStore';
-import { __getCatLocation } from '../redux/modules/cat';
+import { __getCatLocation, __getMoreCat } from '../redux/modules/cat';
 
 // function
 import InfinityScroll from '../shared/InfinityScroll';
 
 const Home = (props) => {
   const dispatch = useDispatch();
-
+  const query = window.location.search;
   const catList = useSelector((state) => state.cat.list);
   const location = useSelector((state) => state.map.keywordList[0]);
 
+  const getMoreCat = () => {
+    dispatch(__getMoreCat(location));
+  };
+
   useEffect(() => {
-    /* eslint-disable */
-    dispatch(__getCatLocation(location));
+    if (!query) dispatch(__getCatLocation(location));
+
+    return () => {
+      dispatch(__getCatLocation(location));
+    };
   }, [location]);
 
   return (
     <Template props={props}>
       {catList.length ? (
         catList.map((cat, idx) => {
-          return <CatPost {...cat} cat={cat} key={idx} />;
+          return (
+            <InfinityScroll
+              next={getMoreCat}
+              index={idx}
+              length={catList.length}
+              key={cat.catId}
+            >
+              <CatPost cat={cat} />
+            </InfinityScroll>
+          );
         })
       ) : (
         <></>
       )}
-
-      {/* {catList.length
-        ? catList.map((cat, idx) => {
-            return (
-              <InfinityScroll
-                next={}
-                index={idx}
-                length={catList.length}
-                key={cat.catId}
-              >
-                <CatPost cat={cat} />
-              </InfinityScroll>
-            );
-          })
-        : null} */}
 
       <Button
         is_float="is_float"

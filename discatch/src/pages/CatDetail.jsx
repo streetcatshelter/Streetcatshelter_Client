@@ -14,6 +14,7 @@ import {
   CatGallery,
   Like,
   CatPost,
+  CatComment,
 } from '../components';
 
 // element
@@ -140,6 +141,8 @@ const CatDetail = (props) => {
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />
       </Button>
+
+      <CatComment />
     </Template>
   );
 };

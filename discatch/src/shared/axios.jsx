@@ -49,7 +49,10 @@ export const catApi = {
     instance.get(`/cat/diary/${catId}?page=1&size=${size}`),
   getCatComment: (catId, size) =>
     instance.get(`/cat/comment/${catId}?page=0&size=${size}`),
-  createCatComment: () => instance.post('/cat/comment'),
+  createCatComment: (contents, catId) =>
+    instance.post(`/cat/comment/${catId}`, { contents }),
+  createCatDetailComment: (contents, catDetailId) =>
+    instance.post(`/cat/detail/comment/${catDetailId}`, { contents }),
   deleteCatComment: () => instance.delete('/cat/comment'),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
   updateCatDetail: () => instance.put('/cat/detailUpdate'),

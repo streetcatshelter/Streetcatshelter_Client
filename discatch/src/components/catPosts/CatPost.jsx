@@ -18,14 +18,14 @@ import { flexBox } from '../../shared/style';
 const CatPost = ({ cat }) => {
   const catId = cat.catId;
 
-  // console.log(cat);
+  // console.log(catId);
 
   const location = useSelector((state) => state.map.keywordList[0]);
 
   return (
     <React.Fragment>
       <Grid
-        margin="6% 0 0 0"
+        margin="3% 0 0 0"
         bgColor="diaryColor"
         display="flex"
         padding="8px"
@@ -70,10 +70,7 @@ const CatPost = ({ cat }) => {
 
               <Button
                 clickEvent={() => {
-                  // history.push(`/catdetail/${catId}`);
-                  history.push({
-                    pathname: `/catdetail/${catId}`,
-                  });
+                  history.push(`/catdetail/${catId}`);
                 }}
                 fontWeight="bold"
                 padding="0"

@@ -28,7 +28,6 @@ const Header = (props) => {
   const location1 = userInfo?.location;
   const location2 = userInfo?.location2;
   const location3 = userInfo?.location3;
-  
 
   const [searchModal, setSearchModal] = useState(false);
   
@@ -38,15 +37,24 @@ const Header = (props) => {
   useEffect(() => {
     dispatch(searchMap(location1));
   }, []);
-    
-  const options = useMemo(
-    () => [
+
+  let options;
+  if (location1 !== null) {
+    options = [
+      { key: 1, value: location1 }
+    ]
+  } else if (location1 !== null && location2 !== null) {
+    options = [
+      { key: 1, value: location1 },
+      { key: 2, value: location2 }
+            ];
+  } else if (location1 !== null && location2 !== null && location3 !== null) {
+    options = [
       { key: 1, value: location1 },
       { key: 2, value: location2 },
       { key: 3, value: location3 },
-    ],
-    []
-  );
+    ];
+  }
 
   const [place, setPlace] = useState(village[0]);
   const onChangeHandler = (e) => {

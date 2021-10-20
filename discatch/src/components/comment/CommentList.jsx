@@ -13,14 +13,10 @@ import { flexBox } from '../../shared/style';
 // ELEMENTS
 import { Grid, Button, TextArea } from '../../elements/index';
 
-// ROUTE
-import { useLocation } from 'react-router-dom';
-
 // REDUX
 import { addCommunityCommentDB } from '../../redux/modules/community';
 
 const CommentList = (props) => {
-  const path = useLocation();
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
 
@@ -35,11 +31,7 @@ const CommentList = (props) => {
   };
 
   const addCommentBtn = () => {
-    if (path.pathname.split('/')[1] === 'community') {
       dispatch(addCommunityCommentDB(comments, communityId));
-    } else {
-      console.log('캣 댓글 추가');
-    }
   };
 
   return (

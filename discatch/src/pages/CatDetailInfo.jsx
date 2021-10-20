@@ -10,7 +10,7 @@ import { flexBox } from '../shared/style';
 import { Grid, Text, Image } from '../elements';
 
 // component
-import { Template, CommentList, EditModalSlide } from '../components';
+import { Template, CatDetailComment, EditModalSlide } from '../components';
 
 // icon
 import { CheckSquare } from 'react-feather';
@@ -139,7 +139,7 @@ const CatDetailInfo = (props) => {
         </Text>
       ) : null} */}
 
-      <CommentList />
+      <CatDetailComment />
     </Template>
   );
 };

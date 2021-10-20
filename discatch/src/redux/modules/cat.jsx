@@ -62,8 +62,6 @@ export const __createCatDetailInfo = (
   catId,
 ) => {
   return function (dispatch, getState, { history }) {
-    const id = getState();
-    console.log(id);
     const imgFile = getState().image.file;
     if (imgFile.length < 4) {
       dispatch(
@@ -86,7 +84,8 @@ export const __createCatDetailInfo = (
             .then((res) => {
               dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());
-              history.push(`/catdetailinfo/${catId}`);
+              history.goBack();
+              // window.location.replace(`/catdetailinfo/${catId}`);
             })
             .catch((err) => {
               console.error(err);
@@ -117,12 +116,50 @@ export const _catCommentCreate =
 // GET
 // 지역에 따라 cat 가져오기 ✅
 export const __getCatLocation =
-  (location, size = 15) =>
+  (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.getCatLocation(location, size);
+      const { data } = await catApi.getCatLocation(location, limit);
+      if (data.length < limit + 1) {
+        dispatch(getCatLocation(data, null));
+        return;
+      }
+      dispatch(getCatLocation(data, limit));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-      dispatch(getCatLocation(data));
+export const __getMoreCat =
+  (location, limit = 11) =>
+  async (dispatch, getState, { history }) => {
+    let start = getState().cat.start;
+
+    if (start === null) {
+      return;
+    } else {
+      start += 1;
+    }
+
+    try {
+      const data = await catApi.getMoreCat(location, start, limit);
+      const catList = data.data;
+      if (catList.length < limit + 1) {
+        dispatch(getMoreCat(catList, null));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+// 상세페이지
+export const __getOnePost =
+  (catId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await catApi.getDetail(catId);
+      console.log(data);
+      dispatch(getOneCat(data));
     } catch (err) {
       console.error(err);
     }
@@ -134,6 +171,7 @@ export const __getCatDetail =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatDetail(catDetailId);
+
       dispatch(getCatDetail(data));
     } catch (err) {
       console.error(err);
@@ -152,6 +190,18 @@ export const __getCalendar =
     }
   };
 
+// Cat 상세 페이지(집사일기)
+export const __getDiary =
+  (catId, size = 15) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await catApi.getCatDiary(catId, size);
+      dispatch(getDiary(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 // Cat 상세 페이지(갤러리)
 export const __getGallery =
   (catId, size = 15) =>
@@ -164,12 +214,22 @@ export const __getGallery =
     }
   };
 
-// Cat 상세 페이지(집사일기)
-
 // Cat 댓글 더보기
 
 // DELETE
 // Cat 상세정보 삭제
+export const __deleteCatInfo =
+  (catDetailId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const data = await catApi.deleteCatDetail(catDetailId);
+      dispatch(deleteCatInfo(catDetailId));
+      window.alert('게시물 삭제 완료!');
+      history.push('/');
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
 // Cat 댓글 삭제
 
@@ -212,24 +272,43 @@ const cat = createSlice({
         snack: action.payload.snack,
         water: action.payload.water,
       };
-      state.catdetail.push(detailInfo);
+      state.list.push(detailInfo);
     },
 
     getCatLocation: (state, action) => {
       state.list = action.payload;
     },
 
+    getMoreCat: (state, action) => {
+      return {
+        ...state,
+        list: [...state.list, ...action.payload],
+        start: state.start + 1,
+      };
+    },
+
+    getOneCat: (state, action) => {
+      state.list = action.payload;
+    },
+
     getCatDetail: (state, action) => {
-      state.catdetail = action.payload;
+      state.list = action.payload;
     },
 
     getCalendar: (state, action) => {
       state.list = action.payload;
-      // console.log(action.payload);
+    },
+
+    getDiary: (state, action) => {
+      state.list = action.payload;
     },
 
     getGallery: (state, action) => {
       state.list = action.payload;
+    },
+
+    deleteCatInfo: (state, action) => {
+      console.log('삭제 완료');
     },
   },
 });
@@ -238,9 +317,13 @@ export const {
   createCatInfo,
   createCatDetailInfo,
   getCatLocation,
+  getMoreCat,
+  getOneCat,
   getCatDetail,
   getCalendar,
+  getDiary,
   getGallery,
+  deleteCatInfo,
 } = cat.actions;
 
 export default cat;

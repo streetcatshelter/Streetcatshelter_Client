@@ -17,37 +17,32 @@ import { CheckSquare } from 'react-feather';
 
 // redux
 import { history } from '../redux/configureStore';
-import { __getCatDetail, __getCatLocation } from '../redux/modules/cat';
+import { __getCatDetail, __deleteCatInfo } from '../redux/modules/cat';
 
 const CatDetailInfo = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
 
   const catDetailId = props.match.params.catDetailId;
+  console.log(catDetailId);
   // const location = useSelector((state) => state.map.keywordList[0]);
 
-  const { user, image, tag } = useSelector(
-    (state) => ({
-      user: state.cat.list[0].catName,
-      image: state.cat.list[0].catImage,
-      tag: state.cat.list[0].catTagList,
-    }),
-    shallowEqual,
-  );
+  const deleteCatInfo = () => {
+    dispatch(__deleteCatInfo(catDetailId));
+  };
 
-  const { diary, water, food, snack, data } = useSelector(
+  const { image, diary, water, food, snack, createdAt, tags } = useSelector(
     (state) => ({
-      // image: state.cat.catdetail.catImage,
+      image: state.cat.catdetail.catImages,
       diary: state.cat.catdetail.diary,
       water: state.cat.catdetail.water,
       food: state.cat.catdetail.food,
       snack: state.cat.catdetail.snack,
-      data: state.cat.catdetail,
+      createdAt: state.cat.catdetail.createdAt,
+      tags: state.cat.catdetail.catTags,
     }),
     shallowEqual,
   );
-
-  console.log(data);
+  // console.log(image);
 
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));
@@ -63,24 +58,27 @@ const CatDetailInfo = (props) => {
           `;
         }}
       >
-        <Image src={image} width="35px" height="35px" borderRadius="25px" />
+        <Image
+          src={image}
+          width="35px"
+          height="35px"
+          borderRadius="25px"
+          margin="0 15% 0 3%"
+        />
 
-        <Text margin="0 10% 0 -7%" fontWeight="bold">
-          {user}
-        </Text>
-
-        <Text margin="0 -10% 0 0" size="12px" fontWeight="bold">
-          2021-09-10-17:55
+        <Text margin="0 -5% 0 0" size="12px" fontWeight="bold">
+          {/* {createdAt}*/}
         </Text>
 
         <EditModalSlide
           FirstBtn={'게시글 수정'}
           SecondBtn={'삭제'}
-          FirstClick={() => history.push('/catdetailedit')}
+          FirstClick={() => history.push(`/catdetailedit/${catDetailId}`)}
+          SecondClick={deleteCatInfo}
         />
       </Grid>
 
-      <Image src={image} margin="auto" width="300px" height="140px" />
+      <Image src={image} margin="auto" width="300px" height="300px" />
 
       <Grid
         margin="5% 0"
@@ -128,9 +126,9 @@ const CatDetailInfo = (props) => {
         {diary}
         <br />
         <br />
-        {tag.map((tag, idx) => {
+        {/* {tags.map((tag, idx) => {
           return <TagStyle key={idx}>#{tag.tag}</TagStyle>;
-        })}
+        })} */}
       </Text>
 
       {/* {tag ? (

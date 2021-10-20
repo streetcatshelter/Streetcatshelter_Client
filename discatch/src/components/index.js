@@ -51,6 +51,7 @@ import Location from "./map/Location";
 /* chat */
 import ChatBoxs from "./chat/ChatBoxs";
 import ChatWrite from "./chat/ChatWrite";
+import ChatTest from "./chat/ChatTest";
 
 import GoogleLoginBtn from "./GoogleLoginBtn";
 export {
@@ -98,5 +99,6 @@ export {
   /* chat */
   ChatBoxs,
   ChatWrite,
+  ChatTest,
   GoogleLoginBtn,
 };

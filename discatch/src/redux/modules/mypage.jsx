@@ -1,6 +1,7 @@
 // LIBRARY
 import { createSlice } from "@reduxjs/toolkit";
 import { myPageApi } from "../../shared/axios";
+import { userActions } from "../modules/user";
 
 const _getUserInfo =
   () =>
@@ -10,6 +11,7 @@ const _getUserInfo =
       dispatch(setUserInfo(data));
     } catch (e) {
       console.log(e);
+      dispatch(userActions._logout());
     }
   };
 const _editUserInfo =

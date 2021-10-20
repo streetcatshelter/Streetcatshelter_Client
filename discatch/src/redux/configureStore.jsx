@@ -16,6 +16,7 @@ import community from "./modules/community";
 import user from "./modules/user";
 import cat from "./modules/cat";
 import mypage from "./modules/mypage";
+import chat from "./modules/chat";
 
 export const history = createBrowserHistory();
 
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   router: connectRouter(history),
   cat: cat.reducer,
   mypage: mypage.reducer,
+  chat: chat.reducer,
 });
 
 // history 넣기, 로거사용

@@ -15,9 +15,9 @@ import { history } from '../../redux/configureStore';
 // style
 import { flexBox } from '../../shared/style';
 
-const CatPost = (cat) => {
+const CatPost = ({ cat }) => {
   const catId = cat.catId;
-  console.log(catId);
+
   // console.log(cat);
 
   const location = useSelector((state) => state.map.keywordList[0]);
@@ -70,7 +70,10 @@ const CatPost = (cat) => {
 
               <Button
                 clickEvent={() => {
-                  history.push(`/catdetail/${catId}/${location}`);
+                  // history.push(`/catdetail/${catId}`);
+                  history.push({
+                    pathname: `/catdetail/${catId}`,
+                  });
                 }}
                 fontWeight="bold"
                 padding="0"

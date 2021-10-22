@@ -1,7 +1,7 @@
 // library
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 
 // style
 import { flexBox } from '../shared/style';
@@ -124,11 +124,6 @@ const CatDetailInfo = (props) => {
 
       <Text bgColor="diaryColor" fontWeight="500" padding="20px">
         {diary}
-        <br />
-        <br />
-        {/* {tags.map((tag, idx) => {
-          return <TagStyle key={idx}>#{tag.tag}</TagStyle>;
-        })} */}
       </Text>
 
       {/* {tag ? (
@@ -139,13 +134,9 @@ const CatDetailInfo = (props) => {
         </Text>
       ) : null} */}
 
-      <CatDetailComment />
+      <CatDetailComment catDetailId={catDetailId} />
     </Template>
   );
 };
-
-const TagStyle = styled.span`
-  font-weight: bold;
-`;
 
 export default CatDetailInfo;

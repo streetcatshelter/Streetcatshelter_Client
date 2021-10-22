@@ -1,14 +1,15 @@
 // library
 import { createSlice } from '@reduxjs/toolkit';
 // api
-import instance, { catApi } from '../../shared/axios';
+import { catApi } from '../../shared/axios';
 
-// Cat 댓글 생성
+// Cat 댓글 생성 ✅
 export const __createCatComment =
   (catId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
       const data = await catApi.createCatComment(catId, contents);
+
       dispatch(createCatComment({ contents }));
       window.location.reload();
     } catch (err) {
@@ -16,19 +17,21 @@ export const __createCatComment =
     }
   };
 
-// CatDetail 댓글 생성
+// CatDetail 댓글 생성 ✅
 export const __createCatDetailComment =
-  (contents, catDetailId) =>
+  (catDetailId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.createCatDetailComment(contents, catDetailId);
+      const data = await catApi.createCatDetailComment(catDetailId, contents);
+
       dispatch(createCatDetailComment({ contents }));
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
   };
 
-// 댓글 불러오기
+// 상세페이지 댓글 불러오기 ✅
 export const __getComment =
   (catId, size = 15) =>
   async (dispatch, getState, { history }) => {
@@ -41,14 +44,32 @@ export const __getComment =
     }
   };
 
-// 댓글 삭제
+// 더보기
+
+// 상세정보 페이지 댓글 불러오기 ✅
+export const __getDetailComment =
+  (catDetailId, size = 15) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await catApi.getDetailComment(catDetailId, size);
+
+      dispatch(getDetailComment(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+// 더보기
+
+// 댓글 삭제 ✅
 export const __deleteComment =
   (commentId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.deleteCatComment(commentId);
+      const { data } = await catApi.deleteCatComment(commentId);
+
       dispatch(deleteCatComment(commentId));
-      window.alert('댓글 삭제');
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -68,10 +89,15 @@ const comment = createSlice({
     },
 
     createCatDetailComment: (state, action) => {
-      state.list = action.payload;
+      const contents = action.payload.contents;
+      state.list.push({ contents });
     },
 
     getComment: (state, action) => {
+      state.list = action.payload;
+    },
+
+    getDetailComment: (state, action) => {
       state.list = action.payload;
     },
 
@@ -79,7 +105,7 @@ const comment = createSlice({
       const deleteComment = state.list.filter(
         (comment) => comment.commentId !== action.commentId,
       );
-      state.list = action.payload;
+      state.list = deleteComment;
     },
   },
 });
@@ -88,6 +114,7 @@ export const {
   createCatComment,
   createCatDetailComment,
   getComment,
+  getDetailComment,
   deleteCatComment,
 } = comment.actions;
 

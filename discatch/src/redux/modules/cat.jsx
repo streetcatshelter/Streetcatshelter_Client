@@ -5,7 +5,6 @@ import instance, { catApi } from '../../shared/axios';
 // redux
 import { imgActions } from './image';
 
-// POST
 // Cat 기본 정보 작성 ✅
 export const __createCatInfo = (
   catName,
@@ -100,14 +99,7 @@ export const __createCatDetailInfo = (
   };
 };
 
-// Cat 댓글 생성
-
-// CatDetail 댓글 생성
-
-// Cat 즐겨찾기
-
-// GET
-// 지역에 따라 cat 가져오기 ✅
+// 지역에 따라 catPost 가져오기 ✅
 export const __getCatLocation =
   (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
@@ -123,6 +115,7 @@ export const __getCatLocation =
     }
   };
 
+// ✅
 export const __getMoreCat =
   (location, limit = 11) =>
   async (dispatch, getState, { history }) => {
@@ -145,7 +138,7 @@ export const __getMoreCat =
     }
   };
 
-// 상세페이지
+// 상세페이지 ✅
 export const __getOnePost =
   (catId) =>
   async (dispatch, getState, { history }) => {
@@ -207,10 +200,7 @@ export const __getGallery =
     }
   };
 
-// get 댓글
-
-// DELETE
-// Cat 상세정보 삭제
+// Cat 상세정보 삭제 (보류)
 export const __deleteCatInfo =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
@@ -223,11 +213,6 @@ export const __deleteCatInfo =
       console.error(err);
     }
   };
-
-// Cat 댓글 삭제
-
-// UPDATE
-// Cat 상세정보 수정
 
 const initialState = {
   list: [],

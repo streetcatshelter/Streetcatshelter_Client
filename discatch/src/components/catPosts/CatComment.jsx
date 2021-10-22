@@ -3,33 +3,32 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
+// component
+import { CatCommentCard } from '..';
+
 // element
-import { Grid, Text, Button, Input, Image } from '../../elements';
+import { Grid, Text, Button, Input } from '../../elements';
 
 // style
 import { flexBox } from '../../shared/style';
 
 // redux
-import {
-  __createCatComment,
-  __getComment,
-  __deleteComment,
-} from '../../redux/modules/comment';
+import { __createCatComment, __getComment } from '../../redux/modules/comment';
 
 const CatComment = (props) => {
   const dispatch = useDispatch();
   const catId = props.catId;
 
-  const [contents, setComment] = useState('');
+  const commentList = useSelector((state) => state.comment.list);
+  const commentCnt = commentList.length;
+
+  const [comment, setComment] = useState('');
   const $comment = (e) => {
     setComment(e.target.value);
   };
 
-  const commentList = useSelector((state) => state.comment.list);
-  console.log(commentList);
-
   const addComment = () => {
-    dispatch(__createCatComment(catId, contents));
+    dispatch(__createCatComment(catId, comment));
   };
 
   useEffect(() => {
@@ -52,17 +51,16 @@ const CatComment = (props) => {
         <Text fontWeight="700" size="16px">
           댓글
         </Text>
-        <Count>2</Count>
+        <Count>{commentCnt}</Count>
       </Grid>
 
       <Grid padding="8px">
         <Grid
           alignItems="center"
-          margin="0 auto 3% auto"
+          margin="0 auto 12% auto"
           addstyle={() => {
             return css`
               ${flexBox('space-between')}
-              margin-bottom: 12%;
             `;
           }}
         >
@@ -94,42 +92,7 @@ const CatComment = (props) => {
         </Grid>
 
         {commentList.map((comment, idx) => {
-          return (
-            <Grid
-              margin="3% 0"
-              key={idx}
-              alignItems="center"
-              display="flex"
-              addstyle={() => {
-                return css`
-                  ${flexBox('space-between')}
-                `;
-              }}
-            >
-              <Image
-                src={comment.profileImageUrl}
-                width="30px"
-                height="30px"
-                borderRadius="20px"
-              ></Image>
-              <Text fontWeight="bold" size="15px">
-                {comment.username}:
-              </Text>
-              <Text fontWeight="bold" size="15px" width="55%">
-                {comment.contents}
-              </Text>
-              <Text fontWeight="bold" size="12px">
-                {comment.createdAt ? (
-                  `${comment.createdAt[0]}.${comment.createdAt[1]}.\
-                  ${comment.createdAt[2]}
-                  ${comment.createdAt[3]}시 ${comment.createdAt[4]}분
-                  `
-                ) : (
-                  <></>
-                )}
-              </Text>
-            </Grid>
-          );
+          return <CatCommentCard key={idx} comment={comment} />;
         })}
       </Grid>
     </>

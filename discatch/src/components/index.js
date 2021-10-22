@@ -36,7 +36,9 @@ import Diary from './catPosts/Diary';
 import Gallery from './catPosts/Gallery';
 import Like from './catPosts/Like';
 import CatComment from './catPosts/CatComment';
+import CatCommentCard from './catPosts/CatCommentCard';
 import CatDetailComment from './catPosts/CatDetailComment';
+import CatDetailCommentCard from './catPosts/CatDetailCommentCard';
 
 /* comments */
 import Comment from './comment/Comment';
@@ -90,7 +92,9 @@ export {
   Gallery,
   Like,
   CatComment,
+  CatCommentCard,
   CatDetailComment,
+  CatDetailCommentCard,
   /* ==comments */
   Comment,
   CommentList,

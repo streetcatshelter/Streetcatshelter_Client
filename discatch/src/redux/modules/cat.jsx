@@ -101,30 +101,8 @@ export const __createCatDetailInfo = (
 };
 
 // Cat 댓글 생성
-export const __createCatComment =
-  (contents, catId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const data = await catApi.createCatComment(contents, catId);
-      dispatch(createCatComment({ contents }));
-      window.location.reload();
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
 // CatDetail 댓글 생성
-export const __createCatDetailComment =
-  (contents, catDetailId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const data = await catApi.createCatDetailComment(contents, catDetailId);
-      dispatch(createCatDetailComment({ contents }));
-      window.location.reload();
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
 // Cat 즐겨찾기
 
@@ -174,7 +152,7 @@ export const __getOnePost =
     try {
       const { data } = await catApi.getDetail(catId);
 
-      dispatch(getOneCat(data));
+      dispatch(getOnePost(data));
     } catch (err) {
       console.error(err);
     }
@@ -229,7 +207,7 @@ export const __getGallery =
     }
   };
 
-// Cat 댓글 더보기
+// get 댓글
 
 // DELETE
 // Cat 상세정보 삭제
@@ -291,14 +269,6 @@ const cat = createSlice({
       console.log(action.payload);
     },
 
-    createCatComment: (state, action) => {
-      state.list = action.payload;
-    },
-
-    createCatDetailComment: (state, action) => {
-      state.list = action.payload;
-    },
-
     getCatLocation: (state, action) => {
       state.list = action.payload;
     },
@@ -311,12 +281,12 @@ const cat = createSlice({
       };
     },
 
-    getOneCat: (state, action) => {
-      state.list = action.payload;
+    getOnePost: (state, action) => {
+      state.detail = action.payload;
     },
 
     getCatDetail: (state, action) => {
-      state.list = action.payload;
+      state.detail = action.payload;
     },
 
     getCalendar: (state, action) => {
@@ -340,11 +310,10 @@ const cat = createSlice({
 export const {
   createCatInfo,
   createCatDetailInfo,
-  createCatComment,
   createCatDetailComment,
   getCatLocation,
   getMoreCat,
-  getOneCat,
+  getOnePost,
   getCatDetail,
   getCalendar,
   getDiary,

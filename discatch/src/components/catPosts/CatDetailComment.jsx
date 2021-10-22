@@ -1,6 +1,10 @@
 // library
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
+
+// component
+import { CatDetailCommentCard } from '..';
 
 // element
 import { Grid, Text, Button, Input } from '../../elements';
@@ -9,8 +13,31 @@ import { Grid, Text, Button, Input } from '../../elements';
 import { flexBox } from '../../shared/style';
 
 // redux
+import {
+  __createCatDetailComment,
+  __getDetailComment,
+} from '../../redux/modules/comment';
 
-const CatDetailComment = () => {
+const CatDetailComment = (props) => {
+  const dispatch = useDispatch();
+  const catDetailId = props.catDetailId;
+
+  const commentList = useSelector((state) => state.comment.list);
+  const commentCnt = commentList.length;
+
+  const [comment, setComment] = useState('');
+  const $comment = (e) => {
+    setComment(e.target.value);
+  };
+
+  const addComment = () => {
+    dispatch(__createCatDetailComment(catDetailId, comment));
+  };
+
+  useEffect(() => {
+    dispatch(__getDetailComment(catDetailId));
+  }, []);
+
   return (
     <>
       <Grid
@@ -27,42 +54,49 @@ const CatDetailComment = () => {
         <Text fontWeight="700" size="16px">
           댓글
         </Text>
-        <Count>2</Count>
+        <Count>{commentCnt}</Count>
       </Grid>
 
-      <Grid
-        alignItems="center"
-        width="95%"
-        margin="0 auto 20% auto"
-        addstyle={() => {
-          return css`
-            ${flexBox('space-between')}
-          `;
-        }}
-      >
-        <Input
-          width="85%"
-          height="40px"
-          padding="4px"
-          radius="10px"
-          placeholder="댓글 달기..."
+      <Grid padding="8px">
+        <Grid
+          alignItems="center"
+          margin="0 auto 5% auto"
           addstyle={() => {
             return css`
-              border: 1px solid rgb(${(props) => props.theme.palette.yellow});
-            `;
-          }}
-        />
-        <Button
-          width="45px"
-          bgColor="yellow"
-          addstyle={() => {
-            return css`
-              height: 40px;
+              ${flexBox('space-between')}
             `;
           }}
         >
-          작성
-        </Button>
+          <Input
+            onChange={$comment}
+            width="85%"
+            height="40px"
+            padding="4px"
+            radius="10px"
+            placeholder="댓글 달기..."
+            addstyle={() => {
+              return css`
+                border: 1px solid rgb(${(props) => props.theme.palette.yellow});
+              `;
+            }}
+          />
+          <Button
+            clickEvent={addComment}
+            width="45px"
+            bgColor="yellow"
+            addstyle={() => {
+              return css`
+                height: 40px;
+              `;
+            }}
+          >
+            작성
+          </Button>
+        </Grid>
+
+        {commentList.map((comment, idx) => {
+          return <CatDetailCommentCard key={idx} comment={comment} />;
+        })}
       </Grid>
     </>
   );

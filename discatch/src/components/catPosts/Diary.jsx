@@ -1,5 +1,5 @@
 // library
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css } from 'styled-components';
 
 // element
@@ -12,8 +12,20 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // route
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-const Diary = () => {
+// redux
+import { __getDiary } from '../../redux/modules/cat';
+
+const Diary = (props) => {
+  console.log(props);
+  const dispatch = useDispatch();
+  const catId = props.catId;
+
+  // useEffect(() => {
+  //   dispatch(__getDiary(catId));
+  // });
+
   return (
     <Link to="catdetailinfo" style={{ textDecoration: 'none' }}>
       <Grid

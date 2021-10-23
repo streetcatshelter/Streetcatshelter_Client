@@ -1,6 +1,6 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import Auth from "../shared/auth";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Auth from '../shared/auth';
 
 /* == Pages */
 import {
@@ -15,7 +15,6 @@ import {
   CatDetailInfoWrite,
   CatDetail,
   CatDetailInfo,
-  CatDetailEdit,
   CommunityPostWrite,
   CommunityPostEdit,
   CommunityDetail,
@@ -28,15 +27,16 @@ import {
   LoginRedirectKakao,
   LoginRedirectNaver,
   LoginRedirectGoogle,
-} from "../pages";
+} from '../pages';
 
 // 배포 시 해당 라우트 삭제 예정
-import test from "../pages/test";
+import test from '../pages/test';
 
 // * == ( Router ) -------------------- * //
 const Router = () => {
   return (
     <Switch>
+      {/* == Login */}
       <Route path="/login" component={Auth(Login, false)} exact />
       <Route
         path="/user/kakao/callback"
@@ -53,8 +53,14 @@ const Router = () => {
         component={Auth(LoginRedirectGoogle, false)}
         exact
       />
+
+      {/* == Home */}
       <Route path="/" component={Auth(Home, true)} exact />
+
+      {/* == Slider */}
       <Route path="/slider" exact component={Slider} />
+
+      {/* == MyPage */}
       <Route path="/mypage" component={Auth(MyPageCat, true)} exact />
       <Route
         path="/mypage/notice"
@@ -69,26 +75,20 @@ const Router = () => {
       <Route path="/mypage/work" component={Auth(MyPageWork, true)} exact />
       <Route path="/userinfowrite" exact component={UserInfoWrite} />
       <Route path="/userinfoedit" exact component={UserInfoWrite} />
-      <Route path="/catinfowrite/:location" exact component={CatInfoWrite} />
-      <Route path="/catdetailinfowrite" exact component={CatDetailInfoWrite} />
-      <Route path="/catdetail" exact component={CatDetail} />
-      <Route path="/catdetail/:catId/:locaiton" exact component={CatDetail} />
-
-      <Route path="/catdetailinfo" exact component={CatDetailInfo} />
-      <Route
-        path="/catdetailinfo/:catDetailId"
-        exact
-        component={CatDetailInfo}
-      />
-      <Route path="/catdetailedit" exact component={CatDetailEdit} />
-
       <Route
         path="/userinfowrite"
         component={Auth(UserInfoWrite, true)}
         exact
       />
       <Route path="/userinfoedit" component={Auth(UserInfoWrite, true)} exact />
+
+      {/* == Cat */}
       <Route path="/catinfowrite" component={Auth(CatInfoWrite, true)} exact />
+      <Route
+        path="/catinfowrite/:location"
+        component={Auth(CatInfoWrite, true)}
+        exact
+      />
       <Route
         path="/catdetailinfowrite"
         component={Auth(CatDetailInfoWrite, true)}
@@ -101,17 +101,18 @@ const Router = () => {
       />
       <Route path="/catdetail" component={Auth(CatDetail, true)} exact />
       <Route path="/catdetail/:catId" component={Auth(CatDetail, true)} exact />
-
       <Route
         path="/catdetailinfo"
         component={Auth(CatDetailInfo, true)}
         exact
       />
       <Route
-        path="/catdetailedit"
-        component={Auth(CatDetailEdit, true)}
+        path="/catdetailinfo/:catDetailId"
         exact
+        component={Auth(CatDetailInfo, true)}
       />
+
+      {/* == Community */}
       <Route
         path="/community/:village/:category/write"
         component={Auth(CommunityPostWrite, true)}
@@ -142,12 +143,16 @@ const Router = () => {
         component={Auth(CommunityPostDetail, true)}
         exact
       />
-
       <Route path="/community" component={Auth(Community, true)} exact />
+
+      {/* Map */}
       <Route path="/map" component={Auth(Map, true)} exact />
+
+      {/* Chat */}
       <Route path="/chat" component={Auth(Chat, true)} exact />
+
       <Route path="/test" component={Auth(test, true)} exact />
-      <Route path={"*"} exact component={NotFound} />
+      <Route path={'*'} exact component={NotFound} />
     </Switch>
   );
 };

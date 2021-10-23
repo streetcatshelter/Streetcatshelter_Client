@@ -8,20 +8,19 @@ import { Diary } from '..';
 // redux
 import { __getDiary } from '../../redux/modules/cat';
 
-const CatDiary = () => {
+const CatDiary = (props) => {
+  console.log(props);
+  const catId = props.catId;
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(__getDiary);
-  }, []);
+  // useEffect(() => {
+  //   dispatch(__getDiary(catId));
+  // }, []);
 
   return (
     <>
       {}
 
-      <Diary />
-      <Diary />
-      <Diary />
-      <Diary />
+      <Diary catId={catId} />
     </>
   );
 };

@@ -35,6 +35,7 @@ const CatDetail = (props) => {
 
   const catInfo = useSelector((state) => state.cat.list);
   // console.log(catInfo);
+  // console.log(props);
 
   useEffect(() => {
     dispatch(__getOnePost(catId));
@@ -142,7 +143,7 @@ const CatDetail = (props) => {
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />
       </Button>
 
-      <CatComment />
+      <CatComment catId={catId} />
     </Template>
   );
 };

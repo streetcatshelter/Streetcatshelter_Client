@@ -47,15 +47,16 @@ export const catApi = {
     instance.get(`/cat/gallery/${catId}?page=1&size=${size}`),
   getCatDiary: (catId, size) =>
     instance.get(`/cat/diary/${catId}?page=1&size=${size}`),
-  getCatComment: (catId, size) =>
-    instance.get(`/cat/comment/${catId}?page=0&size=${size}`),
-  createCatComment: (contents, catId) =>
+  getComment: (catId, size) =>
+    instance.get(`/cat/comment/${catId}?page=1&size=${size}`),
+  getDetailComment: (catDetailId, size) =>
+    instance.get(`/cat/detail/comment/${catDetailId}?page=1&size=${size}`),
+  createCatComment: (catId, contents) =>
     instance.post(`/cat/comment/${catId}`, { contents }),
-  createCatDetailComment: (contents, catDetailId) =>
+  createCatDetailComment: (catDetailId, contents) =>
     instance.post(`/cat/detail/comment/${catDetailId}`, { contents }),
-  deleteCatComment: () => instance.delete('/cat/comment'),
+  deleteCatComment: (commentId) => instance.delete(`/cat/comment/${commentId}`),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
-  updateCatDetail: () => instance.put('/cat/detailUpdate'),
   deleteCatDetail: (catDetailId) =>
     instance.delete(`/cat/detail/${catDetailId}`),
   catFavorite: () => instance.post('/cat/favorite'),

@@ -5,7 +5,6 @@ import instance, { catApi } from '../../shared/axios';
 // redux
 import { imgActions } from './image';
 
-// POST
 // Cat 기본 정보 작성 ✅
 export const __createCatInfo = (
   catName,
@@ -100,36 +99,7 @@ export const __createCatDetailInfo = (
   };
 };
 
-// Cat 댓글 생성
-export const __createCatComment =
-  (contents, catId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const data = await catApi.createCatComment(contents, catId);
-      dispatch(createCatComment({ contents }));
-      window.location.reload();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-// CatDetail 댓글 생성
-export const __createCatDetailComment =
-  (contents, catDetailId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const data = await catApi.createCatDetailComment(contents, catDetailId);
-      dispatch(createCatDetailComment({ contents }));
-      window.location.reload();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-// Cat 즐겨찾기
-
-// GET
-// 지역에 따라 cat 가져오기 ✅
+// 지역에 따라 catPost 가져오기 ✅
 export const __getCatLocation =
   (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
@@ -145,6 +115,7 @@ export const __getCatLocation =
     }
   };
 
+// ✅
 export const __getMoreCat =
   (location, limit = 11) =>
   async (dispatch, getState, { history }) => {
@@ -167,14 +138,14 @@ export const __getMoreCat =
     }
   };
 
-// 상세페이지
+// 상세페이지 ✅
 export const __getOnePost =
   (catId) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getDetail(catId);
 
-      dispatch(getOneCat(data));
+      dispatch(getOnePost(data));
     } catch (err) {
       console.error(err);
     }
@@ -229,10 +200,7 @@ export const __getGallery =
     }
   };
 
-// Cat 댓글 더보기
-
-// DELETE
-// Cat 상세정보 삭제
+// Cat 상세정보 삭제 (보류)
 export const __deleteCatInfo =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
@@ -245,11 +213,6 @@ export const __deleteCatInfo =
       console.error(err);
     }
   };
-
-// Cat 댓글 삭제
-
-// UPDATE
-// Cat 상세정보 수정
 
 const initialState = {
   list: [],
@@ -291,14 +254,6 @@ const cat = createSlice({
       console.log(action.payload);
     },
 
-    createCatComment: (state, action) => {
-      state.list = action.payload;
-    },
-
-    createCatDetailComment: (state, action) => {
-      state.list = action.payload;
-    },
-
     getCatLocation: (state, action) => {
       state.list = action.payload;
     },
@@ -311,12 +266,12 @@ const cat = createSlice({
       };
     },
 
-    getOneCat: (state, action) => {
-      state.list = action.payload;
+    getOnePost: (state, action) => {
+      state.detail = action.payload;
     },
 
     getCatDetail: (state, action) => {
-      state.list = action.payload;
+      state.detail = action.payload;
     },
 
     getCalendar: (state, action) => {
@@ -340,11 +295,10 @@ const cat = createSlice({
 export const {
   createCatInfo,
   createCatDetailInfo,
-  createCatComment,
   createCatDetailComment,
   getCatLocation,
   getMoreCat,
-  getOneCat,
+  getOnePost,
   getCatDetail,
   getCalendar,
   getDiary,

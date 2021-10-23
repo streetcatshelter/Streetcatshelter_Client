@@ -1,7 +1,7 @@
 // library
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // style
 import { flexBox } from '../shared/style';
@@ -13,7 +13,6 @@ import {
   CatDiary,
   CatGallery,
   Like,
-  CatPost,
   CatComment,
 } from '../components';
 
@@ -32,12 +31,11 @@ const CatDetail = (props) => {
   const catId = props.match.params.catId;
   const [menu, setMenu] = useState('캘린더');
 
+  const diaryCnt = useSelector((state) => state.cat.diary.length);
+  const galleryCnt = useSelector((state) => state.cat.gallery.length);
+
   return (
     <Template props={props}>
-      {/* {catInfo.map((cat, idx) => {
-        return <CatPost key={idx} cat={cat} />;
-      })} */}
-
       <Grid
         clickEvent={() => history.push(`/catdetailinfo/${catId}`)}
         bgColor="diaryColor"
@@ -77,9 +75,11 @@ const CatDetail = (props) => {
       </Grid>
 
       <Grid
+        alignItems="center"
         addstyle={() => {
           return css`
             border-bottom: 2px solid #cbcf5e;
+            ${flexBox('flex-start')}
           `;
         }}
       >
@@ -88,7 +88,7 @@ const CatDetail = (props) => {
             setMenu('캘린더');
           }}
           color={menu === '캘린더' ? 'olive' : 'black'}
-          margin="2% 8% 0 5%"
+          margin="0 8%"
           fontSize="1em"
           fontWeight="800"
         >
@@ -104,17 +104,20 @@ const CatDetail = (props) => {
         >
           집사일기
         </Button>
+        <Count>{diaryCnt}</Count>
+
         <Button
           clickEvent={() => {
             setMenu('갤러리');
           }}
           color={menu === '갤러리' ? 'olive' : 'black'}
-          margin="0 8%"
+          margin="0 0 0 8%"
           fontSize="1em"
           fontWeight="800"
         >
           갤러리
         </Button>
+        <Count>{galleryCnt}</Count>
       </Grid>
 
       {menu === '캘린더' ? (
@@ -138,5 +141,16 @@ const CatDetail = (props) => {
     </Template>
   );
 };
+
+const Count = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: rgb(${(props) => props.theme.palette.D_yellow});
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+  margin-left: 1%;
+`;
 
 export default CatDetail;

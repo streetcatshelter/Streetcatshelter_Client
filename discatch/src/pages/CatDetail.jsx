@@ -26,20 +26,11 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 // redux
 import { history } from '../redux/configureStore';
-import { __getOnePost } from '../redux/modules/cat';
 
 const CatDetail = (props) => {
   const dispatch = useDispatch();
   const catId = props.match.params.catId;
   const [menu, setMenu] = useState('캘린더');
-
-  const catInfo = useSelector((state) => state.cat.list);
-  // console.log(catInfo);
-  // console.log(props);
-
-  useEffect(() => {
-    dispatch(__getOnePost(catId));
-  }, []);
 
   return (
     <Template props={props}>
@@ -127,11 +118,11 @@ const CatDetail = (props) => {
       </Grid>
 
       {menu === '캘린더' ? (
-        <CatCalendar />
+        <CatCalendar catId={catId} />
       ) : menu === '집사일기' ? (
-        <CatDiary />
+        <CatDiary catId={catId} />
       ) : menu === '갤러리' ? (
-        <CatGallery />
+        <CatGallery catId={catId} />
       ) : null}
 
       <Button

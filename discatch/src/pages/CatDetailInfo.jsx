@@ -21,28 +21,24 @@ import { __getCatDetail, __deleteCatInfo } from '../redux/modules/cat';
 
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
-
   const catDetailId = props.match.params.catDetailId;
 
   const deleteCatInfo = () => {
     dispatch(__deleteCatInfo(catDetailId));
   };
 
-  const { image, diary, water, food, snack, createdAt, tags, data } =
-    useSelector(
-      (state) => ({
-        image: state.cat.list.catImages,
-        diary: state.cat.list.diary,
-        water: state.cat.list.water,
-        food: state.cat.list.food,
-        snack: state.cat.list.snack,
-        createdAt: state.cat.list.createdAt,
-        tags: state.cat.list.catTags,
-        data: state.cat,
-      }),
-      shallowEqual,
-    );
-  console.log(data);
+  const { image, diary, water, food, snack, createdAt, tags } = useSelector(
+    (state) => ({
+      image: state.cat.list.catImages,
+      diary: state.cat.list.diary,
+      water: state.cat.list.water,
+      food: state.cat.list.food,
+      snack: state.cat.list.snack,
+      createdAt: state.cat.list.createdAt,
+      tags: state.cat.list.catTags,
+    }),
+    shallowEqual,
+  );
 
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));
@@ -51,29 +47,35 @@ const CatDetailInfo = (props) => {
   return (
     <Template props={props}>
       <Grid
-        margin="2% 0"
+        margin="2% auto"
         addstyle={() => {
           return css`
-            ${flexBox('space-around')}
+            ${flexBox('space-evenly')}
           `;
         }}
       >
         <Image
+          margin="0 0 0 5%"
           src={image}
           width="35px"
           height="35px"
           borderRadius="25px"
-          margin="0 15% 0 3%"
         />
 
-        <Text margin="0 -5% 0 0" size="12px" fontWeight="bold">
-          {/* {createdAt}*/}
+        <Text margin="0 -8% 0 25%" size="12px" fontWeight="bold">
+          {createdAt ? (
+            `${createdAt[0]}.${createdAt[1]}.${createdAt[2]} ${createdAt[3]}시 ${createdAt[4]}분`
+          ) : (
+            <></>
+          )}
         </Text>
 
         <EditModalSlide
-          FirstBtn={'게시글 수정'}
+          FirstBtn={'홈으로'}
+          FirstClick={() => {
+            history.push('/');
+          }}
           SecondBtn={'삭제'}
-          FirstClick={() => history.push(`/catdetailedit/${catDetailId}`)}
           SecondClick={deleteCatInfo}
         />
       </Grid>
@@ -122,17 +124,19 @@ const CatDetailInfo = (props) => {
         </Grid>
       </Grid>
 
-      <Text bgColor="diaryColor" fontWeight="500" padding="20px">
-        {diary}
-      </Text>
-
-      {/* {tag ? (
-        <Text>
-          {tag.map((tag, idx) => {
-            return <TagStyle key={idx}>#{tag.tag}</TagStyle>;
-          })}
+      <Grid bgColor="diaryColor" padding="20px">
+        <Text margin="0 0 5% 0" fontWeight="500">
+          {diary}
         </Text>
-      ) : null} */}
+
+        {tags?.map((tag, idx) => {
+          return (
+            <Text fontWeight="500" key={idx}>
+              #{tag}
+            </Text>
+          );
+        })}
+      </Grid>
 
       <CatDetailComment catDetailId={catDetailId} />
     </Template>

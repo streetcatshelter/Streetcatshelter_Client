@@ -79,12 +79,13 @@ export const __createCatDetailInfo = (
             catId: catId,
           };
           instance
-            .post(`/cat/detail/${catId}`, detailInfo)
+            .post(`/cat/detail/${catId}`, { detailInfo })
             .then((res) => {
               dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());
-              history.goBack();
-              window.location.replace(`/catdetailinfo/${catId}`);
+              history.push('/');
+              // history.push(`/catdetailinfo/${catId}`);
+              // window.location.replace(`/catdetailinfo/${catId}`);
             })
             .catch((err) => {
               console.error(err);
@@ -138,19 +139,6 @@ export const __getMoreCat =
     }
   };
 
-// 상세페이지 ✅
-export const __getOnePost =
-  (catId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const { data } = await catApi.getDetail(catId);
-
-      dispatch(getOnePost(data));
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
 // catPost 상세 정보 ✅
 export const __getCatDetail =
   (catDetailId) =>
@@ -170,7 +158,8 @@ export const __getCalendar =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatCalendar(catId);
-      dispatch(getCalendar(data));
+      console.log(data);
+      dispatch(getCalendar());
     } catch (err) {
       console.error(err);
     }
@@ -182,6 +171,7 @@ export const __getDiary =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatDiary(catId, size);
+      console.log(data);
       dispatch(getDiary(data));
     } catch (err) {
       console.error(err);
@@ -194,6 +184,7 @@ export const __getGallery =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatGallery(catId, size);
+      console.log(data);
       dispatch(getCalendar(data));
     } catch (err) {
       console.error(err);
@@ -217,6 +208,9 @@ export const __deleteCatInfo =
 const initialState = {
   list: [],
   detail: [],
+  calendar: [],
+  gallery: [],
+  diary: [],
   page: 0,
   start: 0,
 };
@@ -250,7 +244,7 @@ const cat = createSlice({
         snack: action.payload.snack,
         water: action.payload.water,
       };
-      state.detail.push(detailInfo);
+      state.list.push(detailInfo);
       console.log(action.payload);
     },
 
@@ -266,24 +260,20 @@ const cat = createSlice({
       };
     },
 
-    getOnePost: (state, action) => {
-      state.detail = action.payload;
-    },
-
     getCatDetail: (state, action) => {
-      state.detail = action.payload;
+      state.list = action.payload;
     },
 
     getCalendar: (state, action) => {
-      state.list = action.payload;
+      state.calendar = action.payload;
     },
 
     getDiary: (state, action) => {
-      state.list = action.payload;
+      state.diary = action.payload;
     },
 
     getGallery: (state, action) => {
-      state.list = action.payload;
+      state.gallery = action.payload;
     },
 
     deleteCatInfo: (state, action) => {
@@ -298,7 +288,6 @@ export const {
   createCatDetailComment,
   getCatLocation,
   getMoreCat,
-  getOnePost,
   getCatDetail,
   getCalendar,
   getDiary,

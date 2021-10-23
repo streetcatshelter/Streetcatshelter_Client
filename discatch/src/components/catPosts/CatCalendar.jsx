@@ -7,10 +7,11 @@ import { Calendar } from '..';
 // element
 import { Grid } from '../../elements/index';
 
-const CatCalendar = () => {
+const CatCalendar = (props) => {
+  const catId = props.catId;
   return (
     <Grid>
-      <Calendar path="CatCalendar" />
+      <Calendar path="cat" />
     </Grid>
   );
 };

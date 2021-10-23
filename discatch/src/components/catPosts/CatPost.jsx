@@ -1,6 +1,5 @@
 // library
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { css } from 'styled-components';
 
 // element
@@ -17,10 +16,6 @@ import { flexBox } from '../../shared/style';
 
 const CatPost = ({ cat }) => {
   const catId = cat.catId;
-
-  // console.log(catId);
-
-  const location = useSelector((state) => state.map.keywordList[0]);
 
   return (
     <React.Fragment>

@@ -2,7 +2,7 @@
 import React from 'react';
 
 /* == Library - style */
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 
 // element
 import { Grid, Image } from '../../elements';
@@ -10,33 +10,19 @@ import { Grid, Image } from '../../elements';
 // style
 import { flexBox } from '../../shared/style';
 
-const Gallery = () => {
-  // map 돌리기
+const Gallery = ({ gallery }) => {
   return (
-    <Grid>
-      <Grid
-        addstyle={() => {
-          return css`
-            ${flexBox()}
-          `;
-        }}
-      >
-        <Image width="100%" height="120px" />
-        <Image width="100%" height="120px" />
-        <Image width="100%" height="120px" />
-      </Grid>
+    <Grid
+      margin="2% 0"
+      addstyle={() => {
+        return css`
+          ${flexBox()}
+        `;
+      }}
+    >
+      <Image src={gallery.catImages} width="80%" height="250px" />
     </Grid>
   );
 };
-
-const Count = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background: rgb(${(props) => props.theme.palette.D_yellow});
-  font-size: 12px;
-  text-align: center;
-  line-height: 20px;
-`;
 
 export default Gallery;

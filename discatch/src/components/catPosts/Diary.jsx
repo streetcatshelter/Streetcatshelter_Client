@@ -1,5 +1,5 @@
 // library
-import React, { useEffect } from 'react';
+import React from 'react';
 import { css } from 'styled-components';
 
 // element
@@ -12,28 +12,11 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // route
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
-// redux
-import { __getDiary } from '../../redux/modules/cat';
-
-const Diary = (props) => {
-  console.log(props);
-  const dispatch = useDispatch();
-  const catId = props.catId;
-
-  // useEffect(() => {
-  //   dispatch(__getDiary(catId));
-  // });
-
+const Diary = ({ diary }) => {
   return (
     <Link to="catdetailinfo" style={{ textDecoration: 'none' }}>
-      <Grid
-        bgColor="diaryColor"
-        padding="6px"
-        width="95%"
-        margin="0 auto 2% auto"
-      >
+      <Grid bgColor="diaryColor" padding="6px" width="95%" margin="3%  auto">
         <Grid
           margin="0 0 3% 0"
           display="flex"
@@ -44,8 +27,13 @@ const Diary = (props) => {
             `;
           }}
         >
-          <Image width="30px" height="30px" margin="0 3% 0 0" />
-          <Text margin="0 30% 0 -35%">뽀삐맘</Text>
+          <Image
+            src={diary.profileImageUrl}
+            width="30px"
+            height="30px"
+            margin="0 3% 0 0"
+          />
+          <Text margin="0 30% 0 -35%">{diary.username}</Text>
           <Text
             margin="0 3% 0 0"
             addstyle={() => {
@@ -54,14 +42,11 @@ const Diary = (props) => {
               `;
             }}
           >
-            몇초전
+            {diary.createdAt[5]}초전
           </Text>
         </Grid>
 
-        <Text>
-          오늘 간식줬어요~ 날씨 너무 좋은데 뽀삐 얼굴봐서 좋았습니다. 점점
-          마음을 여는것 같아서 너무 기쁘네요~ :)내일도 볼수있기를 바랍니다 !
-        </Text>
+        <Text>{diary.diary}</Text>
 
         <Grid
           bgcolor="diaryColor"
@@ -80,7 +65,7 @@ const Diary = (props) => {
             }}
           >
             <Eye size="18" />
-            10
+            {diary.viewCnt}
           </Button>
 
           <Button
@@ -92,7 +77,7 @@ const Diary = (props) => {
             }}
           >
             <MessageCircle size="18" />
-            10
+            {diary.commentCnt}
           </Button>
 
           <Button
@@ -104,7 +89,7 @@ const Diary = (props) => {
             }}
           >
             <FavoriteIcon style={{ fontSize: '18', color: 'red' }} />
-            10
+            {diary.likeCnt}
           </Button>
         </Grid>
       </Grid>

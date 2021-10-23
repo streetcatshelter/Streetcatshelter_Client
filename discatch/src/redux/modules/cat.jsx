@@ -79,7 +79,7 @@ export const __createCatDetailInfo = (
             catId: catId,
           };
           instance
-            .post(`/cat/detail/${catId}`, { detailInfo })
+            .post(`/cat/detail/${catId}`, detailInfo)
             .then((res) => {
               dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());
@@ -165,27 +165,27 @@ export const __getCalendar =
     }
   };
 
-// Cat 상세 페이지(집사일기)
+// Cat 상세 페이지(집사일기) ✅
 export const __getDiary =
-  (catId, size = 15) =>
+  (catId, size = 30) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatDiary(catId, size);
-      console.log(data);
+
       dispatch(getDiary(data));
     } catch (err) {
       console.error(err);
     }
   };
 
-// Cat 상세 페이지(갤러리)
+// Cat 상세 페이지(갤러리) ✅
 export const __getGallery =
-  (catId, size = 15) =>
+  (catId, size = 30) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatGallery(catId, size);
       console.log(data);
-      dispatch(getCalendar(data));
+      dispatch(getGallery(data));
     } catch (err) {
       console.error(err);
     }

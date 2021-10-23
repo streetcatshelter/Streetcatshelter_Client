@@ -2,6 +2,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+// element
+import { Grid } from '../../elements';
+
 // component
 import { Diary } from '..';
 
@@ -9,18 +12,24 @@ import { Diary } from '..';
 import { __getDiary } from '../../redux/modules/cat';
 
 const CatDiary = (props) => {
-  console.log(props);
-  const catId = props.catId;
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(__getDiary(catId));
-  // }, []);
+  const catId = props.catId;
+
+  const diaryList = useSelector((state) => state.cat.diary);
+
+  useEffect(() => {
+    dispatch(__getDiary(catId));
+  }, []);
 
   return (
     <>
-      {}
-
-      <Diary catId={catId} />
+      {diaryList.map((diary, idx) => {
+        return (
+          <Grid key={idx}>
+            <Diary catId={catId} diary={diary}></Diary>
+          </Grid>
+        );
+      })}
     </>
   );
 };

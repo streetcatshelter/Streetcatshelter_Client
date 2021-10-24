@@ -7,17 +7,22 @@ import { css } from 'styled-components';
 import { flexBox } from '../shared/style';
 
 // element
-import { Grid, Text, Image } from '../elements';
+import { Grid, Text, Image, Button } from '../elements';
 
 // component
 import { Template, CatDetailComment, EditModalSlide } from '../components';
 
 // icon
 import { CheckSquare } from 'react-feather';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // redux
 import { history } from '../redux/configureStore';
-import { __getCatDetail, __deleteCatInfo } from '../redux/modules/cat';
+import {
+  __getCatDetail,
+  __deleteCatInfo,
+  __catDetailLike,
+} from '../redux/modules/cat';
 
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
@@ -39,6 +44,11 @@ const CatDetailInfo = (props) => {
     }),
     shallowEqual,
   );
+
+  const userLiked = useSelector((state) => state.cat.list.userLiked);
+  const likeToggle = () => {
+    dispatch(__catDetailLike(catDetailId));
+  };
 
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));
@@ -125,9 +135,27 @@ const CatDetailInfo = (props) => {
       </Grid>
 
       <Grid bgColor="diaryColor" padding="20px">
-        <Text margin="0 0 5% 0" fontWeight="500">
-          {diary}
-        </Text>
+        <Grid
+          alignItems="center"
+          addstyle={() => {
+            return css`
+              ${flexBox('space-between')}
+            `;
+          }}
+        >
+          <Text margin="0 0 5% 0" fontWeight="500">
+            {diary}
+          </Text>
+
+          <Button
+            padding="0"
+            bgColor="diaryColor"
+            color={userLiked ? 'red' : 'black'}
+            clickEvent={likeToggle}
+          >
+            <FavoriteIcon />
+          </Button>
+        </Grid>
 
         {tags?.map((tag, idx) => {
           return (

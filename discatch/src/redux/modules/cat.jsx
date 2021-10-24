@@ -129,10 +129,9 @@ export const __getMoreCat =
     }
 
     try {
-      const data = await catApi.getMoreCat(location, start, limit);
-      const catList = data.data;
-      if (catList.length < limit + 1) {
-        dispatch(getMoreCat(catList, null));
+      const { data } = await catApi.getMoreCat(location, start, limit);
+      if (data.length < limit + 1) {
+        dispatch(getMoreCat(data, null));
       }
     } catch (err) {
       console.error(err);
@@ -159,7 +158,7 @@ export const __getCalendar =
     try {
       const { data } = await catApi.getCatCalendar(catId);
       console.log(data);
-      dispatch(getCalendar());
+      dispatch(getCalendar(data));
     } catch (err) {
       console.error(err);
     }
@@ -200,6 +199,31 @@ export const __deleteCatInfo =
       dispatch(deleteCatInfo(catDetailId));
       window.alert('게시물 삭제 완료!');
       history.push('/');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+// 좋아요
+export const __catLike =
+  (catId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await catApi.catLike(catId);
+      console.log('기본정보 좋아요');
+      // window.location.reload();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+// ✅
+export const __catDetailLike =
+  (catDetailId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await catApi.catDetailLike(catDetailId);
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }

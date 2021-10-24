@@ -46,6 +46,8 @@ const theme = {
     D_brown: '190, 112, 29',
     D_olive: '181, 187, 25',
     diaryColor: '252, 246, 222',
+    red: '255, 0, 0',
+    black: '0, 0, 0',
   },
 
   size: {

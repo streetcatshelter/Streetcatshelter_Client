@@ -58,7 +58,9 @@ export const catApi = {
   deleteCatComment: (commentId) => instance.delete(`/cat/comment/${commentId}`),
   deleteCatDetail: (catDetailId) =>
     instance.delete(`/cat/detail/${catDetailId}`),
-  catFavorite: () => instance.post('/cat/favorite'),
+  catLike: (catId) => instance.post(`/cat/like/${catId}`),
+  catDetailLike: (catDetailId) =>
+    instance.post(`/cat/detail/like/${catDetailId}`),
 };
 
 export const communityApi = {

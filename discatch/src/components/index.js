@@ -34,7 +34,6 @@ import CatDiary from './catPosts/CatDiary';
 import CatGallery from './catPosts/CatGallery';
 import Diary from './catPosts/Diary';
 import Gallery from './catPosts/Gallery';
-import Like from './catPosts/Like';
 import CatComment from './catPosts/CatComment';
 import CatCommentCard from './catPosts/CatCommentCard';
 import CatDetailComment from './catPosts/CatDetailComment';
@@ -90,7 +89,6 @@ export {
   CatGallery,
   Diary,
   Gallery,
-  Like,
   CatComment,
   CatCommentCard,
   CatDetailComment,

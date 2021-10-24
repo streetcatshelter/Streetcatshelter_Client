@@ -12,7 +12,6 @@ import {
   CatCalendar,
   CatDiary,
   CatGallery,
-  Like,
   CatComment,
 } from '../components';
 
@@ -22,6 +21,7 @@ import { Button, Grid, Image, Text } from '../elements';
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // redux
 import { history } from '../redux/configureStore';
@@ -37,7 +37,6 @@ const CatDetail = (props) => {
   return (
     <Template props={props}>
       <Grid
-        clickEvent={() => history.push(`/catdetailinfo/${catId}`)}
         bgColor="diaryColor"
         alignItems="center"
         padding="8px"
@@ -60,16 +59,39 @@ const CatDetail = (props) => {
             <Text fontWeight="bold" size="12px">
               {/* {catName} */}
             </Text>
+
             <Text fontWeight="bold" size="12px" width="45%">
               {/* 중성화: {neutering} */}
             </Text>
-            <Like />
+
+            <Button
+              padding="0"
+              bgColor="diaryColor"
+              // color={like ? 'red' : 'black'}
+              color="red"
+            >
+              <FavoriteIcon />
+            </Button>
           </Grid>
 
-          <Grid>
+          <Grid
+            addstyle={() => {
+              return css`
+                ${flexBox('space-between')}
+              `;
+            }}
+          >
             <Text fontWeight="bold" size="12px">
               ㅌㄱ
             </Text>
+            <Button
+              clickEvent={() => history.push(`/catdetailinfo/${catId}`)}
+              fontWeight="bold"
+              padding="0"
+              bgColor="diaryColor"
+            >
+              자세히보기
+            </Button>
           </Grid>
         </Grid>
       </Grid>

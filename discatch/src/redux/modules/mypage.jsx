@@ -7,6 +7,7 @@ const _getUserInfo =
   () =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(loading(true));
       const { data } = await myPageApi.getUserInfo();
       dispatch(setUserInfo(data));
     } catch (e) {
@@ -73,8 +74,8 @@ const _editMyInfo =
     console.log(userInfo);
     try {
       const { data } = await myPageApi.putUserInfo(userInfo);
-      console.log(data);
-      // dispatch(editMyInfo(data));
+      window.alert("사용자 정보가 수정됐습니다.");
+      history.push("/mypage");
     } catch (e) {
       console.log(e);
     }
@@ -87,6 +88,7 @@ const initialState = {
   userInfo: [],
   calendar: [],
   userVillage: [],
+  isLoaded: false,
 };
 
 // 리듀서
@@ -105,6 +107,10 @@ const mypage = createSlice({
     },
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
+      const Village = [...action.payload.location];
+      state.userVillage = Village;
+      state.isLoaded = false;
+      console.log(state.isLoaded);
     },
     setCalendar: (state, action) => {
       state.calendar = action.payload;
@@ -116,10 +122,14 @@ const mypage = createSlice({
     deleteVillage: (state, action) => {
       return {
         ...state,
+
         userVillage: state.userVillage.filter(
           (village) => village !== action.payload
         ),
       };
+    },
+    loading: (state, action) => {
+      state.isLoaded = action.payload;
     },
   },
 });
@@ -140,5 +150,6 @@ export const {
   setCalendar,
   saveVillage,
   deleteVillage,
+  loading,
 } = mypage.actions;
 export default mypage;

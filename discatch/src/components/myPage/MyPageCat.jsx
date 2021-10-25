@@ -22,7 +22,7 @@ const MyPageCat = () => {
   }, []);
   return (
     <div>
-      {LikedAllCat.map((LikedCat, index) => {
+      {LikedAllCat.map((LikedCat, idx) => {
         return (
           <CatPost
             onClick={() => {

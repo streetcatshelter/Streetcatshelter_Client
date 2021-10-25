@@ -21,6 +21,7 @@ const CatComment = (props) => {
 
   const commentList = useSelector((state) => state.comment.list);
   const commentCnt = commentList.length;
+  console.log(commentList);
 
   const [comment, setComment] = useState('');
   const $comment = (e) => {
@@ -29,11 +30,12 @@ const CatComment = (props) => {
 
   const addComment = () => {
     dispatch(__createCatComment(catId, comment));
+    window.location.reload();
   };
 
   useEffect(() => {
     dispatch(__getComment(catId));
-  }, []);
+  }, [commentList.length]);
 
   return (
     <>

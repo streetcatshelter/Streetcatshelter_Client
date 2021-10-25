@@ -32,11 +32,12 @@ const CatDetailComment = (props) => {
 
   const addComment = () => {
     dispatch(__createCatDetailComment(catDetailId, comment));
+    window.location.reload();
   };
 
   useEffect(() => {
     dispatch(__getDetailComment(catDetailId));
-  }, []);
+  }, [commentList.length]);
 
   return (
     <>

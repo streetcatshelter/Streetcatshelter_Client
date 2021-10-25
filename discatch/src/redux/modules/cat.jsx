@@ -153,12 +153,12 @@ export const __getCatDetail =
 
 // Cat 상세 페이지(캘린더)
 export const __getCalendar =
-  (catId) =>
+  (catId, month, year) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.getCatCalendar(catId);
-      console.log(data);
-      dispatch(getCalendar(data));
+      const { data } = await catApi.getCatCalendar(catId, month, year);
+
+      dispatch(getCalendar(data.date));
     } catch (err) {
       console.error(err);
     }
@@ -183,7 +183,7 @@ export const __getGallery =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatGallery(catId, size);
-      console.log(data);
+
       dispatch(getGallery(data));
     } catch (err) {
       console.error(err);

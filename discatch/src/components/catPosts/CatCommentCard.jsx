@@ -39,7 +39,7 @@ const CatCommentCard = ({ comment }) => {
         width="30px"
         height="30px"
         borderRadius="20px"
-      ></Image>
+      />
 
       <Text fontWeight="bold" size="15px" width="60%">
         {comment.username}: {comment.contents}

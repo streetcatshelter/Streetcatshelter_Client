@@ -14,16 +14,7 @@ const _getUserInfo =
       dispatch(userActions._logout());
     }
   };
-const _editUserInfo =
-  () =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const { data } = await myPageApi.putUserInfo();
-      console.log(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
 const _getCalender =
   () =>
   async (dispatch, getState, { history }) => {
@@ -139,7 +130,6 @@ export const mypageActions = {
   _getCalender,
   _getLikedAllCat,
   _getUserInfo,
-  _editUserInfo,
   _editMyInfo,
 };
 export const {

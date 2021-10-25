@@ -39,21 +39,27 @@ const UserInfo = (edit) => {
         </Inner>
         <Inner>
           <p>내동네</p>
-          <VillageWrap>
-            {Village.map((town, idx) => {
-              return (
-                <div style={{ display: "flex", width: "90px", height: "20px" }}>
-                  <div>{town}</div>
-                  <XCircle
-                    width="18px"
-                    height="18px"
-                    style={{ cursor: "pointer" }}
-                    // onClick={VillageDelete(town)}
-                  />
-                </div>
-              );
-            })}
-          </VillageWrap>
+          {Village ? (
+            <VillageWrap>
+              {Village.map((town, idx) => {
+                return (
+                  <div
+                    style={{ display: "flex", width: "90px", height: "20px" }}
+                  >
+                    <div>{town}</div>
+                    <XCircle
+                      width="18px"
+                      height="18px"
+                      style={{ cursor: "pointer" }}
+                      // onClick={VillageDelete(town)}
+                    />
+                  </div>
+                );
+              })}
+            </VillageWrap>
+          ) : (
+            ""
+          )}
         </Inner>
         <SearchAddress />
 

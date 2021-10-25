@@ -11,14 +11,11 @@ import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
 import { XCircle } from "react-feather";
 const UserInfo = (edit) => {
   const dispatch = useDispatch();
-  const [NickName, setNickName] = useState(edit === "edit" ? "NickName" : "");
+  const UserInfo = useSelector((state) => state.mypage.userInfo);
+  const [NickName, setNickName] = useState(UserInfo.nickname);
   const Village = useSelector((state) => state.mypage.userVillage);
   const changeNickName = (e) => {
     setNickName(e.target.value);
-  };
-
-  const VillageDelete = (town) => {
-    dispatch(deleteVillage(town));
   };
 
   const EditMyInfo = () => {
@@ -42,6 +39,9 @@ const UserInfo = (edit) => {
           {Village ? (
             <VillageWrap>
               {Village.map((town, idx) => {
+                if (town === null) {
+                  return "";
+                }
                 return (
                   <div
                     style={{ display: "flex", width: "90px", height: "20px" }}
@@ -51,7 +51,7 @@ const UserInfo = (edit) => {
                       width="18px"
                       height="18px"
                       style={{ cursor: "pointer" }}
-                      // onClick={VillageDelete(town)}
+                      onClick={() => dispatch(deleteVillage(town))}
                     />
                   </div>
                 );
@@ -61,7 +61,7 @@ const UserInfo = (edit) => {
             ""
           )}
         </Inner>
-        <SearchAddress />
+        <SearchAddress Village={Village} />
 
         <Inner>
           <button onClick={EditMyInfo}>등록</button>

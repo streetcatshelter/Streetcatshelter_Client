@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { saveVillage } from "../../redux/modules/mypage";
 import { useDispatch } from "react-redux";
 import { Search } from "react-feather";
-const SearchAddress = () => {
+const SearchAddress = (props) => {
   const dispatch = useDispatch();
   const [address, setAddress] = useState(""); // 주소
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
@@ -14,7 +14,13 @@ const SearchAddress = () => {
   const [isOpenPost, setIsOpenPost] = useState(false);
 
   const onChangeOpenPost = () => {
-    setIsOpenPost(!isOpenPost);
+    if (isOpenPost === false && props.Village.length === 3) {
+      window.alert(
+        "최대 3동네까지 등록하실 수 있습니다. 수정을 원하시면 동네 삭제 후 다시 시도해주세요!"
+      );
+    } else {
+      setIsOpenPost(!isOpenPost);
+    }
   };
 
   const onCompletePost = (data) => {
@@ -34,9 +40,10 @@ const SearchAddress = () => {
 
     setAddress(data.zonecode);
     setAddressDetail(fullAddr);
-    console.log(data.sigungu);
-    console.log(data.bname);
+    // console.log(data.sigungu);
+    // console.log(data.bname);
     dispatch(saveVillage(data.bname));
+
     setIsOpenPost(false);
   };
 

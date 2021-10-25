@@ -17,7 +17,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const NickName = UserInfo.nickname === "string" ? "" : UserInfo.nickname;
-  console.log(UserInfo);
+
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, []);

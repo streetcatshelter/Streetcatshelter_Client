@@ -14,14 +14,20 @@ import { __getCalendar } from '../../redux/modules/cat';
 const CatCalendar = (props) => {
   const dispatch = useDispatch();
   const catId = props.catId;
+  // const calendar = useSelector((state) => state.cat.calendar);
+  // console.log(calendar);
+
+  let DATE = new Date();
+  const YEAR = DATE.getFullYear();
+  const MONTH = DATE.getMonth();
 
   useEffect(() => {
-    dispatch(__getCalendar(catId));
+    dispatch(__getCalendar(catId, MONTH, YEAR));
   }, []);
 
   return (
     <Grid>
-      <Calendar />
+      <Calendar path="CatCalendar" />
     </Grid>
   );
 };

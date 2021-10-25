@@ -5,7 +5,6 @@ import Dialog from "@material-ui/core/Dialog";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import Slide from "@material-ui/core/Slide";
-import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 // ICON

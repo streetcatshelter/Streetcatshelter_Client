@@ -21,7 +21,6 @@ import {
 const CatDetailComment = (props) => {
   const dispatch = useDispatch();
   const catDetailId = props.catDetailId;
-
   const commentList = useSelector((state) => state.comment.list);
   const commentCnt = commentList.length;
 

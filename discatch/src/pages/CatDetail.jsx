@@ -25,18 +25,25 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // redux
 import { history } from '../redux/configureStore';
+import { __getCatLocation } from '../redux/modules/cat';
 
 const CatDetail = (props) => {
   const dispatch = useDispatch();
   const catId = props.match.params.catId;
+  // const location = props.match.params.location;
+
   const [menu, setMenu] = useState('캘린더');
 
-  const diaryCnt = useSelector((state) => state.cat.diary.length);
-  const galleryCnt = useSelector((state) => state.cat.gallery.length);
+  // useEffect(() => {
+  //   dispatch(__getCatLocation(location));
+  // }, []);
+
+  // const catList = useSelector((state) => state.cat.list);
+  // console.log(catList);
 
   return (
     <Template props={props}>
-      <Grid
+      {/* <Grid
         bgColor="diaryColor"
         alignItems="center"
         padding="8px"
@@ -57,19 +64,14 @@ const CatDetail = (props) => {
             }}
           >
             <Text fontWeight="bold" size="12px">
-              {/* {catName} */}
+              catName:
             </Text>
 
             <Text fontWeight="bold" size="12px" width="45%">
-              {/* 중성화: {neutering} */}
+              neutering:
             </Text>
 
-            <Button
-              padding="0"
-              bgColor="diaryColor"
-              // color={like ? 'red' : 'black'}
-              color="red"
-            >
+            <Button padding="0" bgColor="diaryColor" color="red">
               <FavoriteIcon />
             </Button>
           </Grid>
@@ -84,17 +86,9 @@ const CatDetail = (props) => {
             <Text fontWeight="bold" size="12px">
               ㅌㄱ
             </Text>
-            <Button
-              clickEvent={() => history.push(`/catdetailinfo/${catId}`)}
-              fontWeight="bold"
-              padding="0"
-              bgColor="diaryColor"
-            >
-              자세히보기
-            </Button>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> */}
 
       <Grid
         alignItems="center"
@@ -126,7 +120,6 @@ const CatDetail = (props) => {
         >
           집사일기
         </Button>
-        <Count>{diaryCnt}</Count>
 
         <Button
           clickEvent={() => {
@@ -139,7 +132,6 @@ const CatDetail = (props) => {
         >
           갤러리
         </Button>
-        <Count>{galleryCnt}</Count>
       </Grid>
 
       {menu === '캘린더' ? (

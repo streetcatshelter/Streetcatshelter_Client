@@ -1,7 +1,5 @@
 // library
 import React from 'react';
-
-/* == Library - style */
 import { css } from 'styled-components';
 
 // element
@@ -10,7 +8,12 @@ import { Grid, Image } from '../../elements';
 // style
 import { flexBox } from '../../shared/style';
 
+// redux
+import { history } from '../../redux/configureStore';
+
 const Gallery = ({ gallery }) => {
+  const catDetailId = gallery.catDetailId;
+
   return (
     <Grid
       margin="2% 0"
@@ -19,6 +22,7 @@ const Gallery = ({ gallery }) => {
           ${flexBox()}
         `;
       }}
+      clickEvent={() => history.push(`/catdetailinfo/${catDetailId}`)}
     >
       <Image src={gallery.catImages} width="80%" height="250px" />
     </Grid>

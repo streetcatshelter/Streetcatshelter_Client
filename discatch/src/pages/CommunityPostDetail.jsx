@@ -38,7 +38,7 @@ const CommunityPostDetail = (props) => {
   const userName = userInfo.split('"')[5];
 
   let name;
-  if (nickname === null) {
+  if (nickname === '') {
     name = username;
   } else {
     name = nickname;

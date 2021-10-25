@@ -151,7 +151,7 @@ export const __getCatDetail =
     }
   };
 
-// Cat 상세 페이지(캘린더)
+// Cat 상세 페이지(캘린더) ✅
 export const __getCalendar =
   (catId, month, year) =>
   async (dispatch, getState, { history }) => {
@@ -285,7 +285,7 @@ const cat = createSlice({
     },
 
     getCatDetail: (state, action) => {
-      state.list = action.payload;
+      state.detail = action.payload;
     },
 
     getCalendar: (state, action) => {
@@ -301,7 +301,7 @@ const cat = createSlice({
     },
 
     deleteCatInfo: (state, action) => {
-      console.log('삭제 완료');
+      state.detail = action.payload;
     },
   },
 });

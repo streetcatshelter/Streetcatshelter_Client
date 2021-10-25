@@ -25,6 +25,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // redux
 import { history } from '../redux/configureStore';
+import { __getCatDetail } from '../redux/modules/cat';
 
 const CatDetail = (props) => {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ const CatDetail = (props) => {
 
   const diaryCnt = useSelector((state) => state.cat.diary.length);
   const galleryCnt = useSelector((state) => state.cat.gallery.length);
+
+  const catDetailId = useSelector((state) => state.cat.diary);
+  // console.log(catDetailId);
 
   return (
     <Template props={props}>

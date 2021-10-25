@@ -285,7 +285,7 @@ const cat = createSlice({
     },
 
     getCatDetail: (state, action) => {
-      state.list = action.payload;
+      state.detail = action.payload;
     },
 
     getCalendar: (state, action) => {

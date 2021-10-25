@@ -21,7 +21,6 @@ const CatComment = (props) => {
 
   const commentList = useSelector((state) => state.comment.list);
   const commentCnt = commentList.length;
-  console.log(commentList);
 
   const [comment, setComment] = useState('');
   const $comment = (e) => {

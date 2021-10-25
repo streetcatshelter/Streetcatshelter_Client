@@ -14,6 +14,7 @@ import { history } from "../../redux/configureStore";
 
 const MyPageCat = () => {
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
+
   console.log(LikedAllCat);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,7 +26,7 @@ const MyPageCat = () => {
         return (
           <CatPost
             onClick={() => {
-              history.push("/catdetail");
+              history.push(`/catdetail/${LikedCat.catId}`);
             }}
           >
             <Image

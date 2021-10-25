@@ -1,5 +1,5 @@
 // library
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { css } from 'styled-components';
 
@@ -19,6 +19,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 const CatPost = ({ cat }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
+
+  const location = useSelector((state) => state.mypage.userInfo.location);
 
   // const userLiked = useSelector((state) => state.cat.list);
   // console.log(userLiked);
@@ -86,7 +88,7 @@ const CatPost = ({ cat }) => {
 
               <Button
                 clickEvent={() => {
-                  history.push(`/catdetail/${catId}`);
+                  history.push(`/catdetail/${catId}/${location}`);
                 }}
                 fontWeight="bold"
                 padding="0"

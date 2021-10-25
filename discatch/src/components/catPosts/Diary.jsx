@@ -10,7 +10,7 @@ import { flexBox } from '../../shared/style';
 import { Eye, MessageCircle } from 'react-feather';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-// route
+// redux
 import { history } from '../../redux/configureStore';
 
 const Diary = ({ diary }) => {

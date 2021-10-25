@@ -27,26 +27,29 @@ import {
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
   const catDetailId = props.match.params.catDetailId;
-  console.log(catDetailId);
 
   const deleteCatInfo = () => {
     dispatch(__deleteCatInfo(catDetailId));
   };
 
-  const { image, diary, water, food, snack, createdAt, tags } = useSelector(
-    (state) => ({
-      image: state.cat.detail.catImages,
-      diary: state.cat.detail.diary,
-      water: state.cat.detail.water,
-      food: state.cat.detail.food,
-      snack: state.cat.detail.snack,
-      createdAt: state.cat.detail.createdAt,
-      tags: state.cat.detail.catTags,
-    }),
-    shallowEqual,
-  );
+  const { detailId, image, diary, water, food, snack, createdAt, tags } =
+    useSelector(
+      (state) => ({
+        detailId: state.cat.detail,
+        image: state.cat.detail.catImages,
+        diary: state.cat.detail.diary,
+        water: state.cat.detail.water,
+        food: state.cat.detail.food,
+        snack: state.cat.detail.snack,
+        createdAt: state.cat.detail.createdAt,
+        tags: state.cat.detail.catTags,
+      }),
+      shallowEqual,
+    );
 
-  const userLiked = useSelector((state) => state.cat.list.userLiked);
+  console.log(detailId);
+
+  const userLiked = useSelector((state) => state.cat.detail.userLiked);
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
   };

@@ -1,6 +1,6 @@
 // library
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { css } from 'styled-components';
 
 // element
@@ -20,15 +20,12 @@ const CatPost = ({ cat }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
 
-  const [like, setLike] = useState(false);
+  // const userLiked = useSelector((state) => state.cat.list);
+  // console.log(userLiked);
+  // console.log(cat);
 
   const likeToggle = () => {
     dispatch(__catLike(catId));
-    if (like === false) {
-      setLike(true);
-    } else if (like === true) {
-      setLike(false);
-    }
   };
 
   return (
@@ -63,7 +60,7 @@ const CatPost = ({ cat }) => {
             <Button
               padding="0"
               bgColor="diaryColor"
-              color={like === true ? 'red' : 'black'}
+              // color={ === true ? 'red' : 'black'}
               clickEvent={likeToggle}
             >
               <FavoriteIcon />

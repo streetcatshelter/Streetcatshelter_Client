@@ -42,7 +42,8 @@ export const catApi = {
   getMoreCat: (location, start, limit) =>
     instance.get(`/cat/${location}?page=${start + 1}&size=${limit}`),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
-  getCatCalendar: (catId) => instance.get(`/cat/calendar/${catId}`),
+  getCatCalendar: (catId, month, year) =>
+    instance.get(`/cat/calender/${catId}?month=${month}&year=${year}`),
   getCatGallery: (catId, size) =>
     instance.get(`/cat/gallery/${catId}?page=1&size=${size}`),
   getCatDiary: (catId, size) =>

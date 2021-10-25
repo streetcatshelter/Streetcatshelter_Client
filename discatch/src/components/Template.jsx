@@ -5,9 +5,6 @@ import styled from "styled-components";
 /* == components*/
 import { Header, Menu } from "./";
 
-/* == Custom - Elements*/
-import { Grid } from "../elements";
-
 const Template = (props) => {
   const path = props.props.match.path;
   return (

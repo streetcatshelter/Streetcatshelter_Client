@@ -1,5 +1,5 @@
 // library
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
 // style
@@ -9,7 +9,7 @@ import { flexBox } from "../shared/style";
 import { Link } from "react-router-dom";
 
 // element
-import { Grid, Text } from "../elements";
+import { Grid } from "../elements";
 
 // icon
 import { Search, Bell, ArrowLeft } from "react-feather";
@@ -39,11 +39,11 @@ const Header = (props) => {
   }, []);
 
   let options;
-  if (location1 !== null) {
+  if (location1 !== null && location2 === null) {
     options = [
       { key: 1, value: location1 }
     ]
-  } else if (location1 !== null && location2 !== null) {
+  } else if (location1 !== null && location2 !== null && location3 === null) {
     options = [
       { key: 1, value: location1 },
       { key: 2, value: location2 }

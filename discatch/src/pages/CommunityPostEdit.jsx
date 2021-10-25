@@ -45,7 +45,6 @@ const CommunityPostEdit = (props) => {
   const dispatch = useDispatch();
 
   const [fileNum, setFileNum] = useState(imageNum);
-
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();

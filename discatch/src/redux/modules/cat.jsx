@@ -183,7 +183,7 @@ export const __getGallery =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatGallery(catId, size);
-      console.log(data);
+
       dispatch(getGallery(data));
     } catch (err) {
       console.error(err);

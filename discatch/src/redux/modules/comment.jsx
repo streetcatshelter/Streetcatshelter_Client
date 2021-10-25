@@ -11,7 +11,6 @@ export const __createCatComment =
       const data = await catApi.createCatComment(catId, contents);
 
       dispatch(createCatComment({ contents }));
-      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -25,7 +24,6 @@ export const __createCatDetailComment =
       const data = await catApi.createCatDetailComment(catDetailId, contents);
 
       dispatch(createCatDetailComment({ contents }));
-      window.location.reload();
     } catch (err) {
       console.error(err);
     }

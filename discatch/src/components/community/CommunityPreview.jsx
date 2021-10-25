@@ -5,22 +5,23 @@ import React from 'react'
 import { Grid, Image } from "../../elements/index";
 
 // STYLE
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
 
 const CommunityPreview = (preview) => {
-    const previewImage = preview.preview[preview.previewNum]?.preview;
+    let previewImage; 
     const path = useLocation();
     const pathLength = path.pathname.split('/').length
-    let editImage = null;
-    if (pathLength === 3) {
-      editImage = preview?.preview[preview.previewNum-preview.imageNum]?.preview || preview?.imageList[preview.previewNum]?.image;
+    let newImage = preview?.preview[preview?.previewNum]?.preview;
+    if (pathLength === 6) {
+      newImage = preview?.preview[preview?.previewNum - preview.imageNum]?.preview;
+      previewImage = preview?.imageList[preview?.previewNum]?.image;
     }
     return (
         <>
-        {pathLength === 3 ? (<Grid
+        {pathLength === 5 ? (<Grid
                   width={"90px"}
                   height={"90px"}
                   margin={"0 5.5px"}
@@ -34,7 +35,7 @@ const CommunityPreview = (preview) => {
                     `;
                   }}
                 >
-                  <Image src={editImage} width="100%" height="100%"/>
+                  <Image src={newImage} width="100%" height="100%"/>
                 </Grid>) : (<Grid
             width="90px"
             height="90px"
@@ -51,7 +52,7 @@ const CommunityPreview = (preview) => {
             >
             
             <Image 
-                src={previewImage} 
+                src={previewImage || newImage} 
                 width="100%" 
                 height="100%" 
                 addstyle={() => {

@@ -83,9 +83,6 @@ export const __createCatDetailInfo = (
             .then((res) => {
               dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());
-              history.push('/');
-              // history.push(`/catdetailinfo/${catId}`);
-              // window.location.replace(`/catdetailinfo/${catId}`);
             })
             .catch((err) => {
               console.error(err);
@@ -268,7 +265,7 @@ const cat = createSlice({
         snack: action.payload.snack,
         water: action.payload.water,
       };
-      state.list.push(detailInfo);
+      state.detail.push(detailInfo);
       console.log(action.payload);
     },
 

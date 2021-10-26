@@ -21,7 +21,7 @@ const Diary = ({ diary }) => {
       bgColor="diaryColor"
       padding="6px"
       width="95%"
-      margin="3%  auto"
+      margin="2%  auto"
       clickEvent={() => history.push(`/catdetailinfo/${catDetailId}`)}
     >
       <Grid
@@ -39,62 +39,41 @@ const Diary = ({ diary }) => {
           width="30px"
           height="30px"
           margin="0 3% 0 0"
+          borderRadius="20px"
         />
-        <Text margin="0 30% 0 -35%">{diary.username}</Text>
-        <Text
-          margin="0 3% 0 0"
-          addstyle={() => {
-            return css`
-              font-size: 12px;
-            `;
-          }}
-        >
-          {diary.createdAt[5]}초전
+        <Text width="25%" margin="0 20% 0 0" fontWeight="bold" size="16px">
+          {diary.username}
+        </Text>
+        <Text margin="0 0 0 5%" width="45%" fontWeight="bold" size="14px">
+          {diary.createdAt ? (
+            `${diary.createdAt[0]}.${diary.createdAt[1]}.${diary.createdAt[2]} ${diary.createdAt[3]}시 ${diary.createdAt[4]}분`
+          ) : (
+            <></>
+          )}
         </Text>
       </Grid>
 
-      <Text>{diary.diary}</Text>
+      <Text size="16px">{diary.diary}</Text>
 
       <Grid
-        bgcolor="diaryColor"
+        bgColor="diaryColor"
         addstyle={() => {
           return css`
             ${flexBox('flex-end')}
           `;
         }}
       >
-        <Button
-          margin="0 3%"
-          addstyle={() => {
-            return css`
-              background: #fcf6e8;
-            `;
-          }}
-        >
+        <Button bgColor="diaryColor">
           <Eye size="18" />
           {diary.viewCnt}
         </Button>
 
-        <Button
-          margin="0 3%"
-          addstyle={() => {
-            return css`
-              background: #fcf6e8;
-            `;
-          }}
-        >
+        <Button margin="0 3%" bgColor="diaryColor">
           <MessageCircle size="18" />
           {diary.commentCnt}
         </Button>
 
-        <Button
-          margin="0 3%"
-          addstyle={() => {
-            return css`
-              background: #fcf6e8;
-            `;
-          }}
-        >
+        <Button bgColor="diaryColor">
           <FavoriteIcon style={{ fontSize: '18', color: 'red' }} />
           {diary.likeCnt}
         </Button>

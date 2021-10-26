@@ -16,6 +16,7 @@ import { flexBox } from '../shared/style';
 import { Camera } from 'react-feather';
 
 // redux
+import { history } from '../redux/configureStore';
 import { imgActions } from '../redux/modules/image';
 import { __createCatDetailInfo } from '../redux/modules/cat';
 
@@ -71,6 +72,7 @@ const CatDetailInfoWrite = (props) => {
         catId,
       ),
     );
+    history.push(`/catdetail/${catId}`);
   };
 
   return (

@@ -9,6 +9,7 @@ const _getUserInfo =
     try {
       dispatch(loading(true));
       const { data } = await myPageApi.getUserInfo();
+      console.log(data);
       dispatch(setUserInfo(data));
     } catch (e) {
       console.log(e);
@@ -65,9 +66,7 @@ const _editMyInfo =
   async (dispatch, getState, { history }) => {
     console.log(NickName, Village);
     const userInfo = {
-      location: Village[0],
-      location2: Village[1],
-      location3: Village[2],
+      location: Village,
       nickname: NickName,
       profileUrl: "string",
     };
@@ -78,6 +77,9 @@ const _editMyInfo =
       history.push("/mypage");
     } catch (e) {
       console.log(e);
+      window.alert(
+        "사용자 정보 수정에 실패하였습니다. 다시 시도해주시길 바랍니다."
+      );
     }
   };
 
@@ -107,10 +109,9 @@ const mypage = createSlice({
     },
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
-      const Village = [...action.payload.location];
+      const Village = [...action.payload.locationList];
       state.userVillage = Village;
       state.isLoaded = false;
-      console.log(state.isLoaded);
     },
     setCalendar: (state, action) => {
       state.calendar = action.payload;
@@ -122,7 +123,6 @@ const mypage = createSlice({
     deleteVillage: (state, action) => {
       return {
         ...state,
-
         userVillage: state.userVillage.filter(
           (village) => village !== action.payload
         ),

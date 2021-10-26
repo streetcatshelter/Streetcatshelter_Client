@@ -25,9 +25,14 @@ const Header = (props) => {
   const path = props.path;
   const village = useSelector((state) => state.map.villageList);
   const userInfo = useSelector((state) => state.mypage.userInfo);
-  const location1 = userInfo?.location;
-  const location2 = userInfo?.location2;
-  const location3 = userInfo?.location3;
+  let location1;
+  let location2;
+  let location3;
+  if (userInfo.locationList !== undefined) {
+    location1 = userInfo.locationList[0];
+    location2 = userInfo.locationList[1];
+    location3 = userInfo.locationList[2];
+  }
 
   const [searchModal, setSearchModal] = useState(false);
   
@@ -39,16 +44,16 @@ const Header = (props) => {
   }, []);
 
   let options;
-  if (location1 !== null && location2 === null) {
+  if (location1 !== undefined && location2 === undefined) {
     options = [
       { key: 1, value: location1 }
     ]
-  } else if (location1 !== null && location2 !== null && location3 === null) {
+  } else if (location1 !== undefined && location2 !== undefined && location3 === undefined) {
     options = [
       { key: 1, value: location1 },
       { key: 2, value: location2 }
             ];
-  } else if (location1 !== null && location2 !== null && location3 !== null) {
+  } else if (location1 !== undefined && location2 !== undefined && location3 !== undefined) {
     options = [
       { key: 1, value: location1 },
       { key: 2, value: location2 },
@@ -76,7 +81,7 @@ const Header = (props) => {
         <Grid width="20%" height="100%" margin="auto">
           {path === "/" || path === "/community" || path === "/map" ? (
             <SelectStyle onChange={onChangeHandler} value={place}>
-              {options.map((pl, idx) => (
+              {options && options.map((pl, idx) => (
                 <option key={pl.key} value={pl.value}>
                   {pl.value}
                 </option>

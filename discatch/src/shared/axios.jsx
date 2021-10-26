@@ -1,23 +1,23 @@
 // LIBRARY
-import axios from 'axios';
+import axios from "axios";
 
 // FUNCTION
-import { getToken } from './token';
+import { getToken } from "./token";
 
 axios.defaults.withCredentials = true;
 
 const instance = axios.create({
-  baseURL: 'http://52.78.241.50/',
+  baseURL: "http://52.78.241.50/",
 });
 
 instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   if (token) {
-    config.headers['Authorization'] = getToken();
+    config.headers["Authorization"] = getToken();
   }
-  config.headers['Content-Type'] = 'application/json; charset=utf-8';
-  config.headers['X-Requested-With'] = 'XMLHttpRequest';
-  config.headers['Accept'] = '*/*';
+  config.headers["Content-Type"] = "application/json; charset=utf-8";
+  config.headers["X-Requested-With"] = "XMLHttpRequest";
+  config.headers["Accept"] = "*/*";
   return config;
 });
 
@@ -28,12 +28,15 @@ export const userApi = {
     instance.get(`/user/naver/callback?code=${authorization_code}`),
 };
 export const myPageApi = {
-  getNotice: () => instance.get('/mypage/notice'),
+  getNotice: () => instance.get("/mypage/notice"),
   getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),
-  getCalendar: () => instance.get('/mypage/calendar'),
-  getLikedAllCat: () => instance.get('/mypage/mycat'),
-  getUserInfo: () => instance.get('/mypage/user/information'),
-  putUserInfo: (userInfo) => instance.put('/mypage/user/information', userInfo),
+  getCalendar: (year, month) =>
+    instance.get(`/mypage/calendar?year=${year}&month=${month}`),
+  getCalendarDetail: (year, month, elm) =>
+    instance.get(`/mypage/calendar/day/${elm}?year=${year}&month=${month}`),
+  getLikedAllCat: () => instance.get("/mypage/mycat"),
+  getUserInfo: () => instance.get("/mypage/user/information"),
+  putUserInfo: (userInfo) => instance.put("/mypage/user/information", userInfo),
 };
 
 export const catApi = {
@@ -65,16 +68,16 @@ export const catApi = {
 };
 
 export const communityApi = {
-  createCommunity: (postInfo) => instance.post('/community/create', postInfo),
+  createCommunity: (postInfo) => instance.post("/community/create", postInfo),
   getCommunity: (category, location, limit) =>
     instance.get(
-      `/community/category/${category}?page=1&size=${limit}&location=${location}`,
+      `/community/category/${category}?page=1&size=${limit}&location=${location}`
     ),
   getMoreCommunity: (category, start, limit, location) =>
     instance.get(
       `/community/category/${category}?page=${
         start + 1
-      }&size=${limit}&location=${location}`,
+      }&size=${limit}&location=${location}`
     ),
   getDetailCommunity: (communityId) =>
     instance.get(`/community/${communityId}`),
@@ -85,7 +88,7 @@ export const communityApi = {
     location,
     editTitle,
     username,
-    communityId,
+    communityId
   ) =>
     instance.put(`/community/${communityId}`, {
       category: category,

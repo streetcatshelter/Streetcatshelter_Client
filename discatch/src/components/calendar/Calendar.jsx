@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
 const Calendar = (props) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(mypageActions._getCalender());
-  }, []);
+
   let DATE = new Date();
   const YEAR = DATE.getFullYear();
   const MONTH = DATE.getMonth();
@@ -57,12 +55,18 @@ const Calendar = (props) => {
     setTotalDate(changeDate(month));
   }, [month]);
 
+  useEffect(() => {
+    dispatch(mypageActions._getCalender(year, month));
+  }, [dispatch, year, month]);
+
   const [today, setToday] = useState(0);
 
   const goToday = () => {
     let TODAY = new Date().getDate();
+
     let goMonth = new Date().getMonth() + 1;
     let goYear = new Date().getFullYear();
+
     setYear(goYear);
     setMonth(goMonth);
     setToday(TODAY);

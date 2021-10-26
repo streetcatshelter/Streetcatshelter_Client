@@ -49,11 +49,11 @@ const CatPost = ({ cat }) => {
               `;
             }}
           >
-            <Text fontWeight="bold" size="12px" width="40%">
+            <Text fontWeight="bold" size="14px" width="35%">
               {cat.catName}
             </Text>
 
-            <Text fontWeight="bold" size="12px" margin="0 0 0 0" width="60%">
+            <Text fontWeight="bold" size="14px" margin="0 0 0 0" width="50%">
               중성화: {cat.neutering}
             </Text>
 
@@ -65,6 +65,24 @@ const CatPost = ({ cat }) => {
             >
               <FavoriteIcon />
             </Button>
+
+            <Button
+              clickEvent={() => {
+                history.push(`/catdetail/${catId}`);
+              }}
+              fontWeight="bold"
+              padding="0"
+              margin="0 -3% 0 0"
+              width="75px"
+              bgColor="diaryColor"
+              addstyle={() => {
+                return css`
+                  ${flexBox('flex-end')}
+                `;
+              }}
+            >
+              자세히보기
+            </Button>
           </Grid>
 
           {cat.catTagList ? (
@@ -72,28 +90,23 @@ const CatPost = ({ cat }) => {
               margin="2% 0 0 0"
               addstyle={() => {
                 return css`
-                  ${flexBox('space-between')}
+                  ${flexBox('flex-start')}
                 `;
               }}
             >
               {cat.catTagList.map((tag, idx) => {
                 return (
-                  <Text key={idx} size="12px" fontWeight="bold">
+                  <Text
+                    margin="0 2% 0 0"
+                    padding="2px"
+                    key={idx}
+                    size="14px"
+                    fontWeight="bold"
+                  >
                     #{tag.tag}
                   </Text>
                 );
               })}
-
-              <Button
-                clickEvent={() => {
-                  history.push(`/catdetail/${catId}`);
-                }}
-                fontWeight="bold"
-                padding="0"
-                bgColor="diaryColor"
-              >
-                자세히보기
-              </Button>
             </Grid>
           ) : null}
         </Grid>

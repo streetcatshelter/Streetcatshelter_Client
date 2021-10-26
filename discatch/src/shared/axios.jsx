@@ -32,6 +32,8 @@ export const myPageApi = {
   getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),
   getCalendar: (year, month) =>
     instance.get(`/mypage/calendar?year=${year}&month=${month}`),
+  getCalendarDetail: (year, month, elm) =>
+    instance.get(`/mypage/calendar/day/${elm}?year=${year}&month=${month}`),
   getLikedAllCat: () => instance.get("/mypage/mycat"),
   getUserInfo: () => instance.get("/mypage/user/information"),
   putUserInfo: (userInfo) => instance.put("/mypage/user/information", userInfo),

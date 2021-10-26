@@ -28,12 +28,12 @@ const _getCalender =
     }
   };
 const _getCalenderDetail =
-  (day) =>
+  (year, month, elm) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await myPageApi.getCalendarDetail(day);
+      const { data } = await myPageApi.getCalendarDetail(year, month, elm);
       console.log(data);
-      dispatch(setCalendar(data));
+      dispatch(setCalendarDetail(data));
     } catch (e) {
       console.log(e);
     }
@@ -100,6 +100,7 @@ const initialState = {
   likedAllCat: [],
   userInfo: [],
   calendar: [],
+  calendardetail: [],
   userVillage: [],
   isLoaded: false,
 };
@@ -127,6 +128,9 @@ const mypage = createSlice({
     setCalendar: (state, action) => {
       state.calendar = action.payload;
     },
+    setCalendarDetail: (state, action) => {
+      state.calendardetail = action.payload;
+    },
     saveVillage: (state, action) => {
       const Village = action.payload;
       state.userVillage.unshift(Village);
@@ -149,6 +153,7 @@ export const mypageActions = {
   _getNotice,
   _getOneNotice,
   _getCalender,
+  _getCalenderDetail,
   _getLikedAllCat,
   _getUserInfo,
   _editMyInfo,
@@ -159,6 +164,7 @@ export const {
   setLikedAllCat,
   setUserInfo,
   setCalendar,
+  setCalendarDetail,
   saveVillage,
   deleteVillage,
   loading,

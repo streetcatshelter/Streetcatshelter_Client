@@ -3,10 +3,16 @@ import React, { useState, useEffect } from "react";
 /* == Library - style */
 import { CheckSquare } from "react-feather";
 import styled from "styled-components";
-
+import { useDispatch, useSelector } from "react-redux";
+import { mypageActions } from "../../redux/modules/mypage";
 const CalendarModal = (props) => {
   const { elm, month, year, setOpenModal } = props;
+  const dispatch = useDispatch();
+  const WorkDetail = useSelector((state) => state.mypage.calendardetail);
 
+  useEffect(() => {
+    dispatch(mypageActions._getCalenderDetail(year, month, elm));
+  }, []);
   return (
     <>
       <Background>
@@ -26,14 +32,30 @@ const CalendarModal = (props) => {
 
           <Events>
             <ul>
-              <li>
-                <CheckSquare />
-                또또 밥주기
-              </li>
-              <li>
-                <CheckSquare />
-                초코 급수
-              </li>
+              {WorkDetail[0].food ? (
+                <li>
+                  <CheckSquare />
+                  {WorkDetail[0].catName} 밥주기
+                </li>
+              ) : (
+                ""
+              )}
+              {WorkDetail[0].water ? (
+                <li>
+                  <CheckSquare />
+                  {WorkDetail[0].catName} 급수하기
+                </li>
+              ) : (
+                ""
+              )}
+              {WorkDetail[0].snack ? (
+                <li>
+                  <CheckSquare />
+                  {WorkDetail[0].catName} 간식주기
+                </li>
+              ) : (
+                ""
+              )}
             </ul>
           </Events>
           <Footer>

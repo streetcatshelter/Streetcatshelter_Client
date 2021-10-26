@@ -9,8 +9,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Calendar } from "..";
 const CalendarDates = (props) => {
-  const { lastDate, firstDate, elm, findToday, month, year, idx, holiday } =
-    props;
+  const { lastDate, firstDate, elm, findToday, month, year, idx } = props;
 
   const [openModal, setOpenModal] = useState(false);
 

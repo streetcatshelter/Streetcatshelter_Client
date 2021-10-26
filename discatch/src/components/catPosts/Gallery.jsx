@@ -16,7 +16,7 @@ const Gallery = ({ gallery }) => {
 
   return (
     <Grid
-      margin="2% 0"
+      margin="2% auto"
       addstyle={() => {
         return css`
           ${flexBox()}
@@ -24,7 +24,7 @@ const Gallery = ({ gallery }) => {
       }}
       clickEvent={() => history.push(`/catdetailinfo/${catDetailId}`)}
     >
-      <Image src={gallery.catImages} width="80%" height="250px" />
+      <Image src={gallery.catImages} width="100%" height="250px" />
     </Grid>
   );
 };

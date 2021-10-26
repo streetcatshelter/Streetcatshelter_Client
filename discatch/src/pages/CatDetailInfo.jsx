@@ -28,9 +28,11 @@ const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
   const catDetailId = props.match.params.catDetailId;
 
-  const deleteCatInfo = () => {
-    dispatch(__deleteCatInfo(catDetailId));
-  };
+  const { userProfile, nickname, username } = useSelector((state) => ({
+    userProfile: state.mypage.userInfo.profileImageUrl,
+    nickname: state.mypage.userInfo.nickname,
+    username: state.mypage.userInfo.username,
+  }));
 
   const { detailId, image, diary, water, food, snack, createdAt, tags } =
     useSelector(
@@ -47,7 +49,7 @@ const CatDetailInfo = (props) => {
       shallowEqual,
     );
 
-  console.log(detailId);
+  // console.log(detailId);
 
   const userLiked = useSelector((state) => state.cat.detail.userLiked);
   const likeToggle = () => {
@@ -57,6 +59,10 @@ const CatDetailInfo = (props) => {
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));
   }, []);
+
+  const deleteCatInfo = () => {
+    dispatch(__deleteCatInfo(catDetailId));
+  };
 
   return (
     <Template props={props}>
@@ -69,14 +75,18 @@ const CatDetailInfo = (props) => {
         }}
       >
         <Image
-          margin="0 0 0 5%"
-          src={image}
+          margin="0 2% 0 5%"
+          src={userProfile}
           width="35px"
           height="35px"
           borderRadius="25px"
         />
 
-        <Text margin="0 -8% 0 25%" size="12px" fontWeight="bold">
+        <Text width="30%" size="14px" fontWeight="bold">
+          {nickname ? nickname : username}
+        </Text>
+
+        <Text width="35%" margin="0 -5% 0 0" size="12px" fontWeight="bold">
           {createdAt ? (
             `${createdAt[0]}.${createdAt[1]}.${createdAt[2]} ${createdAt[3]}시 ${createdAt[4]}분`
           ) : (

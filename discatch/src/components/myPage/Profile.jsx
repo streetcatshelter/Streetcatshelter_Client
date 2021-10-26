@@ -17,13 +17,16 @@ const Profile = () => {
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const NickName = UserInfo.nickname === "string" ? "" : UserInfo.nickname;
-
+  console.log(UserInfo);
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, []);
   const logout = () => {
     dispatch(userActions._logout());
   };
+  if (!UserInfo) {
+    return <div></div>;
+  }
   return (
     <Wrapper>
       <Image
@@ -57,12 +60,16 @@ const Profile = () => {
         </Grid>
         <Grid>
           <Text fontWeight="800">{UserInfo.userLevel}</Text>
-        </Grid>
-        <Grid>
-          <Text size="12px">
-            {UserInfo.location},{UserInfo.location2},{UserInfo.location3}
-          </Text>
-        </Grid>
+        </Grid>{" "}
+        {UserInfo.locationList ? (
+          <Grid display="flex">
+            {UserInfo.locationList.map((location, idx) => {
+              return <Text style={{ marginRight: "5px" }}>{location}</Text>;
+            })}
+          </Grid>
+        ) : (
+          ""
+        )}
       </Grid>
     </Wrapper>
   );

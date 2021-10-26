@@ -36,22 +36,20 @@ const UserInfo = (edit) => {
         </Inner>
         <Inner>
           <p>내동네</p>
-          {Village ? (
+          {Village.length > 0 ? (
             <VillageWrap>
-              {Village.map((town, idx) => {
-                if (town === null) {
-                  return "";
-                }
+              {Village.map((village, key) => {
                 return (
                   <div
                     style={{ display: "flex", width: "90px", height: "20px" }}
                   >
-                    <div>{town}</div>
+                    <div> {village}</div>
+
                     <XCircle
                       width="18px"
                       height="18px"
                       style={{ cursor: "pointer" }}
-                      onClick={() => dispatch(deleteVillage(town))}
+                      onClick={() => dispatch(deleteVillage(village))}
                     />
                   </div>
                 );

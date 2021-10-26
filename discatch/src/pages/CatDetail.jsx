@@ -1,7 +1,6 @@
 // library
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import styled, { css } from 'styled-components';
+import React, { useState } from 'react';
+import { css } from 'styled-components';
 
 // style
 import { flexBox } from '../shared/style';
@@ -16,80 +15,22 @@ import {
 } from '../components';
 
 // element
-import { Button, Grid, Image, Text } from '../elements';
+import { Button, Grid } from '../elements';
 
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // redux
 import { history } from '../redux/configureStore';
-import { __getCatLocation } from '../redux/modules/cat';
 
 const CatDetail = (props) => {
-  const dispatch = useDispatch();
   const catId = props.match.params.catId;
-  // const location = props.match.params.location;
 
   const [menu, setMenu] = useState('캘린더');
 
-  // useEffect(() => {
-  //   dispatch(__getCatLocation(location));
-  // }, []);
-
-  // const catList = useSelector((state) => state.cat.list);
-  // console.log(catList);
-
   return (
     <Template props={props}>
-      {/* <Grid
-        bgColor="diaryColor"
-        alignItems="center"
-        padding="8px"
-        addstyle={() => {
-          return css`
-            ${flexBox()}
-          `;
-        }}
-      >
-        <Image borderRadius="10px" />
-
-        <Grid padding="6px" alignItems="center">
-          <Grid
-            addstyle={() => {
-              return css`
-                ${flexBox('space-between')}
-              `;
-            }}
-          >
-            <Text fontWeight="bold" size="12px">
-              catName:
-            </Text>
-
-            <Text fontWeight="bold" size="12px" width="45%">
-              neutering:
-            </Text>
-
-            <Button padding="0" bgColor="diaryColor" color="red">
-              <FavoriteIcon />
-            </Button>
-          </Grid>
-
-          <Grid
-            addstyle={() => {
-              return css`
-                ${flexBox('space-between')}
-              `;
-            }}
-          >
-            <Text fontWeight="bold" size="12px">
-              ㅌㄱ
-            </Text>
-          </Grid>
-        </Grid>
-      </Grid> */}
-
       <Grid
         alignItems="center"
         addstyle={() => {
@@ -110,6 +51,7 @@ const CatDetail = (props) => {
         >
           캘린더
         </Button>
+
         <Button
           clickEvent={() => {
             setMenu('집사일기');
@@ -155,16 +97,5 @@ const CatDetail = (props) => {
     </Template>
   );
 };
-
-const Count = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background: rgb(${(props) => props.theme.palette.D_yellow});
-  font-size: 12px;
-  text-align: center;
-  line-height: 20px;
-  margin-left: 1%;
-`;
 
 export default CatDetail;

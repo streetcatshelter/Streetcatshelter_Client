@@ -23,7 +23,7 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const query = window.location.search;
   const catList = useSelector((state) => state.cat.list);
-  const location = useSelector((state) => state.mypage.userInfo.location);
+  const location = useSelector((state) => state.mypage.userInfo.locationList);
 
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));

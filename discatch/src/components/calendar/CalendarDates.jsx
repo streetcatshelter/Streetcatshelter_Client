@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 /* == components*/
-import CalendarModal from './CalendarModal';
+import CalendarModal from "./CalendarModal";
 
-import { Gitlab } from 'react-feather';
+import { Gitlab } from "react-feather";
 /* == Library - style */
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { Calendar } from '..';
+import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { Calendar } from "..";
 const CalendarDates = (props) => {
   const { lastDate, firstDate, elm, findToday, month, year, idx, holiday } =
     props;
@@ -15,7 +15,7 @@ const CalendarDates = (props) => {
   const [openModal, setOpenModal] = useState(false);
 
   const Calendar = useSelector((state) => state.mypage.calendar);
-  // console.log(Calendar);
+
   return (
     <>
       <Form
@@ -23,55 +23,60 @@ const CalendarDates = (props) => {
           setOpenModal(true);
         }}
       >
-        <DateNum
-          idx={idx}
-          lastDate={lastDate}
-          firstDate={firstDate}
-          findToday={findToday}
-        >
-          <TodayCSS findToday={findToday}>
-            <span>{elm}</span>
-          </TodayCSS>
-          {props.path === 'mypage' ? (
-            <Dots>
-              {Calendar.filter(
-                (workDate) =>
-                  workDate.createdAt.substr(8, 2) == elm &&
-                  workDate.createdAt.substr(5, 2) == month,
-              )
-                .sort()
-                .map((workDate) => {
-                  const food = workDate.food;
-                  const water = workDate.water;
-                  const snack = workDate.snack;
-                  return (
-                    <div
-                      style={{
-                        display: 'flex',
-                        margin: 'auto',
-                      }}
-                    >
-                      <Gitlab width="5px" height="5px" />
-                      <Dot
-                        background="#D19B61"
-                        work={food ? 'block' : 'none'}
-                      />
-                      <Dot
-                        background="skyblue"
-                        work={water ? 'block' : 'none'}
-                      />
-                      <Dot
-                        background="#CBCF52"
-                        work={snack ? 'block' : 'none'}
-                      />
-                    </div>
-                  );
-                })}
-            </Dots>
-          ) : (
-            ''
-          )}
-        </DateNum>
+        {(props.firstDate > 0 && props.idx > props.firstDate - 1) ||
+        props.idx < props.lastDate ? (
+          ""
+        ) : (
+          <DateNum
+            idx={idx}
+            lastDate={lastDate}
+            firstDate={firstDate}
+            findToday={findToday}
+          >
+            <TodayCSS findToday={findToday}>
+              <span>{elm}</span>
+            </TodayCSS>
+            {props.path === "mypage" ? (
+              <Dots>
+                {Calendar.filter(
+                  (workDate) =>
+                    workDate.localDate[2] == elm &&
+                    workDate.localDate[1] == month
+                )
+                  .sort()
+                  .map((workDate) => {
+                    const food = workDate.food;
+                    const water = workDate.water;
+                    const snack = workDate.snack;
+                    return (
+                      <div
+                        style={{
+                          display: "flex",
+                          margin: "auto",
+                        }}
+                      >
+                        <Gitlab width="5px" height="5px" />
+                        <Dot
+                          background="#D19B61"
+                          work={food ? "block" : "none"}
+                        />
+                        <Dot
+                          background="skyblue"
+                          work={water ? "block" : "none"}
+                        />
+                        <Dot
+                          background="#CBCF52"
+                          work={snack ? "block" : "none"}
+                        />
+                      </div>
+                    );
+                  })}
+              </Dots>
+            ) : (
+              ""
+            )}
+          </DateNum>
+        )}
       </Form>
       {openModal && (
         <CalendarModal

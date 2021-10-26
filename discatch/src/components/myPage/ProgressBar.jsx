@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 const ProgressBar = () => {
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const workPercent = (UserInfo.cntActivity / 30) * 100 + "%";
-  console.log(workPercent);
   return (
     <div>
       <p>

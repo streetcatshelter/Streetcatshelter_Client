@@ -9,7 +9,6 @@ const _getUserInfo =
     try {
       dispatch(loading(true));
       const { data } = await myPageApi.getUserInfo();
-      console.log(data);
       dispatch(setUserInfo(data));
     } catch (e) {
       console.log(e);
@@ -18,10 +17,22 @@ const _getUserInfo =
   };
 
 const _getCalender =
-  () =>
+  (year, month) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await myPageApi.getCalendar();
+      const { data } = await myPageApi.getCalendar(year, month);
+      console.log(data);
+      dispatch(setCalendar(data.date));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+const _getCalenderDetail =
+  (day) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await myPageApi.getCalendarDetail(day);
+      console.log(data);
       dispatch(setCalendar(data));
     } catch (e) {
       console.log(e);

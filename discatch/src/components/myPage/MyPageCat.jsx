@@ -12,19 +12,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
 
+import moment from "moment";
 const MyPageCat = () => {
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
-
-  console.log(LikedAllCat);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(mypageActions._getLikedAllCat());
   }, []);
+
   return (
     <div>
       {LikedAllCat.map((LikedCat, idx) => {
+        const lastActivity = moment(LikedCat.lastActivity).format(
+          "YYYY-M-D hh:mm"
+        );
+        const myActivity = moment(LikedCat.myActivity).format("YYYY-M-D hh:mm");
         return (
           <CatPost
+            key={idx}
             onClick={() => {
               history.push(`/catdetail/${LikedCat.catId}`);
             }}
@@ -39,8 +45,8 @@ const MyPageCat = () => {
               <p style={{ fontWeight: "800", fontSize: "14px" }}>
                 {LikedCat.catName}
               </p>
-              <p>최근활동:{LikedCat.lastActivity}</p>
-              <p>나의 최근활동:{LikedCat.myActivity}</p>
+              <p>최근활동:{lastActivity}</p>
+              <p>나의 최근활동:{myActivity}</p>
               <InfoIcon>
                 <FileText width="15px" height="15px" />{" "}
                 <p>{LikedCat.cntCatDetail}</p>

@@ -193,8 +193,8 @@ export const __catLike =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catLike(catId);
-      console.log('기본정보 좋아요');
-      // window.location.reload();
+
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }

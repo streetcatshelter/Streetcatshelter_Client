@@ -19,10 +19,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 const CatPost = ({ cat }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
-
-  // const userLiked = useSelector((state) => state.cat.list);
-  // console.log(userLiked);
-  // console.log(cat);
+  const userLiked = cat.userLiked;
 
   const likeToggle = () => {
     dispatch(__catLike(catId));
@@ -60,7 +57,7 @@ const CatPost = ({ cat }) => {
             <Button
               padding="0"
               bgColor="diaryColor"
-              // color={userLiked === true ? 'red' : 'black'}
+              color={userLiked === true ? 'red' : 'black'}
               clickEvent={likeToggle}
             >
               <FavoriteIcon />

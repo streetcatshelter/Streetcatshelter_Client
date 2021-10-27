@@ -21,21 +21,19 @@ import InfinityScroll from '../shared/InfinityScroll';
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const query = window.location.search;
   const catList = useSelector((state) => state.cat.list);
-  const location = useSelector((state) => state.mypage.userInfo.locationList);
+  const location = useSelector((state) => state.map.keywordList[0]);
+  const userVillage = useSelector((state) => state.mypage.userVillage[0]);
 
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));
   };
 
   useEffect(() => {
-    if (!query) dispatch(__getCatLocation(location));
-
-    return () => {
-      dispatch(__getCatLocation(location));
-    };
-  }, [location]);
+    location === undefined
+      ? dispatch(__getCatLocation(userVillage))
+      : dispatch(__getCatLocation(location));
+  }, [userVillage, location]);
 
   return (
     <Template props={props}>

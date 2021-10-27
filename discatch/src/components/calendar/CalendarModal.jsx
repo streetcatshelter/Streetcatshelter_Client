@@ -23,40 +23,47 @@ const CalendarModal = (props) => {
                 dis<span>C</span>
                 <span>A</span>
                 <span>T</span>ch
-              </p>{" "}
+              </p>
             </Header>
             <ViewDate>
-              {year}년{month}월{elm}일 <span>활동일지</span>
+              <span>활동일지</span>({year}년{month}월{elm}일)
             </ViewDate>
           </Head>
 
           <Events>
-            <ul>
-              {WorkDetail[0].food ? (
-                <li>
-                  <CheckSquare />
-                  {WorkDetail[0].catName} 밥주기
-                </li>
-              ) : (
-                ""
-              )}
-              {WorkDetail[0].water ? (
-                <li>
-                  <CheckSquare />
-                  {WorkDetail[0].catName} 급수하기
-                </li>
-              ) : (
-                ""
-              )}
-              {WorkDetail[0].snack ? (
-                <li>
-                  <CheckSquare />
-                  {WorkDetail[0].catName} 간식주기
-                </li>
-              ) : (
-                ""
-              )}
-            </ul>
+            {WorkDetail.map((EachCatWork, idx) => {
+              return (
+                <EventBox>
+                  😺 고양이이름: {EachCatWork.catName}
+                  <ul>
+                    {EachCatWork.food ? (
+                      <li>
+                        <CheckSquare />
+                        밥주기
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                    {EachCatWork.water ? (
+                      <li>
+                        <CheckSquare />
+                        급수하기
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                    {EachCatWork.snack ? (
+                      <li>
+                        <CheckSquare />
+                        간식주기
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                  </ul>
+                </EventBox>
+              );
+            })}
           </Events>
           <Footer>
             <Close
@@ -126,7 +133,8 @@ const Head = styled.div`
 `;
 
 const ViewDate = styled.div`
-  padding-top: 5px;
+  padding-top: 20px;
+  font-size: 12px;
   span {
     font-size: 15px;
     margin-left: -2px;
@@ -134,27 +142,35 @@ const ViewDate = styled.div`
   }
 `;
 const Events = styled.div`
-  height: 50%;
+  height: 150px;
   text-align: left;
   font-weight: 700;
+  overflow-y: auto;
+  font-size: 14px;
+  padding: 0px 20px;
   ul {
     padding: 0px 20px;
-
+    font-size: 12px;
     li {
       list-style: none;
       margin: 10px auto;
     }
     svg {
       margin: auto 4px -4px auto;
+      width: 15px;
+      height: 15px;
     }
   }
 `;
+
+const EventBox = styled.div``;
 const Footer = styled.div`
   height: 20%;
 `;
 
 const Close = styled.div`
   margin: auto;
+  margin-top: 10px;
   padding: auto;
   width: 80px;
   height: 30px;

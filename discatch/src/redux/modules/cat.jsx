@@ -188,14 +188,14 @@ export const __getGallery =
   };
 
 // Cat 상세정보 삭제 (보류)
-export const __deleteCatInfo =
+export const __deleteCatDetail =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
     try {
       const data = await catApi.deleteCatDetail(catDetailId);
-      dispatch(deleteCatInfo(catDetailId));
+      dispatch(deleteCatDetail(catDetailId));
       window.alert('게시물 삭제 완료!');
-      history.push('/');
+      // history.push('/');
     } catch (err) {
       console.error(err);
     }
@@ -297,8 +297,8 @@ const cat = createSlice({
       state.gallery = action.payload;
     },
 
-    deleteCatInfo: (state, action) => {
-      state.detail = action.payload;
+    deleteCatDetail: (state, action) => {
+      console.log('삭제 요청 완료');
     },
   },
 });
@@ -313,7 +313,7 @@ export const {
   getCalendar,
   getDiary,
   getGallery,
-  deleteCatInfo,
+  deleteCatDetail,
 } = cat.actions;
 
 export default cat;

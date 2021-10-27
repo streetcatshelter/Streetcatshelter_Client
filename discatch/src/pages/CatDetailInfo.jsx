@@ -20,13 +20,14 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { history } from '../redux/configureStore';
 import {
   __getCatDetail,
-  __deleteCatInfo,
+  __deleteCatDetail,
   __catDetailLike,
 } from '../redux/modules/cat';
 
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
   const catDetailId = props.match.params.catDetailId;
+  console.log(catDetailId);
 
   const { userProfile, nickname, username } = useSelector((state) => ({
     userProfile: state.mypage.userInfo.profileImageUrl,
@@ -34,22 +35,18 @@ const CatDetailInfo = (props) => {
     username: state.mypage.userInfo.username,
   }));
 
-  const { detailId, image, diary, water, food, snack, createdAt, tags } =
-    useSelector(
-      (state) => ({
-        detailId: state.cat.detail,
-        image: state.cat.detail.catImages,
-        diary: state.cat.detail.diary,
-        water: state.cat.detail.water,
-        food: state.cat.detail.food,
-        snack: state.cat.detail.snack,
-        createdAt: state.cat.detail.createdAt,
-        tags: state.cat.detail.catTags,
-      }),
-      shallowEqual,
-    );
-
-  // console.log(detailId);
+  const { image, diary, water, food, snack, createdAt, tags } = useSelector(
+    (state) => ({
+      image: state.cat.detail.catImages,
+      diary: state.cat.detail.diary,
+      water: state.cat.detail.water,
+      food: state.cat.detail.food,
+      snack: state.cat.detail.snack,
+      createdAt: state.cat.detail.createdAt,
+      tags: state.cat.detail.catTags,
+    }),
+    shallowEqual,
+  );
 
   const userLiked = useSelector((state) => state.cat.detail.userLiked);
   const likeToggle = () => {
@@ -60,8 +57,8 @@ const CatDetailInfo = (props) => {
     dispatch(__getCatDetail(catDetailId));
   }, []);
 
-  const deleteCatInfo = () => {
-    dispatch(__deleteCatInfo(catDetailId));
+  const deleteCatDetail = () => {
+    dispatch(__deleteCatDetail(catDetailId));
   };
 
   return (
@@ -75,7 +72,7 @@ const CatDetailInfo = (props) => {
         }}
       >
         <Image
-          margin="0 2% 0 5%"
+          margin="0 0 0 5%"
           src={userProfile}
           width="35px"
           height="35px"
@@ -100,7 +97,7 @@ const CatDetailInfo = (props) => {
             history.push('/');
           }}
           SecondBtn={'삭제'}
-          SecondClick={deleteCatInfo}
+          SecondClick={deleteCatDetail}
         />
       </Grid>
 

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // api
 import { catApi } from '../../shared/axios';
 
-// Cat 댓글 생성 ✅
+// detail 댓글 작성
 export const __createCatComment =
   (catId, contents) =>
   async (dispatch, getState, { history }) => {
@@ -16,7 +16,7 @@ export const __createCatComment =
     }
   };
 
-// CatDetail 댓글 생성 ✅
+// catDetailInfo 댓글 작성
 export const __createCatDetailComment =
   (catDetailId, contents) =>
   async (dispatch, getState, { history }) => {
@@ -29,9 +29,9 @@ export const __createCatDetailComment =
     }
   };
 
-// 상세페이지 댓글 불러오기 ✅
+// detail 댓글 불러오기
 export const __getComment =
-  (catId, size = 15) =>
+  (catId, size = 30) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getComment(catId, size);
@@ -42,11 +42,9 @@ export const __getComment =
     }
   };
 
-// 더보기
-
-// 상세정보 페이지 댓글 불러오기 ✅
+// catDetailInfo 댓글 불러오기
 export const __getDetailComment =
-  (catDetailId, size = 15) =>
+  (catDetailId, size = 30) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getDetailComment(catDetailId, size);
@@ -57,9 +55,7 @@ export const __getDetailComment =
     }
   };
 
-// 더보기
-
-// 댓글 삭제 ✅
+// 댓글 삭제
 export const __deleteComment =
   (commentId) =>
   async (dispatch, getState, { history }) => {

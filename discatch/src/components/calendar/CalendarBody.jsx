@@ -14,6 +14,17 @@ const CalendarBody = (props) => {
   const getMonth = new Date().getMonth() + 1;
 
   const findToday = year === YEAR && month === getMonth ? today : "";
+  // const Calendar = useSelector((state) => state.mypage.calendar);
+  // const dayOffList = [];
+  // console.log(Calendar);
+
+  // useEffect(() => {
+  //   Calendar.map((workDate, idx) => {
+  //     return dayOffList.unshift(workDate.date);
+  //   });
+  // }, []);
+
+  // console.log(dayOffList);
 
   return (
     <Form>

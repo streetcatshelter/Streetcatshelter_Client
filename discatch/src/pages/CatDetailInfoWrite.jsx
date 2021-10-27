@@ -1,24 +1,24 @@
 // library
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled, { css } from 'styled-components';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled, { css } from "styled-components";
 
 // component
-import { Template } from '../components';
+import { Template } from "../components";
 
 // element
-import { Grid, TextArea, Button, Input, Image, Text } from '../elements';
+import { Grid, TextArea, Button, Input, Image, Text } from "../elements";
 
 // style
-import { flexBox } from '../shared/style';
+import { flexBox } from "../shared/style";
 
 // icon
-import { Camera } from 'react-feather';
+import { Camera } from "react-feather";
 
 // redux
-import { history } from '../redux/configureStore';
-import { imgActions } from '../redux/modules/image';
-import { __createCatDetailInfo } from '../redux/modules/cat';
+import { history } from "../redux/configureStore";
+import { imgActions } from "../redux/modules/image";
+import { __createCatDetailInfo } from "../redux/modules/cat";
 
 const CatDetailInfoWrite = (props) => {
   const dispatch = useDispatch();
@@ -38,16 +38,16 @@ const CatDetailInfoWrite = (props) => {
       dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum + 1);
     } else {
-      alert('사진은 최대 3장까지 등록할 수 있어요!');
+      alert("사진은 최대 3장까지 등록할 수 있어요!");
     }
   };
 
-  const [tag, setTag] = useState('');
+  const [tag, setTag] = useState("");
   const $tag = (e) => {
     setTag(e.target.value);
   };
 
-  const [diary, setDiary] = useState('');
+  const [diary, setDiary] = useState("");
   const $diary = (e) => {
     setDiary(e.target.value);
   };
@@ -69,8 +69,8 @@ const CatDetailInfoWrite = (props) => {
         longitude,
         snack,
         water,
-        catId,
-      ),
+        catId
+      )
     );
     history.push(`/catdetail/${catId}`);
   };
@@ -100,7 +100,7 @@ const CatDetailInfoWrite = (props) => {
         padding="14px"
         addstyle={() => {
           return css`
-            ${flexBox('space-between')}
+            ${flexBox("space-between")}
           `;
         }}
       >

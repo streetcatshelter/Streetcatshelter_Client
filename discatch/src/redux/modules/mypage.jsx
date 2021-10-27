@@ -1,14 +1,16 @@
 // LIBRARY
 import { createSlice } from "@reduxjs/toolkit";
-import { myPageApi } from "../../shared/axios";
+import instance, { myPageApi } from "../../shared/axios";
 import { userActions } from "../modules/user";
-
+// redux
+import { imgActions } from "./image";
 const _getUserInfo =
   () =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(loading(true));
       const { data } = await myPageApi.getUserInfo();
+      console.log(data);
       dispatch(setUserInfo(data));
     } catch (e) {
       console.log(e);
@@ -76,27 +78,58 @@ const _getOneNotice =
     }
   };
 
-const _editMyInfo =
-  (NickName, Village) =>
-  async (dispatch, getState, { history }) => {
-    console.log(NickName, Village);
-    const userInfo = {
-      location: Village,
-      nickname: NickName,
-      profileUrl: "string",
-    };
-    console.log(userInfo);
-    try {
-      const { data } = await myPageApi.putUserInfo(userInfo);
-      window.alert("사용자 정보가 수정됐습니다.");
-      history.push("/mypage");
-    } catch (e) {
-      console.log(e);
-      window.alert(
-        "사용자 정보 수정에 실패하였습니다. 다시 시도해주시길 바랍니다."
+const _editMyInfo = (NickName, Village) => {
+  return function (dispatch, getState, { history }) {
+    const imgFile = getState().image.file;
+    if (imgFile.length) {
+      dispatch(
+        imgActions.uploadImageDB(() => {
+          const imageUrl = getState().image.imageUrl;
+
+          const userInfo = {
+            location: Village,
+            nickname: NickName,
+            profileUrl: imageUrl,
+          };
+          console.log(userInfo);
+          instance
+            .put("/mypage/user/information", userInfo)
+            .then((res) => {
+              dispatch(imgActions.setInitialState());
+              window.alert("사용자 정보가 수정됐습니다.");
+              history.push("/mypage");
+            })
+            .catch((err) => {
+              console.error(err);
+              window.alert(
+                "사용자 정보 수정에 실패하였습니다. 다시 시도해주시길 바랍니다."
+              );
+            });
+        })
       );
+    } else {
+      const userInfo = {
+        location: Village,
+        nickname: NickName,
+        profileUrl: null,
+      };
+      console.log(userInfo);
+      instance
+        .put("/mypage/user/information", userInfo)
+        .then((res) => {
+          dispatch(imgActions.setInitialState());
+          window.alert("사용자 정보가 수정됐습니다.");
+          history.push("/mypage");
+        })
+        .catch((err) => {
+          console.error(err);
+          window.alert(
+            "사용자 정보 수정에 실패하였습니다. 다시 시도해주시길 바랍니다."
+          );
+        });
     }
   };
+};
 
 const initialState = {
   noticelist: [],

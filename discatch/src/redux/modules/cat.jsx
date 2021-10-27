@@ -1,9 +1,9 @@
 // library
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 // api
-import instance, { catApi } from '../../shared/axios';
+import instance, { catApi } from "../../shared/axios";
 // redux
-import { imgActions } from './image';
+import { imgActions } from "./image";
 
 // Cat 기본 정보 작성 ✅
 export const __createCatInfo = (
@@ -13,7 +13,7 @@ export const __createCatInfo = (
   location,
   username,
   latitude,
-  longitude,
+  longitude
 ) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
@@ -34,16 +34,16 @@ export const __createCatInfo = (
             username: username,
           };
           instance
-            .post('/cat/create', catInfo)
+            .post("/cat/create", catInfo)
             .then((res) => {
               dispatch(createCatInfo(catInfo));
               dispatch(imgActions.setInitialState());
-              history.push('/');
+              history.push("/");
             })
             .catch((err) => {
               console.error(err);
             });
-        }),
+        })
       );
     }
   };
@@ -58,7 +58,7 @@ export const __createCatDetailInfo = (
   longitude,
   snack,
   water,
-  catId,
+  catId
 ) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
@@ -87,10 +87,10 @@ export const __createCatDetailInfo = (
             .catch((err) => {
               console.error(err);
             });
-        }),
+        })
       );
     } else if (imgFile.length > 3) {
-      alert('사진은 최대 3장까지 등록할 수 있어요!');
+      alert("사진은 최대 3장까지 등록할 수 있어요!");
     } else {
       return;
     }
@@ -194,8 +194,8 @@ export const __deleteCatInfo =
     try {
       const data = await catApi.deleteCatDetail(catDetailId);
       dispatch(deleteCatInfo(catDetailId));
-      window.alert('게시물 삭제 완료!');
-      history.push('/');
+      window.alert("게시물 삭제 완료!");
+      history.push("/");
     } catch (err) {
       console.error(err);
     }
@@ -207,7 +207,7 @@ export const __catLike =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catLike(catId);
-      console.log('기본정보 좋아요');
+      console.log("기본정보 좋아요");
       // window.location.reload();
     } catch (err) {
       console.error(err);
@@ -237,7 +237,7 @@ const initialState = {
 };
 
 const cat = createSlice({
-  name: 'cat',
+  name: "cat",
   initialState,
   reducers: {
     createCatInfo: (state, action) => {

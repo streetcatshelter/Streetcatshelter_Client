@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 /* == Library - style */
 import styled from "styled-components";
@@ -7,20 +7,29 @@ import SearchAddress from "./SearchAddress";
 import { history } from "../../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
-
-import { XCircle } from "react-feather";
+import { imgActions } from "../../redux/modules/image";
+import { XCircle, Upload } from "react-feather";
 const UserInfo = (edit) => {
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [NickName, setNickName] = useState(UserInfo.nickname);
   const Village = useSelector((state) => state.mypage.userVillage);
+  const [fileUrl, setFileUrl] = useState(null);
   const changeNickName = (e) => {
     setNickName(e.target.value);
   };
 
   const EditMyInfo = () => {
-    console.log(NickName, Village);
     dispatch(mypageActions._editMyInfo(NickName, Village));
+  };
+
+  const processImage = (e) => {
+    e.preventDefault();
+    const imageFile = e.target.files[0];
+    const imageUrl = URL.createObjectURL(imageFile);
+    dispatch(imgActions.setInitialState(imageUrl));
+    dispatch(imgActions.setFile(imageFile));
+    setFileUrl(imageUrl);
   };
   return (
     <React.Fragment>
@@ -34,6 +43,29 @@ const UserInfo = (edit) => {
             defaultValue={NickName}
           />
         </Inner>
+        <Inner>
+          <p>프로필사진</p>
+          <ImageLabel for="imgFile">
+            <p>프로필 사진 업로드하기</p>
+            <Upload />
+          </ImageLabel>
+          <ImageInput
+            id="imgFile"
+            name="imgFile"
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={processImage}
+          />
+        </Inner>
+        {fileUrl === null ? (
+          ""
+        ) : (
+          <img
+            style={{ width: "100px", height: "100px" }}
+            src={fileUrl}
+            alt={fileUrl}
+          />
+        )}
         <Inner>
           <p>내동네</p>
           {Village.length > 0 ? (
@@ -68,7 +100,32 @@ const UserInfo = (edit) => {
     </React.Fragment>
   );
 };
-
+const ImageInput = styled.input`
+  display: none;
+`;
+const ImageLabel = styled.label`
+  background: #f9c852;
+  width: 100%;
+  height: 32px;
+  border: none;
+  border-radius: 10px;
+  justify-content: center;
+  margin: 5px auto 0px;
+  display: flex;
+  cursor: pointer;
+  p {
+    width: 180px;
+    margin: auto;
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 900;
+    text-align: center;
+  }
+  svg {
+    width: 16px;
+    margin: auto;
+  }
+`;
 const Inner = styled.div`
   width: 75%;
   display: inherit;
@@ -79,12 +136,14 @@ const Inner = styled.div`
     justify-content: flex-start;
     text-size: 16px;
     font-weight: 700;
-    margin-left: 5px;
   }
   input {
     height: 35px;
     border: 1px solid #b5bb19;
     border-radius: 10px;
+    font-size: 14px;
+    font-weight: 900;
+    padding-left: 10px;
   }
   button {
     background: #cbcf52;
@@ -103,8 +162,8 @@ const VillageWrap = styled.div`
   height: 35px;
   border: 1px solid #b5bb19;
   border-radius: 10px;
-  padding: 2px;
   display: flex;
+  padding: 4px 10px;
 `;
 
 const Wrapper = styled.div`

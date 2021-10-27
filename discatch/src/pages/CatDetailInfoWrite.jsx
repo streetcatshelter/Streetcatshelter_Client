@@ -72,7 +72,7 @@ const CatDetailInfoWrite = (props) => {
         catId,
       ),
     );
-    window.location.replace(`/catdetail/${catId}`);
+    history.push(`/catdetail/${catId}`);
   };
 
   return (

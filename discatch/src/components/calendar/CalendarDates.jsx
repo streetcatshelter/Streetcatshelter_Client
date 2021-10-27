@@ -12,14 +12,16 @@ const CalendarDates = (props) => {
   const { lastDate, firstDate, elm, findToday, month, year, idx } = props;
 
   const [openModal, setOpenModal] = useState(false);
-
   const Calendar = useSelector((state) => state.mypage.calendar);
 
+  const DayOff = [];
   return (
     <>
       <Form
         onClick={() => {
-          setOpenModal(true);
+          if (DayOff.length > 0) {
+            setOpenModal(true);
+          } else return;
         }}
       >
         {(props.firstDate > 0 && props.idx > props.firstDate - 1) ||
@@ -39,11 +41,11 @@ const CalendarDates = (props) => {
               <Dots>
                 {Calendar.filter(
                   (workDate) =>
-                    workDate.localDate[2] == elm &&
-                    workDate.localDate[1] == month
+                    workDate.date[2] == elm && workDate.date[1] == month
                 )
                   .sort()
                   .map((workDate) => {
+                    DayOff.unshift(workDate.date[2]);
                     const food = workDate.food;
                     const water = workDate.water;
                     const snack = workDate.snack;

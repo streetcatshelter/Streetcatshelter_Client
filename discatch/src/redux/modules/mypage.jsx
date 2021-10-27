@@ -22,7 +22,7 @@ const _getCalender =
     try {
       const { data } = await myPageApi.getCalendar(year, month);
       console.log(data);
-      dispatch(setCalendar(data.date));
+      dispatch(setCalendar(data));
     } catch (e) {
       console.log(e);
     }
@@ -33,7 +33,11 @@ const _getCalenderDetail =
     try {
       const { data } = await myPageApi.getCalendarDetail(year, month, elm);
       console.log(data);
-      dispatch(setCalendarDetail(data));
+      if (data.length === 0) {
+        return;
+      } else {
+        return dispatch(setCalendarDetail(data));
+      }
     } catch (e) {
       console.log(e);
     }
@@ -100,7 +104,9 @@ const initialState = {
   likedAllCat: [],
   userInfo: [],
   calendar: [],
-  calendardetail: [],
+  calendardetail: [
+    { catId: null, catName: null, food: false, snack: false, water: false },
+  ],
   userVillage: [],
   isLoaded: false,
 };

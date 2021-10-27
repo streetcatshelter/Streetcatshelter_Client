@@ -5,7 +5,7 @@ import instance, { catApi } from '../../shared/axios';
 // redux
 import { imgActions } from './image';
 
-// Cat 기본 정보 작성 ✅
+// 기본 정보 작성
 export const __createCatInfo = (
   catName,
   catTag,
@@ -49,7 +49,7 @@ export const __createCatInfo = (
   };
 };
 
-// Cat 상세 정보 작성 ✅
+// 상세 정보 작성
 export const __createCatDetailInfo = (
   catTags,
   diary,
@@ -97,7 +97,7 @@ export const __createCatDetailInfo = (
   };
 };
 
-// 지역에 따라 catPost 가져오기 ✅
+// 지역에 따라 게시물 불러오기
 export const __getCatLocation =
   (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
@@ -113,7 +113,7 @@ export const __getCatLocation =
     }
   };
 
-// ✅
+// 게시물 더보기
 export const __getMoreCat =
   (location, limit = 11) =>
   async (dispatch, getState, { history }) => {
@@ -135,7 +135,7 @@ export const __getMoreCat =
     }
   };
 
-// catPost 상세 정보 ✅
+// 상세 정보
 export const __getCatDetail =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
@@ -148,7 +148,7 @@ export const __getCatDetail =
     }
   };
 
-// Cat 상세 페이지(캘린더) ✅
+// 상세 페이지(캘린더)
 export const __getCalendar =
   (catId, month, year) =>
   async (dispatch, getState, { history }) => {
@@ -161,7 +161,7 @@ export const __getCalendar =
     }
   };
 
-// Cat 상세 페이지(집사일기) ✅
+// 상세 페이지(집사일기)
 export const __getDiary =
   (catId, size = 30) =>
   async (dispatch, getState, { history }) => {
@@ -174,7 +174,7 @@ export const __getDiary =
     }
   };
 
-// Cat 상세 페이지(갤러리) ✅
+// 상세 페이지(갤러리)
 export const __getGallery =
   (catId, size = 30) =>
   async (dispatch, getState, { history }) => {
@@ -187,21 +187,7 @@ export const __getGallery =
     }
   };
 
-// Cat 상세정보 삭제 (보류)
-export const __deleteCatDetail =
-  (catDetailId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const data = await catApi.deleteCatDetail(catDetailId);
-      dispatch(deleteCatDetail(catDetailId));
-      window.alert('게시물 삭제 완료!');
-      // history.push('/');
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-// 좋아요
+// 기본 정보 좋아요 💩
 export const __catLike =
   (catId) =>
   async (dispatch, getState, { history }) => {
@@ -214,13 +200,27 @@ export const __catLike =
     }
   };
 
-// ✅
+// 상세 정보 좋아요
 export const __catDetailLike =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catDetailLike(catDetailId);
       window.location.reload();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+// Cat 상세정보 삭제 💩
+export const __deleteCatDetail =
+  (catDetailId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const data = await catApi.deleteCatDetail(catDetailId);
+      dispatch(deleteCatDetail(catDetailId));
+      window.alert('게시물 삭제 완료!');
+      // history.push('/');
     } catch (err) {
       console.error(err);
     }

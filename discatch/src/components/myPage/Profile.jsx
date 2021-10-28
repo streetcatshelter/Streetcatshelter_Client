@@ -20,6 +20,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
+    // dispatch(mypageActions._getLevelUp());
   }, []);
   const logout = () => {
     dispatch(userActions._logout());
@@ -44,7 +45,7 @@ const Profile = () => {
             width="95%"
             positon="relative"
           >
-            <Text fontWeight="800">
+            <Text fontWeight="800" margin="5px 0px">
               {UserInfo.username}({NickName})
             </Text>
 
@@ -59,12 +60,16 @@ const Profile = () => {
           </Grid>
         </Grid>
         <Grid>
-          <Text fontWeight="800">{UserInfo.userLevel}</Text>
-        </Grid>{" "}
+          <Text fontWeight="900">{UserInfo.userLevel}</Text>
+        </Grid>
         {UserInfo.locationList ? (
           <Grid display="flex">
             {UserInfo.locationList.map((location, idx) => {
-              return <Text style={{ marginRight: "5px" }}>{location}</Text>;
+              return (
+                <Text margin="0px 5px 0px 0px" size="12px">
+                  {location}
+                </Text>
+              );
             })}
           </Grid>
         ) : (

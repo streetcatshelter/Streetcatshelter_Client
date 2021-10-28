@@ -36,7 +36,8 @@ export const myPageApi = {
     instance.get(`/mypage/calendar/day/${elm}?year=${year}&month=${month}`),
   getLikedAllCat: () => instance.get("/mypage/mycat"),
   getUserInfo: () => instance.get("/mypage/user/information"),
-  putUserInfo: (userInfo) => instance.put("/mypage/user/information", userInfo),
+  getLevelUp: () => instance.get("/leveluptest"),
+  // putUserInfo: (userInfo) => instance.put("/mypage/user/information", userInfo),
 };
 
 export const catApi = {

@@ -10,6 +10,7 @@ const _getUserInfo =
     try {
       dispatch(loading(true));
       const { data } = await myPageApi.getUserInfo();
+
       console.log(data);
       dispatch(setUserInfo(data));
     } catch (e) {
@@ -17,7 +18,17 @@ const _getUserInfo =
       dispatch(userActions._logout());
     }
   };
-
+const _getLevelUp =
+  () =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await myPageApi.getLevelUp();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+      dispatch(userActions._logout());
+    }
+  };
 const _getCalender =
   (year, month) =>
   async (dispatch, getState, { history }) => {
@@ -196,6 +207,7 @@ export const mypageActions = {
   _getLikedAllCat,
   _getUserInfo,
   _editMyInfo,
+  _getLevelUp,
 };
 export const {
   setNotice,

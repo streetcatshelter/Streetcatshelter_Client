@@ -27,6 +27,9 @@ import {
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
   const catDetailId = props.match.params.catDetailId;
+  // console.log(catDetailId);
+
+  // const catDetailId = useSelector((state) => state.cat.detail.catDetailId);
   console.log(catDetailId);
 
   const { userProfile, nickname, username } = useSelector((state) => ({

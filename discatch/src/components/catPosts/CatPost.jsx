@@ -20,6 +20,8 @@ const CatPost = ({ cat }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
+  console.log(userLiked);
+  // console.log(cat);
 
   const likeToggle = () => {
     dispatch(__catLike(catId));

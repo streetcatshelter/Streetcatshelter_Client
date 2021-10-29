@@ -5,11 +5,12 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 const ProgressBar = () => {
   const UserInfo = useSelector((state) => state.mypage.userInfo);
-  const leftPoint = 20 - UserInfo.cntActivity;
-  const workPercent = (UserInfo.cntActivity / 20) * 100 + "%";
+
+  const workPercent =
+    (UserInfo.score / (UserInfo.score + UserInfo.scoreLeft)) * 100 + "%";
 
   return (
-    <Wrap>
+    <React.Fragment>
       <Head>
         Level :{UserInfo.userLevel} 😻
         {UserInfo.score}점
@@ -18,14 +19,13 @@ const ProgressBar = () => {
         <Bar width={workPercent}></Bar>
       </BarWrap>
       <LevelDetail>
-        🌳__🏃‍♀️💨<span>"냥린이"</span>를 위해 남은 점수는{" "}
-        <span>{leftPoint}</span>점 입니다!!!
+        🏃‍♀️<span>{UserInfo.nextLevel}</span>를 위해 남은 점수는
+        <span>{UserInfo.scoreLeft}</span>점 입니다!!!
       </LevelDetail>
-    </Wrap>
+    </React.Fragment>
   );
 };
 
-const Wrap = styled.div``;
 const Head = styled.p`
   font-size: 16px;
   font-weight: 900;

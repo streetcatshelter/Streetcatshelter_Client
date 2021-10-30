@@ -31,6 +31,7 @@ const UserInfo = (edit) => {
     dispatch(imgActions.setFile(imageFile));
     setFileUrl(imageUrl);
   };
+
   return (
     <React.Fragment>
       <Wrapper>
@@ -71,6 +72,11 @@ const UserInfo = (edit) => {
           {Village.length > 0 ? (
             <VillageWrap>
               {Village.map((village, key) => {
+                const DeleteVillage = () => {
+                  if (window.confirm("정말로 동네를 지우시겠습니까?")) {
+                    dispatch(deleteVillage(village));
+                  }
+                };
                 return (
                   <div
                     style={{ display: "flex", width: "90px", height: "20px" }}
@@ -81,7 +87,7 @@ const UserInfo = (edit) => {
                       width="18px"
                       height="18px"
                       style={{ cursor: "pointer" }}
-                      onClick={() => dispatch(deleteVillage(village))}
+                      onClick={DeleteVillage}
                     />
                   </div>
                 );

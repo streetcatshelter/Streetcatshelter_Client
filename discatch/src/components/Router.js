@@ -1,6 +1,6 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Auth from '../shared/auth';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Auth from "../shared/auth";
 
 /* == Pages */
 import {
@@ -27,10 +27,10 @@ import {
   LoginRedirectKakao,
   LoginRedirectNaver,
   LoginRedirectGoogle,
-} from '../pages';
+} from "../pages";
 
 // 배포 시 해당 라우트 삭제 예정
-import test from '../pages/test';
+import test from "../pages/test";
 
 // * == ( Router ) -------------------- * //
 const Router = () => {
@@ -152,7 +152,7 @@ const Router = () => {
       <Route path="/chat" component={Auth(Chat, true)} exact />
 
       <Route path="/test" component={Auth(test, true)} exact />
-      <Route path={'*'} exact component={NotFound} />
+      <Route path={"*"} exact component={NotFound} />
     </Switch>
   );
 };

@@ -12,14 +12,27 @@ const _getRooms =
     }
   };
 
-const _createRoom =
-  (ChatUser) =>
+const _getRoom =
+  (roomId) =>
   async (dispatch, getState, { history }) => {
-    console.log(ChatUser);
     try {
-      const { data } = await chatApi.createRoom(ChatUser);
+      const { data } = await chatApi.getRoom(roomId);
       console.log(data);
-      // dispatch(setRooms(data));
+      dispatch(setRoom(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+const _createRoom =
+  (name) =>
+  async (dispatch, getState, { history }) => {
+    console.log(name);
+    try {
+      const { data } = await chatApi.createRoom(name);
+      console.log(data);
+      dispatch(setRoom(data));
+      history.push(`/chat/room/${data.roomId}`);
     } catch (e) {
       console.log(e);
     }
@@ -42,9 +55,12 @@ const chat = createSlice({
     setRooms: (state, action) => {
       state.roomlist = action.payload;
     },
+    setRoom: (state, action) => {
+      state.room = action.payload;
+    },
   },
 });
 
-export const chatActions = { _getRooms, _createRoom };
-export const { setMessage, setRooms } = chat.actions;
+export const chatActions = { _getRooms, _createRoom, _getRoom };
+export const { setMessage, setRooms, setRoom } = chat.actions;
 export default chat;

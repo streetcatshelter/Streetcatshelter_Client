@@ -23,7 +23,8 @@ import {
   Community,
   Login,
   Map,
-  Chat,
+  ChatMainPage,
+  ChatRoomPage,
   LoginRedirectKakao,
   LoginRedirectNaver,
   LoginRedirectGoogle,
@@ -149,7 +150,12 @@ const Router = () => {
       <Route path="/map" component={Auth(Map, true)} exact />
 
       {/* Chat */}
-      <Route path="/chat" component={Auth(Chat, true)} exact />
+      <Route path="/chat" component={Auth(ChatMainPage, true)} exact />
+      <Route
+        path="/chat/room/:roomId"
+        component={Auth(ChatRoomPage, true)}
+        exact
+      />
 
       <Route path="/test" component={Auth(test, true)} exact />
       <Route path={"*"} exact component={NotFound} />

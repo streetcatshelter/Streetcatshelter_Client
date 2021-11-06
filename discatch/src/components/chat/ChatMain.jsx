@@ -1,95 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Template, ChatBoxs } from "../../components";
+import { chatActions } from "../../redux/modules/chat";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
-import { ChatEx } from "..";
-const ChatMain = () => {
-  const [openModal, setOpenModal] = useState(false);
 
+const ChatMain = () => {
+  const dispatch = useDispatch();
+  const Rooms = useSelector((state) => state.chat.roomlist);
+  console.log(Rooms);
+
+  useEffect(() => {
+    dispatch(chatActions._getRooms());
+  }, []);
   return (
     <React.Fragment>
-      {openModal ? (
-        <ChatEx />
-      ) : (
-        <Wrapper>
-          <Header>채팅</Header>
+      <Wrapper>
+        <Header>채팅</Header>
 
-          <ChatRoom
-            // key={idx}
-            onClick={() => {
-              setOpenModal(true);
-            }}
-          >
-            <InnerBox>
-              <ProfileImg src="http://placeimg.com/100/100/any" alt="any" />
-              <ChatInfo>
-                <InfoInner>
-                  <p>열매엄마</p>
-                  <p>2021-11-01 22:37</p>
-                </InfoInner>
-                <ChatMsg>
-                  오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
-                  가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
-                  언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에
-                  밥주러 언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘
-                  한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
-                  가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
-                  언제 가시나요?오늘 한강에 밥주러 언제 가시나요?
-                </ChatMsg>
-              </ChatInfo>
-            </InnerBox>
-          </ChatRoom>
-          <ChatRoom
-            // key={idx}
-            onClick={() => {
-              history.push(``);
-            }}
-          >
-            <InnerBox>
-              <ProfileImg src="http://placeimg.com/100/100/any" alt="any" />
-              <ChatInfo>
-                <InfoInner>
-                  <p>열매엄마</p>
-                  <p>2021-11-01 22:37</p>{" "}
-                </InfoInner>
-                <ChatMsg>
-                  오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
-                  가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
-                  언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에
-                  밥주러 언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘
-                  한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
-                  가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
-                  언제 가시나요?오늘 한강에 밥주러 언제 가시나요?
-                </ChatMsg>
-              </ChatInfo>
-            </InnerBox>
-          </ChatRoom>
-          <ChatRoom
-            // key={idx}
-            onClick={() => {
-              history.push(``);
-            }}
-          >
-            <InnerBox>
-              <ProfileImg src="http://placeimg.com/100/100/any" alt="any" />
-              <ChatInfo>
-                <InfoInner>
-                  <p>열매엄마</p>
-                  <p>2021-11-01 22:37</p>{" "}
-                </InfoInner>
-                <ChatMsg>
-                  오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
-                  가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
-                  언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에
-                  밥주러 언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘
-                  한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
-                  가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
-                  언제 가시나요?오늘 한강에 밥주러 언제 가시나요?
-                </ChatMsg>
-              </ChatInfo>
-            </InnerBox>
-          </ChatRoom>
-        </Wrapper>
-      )}
+        {Rooms.map((room, idx) => {
+          return (
+            <ChatRoom
+              key={idx}
+              onClick={() => {
+                history.push(`/chat/room/${room.roomId}`);
+              }}
+            >
+              <InnerBox>
+                <ProfileImg src="http://placeimg.com/100/100/any" alt="any" />
+                <ChatInfo>
+                  <InfoInner>
+                    <p>{room.name}</p>
+                    <p>2021-11-01 22:37</p>
+                  </InfoInner>
+                  <ChatMsg>
+                    오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
+                    가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
+                    언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에
+                    밥주러 언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘
+                    한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
+                    가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
+                    언제 가시나요?오늘 한강에 밥주러 언제 가시나요?
+                  </ChatMsg>
+                </ChatInfo>
+              </InnerBox>
+            </ChatRoom>
+          );
+        })}
+      </Wrapper>
     </React.Fragment>
   );
 };

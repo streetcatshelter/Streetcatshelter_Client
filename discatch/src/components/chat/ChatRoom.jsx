@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import { chatActions } from "../../redux/modules/chat";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatEx } from "..";
-const ChatRoom = () => {
+const ChatRoom = (props) => {
   const dispatch = useDispatch();
-  const Rooms = useSelector((state) => state.chat.roomlist);
-  console.log(Rooms);
+  const RoomDetail = useSelector((state) => state.chat.room);
+  console.log(RoomDetail);
+  const roomId = props.roomId;
 
   useEffect(() => {
-    dispatch(chatActions._getRooms());
+    dispatch(chatActions._getRoom(roomId));
   }, []);
-
   return (
     <div>
+      채팅방입니다!
       <ChatEx />
     </div>
   );

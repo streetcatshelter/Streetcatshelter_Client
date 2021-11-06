@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import * as StompJs from "@stomp/stompjs";
 import * as SockJS from "sockjs-client";
 
-const ROOM_SEQ = 1;
-
 const ChatEx = () => {
+  const ROOM_SEQ = 1;
   const token = localStorage.getItem("token");
   const client = useRef({});
   const [chatMessages, setChatMessages] = useState([]);

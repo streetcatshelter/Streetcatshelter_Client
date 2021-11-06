@@ -27,6 +27,11 @@ export const userApi = {
   getNaver: (authorization_code) =>
     instance.get(`/user/naver/callback?code=${authorization_code}`),
 };
+
+export const chatApi = {
+  getRooms: () => instance.get(`/chat/rooms`),
+  createRoom: (otherUser) => instance.post("/chat/room", otherUser),
+};
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),
   getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),

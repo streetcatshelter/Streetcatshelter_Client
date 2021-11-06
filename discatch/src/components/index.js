@@ -56,6 +56,8 @@ import ChatBoxs from "./chat/ChatBoxs";
 import ChatWrite from "./chat/ChatWrite";
 import ChatTest from "./chat/ChatTest";
 import ChatMain from "./chat/ChatMain";
+import ChatEx from "./chat/ChatEx";
+import ChatRoom from "./chat/ChatRoom";
 
 import GoogleLoginBtn from "./GoogleLoginBtn";
 
@@ -110,6 +112,8 @@ export {
   ChatWrite,
   ChatTest,
   ChatMain,
+  ChatEx,
+  ChatRoom,
   GoogleLoginBtn,
   Spinner,
 };

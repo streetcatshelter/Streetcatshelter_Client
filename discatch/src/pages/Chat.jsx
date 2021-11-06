@@ -1,10 +1,10 @@
 import React from "react";
-import { Template, ChatMain } from "../components";
+import { Template, ChatEx, ChatRoom } from "../components";
 
 const Chat = (props) => {
   return (
     <Template props={props} page="map">
-      <ChatMain />
+      <ChatRoom />
     </Template>
   );
 };

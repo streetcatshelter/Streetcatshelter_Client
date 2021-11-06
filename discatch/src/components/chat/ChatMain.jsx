@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
-import { ChatTest } from "..";
+import { ChatEx } from "..";
 const ChatMain = () => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <React.Fragment>
       {openModal ? (
-        <ChatTest />
+        <ChatEx />
       ) : (
         <Wrapper>
           <Header>채팅</Header>

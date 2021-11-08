@@ -12,13 +12,17 @@ import { Trash2 } from "react-feather";
 const CatCommentCard = ({ comment }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
+  const userInfo = localStorage.getItem("userInfo");
+  const userName = userInfo.split('"')[5];
   const [ProfileModal, setProfileModal] = useState(false);
   const deleteComment = () => {
     dispatch(__deleteComment(commentId));
   };
 
   const OpenProfile = () => {
-    setProfileModal(!ProfileModal);
+    if (userName !== comment.username) {
+      setProfileModal(!ProfileModal);
+    }
   };
 
   const MakeChat = () => {

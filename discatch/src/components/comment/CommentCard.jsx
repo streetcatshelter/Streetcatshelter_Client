@@ -30,7 +30,9 @@ const CommentCard = ({ comment }) => {
   const [ProfileModal, setProfileModal] = useState(false);
 
   const OpenProfile = () => {
-    setProfileModal(!ProfileModal);
+    if (userName !== comment.username) {
+      setProfileModal(!ProfileModal);
+    }
   };
 
   const MakeChat = () => {

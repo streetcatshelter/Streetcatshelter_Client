@@ -45,7 +45,9 @@ const CommunityPostDetail = (props) => {
   const [ProfileModal, setProfileModal] = useState(false);
 
   const OpenProfile = () => {
-    setProfileModal(!ProfileModal);
+    if (userName !== username) {
+      setProfileModal(!ProfileModal);
+    }
   };
 
   const MakeChat = () => {

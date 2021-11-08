@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configureStore';
+
 
 // COMPONENTS
 import { Template, CommentList, EditModalSlide } from "../components";
@@ -11,8 +12,12 @@ import styled, { css } from "styled-components";
 // ELEMENTS
 import { Grid, Text, Image } from "../elements/index";
 
+// ICON
+import Avatar from '@material-ui/core/Avatar';
+
 // REDUX
 import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
+import { chatActions } from "../redux/modules/chat";
 
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
@@ -36,6 +41,16 @@ const CommunityPostDetail = (props) => {
   };
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo.split('"')[5];
+
+  const [ProfileModal, setProfileModal] = useState(false);
+
+  const OpenProfile = () => {
+    setProfileModal(!ProfileModal);
+  };
+
+  const MakeChat = () => {
+    dispatch(chatActions._createRoom(username));
+  };
 
   let name;
   if (nickname === '') {
@@ -77,19 +92,14 @@ const CommunityPostDetail = (props) => {
             `;
           }}
         >
-          <Grid>
-            <Image
-              width="30px"
-              height="30px"
-              src={profileImageUrl}
-              addstyle={() => {
-                return css`
-                  border-radius: 30px;
-                  margin: 3vw 2vw 3vw 6vw;
-                `;
-              }}
-            />
-          </Grid>
+          <Avatar 
+            src={profileImageUrl} 
+            style={{width:'30px', 
+                    height:'30px', 
+                    borderRadius:'30px',
+                    margin:'3vw 2vw 3vw 6vw',
+                    }}
+          />
           <Grid
             margin="10px 220px 0 0"
             addstyle={() => {
@@ -99,7 +109,7 @@ const CommunityPostDetail = (props) => {
             }}
           >
             <Grid>
-              <Text fontWeight="bold">
+              <Text fontWeight="bold" onClick={OpenProfile}>
                 {name}
               </Text>
               <Text size="12px">
@@ -265,6 +275,14 @@ const CommunityPostDetail = (props) => {
               </Grid>
         </Grid>
       </Grid>
+      <EditModalSlide
+        FirstBtn="프로필보기"
+        SecondBtn="채팅하기"
+        Profile="profile"
+        openModal={ProfileModal}
+        FirstClick={() => {}}
+        SecondClick={MakeChat}
+      />
     </Template>
   );
 };

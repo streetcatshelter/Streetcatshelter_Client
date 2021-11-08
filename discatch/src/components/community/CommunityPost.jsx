@@ -9,6 +9,7 @@ import styled, { css } from 'styled-components';
 // ICON
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { MessageCircle, Eye } from "react-feather";
+import Avatar from '@material-ui/core/Avatar';
 
 // REDUX
 import { history } from "../../redux/configureStore";
@@ -47,15 +48,12 @@ const CommunityPost = ({community}) => {
               display: flex;
               `;
             }}>
-              <Image 
-                width={'25px'} 
-                height={'25px'}
-                src={community.profileImageUrl}
-                addstyle={() => {
-                  return css`
-                  border-radius:25px;
-                  `;
-                }}/>
+              <Avatar 
+              src={community.profileImageUrl} 
+              style={{width:'25px', 
+                      height:'25px', 
+                      borderRadius:'25px',
+                      }}/>
             <Text width="100px" margin="4px" fontWeight="bold">
             {name}
             </Text>

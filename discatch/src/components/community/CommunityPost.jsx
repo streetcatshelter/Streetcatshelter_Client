@@ -54,10 +54,21 @@ const CommunityPost = ({community}) => {
                       height:'25px', 
                       borderRadius:'25px',
                       }}/>
-            <Text width="100px" margin="4px" fontWeight="bold">
+            <Text width="100%" margin="4px" fontWeight="bold">
             {name}
             </Text>
-            <Text size="10px" margin="0 10px 0 32vw" fontWeight="bold">
+            <Text 
+              width="100%" 
+              size="10px" 
+              margin="0 0 0 15vw" 
+              fontWeight="bold"
+              addstyle={() => {
+                return css`
+                @media screen and (max-width: 375px) {
+                  margin: 0 0 0 28vw;
+                }
+                `;
+              }}>
             {community.createdAt[0]}.{community.createdAt[1]}.{community.createdAt[2]} {community.createdAt[3]}시 {community.createdAt[4]}분
             </Text>
             </Grid>

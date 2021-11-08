@@ -63,6 +63,7 @@ const _loginNaver =
 const _loginGoogle =
   (authorization_code) =>
   async (dispatch, getState, { history }) => {
+    console.log(authorization_code);
     try {
       const { data } = await userApi.getGoogle(authorization_code);
 
@@ -72,7 +73,7 @@ const _loginGoogle =
         picture: data.profileImage,
       };
 
-      dispatch(loginNaver(userInfo));
+      dispatch(loginGoogle(userInfo));
       setToken(data.token);
       const str_userInfo = JSON.stringify(userInfo);
       localStorage.setItem("userInfo", str_userInfo);
@@ -127,6 +128,16 @@ const user = createSlice({
       };
     },
     loginNaver: (state, action) => {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoggedIn: true,
+        userId: action.payload.userId,
+        name: action.payload.name,
+        picture: action.payload.picture,
+      };
+    },
+    loginGoogle: (state, action) => {
       console.log(action.payload);
       return {
         ...state,

@@ -61,21 +61,7 @@ const Login = (props) => {
                 />
                 <p style={{ color: "#ffffff" }}>네이버로 로그인하기</p>
               </LoginBtn>
-              {/* <LoginBtn
-                background="#FFFFFF"
-                onClick={() => {
-                  dispatch(userActions._loginGoogle());
-                }}
-              >
-                <Img
-                  src={Google}
-                  alt={Google}
-                  width="28px"
-                  height="28px"
-                  margin="auto 11px"
-                />
-                <p>구글로 로그인하기 </p>
-              </LoginBtn> */}
+
               <GoogleLoginBtn />
             </LoginWrap>
           </Body>

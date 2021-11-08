@@ -96,17 +96,15 @@ const CommunityDetail = (props) => {
             </Text>
           </Grid>
           <Grid 
-            margin="-85vh 0 0 0"
+            margin="-95vh 0 0 0"
             addstyle={() => {
               return css`
-                @media screen and (min-height: 1024px) {
-                  margin: -96vh 0 0 0;
-                }
-                @media screen and (min-height: 812px) {
-                  margin: -93vh 0 0 0;
+                @media screen and (max-width: 375px) {
+                  margin: -85vh 0 0 0;
                 }
               `;
-            }}>
+            }}
+            >
 
           {communityList?.length ? (
             communityList.map((community, idx) => {
@@ -143,14 +141,13 @@ const CommunityDetail = (props) => {
 const CommunityDetailStyle = styled.div`
   width: 100%;
   overflow-x: hidden;
-  height: 92vh;
-  margin: -10vh 0 0;
-  @media screen and (min-height: 1024px) {
-    height: 102vh;
+  height: 100vh;
+  margin: -5vh 0 0;
+  @media screen and (max-width: 375px) {
+    height: 92vh;
+    margin: -10vh 0 0;
   }
-  @media screen and (min-height: 812px) {
-    height: 97vh;
-  }
+
 `;
 
 export default CommunityDetail;

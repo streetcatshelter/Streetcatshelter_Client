@@ -1,56 +1,79 @@
+// import React from "react";
+// import GoogleLogin from "react-google-login";
+// import { GOOGLE_API_KEY } from "../shared/oauthenv";
+// import Google from "../styles/images/icon-Google.png";
+// import styled from "styled-components";
+// import { useDispatch } from "react-redux";
+// import { userActions } from "../redux/modules/user";
+// export default function GoogleButton({ onGoogleLogin }) {
+//   const dispatch = useDispatch();
+//   const onSuccess = (response) => {
+//     const authorization_code = response.tokenId;
+//     dispatch(userActions._loginGoogle(authorization_code));
+//   };
+
+//   const onFailure = (error) => {
+//     console.log(error);
+//   };
+
+//   return (
+//     <div>
+//       <GoogleLogin
+//         clientId={GOOGLE_API_KEY}
+//         responseType={"id_token"}
+//         onSuccess={onSuccess}
+//         onFailure={onFailure}
+//         render={(renderProps) => (
+//           <LoginBtn
+//             background="#FFFFFF"
+//             onClick={renderProps.onClick}
+//             disabled={renderProps.disabled}
+//           >
+//             <Img
+//               src={Google}
+//               alt={Google}
+//               width="28px"
+//               height="28px"
+//               margin="auto 11px"
+//             />
+//             <p>구글로 로그인하기 </p>
+//           </LoginBtn>
+//         )}
+//       />
+//     </div>
+//   );
+// }
+
 import React from "react";
-import GoogleLogin from "react-google-login";
-import { GOOGLE_API_KEY } from "../shared/oauthenv";
-import Google from "../styles/images/icon-Google.png";
 import styled from "styled-components";
-export default function GoogleButton({ onSocial }) {
-  const onSuccess = async (response) => {
-    console.log(response);
-
-    const {
-      googleId,
-      profileObj: { email, name },
-    } = response;
-    // await
-    //  onSocial({
-    //     socialId : googleId,
-    //     socialType : 'google',
-    //     email,
-    //     nickname : name
-    // });
-  };
-
-  const onFailure = (error) => {
-    console.log(error);
-  };
-
+import Google from "../styles/images/icon-Google.png";
+import { history } from "../redux/configureStore";
+const GoogleLoginBtn = () => {
   return (
     <div>
-      <GoogleLogin
-        clientId={GOOGLE_API_KEY}
-        responseType={"id_token"}
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        render={(renderProps) => (
-          <LoginBtn
-            background="#FFFFFF"
-            onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
-          >
-            <Img
-              src={Google}
-              alt={Google}
-              width="28px"
-              height="28px"
-              margin="auto 11px"
-            />
-            <p>구글로 로그인하기 </p>
-          </LoginBtn>
-        )}
-      />
+      <LoginBtn
+        background="#FFFFFF"
+        onClick={() => {
+          window.open(
+            "https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email&response_type=code&client_id=942030155154-umcoqj12iejta6r6nulph49tnt0o9fop.apps.googleusercontent.com&redirect_uri=http://localhost:3000/user/google/callback",
+            "_blank"
+          );
+        }}
+      >
+        <Img
+          src={Google}
+          alt={Google}
+          width="28px"
+          height="28px"
+          margin="auto 11px"
+        />
+        <p>구글로 로그인하기 </p>
+      </LoginBtn>
     </div>
   );
-}
+};
+
+export default GoogleLoginBtn;
 
 const LoginBtn = styled.div`
   display: flex;

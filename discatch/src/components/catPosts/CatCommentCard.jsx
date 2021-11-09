@@ -50,7 +50,11 @@ const CatCommentCard = ({ comment }) => {
         </Left>
 
         <Right>
-          <Trash2 size="14px" color="red" onClick={deleteComment} />
+          {userName !== comment.username ? (
+            <Trash2 size="14px" color="red" onClick={deleteComment} />
+          ) : (
+            ""
+          )}
         </Right>
       </Header>
       <Content>{comment.contents}</Content>

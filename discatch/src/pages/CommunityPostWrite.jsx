@@ -25,7 +25,7 @@ import { Camera } from "react-feather";
 const CommunityPostWrite = (props) => {
   const path = useLocation();
   const pathName = path.pathname.split('/');
-  const backPath = `/${pathName[1]}/${pathName[2]}/${pathName[3]}`
+  const backPath = `/${pathName[1]}/${pathName[2]}/${pathName[3]}`;
   const location = pathName[2]
   const preview = useSelector((state) => state.image.preview ? state.image.preview : Array())
   const dispatch = useDispatch();

@@ -36,6 +36,7 @@ const CommunityPostDetail = (props) => {
     profileImageUrl: state.community.list.data?.profileImageUrl,
     createdAt: state.community.list.data?.createdAt ? state.community.list.data?.createdAt : Array(1,3,4),
   }));
+
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
@@ -55,30 +56,39 @@ const CommunityPostDetail = (props) => {
   };
 
   let name;
-  if (nickname === '') {
+  if (nickname === '' || nickname === null) {
     name = username;
   } else {
     name = nickname;
+  }
+
+  let locationName = '';
+  if (location === 'undefined') {
+    locationName = '';
+  } else if (location !== 'undefined') {
+    locationName = location;
   }
   return (
     <Template props={props}>
       <Grid
         bgColor="bgColor"
-        margin="-10vh 0 0 0"
         addstyle={() => {
           return css`
             position: relative;
-            top: 80px;
+            top: 20px;
           `;
         }}
       >
         <Grid
-          width="350px"
+          width="320px"
           addstyle={() => {
             return css`
-              margin: 0 0 0 4vw;
+              margin: 0 0 0 50px;
               font-size: 18px;
               font-weight: bold;
+              @media screen and (max-width: 375px) {
+                margin: 0 0 0 30px;
+              }
             `;
           }}
         >
@@ -91,6 +101,11 @@ const CommunityPostDetail = (props) => {
               display: flex;
               position: relative;
               top: 10px;
+              @media screen and (max-width: 375px) {
+                width: 250px;
+                margin: -30px 0 0 -30px;
+                top: 25px;
+              }
             `;
           }}
         >
@@ -99,11 +114,11 @@ const CommunityPostDetail = (props) => {
             style={{width:'30px', 
                     height:'30px', 
                     borderRadius:'30px',
-                    margin:'3vw 2vw 3vw 6vw',
-                    }}
+                    margin:'30px 10px 30px 60px',
+            }}
           />
           <Grid
-            margin="10px 220px 0 0"
+            margin="30px 0 0 0"
             addstyle={() => {
               return css`
                 display: flex;
@@ -111,11 +126,18 @@ const CommunityPostDetail = (props) => {
             }}
           >
             <Grid>
-              <Text fontWeight="bold" onClick={OpenProfile}>
+              <Text 
+                fontWeight="bold" 
+                onClick={OpenProfile}
+                addstyle={() => {
+                  return css`
+                    cursor: pointer;
+                  `;
+                }}>
                 {name}
               </Text>
               <Text size="12px">
-                {location}
+                {locationName}
               </Text>
             </Grid>
             <Grid
@@ -136,7 +158,10 @@ const CommunityPostDetail = (props) => {
                 addstyle={() => {
                   return css`
                     position: relative;
-                    left: -30px;
+                    left: -60px;
+                    @media screen and (max-width: 375px) {
+                      left: 40px;
+                    }
                   `;
                 }}
               >
@@ -147,8 +172,11 @@ const CommunityPostDetail = (props) => {
                 addstyle={() => {
                   return css`
                     position: relative;
-                    left: -40px;
+                    left: -70px;
                     top: -11px;
+                    @media screen and (max-width: 375px) {
+                      left: 20px;
+                    }
                   `;
                 }}
               >
@@ -290,8 +318,9 @@ const CommunityPostDetail = (props) => {
 };
 
 const CommunityPostDetailStyle = styled.div`
-  width: 320px;
-  margin: 10px auto;
+  width: 350px;
+  margin: auto;
+  position: relative;
 `;
 
 export default CommunityPostDetail;

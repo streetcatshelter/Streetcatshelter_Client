@@ -64,11 +64,18 @@ const CommentCard = ({ comment }) => {
             <p>{username}</p>
         </Profile>
         <Text 
-          width="80vw" 
+          width="300px" 
           margin="0 0 0 10px" 
           padding="4px"
-          style={{borderRadius:'10px'}}>{comment.contents}</Text>
-        <Text margin="0 0 0 10px" size="8px" width="30vw" style={{lineHeight:'30px'}}>
+          style={{borderRadius:'10px'}}
+          
+          >{comment.contents}</Text>
+        <Text 
+          margin="0 0 0 10px" 
+          size="8px" 
+          width="30vw" 
+          style={{lineHeight:'30px'}}
+        >
           {comment.createdAt[0]}.{comment.createdAt[1]}.{comment.createdAt[2]} {comment.createdAt[3]}시 {comment.createdAt[4]}분
         </Text>
         </Grid>

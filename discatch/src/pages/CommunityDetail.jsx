@@ -83,14 +83,7 @@ const CommunityDetail = (props) => {
           >
             <Text 
               size="18px" 
-              margin="0 0 0 3vw"
-              addstyle={() => {
-                return css`
-                  @media screen and (min-height: 1024px) {
-                    margin: 12% 0 0 8%;
-                  }
-                `;
-                }}
+              margin="0 0 0 10px"
               >
               {category}
             </Text>
@@ -147,7 +140,6 @@ const CommunityDetailStyle = styled.div`
     height: 92vh;
     margin: -10vh 0 0;
   }
-
 `;
 
 export default CommunityDetail;

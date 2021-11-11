@@ -1,7 +1,7 @@
 import React from 'react';
 
 // ELEMENTS
-import { Grid, Text, Image } from '../../elements/index';
+import { Grid, Text } from '../../elements/index';
 
 // STYLE
 import styled, { css } from 'styled-components';
@@ -23,7 +23,7 @@ const CommunityPost = ({community}) => {
   const communityId = community.communityId
   const category = path.pathname.split('/')[3];
   let name;
-  if (community.nickname === "") {
+  if (community.nickname === "" || community.nickname === null) {
     name = community.username;
   } else {
     name = community.nickname;
@@ -60,12 +60,12 @@ const CommunityPost = ({community}) => {
             <Text 
               width="100%" 
               size="10px" 
-              margin="0 0 0 15vw" 
+              margin="0 0 0 150px" 
               fontWeight="bold"
               addstyle={() => {
                 return css`
                 @media screen and (max-width: 375px) {
-                  margin: 0 0 0 28vw;
+                  margin: 0 0 0 100px;
                 }
                 `;
               }}>

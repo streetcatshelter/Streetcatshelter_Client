@@ -152,7 +152,7 @@ const Router = () => {
       {/* Chat */}
       <Route path="/chat" component={Auth(ChatMainPage, true)} exact />
       <Route
-        path="/chat/room/:roomId"
+        path="/api/chat/enter/:roomId"
         component={Auth(ChatRoomPage, true)}
         exact
       />

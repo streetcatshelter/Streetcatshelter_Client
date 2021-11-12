@@ -14,7 +14,7 @@ const ChatRoom = (props) => {
   return (
     <div>
       채팅방입니다!
-      <ChatEx />
+      <ChatEx roomId={roomId} />
     </div>
   );
 };

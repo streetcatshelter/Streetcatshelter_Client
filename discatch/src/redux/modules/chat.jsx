@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { chatApi } from "../../shared/axios";
+
 const _getRooms =
-  (year, month) =>
+  () =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await chatApi.getRooms(year, month);
+      const { data } = await chatApi.getRooms();
       console.log(data);
       dispatch(setRooms(data));
     } catch (e) {
@@ -25,14 +26,26 @@ const _getRoom =
   };
 
 const _createRoom =
-  (name) =>
+  (chatuser) =>
   async (dispatch, getState, { history }) => {
-    console.log(name);
+    console.log(chatuser);
     try {
-      const { data } = await chatApi.createRoom(name);
+      const { data } = await chatApi.createRoom(chatuser);
       console.log(data);
       dispatch(setRoom(data));
       history.push(`/chat/room/${data.roomId}`);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+const _getAllMessage =
+  (roomId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await chatApi.getAllMessage(roomId);
+      console.log(data);
+      // dispatch(setRoom(data));
     } catch (e) {
       console.log(e);
     }
@@ -61,6 +74,6 @@ const chat = createSlice({
   },
 });
 
-export const chatActions = { _getRooms, _createRoom, _getRoom };
+export const chatActions = { _getRooms, _createRoom, _getRoom, _getAllMessage };
 export const { setMessage, setRooms, setRoom } = chat.actions;
 export default chat;

@@ -1,31 +1,32 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 // ELEMENTS
-import { Grid, Button, Text } from '../../elements/index';
-import { flexBox } from '../../shared/style';
+import { Grid, Button, Text } from "../../elements/index";
+import { flexBox } from "../../shared/style";
 
 // COMPONENTS
 import EditModalSlide from "../EditModalSlide";
 
 // STYLE
-import { css } from 'styled-components';
+import { css } from "styled-components";
 import styled from "styled-components";
 
 // ICON
-import { Trash2 } from 'react-feather';
-import Avatar from '@material-ui/core/Avatar';
+import { Trash2 } from "react-feather";
+import Avatar from "@material-ui/core/Avatar";
 
 // REDUX
-import { deleteCommunityCommentDB } from '../../redux/modules/community';
+import { deleteCommunityCommentDB } from "../../redux/modules/community";
 import { chatActions } from "../../redux/modules/chat";
 
 const CommentCard = ({ comment }) => {
-  const commentId = comment.commentId
+  const commentId = comment.commentId;
   const dispatch = useDispatch();
   const username = comment.nickname ? comment.nickname : comment.username;
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo.split('"')[5];
+  const UserNickName = useSelector((state) => state.mypage.userInfo.nickname);
 
   const [ProfileModal, setProfileModal] = useState(false);
 
@@ -36,7 +37,8 @@ const CommentCard = ({ comment }) => {
   };
 
   const MakeChat = () => {
-    dispatch(chatActions._createRoom(comment.username));
+    const chatuser = { chatUser: [comment.nickname, UserNickName] };
+    dispatch(chatActions._createRoom(chatuser));
   };
 
   const deleteBtn = () => {
@@ -48,29 +50,37 @@ const CommentCard = ({ comment }) => {
         alignItems="center"
         addstyle={() => {
           return css`
-            ${flexBox('space-evenly')};
+            ${flexBox("space-evenly")};
             margin: 6% 0 0 0;
           `;
         }}
       >
         <Grid>
-        <Profile onClick={OpenProfile}>
-            <Avatar 
-              style={{width:'30px', 
-                      height:'30px', 
-                      margin:'3px'}} 
-              src={comment.profileImageUrl} 
-              alt={'profileImage'}/>
+          <Profile onClick={OpenProfile}>
+            <Avatar
+              style={{ width: "30px", height: "30px", margin: "3px" }}
+              src={comment.profileImageUrl}
+              alt={"profileImage"}
+            />
             <p>{username}</p>
-        </Profile>
-        <Text 
-          width="80vw" 
-          margin="0 0 0 10px" 
-          padding="4px"
-          style={{borderRadius:'10px'}}>{comment.contents}</Text>
-        <Text margin="0 0 0 10px" size="8px" width="30vw" style={{lineHeight:'30px'}}>
-          {comment.createdAt[0]}.{comment.createdAt[1]}.{comment.createdAt[2]} {comment.createdAt[3]}시 {comment.createdAt[4]}분
-        </Text>
+          </Profile>
+          <Text
+            width="80vw"
+            margin="0 0 0 10px"
+            padding="4px"
+            style={{ borderRadius: "10px" }}
+          >
+            {comment.contents}
+          </Text>
+          <Text
+            margin="0 0 0 10px"
+            size="8px"
+            width="30vw"
+            style={{ lineHeight: "30px" }}
+          >
+            {comment.createdAt[0]}.{comment.createdAt[1]}.{comment.createdAt[2]}{" "}
+            {comment.createdAt[3]}시 {comment.createdAt[4]}분
+          </Text>
         </Grid>
 
         {userName === comment.username && (
@@ -92,7 +102,7 @@ const CommentCard = ({ comment }) => {
 };
 
 const Profile = styled.div`
-  width:30vw;
+  width: 30vw;
   display: flex;
   cursor: pointer;
   p {

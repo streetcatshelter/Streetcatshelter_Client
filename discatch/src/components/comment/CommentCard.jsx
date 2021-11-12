@@ -65,7 +65,7 @@ const CommentCard = ({ comment }) => {
             <p>{username}</p>
           </Profile>
           <Text
-            width="80vw"
+            width="300px"
             margin="0 0 0 10px"
             padding="4px"
             style={{ borderRadius: "10px" }}

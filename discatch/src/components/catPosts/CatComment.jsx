@@ -29,7 +29,6 @@ const CatComment = (props) => {
 
   const addComment = () => {
     dispatch(__createCatComment(catId, comment));
-    window.location.reload();
   };
 
   useEffect(() => {

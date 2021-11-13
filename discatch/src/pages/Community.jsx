@@ -12,7 +12,7 @@ import { Grid } from "../elements/index";
 import { history } from "../redux/configureStore";
 
 const Community = (props) => {
-  const village = useSelector((state) => state.map.keywordList[0]);
+  const village = useSelector((state) => state.mypage.userVillage[0]);
   const requestLocationInfo = () => {
     history.push('/userinfoedit');
     alert('동네 정보를 입력해주세요!')

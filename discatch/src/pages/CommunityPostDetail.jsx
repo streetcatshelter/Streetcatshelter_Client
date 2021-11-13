@@ -22,9 +22,7 @@ import { chatActions } from "../redux/modules/chat";
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
-  React.useEffect(() => {
-    dispatch(getOneCommunityDB(communityId));
-  }, []);
+  
   const { category, contents, imageList, location, title, username, createdAt, nickname, profileImageUrl } = useSelector((state) => ({
     category: state.community.list.data?.category,
     contents: state.community.list.data?.contents,
@@ -68,6 +66,10 @@ const CommunityPostDetail = (props) => {
   } else if (location !== 'undefined') {
     locationName = location;
   }
+
+  React.useEffect(() => {
+    dispatch(getOneCommunityDB(communityId));
+  }, []);
   return (
     <Template props={props}>
       <Grid

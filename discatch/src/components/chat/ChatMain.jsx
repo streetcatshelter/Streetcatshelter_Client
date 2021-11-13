@@ -13,6 +13,7 @@ const ChatMain = () => {
   useEffect(() => {
     dispatch(chatActions._getRooms());
   }, []);
+
   return (
     <React.Fragment>
       <Wrapper>
@@ -23,15 +24,18 @@ const ChatMain = () => {
             <ChatRoom
               key={idx}
               onClick={() => {
-                history.push(`/chat/room/${room.roomId}`);
+                history.push(`api/chat/enter/${room.id}`);
               }}
             >
               <InnerBox>
-                <ProfileImg src="http://placeimg.com/100/100/any" alt="any" />
+                <ProfileImg
+                  src={room.user[0].profileImageUrl}
+                  alt={room.user[0].profileImageUrl}
+                />
                 <ChatInfo>
                   <InfoInner>
-                    <p>{room.name}</p>
-                    <p>2021-11-01 22:37</p>
+                    <p>{room.user[0].nickname}</p>
+                    <p>{room.user[0].modifiedAt}</p>
                   </InfoInner>
                   <ChatMsg>
                     오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제

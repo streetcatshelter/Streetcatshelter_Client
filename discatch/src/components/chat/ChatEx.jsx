@@ -1,14 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as StompJs from "@stomp/stompjs";
 import * as SockJS from "sockjs-client";
-
-const ChatEx = () => {
+import { useDispatch } from "react-redux";
+import { chatActions } from "../../redux/modules/chat";
+const ChatEx = (roomId) => {
+  const dispatch = useDispatch();
   const ROOM_SEQ = 1;
   const token = localStorage.getItem("token");
   const client = useRef({});
   const [chatMessages, setChatMessages] = useState([]);
-  console.log(chatMessages);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    dispatch(chatActions._getAllMessage(roomId));
+  }, []);
+
   useEffect(() => {
     connect();
 

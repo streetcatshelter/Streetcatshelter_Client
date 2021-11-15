@@ -27,7 +27,7 @@ const CommentCard = ({ comment }) => {
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo.split('"')[5];
   const UserNickName = useSelector((state) => state.mypage.userInfo.nickname);
-
+  console.log(comment.nickname);
   const [ProfileModal, setProfileModal] = useState(false);
 
   const OpenProfile = () => {
@@ -38,6 +38,7 @@ const CommentCard = ({ comment }) => {
 
   const MakeChat = () => {
     const chatuser = { chatUser: [comment.nickname, UserNickName] };
+
     dispatch(chatActions._createRoom(chatuser));
   };
 

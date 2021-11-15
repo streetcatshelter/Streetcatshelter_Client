@@ -64,15 +64,18 @@ body {
 #chat-box {
   height: 400px;
   padding: 12px 10px;
-  overflow: scroll;
+  overflow: auto;
+}
+
+.bubble-box {
+  display: flex;
 }
 
 .bubble {
   margin: 5px 0;
-  display: inline-block;
+  display: flex;
   max-width: 300px;
   font-size: 14px;
-  position: relative;
 }
 
 .friend-bubble {
@@ -93,6 +96,11 @@ body {
   color: #000000;
 }
 
+.date {
+  font-size: 10px;
+  margin: 0px;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -101,7 +109,7 @@ body {
   height: 80px;
   padding: 10px;
   position: absolute;
-  bottom: 0;
+  bottom: 5;
 }
 
 #input {

@@ -54,14 +54,14 @@ const Home = (props) => {
         <></>
       )}
 
-      <Button
+      {/* <Button
         is_float="is_float"
         clickEvent={() => {
           history.push(`/catinfowrite/${location}`);
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />
-      </Button>
+      </Button> */}
     </Template>
   );
 };

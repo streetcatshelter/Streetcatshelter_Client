@@ -13,13 +13,13 @@ const _getRooms =
     }
   };
 
-const _getRoom =
+const _getRoomInfo =
   (roomId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await chatApi.getRoom(roomId);
+      const { data } = await chatApi.getRoomInfo(roomId);
       console.log(data);
-      dispatch(setRoom(data));
+      dispatch(setChatInfo(data));
     } catch (e) {
       console.log(e);
     }
@@ -31,8 +31,6 @@ const _createRoom =
     console.log(chatuser);
     try {
       const { data } = await chatApi.createRoom(chatuser);
-      console.log(data);
-      dispatch(setRoom(data));
       history.push(`/chat/room/${data.roomId}`);
     } catch (e) {
       console.log(e);
@@ -42,6 +40,7 @@ const _createRoom =
 const _getAllMessage =
   (roomId) =>
   async (dispatch, getState, { history }) => {
+    console.log(roomId.roomId);
     try {
       const { data } = await chatApi.getAllMessage(roomId);
       console.log(data);
@@ -52,8 +51,8 @@ const _getAllMessage =
   };
 
 const initialState = {
-  chatlist: [],
   roomlist: [],
+  chatinfo: [],
 };
 
 // 리듀서
@@ -61,19 +60,20 @@ const chat = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    // setMessage: (state, action) => {
-    //   const Message = action.payload;
-    //   state.chatlist.push(Message);
-    // },
     setRooms: (state, action) => {
       state.roomlist = action.payload;
     },
-    setRoom: (state, action) => {
-      state.room = action.payload;
+    setChatInfo: (state, action) => {
+      state.chatinfo = action.payload;
     },
   },
 });
 
-export const chatActions = { _getRooms, _createRoom, _getRoom, _getAllMessage };
-export const { setMessage, setRooms, setRoom } = chat.actions;
+export const chatActions = {
+  _getRooms,
+  _createRoom,
+  _getRoomInfo,
+  _getAllMessage,
+};
+export const { setChatInfo, setRooms } = chat.actions;
 export default chat;

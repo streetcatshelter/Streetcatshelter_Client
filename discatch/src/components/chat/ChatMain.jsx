@@ -24,7 +24,7 @@ const ChatMain = () => {
             <ChatRoom
               key={idx}
               onClick={() => {
-                history.push(`api/chat/enter/${room.id}`);
+                history.push(`api/chat/enter/${room.roomId}`);
               }}
             >
               <InnerBox>

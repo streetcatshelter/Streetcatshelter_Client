@@ -62,8 +62,8 @@ const CatInfoWrite = (props) => {
     setCatTag(e.target.value);
   };
 
-  const latitude = 0;
-  const longitude = 0;
+  const latitude = props.history.location.state.latitude;
+  const longitude = props.history.location.state.longitude;
 
   const createBtn = () => {
     dispatch(

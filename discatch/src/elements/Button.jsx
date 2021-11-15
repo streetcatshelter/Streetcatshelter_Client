@@ -5,7 +5,7 @@ import styled from "styled-components";
 // STYLE
 import { borderBox } from "../shared/style";
 
-const Button = ({ is_float, children, clickEvent, ...props }) => {
+const Button = ({ is_float, children, clickEvent,...props }) => {
   if (is_float) {
     return (
       <React.Fragment>

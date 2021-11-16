@@ -1,8 +1,10 @@
+// LIBRARY
 import React from "react";
 
+// STYLE
 import styled from "styled-components";
 
-/* == components*/
+// COMPONENTS
 import { Header, Menu } from "./";
 
 const Template = (props) => {

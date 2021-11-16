@@ -23,7 +23,8 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const catList = useSelector((state) => state.cat.list);
   const location = useSelector((state) => state.map.keywordList[0]);
-  const userVillage = useSelector((state) => state.mypage.userVillage[0]);
+  const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
+  const userLocation = location ? location : userVillage;
 
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));
@@ -54,14 +55,14 @@ const Home = (props) => {
         <></>
       )}
 
-      {/* <Button
+      <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push(`/catinfowrite/${location}`);
+          history.push({pathname:`/map/${userLocation}`, state: { userLocation }});
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />
-      </Button> */}
+      </Button>
     </Template>
   );
 };

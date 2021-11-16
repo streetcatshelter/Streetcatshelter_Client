@@ -67,7 +67,7 @@ const Profile = () => {
             {UserInfo.locationList.map((location, idx) => {
               return (
                 <Text margin="0px 5px 0px 0px" size="12px">
-                  {location}
+                  {location.split('@')[0]}
                 </Text>
               );
             })}

@@ -27,7 +27,7 @@ const CommentCard = ({ comment }) => {
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo.split('"')[5];
   const UserNickName = useSelector((state) => state.mypage.userInfo.nickname);
-  console.log(comment.nickname);
+
   const [ProfileModal, setProfileModal] = useState(false);
 
   const OpenProfile = () => {

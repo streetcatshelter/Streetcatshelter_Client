@@ -12,31 +12,40 @@ import { Grid } from "../elements/index";
 import { history } from "../redux/configureStore";
 
 const Community = (props) => {
-  const village = useSelector((state) => state.mypage.userVillage[0]);
+  const village = useSelector((state) => state.map.keywordList[0]);
+  const userInfo = props.location.state.userLocation
+  let pathVillage;
+  if (village === undefined) {
+    pathVillage = userInfo;
+  } else {
+    pathVillage = village
+  }
+  console.log(userInfo);
+  console.log(village);
   const requestLocationInfo = () => {
     history.push('/userinfoedit');
     alert('동네 정보를 입력해주세요!')
   }
   return (
     <Template props={props}>
-      {village !== undefined ? (
+      {pathVillage !== undefined ? (
       <Grid margin="10vh 0 0 0">
           <CommunityCategoryCard
-            clickEvent={()=>history.push(`/community/${village}/catinfo`)}
+            clickEvent={()=>history.push(`/community/${pathVillage}/catinfo`)}
             width="60px"
             height="60px"
             title="고양이 정보글!"
             subtitle="고양이는 츄르를 좋아해요~"
           />
           <CommunityCategoryCard
-            clickEvent={()=>history.push(`/community/${village}/gathering`)}
+            clickEvent={()=>history.push(`/community/${pathVillage}/gathering`)}
             width="60px"
             height="60px"
             title="동네 모임"
             subtitle="동네 고양이님들에 대해 얘기 나눠 보아요~"
           />
           <CommunityCategoryCard
-            clickEvent={()=>history.push(`/community/${village}/sharing`)}
+            clickEvent={()=>history.push(`/community/${pathVillage}/sharing`)}
             width="60px"
             height="60px"
             title="고양이 용품 나눔"

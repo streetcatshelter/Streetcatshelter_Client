@@ -10,8 +10,6 @@ const _getUserInfo =
     try {
       dispatch(loading(true));
       const { data } = await myPageApi.getUserInfo();
-
-      console.log(data);
       dispatch(setUserInfo(data));
     } catch (e) {
       console.log(e);
@@ -34,7 +32,6 @@ const _getCalender =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await myPageApi.getCalendar(year, month);
-      console.log(data);
       dispatch(setCalendar(data));
     } catch (e) {
       console.log(e);
@@ -45,7 +42,6 @@ const _getCalenderDetail =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await myPageApi.getCalendarDetail(year, month, elm);
-      console.log(data);
       if (data.length === 0) {
         return;
       } else {
@@ -80,7 +76,6 @@ const _getNotice =
 const _getOneNotice =
   (id) =>
   async (dispatch, getState, { history }) => {
-    console.log(id);
     try {
       const { data } = await myPageApi.getOneNotice(id);
       dispatch(setOneNotice(data));
@@ -102,7 +97,6 @@ const _editMyInfo = (NickName, Village) => {
             nickname: NickName,
             profileUrl: imageUrl,
           };
-          console.log(userInfo);
           instance
             .put("/mypage/user/information", userInfo)
             .then((res) => {
@@ -124,7 +118,6 @@ const _editMyInfo = (NickName, Village) => {
         nickname: NickName,
         profileUrl: null,
       };
-      console.log(userInfo);
       instance
         .put("/mypage/user/information", userInfo)
         .then((res) => {

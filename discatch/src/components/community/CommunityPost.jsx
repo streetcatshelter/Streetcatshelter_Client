@@ -110,7 +110,9 @@ const CommunityPost = ({community}) => {
                   size={'12px'} 
                   fontWeight={'bold'}
                 >
-                  {community.cntView}
+                  {String(community.cntView).length > 3 ? 
+                  `${String(community.cntView)[0]}${'0'.repeat(String(community.cntView).length-4)}K` : 
+                  community.cntView}
                 </Text>
               </Grid>
               <Grid 
@@ -121,7 +123,9 @@ const CommunityPost = ({community}) => {
               }}>
                 <MessageCircle style={{width:'13px', margin:'-4px 3px 0 0'}}/>
                 <Text size={'12px'} fontWeight={'bold'}>
-                {community.cntComment}
+                {String(community.cntComment).length > 3 ? 
+                `${String(community.cntComment)[0]}${'0'.repeat(String(community.cntComment).length-4)}K` : 
+                community.cntComment}
                 </Text>
               </Grid>
               <Grid 
@@ -132,7 +136,9 @@ const CommunityPost = ({community}) => {
               }}>
                 <FavoriteIcon style={{width:'13px', margin:'-4px 3px 0 0', color:'red'}}/>
                 <Text size={'12px'} fontWeight={'bold'}>
-                {community.cntLikeit}
+                {String(community.cntLikeit).length > 3 ? 
+                  `${String(community.cntLikeit)[0]}${'0'.repeat(String(community.cntLikeit).length-4)}K` : 
+                community.cntLikeit}
                 </Text>
               </Grid>
               </Grid>

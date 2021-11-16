@@ -27,7 +27,7 @@ import { history } from "../redux/configureStore";
 const CommunityDetail = (props) => {
   const query = window.location.search;
   const dispatch = useDispatch();
-  const location = props.match.params.village
+  const location = props.match.params.village.split('@')[0];
 
   const path = useLocation();
   let category = null;

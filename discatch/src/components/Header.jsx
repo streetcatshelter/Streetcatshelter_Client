@@ -7,6 +7,7 @@ import { flexBox } from "../shared/style";
 
 // route
 import { Link } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 // element
 import { Grid } from "../elements";
@@ -21,17 +22,22 @@ import { searchMap } from "../redux/modules/map";
 import { mypageActions } from "../redux/modules/mypage";
 
 const Header = (props) => {
+  const locationA = useLocation();
   const dispatch = useDispatch();
   const path = props.path;
-  const village = useSelector((state) => state.map.villageList);
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location1;
+  if (userInfo.locationList && path.length === 1) {
+    location1 = userInfo?.locationList[0].split('@')[0]
+  } else {
+    location1 = locationA.state?.userLocation;
+  }
+  const locationList = userInfo.locationList?.filter(v => v.split('@')[0] !== location1);
   let location2;
   let location3;
   if (userInfo.locationList !== undefined) {
-    location1 = userInfo.locationList[0];
-    location2 = userInfo.locationList[1];
-    location3 = userInfo.locationList[2];
+    location2 = locationList[0].split('@')[0];
+    location3 = locationList[1].split('@')[0];
   }
 
   const [searchModal, setSearchModal] = useState(false);
@@ -39,8 +45,9 @@ const Header = (props) => {
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, []);
+  
   useEffect(() => {
-    dispatch(searchMap(location1));
+    dispatch(searchMap(locationA.state?.location));
   }, []);
 
   let options;
@@ -61,7 +68,7 @@ const Header = (props) => {
     ];
   }
 
-  const [place, setPlace] = useState(village[0]);
+  const [place, setPlace] = useState(location1);
   const onChangeHandler = (e) => {
     setPlace(e.target.value);
     const keyword = e.target.value;
@@ -79,7 +86,7 @@ const Header = (props) => {
         }}
       >
         <Grid width="20%" height="100%" margin="auto">
-          {path === "/" || path === "/community" || path === "/map" ? (
+          {path === "/" || path === "/community" || path === "/map" || path === "/map/:village"? (
             <SelectStyle onChange={onChangeHandler} value={place}>
               {options && options.map((pl, idx) => (
                 <option key={pl.key} value={pl.value}>

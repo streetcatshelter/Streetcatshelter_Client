@@ -71,7 +71,8 @@ const Location = (props) => {
   }
 
   const typeKeyword = useSelector((state) => state.map.typeKeywordList[0]);
-  const typeVillageKeyword = villageKeyword + typeKeyword;
+  const typeVillageKeyword = vKeyword + typeKeyword;
+  console.log(vKeyword);
 
   const [searchKeyword, setSearchKeyword] = useState();
   const [Pagination, SetPagination] = useState("");

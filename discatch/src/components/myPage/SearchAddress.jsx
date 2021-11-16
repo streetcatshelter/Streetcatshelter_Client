@@ -39,10 +39,11 @@ const SearchAddress = (props) => {
     }
 
     setAddress(data.zonecode);
+    console.log(data.zonecode);
     setAddressDetail(fullAddr);
     // console.log(data.sigungu);
     // console.log(data.bname);
-    dispatch(saveVillage(data.bname));
+    dispatch(saveVillage(`${data.bname}@${fullAddr}`));
 
     setIsOpenPost(false);
   };

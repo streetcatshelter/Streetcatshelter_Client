@@ -57,10 +57,12 @@ const CatPost = ({ cat }) => {
             <Button
               padding='0'
               bgColor='diaryColor'
-              color={userLiked === true ? 'red' : 'black'}
               clickEvent={likeToggle}
             >
-              <FavoriteIcon />
+              <FavoriteIcon 
+                style={{
+                color: userLiked ? 'red' : 'gray'
+                }}/>
             </Button>
 
             <Button

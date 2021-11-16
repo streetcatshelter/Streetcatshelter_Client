@@ -12,7 +12,6 @@ export default (Page, checkAuth) => {
   const AuthCheck = (props) => {
     const dispatch = useDispatch();
     const token = localStorage.getItem("token");
-    console.log(token);
     const isLoggedIn =
       token !== undefined && token !== "" && token !== null && token !== {}
         ? true

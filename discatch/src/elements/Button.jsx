@@ -44,6 +44,7 @@ const ButtonStyle = styled.button`
 `;
 
 const FloatButton = styled.button`
+  z-index: 100;
   width: 45px;
   height: 45px;
   background-color: #b5bb19;

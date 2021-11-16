@@ -1,20 +1,35 @@
 // library
-import React from "react";
-import styled, { css } from "styled-components";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // style
 import { flexBox } from "../shared/style";
+import styled, { css } from "styled-components";
 
 // route
 import { Link } from "react-router-dom";
 
 // element
-import { Grid, Text } from "../elements";
+import { Grid, Text, Button } from "../elements";
 
 // icon
 import { Home, Users, Compass, Send, User } from "react-feather";
 
+// redux
+import { __getCatLocation } from '../redux/modules/cat';
+
 const Menu = () => {
+  const dispatch = useDispatch();
+  const location = useSelector((state) => state.map.keywordList[0]);
+  const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
+  const userLocation = location ? location : userVillage;
+
+  useEffect(() => {
+    location === undefined
+      ? dispatch(__getCatLocation(userVillage))
+      : dispatch(__getCatLocation(location));
+  }, [userVillage, location]);
+
   return (
     <MenuStyle>
       <Grid
@@ -37,7 +52,7 @@ const Menu = () => {
           </Text>
         </Link>
         <Link
-          to="/community"
+          to={{pathname: '/community', state: { userLocation }}}
           style={{
             textDecoration: "none",
             color: "black",
@@ -48,7 +63,7 @@ const Menu = () => {
           <Text size="12px">커뮤니티</Text>
         </Link>
         <Link
-          to="/map"
+          to={{pathname: `/map/${userLocation}`, state: { userLocation }}}
           style={{
             textDecoration: "none",
             color: "black",

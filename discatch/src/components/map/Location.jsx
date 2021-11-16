@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { searchMap, searchKeywordMap } from "../../redux/modules/map";
 
+// ROUTE
+import { useLocation } from 'react-router-dom';
+
 // STYLE
 import styled, { css } from "styled-components";
-import { Place } from "@material-ui/icons";
 import { Map } from "react-feather";
 
 // ELEMENTS
@@ -20,13 +22,54 @@ import { history } from '../../redux/configureStore';
 import { __getCatLocation } from '../../redux/modules/cat';
 
 const Location = (props) => {
+  const location = useLocation();
   const dispatch = useDispatch();
-  
   //리덕스에서 키워드를 받아옵니다.
   const catList = useSelector((state) => state.cat.list);
-  console.log(catList);
-  const userVillage = useSelector((state) => state.mypage.userVillage[0]);
+  let positions = [];
+  for (let i = 0; i < catList.length; i ++) {
+    positions.push({
+      catName : catList[i].catName, 
+      latlng: new kakao.maps.LatLng(catList[i].latitude, catList[i].longitude),
+      catId: catList[i].catId
+    });
+  }
+
+  const pathVillage = location.pathname.split('/')[2];
+  let userVillage;
+  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
+  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
+  
+  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
+  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
+  
+  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
+  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
+  
   const villageKeyword = useSelector((state) => state.map.keywordList[0]);
+
+  if (villageKeyword === userVillage0) {
+    userVillage = userVillageA;
+  } else if (villageKeyword === userVillage1) {
+    userVillage = userVillageB
+  } else if (villageKeyword === userVillage2) {
+    userVillage = userVillageC
+  } else if (userVillage0 === pathVillage) {
+    userVillage = userVillageA;
+  } else if (userVillage1 === pathVillage) {
+    userVillage = userVillageB;
+  } else if (userVillage2 === pathVillage) {
+    userVillage = userVillageC;
+  }
+
+  let vKeyword;
+
+  if (villageKeyword === undefined) {
+    vKeyword = pathVillage;
+  } else {
+    vKeyword = villageKeyword;
+  }
+
   const typeKeyword = useSelector((state) => state.map.typeKeywordList[0]);
   const typeVillageKeyword = villageKeyword + typeKeyword;
 
@@ -133,52 +176,37 @@ const Location = (props) => {
   //경도 저장
   const [longitude, setLongitude] = useState();
 
-  console.log(latitude);
-  console.log(longitude);
+  useEffect(() => {
+    dispatch(__getCatLocation(vKeyword));
+  }, [vKeyword]);
 
   useEffect(() => {
     setPlaces([]);
-    var mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
+    const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
       mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 2, // 지도의 확대 레벨
       };
 
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
     // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-    var mapTypeControl = new kakao.maps.MapTypeControl();
+    const mapTypeControl = new kakao.maps.MapTypeControl();
 
     // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
     // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
     map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
     // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-    var zoomControl = new kakao.maps.ZoomControl();
+    const zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-    //지도 마커 표시하기//
+    // 지도 마커 표시하기
     const marker = new kakao.maps.Marker({ position: map.getCenter() });
 
-    const positions = [
-      {
-          name: '루디', 
-          latlng: new kakao.maps.LatLng(37.17241412306783, 127.11630870903858)
-      },
-      {
-          name: '루이', 
-          latlng: new kakao.maps.LatLng(37.17198251966975, 127.11919224622419)
-      },
-      {
-          name: '루키', 
-          latlng: new kakao.maps.LatLng(37.170542084754956, 127.11829077742688)
-      },
-      {
-          name: '루피',
-          latlng: new kakao.maps.LatLng(37.17133547879037, 127.11702744881934)
-      }
-    ];
     const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+
 
     for (let i = 0; i < positions.length; i ++) {
       // 마커 이미지의 이미지 크기 입니다
@@ -188,15 +216,12 @@ const Location = (props) => {
       const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
 
       // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-      // history.push(`/catdetail/${catId}`);
-      // onclick="location.href='/catdetail/37'" 
-
       let iwContent = `<button 
-                         onclick="alert('${i}')" 
+                         onclick="location.href='/catdetail/${positions[i].catId}'" 
                          style="padding:5px; 
                                 margin:0 10px;
                                 border: 0;
-                                background-color: white;">${positions[i].name}보러가기</button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                                background-color: white;">${positions[i].catName}보러가기</button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
       iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
       // 인포윈도우를 생성합니다
@@ -209,7 +234,7 @@ const Location = (props) => {
       const markers = new kakao.maps.Marker({
           map: map, // 마커를 표시할 지도
           position: positions[i].latlng, // 마커를 표시할 위치
-          title : positions[i].name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          title : catList[i].catName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           image : markerImage // 마커 이미지 
       });
 
@@ -238,27 +263,19 @@ const Location = (props) => {
 
     //가져온 키워드를 검색합니다.
     const ps = new kakao.maps.services.Places();
-
-    ps.keywordSearch(villageKeyword, placesSearchCB);
+    ps.keywordSearch(userVillage, placesSearchCB);
 
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
         let bounds = new kakao.maps.LatLngBounds();
 
         for (let i = 0; i < data.length; i++) {
-          // displayMarker(data[i]);
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         map.setBounds(bounds);
       }
     }
-  }, [villageKeyword]);
-
-  useEffect(() => {
-    villageKeyword === undefined
-      ? dispatch(__getCatLocation(userVillage))
-      : dispatch(__getCatLocation(villageKeyword));
-  }, [userVillage, villageKeyword]);
+  }, [userVillage, vKeyword]);
 
   return (
     <MapWrap>
@@ -355,7 +372,7 @@ const Location = (props) => {
         clickEvent={() => {
           if(latitude !== undefined && longitude !== undefined) {
             history.push({
-              pathname:`/catinfowrite/${villageKeyword}`, 
+              pathname:`/catinfowrite/${vKeyword}`, 
               state: {latitude, longitude}});
           } else {
             alert('지도에 위치를 표시해주세요!');

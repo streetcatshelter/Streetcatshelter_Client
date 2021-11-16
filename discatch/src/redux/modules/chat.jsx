@@ -18,7 +18,6 @@ const _getRoomInfo =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await chatApi.getRoomInfo(roomId);
-      console.log(data);
       dispatch(setChatInfo(data));
     } catch (e) {
       console.log(e);
@@ -31,20 +30,20 @@ const _createRoom =
     console.log(chatuser);
     try {
       const { data } = await chatApi.createRoom(chatuser);
-      history.push(`/chat/room/${data.roomId}`);
+      history.push(`/api/chat/enter/${data.roomId}`);
     } catch (e) {
       console.log(e);
+      alert("채팅방 만들기에 실패하였습니다😹다시 시도해주세요!");
     }
   };
 
 const _getAllMessage =
   (roomId) =>
   async (dispatch, getState, { history }) => {
-    console.log(roomId.roomId);
     try {
       const { data } = await chatApi.getAllMessage(roomId);
       console.log(data);
-      // dispatch(setRoom(data));
+      dispatch(setChatMessage(data));
     } catch (e) {
       console.log(e);
     }
@@ -53,6 +52,7 @@ const _getAllMessage =
 const initialState = {
   roomlist: [],
   chatinfo: [],
+  chatmessage: [],
 };
 
 // 리듀서
@@ -66,6 +66,12 @@ const chat = createSlice({
     setChatInfo: (state, action) => {
       state.chatinfo = action.payload;
     },
+    setChatMessage: (state, action) => {
+      state.chatmessage = action.payload;
+    },
+    pushChatMessage: (state, action) => {
+      state.chatmessage.push(action.payload);
+    },
   },
 });
 
@@ -75,5 +81,6 @@ export const chatActions = {
   _getRoomInfo,
   _getAllMessage,
 };
-export const { setChatInfo, setRooms } = chat.actions;
+export const { setChatInfo, setRooms, setChatMessage, pushChatMessage } =
+  chat.actions;
 export default chat;

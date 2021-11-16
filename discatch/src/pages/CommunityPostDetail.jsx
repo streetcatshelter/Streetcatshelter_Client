@@ -40,7 +40,7 @@ const CommunityPostDetail = (props) => {
   };
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo.split('"')[5];
-
+  const NickName = useSelector((state) => state.mypage.userInfo.nickname);
   const [ProfileModal, setProfileModal] = useState(false);
 
   const OpenProfile = () => {
@@ -50,7 +50,8 @@ const CommunityPostDetail = (props) => {
   };
 
   const MakeChat = () => {
-    dispatch(chatActions._createRoom(username));
+    const chatuser = { chatUser: [name,NickName] };
+    dispatch(chatActions._createRoom(chatuser));
   };
 
   let name;

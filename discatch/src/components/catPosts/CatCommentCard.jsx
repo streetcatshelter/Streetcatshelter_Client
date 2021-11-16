@@ -1,8 +1,9 @@
 // library
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import EditModalSlide from "../EditModalSlide";
+import moment from "moment";
 // redux
 import { __deleteComment } from "../../redux/modules/comment";
 import { chatActions } from "../../redux/modules/chat";
@@ -12,21 +13,23 @@ import { Trash2 } from "react-feather";
 const CatCommentCard = ({ comment }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
-  const userInfo = localStorage.getItem("userInfo");
-  const userName = userInfo.split('"')[5];
+  const UserInfo = useSelector((state) => state.mypage.userInfo);
+
+  const CreatedAt = moment(comment.createdAt).format("YYYY-M-D hh:mm");
   const [ProfileModal, setProfileModal] = useState(false);
   const deleteComment = () => {
     dispatch(__deleteComment(commentId));
   };
 
   const OpenProfile = () => {
-    if (userName !== comment.username) {
+    if (UserInfo.nickname !== comment.nickname) {
       setProfileModal(!ProfileModal);
     }
   };
 
   const MakeChat = () => {
-    dispatch(chatActions._createRoom(comment.username));
+    const chatuser = { chatUser: [comment.nickname, UserInfo.nickname] };
+    dispatch(chatActions._createRoom(chatuser));
   };
 
   return (
@@ -35,22 +38,14 @@ const CatCommentCard = ({ comment }) => {
         <Left>
           <Profile onClick={OpenProfile}>
             <img src={comment.profileImageUrl} alt={comment.profileImageUrl} />
-            <p>{comment.username}</p>
+            <p>{comment.nickname}</p>
           </Profile>
 
-          {comment.createdAt ? (
-            <span>
-              {comment.createdAt[0]}.{comment.createdAt[1]}.
-              {comment.createdAt[2]} {comment.createdAt[3]}:
-              {comment.createdAt[4]}
-            </span>
-          ) : (
-            ""
-          )}
+          {CreatedAt ? <span>{CreatedAt}</span> : ""}
         </Left>
 
         <Right>
-          {userName === comment.username ? (
+          {UserInfo.username === comment.username ? (
             <Trash2 size="14px" color="red" onClick={deleteComment} />
           ) : (
             ""

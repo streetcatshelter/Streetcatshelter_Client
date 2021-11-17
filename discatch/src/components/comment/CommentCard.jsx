@@ -24,20 +24,18 @@ const CommentCard = ({ comment }) => {
   const commentId = comment.commentId;
   const dispatch = useDispatch();
   const username = comment.nickname ? comment.nickname : comment.username;
-  const userInfo = localStorage.getItem("userInfo");
-  const userName = userInfo.split('"')[5];
-  const UserNickName = useSelector((state) => state.mypage.userInfo.nickname);
+  const UserInfo = useSelector((state) => state.mypage.userInfo);
 
   const [ProfileModal, setProfileModal] = useState(false);
 
   const OpenProfile = () => {
-    if (userName !== comment.username) {
+    if (UserInfo.nickname !== comment.nickname) {
       setProfileModal(!ProfileModal);
     }
   };
 
   const MakeChat = () => {
-    const chatuser = { chatUser: [comment.nickname, UserNickName] };
+    const chatuser = { chatUser: [comment.nickname, UserInfo.nickname] };
 
     dispatch(chatActions._createRoom(chatuser));
   };
@@ -84,7 +82,7 @@ const CommentCard = ({ comment }) => {
           </Text>
         </Grid>
 
-        {userName === comment.username && (
+        {UserInfo.userName === comment.username && (
           <Button onClick={deleteBtn}>
             <Trash2 size="12px" color="red" />
           </Button>

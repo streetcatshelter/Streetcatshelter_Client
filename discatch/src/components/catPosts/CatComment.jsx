@@ -1,19 +1,19 @@
 // library
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled, { css } from 'styled-components';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled, { css } from "styled-components";
 
 // component
-import { CatCommentCard } from '..';
+import { CatCommentCard } from "..";
 
 // element
-import { Grid, Text, Button, Input } from '../../elements';
+import { Grid, Text, Button, Input } from "../../elements";
 
 // style
-import { flexBox } from '../../shared/style';
+import { flexBox } from "../../shared/style";
 
 // redux
-import { __createCatComment, __getComment } from '../../redux/modules/comment';
+import { __createCatComment, __getComment } from "../../redux/modules/comment";
 
 const CatComment = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const CatComment = (props) => {
   const commentList = useSelector((state) => state.comment.list);
   const commentCnt = commentList.length;
 
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const $comment = (e) => {
     setComment(e.target.value);
   };
@@ -33,7 +33,7 @@ const CatComment = (props) => {
 
   useEffect(() => {
     dispatch(__getComment(catId));
-  }, [commentList.length]);
+  }, [dispatch, commentList.length]);
 
   return (
     <>
@@ -60,7 +60,7 @@ const CatComment = (props) => {
           margin="0 auto 12% auto"
           addstyle={() => {
             return css`
-              ${flexBox('space-between')}
+              ${flexBox("space-between")}
             `;
           }}
         >

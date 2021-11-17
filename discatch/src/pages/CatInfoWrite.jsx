@@ -1,21 +1,21 @@
-// library
+// LIBRARY
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 
-// component
+// COMPONENTS
 import { Template } from '../components';
 
-// element
+// ELEMENTS
 import { Grid, Image, TextArea, Input, Button } from '../elements/index';
 
-// stlye
+// STYLE
 import { flexBox } from '../shared/style';
 
-// icon
+// ICON
 import { Camera } from 'react-feather';
 
-// redux
+// REDUX
 import { imgActions } from '../redux/modules/image';
 import { __createCatInfo } from '../redux/modules/cat';
 
@@ -84,7 +84,7 @@ const CatInfoWrite = (props) => {
       <Grid>
         <Grid width="80%" bgColor="lightGray" padding="12px" margin="5% auto">
           <label htmlFor="imgFile">
-            <Camera width="100%" height="100" color="white" />
+            <Camera width="100%" height="100px" color="white" />
           </label>
 
           <Input

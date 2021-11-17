@@ -22,6 +22,7 @@ const map = createSlice({
       const keyword = action.payload;
       console.log(keyword);
       state.typeKeywordList.unshift(keyword);
+      console.log(keyword);
     },
     searchResult: (state, action) => {
       const ResultList = action.payload;

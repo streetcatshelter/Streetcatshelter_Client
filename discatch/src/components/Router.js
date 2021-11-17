@@ -147,7 +147,6 @@ const Router = () => {
       <Route path="/community" component={Auth(Community, true)} exact />
 
       {/* Map */}
-      <Route path="/map" component={Auth(Map, true)} exact />
       <Route path="/map/:village" component={Auth(Map, true)} exact />
 
       {/* Chat */}

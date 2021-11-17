@@ -1,7 +1,7 @@
 /*global kakao*/
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { searchMap, searchKeywordMap } from "../../redux/modules/map";
+import { searchKeywordMap } from "../../redux/modules/map";
 
 // ROUTE
 import { useLocation } from 'react-router-dom';
@@ -24,6 +24,7 @@ import { __getCatLocation } from '../../redux/modules/cat';
 const Location = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
+
   //리덕스에서 키워드를 받아옵니다.
   const catList = useSelector((state) => state.cat.list);
   let positions = [];
@@ -62,38 +63,56 @@ const Location = (props) => {
     userVillage = userVillageC;
   }
 
-  let vKeyword;
+  let vKeyword, vPath;
 
-  if (villageKeyword === undefined) {
-    vKeyword = pathVillage;
-  } else {
-    vKeyword = villageKeyword;
+  if (userVillage0 === pathVillage) {
+    vPath = userVillage0;
+  } else if (userVillage1 === pathVillage) {
+    vPath = userVillage1;
+  } else if (userVillage2 === pathVillage) {
+    vPath = userVillage2;
   }
 
-  const typeKeyword = useSelector((state) => state.map.typeKeywordList[0]);
-  const typeVillageKeyword = vKeyword + typeKeyword;
-  console.log(vKeyword);
+  if (villageKeyword === undefined) {
+    if (userVillage0 === pathVillage) {
+      vKeyword = userVillageA;
+    } else if (userVillage1 === pathVillage) {
+      vKeyword = userVillageB;
+    } else if (userVillage2 === pathVillage) {
+      vKeyword = userVillageC;
+    }
+  } else {
+    if (userVillage0 === villageKeyword) {
+      vKeyword = userVillageA;
+    } else if (userVillage1 === villageKeyword) {
+      vKeyword = userVillageB;
+    } else if (userVillage2 === villageKeyword) {
+      vKeyword = userVillageC;
+    }
+  }
 
-  const [searchKeyword, setSearchKeyword] = useState();
+  const [searchKeyword, setSearchKeyword] = useState('');
   const [Pagination, SetPagination] = useState("");
   const [Places, setPlaces] = useState([]);
 
-  const PlaceVisible = Places.length === 0 ? false : true;
-  const [listVisible, setListVisible] = useState(false);
-  const [modal, setModal] = useState(false);
+  const PlaceVisible = Places.length === 0 ? 0 : 1;
+  const [listvisible, setListVisible] = useState(0);
+  const [modal, setModal] = useState(0);
+
+  const typeVillageKeyword = vKeyword + searchKeyword;
 
   const ChangeKeyword = (e) => {
     setSearchKeyword(e.target.value);
   };
 
   const CreateKeyword = () => {
+    setSearchKeyword('')
     if (searchKeyword === "") {
       window.alert("검색어를 입력해주세요!");
       return;
     }
     dispatch(searchKeywordMap(searchKeyword));
-    setModal(true);
-    setListVisible(true);
+
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
     const container = document.getElementById("myMap");
     const options = {
@@ -169,7 +188,9 @@ const Location = (props) => {
         infowindow.open(map, marker);
       });
     }
-    setSearchKeyword("");
+    setModal(1);
+    setListVisible(1);
+    setSearchKeyword('')
   };
 
   //위도 저장
@@ -178,11 +199,10 @@ const Location = (props) => {
   const [longitude, setLongitude] = useState();
 
   useEffect(() => {
-    dispatch(__getCatLocation(vKeyword));
-  }, [vKeyword]);
+    dispatch(__getCatLocation(vPath));
+  }, [vPath]);
 
   useEffect(() => {
-    setPlaces([]);
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
       mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -243,7 +263,8 @@ const Location = (props) => {
       kakao.maps.event.addListener(markers, 'click', function() {
         // 마커 위에 인포윈도우를 표시합니다
         infowindow.open(map, markers);  
-        });
+      });
+      markers.setMap(map)
     }
 
 
@@ -301,13 +322,14 @@ const Location = (props) => {
           value={searchKeyword}
           onChange={ChangeKeyword}
         />
-        <div
+        <button
           style={{
+            border: 0,
             backgroundColor: "#FBD986",
             width: "50px",
             borderRadius: "15px",
           }}
-          type="summit"
+          type="submit"
           onClick={CreateKeyword}
         >
           <p
@@ -319,14 +341,14 @@ const Location = (props) => {
           >
             검색
           </p>
-        </div>
+        </button>
       </div>
       <div
         id="myMap"
         style={{ width: "100%", height: "500px", margin: "auto" }}
       />
       <MapIcon
-        listVisible={listVisible}
+        listvisible={listvisible}
         onClick={() => {
           setModal(!modal);
         }}
@@ -373,7 +395,7 @@ const Location = (props) => {
         clickEvent={() => {
           if(latitude !== undefined && longitude !== undefined) {
             history.push({
-              pathname:`/catinfowrite/${vKeyword}`, 
+              pathname:`/catinfowrite/${vPath}`, 
               state: {latitude, longitude}});
           } else {
             alert('지도에 위치를 표시해주세요!');
@@ -387,7 +409,7 @@ const Location = (props) => {
 };
 
 const MapIcon = styled(Map)`
-  display: ${(props) => (props.listVisible ? "block" : "none")};
+  display: ${(props) => (props.listvisible ? "block" : "none")};
   position: fixed;
   top: 110px;
   margin: 10px;

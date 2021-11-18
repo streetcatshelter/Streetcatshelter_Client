@@ -54,7 +54,7 @@ export const addCommunityDB = (category, contents, location, title) => {
 };
 
 // 커뮤니티 글 가져오기
-export const getCommunityDB = (category, location, limit = 5) => 
+export const getCommunityDB = (category, location, limit = 10) => 
   async (dispatch, getState, { history }) => {
     try {
       const data = await communityApi.getCommunity(category, location, limit);
@@ -70,7 +70,7 @@ export const getCommunityDB = (category, location, limit = 5) =>
       }
 };
 
-export const getMoreCommunityDB = (category, location, limit = 6) => 
+export const getMoreCommunityDB = (category, location, limit = 11) => 
   async (dispatch, getState, { history }) => {
     let start = getState().community.start;
 

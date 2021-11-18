@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
+// LIBRARY
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-/* == Custom - Elements*/
+// ELEMENTS
 import { Image, Grid, Text } from "../../elements";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
 
+// COMPONENTS
 import { EditModalSlide } from "..";
 
-/* == Redux */
-import { useDispatch, useSelector } from "react-redux";
+// REDUX
 import { history } from "../../redux/configureStore";
 import { userActions } from "../../redux/modules/user";
 import { mypageActions } from "../../redux/modules/mypage";
+
 const Profile = () => {
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
@@ -20,8 +23,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
-    // dispatch(mypageActions._getLevelUp());
-  }, []);
+  }, [dispatch]);
   const logout = () => {
     dispatch(userActions._logout());
   };

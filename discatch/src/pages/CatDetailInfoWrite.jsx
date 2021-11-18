@@ -1,21 +1,21 @@
-// library
+// LIBRARY
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
-// component
+// COMPONENTS
 import { Template } from "../components";
 
-// element
+// ELEMENTS
 import { Grid, TextArea, Button, Input, Image, Text } from "../elements";
 
-// style
+// STYLE
 import { flexBox } from "../shared/style";
 
-// icon
+// ICON
 import { Camera } from "react-feather";
 
-// redux
+// REDUX
 import { history } from "../redux/configureStore";
 import { imgActions } from "../redux/modules/image";
 import { __createCatDetailInfo } from "../redux/modules/cat";

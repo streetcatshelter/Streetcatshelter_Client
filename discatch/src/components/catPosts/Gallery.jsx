@@ -13,7 +13,7 @@ import { history } from '../../redux/configureStore';
 
 const Gallery = ({ gallery, location }) => {
   const catDetailId = gallery.catDetailId;
-  console.log(location);
+  
   return (
     <Grid
       margin="2% auto"

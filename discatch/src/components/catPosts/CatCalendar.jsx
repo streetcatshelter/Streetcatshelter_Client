@@ -1,29 +1,26 @@
-// library
+// LIBRARY
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-// component
+// COMPONENTS
 import { Calendar } from '..';
 
-// element
+// ELEMENTS
 import { Grid } from '../../elements/index';
 
-// redux
+// REDUX
 import { __getCalendar } from '../../redux/modules/cat';
 
 const CatCalendar = (props) => {
   const dispatch = useDispatch();
   const catId = props.catId;
-  // const calendar = useSelector((state) => state.cat.calendar);
-  // console.log(calendar);
-
   let DATE = new Date();
   const YEAR = DATE.getFullYear();
   const MONTH = DATE.getMonth();
 
   useEffect(() => {
     dispatch(__getCalendar(catId, MONTH, YEAR));
-  }, []);
+  }, [catId, MONTH, YEAR, dispatch]);
 
   return (
     <Grid>

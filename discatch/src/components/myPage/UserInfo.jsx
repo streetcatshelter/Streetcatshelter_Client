@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
-
-/* == Library - style */
-import styled from "styled-components";
-import SearchAddress from "./SearchAddress";
-/* == Redux */
-import { history } from "../../redux/configureStore";
+// LIBRARY
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// STYLE
+import styled from "styled-components";
+
+// COMPONENTS
+import SearchAddress from "./SearchAddress";
+
+// REDUX
 import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
 import { imgActions } from "../../redux/modules/image";
 import { XCircle, Upload } from "react-feather";
-const UserInfo = (edit) => {
+
+const UserInfo = () => {
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [NickName, setNickName] = useState(UserInfo.nickname);

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// LIBRARY
+import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 
 import styled from "styled-components";
@@ -8,8 +9,6 @@ import { useDispatch } from "react-redux";
 import { Search } from "react-feather";
 const SearchAddress = (props) => {
   const dispatch = useDispatch();
-  const [address, setAddress] = useState(""); // 주소
-  const [addressDetail, setAddressDetail] = useState(""); // 상세주소
 
   const [isOpenPost, setIsOpenPost] = useState(false);
 
@@ -38,13 +37,7 @@ const SearchAddress = (props) => {
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
 
-    setAddress(data.zonecode);
-    console.log(data.zonecode);
-    setAddressDetail(fullAddr);
-    // console.log(data.sigungu);
-    // console.log(data.bname);
     dispatch(saveVillage(`${data.bname}@${fullAddr}`));
-
     setIsOpenPost(false);
   };
 

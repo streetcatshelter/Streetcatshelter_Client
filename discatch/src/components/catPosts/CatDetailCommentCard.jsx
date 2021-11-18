@@ -1,18 +1,18 @@
-// library
+// LIBRARY
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { css } from 'styled-components';
 
-// element
+// ELEMENTS
 import { Grid, Text, Button, Image } from '../../elements';
 
-// style
+// STYLE
 import { flexBox } from '../../shared/style';
 
-// redux
+// REDUX
 import { __deleteComment } from '../../redux/modules/comment';
 
-// icon
+// ICON
 import { Trash2 } from 'react-feather';
 
 const CatDetailCommentCard = ({ comment }) => {

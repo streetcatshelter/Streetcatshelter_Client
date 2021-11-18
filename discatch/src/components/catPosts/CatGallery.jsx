@@ -20,7 +20,7 @@ const CatGallery = (props) => {
 
   useEffect(() => {
     dispatch(__getGallery(catId));
-  }, []);
+  }, [catId, dispatch]);
 
   return (
     <>

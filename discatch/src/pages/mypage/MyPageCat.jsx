@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+// LIBRARY
+import React from "react";
+import { useSelector } from "react-redux";
 
-/* == components*/
+// COMPONENTS
 import {
   MyPageDetail,
   Profile,
@@ -8,9 +10,6 @@ import {
   MyPageCat,
   Spinner,
 } from "../../components";
-
-import { useSelector } from "react-redux";
-//COMPONENTS
 
 const MyPage = (props) => {
   const isLoaded = useSelector((state) => state.mypage.isLoaded);

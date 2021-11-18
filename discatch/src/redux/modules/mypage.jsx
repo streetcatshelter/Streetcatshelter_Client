@@ -1,9 +1,11 @@
 // LIBRARY
 import { createSlice } from "@reduxjs/toolkit";
 import instance, { myPageApi } from "../../shared/axios";
+
+// REUDX
 import { userActions } from "../modules/user";
-// redux
 import { imgActions } from "./image";
+
 const _getUserInfo =
   () =>
   async (dispatch, getState, { history }) => {
@@ -21,7 +23,6 @@ const _getLevelUp =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await myPageApi.getLevelUp();
-      console.log(data);
     } catch (e) {
       console.log(e);
       dispatch(userActions._logout());
@@ -135,6 +136,7 @@ const _editMyInfo = (NickName, Village) => {
   };
 };
 
+// INITIAL STATE
 const initialState = {
   noticelist: [],
   noticedetail: [],
@@ -148,7 +150,7 @@ const initialState = {
   isLoaded: false,
 };
 
-// 리듀서
+// REDUCER
 const mypage = createSlice({
   name: "mypage",
   initialState,
@@ -202,6 +204,7 @@ export const mypageActions = {
   _editMyInfo,
   _getLevelUp,
 };
+
 export const {
   setNotice,
   setOneNotice,

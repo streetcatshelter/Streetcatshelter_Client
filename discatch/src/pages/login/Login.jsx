@@ -1,20 +1,20 @@
+// LIBRARY
 import React from "react";
 
+// COMPONENTS
 import { Template, GoogleLoginBtn } from "../../components";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
+
+// AUTH
 import { dev_oauthKaKaoURL, dev_oauthNaverURL } from "../../shared/oauthenv";
-/* == Custom - Icon */
+
+// ICON
 import Kakao from "../../styles/images/icon-Kakao.png";
 import Naver from "../../styles/images/icon-Naver(G).png";
-import Google from "../../styles/images/icon-Google.png";
-
-import { useDispatch } from "react-redux";
-import { userActions } from "../../redux/modules/user";
 
 const Login = (props) => {
-  const dispatch = useDispatch();
   return (
     <Template props={props} page="login">
       <Wrapper>

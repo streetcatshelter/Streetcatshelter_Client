@@ -1,6 +1,7 @@
+// LIBRARY
 import React from "react";
 
-/* == components*/
+// COMPONENTS
 import { MyPageCat, MyWork, Notice } from "..";
 
 const MyPageContent = (props) => {

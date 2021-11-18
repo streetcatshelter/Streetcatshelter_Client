@@ -1,25 +1,26 @@
+// LIBRARY
 import React, { useEffect } from "react";
+import moment from "moment";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
 
-/* == Custom - Elements*/
-import { Image, Text } from "../../elements";
+// ELEMENTS
+import { Image } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
 
-/* == Redux */
+// REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
 
-import moment from "moment";
 const MyPageCat = () => {
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(mypageActions._getLikedAllCat());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

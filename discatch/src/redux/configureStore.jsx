@@ -1,15 +1,15 @@
-// library
+// LIBRARY
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 
-// middleware
+// MIDDLEWARE
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-// redux router
+// REDUX ROUTER
 import { createBrowserHistory } from 'history';
 import { connectRouter } from 'connected-react-router';
 
-// reducer
+// REDUCER
 import image from './modules/image';
 import map from './modules/map';
 import community from './modules/community';

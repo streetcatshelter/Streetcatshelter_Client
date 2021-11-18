@@ -1,4 +1,7 @@
+// LIBRARY
 import React from 'react';
+
+// STYLE
 import styled from 'styled-components';
 
 const Input = ({

@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -9,7 +9,7 @@ import { CommunityPreview, Template } from "../components";
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button, Input, TextArea, Text, Image } from "../elements/index";
+import { Grid, Button, Input, TextArea, Text } from "../elements/index";
 
 // REDUX
 import { imgActions } from "../redux/modules/image";
@@ -25,12 +25,13 @@ import { getOneCommunityDB } from '../redux/modules/community';
 import { useLocation } from 'react-router-dom';
 
 const CommunityPostEdit = (props) => {
+  const dispatch = useDispatch();
   const path = useLocation();
   const preview = useSelector((state) => state.image.preview)
   const communityId = path.pathname.split('/')[5];
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
-  }, []);
+  }, [communityId, dispatch]);
 
   const { category, contents, imageList, location, title, username } = useSelector((state) => ({
     category: state.community.list.data?.category,
@@ -42,7 +43,6 @@ const CommunityPostEdit = (props) => {
   }));
   const imageNum = imageList?.length;
 
-  const dispatch = useDispatch();
 
   const [fileNum, setFileNum] = useState(imageNum);
   // S3

@@ -1,16 +1,20 @@
+// LIBRARY
 import React, { useEffect } from "react";
-/* == Library - style */
-import styled from "styled-components";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+
+// STYLE
+import styled from "styled-components";
+
+// REDUX
 import { mypageActions } from "../../redux/modules/mypage";
+
 const NoticeDesc = (props) => {
   const NoticeDetail = useSelector((state) => state.mypage.noticedetail);
-  console.log(NoticeDetail);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(mypageActions._getOneNotice(props.id));
-  }, []);
+  }, [props.id, dispatch]);
   const modifiedAt = moment(NoticeDetail.modifiedAt).format("YYYY-M-D");
 
   if (!NoticeDetail) {

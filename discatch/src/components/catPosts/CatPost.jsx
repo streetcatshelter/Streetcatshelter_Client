@@ -1,22 +1,22 @@
-// library
+// LIBRARY
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { css } from 'styled-components';
 
-// element
+// ELEMENTS
 import { Grid, Text, Image, Button } from '../../elements';
 
-// redux
+// REDUX
 import { history } from '../../redux/configureStore';
 import { __catLike } from '../../redux/modules/cat';
 
-// style
+// STYLE
 import { flexBox } from '../../shared/style';
 
-// icon
+// ICON
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-const CatPost = ({ cat }) => {
+const CatPost = ({ cat, location }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
@@ -67,7 +67,7 @@ const CatPost = ({ cat }) => {
 
             <Button
               clickEvent={() => {
-                history.push(`/catdetail/${catId}`);
+                history.push(`/catdetail/${location}/${catId}`);
               }}
               fontWeight='bold'
               padding='0'

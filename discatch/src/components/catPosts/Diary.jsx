@@ -13,7 +13,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 // redux
 import { history } from '../../redux/configureStore';
 
-const Diary = ({ diary }) => {
+const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;
 
   return (
@@ -22,7 +22,7 @@ const Diary = ({ diary }) => {
       padding="6px"
       width="95%"
       margin="2%  auto"
-      clickEvent={() => history.push(`/catdetailinfo/${catDetailId}`)}
+      clickEvent={() => history.push(`/catdetailinfo/${location}/${catDetailId}`)}
     >
       <Grid
         margin="0 0 3% 0"

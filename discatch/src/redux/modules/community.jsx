@@ -110,7 +110,6 @@ export const editCommunityDB = (communityId, category, editcontents, location, e
     const imgFile = getState().image.file;
     let newImageUrl = [];
     let newImages = []
-    // const username = '뽀삐맘'; // 나중에 수정
     if (imgFile.length<6) {
       dispatch(
         imgActions.uploadImagesDB(() => {

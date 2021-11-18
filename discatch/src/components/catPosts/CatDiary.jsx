@@ -12,6 +12,7 @@ import { Diary } from '..';
 import { __getDiary } from '../../redux/modules/cat';
 
 const CatDiary = (props) => {
+  const location = props.location;
   const dispatch = useDispatch();
   const catId = props.catId;
 
@@ -26,7 +27,7 @@ const CatDiary = (props) => {
       {diaryList.map((diary, idx) => {
         return (
           <Grid key={idx}>
-            <Diary catId={catId} diary={diary}></Diary>
+            <Diary catId={catId} diary={diary} location={location}></Diary>
           </Grid>
         );
       })}

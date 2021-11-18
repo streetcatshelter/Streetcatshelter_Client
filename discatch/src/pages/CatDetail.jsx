@@ -1,11 +1,11 @@
-// library
+// LIBRARY
 import React, { useState } from 'react';
 import { css } from 'styled-components';
 
-// style
+// STYLE
 import { flexBox } from '../shared/style';
 
-// component
+// COMPONENTS
 import {
   Template,
   CatCalendar,
@@ -14,17 +14,18 @@ import {
   CatComment,
 } from '../components';
 
-// element
+// ELEMENTS
 import { Button, Grid } from '../elements';
 
-// icon
+// ICON
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
-// redux
+// REDUX
 import { history } from '../redux/configureStore';
 
 const CatDetail = (props) => {
+  const location = props.location.pathname.split('/')[2];
   const catId = props.match.params.catId;
 
   const [menu, setMenu] = useState('캘린더');
@@ -77,11 +78,11 @@ const CatDetail = (props) => {
       </Grid>
 
       {menu === '캘린더' ? (
-        <CatCalendar catId={catId} />
+        <CatCalendar catId={catId} location={location}/>
       ) : menu === '집사일기' ? (
-        <CatDiary catId={catId} />
+        <CatDiary catId={catId} location={location}/>
       ) : menu === '갤러리' ? (
-        <CatGallery catId={catId} />
+        <CatGallery catId={catId} location={location}/>
       ) : null}
 
       <Button

@@ -1,34 +1,32 @@
-// library
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// LIBRARY
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-// style
+// STYLE
 import { flexBox } from "../shared/style";
 import styled, { css } from "styled-components";
 
-// route
-import { Link } from "react-router-dom";
+// ROUTE
+import { Link, useLocation } from "react-router-dom";
 
-// element
-import { Grid, Text, Button } from "../elements";
+// ELEMENTS
+import { Grid, Text } from "../elements";
 
-// icon
+// ICON
 import { Home, Users, Compass, Send, User } from "react-feather";
 
-// redux
-import { __getCatLocation } from '../redux/modules/cat';
-
 const Menu = () => {
-  const dispatch = useDispatch();
-  const location = useSelector((state) => state.map.keywordList[0]);
+  const path = useLocation();
+  const pathLocation = path.pathname.split('/')[2];
+  const userLocation = useSelector((state) => state.map.keywordList[0]);
   const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
-  const userLocation = location ? location : userVillage;
-
-  useEffect(() => {
-    location === undefined
-      ? dispatch(__getCatLocation(userVillage))
-      : dispatch(__getCatLocation(location));
-  }, [userVillage, location]);
+  let location = userLocation ? userLocation : userVillage;
+  
+  if (pathLocation !== undefined) {
+    if (location !== pathLocation) {
+      location = pathLocation;
+    }
+  }
 
   return (
     <MenuStyle>
@@ -52,7 +50,7 @@ const Menu = () => {
           </Text>
         </Link>
         <Link
-          to={{pathname: '/community', state: { userLocation }}}
+          to={{pathname: '/community', state: { location }}}
           style={{
             textDecoration: "none",
             color: "black",
@@ -63,7 +61,7 @@ const Menu = () => {
           <Text size="12px">커뮤니티</Text>
         </Link>
         <Link
-          to={{pathname: `/map/${userLocation}`, state: { userLocation }}}
+          to={{pathname: `/map/${location}`, state: { location }}}
           style={{
             textDecoration: "none",
             color: "black",

@@ -1,22 +1,22 @@
-// library
+// LIBRARY
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-// component
+// COMPONENTS
 import { Template, CatPost } from '../components';
 
-// element
+// ELEMENTS
 import { Button } from '../elements';
 
-// icon
+// ICON
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
-// redux
+// REDUX
 import { history } from '../redux/configureStore';
 import { __getCatLocation, __getMoreCat } from '../redux/modules/cat';
 
-// function
+// FUNCTION
 import InfinityScroll from '../shared/InfinityScroll';
 
 const Home = (props) => {
@@ -47,7 +47,7 @@ const Home = (props) => {
               length={catList.length}
               key={cat.catId}
             >
-              <CatPost cat={cat} />
+              <CatPost cat={cat} location={location}/>
             </InfinityScroll>
           );
         })
@@ -58,7 +58,7 @@ const Home = (props) => {
       <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push(`/map/${location}`);
+          history.push({pathname:`/map/${location}`, state : { location }});
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />

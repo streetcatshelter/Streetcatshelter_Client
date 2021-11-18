@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { chatActions } from "../../redux/modules/chat";
 import { pushChatMessage } from "../../redux/modules/chat";
 import styled from "styled-components";
-import { Image } from "../../elements";
+import { Image, Grid } from "../../elements";
 import moment from "moment";
 import { EditModalSlide } from "..";
 import ChatMessage from "./ChatMessage";
@@ -130,9 +130,9 @@ const ChatRoom = (props) => {
           <EditModalSlide />
         </CallBox>
       </Header>
-      <div style={{ height: "60%" }}>
+      <Grid style={{ height: "60%" }}>
         <ChatMessage props={props.roomId} />
-      </div>
+      </Grid>
 
       <ChatSendBox>
         <ChatInput
@@ -153,18 +153,23 @@ const ChatRoom = (props) => {
 };
 
 const ChatWrap = styled.div`
+  position: relative;
+  left: 7px;
   width: 95%;
-  height: 95%;
-  overflow: auto;
-  margin: auto;
+  height: 76vh;
+  margin: -1vh 0 0;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 375px) {
+    height: 65vh;
+  }
 `;
 
 const Header = styled.div`
+  position: fixed;
   background: #fefdf8;
-  width: 95%;
+  width: 390px;
   display: flex;
   height: 60px;
   padding: 5px;
@@ -198,20 +203,28 @@ const CallBox = styled.div`
   display: flex;
   width: 60px;
   align-items: center;
+  @media screen and (max-width: 375px) {
+    position: relative;
+    right: 30px;
+  }
 `;
 
 const ChatSendBox = styled.div`
+  position: fixed;
+  bottom: 60px;
   display: flex;
   align-items: flex-end;
   background: #fefdf8;
-  width: 90%;
+  width: 380px;
   height: 80px;
   padding: 10px;
   border: 1px solid #cbcf52;
   border-radius: 10px;
   margin: auto;
-
   z-index: 1200;
+  @media screen and (max-width: 375px) {
+    width: 90%;
+  }
 `;
 const ChatInput = styled.textarea`
   position: relative;
@@ -229,7 +242,7 @@ const SendText = styled.div`
   height: 30px;
   background: #fbd986;
   display: flex;
-  jutify-content: center;
+  justify-content: center;
   border-radius: 10px;
   p {
     font-size: 14px;

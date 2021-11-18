@@ -56,7 +56,7 @@ const Header = (props) => {
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, [dispatch]);
-  
+
   useEffect(() => {
     dispatch(searchMap(locationA.state?.location));
   }, [locationA.state?.location, dispatch]);
@@ -106,7 +106,7 @@ const Header = (props) => {
         }}
       >
         <Grid width="20%" height="100%" margin="auto">
-          {path === "/" || path === "/community" || path === "/map/:village"? (
+          {path === "/" || path === "/community" || path === "/map/:village" ? (
             <SelectStyle onChange={onChangeHandler} value={place}>
               {options &&
                 options.map((pl, idx) => (

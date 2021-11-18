@@ -48,7 +48,18 @@ const _getAllMessage =
       console.log(e);
     }
   };
+const _deleteRoom =
+  (roomId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await chatApi.deleteRoom(roomId);
+      console.log(data);
 
+      // dispatch(deleteRoom(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 const initialState = {
   roomlist: [],
   chatinfo: [],
@@ -80,6 +91,7 @@ export const chatActions = {
   _createRoom,
   _getRoomInfo,
   _getAllMessage,
+  _deleteRoom,
 };
 export const { setChatInfo, setRooms, setChatMessage, pushChatMessage } =
   chat.actions;

@@ -47,7 +47,6 @@
 import React from "react";
 import styled from "styled-components";
 import Google from "../styles/images/icon-Google.png";
-import { history } from "../redux/configureStore";
 const GoogleLoginBtn = () => {
   return (
     <div>

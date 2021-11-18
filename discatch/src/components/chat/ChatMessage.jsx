@@ -1,10 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+// LIBRARY
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "moment/locale/ko";
+import moment from "moment";
+
+
+// REDUX
 import { chatActions } from "../../redux/modules/chat";
 
+// STYLE
 import styled from "styled-components";
-import moment from "moment";
-import "moment/locale/ko";
+
 const ChatMessage = (props) => {
   const dispatch = useDispatch();
   const commentsEndRef = useRef(null);

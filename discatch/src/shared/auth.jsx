@@ -1,6 +1,8 @@
 /* eslint-disable import/no-anonymous-default-export */
+// LIBRARY
 import React, { useEffect } from "react";
-/* == Redux - actions */
+
+// REDUX
 import { useDispatch } from "react-redux";
 import { userActions } from "../redux/modules/user";
 /**src/component/Router.js
@@ -27,7 +29,7 @@ export default (Page, checkAuth) => {
       else if (isLoggedIn && !checkAuth) {
         props.history.push("/");
       }
-    }, []);
+    }, [isLoggedIn, props.history, dispatch]);
 
     return <Page {...props} />;
   };

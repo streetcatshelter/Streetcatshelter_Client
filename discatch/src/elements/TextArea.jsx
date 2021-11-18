@@ -1,6 +1,7 @@
+// LIBRARY
 import React, { useRef, useEffect, useCallback } from 'react';
 
-/* == Library - style */
+// STYLE
 import styled from 'styled-components';
 
 // ROUTE

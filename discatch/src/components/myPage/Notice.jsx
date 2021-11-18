@@ -1,19 +1,21 @@
+// LIBRARY
 import React, { useEffect } from "react";
-
-/* == Library - style */
-import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import { useDispatch, useSelector } from "react-redux";
+// STYLE
+import styled from "styled-components";
+
+// REDUX
 import { mypageActions } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
+
 const Notice = () => {
   const NoticeList = useSelector((state) => state.mypage.noticelist);
-  console.log(NoticeList);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(mypageActions._getNotice());
-  }, []);
+  }, [dispatch]);
   return (
     <Wrapper>
       <Title>

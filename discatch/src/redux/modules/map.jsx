@@ -1,7 +1,7 @@
 // LIBRARY
 import { createSlice } from "@reduxjs/toolkit";
 
-//initialState
+// INITIAL STATE
 const initialState = {
   villageList: ["망원동", "합정동", "평창동"],
   keywordList: ["망원동"],
@@ -9,7 +9,7 @@ const initialState = {
   resultList: [],
 };
 
-// 리듀서
+// REDUCER
 const map = createSlice({
   name: "map",
   initialState,

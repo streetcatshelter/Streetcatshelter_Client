@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+// LIBRARY
+import React from "react";
 
-/* == components*/
-import { MyPageContent } from "..";
-
-/* == Custom - Elements*/
+// ELEMENTS
 import { Grid } from "../../elements";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
+
+// REDUX
 import { history } from "../../redux/configureStore";
+
 const MyPageDetail = (props) => {
   return (
     <Wrapper>

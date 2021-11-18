@@ -1,4 +1,7 @@
+// LIBRARY
 import React from "react";
+
+// COMPONENTS
 import { CommentList, Template } from "../components";
 
 const test = () => {

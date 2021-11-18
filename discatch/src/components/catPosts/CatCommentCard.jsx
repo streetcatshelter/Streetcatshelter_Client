@@ -1,14 +1,21 @@
-// library
+// LIBRARY
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import EditModalSlide from "../EditModalSlide";
 import moment from "moment";
-// redux
+
+// COMPONENTS
+import EditModalSlide from "../EditModalSlide";
+
+// ICON
+import { Trash2 } from "react-feather";
+
+// STYLE
+import styled from "styled-components";
+
+// REDUX
 import { __deleteComment } from "../../redux/modules/comment";
 import { chatActions } from "../../redux/modules/chat";
-// icon
-import { Trash2 } from "react-feather";
+
 
 const CatCommentCard = ({ comment }) => {
   const dispatch = useDispatch();

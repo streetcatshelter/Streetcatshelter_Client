@@ -1,12 +1,21 @@
+// LIBRARY
 import React, { useEffect, useRef, useState } from "react";
 import * as StompJs from "@stomp/stompjs";
 import * as SockJS from "sockjs-client";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+
+// REDUX
 import { chatActions } from "../../redux/modules/chat";
 import { pushChatMessage } from "../../redux/modules/chat";
+
+// STYLE
 import styled from "styled-components";
+
+// ELEMENTS
 import { Image, Grid } from "../../elements";
-import moment from "moment";
+
+// COMPONENTS
 import { EditModalSlide } from "..";
 import ChatMessage from "./ChatMessage";
 

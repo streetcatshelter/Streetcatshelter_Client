@@ -1,16 +1,16 @@
-// library
+// LIBRARY
 import React from 'react';
 import { css } from 'styled-components';
 
-// element
+// ELEMENTS
 import { Grid, Text, Button, Image } from '../../elements';
 import { flexBox } from '../../shared/style';
 
-// icon
+// ICON
 import { Eye, MessageCircle } from 'react-feather';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-// redux
+// REDUX
 import { history } from '../../redux/configureStore';
 
 const Diary = ({ diary, location }) => {

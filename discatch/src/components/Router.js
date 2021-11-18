@@ -1,8 +1,11 @@
+// LIBRARY
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+
+// AUTH
 import Auth from "../shared/auth";
 
-/* == Pages */
+// PAGES
 import {
   Home,
   Slider,

@@ -240,7 +240,7 @@ const Location = () => {
   
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
         let iwContent = `<button 
-                           onclick="location.href='/catdetail/${position[i].catId}'" 
+                           onclick="location.href='/catdetail/${location}/${position[i].catId}'" 
                            style="padding:5px; 
                                   margin:0 10px;
                                   border: 0;
@@ -300,7 +300,7 @@ const Location = () => {
         map.setBounds(bounds);
       }
     }
-  }, [userVillage, vKeyword, catList, position, dispatch]);
+  }, [userVillage, vKeyword, catList, position, location, dispatch]);
 
   return (
     <MapWrap>

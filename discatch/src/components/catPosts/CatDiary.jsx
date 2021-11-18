@@ -1,14 +1,14 @@
-// library
+// LIBRARY
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-// element
+// ELEMENTS
 import { Grid } from '../../elements';
 
-// component
+// COMPONENTS
 import { Diary } from '..';
 
-// redux
+// REDUX
 import { __getDiary } from '../../redux/modules/cat';
 
 const CatDiary = (props) => {
@@ -20,7 +20,7 @@ const CatDiary = (props) => {
 
   useEffect(() => {
     dispatch(__getDiary(catId));
-  }, []);
+  }, [catId, dispatch]);
 
   return (
     <>

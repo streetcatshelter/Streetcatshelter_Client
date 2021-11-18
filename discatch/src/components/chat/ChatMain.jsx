@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { EditModalSlide } from "../../components";
-import { chatActions } from "../../redux/modules/chat";
+// LIBRARY
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import { history } from "../../redux/configureStore";
 import moment from "moment";
+
+// COMPONENTS
+import { EditModalSlide } from "../../components";
+
+// STYLE
+import styled from "styled-components";
+
+// REDUX
+import { chatActions } from "../../redux/modules/chat";
+import { history } from "../../redux/configureStore";
+
 const ChatMain = () => {
   const dispatch = useDispatch();
   const Rooms = useSelector((state) => state.chat.roomlist);

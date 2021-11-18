@@ -1,13 +1,14 @@
+// LIBRARY
 import React, { useState, useEffect, useRef } from "react";
 
-/* == components*/
+// COMPONENTS
 import { Slide, Template } from "../components";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
 import { ChevronLeft, ChevronRight, X } from "react-feather";
 
-/* == Redux  */
+// REDUX
 import { history } from "../redux/configureStore";
 
 const TOTAL_SLIDES = 2;
@@ -116,8 +117,6 @@ const Dot = styled.div`
 
 const CloseButton = styled.button`
   display: flex;
-  align-items:"
-
   width: 30px;
   height: 30px;
   border-radius: 15px;

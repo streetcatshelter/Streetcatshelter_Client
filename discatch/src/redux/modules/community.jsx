@@ -1,4 +1,4 @@
-// LIBRARY
+// API
 import { createSlice } from '@reduxjs/toolkit';
 import instance, { communityApi } from '../../shared/axios';
 
@@ -216,13 +216,14 @@ export const communityLikeToggleDB = (communityId) => {
   }
 }
 
+// INITIAL STATE
 const initialState = {
   list: [],
   page: 0,
   start: 0,
 };
 
-// 리듀서
+// REDUCER
 const community = createSlice({
   name: 'community',
   initialState,

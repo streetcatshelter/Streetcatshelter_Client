@@ -1,3 +1,4 @@
+// LIBRARY
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -55,7 +56,7 @@ const CommunityDetail = (props) => {
     return () => {
       dispatch(getCommunityDB(category, location));
     };
-  }, []);
+  }, [category, location, query, dispatch]);
 
   return (
     <Template props={props}>

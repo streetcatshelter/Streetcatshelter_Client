@@ -1,18 +1,18 @@
-// library
+// LIBRARY
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
-// component
+// COMPONENTS
 import { CatDetailCommentCard } from '..';
 
-// element
+// ELEMENTS
 import { Grid, Text, Button, Input } from '../../elements';
 
-// style
+// STYLE
 import { flexBox } from '../../shared/style';
 
-// redux
+// REDUX
 import {
   __createCatDetailComment,
   __getDetailComment,
@@ -35,7 +35,7 @@ const CatDetailComment = (props) => {
 
   useEffect(() => {
     dispatch(__getDetailComment(catDetailId));
-  }, [commentList.length]);
+  }, [catDetailId, comment, dispatch]);
 
   return (
     <>

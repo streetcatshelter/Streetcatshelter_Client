@@ -70,7 +70,7 @@ const CommunityPostDetail = (props) => {
 
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
-  }, []);
+  }, [communityId, dispatch]);
   return (
     <Template props={props}>
       <Grid

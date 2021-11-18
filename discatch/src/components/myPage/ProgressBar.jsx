@@ -1,8 +1,10 @@
+// LIBRARY
 import React from "react";
-
-/* == Library - style */
-import styled from "styled-components";
 import { useSelector } from "react-redux";
+
+// STYLE
+import styled from "styled-components";
+
 const ProgressBar = () => {
   const UserInfo = useSelector((state) => state.mypage.userInfo);
 

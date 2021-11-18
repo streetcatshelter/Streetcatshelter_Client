@@ -16,6 +16,7 @@ const _getRooms =
 const _getRoomInfo =
   (roomId) =>
   async (dispatch, getState, { history }) => {
+    console.log(roomId);
     try {
       const { data } = await chatApi.getRoomInfo(roomId);
       dispatch(setChatInfo(data));

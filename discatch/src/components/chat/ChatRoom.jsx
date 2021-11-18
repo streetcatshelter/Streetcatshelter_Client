@@ -14,20 +14,23 @@ const ChatRoom = (props) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const ChatInfo = useSelector((state) => state.chat.chatinfo);
-  const LastMessages = useSelector((state) => state.chat.chatmessage);
+
   const username = useSelector((state) => state.mypage.userInfo.username);
-  const NickName = useSelector((state) => state.mypage.userInfo.nickname);
+
   const client = useRef({});
 
+  //header 마지막 활동 시간
+  const LastActivity = moment(ChatInfo.lastActivity).format(
+    "YYYY-M-D HH:mm:ss"
+  );
+  const hourDiff = moment(LastActivity).diff(moment(), "hours");
+  // format 1, 수정한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
+  const updated = moment(LastActivity).format(" YYYY. M. D hh:mm");
+  // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
+  const recentlyUpdated = moment(LastActivity).fromNow();
+  const sendtime = hourDiff < 22 ? recentlyUpdated : updated;
+
   const [message, setMessage] = useState("");
-  const commentsEndRef = useRef(null);
-  // 댓글 스크롤 밑으로 이동
-  const scrollToBottom = () => {
-    commentsEndRef.current?.scrollIntoView({ behavior: "auto" });
-  };
-  useEffect(() => {
-    scrollToBottom();
-  }, [LastMessages]);
 
   useEffect(() => {
     dispatch(chatActions._getAllMessage(props.roomId));
@@ -72,20 +75,13 @@ const ChatRoom = (props) => {
       `/sub/chat/room/${props.roomId}`,
       function (response) {
         const res = JSON.parse(response.body);
-        // const createdAt = moment(res.createdAt).format("YYYY. M. D HH:mm:ss");
-        // const hourDiff = moment(createdAt).diff(moment(), "hours");
-        // // format 1, 수정한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-        // const updated = moment(createdAt).format(" YYYY. M. D hh:mm");
-        // // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
-        // const recentlyUpdated = moment(createdAt).fromNow();
-        // const sendtime = hourDiff < -22 ? { recentlyUpdated } : { updated };
-        // console.log(res.createdAt);
         const message = {
           message: res.message,
           sender: res.userName,
-          time: res.createdAt,
+          time: res.time,
           mine: null,
         };
+
         dispatch(pushChatMessage(message));
       }
     );
@@ -122,7 +118,7 @@ const ChatRoom = (props) => {
           />
           <InfoBlock>
             <p>{ChatInfo.opponent}</p>
-            {ChatInfo.lastActivity ? <p>{ChatInfo.lastActivity}에 활동</p> : ""}
+            {ChatInfo.lastActivity ? <p>{sendtime}에 활동</p> : ""}
           </InfoBlock>
         </InfoBox>
 

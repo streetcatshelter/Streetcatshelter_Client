@@ -1,18 +1,18 @@
-// library
+// LIBRARY
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
-// style
+// STYLE
 import { flexBox } from "../shared/style";
 
-// route
+// ROUTE
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
-// element
+// ELEMENTS
 import { Grid } from "../elements";
 
-// icon
+// ICON
 import { Search, Bell, ArrowLeft } from "react-feather";
 
 // REDUX
@@ -35,20 +35,25 @@ const Header = (props) => {
   const locationList = userInfo.locationList?.filter(v => v.split('@')[0] !== location1);
   let location2;
   let location3;
-  if (userInfo.locationList !== undefined) {
-    location2 = locationList[0].split('@')[0];
-    location3 = locationList[1].split('@')[0];
+  if(userInfo.locationList !== undefined) {
+    if (userInfo.locationList.length === 3) {
+      location2 = locationList[0].split('@')[0];
+      location3 = locationList[1].split('@')[0];
+    } else if (userInfo.locationList.length === 2) {
+      location2 = locationList[0].split('@')[0];
+    } 
   }
+  
 
   const [searchModal, setSearchModal] = useState(false);
   
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
-  }, []);
+  }, [dispatch]);
   
   useEffect(() => {
     dispatch(searchMap(locationA.state?.location));
-  }, []);
+  }, [locationA.state?.location, dispatch]);
 
   let options;
   if (location1 !== undefined && location2 === undefined) {
@@ -129,7 +134,7 @@ const Header = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      {searchModal ? (
+      {/* {searchModal ? (
         <Grid width="100%" height="45px" background="#fefdf8">
           <SearchBar>
             <SearchInput />
@@ -139,38 +144,38 @@ const Header = (props) => {
           </SearchBar>
         </Grid>
       ) : (
-        ""
-      )}
+        ''
+      )} */}
     </HeaderStyle>
   );
 };
-const SearchInput = styled.input`
-  width: 90%;
-  height: 30px;
-  border: none;
-  margin-left: 10px;
-`;
-const SearchBarBtn = styled.div`
-  width: 50px;
-  height: 35px;
-  border-radius: 15px;
+// const SearchInput = styled.input`
+//   width: 90%;
+//   height: 30px;
+//   border: none;
+//   margin-left: 10px;
+// `;
+// const SearchBarBtn = styled.div`
+//   width: 50px;
+//   height: 35px;
+//   border-radius: 15px;
 
-  background: #fbd986;
-  margin: auto;
-  p {
-    margin: 5px;
-    font-weight: 900;
-  }
-`;
-const SearchBar = styled.div`
-  width: 90%;
-  height: 35px;
-  border-radius: 15px;
-  border: 1px solid #fbd986;
-  margin: auto;
-  display: flex;
-  background: #fefdf8;
-`;
+//   background: #fbd986;
+//   margin: auto;
+//   p {
+//     margin: 5px;
+//     font-weight: 900;
+//   }
+// `;
+// const SearchBar = styled.div`
+//   width: 90%;
+//   height: 35px;
+//   border-radius: 15px;
+//   border: 1px solid #fbd986;
+//   margin: auto;
+//   display: flex;
+//   background: #fefdf8;
+// `;
 const SearchBtn = styled(Search)`
   cursor: pointer;
 `;

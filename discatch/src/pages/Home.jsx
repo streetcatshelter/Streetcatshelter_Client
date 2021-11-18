@@ -22,19 +22,19 @@ import InfinityScroll from '../shared/InfinityScroll';
 const Home = (props) => {
   const dispatch = useDispatch();
   const catList = useSelector((state) => state.cat.list);
-  const location = useSelector((state) => state.map.keywordList[0]);
+
+  const userLocation = useSelector((state) => state.map.keywordList[0]);
+
   const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
-  const userLocation = location ? location : userVillage;
+  const location = userLocation ? userLocation : userVillage;
 
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));
   };
 
   useEffect(() => {
-    location === undefined
-      ? dispatch(__getCatLocation(userVillage))
-      : dispatch(__getCatLocation(location));
-  }, [userVillage, location]);
+    dispatch(__getCatLocation(location));
+  }, [location, dispatch]);
 
   return (
     <Template props={props}>
@@ -58,7 +58,7 @@ const Home = (props) => {
       <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push({pathname:`/map/${userLocation}`, state: { userLocation }});
+          history.push(`/map/${location}`);
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />

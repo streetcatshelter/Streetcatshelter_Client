@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { chatActions } from "../../redux/modules/chat";
-import { pushChatMessage } from "../../redux/modules/chat";
+
 import styled from "styled-components";
+import moment from "moment";
+import "moment/locale/ko";
 const ChatMessage = (props) => {
   const dispatch = useDispatch();
   const commentsEndRef = useRef(null);
@@ -25,13 +27,22 @@ const ChatMessage = (props) => {
       {LastMessages ? (
         <ChatBox>
           {LastMessages.map((lastmessage, idx) => {
+            const ChatTime = moment(lastmessage.time).format(
+              "YYYY-M-D hh:mm:ss"
+            );
+            const MinuteDiff = moment(ChatTime).diff(moment(), "minutes");
+            // format 1, 전송한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
+            const SendMsg = moment(ChatTime).format(" YYYY- M-D hh:mm:ss");
+            // format 2, 전송한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
+            const RecentlySendChat = moment(ChatTime).fromNow();
+            const SendTime = MinuteDiff < 24 * 60 ? RecentlySendChat : SendMsg;
             return (
               <div key={idx}>
                 {lastmessage.sender === NickName ? (
                   <div>
                     <BubbleTop user="my">{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="my">
-                      <p>{lastmessage.time}</p>
+                      <p>{SendTime}</p>
                       <Bubble user="my">{lastmessage.message} </Bubble>
                     </BubbleBox>
                   </div>
@@ -40,7 +51,7 @@ const ChatMessage = (props) => {
                     <BubbleTop>{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="friend">
                       <Bubble user="friend">{lastmessage.message} </Bubble>
-                      <p>{lastmessage.time}</p>
+                      <p>{SendTime}</p>
                     </BubbleBox>
                   </div>
                 )}
@@ -61,6 +72,7 @@ const ChatBox = styled.div`
   flex-direction: column;
   overflow: hidden;
   height: 60%;
+  margin-top: 65px;
 `;
 
 const BubbleTop = styled.div`

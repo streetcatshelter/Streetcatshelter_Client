@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Template, ChatBoxs } from "../../components";
+import { EditModalSlide } from "../../components";
 import { chatActions } from "../../redux/modules/chat";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { history } from "../../redux/configureStore";
-
+import moment from "moment";
 const ChatMain = () => {
   const dispatch = useDispatch();
   const Rooms = useSelector((state) => state.chat.roomlist);
-  console.log(Rooms);
 
   useEffect(() => {
     dispatch(chatActions._getRooms());
@@ -20,31 +19,48 @@ const ChatMain = () => {
         <Header>채팅</Header>
 
         {Rooms.map((room, idx) => {
+          const LastActivity = moment(room.lastActivity).format(
+            "YYYY-M-D hh:mm"
+          );
           return (
-            <ChatRoom
-              key={idx}
-              onClick={() => {
-                history.push(`api/chat/enter/${room.roomId}`);
-              }}
-            >
+            <ChatRoom key={idx}>
               <InnerBox>
                 <ProfileImg
-                  src={room.user[0].profileImageUrl}
-                  alt={room.user[0].profileImageUrl}
+                  onClick={() => {
+                    history.push(`api/chat/enter/${room.roomId}`);
+                  }}
+                  src={room.opponentImage}
+                  alt={room.opponentImage}
                 />
                 <ChatInfo>
-                  <InfoInner>
-                    <p>{room.user[0].nickname}</p>
-                    <p>{room.user[0].modifiedAt}</p>
-                  </InfoInner>
-                  <ChatMsg>
-                    오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
-                    가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
-                    언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에
-                    밥주러 언제 가시나요?오늘 한강에 밥주러 언제 가시나요?오늘
-                    한강에 밥주러 언제 가시나요?오늘 한강에 밥주러 언제
-                    가시나요?오늘 한강에 밥주러 언제 가시나요?오늘 한강에 밥주러
-                    언제 가시나요?오늘 한강에 밥주러 언제 가시나요?
+                  <InfoHead>
+                    {" "}
+                    <InfoInner
+                      onClick={() => {
+                        history.push(`api/chat/enter/${room.roomId}`);
+                      }}
+                    >
+                      <p>{room.opponent}</p>
+                      {room.lastActivity ? <p>{LastActivity}</p> : ""}
+                    </InfoInner>
+                    <EditModalSlide
+                      FirstBtn="상대방 프로필보기"
+                      SecondBtn="채팅방 삭제하기"
+                      FirstClick={() => {}}
+                      SecondClick={() => {
+                        dispatch(chatActions._deleteRoom(room.roomId));
+                      }}
+                    />
+                  </InfoHead>
+
+                  <ChatMsg
+                    onClick={() => {
+                      history.push(`api/chat/enter/${room.roomId}`);
+                    }}
+                  >
+                    {room.lastMessage === "메세지가없어요"
+                      ? `${room.opponent}와 채팅을 시작해보세요!`
+                      : room.lastMessage}
                   </ChatMsg>
                 </ChatInfo>
               </InnerBox>
@@ -93,19 +109,25 @@ const ChatInfo = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
+const InfoHead = styled.div`
+  display: flex;
+  justify-content: space-between;
+  line-height: 14px;
+  align-items: center;
+`;
 const InfoInner = styled.div`
   display: flex;
   height: 25px;
-
+  align-items: center;
   p {
     :nth-child(1) {
       font-weight: 900;
       font-size: 14px;
-      margin-right: 10px;
+      margin: auto 10px auto 0px;
     }
     :nth-child(2) {
       font-size: 12px;
+      margin: 0px;
     }
   }
 `;

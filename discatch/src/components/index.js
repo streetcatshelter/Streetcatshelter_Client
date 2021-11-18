@@ -52,16 +52,14 @@ import CommunityPreview from "./community/CommunityPreview";
 import Location from "./map/Location";
 
 /* chat */
-import ChatBoxs from "./chat/ChatBoxs";
-import ChatWrite from "./chat/ChatWrite";
-import ChatTest from "./chat/ChatTest";
 import ChatMain from "./chat/ChatMain";
-import ChatEx from "./chat/ChatEx";
 import ChatRoom from "./chat/ChatRoom";
+import ChatMessage from "./chat/ChatMessage";
 
 import GoogleLoginBtn from "./GoogleLoginBtn";
 
 import Spinner from "./Spinner";
+
 export {
   /* ==Templates */
   Router,
@@ -108,12 +106,10 @@ export {
   /* map */
   Location,
   /* chat */
-  ChatBoxs,
-  ChatWrite,
-  ChatTest,
   ChatMain,
-  ChatEx,
   ChatRoom,
+  ChatMessage,
+  /* login */
   GoogleLoginBtn,
   Spinner,
 };

@@ -7,7 +7,7 @@ import { flexBox } from "../shared/style";
 
 // ROUTE
 import { Link } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 // ELEMENTS
 import { Grid } from "../elements";
@@ -26,13 +26,19 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const path = props.path;
   const userInfo = useSelector((state) => state.mypage.userInfo);
+  console.log(locationA);
+  console.log(path);
+  console.log(userInfo);
   let location1;
   if (userInfo.locationList && path.length === 1) {
-    location1 = userInfo?.locationList[0].split('@')[0]
+    location1 = userInfo?.locationList[0].split("@")[0];
   } else {
     location1 = locationA.state?.userLocation;
   }
-  const locationList = userInfo.locationList?.filter(v => v.split('@')[0] !== location1);
+  const locationList = userInfo.locationList?.filter(
+    (v) => v.split("@")[0] !== location1
+  );
+
   let location2;
   let location3;
   if(userInfo.locationList !== undefined) {
@@ -46,7 +52,7 @@ const Header = (props) => {
   
 
   const [searchModal, setSearchModal] = useState(false);
-  
+
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, [dispatch]);
@@ -57,15 +63,21 @@ const Header = (props) => {
 
   let options;
   if (location1 !== undefined && location2 === undefined) {
-    options = [
-      { key: 1, value: location1 }
-    ]
-  } else if (location1 !== undefined && location2 !== undefined && location3 === undefined) {
+    options = [{ key: 1, value: location1 }];
+  } else if (
+    location1 !== undefined &&
+    location2 !== undefined &&
+    location3 === undefined
+  ) {
     options = [
       { key: 1, value: location1 },
-      { key: 2, value: location2 }
-            ];
-  } else if (location1 !== undefined && location2 !== undefined && location3 !== undefined) {
+      { key: 2, value: location2 },
+    ];
+  } else if (
+    location1 !== undefined &&
+    location2 !== undefined &&
+    location3 !== undefined
+  ) {
     options = [
       { key: 1, value: location1 },
       { key: 2, value: location2 },
@@ -80,6 +92,9 @@ const Header = (props) => {
     dispatch(searchMap(keyword));
   };
 
+  if (!userInfo) {
+    return <div></div>;
+  }
   return (
     <HeaderStyle>
       <Grid
@@ -93,11 +108,12 @@ const Header = (props) => {
         <Grid width="20%" height="100%" margin="auto">
           {path === "/" || path === "/community" || path === "/map/:village"? (
             <SelectStyle onChange={onChangeHandler} value={place}>
-              {options && options.map((pl, idx) => (
-                <option key={pl.key} value={pl.value}>
-                  {pl.value}
-                </option>
-              ))}
+              {options &&
+                options.map((pl, idx) => (
+                  <option key={pl.key} value={pl.value}>
+                    {pl.value}
+                  </option>
+                ))}
             </SelectStyle>
           ) : (
             <ArrowLeft

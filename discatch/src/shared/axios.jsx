@@ -36,6 +36,7 @@ export const chatApi = {
   getRoomInfo: (roomId) => instance.get(`/api/chat/enter/${roomId}`),
   createRoom: (chatuser) => instance.post("/api/chat/create", chatuser),
   getAllMessage: (roomId) => instance.get(`/api/chat/message/${roomId}`),
+  deleteRoom: (roomId) => instance.put(`/api/chat/quit/${roomId}`),
 };
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),

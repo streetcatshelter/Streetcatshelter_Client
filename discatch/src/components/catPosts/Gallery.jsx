@@ -1,19 +1,19 @@
-// library
+// LIBRARY
 import React from 'react';
 import { css } from 'styled-components';
 
-// element
+// ELEMENTS
 import { Grid, Image } from '../../elements';
 
-// style
+// STYLE
 import { flexBox } from '../../shared/style';
 
-// redux
+// REDUX
 import { history } from '../../redux/configureStore';
 
-const Gallery = ({ gallery }) => {
+const Gallery = ({ gallery, location }) => {
   const catDetailId = gallery.catDetailId;
-
+  console.log(location);
   return (
     <Grid
       margin="2% auto"
@@ -22,7 +22,7 @@ const Gallery = ({ gallery }) => {
           ${flexBox()}
         `;
       }}
-      clickEvent={() => history.push(`/catdetailinfo/${catDetailId}`)}
+      clickEvent={() => history.push(`/catdetailinfo/${location}/${catDetailId}`)}
     >
       <Image src={gallery.catImages} width="100%" height="250px" />
     </Grid>

@@ -1,17 +1,18 @@
-// library
+// LIBRARY
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-// element
+// ELEMENTS
 import { Grid } from '../../elements';
 
-// component
+// COMPONENTS
 import { Gallery } from '..';
 
-// redux
+// REDUX
 import { __getGallery } from '../../redux/modules/cat';
 
 const CatGallery = (props) => {
+  const location = props.location;
   const dispatch = useDispatch();
   const catId = props.catId;
 
@@ -26,7 +27,7 @@ const CatGallery = (props) => {
       {galleryList.map((gallery, idx) => {
         return (
           <Grid key={idx}>
-            <Gallery catId={catId} gallery={gallery} />
+            <Gallery catId={catId} gallery={gallery} location={location}/>
           </Grid>
         );
       })}

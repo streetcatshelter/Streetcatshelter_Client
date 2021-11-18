@@ -20,8 +20,6 @@ const Community = (props) => {
   } else {
     pathVillage = village
   }
-  console.log(userInfo);
-  console.log(village);
   const requestLocationInfo = () => {
     history.push('/userinfoedit');
     alert('동네 정보를 입력해주세요!')

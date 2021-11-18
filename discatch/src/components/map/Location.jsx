@@ -21,13 +21,12 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../../redux/configureStore';
 import { __getCatLocation } from '../../redux/modules/cat';
 
-const Location = (props) => {
+const Location = () => {
   const path = useLocation();
   const dispatch = useDispatch();
   let vKeyword;
 
   const pathVillage = path.pathname.split('/')[2];
-  console.log(pathVillage);
   let location = pathVillage;
   let userVillage;
   const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
@@ -87,16 +86,9 @@ const Location = (props) => {
     dispatch(__getCatLocation(location));
   },[location, dispatch]);
 
-  console.log(location);
-
-
-  //리덕스에서 키워드를 받아옵니다.
-
-  console.log(catList);
 
   const positions = [];
   const makePosition = () => {
-      console.log(catList)
       for (let i = 0; i < catList.length; i ++) {
         positions.push({
           catName : catList[i].catName, 
@@ -107,22 +99,6 @@ const Location = (props) => {
       return positions;
   }
   const position = useMemo(() => makePosition(), [catList]);
-  console.log(position);
-
-
-  // const positions = [];
-
-  // for (let i = 0; i < catList.length; i ++) {
-  //   positions.push({
-  //     catName : catList[i].catName, 
-  //     latlng: new kakao.maps.LatLng(catList[i].latitude, catList[i].longitude),
-  //     catId: catList[i].catId
-  //   });
-  // }
-
-  
-
-
 
   const [searchKeyword, setSearchKeyword] = useState('');
   const [Pagination, SetPagination] = useState("");
@@ -226,11 +202,8 @@ const Location = (props) => {
     setSearchKeyword('')
   };
 
-  //위도 저장
   const [latitude, setLatitude] = useState();
-  //경도 저장
   const [longitude, setLongitude] = useState();
-
 
 
   useEffect(() => {

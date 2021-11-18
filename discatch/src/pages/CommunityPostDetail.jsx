@@ -1,7 +1,6 @@
+// LIBRARY
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../redux/configureStore';
-
 
 // COMPONENTS
 import { Template, CommentList, EditModalSlide } from "../components";
@@ -16,6 +15,7 @@ import { Grid, Text, Image } from "../elements/index";
 import Avatar from '@material-ui/core/Avatar';
 
 // REDUX
+import { history } from '../redux/configureStore';
 import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
 import { chatActions } from "../redux/modules/chat";
 

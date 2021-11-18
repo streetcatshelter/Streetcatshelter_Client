@@ -26,14 +26,11 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const path = props.path;
   const userInfo = useSelector((state) => state.mypage.userInfo);
-  console.log(locationA);
-  console.log(path);
-  console.log(userInfo);
   let location1;
   if (userInfo.locationList && path.length === 1) {
     location1 = userInfo?.locationList[0].split("@")[0];
   } else {
-    location1 = locationA.state?.userLocation;
+    location1 = locationA.state?.location;
   }
   const locationList = userInfo.locationList?.filter(
     (v) => v.split("@")[0] !== location1

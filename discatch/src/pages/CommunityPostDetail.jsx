@@ -26,13 +26,13 @@ const CommunityPostDetail = (props) => {
   const { category, contents, imageList, location, title, username, createdAt, nickname, profileImageUrl } = useSelector((state) => ({
     category: state.community.list.data?.category,
     contents: state.community.list.data?.contents,
-    imageList: state.community.list.data?.communityImageList ? state.community.list.data.communityImageList : Array(1,2,3),
+    imageList: state.community.list.data?.communityImageList ? state.community.list.data.communityImageList : Array(1),
     location: state.community.list.data?.location,
     title: state.community.list.data?.title,
     username: state.community.list.data?.username,
     nickname: state.community.list.data?.nickname,
     profileImageUrl: state.community.list.data?.profileImageUrl,
-    createdAt: state.community.list.data?.createdAt ? state.community.list.data?.createdAt : Array(1,3,4),
+    createdAt: state.community.list.data?.createdAt ? state.community.list.data?.createdAt : Array(1),
   }));
 
   const deleteCommunity = () => {

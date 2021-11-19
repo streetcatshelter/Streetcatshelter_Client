@@ -83,7 +83,7 @@ const CommentCard = ({ comment }) => {
           </Text>
         </Grid>
 
-        {UserInfo.userName === comment.username && (
+        {UserInfo.nickname === comment.nickname && (
           <Button onClick={deleteBtn}>
             <Trash2 size="12px" color="red" />
           </Button>

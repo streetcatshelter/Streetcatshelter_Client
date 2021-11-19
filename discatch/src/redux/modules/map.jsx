@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // INITIAL STATE
 const initialState = {
-  villageList: ["망원동", "합정동", "평창동"],
-  keywordList: ["망원동"],
+  villageList: [],
+  keywordList: [],
   typeKeywordList: [],
   resultList: [],
 };
@@ -20,9 +20,7 @@ const map = createSlice({
     },
     searchKeywordMap: (state, action) => {
       const keyword = action.payload;
-      console.log(keyword);
       state.typeKeywordList.unshift(keyword);
-      console.log(keyword);
     },
     searchResult: (state, action) => {
       const ResultList = action.payload;

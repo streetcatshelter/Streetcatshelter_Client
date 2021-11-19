@@ -52,7 +52,7 @@ const CommunityDetail = (props) => {
   React.useEffect(() => {
     dispatch(getCommunityDB(category, location));
   }, [category, location, dispatch]);
-  
+
   return (
     <Template props={props}>
       <Header>{category}</Header>

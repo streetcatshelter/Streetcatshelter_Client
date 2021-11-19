@@ -83,7 +83,6 @@ const uploadImageDB = (callNext) => {
   return async function (dispatch, getState) {
     const imgList = getState().image.file;
     const imgUrl = getState().image.imageUrl;
-    console.log(imgList, imgUrl);
     for (let i = 0; i < imgList.length; i++) {
       const img = imgList[i];
       const url = imgUrl[i];

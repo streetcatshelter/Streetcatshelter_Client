@@ -10,10 +10,13 @@ import styled, { css } from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 
 // ELEMENTS
-import { Grid, Text } from "../elements";
+import { Grid, Text, Button } from "../elements";
 
 // ICON
 import { Home, Users, Compass, Send, User } from "react-feather";
+
+// REDUX
+import { history } from "../redux/configureStore";
 
 const Menu = () => {
   const path = useLocation();
@@ -26,6 +29,11 @@ const Menu = () => {
     if (location !== pathLocation) {
       location = pathLocation;
     }
+  }
+
+  const moveToCommunity = () => {
+    history.push({pathname: '/community', state: { location }});
+    window.location.reload();
   }
 
   return (
@@ -49,6 +57,13 @@ const Menu = () => {
             홈
           </Text>
         </Link>
+        {/* <Button 
+          onClick={()=>moveToCommunity()}
+          width='30px' style={{opacity: '0.1'}}>
+        <Users />
+        <Text size="12px">커뮤니티</Text>
+        </Button> */}
+
         <Link
           to={{pathname: '/community', state: { location }}}
           style={{

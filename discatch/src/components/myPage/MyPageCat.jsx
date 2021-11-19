@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 /* == Custom - Elements*/
-import { Image, Text } from "../../elements";
+import { Image } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
 
 /* == Redux */
@@ -12,7 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
 
+/* == moment*/
 import moment from "moment";
+
 const MyPageCat = () => {
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
   const dispatch = useDispatch();

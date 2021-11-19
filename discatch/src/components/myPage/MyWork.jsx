@@ -8,10 +8,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
 const Mywork = () => {
-  // const NoticeList = useSelector((state) => state.mypage.noticelist);
-  // console.log(NoticeList);
-  const dispatch = useDispatch();
-
   return (
     <Wrapper>
       <ProgressBar />

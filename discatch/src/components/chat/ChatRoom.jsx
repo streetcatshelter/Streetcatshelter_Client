@@ -1,23 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
+
+// socket
 import * as StompJs from "@stomp/stompjs";
 import * as SockJS from "sockjs-client";
+
+// ELEMENTS
+import { Image, Grid } from "../../elements";
+
+// STYLE
+import styled from "styled-components";
+
+// COMPONENTS
+import { EditModalSlide, ChatMessage } from "..";
+
+// moment
+import moment from "moment";
+
+// REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { chatActions } from "../../redux/modules/chat";
 import { pushChatMessage } from "../../redux/modules/chat";
-import styled from "styled-components";
-import { Image, Grid } from "../../elements";
-import moment from "moment";
-import { EditModalSlide } from "..";
-import ChatMessage from "./ChatMessage";
 
 const ChatRoom = (props) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const ChatInfo = useSelector((state) => state.chat.chatinfo);
-
   const username = useSelector((state) => state.mypage.userInfo.username);
 
   const client = useRef({});
+  const [message, setMessage] = useState("");
 
   //header 마지막 활동 시간
   const LastActivity = moment(ChatInfo.lastActivity).format(
@@ -29,8 +40,6 @@ const ChatRoom = (props) => {
   // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
   const recentlyUpdated = moment(LastActivity).fromNow();
   const sendtime = hourDiff < 22 ? recentlyUpdated : updated;
-
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     dispatch(chatActions._getAllMessage(props.roomId));
@@ -91,18 +100,21 @@ const ChatRoom = (props) => {
     if (!client.current.connected) {
       return;
     }
+    if (message.length > 0) {
+      client.current.publish({
+        destination: "/pub/api/chat/message",
+        headers: { token: token },
+        body: JSON.stringify({
+          message: message,
+          roomId: props.roomId,
+          userName: username,
+        }),
+      });
 
-    client.current.publish({
-      destination: "/pub/api/chat/message",
-      headers: { token: token },
-      body: JSON.stringify({
-        message: message,
-        roomId: props.roomId,
-        userName: username,
-      }),
-    });
-
-    setMessage("");
+      setMessage("");
+    } else {
+      alert("메세지를 입력해주세요!");
+    }
   };
 
   return (
@@ -123,7 +135,14 @@ const ChatRoom = (props) => {
         </InfoBox>
 
         <CallBox>
-          <EditModalSlide />
+          <EditModalSlide
+            FirstBtn="상대방 프로필보기"
+            SecondBtn="채팅방 삭제하기"
+            FirstClick={() => {}}
+            SecondClick={() => {
+              dispatch(chatActions._deleteRoom(props.roomId));
+            }}
+          />
         </CallBox>
       </Header>
       <Grid style={{ height: "60%" }}>

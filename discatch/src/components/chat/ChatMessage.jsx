@@ -1,15 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
+
+// STYLE
+import styled from "styled-components";
+
+//moment
+import moment from "moment";
+import "moment/locale/ko";
+
+// REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { chatActions } from "../../redux/modules/chat";
 
-import styled from "styled-components";
-import moment from "moment";
-import "moment/locale/ko";
 const ChatMessage = (props) => {
   const dispatch = useDispatch();
   const commentsEndRef = useRef(null);
   const LastMessages = useSelector((state) => state.chat.chatmessage);
-  const username = useSelector((state) => state.mypage.userInfo.username);
   const NickName = useSelector((state) => state.mypage.userInfo.nickname);
   // 댓글 스크롤 밑으로 이동
   const scrollToBottom = () => {
@@ -35,7 +40,7 @@ const ChatMessage = (props) => {
             const SendMsg = moment(ChatTime).format(" YYYY- M-D hh:mm:ss");
             // format 2, 전송한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
             const RecentlySendChat = moment(ChatTime).fromNow();
-            const SendTime = MinuteDiff < 24 * 60 ? RecentlySendChat : SendMsg;
+            const SendTime = MinuteDiff > -60 ? RecentlySendChat : SendMsg;
             return (
               <div key={idx}>
                 {lastmessage.sender === NickName ? (

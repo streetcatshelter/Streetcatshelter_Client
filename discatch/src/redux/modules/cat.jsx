@@ -1,9 +1,9 @@
 // library
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 // api
-import instance, { catApi } from '../../shared/axios';
+import instance, { catApi } from "../../shared/axios";
 // redux
-import { imgActions } from './image';
+import { imgActions } from "./image";
 
 // 기본 정보 작성
 export const __createCatInfo = (
@@ -34,11 +34,11 @@ export const __createCatInfo = (
             username: username,
           };
           instance
-            .post('/cat/create', catInfo)
+            .post("/cat/create", catInfo)
             .then((res) => {
               dispatch(createCatInfo(catInfo));
               dispatch(imgActions.setInitialState());
-              history.push('/');
+              history.push("/");
             })
             .catch((err) => {
               console.error(err);
@@ -90,7 +90,7 @@ export const __createCatDetailInfo = (
         })
       );
     } else if (imgFile.length > 3) {
-      alert('사진은 최대 3장까지 등록할 수 있어요!');
+      alert("사진은 최대 3장까지 등록할 수 있어요!");
     } else {
       return;
     }
@@ -140,8 +140,8 @@ export const __getCatDetail =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
     try {
+      console.log(catDetailId);
       const { data } = await catApi.getCatDetail(catDetailId);
-
       dispatch(getCatDetail(data));
     } catch (err) {
       console.error(err);
@@ -187,14 +187,13 @@ export const __getGallery =
     }
   };
 
-// 기본 정보 좋아요 💩
+// 기본 정보 좋아요
 export const __catLike =
-  (catId) =>
+  (catId, location) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catLike(catId);
-
-      window.location.reload();
+      dispatch(__getCatLocation(location));
     } catch (err) {
       console.error(err);
     }
@@ -219,7 +218,7 @@ export const __deleteCatDetail =
     try {
       const data = await catApi.deleteCatDetail(catDetailId);
       dispatch(deleteCatDetail(catDetailId));
-      window.alert('게시물 삭제 완료!');
+      window.alert("게시물 삭제 완료!");
       history.goBack();
     } catch (err) {
       console.error(err);
@@ -237,7 +236,7 @@ const initialState = {
 };
 
 const cat = createSlice({
-  name: 'cat',
+  name: "cat",
   initialState,
   reducers: {
     createCatInfo: (state, action) => {
@@ -298,7 +297,7 @@ const cat = createSlice({
     },
 
     deleteCatDetail: (state, action) => {
-      console.log('삭제 요청 완료');
+      console.log("삭제 요청 완료");
     },
   },
 });

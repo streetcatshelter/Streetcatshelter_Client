@@ -8,7 +8,6 @@ import { imgActions } from "./image";
 // 커뮤니티 글 등록
 export const addCommunityDB = (category, contents, location, title) => {
   return function (dispatch, getState, { history }) {
-    const imgFile = getState().image.file;
     const userInfo = localStorage.getItem("userInfo");
     const path = category.split(" ");
     let pathName = null;
@@ -20,36 +19,29 @@ export const addCommunityDB = (category, contents, location, title) => {
       pathName = "sharing";
     }
     const username = userInfo.split('"')[5];
-    if (imgFile.length < 6) {
-      dispatch(
-        imgActions.uploadImagesDB(() => {
-          const imageUrl = getState().image.imageUrls;
-          const postInfo = {
-            category: category,
-            contents: contents,
-            image: imageUrl,
-            location: location,
-            title: title,
-            username: username,
-          };
-          instance
-            .post("/community/create", postInfo)
-            .then((res) => {
-              dispatch(addCommunity(postInfo));
-              dispatch(imgActions.setInitialState());
-              dispatch(getCommunityDB(category, location));
-              window.location.replace(`/community/${location}/${pathName}`);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        })
-      );
-    } else if (imgFile.length > 5) {
-      alert("사진은 최대 5장까지 등록할 수 있어요!");
-    } else {
-      return;
-    }
+    dispatch(
+      imgActions.uploadImagesDB(() => {
+        const imageUrl = getState().image.imageUrls;
+        const postInfo = {
+          category: category,
+          contents: contents,
+          image: imageUrl,
+          location: location,
+          title: title,
+          username: username,
+        };
+        instance
+          .post("/community/create", postInfo)
+          .then((res) => {
+            dispatch(imgActions.setInitialState());
+            dispatch(getCommunityDB(category, location));
+            history.push(`/community/${location}/${pathName}`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+    );
   };
 };
 

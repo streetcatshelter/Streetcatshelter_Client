@@ -1,19 +1,19 @@
 // LIBRARY
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import styled, { css } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 // ELEMENTS
-import { Grid, Text } from '../../elements/index';
+import { Grid, Text } from "../../elements/index";
 
 // ROUTE
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 // ICON
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 // REDUX
-import { communityLikeToggleDB } from '../../redux/modules/community';
+import { communityLikeToggleDB } from "../../redux/modules/community";
 
 const Comment = () => {
   const dispatch = useDispatch();
@@ -25,12 +25,12 @@ const Comment = () => {
   const userLike = community.data?.liked;
 
   const updateLikes = () => {
-      dispatch(communityLikeToggleDB(communityId));
+    dispatch(communityLikeToggleDB(communityId));
   };
 
   return (
     <Grid
-      margin="20px 0px 15px 0px"
+      margin="20px auto 15px auto"
       addstyle={() => {
         return css`
           display: flex;
@@ -48,39 +48,46 @@ const Comment = () => {
         <Text margin="2px 3px" fontWeight="700" size="16px">
           댓글
         </Text>
-        <Count>{community.data?.cntComment}</Count>
+        {community.data?.cntComment ? (
+          <Count>{community.data?.cntComment}</Count>
+        ) : (
+          ""
+        )}
       </Grid>
-    
-      {location.pathname.split('/')[1] === 'community' && <Grid
-        addstyle={() => {
-          return css`
-            display: flex;
-          `;
-        }}
-      >
-        <Grid></Grid>
+
+      {location.pathname.split("/")[1] === "community" && (
         <Grid
           addstyle={() => {
             return css`
               display: flex;
-              margin: 0 0 0 60px;
             `;
           }}
         >
-          <Grid>
-          <FavoriteIcon
-            onClick={updateLikes}
-            style={{
-              color: userLike ? 'red' : 'gray',
-              position:'relative',
-              bottom:'2px'}}
-          />
+          <Grid></Grid>
+          <Grid
+            addstyle={() => {
+              return css`
+                display: flex;
+                margin: 0 0 0 60px;
+              `;
+            }}
+          >
+            <Grid>
+              <FavoriteIcon
+                onClick={updateLikes}
+                style={{
+                  color: userLike ? "red" : "gray",
+                  position: "relative",
+                  bottom: "2px",
+                }}
+              />
+            </Grid>
+            <Text fontWeight="bold" margin="0 0 0 -25px" width="32px">
+              {community.data?.cntLikeit}
+            </Text>
           </Grid>
-          <Text fontWeight="bold" margin="0 0 0 -25px" width="32px">
-            {community.data?.cntLikeit}
-          </Text>
         </Grid>
-      </Grid>}
+      )}
     </Grid>
   );
 };

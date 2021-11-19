@@ -4,7 +4,7 @@ import React from "react";
 // STYLE
 import styled from "styled-components";
 
-const Image = ({ src, width, height, ...props }) => {
+const Image = ({ src, width, clickEvent, height, ...props }) => {
   return (
     <React.Fragment>
       <AspectInner
@@ -12,6 +12,7 @@ const Image = ({ src, width, height, ...props }) => {
         src={src}
         width={width}
         height={height}
+        onClick={clickEvent}
       ></AspectInner>
     </React.Fragment>
   );

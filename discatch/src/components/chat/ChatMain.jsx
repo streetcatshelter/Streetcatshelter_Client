@@ -1,17 +1,18 @@
-// LIBRARY
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
-
-// COMPONENTS
-import { EditModalSlide } from "../../components";
+import React, { useEffect, useState } from "react";
 
 // STYLE
 import styled from "styled-components";
 
+// COMPONENTS
+import { EditModalSlide } from "../../components";
+
+// moment
+import moment from "moment";
+
 // REDUX
-import { chatActions } from "../../redux/modules/chat";
 import { history } from "../../redux/configureStore";
+import { chatActions } from "../../redux/modules/chat";
+import { useDispatch, useSelector } from "react-redux";
 
 const ChatMain = () => {
   const dispatch = useDispatch();

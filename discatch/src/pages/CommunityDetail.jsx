@@ -27,20 +27,20 @@ import { history } from "../redux/configureStore";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
-  const location = props.match.params.village.split('@')[0];
+  const location = props.match.params.village.split("@")[0];
 
   const path = useLocation();
   let category = null;
-  let nextPath = null
+  let nextPath = null;
   if (path.pathname === `/community/${location}/catinfo`) {
-    category = '고양이 정보글';
-    nextPath = 'catinfo'
+    category = "고양이 정보글";
+    nextPath = "catinfo";
   } else if (path.pathname === `/community/${location}/gathering`) {
     category = `${location} 동네 모임`;
-    nextPath = 'gathering'
+    nextPath = "gathering";
   } else if (path.pathname === `/community/${location}/sharing`) {
     category = `${location} 고양이 용품 나눔`;
-    nextPath = 'sharing'
+    nextPath = "sharing";
   }
 
   const getMoreCommunity = () => {
@@ -52,9 +52,10 @@ const CommunityDetail = (props) => {
   React.useEffect(() => {
     dispatch(getCommunityDB(category, location));
   }, [category, location, dispatch]);
-  
+
   return (
     <Template props={props}>
+      <Header>{category}</Header>
       <Grid
         bgColor="bgColor"
         margin="-10vh 0 0 0"
@@ -76,15 +77,8 @@ const CommunityDetail = (props) => {
                 top: 90px;
               `;
             }}
-          >
-            <Text 
-              size="18px" 
-              margin="0 0 0 10px"
-              >
-              {category}
-            </Text>
-          </Grid>
-          <Grid 
+          ></Grid>
+          <Grid
             margin="-95vh 0 0 0"
             addstyle={() => {
               return css`
@@ -93,35 +87,33 @@ const CommunityDetail = (props) => {
                 }
               `;
             }}
-            >
-
-          {communityList?.length ? (
-            communityList.map((community, idx) => {
-              return (
-                <InfinityScroll
-                  next={getMoreCommunity}
-                  index={idx}
-                  length={communityList.length}
-                  key={community.communityId}
-                >
-                  <CommunityPost community={community} />
-                </InfinityScroll>
-              );
-            })
-          ) : (
-            <></>
-          )}
+          >
+            {communityList?.length ? (
+              communityList.map((community, idx) => {
+                return (
+                  <InfinityScroll
+                    next={getMoreCommunity}
+                    index={idx}
+                    length={communityList.length}
+                    key={community.communityId}
+                  >
+                    <CommunityPost community={community} />
+                  </InfinityScroll>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </Grid>
         </CommunityDetailStyle>
         <Button
           clickEvent={() =>
-              history.push(`/community/${location}/${nextPath}/write`)
+            history.push(`/community/${location}/${nextPath}/write`)
           }
           is_float="is_float"
         >
           <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
         </Button>
-        
       </Grid>
     </Template>
   );
@@ -136,6 +128,14 @@ const CommunityDetailStyle = styled.div`
     height: 92vh;
     margin: -10vh 0 0;
   }
+`;
+
+const Header = styled.div`
+  height: 30px;
+  font-size: 16px;
+  font-weight: 900;
+  text-align: center;
+  border-bottom: 0.2px solid rgba(203, 207, 94, 1);
 `;
 
 export default CommunityDetail;

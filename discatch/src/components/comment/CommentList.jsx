@@ -1,20 +1,20 @@
 // LIBRARY
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import Comment from './Comment';
-import CommentCard from './CommentCard';
+import Comment from "./Comment";
+import CommentCard from "./CommentCard";
 
 // STYLE
-import { css } from 'styled-components';
-import { flexBox } from '../../shared/style';
+import { css } from "styled-components";
+import { flexBox } from "../../shared/style";
 
 // ELEMENTS
-import { Grid, Button, TextArea } from '../../elements/index';
+import { Grid, Button, TextArea } from "../../elements/index";
 
 // REDUX
-import { addCommunityCommentDB } from '../../redux/modules/community';
+import { addCommunityCommentDB } from "../../redux/modules/community";
 
 const CommentList = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const CommentList = (props) => {
 
   let communityId = props.props?.match.params.communityId;
 
-  const [comments, setComment] = React.useState('');
+  const [comments, setComment] = React.useState("");
 
   const commentList = community.data?.commentList;
 
@@ -31,7 +31,7 @@ const CommentList = (props) => {
   };
 
   const addCommentBtn = () => {
-      dispatch(addCommunityCommentDB(comments, communityId));
+    dispatch(addCommunityCommentDB(comments, communityId));
   };
 
   return (
@@ -42,7 +42,7 @@ const CommentList = (props) => {
         margin="0 auto"
         addstyle={() => {
           return css`
-            ${flexBox('flex-start')}
+            ${flexBox("flex-start")}
           `;
         }}
       >
@@ -54,7 +54,7 @@ const CommentList = (props) => {
             return css`
               border: 1px solid rgb(${(props) => props.theme.palette.yellow});
               border-radius: 10px;
-              resize:none;
+              resize: none;
               overflow-y: hidden;
             `;
           }}
@@ -67,7 +67,7 @@ const CommentList = (props) => {
           addstyle={() => {
             return css`
               display: flex;
-              position:sticky;
+              position: sticky;
               height: 30px;
               align-items: center;
               justify-content: center;
@@ -80,7 +80,13 @@ const CommentList = (props) => {
 
       {commentList &&
         commentList.map((comment, idx) => {
-          return <CommentCard key={idx} comment={comment} />;
+          return (
+            <CommentCard
+              key={idx}
+              comment={comment}
+              communityId={communityId}
+            />
+          );
         })}
     </>
   );

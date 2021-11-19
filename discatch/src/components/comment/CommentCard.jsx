@@ -21,10 +21,9 @@ import Avatar from "@material-ui/core/Avatar";
 import { deleteCommunityCommentDB } from "../../redux/modules/community";
 import { chatActions } from "../../redux/modules/chat";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, communityId }) => {
   const commentId = comment.commentId;
   const dispatch = useDispatch();
-  const username = comment.nickname ? comment.nickname : comment.username;
   const UserInfo = useSelector((state) => state.mypage.userInfo);
 
   const [ProfileModal, setProfileModal] = useState(false);
@@ -42,53 +41,38 @@ const CommentCard = ({ comment }) => {
   };
 
   const deleteBtn = () => {
-    dispatch(deleteCommunityCommentDB(commentId));
+    dispatch(deleteCommunityCommentDB(commentId, communityId));
   };
   return (
-    <>
-      <Grid
-        alignItems="center"
-        addstyle={() => {
-          return css`
-            ${flexBox("space-evenly")};
-            margin: 6% 0 0 0;
-          `;
-        }}
-      >
-        <Grid>
+    <Wrap>
+      <Header>
+        <Left>
           <Profile onClick={OpenProfile}>
-            <Avatar
-              style={{ width: "30px", height: "30px", margin: "3px" }}
-              src={comment.profileImageUrl}
-              alt={"profileImage"}
-            />
-            <p>{username}</p>
+            <img src={comment.profileImageUrl} alt={comment.profileImageUrl} />
+            <p>{comment.nickname}</p>
           </Profile>
-          <Text
-            width="300px"
-            margin="0 0 0 10px"
-            padding="4px"
-            style={{ borderRadius: "10px" }}
-          >
-            {comment.contents}
-          </Text>
-          <Text
-            margin="0 0 0 10px"
-            size="8px"
-            width="30vw"
-            style={{ lineHeight: "30px" }}
-          >
-            {comment.createdAt[0]}.{comment.createdAt[1]}.{comment.createdAt[2]}{" "}
-            {comment.createdAt[3]}시 {comment.createdAt[4]}분
-          </Text>
-        </Grid>
 
-        {UserInfo.nickname === comment.nickname && (
-          <Button onClick={deleteBtn}>
-            <Trash2 size="12px" color="red" />
-          </Button>
-        )}
-      </Grid>
+          {comment.createdAt ? (
+            <span>
+              {" "}
+              {comment.createdAt[0]}.{comment.createdAt[1]}.
+              {comment.createdAt[2]} {comment.createdAt[3]}시
+              {comment.createdAt[4]}분
+            </span>
+          ) : (
+            ""
+          )}
+        </Left>
+
+        <Right>
+          {UserInfo.username === comment.username ? (
+            <Trash2 size="14px" color="red" onClick={deleteBtn} />
+          ) : (
+            ""
+          )}
+        </Right>
+      </Header>
+      <Content>{comment.contents}</Content>
       <EditModalSlide
         FirstBtn="프로필보기"
         SecondBtn="채팅하기"
@@ -97,20 +81,61 @@ const CommentCard = ({ comment }) => {
         FirstClick={() => {}}
         SecondClick={MakeChat}
       />
-    </>
+    </Wrap>
   );
 };
 
+const Wrap = styled.div`
+  width: 95%;
+  margin: 20px auto;
+`;
+const Header = styled.div`
+  display: flex;
+  line-height: 15px;
+  justify-content: space-between;
+`;
+
+const Left = styled.div`
+  display: flex;
+  span {
+    font-size: 10px;
+    line-height: 30px;
+    margin-left: 5px;
+  }
+`;
+
 const Profile = styled.div`
-  width: 30vw;
   display: flex;
   cursor: pointer;
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
   p {
     font-size: 14px;
     margin: 0px 5px;
     line-height: 30px;
     font-weight: bold;
   }
+`;
+const Right = styled.div`
+  display: flex;
+  line-height: 15px;
+  cursor: pointer;
+  align-items: center;
+  svg {
+    line-height: 14px;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+  }
+`;
+
+const Content = styled.p`
+  line-height: 15px;
+  margin: 5px;
+  font-size: 14px;
 `;
 
 export default CommentCard;

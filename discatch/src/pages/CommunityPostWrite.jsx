@@ -24,21 +24,23 @@ import { Camera } from "react-feather";
 
 const CommunityPostWrite = (props) => {
   const path = useLocation();
-  const pathName = path.pathname.split('/');
+  const pathName = path.pathname.split("/");
   const backPath = `/${pathName[1]}/${pathName[2]}/${pathName[3]}`;
-  const location = pathName[2]
-  const preview = useSelector((state) => state.image.preview ? state.image.preview : Array())
+  const location = pathName[2];
+  const preview = useSelector((state) =>
+    state.image.preview ? state.image.preview : Array()
+  );
   const dispatch = useDispatch();
 
   let firstCategory = null;
-  if (pathName[3] === 'catinfo') {
-    firstCategory = '고양이 정보글';
-  } else if (pathName[3] === 'gathering') {
+  if (pathName[3] === "catinfo") {
+    firstCategory = "고양이 정보글";
+  } else if (pathName[3] === "gathering") {
     firstCategory = `${location} 동네 모임`;
   } else {
     firstCategory = `${location} 고양이 용품 나눔`;
   }
-  
+
   const [fileNum, setFileNum] = useState(0);
 
   // S3
@@ -47,20 +49,20 @@ const CommunityPostWrite = (props) => {
     if (fileNum < 5) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setPreview(imageUrl,fileNum));
+      dispatch(imgActions.setPreview(imageUrl, fileNum));
       dispatch(imgActions.setFiles(file, fileNum));
-      setFileNum(fileNum+1);
+      setFileNum(fileNum + 1);
     } else {
-      alert('사진은 최대 5장까지 등록할 수 있어요!');
+      alert("사진은 최대 5장까지 등록할 수 있어요!");
     }
   };
-  
+
   const [category, setCategory] = React.useState(firstCategory);
 
   const Options = [
-    { key: 1, value: '고양이 정보글'},
-    { key: 2, value:`${location} 동네 모임`},
-    { key: 3, value: `${location} 고양이 용품 나눔`},
+    { key: 1, value: "고양이 정보글" },
+    { key: 2, value: `${location} 동네 모임` },
+    { key: 3, value: `${location} 고양이 용품 나눔` },
   ];
 
   const onChangeHandler = (e) => {
@@ -85,27 +87,27 @@ const CommunityPostWrite = (props) => {
     if (preview.lentgh === 5) {
       dispatch(imgActions.delPreview(4));
       dispatch(imgActions.delFile(4));
-      setFileNum(fileNum-1)
+      setFileNum(fileNum - 1);
     } else if (preview.length === 4) {
       dispatch(imgActions.delPreview(3));
       dispatch(imgActions.delFile(3));
-      setFileNum(fileNum-1)
+      setFileNum(fileNum - 1);
     } else if (preview.length === 3) {
       dispatch(imgActions.delPreview(2));
       dispatch(imgActions.delFile(2));
-      setFileNum(fileNum-1)
+      setFileNum(fileNum - 1);
     } else if (preview.length === 2) {
       dispatch(imgActions.delPreview(1));
       dispatch(imgActions.delFile(1));
-      setFileNum(fileNum-1)
+      setFileNum(fileNum - 1);
     } else if (preview.length === 1) {
       dispatch(imgActions.delPreview(0));
       dispatch(imgActions.delFile(0));
-      setFileNum(fileNum-1)
+      setFileNum(fileNum - 1);
     } else {
-      alert('삭제할 사진이 없어요!');
+      alert("삭제할 사진이 없어요!");
     }
-  }
+  };
 
   return (
     <Template props={props}>
@@ -147,19 +149,22 @@ const CommunityPostWrite = (props) => {
             />
             <Button
               bgColor="lightGray"
-              onClick={()=>delLastImageBtn()}
+              onClick={() => delLastImageBtn()}
               addstyle={() => {
                 return css`
-                  display:flex;
-                  justify-content:center;
-                  align-items:center;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
                   height: 20px;
-                  width:120px;
+                  width: 120px;
                   position: relative;
                   top: 3px;
-                  left:4vw;
+                  left: 4vw;
                 `;
-              }}>마지막 사진 삭제</Button>
+              }}
+            >
+              마지막 사진 삭제
+            </Button>
 
             <Grid
               margin="0 0 0 12px"
@@ -229,34 +234,19 @@ const CommunityPostWrite = (props) => {
                 </Grid>
               </Grid>
               {preview[0] && (
-                <CommunityPreview 
-                  preview={preview} 
-                  previewNum={0}
-                />
+                <CommunityPreview preview={preview} previewNum={0} />
               )}
               {preview[1] && (
-                <CommunityPreview 
-                preview={preview} 
-                previewNum={1}
-              />
+                <CommunityPreview preview={preview} previewNum={1} />
               )}
               {preview[2] && (
-                <CommunityPreview 
-                preview={preview} 
-                previewNum={2}
-              />
+                <CommunityPreview preview={preview} previewNum={2} />
               )}
               {preview[3] && (
-                <CommunityPreview 
-                preview={preview} 
-                previewNum={3}
-              />
+                <CommunityPreview preview={preview} previewNum={3} />
               )}
               {preview[4] && (
-                <CommunityPreview 
-                preview={preview} 
-                previewNum={4}
-              />
+                <CommunityPreview preview={preview} previewNum={4} />
               )}
             </Grid>
             <TextArea

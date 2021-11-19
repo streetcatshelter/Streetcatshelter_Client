@@ -1,6 +1,6 @@
 // LIBRARY
 import React, { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import { Template, CommentList, EditModalSlide } from "../components";
@@ -12,27 +12,44 @@ import styled, { css } from "styled-components";
 import { Grid, Text, Image } from "../elements/index";
 
 // ICON
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from "@material-ui/core/Avatar";
 
 // REDUX
-import { history } from '../redux/configureStore';
-import { getOneCommunityDB, deleteCommunityDB } from '../redux/modules/community';
+import { history } from "../redux/configureStore";
+import {
+  getOneCommunityDB,
+  deleteCommunityDB,
+} from "../redux/modules/community";
 import { chatActions } from "../redux/modules/chat";
 
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
-  
-  const { category, contents, imageList, location, title, username, createdAt, nickname, profileImageUrl } = useSelector((state) => ({
+
+  const {
+    category,
+    contents,
+    imageList,
+    location,
+    title,
+    username,
+    createdAt,
+    nickname,
+    profileImageUrl,
+  } = useSelector((state) => ({
     category: state.community.list.data?.category,
     contents: state.community.list.data?.contents,
-    imageList: state.community.list.data?.communityImageList ? state.community.list.data.communityImageList : Array(1),
+    imageList: state.community.list.data?.communityImageList
+      ? state.community.list.data.communityImageList
+      : Array(1),
     location: state.community.list.data?.location,
     title: state.community.list.data?.title,
     username: state.community.list.data?.username,
     nickname: state.community.list.data?.nickname,
     profileImageUrl: state.community.list.data?.profileImageUrl,
-    createdAt: state.community.list.data?.createdAt ? state.community.list.data?.createdAt : Array(1),
+    createdAt: state.community.list.data?.createdAt
+      ? state.community.list.data?.createdAt
+      : Array(1),
   }));
 
   const deleteCommunity = () => {
@@ -50,21 +67,21 @@ const CommunityPostDetail = (props) => {
   };
 
   const MakeChat = () => {
-    const chatuser = { chatUser: [name,NickName] };
+    const chatuser = { chatUser: [name, NickName] };
     dispatch(chatActions._createRoom(chatuser));
   };
 
   let name;
-  if (nickname === '' || nickname === null) {
+  if (nickname === "" || nickname === null) {
     name = username;
   } else {
     name = nickname;
   }
 
-  let locationName = '';
-  if (location === 'undefined') {
-    locationName = '';
-  } else if (location !== 'undefined') {
+  let locationName = "";
+  if (location === "undefined") {
+    locationName = "";
+  } else if (location !== "undefined") {
     locationName = location;
   }
 
@@ -77,235 +94,170 @@ const CommunityPostDetail = (props) => {
         bgColor="bgColor"
         addstyle={() => {
           return css`
-            position: relative;
             top: 20px;
           `;
         }}
       >
         <Grid
-          width="320px"
           addstyle={() => {
             return css`
-              margin: 0 0 0 50px;
-              font-size: 18px;
-              font-weight: bold;
-              @media screen and (max-width: 375px) {
-                margin: 0 0 0 30px;
-              }
-            `;
-          }}
-        >
-          {category}
-        </Grid>
-        <Grid
-          margin="0 0 -35px 0"
-          addstyle={() => {
-            return css`
+              justify-content: space-between;
+              padding: 5px;
+              width: 100%;
+              height: 50px;
               display: flex;
-              position: relative;
-              top: 10px;
-              @media screen and (max-width: 375px) {
-                width: 250px;
-                margin: -30px 0 0 -30px;
-                top: 25px;
-              }
+              border-bottom: 1px solid
+                rgb(${(props) => props.theme.palette.olive});
             `;
           }}
         >
-          <Avatar 
-            src={profileImageUrl} 
-            style={{width:'30px', 
-                    height:'30px', 
-                    borderRadius:'30px',
-                    margin:'30px 10px 30px 60px',
-            }}
-          />
-          <Grid
-            margin="30px 0 0 0"
-            addstyle={() => {
-              return css`
-                display: flex;
-              `;
-            }}
-          >
-            <Grid>
-              <Text 
-                fontWeight="bold" 
-                onClick={OpenProfile}
-                addstyle={() => {
-                  return css`
-                    cursor: pointer;
-                  `;
-                }}>
-                {name}
-              </Text>
-              <Text size="12px">
-                {locationName}
-              </Text>
-            </Grid>
+          <Grid display="flex">
+            <Avatar
+              src={profileImageUrl}
+              style={{
+                width: "30px",
+                height: "30px",
+                borderRadius: "15px",
+                alignItems: "center",
+              }}
+            />
             <Grid
-              width="300px"
-              margin="20px 0 0 0"
               addstyle={() => {
                 return css`
                   display: flex;
-                  position: relative;
-                  right: 10px;
+                  margin-left: 10px;
                 `;
               }}
             >
-              <Text
-                fontWeight="bold"
-                size="10px"
-                width="140px"
-                addstyle={() => {
-                  return css`
-                    position: relative;
-                    left: -60px;
-                    @media screen and (max-width: 375px) {
-                      left: 40px;
-                    }
-                  `;
-                }}
-              >
-                {createdAt[0]}년 {createdAt[1]}월 {createdAt[2]}일 {createdAt[3]}시 {createdAt[4]}분
-              </Text>
-              <Grid
-                width="30px"
-                addstyle={() => {
-                  return css`
-                    position: relative;
-                    left: -70px;
-                    top: -11px;
-                    @media screen and (max-width: 375px) {
-                      left: 20px;
-                    }
-                  `;
-                }}
-              >
-                {username === userName ? (
-                  <EditModalSlide 
-                  FirstBtn={'게시글 수정'} 
-                  SecondBtn={'삭제'} 
-                  FirstClick={() => {
-                        history.push(`/community/${location}/${category}/postedit/${communityId}`);
+              <Grid>
+                <Text
+                  fontWeight="bold"
+                  onClick={OpenProfile}
+                  addstyle={() => {
+                    return css`
+                      cursor: pointer;
+                    `;
+                  }}
+                >
+                  {name}
+                </Text>
+                <Grid display="flex">
+                  <Text size="12px" lineHeight="12px" margin="0px">
+                    {locationName}
+                  </Text>
+                  <Text
+                    fontWeight="bold"
+                    size="10px"
+                    width="140px"
+                    addstyle={() => {
+                      return css`
+                        line-height: 12px;
+                        position: relative;
+                        margin: 0px 0px 0px 5px;
+                      `;
                     }}
-                  SecondClick={deleteCommunity}
-                  />
-                ) : (<Grid height="36px"></Grid>)}
+                  >
+                    {createdAt[0]}년 {createdAt[1]}월 {createdAt[2]}일{" "}
+                    {createdAt[3]}시 {createdAt[4]}분
+                  </Text>
+                </Grid>
               </Grid>
             </Grid>
+
+            {username === userName ? (
+              <EditModalSlide
+                FirstBtn={"게시글 수정"}
+                SecondBtn={"삭제"}
+                FirstClick={() => {
+                  history.push(
+                    `/community/${location}/${category}/postedit/${communityId}`
+                  );
+                }}
+                SecondClick={deleteCommunity}
+              />
+            ) : (
+              <Grid height="36px"></Grid>
+            )}
           </Grid>
         </Grid>
-        <CommunityPostDetailStyle>
-          <Grid margin="30px 0 0 0">
-            <Text
-              margin="-20px 4px 4px 4px"
-              size="17px"
-              fontWeight="bold"
-              addstyle={() => {
-                return css`
-                  line-height: 40px;
-                  padding: 4px;
-                  border-top: 1px solid
-                    rgb(${(props) => props.theme.palette.olive});
-                `;
-              }}
-            >
-              {title}
-            </Text>
-              
+
+        <Grid width="95%">
+          <Text
+            size="16px"
+            fontWeight="bold"
+            addstyle={() => {
+              return css`
+                line-height: 40px;
+                margin: 5px 10px;
+              `;
+            }}
+          >
+            {title}
+          </Text>
+
+          <Grid
+            margin="auto"
+            addstyle={() => {
+              return css`
+                position: relative;
+              `;
+            }}
+          >
+            {imageList[0] && (
+              <Image
+                width="286px"
+                height="286px"
+                margin="10px auto"
+                src={imageList[0].image}
+              />
+            )}
+            {imageList[1] && (
+              <Image
+                width="286px"
+                height="286px"
+                margin="10px auto"
+                src={imageList[1].image}
+              />
+            )}
+            {imageList[2] && (
+              <Image
+                width="286px"
+                height="286px"
+                margin="10px auto"
+                src={imageList[2].image}
+              />
+            )}
+            {imageList[3] && (
+              <Image
+                width="286px"
+                height="286px"
+                margin="10px auto"
+                src={imageList[3].image}
+              />
+            )}
+            {imageList[4] && (
+              <Image
+                width="286px"
+                height="286px"
+                margin="10px auto"
+                src={imageList[4].image}
+              />
+            )}
           </Grid>
-        </CommunityPostDetailStyle>
-        <Grid
-          width="340px"
-          margin="auto"
-          addstyle={() => {
-            return css`
-              position: relative;
-              top: 20px;
-            `;
-          }}
-        >
-              {imageList[0] &&
-              <Image 
-              width="286px" 
-              height="286px"
-              margin="10px auto"
-              src={imageList[0].image}
-              addstyle={() => {
-                return css`
-                position:relative;
-                top:-20px;
-                `;
-              }}
-              />}
-              {imageList[1] &&
-              <Image 
-              width="286px" 
-              height="286px"
-              margin="10px auto"
-              src={imageList[1].image}
-              addstyle={() => {
-                return css`
-                position:relative;
-                top:-20px;
-                `;
-              }}
-              />}
-              {imageList[2] &&
-              <Image 
-              width="286px" 
-              height="286px"
-              margin="10px auto"
-              src={imageList[2].image}
-              addstyle={() => {
-                return css`
-                position:relative;
-                top:-20px;
-                `;
-              }}
-              />}
-              {imageList[3] &&
-              <Image 
-              width="286px" 
-              height="286px"
-              margin="10px auto"
-              src={imageList[3].image}
-              addstyle={() => {
-                return css`
-                position:relative;
-                top:-20px;
-                `;
-              }}
-              />}
-              {imageList[4] &&
-              <Image 
-              width="286px" 
-              height="286px"
-              margin="10px auto"
-              src={imageList[4].image}
-              addstyle={() => {
-                return css`
-                position:relative;
-                top:-20px;
-                `;
-              }}
-              />}
-              <Text
-              margin="0 auto 20px"
-                addstyle={() => {
-                  return css`
-                    position: relative;
-                    width:300px;
-                  `;
-                }}
-              >
-                {contents}
-              </Text>
-              <Grid margin="0 0 12vh 0">
-                <CommentList props={props}/>
-              </Grid>
+
+          <Text
+            addstyle={() => {
+              return css`
+                position: relative;
+                margin: 5px 10px;
+              `;
+            }}
+          >
+            {contents}
+          </Text>
+        </Grid>
+        <Grid>
+          <CommentList props={props} />
         </Grid>
       </Grid>
       <EditModalSlide
@@ -319,11 +271,5 @@ const CommunityPostDetail = (props) => {
     </Template>
   );
 };
-
-const CommunityPostDetailStyle = styled.div`
-  width: 350px;
-  margin: auto;
-  position: relative;
-`;
 
 export default CommunityPostDetail;

@@ -34,7 +34,6 @@ export const addCommunityDB = (category, contents, location, title) => {
           .post("/community/create", postInfo)
           .then((res) => {
             dispatch(imgActions.setInitialState());
-            dispatch(getCommunityDB(category, location));
             history.push(`/community/${location}/${pathName}`);
           })
           .catch((err) => {

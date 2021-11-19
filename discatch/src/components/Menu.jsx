@@ -10,7 +10,7 @@ import styled, { css } from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 
 // ELEMENTS
-import { Grid, Text, Button } from "../elements";
+import { Grid, Text } from "../elements";
 
 // ICON
 import { Home, Users, Compass, Send, User } from "react-feather";
@@ -33,7 +33,7 @@ const Menu = () => {
 
   const moveToCommunity = () => {
     history.push({pathname: '/community', state: { location }});
-    window.location.reload();
+    history.go(0);
   }
 
   return (
@@ -57,29 +57,22 @@ const Menu = () => {
             홈
           </Text>
         </Link>
-        {/* <Button 
-          onClick={()=>moveToCommunity()}
-          width='30px' style={{opacity: '0.1'}}>
+
+        <div 
+          onClick={()=>moveToCommunity()} 
+          style={{
+            cursor:'pointer',
+            textAlign: "center",}}>
         <Users />
         <Text size="12px">커뮤니티</Text>
-        </Button> */}
+        </div>
 
         <Link
-          to={{pathname: '/community', state: { location }}}
+          to={{pathname: `/map/${location}`, 
+              state: { location }}}
           style={{
             textDecoration: "none",
-            color: "black",
-            textAlign: "center",
-          }}
-        >
-          <Users />
-          <Text size="12px">커뮤니티</Text>
-        </Link>
-        <Link
-          to={{pathname: `/map/${location}`, state: { location }}}
-          style={{
-            textDecoration: "none",
-            color: "black",
+            color: "black"
           }}
         >
           <Compass />

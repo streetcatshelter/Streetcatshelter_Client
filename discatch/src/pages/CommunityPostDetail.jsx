@@ -142,7 +142,7 @@ const CommunityPostDetail = (props) => {
                   {name}
                 </Text>
                 <Grid display="flex">
-                  <Text size="12px" lineHeight="12px" margin="0px">
+                  <Text size="12px" lineHeight="12px" width="110px">
                     {locationName}
                   </Text>
                   <Text

@@ -9,7 +9,7 @@ import { Template, CommunityPost } from "../components";
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button, Text } from "../elements/index";
+import { Grid, Button } from "../elements/index";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
@@ -58,11 +58,11 @@ const CommunityDetail = (props) => {
       <Header>{category}</Header>
       <Grid
         bgColor="bgColor"
-        margin="-10vh 0 0 0"
+        margin="-8vh 0 0 0"
         addstyle={() => {
           return css`
             position: relative;
-            top: 80px;
+            top: 67px;
           `;
         }}
       >
@@ -83,7 +83,7 @@ const CommunityDetail = (props) => {
             addstyle={() => {
               return css`
                 @media screen and (max-width: 375px) {
-                  margin: -85vh 0 0 0;
+                  margin: -92.5vh 0 0 0;
                 }
               `;
             }}
@@ -120,13 +120,13 @@ const CommunityDetail = (props) => {
 };
 
 const CommunityDetailStyle = styled.div`
+  z-index: -1;
   width: 100%;
   overflow-x: hidden;
-  height: 100vh;
-  margin: -5vh 0 0;
+  height: 85vh;
   @media screen and (max-width: 375px) {
-    height: 92vh;
-    margin: -10vh 0 0;
+    height: 80vh;
+    margin: -2vh 0 0;
   }
 `;
 

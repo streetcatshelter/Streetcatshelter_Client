@@ -1,6 +1,5 @@
-// library
+// API
 import { createSlice } from '@reduxjs/toolkit';
-// api
 import { catApi } from '../../shared/axios';
 
 // detail 댓글 작성

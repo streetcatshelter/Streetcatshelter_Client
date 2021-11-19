@@ -1,33 +1,32 @@
-/* Templates */
+// TEMPLATES
 import Router from "./Router";
 import Header from "./Header";
 import Menu from "./Menu";
 import Template from "./Template";
 import EditModalSlide from "./EditModalSlide";
 
-/* ==Slider */
+// SLIDER
 import Slide from "./slider/Slide";
 
-/* ==myPages */
+// MYPAGE
 import MyPageCat from "./myPage/MyPageCat";
 import Notice from "./myPage/Notice";
 import NoticeDesc from "./myPage/NoticeDesc";
 import Profile from "./myPage/Profile";
-
 import ProgressBar from "./myPage/ProgressBar";
 import UserInfo from "./myPage/UserInfo";
 import MyPageDetail from "./myPage/MyPageDetail";
 import MyWork from "./myPage/MyWork";
 import MyPageContent from "./myPage/MyPageContent";
 
-/*==calendar */
+// CALENDAR
 import Calendar from "./calendar/Calendar";
 import CalendarBody from "./calendar/CalendarBody";
 import CalendarHead from "./calendar/CalendarHead";
 import CalendarDates from "./calendar/CalendarDates";
 import CalendarModal from "./calendar/CalendarModal";
 
-/* catposts */
+// CATPOSTS
 import CatPost from "./catPosts/CatPost";
 import CatCalendar from "./catPosts/CatCalendar";
 import CatDiary from "./catPosts/CatDiary";
@@ -39,19 +38,19 @@ import CatCommentCard from "./catPosts/CatCommentCard";
 import CatDetailComment from "./catPosts/CatDetailComment";
 import CatDetailCommentCard from "./catPosts/CatDetailCommentCard";
 
-/* comments */
+// COMMENT
 import Comment from "./comment/Comment";
 import CommentList from "./comment/CommentList";
 
-/* community */
+// COMMUNITY
 import CommunityCategoryCard from "./community/CommunityCategoryCard";
 import CommunityPost from "./community/CommunityPost";
 import CommunityPreview from "./community/CommunityPreview";
 
-/* map */
+// MAP
 import Location from "./map/Location";
 
-/* chat */
+// CHAT
 import ChatMain from "./chat/ChatMain";
 import ChatRoom from "./chat/ChatRoom";
 import ChatMessage from "./chat/ChatMessage";
@@ -61,15 +60,15 @@ import GoogleLoginBtn from "./GoogleLoginBtn";
 import Spinner from "./Spinner";
 
 export {
-  /* ==Templates */
+  // TEMPLATES
   Router,
   Header,
   Menu,
   Template,
   EditModalSlide,
-  /* ==Slider */
+  // SLIDER
   Slide,
-  /* ==myPages */
+  // MYPAGES
   MyPageCat,
   Notice,
   NoticeDesc,
@@ -79,13 +78,13 @@ export {
   MyWork,
   MyPageDetail,
   MyPageContent,
-  /* ==calendar */
+  // CALENDAR
   Calendar,
   CalendarBody,
   CalendarHead,
   CalendarDates,
   CalendarModal,
-  /* ==catposts */
+  // CATPOSTS
   CatPost,
   CatCalendar,
   CatDiary,
@@ -96,20 +95,20 @@ export {
   CatCommentCard,
   CatDetailComment,
   CatDetailCommentCard,
-  /* ==comments */
+  // COMMENT
   Comment,
   CommentList,
-  /* ==community */
+  // COMMUNITY
   CommunityCategoryCard,
   CommunityPost,
   CommunityPreview,
-  /* map */
+  // MAP
   Location,
-  /* chat */
+  // CHAT
   ChatMain,
   ChatRoom,
   ChatMessage,
-  /* login */
+  // LOGIN
   GoogleLoginBtn,
   Spinner,
 };

@@ -1,8 +1,9 @@
+// LIBRARY
 import React, { useState, useEffect } from "react";
 
-/* == components*/
+// COMPONENTS
 import { CalendarHead, CalendarBody } from "..";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
 const Calendar = (props) => {
   const dispatch = useDispatch();

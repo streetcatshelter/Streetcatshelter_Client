@@ -15,7 +15,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 // REDUX
 import { communityLikeToggleDB } from "../../redux/modules/community";
 
-const Comment = (props) => {
+const Comment = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 

@@ -1,4 +1,7 @@
+// LIBRARY
 import React from "react";
+
+// COMPONENTS
 import { MyPageDetail, Profile, Template, Notice } from "../../components";
 
 const MyPageNoticeList = (props) => {

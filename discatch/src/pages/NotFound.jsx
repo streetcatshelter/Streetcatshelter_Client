@@ -1,15 +1,16 @@
+// LIBRARY
 import React from "react";
 
-/* == components*/
+// COMPONENTS
 import { Template } from "../components";
 
-/* == Custom - Elements*/
+// ELEMENTS
 import { Button, Text } from "../elements";
 
-/* == Custom - Image */
+// IMAGE
 import NotFoundCatImage from "../styles/images/NotFoundCat.svg";
 
-/* == Redux  */
+// REDUX
 import { history } from "../redux/configureStore";
 
 const NotFound = (props) => {

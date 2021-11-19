@@ -1,22 +1,22 @@
-// library
+// LIBRARY
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { css } from 'styled-components';
 
-// style
+// STYLE
 import { flexBox } from '../shared/style';
 
-// element
+// ELEMENTS
 import { Grid, Text, Image, Button } from '../elements';
 
-// component
+// COMPONENTS
 import { Template, CatDetailComment, EditModalSlide } from '../components';
 
-// icon
+// ICON
 import { CheckSquare } from 'react-feather';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-// redux
+// REDUX
 import { history } from '../redux/configureStore';
 import {
   __getCatDetail,
@@ -27,10 +27,6 @@ import {
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
   const catDetailId = props.match.params.catDetailId;
-  // console.log(catDetailId);
-
-  // const catDetailId = useSelector((state) => state.cat.detail.catDetailId);
-  console.log(catDetailId);
 
   const { userProfile, nickname, username } = useSelector((state) => ({
     userProfile: state.mypage.userInfo.profileImageUrl,
@@ -58,7 +54,7 @@ const CatDetailInfo = (props) => {
 
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));
-  }, []);
+  }, [catDetailId, dispatch]);
 
   const deleteCatDetail = () => {
     dispatch(__deleteCatDetail(catDetailId));

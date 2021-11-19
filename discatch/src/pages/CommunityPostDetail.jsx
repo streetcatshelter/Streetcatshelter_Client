@@ -41,7 +41,7 @@ const CommunityPostDetail = (props) => {
     contents: state.community.list.data?.contents,
     imageList: state.community.list.data?.communityImageList
       ? state.community.list.data.communityImageList
-      : Array(1, 2, 3),
+      : Array(1),
     location: state.community.list.data?.location,
     title: state.community.list.data?.title,
     username: state.community.list.data?.username,
@@ -49,7 +49,7 @@ const CommunityPostDetail = (props) => {
     profileImageUrl: state.community.list.data?.profileImageUrl,
     createdAt: state.community.list.data?.createdAt
       ? state.community.list.data?.createdAt
-      : Array(1, 3, 4),
+      : Array(1),
   }));
 
   const deleteCommunity = () => {
@@ -87,7 +87,7 @@ const CommunityPostDetail = (props) => {
 
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
-  }, []);
+  }, [communityId, dispatch]);
   return (
     <Template props={props}>
       <Grid

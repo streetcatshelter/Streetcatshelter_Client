@@ -1,12 +1,13 @@
+// LIBRARY
 import React from "react";
 
-/* == Custom - Elements*/
+// ELEMENTS
 import { Grid } from "../../elements";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
 
-/* == REDUX */
+// REDUX
 import { history } from "../../redux/configureStore";
 
 const MyPageDetail = (props) => {

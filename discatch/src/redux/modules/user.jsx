@@ -1,26 +1,24 @@
-// LIBRARY
+// API
 import { createSlice } from "@reduxjs/toolkit";
 import { userApi } from "../../shared/axios";
-import jwtDecode from "jwt-decode";
+
+// TOKEN
 import { setToken, removeToken } from "../../shared/token";
-// import { setCookie, deleteCookie } from "../shared/cookie";
+
 const _loginKakao =
   (authorization_code) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await userApi.getKakao(authorization_code);
-      console.log(data);
       const userInfo = {
         userId: data.userId,
         name: data.username,
         picture: data.profileImage,
       };
-
       dispatch(loginKakao(userInfo));
       setToken(data.token);
       const str_userInfo = JSON.stringify(userInfo);
       localStorage.setItem("userInfo", str_userInfo);
-      // 메인페이지 이동
       history.push("/");
     } catch (e) {
       console.log(e);
@@ -34,7 +32,6 @@ const _loginNaver =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await userApi.getNaver(authorization_code);
-      console.log(data);
       if (data === "") {
         console.log("데이터가없음");
         window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
@@ -51,7 +48,6 @@ const _loginNaver =
       setToken(data.token);
       const str_userInfo = JSON.stringify(userInfo);
       localStorage.setItem("userInfo", str_userInfo);
-      // 메인페이지 이동
       history.push("/");
     } catch (e) {
       console.log(e);
@@ -77,7 +73,6 @@ const _loginGoogle =
       setToken(data.token);
       const str_userInfo = JSON.stringify(userInfo);
       localStorage.setItem("userInfo", str_userInfo);
-      // 메인페이지 이동
       history.push("/");
     } catch (e) {
       console.log(e);
@@ -85,6 +80,7 @@ const _loginGoogle =
       history.push("/login");
     }
   };
+
 const _logout =
   () =>
   (dispatch, getState, { history }) => {
@@ -106,6 +102,7 @@ const _setLogin =
     }
   };
 
+// INITIAL STATE
 const initialState = {
   name: "",
   userId: "",
@@ -113,7 +110,7 @@ const initialState = {
   isLoggedIn: false,
 };
 
-// 리듀서
+// REDUCER
 const user = createSlice({
   name: "user",
   initialState,
@@ -170,6 +167,7 @@ export const userActions = {
   _loginNaver,
   _loginGoogle,
 };
+
 export const { setLogin, logout, loginKakao, loginNaver, loginGoogle } =
   user.actions;
 export default user;

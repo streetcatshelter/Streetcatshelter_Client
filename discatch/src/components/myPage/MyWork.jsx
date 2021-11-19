@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+// LIBRARY
+import React from "react";
 
-/* == components*/
+// COMPONENTS
 import { ProgressBar, Calendar } from "..";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
 
 const Mywork = () => {
   return (

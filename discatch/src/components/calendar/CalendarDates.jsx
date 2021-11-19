@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+// LIBRARY
+import React, { useState } from "react";
 
-/* == components*/
+// COMPONENTS
 import CalendarModal from "./CalendarModal";
 
+// ICON
 import { Gitlab } from "react-feather";
-/* == Library - style */
+
+// STYLE
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { Calendar } from "..";
+
 const CalendarDates = (props) => {
   const { lastDate, firstDate, elm, findToday, month, year, idx } = props;
 
@@ -41,7 +44,7 @@ const CalendarDates = (props) => {
               <Dots>
                 {Calendar.filter(
                   (workDate) =>
-                    workDate.date[2] == elm && workDate.date[1] == month
+                    workDate.date[2] === elm && workDate.date[1] === month
                 )
                   .sort()
                   .map((workDate) => {

@@ -10,7 +10,7 @@ import { CommunityPreview } from "../components/index";
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button, Input, TextArea, Text, Image } from "../elements/index";
+import { Grid, Button, Input, TextArea, Text } from "../elements/index";
 
 // REDUX
 import { imgActions } from "../redux/modules/image";

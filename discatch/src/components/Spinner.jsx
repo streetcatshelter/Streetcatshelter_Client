@@ -1,10 +1,11 @@
+// LIBRARY
 import React from "react";
-/* == Library - style */
+import { PropagateLoader } from "react-spinners";
+import PropTypes from "prop-types";
+
+// STYLE
 import styled from "styled-components";
 import SpinnerCat from "../styles/images/spinnerCat.svg";
-/* == Library  */
-import PropTypes from "prop-types";
-import { PropagateLoader } from "react-spinners";
 
 const Spinner = (props) => {
   if (!props.visible) {

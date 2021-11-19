@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+// LIBRARY
+import React from "react";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
 
+// ICON
 import { Gitlab } from "react-feather";
 
 const CalendarHead = (props) => {

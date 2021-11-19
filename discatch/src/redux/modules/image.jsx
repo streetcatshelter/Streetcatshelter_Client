@@ -8,7 +8,7 @@ AWS.config.update({
   }),
 });
 
-// action
+// ACTION
 const UPLOAD_IMAGE = "IMAGE";
 const UPLOAD_IMAGES = "IMAGES";
 const SET_FILE = "SET_FILE";
@@ -18,7 +18,7 @@ const DEL_PREVIEW = "DEL_PREVIEW";
 const SET_INITIAL_STATE = "SET_INITIAL_STATE";
 const SET_PREVIEW = "SET_PREVIEW";
 
-// action creator
+// ACTION CREATOR
 const uploadImage = (imageUrl) => ({ type: UPLOAD_IMAGE, imageUrl });
 const uploadImages = (imageUrls) => ({ type: UPLOAD_IMAGES, imageUrls });
 const setFile = (file, fileId) => ({ type: SET_FILE, file: file, fileId });
@@ -31,7 +31,7 @@ const setPreview = (preview, previewId) => ({
   preview: { preview, previewId },
 });
 
-// initial state
+// INITIAL STATE
 const initialState = {
   imageUrl: [],
   file: [],
@@ -39,18 +39,16 @@ const initialState = {
   imageUrls: [],
 };
 
-// middleware
+// MIDDLEWARE
 // 이미지 여러 개
 const uploadImagesDB = (callNext) => {
   return async function (dispatch, getState) {
     const imgList = getState().image.file;
     const imgUrl = getState().image.imageUrls;
-    console.log(imgList);
 
     for (let i = 0; i < imgList.length; i++) {
       const img = imgList[i].file;
       const url = imgUrl[i];
-      console.log(img, url);
 
       if (typeof img !== "object") {
         dispatch(uploadImages(img));

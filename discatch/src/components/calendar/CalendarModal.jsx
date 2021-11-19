@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+// LIBRARY
+import React, { useEffect } from "react";
 
-/* == Library - style */
+// STYLE
 import { CheckSquare } from "react-feather";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +13,7 @@ const CalendarModal = (props) => {
 
   useEffect(() => {
     dispatch(mypageActions._getCalenderDetail(year, month, elm));
-  }, []);
+  }, [year, month, elm, dispatch]);
   return (
     <>
       <Background>

@@ -1,6 +1,7 @@
+// LIBRARY
 import React from "react";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
 
 const Text = ({ children, clickEvent, ...props }) => {

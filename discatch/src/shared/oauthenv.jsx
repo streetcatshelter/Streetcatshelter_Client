@@ -3,7 +3,6 @@
  * AWS S3 id & key
  */
 /* == KAKAO REST API KEY */
-const KAKAO_API_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT;
 const KAKAO_LOGIN_API_KEY = process.env.REACT_APP_KAKAO_LOGIN_JAVASCRIPT;
 
 const NAVER_API_KEY = process.env.REACT_APP_NAVER_CLIENT_ID;

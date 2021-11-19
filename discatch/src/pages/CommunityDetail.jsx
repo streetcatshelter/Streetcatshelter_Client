@@ -1,3 +1,4 @@
+// LIBRARY
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,7 +26,6 @@ import { getCommunityDB, getMoreCommunityDB } from "../redux/modules/community";
 import { history } from "../redux/configureStore";
 
 const CommunityDetail = (props) => {
-  const query = window.location.search;
   const dispatch = useDispatch();
   const location = props.match.params.village.split("@")[0];
 
@@ -50,13 +50,9 @@ const CommunityDetail = (props) => {
   const communityList = useSelector((state) => state.community.list);
 
   React.useEffect(() => {
-    if (!query) dispatch(getCommunityDB(category, location));
-
-    return () => {
-      dispatch(getCommunityDB(category, location));
-    };
-  }, []);
-
+    dispatch(getCommunityDB(category, location));
+  }, [category, location, dispatch]);
+  
   return (
     <Template props={props}>
       <Header>{category}</Header>

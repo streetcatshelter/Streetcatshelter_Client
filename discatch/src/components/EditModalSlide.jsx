@@ -1,12 +1,14 @@
 // LIBRARY
 import React, { useEffect } from "react";
+
+// STYLE
+import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import Slide from "@material-ui/core/Slide";
 
-import styled from "styled-components";
 // ICON
 import { MoreHorizontal } from "react-feather";
 
@@ -32,7 +34,7 @@ const EditDeleteModal = (props) => {
     if (openModal === true) {
       setOpen(!open);
     }
-  }, [openModal]);
+  }, [openModal, open]);
 
   return (
     <div>

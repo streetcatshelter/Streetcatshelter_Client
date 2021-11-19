@@ -1,3 +1,4 @@
+// LIBRARY
 import React, { useEffect, useRef, useState } from "react";
 
 // socket
@@ -13,11 +14,11 @@ import styled from "styled-components";
 // COMPONENTS
 import { EditModalSlide, ChatMessage } from "..";
 
-// moment
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
 // REDUX
-import { useDispatch, useSelector } from "react-redux";
 import { chatActions } from "../../redux/modules/chat";
 import { pushChatMessage } from "../../redux/modules/chat";
 

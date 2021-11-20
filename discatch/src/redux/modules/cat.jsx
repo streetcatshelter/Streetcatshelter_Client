@@ -78,7 +78,6 @@ export const __createCatDetailInfo = (
           instance
             .post(`/cat/detail/${catId}`, detailInfo)
             .then((res) => {
-              dispatch(createCatDetailInfo(detailInfo));
               dispatch(imgActions.setInitialState());
             })
             .catch((err) => {
@@ -137,7 +136,6 @@ export const __getCatDetail =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
     try {
-      console.log(catDetailId);
       const { data } = await catApi.getCatDetail(catDetailId);
       dispatch(getCatDetail(data));
     } catch (err) {
@@ -151,7 +149,6 @@ export const __getCalendar =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatCalendar(catId, month, year);
-
       dispatch(getCalendar(data.date));
     } catch (err) {
       console.error(err);
@@ -164,7 +161,6 @@ export const __getDiary =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatDiary(catId, size);
-
       dispatch(getDiary(data));
     } catch (err) {
       console.error(err);
@@ -177,7 +173,6 @@ export const __getGallery =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatGallery(catId, size);
-
       dispatch(getGallery(data));
     } catch (err) {
       console.error(err);
@@ -214,7 +209,6 @@ export const __deleteCatDetail =
   async (dispatch, getState, { history }) => {
     try {
       const data = await catApi.deleteCatDetail(catDetailId);
-      dispatch(deleteCatDetail(catDetailId));
       window.alert("게시물 삭제 완료!");
       history.goBack();
     } catch (err) {
@@ -262,7 +256,6 @@ const cat = createSlice({
         water: action.payload.water,
       };
       state.detail.push(detailInfo);
-      console.log(action.payload);
     },
 
     getCatLocation: (state, action) => {

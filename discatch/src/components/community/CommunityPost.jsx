@@ -23,7 +23,7 @@ const CommunityPost = ({ community }) => {
   const location = path.pathname.split("/")[2];
   const communityId = community.communityId;
   const category = path.pathname.split("/")[3];
-  let name;
+  let name ;
   if (community.nickname === "" || community.nickname === null) {
     name = community.username;
   } else {

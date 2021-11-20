@@ -21,8 +21,10 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { history } from '../../redux/configureStore';
 import { __getCatLocation } from '../../redux/modules/cat';
 
-const Location = () => {
+const Location = (props) => {
+  const catId = props.props.match.params.id;
   const path = useLocation();
+  const pathLength = path.pathname.split('/').length;
   const dispatch = useDispatch();
   let vKeyword;
 
@@ -476,11 +478,19 @@ const Location = () => {
         }}
         is_float="is_float"
         clickEvent={() => {
-          if(latitude !== undefined && longitude !== undefined) {
+          if(latitude !== undefined && longitude !== undefined && pathLength === 3) {
             history.push({
               pathname:`/catinfowrite/${location}`, 
               state: {latitude, longitude}});
-          } else {
+          } else if (latitude !== undefined && longitude !== undefined && pathLength === 4) {
+            history.push({
+              pathname:`/catdetailinfowrite/${catId}`, 
+              state: {latitude, longitude, location}});
+          } else if (latitude === undefined && longitude === undefined && pathLength === 4) {
+            history.push({
+              pathname:`/catdetailinfowrite/${catId}`, 
+              state: {location}});
+          } else if (latitude === undefined && longitude === undefined && pathLength === 3) {
             alert('지도에 위치를 표시해주세요!');
           }
         }}

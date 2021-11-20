@@ -26,14 +26,14 @@ const Header = (props) => {
   const locationA = useLocation();
   const dispatch = useDispatch();
   const path = props.path;
+  const location = locationA.pathname.split('/')[2];
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location1;
   const firstLocation = locationA.state?.location;
   
   if (preLocation !== undefined) {
     location1 = preLocation;
-  }
-  else if (userInfo.locationList && path.length === 1) {
+  } else if (userInfo.locationList && path.length === 1) {
     location1 = userInfo.locationList[0]?.split("@")[0];
   } else {
     location1 = firstLocation;
@@ -50,9 +50,10 @@ const Header = (props) => {
       location3 = locationLists[1].split('@')[0];
     } else if (userInfo.locationList.length === 2) {
       location2 = locationLists[0].split('@')[0];
-    } 
+    }
   }
   
+
 
   const [searchModal, setSearchModal] = useState(false);
 
@@ -95,6 +96,17 @@ const Header = (props) => {
     dispatch(searchMap(keyword));
   };
 
+  const goBack = () => {
+    if (path === '/community/:village/:category') {
+      history.push({pathname: '/community', state : { location }});
+      history.go(0);
+    } else if (path === '/catdetail/:village/:catId') {
+      history.push({pathname: '/', state : { location }})
+    } else {
+      history.goBack();
+    }
+  }
+
   if (!userInfo) {
     return <div></div>;
   }
@@ -122,9 +134,7 @@ const Header = (props) => {
           ) : (
             <ArrowLeft
               style={{ margin: "20px", color: "gray" }}
-              onClick={() => {
-                history.goBack();
-              }}
+              onClick={goBack}
             />
           )}
         </Grid>

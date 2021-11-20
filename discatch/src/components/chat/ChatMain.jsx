@@ -14,7 +14,8 @@ import { history } from "../../redux/configureStore";
 import { chatActions } from "../../redux/modules/chat";
 import { useDispatch, useSelector } from "react-redux";
 
-const ChatMain = () => {
+const ChatMain = (props) => {
+  const location = props.props.location.state.location;
   const dispatch = useDispatch();
   const Rooms = useSelector((state) => state.chat.roomlist);
 
@@ -64,7 +65,7 @@ const ChatMain = () => {
 
                   <ChatMsg
                     onClick={() => {
-                      history.push(`api/chat/enter/${room.roomId}`);
+                      history.push({pathname:`api/chat/enter/${room.roomId}`, state : { location }});
                     }}
                   >
                     {room.lastMessage === "메세지가없어요"

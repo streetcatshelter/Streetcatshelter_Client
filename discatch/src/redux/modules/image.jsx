@@ -123,7 +123,6 @@ function image(state = initialState, action) {
     case UPLOAD_IMAGE:
       return { ...state, imageUrl: action.imageUrl };
     case SET_FILE:
-      console.log(action.payload);
       return { ...state, file: [...state.file, action.file] };
     case SET_FILES:
       return { ...state, file: [...state.file, action.file] };

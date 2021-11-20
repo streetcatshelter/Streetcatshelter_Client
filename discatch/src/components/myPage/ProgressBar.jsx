@@ -20,10 +20,16 @@ const ProgressBar = () => {
       <BarWrap>
         <Bar width={workPercent}></Bar>
       </BarWrap>
-      <LevelDetail>
-        🏃‍♀️<span>{UserInfo.nextLevel}</span>를 위해 남은 점수는
-        <span>{UserInfo.scoreLeft}</span>점 입니다!!!
-      </LevelDetail>
+      {UserInfo.nextLevel === "null" ? (
+        <LevelDetail>
+          <span>✨이제 나도 프로집사 ! 😎</span>
+        </LevelDetail>
+      ) : (
+        <LevelDetail>
+          🏃‍♀️<span>{UserInfo.nextLevel}</span>를 위해 남은 점수는
+          <span>{UserInfo.scoreLeft}</span>점 입니다!!!
+        </LevelDetail>
+      )}
     </React.Fragment>
   );
 };

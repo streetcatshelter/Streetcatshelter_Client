@@ -1,6 +1,6 @@
 // API
-import { createSlice } from '@reduxjs/toolkit';
-import { catApi } from '../../shared/axios';
+import { createSlice } from "@reduxjs/toolkit";
+import { catApi } from "../../shared/axios";
 
 // detail 댓글 작성
 export const __createCatComment =
@@ -62,7 +62,6 @@ export const __deleteComment =
       const { data } = await catApi.deleteCatComment(commentId);
 
       dispatch(deleteCatComment(commentId));
-      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -73,7 +72,7 @@ const initialState = {
 };
 
 const comment = createSlice({
-  name: 'comment',
+  name: "comment",
   initialState,
   reducers: {
     createCatComment: (state, action) => {
@@ -95,10 +94,12 @@ const comment = createSlice({
     },
 
     deleteCatComment: (state, action) => {
-      const deleteComment = state.list.filter(
-        (comment) => comment.commentId !== action.commentId,
-      );
-      state.list = deleteComment;
+      return {
+        ...state,
+        list: state.list.filter(
+          (comment) => comment.commentId !== action.payload
+        ),
+      };
     },
   },
 });

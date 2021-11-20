@@ -14,14 +14,14 @@ import { Trash2 } from "react-feather";
 // REDUX
 import { deleteCommunityCommentDB } from "../../redux/modules/community";
 import { chatActions } from "../../redux/modules/chat";
-
-const CommentCard = ({ comment, communityId }) => {
+import { __deleteComment } from "../../redux/modules/comment";
+import moment from "moment";
+const CommentCard = ({ comment, communityId, catId }) => {
   const commentId = comment.commentId;
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
-
   const [ProfileModal, setProfileModal] = useState(false);
-
+  const CreatedAt = moment(comment.createdAt).format("YYYY-M-D hh:mm");
   const OpenProfile = () => {
     if (UserInfo.nickname !== comment.nickname) {
       setProfileModal(!ProfileModal);
@@ -35,26 +35,20 @@ const CommentCard = ({ comment, communityId }) => {
   };
 
   const deleteBtn = () => {
-    dispatch(deleteCommunityCommentDB(commentId, communityId));
+    communityId
+      ? dispatch(deleteCommunityCommentDB(commentId, communityId))
+      : dispatch(__deleteComment(commentId));
   };
   return (
     <Wrap>
       <Header>
         <Left>
-          <Profile onClick={OpenProfile}>
+          <Profile onClick={OpenProfile} isMine={comment.isMine}>
             <img src={comment.profileImageUrl} alt={comment.profileImageUrl} />
             <p>{comment.nickname}</p>
           </Profile>
 
-          {comment.createdAt ? (
-            <span>
-              {comment.createdAt[0]}.{comment.createdAt[1]}.
-              {comment.createdAt[2]} {comment.createdAt[3]}시
-              {comment.createdAt[4]}분
-            </span>
-          ) : (
-            ""
-          )}
+          {comment.createdAt ? <span>{CreatedAt}</span> : ""}
         </Left>
 
         <Right>
@@ -99,7 +93,7 @@ const Left = styled.div`
 
 const Profile = styled.div`
   display: flex;
-  cursor: pointer;
+  ${(props) => (props.isMine ? "" : `cursor: pointer`)};
   img {
     width: 30px;
     height: 30px;

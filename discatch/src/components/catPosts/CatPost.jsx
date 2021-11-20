@@ -8,7 +8,7 @@ import { Grid, Text, Image, Button } from "../../elements";
 
 // redux
 import { history } from "../../redux/configureStore";
-import { __catLike, __getCatDetail } from "../../redux/modules/cat";
+import { __catLike, __getCatInfo } from "../../redux/modules/cat";
 
 // style
 import { flexBox } from "../../shared/style";
@@ -18,20 +18,16 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const CatPost = ({ cat, location, path }) => {
   const dispatch = useDispatch();
-  const catId = path === "detail" ? cat : cat.catId;
-
+  const catId = cat.catId;
   const userLiked = cat.userLiked;
-
   const likeToggle = () => {
-    dispatch(__catLike(catId, location));
+    dispatch(__catLike(catId, location, path));
   };
-
-  useEffect(() => {
-    if (path === "detail") {
-      dispatch(__getCatDetail(catId));
-      console.log("호출함");
-    }
-  }, []);
+  const CatDetailBtn = () => {
+    if (path !== "detail") {
+      history.push(`/catdetail/${location}/${cat.catId}`);
+    } else return;
+  };
 
   return (
     <React.Fragment>
@@ -41,7 +37,7 @@ const CatPost = ({ cat, location, path }) => {
         display="flex"
         padding="8px"
         height="80px"
-        cursor="pointer"
+        cursor={path === "detail" ? "" : "pointer"}
         addstyle={() => {
           return css`
             ${flexBox("space-around")}
@@ -53,9 +49,7 @@ const CatPost = ({ cat, location, path }) => {
           alt={cat.catImage}
           width="80px"
           height="80px"
-          clickEvent={() => {
-            history.push(`/catdetail/${location}/${cat.catId}`);
-          }}
+          clickEvent={CatDetailBtn}
         />
 
         <Grid padding="3px" width="75%" height="70px">
@@ -72,9 +66,7 @@ const CatPost = ({ cat, location, path }) => {
               fontWeight="bold"
               size="16px"
               width="35%"
-              clickEvent={() => {
-                history.push(`/catdetail/${location}/${cat.catId}`);
-              }}
+              clickEvent={CatDetailBtn}
             >
               {cat.catName}
             </Text>
@@ -84,9 +76,7 @@ const CatPost = ({ cat, location, path }) => {
               size="14px"
               margin="0 0 0 0"
               width="50%"
-              clickEvent={() => {
-                history.push(`/catdetail/${location}/${cat.catId}`);
-              }}
+              clickEvent={CatDetailBtn}
             >
               중성화: {cat.neutering}
             </Text>
@@ -102,9 +92,7 @@ const CatPost = ({ cat, location, path }) => {
 
           {cat.catTagList ? (
             <Grid
-              clickEvent={() => {
-                history.push(`/catdetail/${location}/${cat.catId}`);
-              }}
+              clickEvent={CatDetailBtn}
               height="35px"
               addstyle={() => {
                 return css`

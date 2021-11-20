@@ -15,28 +15,29 @@ import { Grid, Button, TextArea } from "../../elements/index";
 
 // REDUX
 import { addCommunityCommentDB } from "../../redux/modules/community";
-
-const CommentList = (props) => {
+import { __createCatComment, __getComment } from "../../redux/modules/comment";
+const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
 
-  let communityId = props.props?.match.params.communityId;
-
   const [comments, setComment] = React.useState("");
 
-  const commentList = community.data?.commentList;
+  const commentList =
+    path === "CatDetail" ? props : community.data?.commentList;
 
   const $comment = (event) => {
     setComment(event.target.value);
   };
 
   const addCommentBtn = () => {
-    dispatch(addCommunityCommentDB(comments, communityId));
-    setComment('');
+    path === "CatDetail"
+      ? dispatch(__createCatComment(catId, comments))
+      : dispatch(addCommunityCommentDB(comments, communityId));
+    setComment("");
   };
   return (
     <>
-      <Comment />
+      <Comment path={path} />
       <Grid
         width="95%"
         margin="0 auto"
@@ -57,6 +58,7 @@ const CommentList = (props) => {
               border-radius: 10px;
               resize: none;
               overflow-y: hidden;
+              height: 50px;
             `;
           }}
         />

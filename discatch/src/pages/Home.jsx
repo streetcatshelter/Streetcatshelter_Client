@@ -29,7 +29,7 @@ const Home = (props) => {
   const userVillage = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]
   );
-  const location = userLocation ? userLocation : (menuLocation || userVillage);
+  const location = userLocation ? userLocation : menuLocation || userVillage;
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));
   };

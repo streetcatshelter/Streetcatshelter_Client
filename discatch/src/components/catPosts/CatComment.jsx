@@ -29,6 +29,7 @@ const CatComment = (props) => {
 
   const addComment = () => {
     dispatch(__createCatComment(catId, comment));
+    setComment('');
   };
 
   useEffect(() => {
@@ -66,6 +67,7 @@ const CatComment = (props) => {
         >
           <Input
             onChange={$comment}
+            value={comment}
             width="85%"
             height="40px"
             padding="4px"

@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 
 // STYLE
 import styled, { css } from "styled-components";
-import { Map } from "react-feather";
+import { AlignRight, Map } from "react-feather";
 
 // ELEMENTS
 import { Button } from '../../elements';
@@ -177,8 +177,11 @@ const Location = () => {
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         map.setBounds(bounds);
-      } 
-    }
+      } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+        alert('검색할 수 없는 지역입니다. 동네 설정을 다시 해주세요.');
+        history.push('/userinfoedit');
+      }
+    } 
   }
 
 
@@ -233,7 +236,6 @@ const Location = () => {
       
       if (status === kakao.maps.services.Status.OK) {
         let bounds = new kakao.maps.LatLngBounds();
-
         for (let i = 0; i < data.length; i++) {
           displayMarker(data[i]);
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
@@ -245,10 +247,6 @@ const Location = () => {
         setPlaces(data);
       } else {
         ps.keywordSearch(vKeyword, placesSearchCB);
-        console.log('검색 실패!');
-        console.log(map);
-        // ps.setMap('')
-        // ps.setLevel(2);
       }
     }
 
@@ -345,21 +343,17 @@ const Location = () => {
 
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(userVillage, placesSearchCB);
-    console.log(ps);
 
-    // 고양이 마커 가져오기
-    function placesSearchCB(data, status, pagination) {
+    function placesSearchCB (data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
-        console.log('asd');
+        console.log(status);
         let bounds = new kakao.maps.LatLngBounds();
 
         for (let i = 0; i < data.length; i++) {
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         map.setBounds(bounds);
-      } else {
-        console.log('서비스 지역이 아닙니다.');
-      }
+      } 
     }
       let marker = new kakao.maps.Marker({
         map: map,
@@ -382,8 +376,6 @@ const Location = () => {
 
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
- 
-
 
 
   useEffect(() => {

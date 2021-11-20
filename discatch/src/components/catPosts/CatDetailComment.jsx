@@ -31,6 +31,7 @@ const CatDetailComment = (props) => {
 
   const addComment = () => {
     dispatch(__createCatDetailComment(catDetailId, comment));
+    setComment('')
   };
 
   useEffect(() => {
@@ -68,6 +69,7 @@ const CatDetailComment = (props) => {
         >
           <Input
             onChange={$comment}
+            value={comment}
             width="85%"
             height="40px"
             padding="4px"

@@ -34,9 +34,8 @@ export const __createCatInfo = (
           instance
             .post("/cat/create", catInfo)
             .then((res) => {
-              // dispatch(createCatInfo(catInfo));
               dispatch(imgActions.setInitialState());
-              // history.push("/");
+              history.push("/");
             })
             .catch((err) => {
               console.error(err);

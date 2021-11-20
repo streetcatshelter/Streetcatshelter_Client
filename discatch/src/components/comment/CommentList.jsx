@@ -15,24 +15,32 @@ import { Grid, Button, TextArea } from "../../elements/index";
 
 // REDUX
 import { addCommunityCommentDB } from "../../redux/modules/community";
-import { __createCatComment, __getComment } from "../../redux/modules/comment";
+import { __createCatComment, __createCatDetailComment } from "../../redux/modules/comment";
+
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
 
   const [comments, setComment] = React.useState("");
-
-  const commentList =
-    path === "CatDetail" ? props : community.data?.commentList;
+  let commentList;
+  if (path === 'CatDetail' || path === 'CatDetailInfo') {
+    commentList = props;
+  } else {
+    commentList = community.data?.commentList;
+  }
 
   const $comment = (event) => {
     setComment(event.target.value);
   };
 
   const addCommentBtn = () => {
-    path === "CatDetail"
-      ? dispatch(__createCatComment(catId, comments))
-      : dispatch(addCommunityCommentDB(comments, communityId));
+    if (path === 'CatDetail') {
+      dispatch(__createCatComment(catId, comments))
+    } else if (path === 'CatDetailInfo') {
+      dispatch(__createCatDetailComment(catId, comments));
+    } else {
+      dispatch(addCommunityCommentDB(comments, communityId));
+    }
     setComment("");
   };
   return (

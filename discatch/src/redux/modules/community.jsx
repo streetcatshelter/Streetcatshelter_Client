@@ -197,6 +197,7 @@ export const addCommunityCommentDB =
   (contents, communityId) =>
   async (dispatch, getState, { history }) => {
     try {
+      console.log(contents, communityId);
       const data = await communityApi.createCommunityComment(
         contents,
         communityId

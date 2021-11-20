@@ -15,10 +15,10 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 // REDUX
 import { communityLikeToggleDB } from "../../redux/modules/community";
 
-const Comment = () => {
+const Comment = ({ path }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const commentList = useSelector((state) => state.comment.list);
   const community = useSelector((state) => state.community.list);
   const communityId = community.data?.communityId;
 
@@ -48,7 +48,11 @@ const Comment = () => {
         <Text margin="2px 3px" fontWeight="700" size="16px">
           댓글
         </Text>
-          <Count>{community.data?.cntComment}</Count>
+        <Count>
+          {path === "CatDetail"
+            ? `${commentList.length}`
+            : `${community.data?.cntComment}`}
+        </Count>
       </Grid>
 
       {location.pathname.split("/")[1] === "community" && (

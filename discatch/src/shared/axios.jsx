@@ -57,6 +57,7 @@ export const catApi = {
   getMoreCat: (location, start, limit) =>
     instance.get(`/cat/${location}?page=${start + 1}&size=${limit}`),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
+  getCatInfo: (catId) => instance.get(`/cat/info/${catId}`),
   getCatCalendar: (catId, month, year) =>
     instance.get(`/cat/calender/${catId}?month=${month}&year=${year}`),
   getCatGallery: (catId, size) =>

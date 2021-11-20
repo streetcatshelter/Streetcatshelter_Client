@@ -257,7 +257,7 @@ const CommunityPostDetail = (props) => {
           </Text>
         </Grid>
         <Grid>
-          <CommentList props={props} />
+          <CommentList props={props} communityId={communityId} />
         </Grid>
       </Grid>
       <EditModalSlide

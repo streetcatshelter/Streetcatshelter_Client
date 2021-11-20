@@ -143,6 +143,18 @@ export const __getCatDetail =
     }
   };
 
+export const __getCatInfo =
+  (catId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      console.log(catId);
+      const { data } = await catApi.getCatInfo(catId);
+      dispatch(getCatInfo(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 // 상세 페이지(캘린더)
 export const __getCalendar =
   (catId, month, year) =>
@@ -181,11 +193,13 @@ export const __getGallery =
 
 // 기본 정보 좋아요
 export const __catLike =
-  (catId, location) =>
+  (catId, location, path) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catLike(catId);
-      dispatch(__getCatLocation(location));
+      path === "detail"
+        ? dispatch(__getCatInfo(catId))
+        : dispatch(__getCatLocation(location));
     } catch (err) {
       console.error(err);
     }
@@ -224,6 +238,7 @@ const initialState = {
   diary: [],
   page: 0,
   start: 0,
+  catinfo: [],
 };
 
 const cat = createSlice({
@@ -273,6 +288,9 @@ const cat = createSlice({
     getCatDetail: (state, action) => {
       state.detail = action.payload;
     },
+    getCatInfo: (state, action) => {
+      state.catinfo = action.payload;
+    },
 
     getCalendar: (state, action) => {
       state.calendar = action.payload;
@@ -299,6 +317,7 @@ export const {
   getCatLocation,
   getMoreCat,
   getCatDetail,
+  getCatInfo,
   getCalendar,
   getDiary,
   getGallery,

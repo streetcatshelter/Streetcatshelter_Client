@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Template, CommentList, EditModalSlide } from "../components";
 
 // STYLE
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
 
 // ELEMENTS
 import { Grid, Text, Image } from "../elements/index";

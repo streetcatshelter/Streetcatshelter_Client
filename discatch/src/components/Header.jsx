@@ -22,28 +22,34 @@ import { searchMap } from "../redux/modules/map";
 import { mypageActions } from "../redux/modules/mypage";
 
 const Header = (props) => {
+  const preLocation = props.location;
   const locationA = useLocation();
   const dispatch = useDispatch();
   const path = props.path;
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location1;
-  if (userInfo.locationList && path.length === 1) {
-    location1 = userInfo?.locationList[0].split("@")[0];
-  } else {
-    location1 = locationA.state?.location;
+  const firstLocation = locationA.state?.location;
+  
+  if (preLocation !== undefined) {
+    location1 = preLocation;
   }
-  const locationList = userInfo.locationList?.filter(
+  else if (userInfo.locationList && path.length === 1) {
+    location1 = userInfo.locationList[0]?.split("@")[0];
+  } else {
+    location1 = firstLocation;
+  }
+
+  const locationLists = userInfo.locationList?.filter(
     (v) => v.split("@")[0] !== location1
   );
-
   let location2;
   let location3;
   if(userInfo.locationList !== undefined) {
     if (userInfo.locationList.length === 3) {
-      location2 = locationList[0].split('@')[0];
-      location3 = locationList[1].split('@')[0];
+      location2 = locationLists[0].split('@')[0];
+      location3 = locationLists[1].split('@')[0];
     } else if (userInfo.locationList.length === 2) {
-      location2 = locationList[0].split('@')[0];
+      location2 = locationLists[0].split('@')[0];
     } 
   }
   
@@ -55,8 +61,8 @@ const Header = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(searchMap(locationA.state?.location));
-  }, [locationA.state?.location, dispatch]);
+    dispatch(searchMap(firstLocation));
+  }, [firstLocation, dispatch]);
 
   let options;
   if (location1 !== undefined && location2 === undefined) {

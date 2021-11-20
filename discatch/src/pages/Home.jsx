@@ -20,6 +20,7 @@ import { __getCatLocation, __getMoreCat } from "../redux/modules/cat";
 import InfinityScroll from "../shared/InfinityScroll";
 
 const Home = (props) => {
+  const menuLocation = props.location.state.location;
   const dispatch = useDispatch();
   const catList = useSelector((state) => state.cat.list);
 
@@ -28,8 +29,7 @@ const Home = (props) => {
   const userVillage = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]
   );
-  const location = userLocation ? userLocation : userVillage;
-
+  const location = userLocation ? userLocation : (menuLocation || userVillage);
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));
   };
@@ -39,7 +39,7 @@ const Home = (props) => {
   }, [location, dispatch]);
 
   return (
-    <Template props={props}>
+    <Template props={props} location={location}>
       {catList.length ? (
         catList.map((cat, idx) => {
           return (

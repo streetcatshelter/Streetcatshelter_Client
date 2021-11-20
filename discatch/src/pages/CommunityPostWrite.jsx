@@ -113,11 +113,14 @@ const CommunityPostWrite = (props) => {
     <Template props={props}>
       <Grid
         bgColor="bgColor"
-        margin="-10vh auto"
+        margin="-5vh auto"
         addstyle={() => {
           return css`
             position: relative;
             top: 80px;
+            @media screen and (max-width: 414px) {
+              margin: -10vh auto;
+            }
           `;
         }}
       >
@@ -148,7 +151,8 @@ const CommunityPostWrite = (props) => {
               }}
             />
             <Button
-              bgColor="lightGray"
+              bgColor="olive"
+              fontWeight="bold"
               onClick={() => delLastImageBtn()}
               addstyle={() => {
                 return css`
@@ -263,28 +267,40 @@ const CommunityPostWrite = (props) => {
             />
           </Grid>
 
-          <Grid width="325px"></Grid>
+          <Grid 
+            width="325px" 
+            height="500px"
+            addstyle={() => {
+              return css`
+                @media screen and (max-width: 414px) {
+                  height: 400px;
+                }
+              `;
+            }}></Grid>
           <Grid
             width="225px"
             height="30px"
             addstyle={() => {
               return css`
                 display: flex;
-                margin: 60px 0 0 -70px;
+                margin: -50px 0 0 -80px;
+                @media screen and (max-width: 414px) {
+                  margin: 50px 0 0 -70px;
+                }
               `;
             }}
           >
             <Button
               width="108px"
-              margin="auto"
-              fontSize="14px"
-              bgColor="D_yellow"
-              fontWeight="bold"
+              margin="0 auto"
+              bgColor="olive"
+              fontSize="18px"
+              fontWeight="800"
               onClick={writeBtn}
               addstyle={() => {
                 return css`
                   display: flex;
-                  height: 24px;
+                  height: 44px;
                   border-radius: 10px;
                   align-items: center;
                   justify-content: center;
@@ -298,15 +314,15 @@ const CommunityPostWrite = (props) => {
             </Button>
             <Button
               width="108px"
-              margin="auto"
-              fontSize="14px"
-              fontWeight="bold"
-              bgColor="D_yellow"
+              margin="0 auto"
+              fontSize="18px"
+              fontWeight="800"
+              bgColor="olive"
               onClick={() => window.location.replace(`${backPath}`)}
               addstyle={() => {
                 return css`
                   display: flex;
-                  height: 24px;
+                  height: 44px;
                   border-radius: 10px;
                   align-items: center;
                   justify-content: center;

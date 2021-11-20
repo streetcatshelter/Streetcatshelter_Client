@@ -26,7 +26,7 @@ const Menu = () => {
   let location = userLocation ? userLocation : userVillage;
   
   if (pathLocation !== undefined) {
-    if (location !== pathLocation) {
+    if (location !== pathLocation && pathLocation !== 'chat' && typeof(pathLocation) === Number) {
       location = pathLocation;
     }
   }
@@ -46,7 +46,8 @@ const Menu = () => {
         }}
       >
         <Link
-          to="/"
+          to={{pathname: '/', 
+          state: { location }}}
           style={{
             textDecoration: "none",
             color: "black",

@@ -33,10 +33,6 @@ import CatDiary from "./catPosts/CatDiary";
 import CatGallery from "./catPosts/CatGallery";
 import Diary from "./catPosts/Diary";
 import Gallery from "./catPosts/Gallery";
-import CatComment from "./catPosts/CatComment";
-import CatCommentCard from "./catPosts/CatCommentCard";
-import CatDetailComment from "./catPosts/CatDetailComment";
-import CatDetailCommentCard from "./catPosts/CatDetailCommentCard";
 
 // COMMENT
 import Comment from "./comment/Comment";
@@ -91,10 +87,6 @@ export {
   CatGallery,
   Diary,
   Gallery,
-  CatComment,
-  CatCommentCard,
-  CatDetailComment,
-  CatDetailCommentCard,
   // COMMENT
   Comment,
   CommentList,

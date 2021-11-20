@@ -49,7 +49,7 @@ const Comment = ({ path }) => {
           댓글
         </Text>
         <Count>
-          {path === "CatDetail"
+          {path === "CatDetail" || path === "CatDetailInfo"
             ? `${commentList.length}`
             : `${community.data?.cntComment}`}
         </Count>

@@ -10,7 +10,7 @@ import { flexBox } from '../shared/style';
 import { Grid, Text, Image, Button } from '../elements';
 
 // COMPONENTS
-import { Template, CatDetailComment, EditModalSlide } from '../components';
+import { Template, CommentList, EditModalSlide } from '../components';
 
 // ICON
 import { CheckSquare } from 'react-feather';
@@ -23,11 +23,15 @@ import {
   __deleteCatDetail,
   __catDetailLike,
 } from '../redux/modules/cat';
+import {
+  __getDetailComment,
+} from '../redux/modules/comment';
 
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
+  const commentList = useSelector((state) => state.comment.list);
   const catDetailId = props.match.params.catDetailId;
-
+  
   const { userProfile, nickname, username } = useSelector((state) => ({
     userProfile: state.mypage.userInfo.profileImageUrl,
     nickname: state.mypage.userInfo.nickname,
@@ -55,6 +59,10 @@ const CatDetailInfo = (props) => {
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));
   }, [catDetailId, dispatch]);
+  
+  useEffect(() => {
+    dispatch(__getDetailComment(catDetailId));
+  }, [catDetailId, commentList.length, dispatch]);
 
   const deleteCatDetail = () => {
     dispatch(__deleteCatDetail(catDetailId));
@@ -99,8 +107,15 @@ const CatDetailInfo = (props) => {
           SecondClick={deleteCatDetail}
         />
       </Grid>
-
-      <Image src={image} margin="auto" width="300px" height="300px" />
+      {image[0] && (
+        <Image src={image[0]} margin="10px auto" width="300px" height="300px" />
+      )}
+      {image[1] && (
+        <Image src={image[1]} margin="10px auto" width="300px" height="300px" />
+      )}
+      {image[2] && (
+        <Image src={image[2]} margin="10px auto" width="300px" height="300px" />
+      )}
 
       <Grid
         margin="5% 0"
@@ -175,8 +190,7 @@ const CatDetailInfo = (props) => {
           );
         })}
       </Grid>
-
-      <CatDetailComment catDetailId={catDetailId} />
+      <CommentList props={commentList} path="CatDetailInfo" catId={catDetailId} />
     </Template>
   );
 };

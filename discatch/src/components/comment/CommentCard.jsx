@@ -16,7 +16,7 @@ import { deleteCommunityCommentDB } from "../../redux/modules/community";
 import { chatActions } from "../../redux/modules/chat";
 import { __deleteComment } from "../../redux/modules/comment";
 import moment from "moment";
-const CommentCard = ({ comment, communityId, catId }) => {
+const CommentCard = ({ comment, communityId }) => {
   const commentId = comment.commentId;
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
@@ -30,7 +30,6 @@ const CommentCard = ({ comment, communityId, catId }) => {
 
   const MakeChat = () => {
     const chatuser = { chatUser: [comment.nickname, UserInfo.nickname] };
-
     dispatch(chatActions._createRoom(chatuser));
   };
 

@@ -20,7 +20,7 @@ import { __getCatLocation, __getMoreCat } from "../redux/modules/cat";
 import InfinityScroll from "../shared/InfinityScroll";
 
 const Home = (props) => {
-  const menuLocation = props.location.state.location;
+  const menuLocation = props.location.state?.location;
   const dispatch = useDispatch();
   const catList = useSelector((state) => state.cat.list);
 

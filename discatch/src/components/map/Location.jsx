@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 
 // STYLE
 import styled, { css } from "styled-components";
-import { AlignRight, Map } from "react-feather";
+import { Map } from "react-feather";
 
 // ELEMENTS
 import { Button } from '../../elements';
@@ -246,7 +246,8 @@ const Location = () => {
         displayPagination(pagination);
         setPlaces(data);
       } else {
-        ps.keywordSearch(vKeyword, placesSearchCB);
+        alert('검색 결과가 없습니다!');
+        showCats();
       }
     }
 
@@ -325,8 +326,8 @@ const Location = () => {
         markers.setMap(map)
       }
     
-    // 지도에 마커를 표시합니다.
-    kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+      // 지도에 마커를 표시합니다.
+      kakao.maps.event.addListener(map, "click", function (mouseEvent) {
       //클릭한 위도, 경도 정보를 가져옵니다.
       const latlng = mouseEvent.latLng;
       //위도 경도 값을 useState를 이용해서 useEffect 밖으로 빼냅니다.
@@ -346,7 +347,6 @@ const Location = () => {
 
     function placesSearchCB (data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
-        console.log(status);
         let bounds = new kakao.maps.LatLngBounds();
 
         for (let i = 0; i < data.length; i++) {

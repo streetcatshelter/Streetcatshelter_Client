@@ -98,6 +98,7 @@ const Header = (props) => {
   if (!userInfo) {
     return <div></div>;
   }
+
   return (
     <HeaderStyle>
       <Grid

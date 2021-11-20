@@ -25,7 +25,6 @@ const CatDetailInfoWrite = (props) => {
 
   const preview = useSelector((state) => state.image.preview);
   const catId = props.match.params.catId;
-
   const [fileNum, setFileNum] = useState(0);
 
   // S3
@@ -56,8 +55,9 @@ const CatDetailInfoWrite = (props) => {
   const [snack, setSnack] = useState(false);
   const [water, setWater] = useState(false);
 
-  const latitude = 0;
-  const longitude = 0;
+  const loaction = props.location.state.location;
+  const latitude = props.location.state.latitude;
+  const longitude = props.location.state.longitude;
 
   const createBtn = () => {
     dispatch(
@@ -72,7 +72,7 @@ const CatDetailInfoWrite = (props) => {
         catId
       )
     );
-    history.push(`/catdetail/${catId}`);
+    history.push(`/catdetail/${loaction}/${catId}`);
   };
 
   return (
@@ -152,7 +152,6 @@ const CatDetailInfoWrite = (props) => {
             value="food"
             onChange={(e) => {
               setFood(e.target.checked);
-              console.log(e.target.checked);
             }}
           />
           <CheckText>사료</CheckText>
@@ -164,7 +163,6 @@ const CatDetailInfoWrite = (props) => {
             value="snack"
             onChange={(e) => {
               setSnack(e.target.checked);
-              console.log(e.target.checked);
             }}
           />
           <CheckText>간식</CheckText>
@@ -175,7 +173,6 @@ const CatDetailInfoWrite = (props) => {
             value="water"
             onChange={(e) => {
               setWater(e.target.checked);
-              console.log(e.target.checked);
             }}
           />
           <CheckText>급수</CheckText>

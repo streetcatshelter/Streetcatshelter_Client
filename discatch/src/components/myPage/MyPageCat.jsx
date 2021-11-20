@@ -34,6 +34,7 @@ const MyPageCat = () => {
             key={idx}
             onClick={() => {
               history.push(`/catdetail/${LikedCat.catId}`);
+              // history.push(`/catdetail/${LikedCat.location}/${LikedCat.catId}`);
             }}
           >
             <Image

@@ -101,7 +101,7 @@ const CatDetail = (props) => {
       <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push(`/catdetailinfowrite/${catId}`);
+          history.push({pathname:`/map/${location}/${catId}`, state: { catId }});
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />

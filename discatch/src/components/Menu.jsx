@@ -26,10 +26,12 @@ const Menu = () => {
   let location = userLocation ? userLocation : userVillage;
   
   if (pathLocation !== undefined) {
-    if (location !== pathLocation && pathLocation !== 'chat' && typeof(pathLocation) === Number) {
+    if (pathLocation === 'chat') {
+      location = userVillage;
+    } else if (location !== pathLocation || typeof(pathLocation) === Number) {
       location = pathLocation;
     }
-  }
+  } 
 
   const moveToCommunity = () => {
     history.push({pathname: '/community', state: { location }});
@@ -82,7 +84,7 @@ const Menu = () => {
           </Text>
         </Link>
         <Link
-          to="/chat"
+          to={{pathname:"/chat", state: { location }}}
           style={{
             textDecoration: "none",
             color: "black",
@@ -94,7 +96,7 @@ const Menu = () => {
           </Text>
         </Link>
         <Link
-          to="/mypage"
+          to={{pathname:"/mypage", state: { location }}}
           style={{
             textDecoration: "none",
             color: "black",

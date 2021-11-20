@@ -5,7 +5,7 @@ import { Template, ChatMain } from "../../components";
 const ChatMainPage = (props) => {
   return (
     <Template props={props} page="map">
-      <ChatMain />
+      <ChatMain props={props}/>
     </Template>
   );
 };

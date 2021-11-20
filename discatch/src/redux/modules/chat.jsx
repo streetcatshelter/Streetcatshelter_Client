@@ -7,7 +7,6 @@ const _getRooms =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await chatApi.getRooms();
-      console.log(data);
       dispatch(setRooms(data));
     } catch (e) {
       console.log(e);
@@ -17,7 +16,6 @@ const _getRooms =
 const _getRoomInfo =
   (roomId) =>
   async (dispatch, getState, { history }) => {
-    console.log(roomId);
     try {
       const { data } = await chatApi.getRoomInfo(roomId);
       dispatch(setChatInfo(data));
@@ -44,7 +42,6 @@ const _getAllMessage =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await chatApi.getAllMessage(roomId);
-      console.log(data);
       dispatch(setChatMessage(data));
     } catch (e) {
       console.log(e);
@@ -55,9 +52,6 @@ const _deleteRoom =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await chatApi.deleteRoom(roomId);
-      console.log(data);
-
-      // dispatch(deleteRoom(data));
     } catch (e) {
       console.log(e);
     }

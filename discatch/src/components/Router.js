@@ -151,6 +151,7 @@ const Router = () => {
 
       {/* Map */}
       <Route path="/map/:village" component={Auth(Map, true)} exact />
+      <Route path="/map/:village/:id" component={Auth(Map, true)} exact />
 
       {/* Chat */}
       <Route path="/chat" component={Auth(ChatMainPage, true)} exact />

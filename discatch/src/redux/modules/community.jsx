@@ -35,6 +35,7 @@ export const addCommunityDB = (category, contents, location, title) => {
           .then((res) => {
             dispatch(imgActions.setInitialState());
             history.push(`/community/${location}/${pathName}`);
+            history.go(0);
           })
           .catch((err) => {
             console.log(err);
@@ -173,7 +174,6 @@ export const editCommunityDB = (
 export const deleteCommunityDB =
   (communityId, category, location) =>
   async (dispatch, getState, { history }) => {
-    console.log(communityId, category, location);
     const path = category.split(" ");
     let pathName = null;
     if (path.length === 2) {

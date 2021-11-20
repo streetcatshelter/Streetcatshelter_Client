@@ -2,20 +2,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// ELEMENTS
-import { Grid, Button, Text } from "../../elements/index";
-import { flexBox } from "../../shared/style";
-
 // COMPONENTS
 import EditModalSlide from "../EditModalSlide";
 
 // STYLE
-import { css } from "styled-components";
 import styled from "styled-components";
 
 // ICON
 import { Trash2 } from "react-feather";
-import Avatar from "@material-ui/core/Avatar";
 
 // REDUX
 import { deleteCommunityCommentDB } from "../../redux/modules/community";
@@ -54,7 +48,6 @@ const CommentCard = ({ comment, communityId }) => {
 
           {comment.createdAt ? (
             <span>
-              {" "}
               {comment.createdAt[0]}.{comment.createdAt[1]}.
               {comment.createdAt[2]} {comment.createdAt[3]}시
               {comment.createdAt[4]}분

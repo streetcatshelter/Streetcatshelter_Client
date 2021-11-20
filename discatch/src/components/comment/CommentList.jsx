@@ -32,8 +32,8 @@ const CommentList = (props) => {
 
   const addCommentBtn = () => {
     dispatch(addCommunityCommentDB(comments, communityId));
+    setComment('');
   };
-
   return (
     <>
       <Comment />
@@ -49,6 +49,7 @@ const CommentList = (props) => {
         <TextArea
           onChange={$comment}
           type="text"
+          value={comments}
           placeholder="댓글 달기..."
           addstyle={() => {
             return css`

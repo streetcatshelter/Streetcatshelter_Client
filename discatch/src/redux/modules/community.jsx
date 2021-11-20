@@ -185,7 +185,6 @@ export const deleteCommunityDB =
     }
     try {
       const data = await communityApi.deleteCommunity(communityId);
-      dispatch(deleteCommunity(communityId));
       window.alert("게시물 삭제 완료!");
       history.push(`/community/${location}/${pathName}`);
     } catch (err) {
@@ -202,7 +201,6 @@ export const addCommunityCommentDB =
         contents,
         communityId
       );
-      dispatch(addCommunityComment({ contents }));
       dispatch(getOneCommunityDB(communityId));
     } catch (err) {
       console.error(err);
@@ -219,7 +217,7 @@ export const deleteCommunityCommentDB =
       dispatch(getOneCommunityDB(communityId));
     } catch (err) {
       console.error(err);
-      window.alert("댓글을 삭제실패했습니다. 다시 시도해주세요!");
+      window.alert("댓글을 삭제할 수 없습니다. 다시 시도해주세요!");
     }
   };
 

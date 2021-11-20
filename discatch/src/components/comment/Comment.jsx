@@ -48,11 +48,7 @@ const Comment = () => {
         <Text margin="2px 3px" fontWeight="700" size="16px">
           댓글
         </Text>
-        {community.data?.cntComment ? (
           <Count>{community.data?.cntComment}</Count>
-        ) : (
-          ""
-        )}
       </Grid>
 
       {location.pathname.split("/")[1] === "community" && (

@@ -15,6 +15,7 @@ import { Grid, Button, Input, TextArea, Text } from "../elements/index";
 // REDUX
 import { imgActions } from "../redux/modules/image";
 import { addCommunityDB } from "../redux/modules/community";
+import { mypageActions } from "../redux/modules/mypage";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
@@ -23,26 +24,46 @@ import { useLocation } from "react-router-dom";
 import { Camera } from "react-feather";
 
 const CommunityPostWrite = (props) => {
+  const dispatch = useDispatch();
   const path = useLocation();
   const pathName = path.pathname.split("/");
   const backPath = `/${pathName[1]}/${pathName[2]}/${pathName[3]}`;
-  const location = pathName[2];
+  const detailLocation = pathName[2];
   const preview = useSelector((state) =>
-    state.image.preview ? state.image.preview : Array()
+    state.image.preview ? state.image.preview : Array(1)
   );
-  const dispatch = useDispatch();
 
-  let firstCategory = null;
+  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
+  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
+  
+  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
+  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
+  
+  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
+  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
+  
+  let location;
+  if (detailLocation === userVillage0) {
+    location = userVillageA
+  } else if (detailLocation === userVillage1) {
+    location = userVillageB
+  } else if (detailLocation === userVillage2) {
+    location = userVillageC
+  }
+
+  let firstCategory;
   if (pathName[3] === "catinfo") {
     firstCategory = "고양이 정보글";
   } else if (pathName[3] === "gathering") {
-    firstCategory = `${location} 동네 모임`;
+    firstCategory = `${detailLocation} 동네 모임`;
   } else {
-    firstCategory = `${location} 고양이 용품 나눔`;
+    firstCategory = `${detailLocation} 고양이 용품 나눔`;
   }
 
   const [fileNum, setFileNum] = useState(0);
 
+  location = location?.substring(0, location.length - 1);
+  console.log(location);
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();
@@ -61,8 +82,8 @@ const CommunityPostWrite = (props) => {
 
   const Options = [
     { key: 1, value: "고양이 정보글" },
-    { key: 2, value: `${location} 동네 모임` },
-    { key: 3, value: `${location} 고양이 용품 나눔` },
+    { key: 2, value: `${detailLocation} 동네 모임` },
+    { key: 3, value: `${detailLocation} 고양이 용품 나눔` },
   ];
 
   const onChangeHandler = (e) => {
@@ -80,7 +101,7 @@ const CommunityPostWrite = (props) => {
   };
 
   const writeBtn = () => {
-    dispatch(addCommunityDB(category, contents, location, title));
+    dispatch(addCommunityDB(category, contents, location, title, detailLocation));
   };
 
   const delLastImageBtn = () => {
@@ -108,6 +129,10 @@ const CommunityPostWrite = (props) => {
       alert("삭제할 사진이 없어요!");
     }
   };
+
+  React.useEffect(() => {
+    dispatch(mypageActions._getUserInfo());
+  }, [dispatch]);
 
   return (
     <Template props={props}>

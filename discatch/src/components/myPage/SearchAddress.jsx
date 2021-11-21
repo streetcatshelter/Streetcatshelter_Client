@@ -11,7 +11,6 @@ const SearchAddress = (props) => {
   const dispatch = useDispatch();
 
   const [isOpenPost, setIsOpenPost] = useState(false);
-
   const onChangeOpenPost = () => {
     if (isOpenPost === false && props.Village.length === 3) {
       window.alert(
@@ -37,7 +36,13 @@ const SearchAddress = (props) => {
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
 
-    dispatch(saveVillage(`${data.bname}@${fullAddr}`));
+    if (props.Village[0]?.split('@')[0] !== data.bname && 
+      props.Village[1]?.split('@')[0] !== data.bname && 
+      props.Village[2]?.split('@')[0] !== data.bname) {
+      dispatch(saveVillage(`${data.bname}@${fullAddr}`));
+    } else {
+      alert('이름이 같은 동은 한 곳만 등록 가능합니다.');
+    }
     setIsOpenPost(false);
   };
 

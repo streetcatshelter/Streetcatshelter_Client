@@ -24,30 +24,54 @@ import { getCommunityDB, getMoreCommunityDB } from "../redux/modules/community";
 
 // REDUX
 import { history } from "../redux/configureStore";
+import { mypageActions } from "../redux/modules/mypage";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
-  const location = props.match.params.village.split("@")[0];
-
+  const pathLocation = props.match.params.village.split("@")[0];
+  let location;
+  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
+  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
+  
+  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
+  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
+  
+  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
+  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
+  
+  if (pathLocation === userVillage0) {
+    location = userVillageA;
+  } else if (pathLocation === userVillage1) {
+    location = userVillageB;
+  } else if (pathLocation === userVillage2) {
+    location = userVillageC;
+  }
+  
   const path = useLocation();
   let category = null;
   let nextPath = null;
-  if (path.pathname === `/community/${location}/catinfo`) {
+  if (path.pathname === `/community/${pathLocation}/catinfo`) {
     category = "고양이 정보글";
     nextPath = "catinfo";
-  } else if (path.pathname === `/community/${location}/gathering`) {
-    category = `${location} 동네 모임`;
+  } else if (path.pathname === `/community/${pathLocation}/gathering`) {
+    category = `${pathLocation} 동네 모임`;
     nextPath = "gathering";
-  } else if (path.pathname === `/community/${location}/sharing`) {
-    category = `${location} 고양이 용품 나눔`;
+  } else if (path.pathname === `/community/${pathLocation}/sharing`) {
+    category = `${pathLocation} 고양이 용품 나눔`;
     nextPath = "sharing";
   }
+
+  location = location?.substring(0, location.length - 1);
 
   const getMoreCommunity = () => {
     dispatch(getMoreCommunityDB(category, location));
   };
 
   const communityList = useSelector((state) => state.community.list);
+
+  React.useEffect(() => {
+    dispatch(mypageActions._getUserInfo());
+  }, [dispatch]);
 
   React.useEffect(() => {
     dispatch(getCommunityDB(category, location));
@@ -108,7 +132,7 @@ const CommunityDetail = (props) => {
         </CommunityDetailStyle>
         <Button
           clickEvent={() =>
-            history.push(`/community/${location}/${nextPath}/write`)
+            history.push(`/community/${pathLocation}/${nextPath}/write`)
           }
           is_float="is_float"
         >

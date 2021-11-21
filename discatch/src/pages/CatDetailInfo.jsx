@@ -107,13 +107,13 @@ const CatDetailInfo = (props) => {
           SecondClick={deleteCatDetail}
         />
       </Grid>
-      {image[0] && (
+      {image && image[0] && (
         <Image src={image[0]} margin="10px auto" width="300px" height="300px" />
       )}
-      {image[1] && (
+      {image && image[1] && (
         <Image src={image[1]} margin="10px auto" width="300px" height="300px" />
       )}
-      {image[2] && (
+      {image && image[2] && (
         <Image src={image[2]} margin="10px auto" width="300px" height="300px" />
       )}
 

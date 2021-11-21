@@ -75,9 +75,7 @@ const CommunityPost = ({ community }) => {
                   `;
                 }}
               >
-                {community.createdAt[0]}.{community.createdAt[1]}.
-                {community.createdAt[2]} {community.createdAt[3]}시{" "}
-                {community.createdAt[4]}분
+                {community.createdAt}
               </Text>
             </Grid>
           </Grid>

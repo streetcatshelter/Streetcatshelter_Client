@@ -24,9 +24,8 @@ const Menu = () => {
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
   let location = userLocation ? userLocation : userVillage;
-  
   if (pathLocation !== undefined) {
-    if (pathLocation === 'chat') {
+    if (pathLocation === 'chat' || pathLocation === 'work' || pathLocation === 'notice' || typeof(Number(pathLocation)) === 'number') {
       location = userVillage;
     } else if (location !== pathLocation || typeof(pathLocation) === Number) {
       location = pathLocation;

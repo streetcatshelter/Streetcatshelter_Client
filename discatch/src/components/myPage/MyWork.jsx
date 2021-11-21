@@ -7,7 +7,7 @@ import { ProgressBar, Calendar } from "..";
 // STYLE
 import styled from "styled-components";
 
-const Mywork = () => {
+const Mywork = (props) => {
   return (
     <Wrapper>
       <ProgressBar />

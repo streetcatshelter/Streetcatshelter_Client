@@ -17,7 +17,7 @@ const CommunityCategoryCard = ({ src, width, height, title, subtitle, clickEvent
       height={height}
       addstyle={() => {
         return css`
-          margin: 20px;
+          margin: 0 20px 0 0;
         `;
       }}
       />

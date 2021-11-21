@@ -1,12 +1,16 @@
 // LIBRARY
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 
 // COMPONENTS
 import EditModalSlide from "../EditModalSlide";
 
+// ELEMENTS
+import { Text } from '../../elements/index';
+
 // STYLE
-import styled from "styled-components";
+import styled, { css }from "styled-components";
 
 // ICON
 import { Trash2 } from "react-feather";
@@ -15,13 +19,14 @@ import { Trash2 } from "react-feather";
 import { deleteCommunityCommentDB } from "../../redux/modules/community";
 import { chatActions } from "../../redux/modules/chat";
 import { __deleteComment } from "../../redux/modules/comment";
-import moment from "moment";
+
 const CommentCard = ({ comment, communityId }) => {
   const commentId = comment.commentId;
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [ProfileModal, setProfileModal] = useState(false);
   const CreatedAt = moment(comment.createdAt).format("YYYY-M-D hh:mm");
+  
   const OpenProfile = () => {
     if (UserInfo.nickname !== comment.nickname) {
       setProfileModal(!ProfileModal);
@@ -58,7 +63,15 @@ const CommentCard = ({ comment, communityId }) => {
           )}
         </Right>
       </Header>
-      <Content>{comment.contents}</Content>
+      <Text 
+          width="280px" 
+          margin="0 0 0 10px" 
+          padding="4px"
+          addstyle={() => {
+            return css`
+              border-radius: 10px;
+            `;
+          }}>{comment.contents}</Text>
       <EditModalSlide
         FirstBtn="프로필보기"
         SecondBtn="채팅하기"
@@ -116,12 +129,6 @@ const Right = styled.div`
     height: 15px;
     margin-right: 10px;
   }
-`;
-
-const Content = styled.p`
-  line-height: 15px;
-  margin: 5px;
-  font-size: 14px;
 `;
 
 export default CommentCard;

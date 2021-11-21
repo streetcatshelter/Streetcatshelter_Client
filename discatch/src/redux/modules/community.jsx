@@ -6,8 +6,9 @@ import instance, { communityApi } from "../../shared/axios";
 import { imgActions } from "./image";
 
 // 커뮤니티 글 등록
-export const addCommunityDB = (category, contents, location, title) => {
+export const addCommunityDB = (category, contents, location, title, detailLocation) => {
   return function (dispatch, getState, { history }) {
+    console.log(location);
     const userInfo = localStorage.getItem("userInfo");
     const path = category.split(" ");
     let pathName = null;
@@ -30,11 +31,12 @@ export const addCommunityDB = (category, contents, location, title) => {
           title: title,
           username: username,
         };
+        console.log(postInfo);
         instance
           .post("/community/create", postInfo)
           .then((res) => {
             dispatch(imgActions.setInitialState());
-            history.push(`/community/${location}/${pathName}`);
+            history.push(`/community/${detailLocation}/${pathName}`);
             history.go(0);
           })
           .catch((err) => {
@@ -255,7 +257,8 @@ const community = createSlice({
       const location = action.payload.location;
       const title = action.payload.title;
       const username = action.payload.username;
-      state.list.push(category, contents, image, location, title, username);
+      const detailLocation = action.payload.username;
+      state.list.push(category, contents, image, location, title, username, detailLocation);
     },
 
     getCommunity: (state, action) => {

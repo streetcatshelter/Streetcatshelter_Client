@@ -26,7 +26,7 @@ const Header = (props) => {
   const locationA = useLocation();
   const dispatch = useDispatch();
   const path = props.path;
-  const location = locationA.pathname.split('/')[2];
+  const location = locationA.pathname?.split('/')[2];
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location1;
   const firstLocation = locationA.state?.location;
@@ -39,21 +39,32 @@ const Header = (props) => {
     location1 = firstLocation;
   }
 
-  const locationLists = userInfo.locationList?.filter(
+  const sameLocationList = userInfo.locationList?.filter(
+    (v) => v.split("@")[0] === location1
+  );
+
+  const locationList = userInfo.locationList?.filter(
     (v) => v.split("@")[0] !== location1
   );
+
   let location2;
   let location3;
-  if(userInfo.locationList !== undefined) {
+  if(userInfo.locationList !== undefined && sameLocationList.length === 1) {
     if (userInfo.locationList.length === 3) {
-      location2 = locationLists[0].split('@')[0];
-      location3 = locationLists[1].split('@')[0];
+      location2 = locationList[0]?.split('@')[0];
+      location3 = locationList[1]?.split('@')[0];
     } else if (userInfo.locationList.length === 2) {
-      location2 = locationLists[0].split('@')[0];
+      location2 = locationList[0]?.split('@')[0];
     }
+  } else if (userInfo.locationList !== undefined && sameLocationList.length === 2) {
+    location1 = sameLocationList[0]?.split('@')[0];
+    location2 = sameLocationList[1]?.split('@')[0];
+    location3 = locationList[0]?.split('@')[0];
+  } else if (userInfo.locationList !== undefined && sameLocationList.length === 3) {
+    location1 = sameLocationList[0]?.split('@')[0];
+    location2 = sameLocationList[1]?.split('@')[0];
+    location3 = sameLocationList[2]?.split('@')[0];
   }
-  
-
 
   const [searchModal, setSearchModal] = useState(false);
 

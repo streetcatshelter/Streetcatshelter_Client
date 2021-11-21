@@ -11,12 +11,13 @@ import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 
 const MyPageDetail = (props) => {
+  const location = props.location;
   return (
     <Wrapper>
       <Grid>
         <MenuBtn
           onClick={() => {
-            history.push("/mypage");
+            history.push({pathname:'/mypage', state : { location }});
           }}
           color={props.menu === "myCat" ? " #B5BB19" : "black"}
         >
@@ -24,7 +25,7 @@ const MyPageDetail = (props) => {
         </MenuBtn>
         <MenuBtn
           onClick={() => {
-            history.push("/mypage/work");
+            history.push({pathname:'/mypage/work', state : { location }});
           }}
           color={props.menu === "myWork" ? " #B5BB19" : "black"}
         >
@@ -32,7 +33,7 @@ const MyPageDetail = (props) => {
         </MenuBtn>
         <MenuBtn
           onClick={() => {
-            history.push("/mypage/notice");
+            history.push({pathname:'/mypage/notice', state : { location }});
           }}
           color={props.menu === "notice" ? " #B5BB19" : "black"}
         >

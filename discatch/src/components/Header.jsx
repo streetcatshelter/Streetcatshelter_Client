@@ -13,24 +13,25 @@ import { useLocation } from "react-router-dom";
 import { Grid } from "../elements";
 
 // ICON
-import { Search, Bell, ArrowLeft } from "react-feather";
+import { Search, Bell, ArrowLeft, LogOut } from "react-feather";
 
 // REDUX
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { searchMap } from "../redux/modules/map";
 import { mypageActions } from "../redux/modules/mypage";
+import { userActions } from "../redux/modules/user";
 
 const Header = (props) => {
   const preLocation = props.location;
   const locationA = useLocation();
   const dispatch = useDispatch();
   const path = props.path;
-  const location = locationA.pathname.split('/')[2];
+  const location = locationA.pathname.split("/")[2];
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location1;
   const firstLocation = locationA.state?.location;
-  
+
   if (preLocation !== undefined) {
     location1 = preLocation;
   } else if (userInfo.locationList && path.length === 1) {
@@ -44,16 +45,14 @@ const Header = (props) => {
   );
   let location2;
   let location3;
-  if(userInfo.locationList !== undefined) {
+  if (userInfo.locationList !== undefined) {
     if (userInfo.locationList.length === 3) {
-      location2 = locationLists[0].split('@')[0];
-      location3 = locationLists[1].split('@')[0];
+      location2 = locationLists[0].split("@")[0];
+      location3 = locationLists[1].split("@")[0];
     } else if (userInfo.locationList.length === 2) {
-      location2 = locationLists[0].split('@')[0];
+      location2 = locationLists[0].split("@")[0];
     }
   }
-  
-
 
   const [searchModal, setSearchModal] = useState(false);
 
@@ -97,15 +96,21 @@ const Header = (props) => {
   };
 
   const goBack = () => {
-    if (path === '/community/:village/:category') {
-      history.push({pathname: '/community', state : { location }});
+    if (path === "/community/:village/:category") {
+      history.push({ pathname: "/community", state: { location } });
       history.go(0);
-    } else if (path === '/catdetail/:village/:catId') {
-      history.push({pathname: '/', state : { location }})
+    } else if (path === "/catdetail/:village/:catId") {
+      history.push({ pathname: "/", state: { location } });
     } else {
       history.goBack();
     }
-  }
+  };
+
+  const Logout = () => {
+    if (window.confirm("정말로 로그아웃하시겠습니까?") === true) {
+      dispatch(userActions._logout());
+    }
+  };
 
   if (!userInfo) {
     return <div></div>;
@@ -154,13 +159,18 @@ const Header = (props) => {
 
         <Grid width="20%" height="100%" margin="auto">
           <Grid margin="20px 10px" height="25px" width="60px">
-            <SearchBtn
+            {/* <SearchBtn
               style={{ color: "gray" }}
               onClick={() => {
                 setSearchModal(!searchModal);
               }}
             />
-            <Bell style={{ margin: "auto 0px auto 10px", color: "gray" }} />
+            <Bell style={{ margin: "auto 0px auto 10px", color: "gray" }} /> */}
+
+            <LogOut
+              onClick={Logout}
+              style={{ color: "gray", marginLeft: "30px", cursor: "pointer" }}
+            />
           </Grid>
         </Grid>
       </Grid>

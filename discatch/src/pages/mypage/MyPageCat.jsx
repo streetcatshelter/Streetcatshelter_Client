@@ -12,6 +12,7 @@ import {
 } from "../../components";
 
 const MyPage = (props) => {
+  const location = props.location.state?.location;
   const isLoaded = useSelector((state) => state.mypage.isLoaded);
 
   return (
@@ -28,8 +29,8 @@ const MyPage = (props) => {
           <div style={{ margin: "10px auto" }}>
             <Profile />
           </div>
-          <MyPageDetail menu="myCat" />
-          <MyPageCat />
+          <MyPageDetail menu="myCat" location={location}/>
+          <MyPageCat location={location}/>
         </div>
       </Template>
     </>

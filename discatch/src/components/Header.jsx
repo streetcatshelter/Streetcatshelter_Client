@@ -26,25 +26,34 @@ const Header = (props) => {
   const locationA = useLocation();
   const dispatch = useDispatch();
   const path = props.path;
-  const location = locationA.pathname?.split('/')[2];
   const userInfo = useSelector((state) => state.mypage.userInfo);
-  let location1;
+  let location;
   const firstLocation = locationA.state?.location;
   
   if (preLocation !== undefined) {
-    location1 = preLocation;
+    location = preLocation;
   } else if (userInfo.locationList && path.length === 1) {
-    location1 = userInfo.locationList[0]?.split("@")[0];
+    location = userInfo.locationList[0]?.split("@")[0];
   } else {
-    location1 = firstLocation;
+    location = firstLocation;
   }
 
+  if (userInfo?.locationList && location+' ' === userInfo?.locationList[0]?.split('@')[1]?.split('(')[0]) {
+    location = userInfo?.locationList[0]?.split('@')[0]
+  } else if (userInfo?.locationList && location+' ' === userInfo?.locationList[1]?.split('@')[1]?.split('(')[0]) {
+    location = userInfo?.locationList[1]?.split('@')[0]
+  } else if (userInfo?.locationList && location+' ' === userInfo?.locationList[2]?.split('@')[1]?.split('(')[0]) {
+    location = userInfo?.locationList[2]?.split('@')[0]
+  } else if (location === undefined) {
+    location = locationA.pathname.split('/')[2];
+  }
+  
   const sameLocationList = userInfo.locationList?.filter(
-    (v) => v.split("@")[0] === location1
+    (v) => v.split("@")[0] === location
   );
 
   const locationList = userInfo.locationList?.filter(
-    (v) => v.split("@")[0] !== location1
+    (v) => v.split("@")[0] !== location
   );
 
   let location2;
@@ -57,15 +66,14 @@ const Header = (props) => {
       location2 = locationList[0]?.split('@')[0];
     }
   } else if (userInfo.locationList !== undefined && sameLocationList.length === 2) {
-    location1 = sameLocationList[0]?.split('@')[0];
+    location = sameLocationList[0]?.split('@')[0];
     location2 = sameLocationList[1]?.split('@')[0];
     location3 = locationList[0]?.split('@')[0];
   } else if (userInfo.locationList !== undefined && sameLocationList.length === 3) {
-    location1 = sameLocationList[0]?.split('@')[0];
+    location = sameLocationList[0]?.split('@')[0];
     location2 = sameLocationList[1]?.split('@')[0];
     location3 = sameLocationList[2]?.split('@')[0];
   }
-
   const [searchModal, setSearchModal] = useState(false);
 
   useEffect(() => {
@@ -77,30 +85,30 @@ const Header = (props) => {
   }, [firstLocation, dispatch]);
 
   let options;
-  if (location1 !== undefined && location2 === undefined) {
-    options = [{ key: 1, value: location1 }];
+  if (location !== undefined && location2 === undefined) {
+    options = [{ key: 1, value: location }];
   } else if (
-    location1 !== undefined &&
+    location !== undefined &&
     location2 !== undefined &&
     location3 === undefined
   ) {
     options = [
-      { key: 1, value: location1 },
+      { key: 1, value: location },
       { key: 2, value: location2 },
     ];
   } else if (
-    location1 !== undefined &&
+    location !== undefined &&
     location2 !== undefined &&
     location3 !== undefined
   ) {
     options = [
-      { key: 1, value: location1 },
+      { key: 1, value: location },
       { key: 2, value: location2 },
       { key: 3, value: location3 },
     ];
   }
 
-  const [place, setPlace] = useState(location1);
+  const [place, setPlace] = useState(location);
   const onChangeHandler = (e) => {
     setPlace(e.target.value);
     const keyword = e.target.value;

@@ -7,7 +7,7 @@ import { flexBox } from "../shared/style";
 import styled, { css } from "styled-components";
 
 // ROUTE
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // ELEMENTS
 import { Grid, Text } from "../elements";
@@ -18,19 +18,14 @@ import { Home, Users, Compass, Send, User } from "react-feather";
 // REDUX
 import { history } from "../redux/configureStore";
 
-const Menu = () => {
-  const path = useLocation();
-  const pathLocation = path.pathname.split('/')[2];
+const Menu = (props) => {
+  const preLocation = props.props.props?.location.state?.location;
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
-  let location = userLocation ? userLocation : userVillage;
-  if (pathLocation !== undefined) {
-    if (pathLocation === 'chat' || pathLocation === 'work' || pathLocation === 'notice' || typeof(Number(pathLocation)) === 'number') {
-      location = userVillage;
-    } else if (location !== pathLocation || typeof(pathLocation) === Number) {
-      location = pathLocation;
-    }
-  } 
+  let location = userLocation ? userLocation : preLocation;
+  if (location === undefined) {
+    location = userVillage;
+  }
 
   const moveToCommunity = () => {
     history.push({pathname: '/community', state: { location }});

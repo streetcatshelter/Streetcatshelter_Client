@@ -63,7 +63,7 @@ const CommunityPostWrite = (props) => {
   const [fileNum, setFileNum] = useState(0);
 
   location = location?.substring(0, location.length - 1);
-  console.log(location);
+  
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();

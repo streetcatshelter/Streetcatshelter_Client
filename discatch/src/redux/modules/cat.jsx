@@ -13,7 +13,8 @@ export const __createCatInfo = (
   location,
   username,
   latitude,
-  longitude
+  longitude,
+  pathLocation
 ) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
@@ -35,7 +36,7 @@ export const __createCatInfo = (
             .post("/cat/create", catInfo)
             .then((res) => {
               dispatch(imgActions.setInitialState());
-              history.push("/");
+              history.push({pathname:'/', state: { location : pathLocation }});
             })
             .catch((err) => {
               console.error(err);
@@ -147,7 +148,6 @@ export const __getCatInfo =
   (catId) =>
   async (dispatch, getState, { history }) => {
     try {
-      console.log(catId);
       const { data } = await catApi.getCatInfo(catId);
       dispatch(getCatInfo(data));
     } catch (err) {

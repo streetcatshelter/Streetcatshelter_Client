@@ -27,7 +27,7 @@ const MyPage = (props) => {
           }}
         >
           <div style={{ margin: "10px auto" }}>
-            <Profile />
+            <Profile location={location}/>
           </div>
           <MyPageDetail menu="myCat" location={location}/>
           <MyPageCat location={location}/>

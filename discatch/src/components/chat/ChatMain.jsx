@@ -26,8 +26,6 @@ const ChatMain = (props) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <Header>채팅</Header>
-
         {Rooms.map((room, idx) => {
           const LastActivity = moment(room.lastActivity).format(
             "YYYY-M-D hh:mm"
@@ -65,7 +63,10 @@ const ChatMain = (props) => {
 
                   <ChatMsg
                     onClick={() => {
-                      history.push({pathname:`api/chat/enter/${room.roomId}`, state : { location }});
+                      history.push({
+                        pathname: `api/chat/enter/${room.roomId}`,
+                        state: { location },
+                      });
                     }}
                   >
                     {room.lastMessage === "메세지가없어요"
@@ -83,14 +84,6 @@ const ChatMain = (props) => {
 };
 
 const Wrapper = styled.div``;
-
-const Header = styled.div`
-  height: 30px;
-  font-size: 16px;
-  font-weight: 900;
-  text-align: center;
-  border-bottom: 0.2px solid rgba(203, 207, 94, 1);
-`;
 
 const ChatRoom = styled.div`
   background: rgba(203, 207, 94, 0.3);

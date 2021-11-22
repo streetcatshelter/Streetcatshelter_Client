@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // component
-import { Template, CatPost } from "../../components";
+import { Template, CatPost, SecondHeader } from "../../components";
 
 // element
 import { Button } from "../../elements";
@@ -40,6 +40,7 @@ const Home = (props) => {
 
   return (
     <Template props={props} location={location}>
+      <SecondHeader title={`${location} 고양이들을 소개합니다!`} />
       {catList.length ? (
         catList.map((cat, idx) => {
           return (

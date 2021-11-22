@@ -36,6 +36,7 @@ export const __createCatInfo = (
             .post("/cat/create", catInfo)
             .then((res) => {
               dispatch(imgActions.setInitialState());
+              dispatch(setInitialState([]));
               history.push("/");
             })
             .catch((err) => {
@@ -240,6 +241,7 @@ const initialState = {
   page: 0,
   start: 0,
   catinfo: [],
+  hashtag: [],
 };
 
 const cat = createSlice({
@@ -308,6 +310,20 @@ const cat = createSlice({
     deleteCatDetail: (state, action) => {
       console.log("삭제 요청 완료");
     },
+
+    addHashTag: (state, action) => {
+      state.hashtag.push(action.payload);
+    },
+
+    deleteHashTag: (state, action) => {
+      return {
+        ...state,
+        hashtag: state.hashtag.filter((tag) => tag !== action.payload),
+      };
+    },
+    setInitialState: (state, action) => {
+      state.hashtag = initialState.hashtag;
+    },
   },
 });
 
@@ -323,6 +339,9 @@ export const {
   getDiary,
   getGallery,
   deleteCatDetail,
+  addHashTag,
+  deleteHashTag,
+  setInitialState,
 } = cat.actions;
 
 export default cat;

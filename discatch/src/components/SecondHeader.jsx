@@ -1,0 +1,19 @@
+import React from "react";
+// STYLE
+import styled from "styled-components";
+const SecondHeader = (props) => {
+  const PageTitle = props.title;
+  return (
+    <div>
+      <Header>{PageTitle}</Header>
+    </div>
+  );
+};
+const Header = styled.div`
+  height: 30px;
+  font-size: 16px;
+  font-weight: 900;
+  text-align: center;
+  border-bottom: 0.2px solid rgba(203, 207, 94, 1);
+`;
+export default SecondHeader;

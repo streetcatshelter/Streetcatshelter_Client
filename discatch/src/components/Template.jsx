@@ -10,7 +10,7 @@ import { Header, Menu } from "./";
 const Template = (props) => {
   const path = props.props.match.path;
   const location = props.location;
-  
+
   return (
     <>
       <Background />
@@ -19,9 +19,9 @@ const Template = (props) => {
           <Content margin="0px auto"> {props.children} </Content>
         ) : (
           <Content margin="60px auto">
-            <Header path={path} location={location}/>
+            <Header path={path} location={location} />
             <>{props.children}</>
-            <Menu/>
+            <Menu />
           </Content>
         )}
       </Wrapper>

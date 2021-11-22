@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CommunityPost } from "../../components";
+import { Template, CommunityPost, SecondHeader } from "../../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -94,7 +94,7 @@ const CommunityDetail = (props) => {
 
   return (
     <Template props={props}>
-      <Header>{category}</Header>
+      <SecondHeader title={category} />
       <Grid
         bgColor="bgColor"
         margin="-8vh 0 0 0"
@@ -167,14 +167,6 @@ const CommunityDetailStyle = styled.div`
     height: 80vh;
     margin: -2vh 0 0;
   }
-`;
-
-const Header = styled.div`
-  height: 30px;
-  font-size: 16px;
-  font-weight: 900;
-  text-align: center;
-  border-bottom: 0.2px solid rgba(203, 207, 94, 1);
 `;
 
 export default CommunityDetail;

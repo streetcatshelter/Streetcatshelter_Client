@@ -63,7 +63,7 @@ const Home = (props) => {
   React.useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, [dispatch]);
-
+  console.log(catList);
   return (
     <Template props={props} location={pathLocation}>
       {catList.length ? (

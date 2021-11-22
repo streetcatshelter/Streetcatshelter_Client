@@ -127,7 +127,10 @@ export const __getMoreCat =
       const { data } = await catApi.getMoreCat(location, start, limit);
       if (data.length < limit + 1) {
         dispatch(getMoreCat(data, null));
+        return;
       }
+      data.content.pop();
+      dispatch(getMoreCat(data, start + limit));
     } catch (err) {
       console.error(err);
     }

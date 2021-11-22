@@ -32,6 +32,21 @@ const Menu = (props) => {
     history.go(0);
   }
 
+  const moveToMap = () => {
+    history.push({pathname: `/map/${location}`, state: { location }});
+    history.go(0);
+  }
+
+  const moveToChat = () => {
+    history.push({pathname: '/chat', state: { location }});
+    history.go(0);
+  }
+
+  const moveToInfo = () => {
+    history.push({pathname: '/mypage', state: { location }});
+    history.go(0);
+  }
+
   return (
     <MenuStyle>
       <Grid
@@ -41,14 +56,13 @@ const Menu = (props) => {
           `;
         }}
       >
-        <Link
+        <Link 
           to={{pathname: '/', 
           state: { location }}}
           style={{
             textDecoration: "none",
-            color: "black",
-          }}
-        >
+            color: "black"
+          }}>
           <Home />
           <Text textAlign="center" size="12px">
             홈
@@ -64,9 +78,8 @@ const Menu = (props) => {
         <Text size="12px">커뮤니티</Text>
         </div>
 
-        <Link
-          to={{pathname: `/map/${location}`, 
-              state: { location }}}
+        <div
+          onClick={()=>moveToMap()}
           style={{
             textDecoration: "none",
             color: "black"
@@ -76,9 +89,9 @@ const Menu = (props) => {
           <Text textAlign="center" size="12px">
             지도
           </Text>
-        </Link>
-        <Link
-          to={{pathname:"/chat", state: { location }}}
+        </div>
+        <div
+          onClick={()=>moveToChat()}
           style={{
             textDecoration: "none",
             color: "black",
@@ -88,9 +101,9 @@ const Menu = (props) => {
           <Text textAlign="center" size="12px">
             채팅
           </Text>
-        </Link>
-        <Link
-          to={{pathname:"/mypage", state: { location }}}
+        </div>
+        <div
+          onClick={()=>moveToInfo()}
           style={{
             textDecoration: "none",
             color: "black",
@@ -99,7 +112,7 @@ const Menu = (props) => {
         >
           <User />
           <Text size="12px">내정보</Text>
-        </Link>
+        </div>
       </Grid>
     </MenuStyle>
   );

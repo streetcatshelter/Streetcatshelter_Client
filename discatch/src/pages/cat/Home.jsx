@@ -80,7 +80,7 @@ const Home = (props) => {
 
   return (
     <Template props={props} location={pathLocation}>
-      <SecondHeader title={`${location} 고양이들을 소개합니다!`} />
+      <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
 
       {catList.length ? (
         catList.map((cat, idx) => {

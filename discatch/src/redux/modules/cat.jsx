@@ -37,6 +37,7 @@ export const __createCatInfo = (
             .then((res) => {
               dispatch(imgActions.setInitialState());
               history.push({pathname:'/', state: { location : pathLocation }});
+              history.go(0);
             })
             .catch((err) => {
               console.error(err);

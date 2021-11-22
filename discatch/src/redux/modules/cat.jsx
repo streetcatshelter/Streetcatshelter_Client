@@ -32,13 +32,11 @@ export const __createCatInfo = (
             neutering: neutering,
             username: NickName,
           };
-          console.log(catInfo);
           instance
             .post("/cat/create", catInfo)
             .then((res) => {
               dispatch(imgActions.setInitialState());
               dispatch(setInitialState([]));
-
               history.push({
                 pathname: "/",
                 state: { location: pathLocation },
@@ -106,9 +104,7 @@ export const __getCatLocation =
   (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     try {
-      console.log(location);
       const { data } = await catApi.getCatLocation(location, limit);
-      console.log(data);
       if (data.length < limit + 1) {
         dispatch(getCatLocation(data, null));
         return;

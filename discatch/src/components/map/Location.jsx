@@ -82,6 +82,8 @@ const Location = (props) => {
     }
   }
 
+  const pathLocation = location;
+
   if (location === userVillage0) {
     location = userVillageA;
   } else if (location === userVillage1) {
@@ -490,7 +492,7 @@ const Location = (props) => {
         clickEvent={() => {
           if(latitude !== undefined && longitude !== undefined && pathLength === 3) {
             history.push({
-              pathname:`/catinfowrite/${location}`, 
+              pathname:`/catinfowrite/${pathLocation}`, 
               state: {latitude, longitude}});
           } else if (latitude !== undefined && longitude !== undefined && pathLength === 4) {
             history.push({

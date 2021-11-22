@@ -1,37 +1,35 @@
 // LIBRARY
-import React, { useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { css } from 'styled-components';
+import React, { useEffect } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { css } from "styled-components";
 
 // STYLE
-import { flexBox } from '../shared/style';
+import { flexBox } from "../../shared/style";
 
 // ELEMENTS
-import { Grid, Text, Image, Button } from '../elements';
+import { Grid, Text, Image, Button } from "../../elements";
 
 // COMPONENTS
-import { Template, CommentList, EditModalSlide } from '../components';
+import { Template, CommentList, EditModalSlide } from "../../components";
 
 // ICON
-import { CheckSquare } from 'react-feather';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import { CheckSquare } from "react-feather";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 // REDUX
-import { history } from '../redux/configureStore';
+import { history } from "../../redux/configureStore";
 import {
   __getCatDetail,
   __deleteCatDetail,
   __catDetailLike,
-} from '../redux/modules/cat';
-import {
-  __getDetailComment,
-} from '../redux/modules/comment';
+} from "../../redux/modules/cat";
+import { __getDetailComment } from "../../redux/modules/comment";
 
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
   const commentList = useSelector((state) => state.comment.list);
   const catDetailId = props.match.params.catDetailId;
-  
+
   const { userProfile, nickname, username } = useSelector((state) => ({
     userProfile: state.mypage.userInfo.profileImageUrl,
     nickname: state.mypage.userInfo.nickname,
@@ -48,7 +46,7 @@ const CatDetailInfo = (props) => {
       createdAt: state.cat.detail.createdAt,
       tags: state.cat.detail.catTags,
     }),
-    shallowEqual,
+    shallowEqual
   );
 
   const userLiked = useSelector((state) => state.cat.detail.userLiked);
@@ -59,7 +57,7 @@ const CatDetailInfo = (props) => {
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));
   }, [catDetailId, dispatch]);
-  
+
   useEffect(() => {
     dispatch(__getDetailComment(catDetailId));
   }, [catDetailId, commentList.length, dispatch]);
@@ -74,7 +72,7 @@ const CatDetailInfo = (props) => {
         margin="2% auto"
         addstyle={() => {
           return css`
-            ${flexBox('space-evenly')}
+            ${flexBox("space-evenly")}
           `;
         }}
       >
@@ -99,11 +97,11 @@ const CatDetailInfo = (props) => {
         </Text>
 
         <EditModalSlide
-          FirstBtn={'홈으로'}
+          FirstBtn={"홈으로"}
           FirstClick={() => {
-            history.push('/');
+            history.push("/");
           }}
-          SecondBtn={'삭제'}
+          SecondBtn={"삭제"}
           SecondClick={deleteCatDetail}
         />
       </Grid>
@@ -133,7 +131,7 @@ const CatDetailInfo = (props) => {
           }}
         >
           <Text fontWeight="bold">급수</Text>
-          <CheckSquare color={water === false ? 'black' : '#cbcf5e'} />
+          <CheckSquare color={water === false ? "black" : "#cbcf5e"} />
         </Grid>
 
         <Grid
@@ -144,7 +142,7 @@ const CatDetailInfo = (props) => {
           }}
         >
           <Text fontWeight="bold">사료</Text>
-          <CheckSquare color={food === false ? 'black' : '#cbcf5e'} />
+          <CheckSquare color={food === false ? "black" : "#cbcf5e"} />
         </Grid>
 
         <Grid
@@ -155,7 +153,7 @@ const CatDetailInfo = (props) => {
           }}
         >
           <Text fontWeight="bold">간식</Text>
-          <CheckSquare color={snack === false ? 'black' : '#cbcf5e'} />
+          <CheckSquare color={snack === false ? "black" : "#cbcf5e"} />
         </Grid>
       </Grid>
 
@@ -164,7 +162,7 @@ const CatDetailInfo = (props) => {
           alignItems="center"
           addstyle={() => {
             return css`
-              ${flexBox('space-between')}
+              ${flexBox("space-between")}
             `;
           }}
         >
@@ -175,7 +173,7 @@ const CatDetailInfo = (props) => {
           <Button
             padding="0"
             bgColor="diaryColor"
-            color={userLiked ? 'red' : 'black'}
+            color={userLiked ? "red" : "black"}
             clickEvent={likeToggle}
           >
             <FavoriteIcon />
@@ -190,7 +188,11 @@ const CatDetailInfo = (props) => {
           );
         })}
       </Grid>
-      <CommentList props={commentList} path="CatDetailInfo" catId={catDetailId} />
+      <CommentList
+        props={commentList}
+        path="CatDetailInfo"
+        catId={catDetailId}
+      />
     </Template>
   );
 };

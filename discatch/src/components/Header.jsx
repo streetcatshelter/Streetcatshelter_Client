@@ -13,13 +13,14 @@ import { useLocation } from "react-router-dom";
 import { Grid } from "../elements";
 
 // ICON
-import { Search, Bell, ArrowLeft } from "react-feather";
+import { Search, Bell, ArrowLeft, LogOut } from "react-feather";
 
 // REDUX
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { searchMap } from "../redux/modules/map";
 import { mypageActions } from "../redux/modules/mypage";
+import { userActions } from "../redux/modules/user";
 
 const Header = (props) => {
   const preLocation = props.location;
@@ -29,7 +30,7 @@ const Header = (props) => {
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location;
   const firstLocation = locationA.state?.location;
-  
+
   if (preLocation !== undefined) {
     location = preLocation;
   } else if (userInfo.locationList && path.length === 1) {
@@ -38,16 +39,25 @@ const Header = (props) => {
     location = firstLocation;
   }
 
-  if (userInfo?.locationList && location+' ' === userInfo?.locationList[0]?.split('@')[1]?.split('(')[0]) {
-    location = userInfo?.locationList[0]?.split('@')[0]
-  } else if (userInfo?.locationList && location+' ' === userInfo?.locationList[1]?.split('@')[1]?.split('(')[0]) {
-    location = userInfo?.locationList[1]?.split('@')[0]
-  } else if (userInfo?.locationList && location+' ' === userInfo?.locationList[2]?.split('@')[1]?.split('(')[0]) {
-    location = userInfo?.locationList[2]?.split('@')[0]
+  if (
+    userInfo?.locationList &&
+    location + " " === userInfo?.locationList[0]?.split("@")[1]?.split("(")[0]
+  ) {
+    location = userInfo?.locationList[0]?.split("@")[0];
+  } else if (
+    userInfo?.locationList &&
+    location + " " === userInfo?.locationList[1]?.split("@")[1]?.split("(")[0]
+  ) {
+    location = userInfo?.locationList[1]?.split("@")[0];
+  } else if (
+    userInfo?.locationList &&
+    location + " " === userInfo?.locationList[2]?.split("@")[1]?.split("(")[0]
+  ) {
+    location = userInfo?.locationList[2]?.split("@")[0];
   } else if (location === undefined) {
-    location = locationA.pathname.split('/')[2];
+    location = locationA.pathname.split("/")[2];
   }
-  
+
   const sameLocationList = userInfo.locationList?.filter(
     (v) => v.split("@")[0] === location
   );
@@ -58,21 +68,27 @@ const Header = (props) => {
 
   let location2;
   let location3;
-  if(userInfo.locationList !== undefined && sameLocationList.length === 1) {
+  if (userInfo.locationList !== undefined && sameLocationList.length === 1) {
     if (userInfo.locationList.length === 3) {
-      location2 = locationList[0]?.split('@')[0];
-      location3 = locationList[1]?.split('@')[0];
+      location2 = locationList[0]?.split("@")[0];
+      location3 = locationList[1]?.split("@")[0];
     } else if (userInfo.locationList.length === 2) {
-      location2 = locationList[0]?.split('@')[0];
+      location2 = locationList[0]?.split("@")[0];
     }
-  } else if (userInfo.locationList !== undefined && sameLocationList.length === 2) {
-    location = sameLocationList[0]?.split('@')[0];
-    location2 = sameLocationList[1]?.split('@')[0];
-    location3 = locationList[0]?.split('@')[0];
-  } else if (userInfo.locationList !== undefined && sameLocationList.length === 3) {
-    location = sameLocationList[0]?.split('@')[0];
-    location2 = sameLocationList[1]?.split('@')[0];
-    location3 = sameLocationList[2]?.split('@')[0];
+  } else if (
+    userInfo.locationList !== undefined &&
+    sameLocationList.length === 2
+  ) {
+    location = sameLocationList[0]?.split("@")[0];
+    location2 = sameLocationList[1]?.split("@")[0];
+    location3 = locationList[0]?.split("@")[0];
+  } else if (
+    userInfo.locationList !== undefined &&
+    sameLocationList.length === 3
+  ) {
+    location = sameLocationList[0]?.split("@")[0];
+    location2 = sameLocationList[1]?.split("@")[0];
+    location3 = sameLocationList[2]?.split("@")[0];
   }
   const [searchModal, setSearchModal] = useState(false);
 
@@ -116,15 +132,21 @@ const Header = (props) => {
   };
 
   const goBack = () => {
-    if (path === '/community/:village/:category') {
-      history.push({pathname: '/community', state : { location }});
+    if (path === "/community/:village/:category") {
+      history.push({ pathname: "/community", state: { location } });
       history.go(0);
-    } else if (path === '/catdetail/:village/:catId') {
-      history.push({pathname: '/', state : { location }})
+    } else if (path === "/catdetail/:village/:catId") {
+      history.push({ pathname: "/", state: { location } });
     } else {
       history.goBack();
     }
-  }
+  };
+
+  const Logout = () => {
+    if (window.confirm("정말로 로그아웃하시겠습니까?") === true) {
+      dispatch(userActions._logout());
+    }
+  };
 
   if (!userInfo) {
     return <div></div>;
@@ -173,13 +195,18 @@ const Header = (props) => {
 
         <Grid width="20%" height="100%" margin="auto">
           <Grid margin="20px 10px" height="25px" width="60px">
-            <SearchBtn
+            {/* <SearchBtn
               style={{ color: "gray" }}
               onClick={() => {
                 setSearchModal(!searchModal);
               }}
             />
-            <Bell style={{ margin: "auto 0px auto 10px", color: "gray" }} />
+            <Bell style={{ margin: "auto 0px auto 10px", color: "gray" }} /> */}
+
+            <LogOut
+              onClick={Logout}
+              style={{ color: "gray", marginLeft: "30px", cursor: "pointer" }}
+            />
           </Grid>
         </Grid>
       </Grid>

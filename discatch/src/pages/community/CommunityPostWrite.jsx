@@ -3,19 +3,19 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template } from "../components";
-import { CommunityPreview } from "../components/index";
+import { Template } from "../../components";
+import { CommunityPreview } from "../../components/index";
 
 // STYLE
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button, Input, TextArea, Text } from "../elements/index";
+import { Grid, Button, Input, TextArea, Text } from "../../elements/index";
 
 // REDUX
-import { imgActions } from "../redux/modules/image";
-import { addCommunityDB } from "../redux/modules/community";
-import { mypageActions } from "../redux/modules/mypage";
+import { imgActions } from "../../redux/modules/image";
+import { addCommunityDB } from "../../redux/modules/community";
+import { mypageActions } from "../../redux/modules/mypage";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
@@ -33,22 +33,34 @@ const CommunityPostWrite = (props) => {
     state.image.preview ? state.image.preview : Array(1)
   );
 
-  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
-  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
-  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
-  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
-  
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
+
   let location;
   if (detailLocation === userVillage0) {
-    location = userVillageA
+    location = userVillageA;
   } else if (detailLocation === userVillage1) {
-    location = userVillageB
+    location = userVillageB;
   } else if (detailLocation === userVillage2) {
-    location = userVillageC
+    location = userVillageC;
   }
 
   let firstCategory;
@@ -101,7 +113,9 @@ const CommunityPostWrite = (props) => {
   };
 
   const writeBtn = () => {
-    dispatch(addCommunityDB(category, contents, location, title, detailLocation));
+    dispatch(
+      addCommunityDB(category, contents, location, title, detailLocation)
+    );
   };
 
   const delLastImageBtn = () => {
@@ -292,8 +306,8 @@ const CommunityPostWrite = (props) => {
             />
           </Grid>
 
-          <Grid 
-            width="325px" 
+          <Grid
+            width="325px"
             height="500px"
             addstyle={() => {
               return css`
@@ -301,7 +315,8 @@ const CommunityPostWrite = (props) => {
                   height: 400px;
                 }
               `;
-            }}></Grid>
+            }}
+          ></Grid>
           <Grid
             width="225px"
             height="30px"

@@ -4,21 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
 // COMPONENTS
-import { Template } from "../components";
+import { Template } from "../../components";
 
 // ELEMENTS
-import { Grid, TextArea, Button, Input, Image, Text } from "../elements";
+import { Grid, TextArea, Button, Input, Image, Text } from "../../elements";
 
 // STYLE
-import { flexBox } from "../shared/style";
+import { flexBox } from "../../shared/style";
 
 // ICON
 import { Camera } from "react-feather";
 
 // REDUX
-import { history } from "../redux/configureStore";
-import { imgActions } from "../redux/modules/image";
-import { __createCatDetailInfo } from "../redux/modules/cat";
+import { history } from "../../redux/configureStore";
+import { imgActions } from "../../redux/modules/image";
+import { __createCatDetailInfo } from "../../redux/modules/cat";
 
 const CatDetailInfoWrite = (props) => {
   const dispatch = useDispatch();

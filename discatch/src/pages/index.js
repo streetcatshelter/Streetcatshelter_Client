@@ -1,14 +1,13 @@
-import Home from "./Home";
 import test from "./test";
 import NotFound from "./NotFound";
 import Slider from "./Slider";
-import UserInfoWrite from "./UserInfoWrite";
 
 // MYPAGE
 import MyPageCat from "./mypage/MyPageCat";
 import MyPageNoticeList from "./mypage/MyPageNoticeList";
 import MyPageNotices from "./mypage/MyPageNotices";
 import MyPageWork from "./mypage/MyPageWork";
+import UserInfoWrite from "./mypage/UserInfoWrite";
 
 // LOGIN
 import Login from "./login/Login";
@@ -17,17 +16,18 @@ import LoginRedirectNaver from "./login/LoginRedirectNaver";
 import LoginRedirectKakao from "./login/LoginRedirectKakao";
 
 // CAT
-import CatDetail from "./CatDetail";
-import CatDetailInfo from "./CatDetailInfo";
-import CatDetailInfoWrite from "./CatDetailInfoWrite";
-import CatInfoWrite from "./CatInfoWrite";
+import Home from "./cat/Home";
+import CatDetail from "./cat/CatDetail";
+import CatDetailInfo from "./cat/CatDetailInfo";
+import CatDetailInfoWrite from "./cat/CatDetailInfoWrite";
+import CatInfoWrite from "./cat/CatInfoWrite";
 
 // COMMUNITY
-import Community from "./Community";
-import CommunityDetail from "./CommunityDetail";
-import CommunityPostDetail from "./CommunityPostDetail";
-import CommunityPostWrite from "./CommunityPostWrite";
-import CommunityPostEdit from "./CommunityPostEdit";
+import Community from "./community/Community";
+import CommunityDetail from "./community/CommunityDetail";
+import CommunityPostDetail from "./community/CommunityPostDetail";
+import CommunityPostWrite from "./community/CommunityPostWrite";
+import CommunityPostEdit from "./community/CommunityPostEdit";
 
 // MAP
 import Map from "./Map";
@@ -37,7 +37,6 @@ import ChatMainPage from "./chat/ChatMainPage";
 import ChatRoomPage from "./chat/ChatRoomPage";
 
 export {
-  Home,
   test,
   NotFound,
   Slider,
@@ -53,6 +52,7 @@ export {
   LoginRedirectNaver,
   LoginRedirectKakao,
   // CAT
+  Home,
   CatDetail,
   CatDetailInfo,
   CatDetailInfoWrite,

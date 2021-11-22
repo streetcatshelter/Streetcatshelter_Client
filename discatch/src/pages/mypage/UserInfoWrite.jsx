@@ -2,7 +2,7 @@
 import React from "react";
 
 // COMPONENTS
-import { UserInfo, Template } from "../components";
+import { UserInfo, Template } from "../../components";
 
 const UserInfoWrite = (props) => {
   const edit = props.match.path === "/userinfoedit" ? "edit" : "";

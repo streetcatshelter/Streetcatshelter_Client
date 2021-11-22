@@ -2,23 +2,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// COMPONENTS
-import { Template, CatPost } from "../components";
+// component
+import { Template, CatPost, SecondHeader } from "../../components";
 
-// ELEMENTS
-import { Button } from "../elements";
+// element
+import { Button } from "../../elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
-import { history } from "../redux/configureStore";
-import { __getCatLocation, __getMoreCat } from "../redux/modules/cat";
-import { mypageActions } from "../redux/modules/mypage";
+import { history } from "../../redux/configureStore";
+import { __getCatLocation, __getMoreCat } from "../../redux/modules/cat";
+import { mypageActions } from "../../redux/modules/mypage";
 
 // FUNCTION
-import InfinityScroll from "../shared/InfinityScroll";
+import InfinityScroll from "../../shared/InfinityScroll";
 
 const Home = (props) => {
   const menuLocation = props.location.state?.location;
@@ -30,24 +30,38 @@ const Home = (props) => {
   const userVillage = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]
   );
-  const pathLocation = userLocation ? userLocation : menuLocation || userVillage;
+  const pathLocation = userLocation
+    ? userLocation
+    : menuLocation || userVillage;
 
-  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
-  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
-  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
-  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
 
   let location;
   if (pathLocation === userVillage0) {
-    location = userVillageA
+    location = userVillageA;
   } else if (pathLocation === userVillage1) {
-    location = userVillageB
+    location = userVillageB;
   } else if (pathLocation === userVillage2) {
-    location = userVillageC
+    location = userVillageC;
   }
 
   location = location?.substring(0, location.length - 1);
@@ -66,6 +80,8 @@ const Home = (props) => {
   console.log(catList);
   return (
     <Template props={props} location={pathLocation}>
+      <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
+
       {catList.length ? (
         catList.map((cat, idx) => {
           return (
@@ -86,7 +102,10 @@ const Home = (props) => {
       <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push({ pathname: `/map/${pathLocation}`, state: { location } });
+          history.push({
+            pathname: `/map/${pathLocation}`,
+            state: { location },
+          });
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />

@@ -11,7 +11,7 @@ export const __createCatInfo = (
   catTag,
   neutering,
   location,
-  username,
+  NickName,
   latitude,
   longitude
 ) => {
@@ -29,8 +29,9 @@ export const __createCatInfo = (
             location: location,
             longitude: longitude,
             neutering: neutering,
-            username: username,
+            username: NickName,
           };
+          console.log(catInfo);
           instance
             .post("/cat/create", catInfo)
             .then((res) => {

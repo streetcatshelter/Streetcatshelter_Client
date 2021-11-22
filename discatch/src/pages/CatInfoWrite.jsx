@@ -1,28 +1,28 @@
 // LIBRARY
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import styled, { css } from 'styled-components';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled, { css } from "styled-components";
 
 // COMPONENTS
-import { Template } from '../components';
+import { Template } from "../components";
 
 // ELEMENTS
-import { Grid, Image, TextArea, Input, Button } from '../elements/index';
+import { Grid, Image, TextArea, Input, Button } from "../elements/index";
 
 // STYLE
-import { flexBox } from '../shared/style';
+import { flexBox } from "../shared/style";
 
 // ICON
-import { Camera } from 'react-feather';
+import { Camera } from "react-feather";
 
 // REDUX
-import { imgActions } from '../redux/modules/image';
-import { __createCatInfo } from '../redux/modules/cat';
+import { imgActions } from "../redux/modules/image";
+import { __createCatInfo } from "../redux/modules/cat";
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
   const location = props.match.params.location;
-
+  const NickName = useSelector((state) => state.mypage.userInfo.nickname);
   const [fileUrl, setFileUrl] = useState(null);
 
   // S3
@@ -36,23 +36,18 @@ const CatInfoWrite = (props) => {
   };
 
   const Options = [
-    { key: 1, value: '중성화 여부' },
-    { key: 2, value: 'YES' },
-    { key: 3, value: 'NO' },
-    { key: 4, value: 'UNDEFINED' },
+    { key: 1, value: "중성화 여부" },
+    { key: 2, value: "YES" },
+    { key: 3, value: "NO" },
+    { key: 4, value: "알수없음" },
   ];
 
-  const [userName, setUserName] = useState('');
-  const $userName = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const [catName, setCatName] = useState('');
+  const [catName, setCatName] = useState("");
   const $catName = (e) => {
     setCatName(e.target.value);
   };
 
-  const [neutering, setNeutering] = useState('중성화 여부');
+  const [neutering, setNeutering] = useState("중성화 여부");
   const $neutering = (e) => {
     setNeutering(e.target.value);
   };
@@ -72,10 +67,10 @@ const CatInfoWrite = (props) => {
         [catTag],
         neutering,
         location,
-        userName,
+        NickName,
         latitude,
-        longitude,
-      ),
+        longitude
+      )
     );
   };
 
@@ -119,14 +114,6 @@ const CatInfoWrite = (props) => {
 
         <Grid width="80%" margin="10% auto">
           <Input
-            padding="6px"
-            width="96%"
-            radius="10px"
-            placeholder="닉네임"
-            changeEvent={$userName}
-          />
-
-          <Input
             margin="5% 0"
             padding="6px"
             width="96%"
@@ -136,11 +123,21 @@ const CatInfoWrite = (props) => {
           />
 
           <Select value={neutering} onChange={$neutering}>
-            {Options.map((item, index) => (
-              <option key={item.key} value={item.value}>
-                {item.value}
-              </option>
-            ))}
+            {Options.map((item, index) => {
+              if (item.key === 1) {
+                return (
+                  <option key={item.key} value={item.value} disabled>
+                    {item.value}
+                  </option>
+                );
+              } else {
+                return (
+                  <option key={item.key} value={item.value}>
+                    {item.value}
+                  </option>
+                );
+              }
+            })}
           </Select>
 
           <TextArea

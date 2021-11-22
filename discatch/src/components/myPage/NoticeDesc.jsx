@@ -25,7 +25,7 @@ const NoticeDesc = (props) => {
   return (
     <Wrap>
       <Title>
-        <p>disCATch 공지사항🐈</p>
+        <p>disCATch 공지사항🐈!!</p>
       </Title>
       <Header>
         <p>{NoticeDetail.title}</p>

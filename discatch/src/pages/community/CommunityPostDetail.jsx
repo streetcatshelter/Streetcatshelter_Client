@@ -3,24 +3,24 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CommentList, EditModalSlide } from "../components";
+import { Template, CommentList, EditModalSlide } from "../../components";
 
 // STYLE
 import { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Text, Image } from "../elements/index";
+import { Grid, Text, Image } from "../../elements/index";
 
 // ICON
 import Avatar from "@material-ui/core/Avatar";
 
 // REDUX
-import { history } from "../redux/configureStore";
+import { history } from "../../redux/configureStore";
 import {
   getOneCommunityDB,
   deleteCommunityDB,
-} from "../redux/modules/community";
-import { chatActions } from "../redux/modules/chat";
+} from "../../redux/modules/community";
+import { chatActions } from "../../redux/modules/chat";
 
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();

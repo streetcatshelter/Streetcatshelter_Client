@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { css } from "styled-components";
 
 // STYLE
-import { flexBox } from "../shared/style";
+import { flexBox } from "../../shared/style";
 
 // COMPONENTS
 import {
@@ -13,10 +13,10 @@ import {
   CatGallery,
   CommentList,
   CatPost,
-} from "../components";
+} from "../../components";
 
 // ELEMENTS
-import { Button, Grid } from "../elements";
+import { Button, Grid } from "../../elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,9 +24,9 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { history } from "../redux/configureStore";
-import { __getCatInfo } from "../redux/modules/cat";
-import { __getComment } from "../redux/modules/comment";
+import { history } from "../../redux/configureStore";
+import { __getCatInfo } from "../../redux/modules/cat";
+import { __getComment } from "../../redux/modules/comment";
 const CatDetail = (props) => {
   const dispatch = useDispatch();
   const location = props.location.pathname.split("/")[2];
@@ -102,7 +102,10 @@ const CatDetail = (props) => {
       <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push({pathname:`/map/${location}/${catId}`, state: { catId, location }});
+          history.push({
+            pathname: `/map/${location}/${catId}`,
+            state: { catId, location },
+          });
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />

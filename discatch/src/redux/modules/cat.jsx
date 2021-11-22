@@ -11,7 +11,7 @@ export const __createCatInfo = (
   catTag,
   neutering,
   location,
-  username,
+  NickName,
   latitude,
   longitude,
   pathLocation
@@ -30,13 +30,19 @@ export const __createCatInfo = (
             location: location,
             longitude: longitude,
             neutering: neutering,
-            username: username,
+            username: NickName,
           };
+          console.log(catInfo);
           instance
             .post("/cat/create", catInfo)
             .then((res) => {
               dispatch(imgActions.setInitialState());
-              history.push({pathname:'/', state: { location : pathLocation }});
+              dispatch(setInitialState([]));
+
+              history.push({
+                pathname: "/",
+                state: { location: pathLocation },
+              });
               history.go(0);
             })
             .catch((err) => {
@@ -100,7 +106,9 @@ export const __getCatLocation =
   (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     try {
+      console.log(location);
       const { data } = await catApi.getCatLocation(location, limit);
+      console.log(data);
       if (data.length < limit + 1) {
         dispatch(getCatLocation(data, null));
         return;
@@ -240,6 +248,7 @@ const initialState = {
   page: 0,
   start: 0,
   catinfo: [],
+  hashtag: [],
 };
 
 const cat = createSlice({
@@ -308,6 +317,20 @@ const cat = createSlice({
     deleteCatDetail: (state, action) => {
       console.log("삭제 요청 완료");
     },
+
+    addHashTag: (state, action) => {
+      state.hashtag.push(action.payload);
+    },
+
+    deleteHashTag: (state, action) => {
+      return {
+        ...state,
+        hashtag: state.hashtag.filter((tag) => tag !== action.payload),
+      };
+    },
+    setInitialState: (state, action) => {
+      state.hashtag = initialState.hashtag;
+    },
   },
 });
 
@@ -323,6 +346,9 @@ export const {
   getDiary,
   getGallery,
   deleteCatDetail,
+  addHashTag,
+  deleteHashTag,
+  setInitialState,
 } = cat.actions;
 
 export default cat;

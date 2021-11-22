@@ -3,34 +3,34 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 // COMPONENTS
-import { CommunityCategoryCard, Template } from "../components";
+import { CommunityCategoryCard, Template } from "../../components";
 
 // ELEMENTS
-import { Grid } from "../elements/index";
+import { Grid } from "../../elements/index";
 
 // REDUX
-import { history } from "../redux/configureStore";
+import { history } from "../../redux/configureStore";
 
 // IMAGES
-import Community1 from '../styles/images/Community1.jpg';
-import Community2 from '../styles/images/Community2.jpg';
-import Community3 from '../styles/images/Community3.jpg';
+import Community1 from "../../styles/images/Community1.jpg";
+import Community2 from "../../styles/images/Community2.jpg";
+import Community3 from "../../styles/images/Community3.jpg";
 
 const Community = (props) => {
   const village = useSelector((state) => state.map.keywordList[0]);
 
   const requestLocationInfo = () => {
-    history.push('/userinfoedit');
-    alert('동네 정보를 입력해주세요!')
-  }
-  
+    history.push("/userinfoedit");
+    alert("동네 정보를 입력해주세요!");
+  };
+
   return (
     <Template props={props}>
       {village !== undefined ? (
-      <Grid margin="10vh 0 0 0">
+        <Grid margin="10vh 0 0 0">
           <CommunityCategoryCard
             src={Community1}
-            clickEvent={()=>history.push(`/community/${village}/catinfo`)}
+            clickEvent={() => history.push(`/community/${village}/catinfo`)}
             width="100px"
             height="100px"
             title="고양이 정보글!"
@@ -38,7 +38,7 @@ const Community = (props) => {
           />
           <CommunityCategoryCard
             src={Community2}
-            clickEvent={()=>history.push(`/community/${village}/gathering`)}
+            clickEvent={() => history.push(`/community/${village}/gathering`)}
             width="100px"
             height="100px"
             title="동네 모임"
@@ -46,16 +46,17 @@ const Community = (props) => {
           />
           <CommunityCategoryCard
             src={Community3}
-            clickEvent={()=>history.push(`/community/${village}/sharing`)}
+            clickEvent={() => history.push(`/community/${village}/sharing`)}
             width="100px"
             height="100px"
             title="고양이 용품 나눔"
           />
-      </Grid>) : (
-      <Grid margin="10vh 0 0 0">
+        </Grid>
+      ) : (
+        <Grid margin="10vh 0 0 0">
           <CommunityCategoryCard
             src={Community1}
-            clickEvent={()=>requestLocationInfo()}
+            clickEvent={() => requestLocationInfo()}
             width="100px"
             height="100px"
             title="고양이 정보글!"
@@ -63,7 +64,7 @@ const Community = (props) => {
           />
           <CommunityCategoryCard
             src={Community2}
-            clickEvent={()=>requestLocationInfo()}
+            clickEvent={() => requestLocationInfo()}
             width="100px"
             height="100px"
             title="동네 모임"
@@ -71,13 +72,13 @@ const Community = (props) => {
           />
           <CommunityCategoryCard
             src={Community3}
-            clickEvent={()=>requestLocationInfo()}
+            clickEvent={() => requestLocationInfo()}
             width="100px"
             height="100px"
             title="고양이 용품 나눔"
           />
-      </Grid>
-        )}
+        </Grid>
+      )}
     </Template>
   );
 };

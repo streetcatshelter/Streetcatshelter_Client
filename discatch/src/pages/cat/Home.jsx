@@ -3,21 +3,21 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // component
-import { Template, CatPost } from "../components";
+import { Template, CatPost } from "../../components";
 
 // element
-import { Button } from "../elements";
+import { Button } from "../../elements";
 
 // icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // redux
-import { history } from "../redux/configureStore";
-import { __getCatLocation, __getMoreCat } from "../redux/modules/cat";
+import { history } from "../../redux/configureStore";
+import { __getCatLocation, __getMoreCat } from "../../redux/modules/cat";
 
 // function
-import InfinityScroll from "../shared/InfinityScroll";
+import InfinityScroll from "../../shared/InfinityScroll";
 
 const Home = (props) => {
   const menuLocation = props.location.state?.location;

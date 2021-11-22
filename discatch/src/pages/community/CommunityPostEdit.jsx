@@ -3,46 +3,48 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { CommunityPreview, Template } from "../components";
+import { CommunityPreview, Template } from "../../components";
 
 // STYLE
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button, Input, TextArea, Text } from "../elements/index";
+import { Grid, Button, Input, TextArea, Text } from "../../elements/index";
 
 // REDUX
-import { imgActions } from "../redux/modules/image";
-import { editCommunityDB } from "../redux/modules/community";
+import { imgActions } from "../../redux/modules/image";
+import { editCommunityDB } from "../../redux/modules/community";
 
 // ICON
 import { Camera } from "react-feather";
 
 // REDUX
-import { getOneCommunityDB } from '../redux/modules/community';
+import { getOneCommunityDB } from "../../redux/modules/community";
 
 // ROUTE
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const CommunityPostEdit = (props) => {
   const dispatch = useDispatch();
   const path = useLocation();
-  const preview = useSelector((state) => state.image.preview)
-  const communityId = path.pathname.split('/')[5];
+  const preview = useSelector((state) => state.image.preview);
+  const communityId = path.pathname.split("/")[5];
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
 
-  const { category, contents, imageList, location, title, username } = useSelector((state) => ({
-    category: state.community.list.data?.category,
-    contents: state.community.list.data?.contents,
-    imageList: state.community.list.data?.communityImageList ? state.community.list.data?.communityImageList : Array(),
-    location: state.community.list.data?.location,
-    title: state.community.list.data?.title,
-    username: state.community.list.data?.username,
-  }));
+  const { category, contents, imageList, location, title, username } =
+    useSelector((state) => ({
+      category: state.community.list.data?.category,
+      contents: state.community.list.data?.contents,
+      imageList: state.community.list.data?.communityImageList
+        ? state.community.list.data?.communityImageList
+        : Array(),
+      location: state.community.list.data?.location,
+      title: state.community.list.data?.title,
+      username: state.community.list.data?.username,
+    }));
   const imageNum = imageList?.length;
-
 
   const [fileNum, setFileNum] = useState(imageNum);
   // S3
@@ -52,11 +54,11 @@ const CommunityPostEdit = (props) => {
     if (fileNum < 5) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setPreview(imageUrl,fileNum));
+      dispatch(imgActions.setPreview(imageUrl, fileNum));
       dispatch(imgActions.setFiles(file, fileNum));
-      setFileNum(fileNum+1);
+      setFileNum(fileNum + 1);
     } else {
-      alert('사진은 최대 5장까지 등록할 수 있어요!');
+      alert("사진은 최대 5장까지 등록할 수 있어요!");
     }
   };
 
@@ -72,36 +74,46 @@ const CommunityPostEdit = (props) => {
 
   const editBtn = () => {
     dispatch(imgActions.setFiles(imageList, imageNum));
-    dispatch(editCommunityDB(communityId, category, editcontents, location, editTitle, username, imageList));
+    dispatch(
+      editCommunityDB(
+        communityId,
+        category,
+        editcontents,
+        location,
+        editTitle,
+        username,
+        imageList
+      )
+    );
   };
 
   const delLastImageBtn = () => {
     if (preview.lentgh === 5) {
-      dispatch(imgActions.delPreview(fileNum-1));
-      dispatch(imgActions.delFile(fileNum-1));
-      setFileNum(fileNum-1)
+      dispatch(imgActions.delPreview(fileNum - 1));
+      dispatch(imgActions.delFile(fileNum - 1));
+      setFileNum(fileNum - 1);
     } else if (preview.length === 4) {
-      dispatch(imgActions.delPreview(fileNum-1));
-      dispatch(imgActions.delFile(fileNum-1));
-      setFileNum(fileNum-1)
+      dispatch(imgActions.delPreview(fileNum - 1));
+      dispatch(imgActions.delFile(fileNum - 1));
+      setFileNum(fileNum - 1);
     } else if (preview.length === 3) {
-      dispatch(imgActions.delPreview(fileNum-1));
-      dispatch(imgActions.delFile(fileNum-1));
-      setFileNum(fileNum-1)
+      dispatch(imgActions.delPreview(fileNum - 1));
+      dispatch(imgActions.delFile(fileNum - 1));
+      setFileNum(fileNum - 1);
     } else if (preview.length === 2) {
-      dispatch(imgActions.delPreview(fileNum-1));
-      dispatch(imgActions.delFile(fileNum-1));
-      setFileNum(fileNum-1)
+      dispatch(imgActions.delPreview(fileNum - 1));
+      dispatch(imgActions.delFile(fileNum - 1));
+      setFileNum(fileNum - 1);
     } else if (preview.length === 1) {
-      dispatch(imgActions.delPreview(fileNum-1));
-      dispatch(imgActions.delFile(fileNum-1));
-      setFileNum(fileNum-1)
-    } else if (preview.length === 0 && imageNum !== 0){
-      alert('이전에 추가한 사진은 삭제할 수 없어요!');
+      dispatch(imgActions.delPreview(fileNum - 1));
+      dispatch(imgActions.delFile(fileNum - 1));
+      setFileNum(fileNum - 1);
+    } else if (preview.length === 0 && imageNum !== 0) {
+      alert("이전에 추가한 사진은 삭제할 수 없어요!");
     } else {
-      alert('삭제할 사진이 없어요!');
+      alert("삭제할 사진이 없어요!");
     }
-  }
+  };
 
   return (
     <Template props={props}>
@@ -117,7 +129,7 @@ const CommunityPostEdit = (props) => {
       >
         <CommunityEditStyle>
           <Grid width="335px" height="auto" margin="0 0 16px 0">
-          <Input
+            <Input
               disabled
               value={category}
               width="103%"
@@ -131,7 +143,7 @@ const CommunityPostEdit = (props) => {
           <Grid width="335px" height="10%">
             <Input
               onChange={$title}
-              placeholder='제목을 입력해주세요.'
+              placeholder="제목을 입력해주세요."
               value={editTitle}
               width="103%"
               addstyle={() => {
@@ -143,19 +155,22 @@ const CommunityPostEdit = (props) => {
             />
             <Button
               bgColor="lightGray"
-              onClick={()=>delLastImageBtn()}
+              onClick={() => delLastImageBtn()}
               addstyle={() => {
                 return css`
-                  display:flex;
-                  justify-content:center;
-                  align-items:center;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
                   height: 20px;
-                  width:120px;
+                  width: 120px;
                   position: relative;
                   top: 3px;
-                  left:4vw;
+                  left: 4vw;
                 `;
-              }}>마지막 사진 삭제</Button>
+              }}
+            >
+              마지막 사진 삭제
+            </Button>
             <Grid
               margin="0 0 0 12px"
               addstyle={() => {
@@ -224,7 +239,7 @@ const CommunityPostEdit = (props) => {
               </Grid>
               {(imageList[0] || preview[0 - imageNum]) && (
                 <CommunityPreview
-                  preview={preview} 
+                  preview={preview}
                   imageList={imageList}
                   imageNum={imageNum}
                   previewNum={0}
@@ -232,7 +247,7 @@ const CommunityPostEdit = (props) => {
               )}
               {(imageList[1] || preview[1 - imageNum]) && (
                 <CommunityPreview
-                  preview={preview} 
+                  preview={preview}
                   imageList={imageList}
                   imageNum={imageNum}
                   previewNum={1}
@@ -240,7 +255,7 @@ const CommunityPostEdit = (props) => {
               )}
               {(imageList[2] || preview[2 - imageNum]) && (
                 <CommunityPreview
-                  preview={preview} 
+                  preview={preview}
                   imageList={imageList}
                   imageNum={imageNum}
                   previewNum={2}
@@ -248,7 +263,7 @@ const CommunityPostEdit = (props) => {
               )}
               {(imageList[3] || preview[3 - imageNum]) && (
                 <CommunityPreview
-                  preview={preview} 
+                  preview={preview}
                   imageList={imageList}
                   imageNum={imageNum}
                   previewNum={3}
@@ -256,7 +271,7 @@ const CommunityPostEdit = (props) => {
               )}
               {(imageList[4] || preview[4 - imageNum]) && (
                 <CommunityPreview
-                  preview={preview} 
+                  preview={preview}
                   imageList={imageList}
                   imageNum={imageNum}
                   previewNum={4}
@@ -317,7 +332,11 @@ const CommunityPostEdit = (props) => {
               fontSize="14px"
               fontWeight="bold"
               bgColor="D_yellow"
-              onClick={() => window.location.replace(`/community/${location}/${category}/postdetail/${communityId}`)}
+              onClick={() =>
+                window.location.replace(
+                  `/community/${location}/${category}/postdetail/${communityId}`
+                )
+              }
               addstyle={() => {
                 return css`
                   display: flex;

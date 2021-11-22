@@ -3,13 +3,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CommunityPost } from "../components";
+import { Template, CommunityPost } from "../../components";
 
 // STYLE
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button } from "../elements/index";
+import { Grid, Button } from "../../elements/index";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
@@ -19,26 +19,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // FUNCTION
-import InfinityScroll from "../shared/InfinityScroll";
-import { getCommunityDB, getMoreCommunityDB } from "../redux/modules/community";
+import InfinityScroll from "../../shared/InfinityScroll";
+import {
+  getCommunityDB,
+  getMoreCommunityDB,
+} from "../../redux/modules/community";
 
 // REDUX
-import { history } from "../redux/configureStore";
-import { mypageActions } from "../redux/modules/mypage";
+import { history } from "../../redux/configureStore";
+import { mypageActions } from "../../redux/modules/mypage";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
   const pathLocation = props.match.params.village.split("@")[0];
   let location;
-  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
-  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
-  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
-  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
-  
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
+
   if (pathLocation === userVillage0) {
     location = userVillageA;
   } else if (pathLocation === userVillage1) {
@@ -46,7 +61,7 @@ const CommunityDetail = (props) => {
   } else if (pathLocation === userVillage2) {
     location = userVillageC;
   }
-  
+
   const path = useLocation();
   let category = null;
   let nextPath = null;

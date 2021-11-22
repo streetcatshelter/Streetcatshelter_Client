@@ -4,20 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
 // COMPONENTS
-import { Template } from "../components";
+import { Template } from "../../components";
 
 // ELEMENTS
-import { Grid, Image, TextArea, Input, Button } from "../elements/index";
+import { Grid, Image, TextArea, Input, Button } from "../../elements/index";
 
 // STYLE
-import { flexBox } from "../shared/style";
+import { flexBox } from "../../shared/style";
 
 // ICON
 import { Camera } from "react-feather";
 
 // REDUX
-import { imgActions } from "../redux/modules/image";
-import { __createCatInfo } from "../redux/modules/cat";
+import { imgActions } from "../../redux/modules/image";
+import { __createCatInfo } from "../../redux/modules/cat";
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
@@ -121,7 +121,6 @@ const CatInfoWrite = (props) => {
             placeholder="고양이 이름"
             changeEvent={$catName}
           />
-
           <Select value={neutering} onChange={$neutering}>
             {Options.map((item, index) => {
               if (item.key === 1) {
@@ -139,18 +138,18 @@ const CatInfoWrite = (props) => {
               }
             })}
           </Select>
-
+          해쉬태그
           <TextArea
             margin="5% 0 0 0"
+            padding="10px"
             width="91%"
-            placeholder="태그"
+            placeholder="태그를 입력해주세요!"
             changeEvent={$catTag}
           ></TextArea>
-
           <Button
             clickEvent={createBtn}
             bgColor="olive"
-            color="white"
+            color="black"
             width="120px"
             radius="15px"
             fontWeight="800"

@@ -34,6 +34,7 @@ const CatDetail = (props) => {
   const cat = useSelector((state) => state.cat.catinfo);
   const commentList = useSelector((state) => state.comment.list);
   const [menu, setMenu] = useState("캘린더");
+
   useEffect(() => {
     dispatch(__getCatInfo(catId));
   }, [catId, dispatch]);
@@ -101,7 +102,7 @@ const CatDetail = (props) => {
       <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push({pathname:`/map/${location}/${catId}`, state: { catId }});
+          history.push({pathname:`/map/${location}/${catId}`, state: { catId, location }});
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />

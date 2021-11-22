@@ -1,4 +1,4 @@
-// library
+// LIBRARY
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,15 +8,16 @@ import { Template, CatPost, SecondHeader } from "../../components";
 // element
 import { Button } from "../../elements";
 
-// icon
+// ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
-// redux
+// REDUX
 import { history } from "../../redux/configureStore";
 import { __getCatLocation, __getMoreCat } from "../../redux/modules/cat";
+import { mypageActions } from "../../redux/modules/mypage";
 
-// function
+// FUNCTION
 import InfinityScroll from "../../shared/InfinityScroll";
 
 const Home = (props) => {
@@ -29,7 +30,42 @@ const Home = (props) => {
   const userVillage = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]
   );
-  const location = userLocation ? userLocation : menuLocation || userVillage;
+  const pathLocation = userLocation
+    ? userLocation
+    : menuLocation || userVillage;
+
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
+
+  let location;
+  if (pathLocation === userVillage0) {
+    location = userVillageA;
+  } else if (pathLocation === userVillage1) {
+    location = userVillageB;
+  } else if (pathLocation === userVillage2) {
+    location = userVillageC;
+  }
+
+  location = location?.substring(0, location.length - 1);
+
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));
   };
@@ -38,9 +74,14 @@ const Home = (props) => {
     dispatch(__getCatLocation(location));
   }, [location, dispatch]);
 
+  React.useEffect(() => {
+    dispatch(mypageActions._getUserInfo());
+  }, [dispatch]);
+
   return (
-    <Template props={props} location={location}>
+    <Template props={props} location={pathLocation}>
       <SecondHeader title={`${location} 고양이들을 소개합니다!`} />
+
       {catList.length ? (
         catList.map((cat, idx) => {
           return (
@@ -50,7 +91,7 @@ const Home = (props) => {
               length={catList.length}
               key={cat.catId}
             >
-              <CatPost cat={cat} location={location} />
+              <CatPost cat={cat} location={pathLocation} />
             </InfinityScroll>
           );
         })
@@ -61,7 +102,10 @@ const Home = (props) => {
       <Button
         is_float="is_float"
         clickEvent={() => {
-          history.push({ pathname: `/map/${location}`, state: { location } });
+          history.push({
+            pathname: `/map/${pathLocation}`,
+            state: { location },
+          });
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />

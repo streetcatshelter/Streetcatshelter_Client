@@ -16,8 +16,9 @@ import { history } from "../../redux/configureStore";
 import { userActions } from "../../redux/modules/user";
 import { mypageActions } from "../../redux/modules/mypage";
 
-const Profile = () => {
+const Profile = (props) => {
   const dispatch = useDispatch();
+  const location = props.location;
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const NickName = UserInfo.nickname === "string" ? "" : UserInfo.nickname;
 
@@ -55,7 +56,7 @@ const Profile = () => {
               FirstBtn="프로필수정"
               SecondBtn="로그아웃"
               FirstClick={() => {
-                history.push("/userinfoedit");
+                history.push({pathname : '/userinfoedit', state : { location }});
               }}
               SecondClick={logout}
             />

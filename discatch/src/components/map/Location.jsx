@@ -56,7 +56,6 @@ const Location = (props) => {
     userVillage = userVillageC;
   }
 
-
   if (userVillage0 === villageKeyword) {
     location = userVillage0;
   } else if (userVillage1 === villageKeyword) {
@@ -82,6 +81,19 @@ const Location = (props) => {
       vKeyword = userVillageC;
     }
   }
+
+  const pathLocation = location;
+
+  if (location === userVillage0) {
+    location = userVillageA;
+  } else if (location === userVillage1) {
+    location = userVillageB;
+  } else if (location === userVillage2) {
+    location = userVillageC;
+  }
+
+  location = location?.substring(0, location.length - 1);
+
   const catList = useSelector((state) => state.cat.list);
 
   useEffect(() => {
@@ -122,7 +134,7 @@ const Location = (props) => {
   
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
         let iwContent = `<button 
-                           onclick="location.href='/catdetail/${location}/${position[i].catId}'" 
+                           onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}'" 
                            style="padding:5px; 
                                   margin:0 10px;
                                   border: 0;
@@ -480,7 +492,7 @@ const Location = (props) => {
         clickEvent={() => {
           if(latitude !== undefined && longitude !== undefined && pathLength === 3) {
             history.push({
-              pathname:`/catinfowrite/${location}`, 
+              pathname:`/catinfowrite/${pathLocation}`, 
               state: {latitude, longitude}});
           } else if (latitude !== undefined && longitude !== undefined && pathLength === 4) {
             history.push({

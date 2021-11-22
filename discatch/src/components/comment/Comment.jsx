@@ -1,6 +1,5 @@
 // LIBRARY
 import React from "react";
-import styled, { css } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
 // ELEMENTS
@@ -8,6 +7,9 @@ import { Grid, Text } from "../../elements/index";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
+
+// STYLE
+import styled, { css } from "styled-components";
 
 // ICON
 import FavoriteIcon from "@material-ui/icons/Favorite";

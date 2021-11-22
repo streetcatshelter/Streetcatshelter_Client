@@ -1,19 +1,19 @@
-// library
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// LIBRARY
+import React from "react";
+import { useDispatch } from "react-redux";
 import { css } from "styled-components";
 
-// element
+// ELEMENTS
 import { Grid, Text, Image, Button } from "../../elements";
 
-// redux
+// REDUX
 import { history } from "../../redux/configureStore";
-import { __catLike, __getCatInfo } from "../../redux/modules/cat";
+import { __catLike } from "../../redux/modules/cat";
 
-// style
+// STYLE
 import { flexBox } from "../../shared/style";
 
-// icon
+// ICON
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const CatPost = ({ cat, location, path }) => {

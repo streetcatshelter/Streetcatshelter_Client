@@ -34,6 +34,7 @@ const CatDetail = (props) => {
   const cat = useSelector((state) => state.cat.catinfo);
   const commentList = useSelector((state) => state.comment.list);
   const [menu, setMenu] = useState("캘린더");
+
   useEffect(() => {
     dispatch(__getCatInfo(catId));
   }, [catId, dispatch]);
@@ -103,7 +104,7 @@ const CatDetail = (props) => {
         clickEvent={() => {
           history.push({
             pathname: `/map/${location}/${catId}`,
-            state: { catId },
+            state: { catId, location },
           });
         }}
       >

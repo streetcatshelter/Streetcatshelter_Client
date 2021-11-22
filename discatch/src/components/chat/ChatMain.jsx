@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// LIBRARY
+import React, { useEffect } from "react";
 
 // STYLE
 import styled from "styled-components";
@@ -6,7 +7,7 @@ import styled from "styled-components";
 // COMPONENTS
 import { EditModalSlide } from "../../components";
 
-// moment
+// MOMENT
 import moment from "moment";
 
 // REDUX

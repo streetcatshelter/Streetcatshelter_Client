@@ -21,7 +21,7 @@ const MyPageCat = () => {
   useEffect(() => {
     dispatch(mypageActions._getLikedAllCat());
   }, [dispatch]);
-
+  
   return (
     <div>
       {LikedAllCat.map((LikedCat, idx) => {

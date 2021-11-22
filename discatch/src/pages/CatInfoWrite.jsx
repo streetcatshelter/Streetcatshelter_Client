@@ -1,6 +1,6 @@
 // LIBRARY
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
 // COMPONENTS
@@ -18,10 +18,31 @@ import { Camera } from 'react-feather';
 // REDUX
 import { imgActions } from '../redux/modules/image';
 import { __createCatInfo } from '../redux/modules/cat';
+import { mypageActions } from "../redux/modules/mypage";
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
-  const location = props.match.params.location;
+  const pathLocation = props.match.params.location;
+
+  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
+  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
+  
+  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
+  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
+  
+  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
+  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
+
+  let location;
+  if (pathLocation === userVillage0) {
+    location = userVillageA
+  } else if (pathLocation === userVillage1) {
+    location = userVillageB
+  } else if (pathLocation === userVillage2) {
+    location = userVillageC
+  }
+
+  location = location?.substring(0, location.length - 1);
 
   const [fileUrl, setFileUrl] = useState(null);
 
@@ -75,9 +96,14 @@ const CatInfoWrite = (props) => {
         userName,
         latitude,
         longitude,
+        pathLocation,
       ),
     );
   };
+
+  React.useEffect(() => {
+    dispatch(mypageActions._getUserInfo());
+  }, [dispatch]);
 
   return (
     <Template props={props}>

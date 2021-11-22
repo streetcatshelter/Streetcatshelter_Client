@@ -29,9 +29,6 @@ const CommunityPostEdit = (props) => {
   const path = useLocation();
   const preview = useSelector((state) => state.image.preview)
   const communityId = path.pathname.split('/')[5];
-  React.useEffect(() => {
-    dispatch(getOneCommunityDB(communityId));
-  }, [communityId, dispatch]);
 
   const { category, contents, imageList, location, title, username } = useSelector((state) => ({
     category: state.community.list.data?.category,
@@ -45,6 +42,7 @@ const CommunityPostEdit = (props) => {
 
 
   const [fileNum, setFileNum] = useState(imageNum);
+  
   // S3
   const handleInputFile = (e) => {
     e.preventDefault();
@@ -102,6 +100,10 @@ const CommunityPostEdit = (props) => {
       alert('삭제할 사진이 없어요!');
     }
   }
+
+  React.useEffect(() => {
+    dispatch(getOneCommunityDB(communityId));
+  }, [communityId, dispatch]);
 
   return (
     <Template props={props}>

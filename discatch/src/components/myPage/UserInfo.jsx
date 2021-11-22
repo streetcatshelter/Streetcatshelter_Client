@@ -13,7 +13,7 @@ import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
 import { imgActions } from "../../redux/modules/image";
 import { XCircle, Upload } from "react-feather";
 
-const UserInfo = () => {
+const UserInfo = (props) => {
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [NickName, setNickName] = useState(UserInfo.nickname);

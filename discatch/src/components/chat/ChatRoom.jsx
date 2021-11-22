@@ -1,7 +1,8 @@
 // LIBRARY
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-// socket
+// SOCKET
 import * as StompJs from "@stomp/stompjs";
 import * as SockJS from "sockjs-client";
 
@@ -15,12 +16,11 @@ import styled from "styled-components";
 import { EditModalSlide, ChatMessage } from "..";
 
 // REDUX
-import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
-
-// REDUX
 import { chatActions } from "../../redux/modules/chat";
 import { pushChatMessage } from "../../redux/modules/chat";
+
+// MOMENT
+import moment from "moment";
 
 const ChatRoom = (props) => {
   const dispatch = useDispatch();

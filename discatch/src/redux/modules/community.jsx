@@ -8,7 +8,6 @@ import { imgActions } from "./image";
 // 커뮤니티 글 등록
 export const addCommunityDB = (category, contents, location, title, detailLocation) => {
   return function (dispatch, getState, { history }) {
-    console.log(location);
     const userInfo = localStorage.getItem("userInfo");
     const path = category.split(" ");
     let pathName = null;
@@ -31,7 +30,6 @@ export const addCommunityDB = (category, contents, location, title, detailLocati
           title: title,
           username: username,
         };
-        console.log(postInfo);
         instance
           .post("/community/create", postInfo)
           .then((res) => {
@@ -199,7 +197,6 @@ export const addCommunityCommentDB =
   (contents, communityId) =>
   async (dispatch, getState, { history }) => {
     try {
-      console.log(contents, communityId);
       const data = await communityApi.createCommunityComment(
         contents,
         communityId

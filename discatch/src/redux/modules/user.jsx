@@ -59,7 +59,6 @@ const _loginNaver =
 const _loginGoogle =
   (authorization_code) =>
   async (dispatch, getState, { history }) => {
-    console.log(authorization_code);
     try {
       const { data } = await userApi.getGoogle(authorization_code);
 
@@ -125,7 +124,6 @@ const user = createSlice({
       };
     },
     loginNaver: (state, action) => {
-      console.log(action.payload);
       return {
         ...state,
         isLoggedIn: true,
@@ -135,7 +133,6 @@ const user = createSlice({
       };
     },
     loginGoogle: (state, action) => {
-      console.log(action.payload);
       return {
         ...state,
         isLoggedIn: true,

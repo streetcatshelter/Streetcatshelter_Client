@@ -17,7 +17,7 @@ import Community2 from '../styles/images/Community2.jpg';
 import Community3 from '../styles/images/Community3.jpg';
 
 const Community = (props) => {
-  const village = useSelector((state) => state.map.keywordList[0]);
+  const location = useSelector((state) => state.map.keywordList[0]);
 
   const requestLocationInfo = () => {
     history.push('/userinfoedit');
@@ -26,11 +26,11 @@ const Community = (props) => {
   
   return (
     <Template props={props}>
-      {village !== undefined ? (
+      {location !== undefined ? (
       <Grid margin="10vh 0 0 0">
           <CommunityCategoryCard
             src={Community1}
-            clickEvent={()=>history.push(`/community/${village}/catinfo`)}
+            clickEvent={()=>history.push({pathname:`/community/${location}/catinfo`, state : { location }})}
             width="100px"
             height="100px"
             title="고양이 정보글!"
@@ -38,7 +38,7 @@ const Community = (props) => {
           />
           <CommunityCategoryCard
             src={Community2}
-            clickEvent={()=>history.push(`/community/${village}/gathering`)}
+            clickEvent={()=>history.push({pathname:`/community/${location}/gathering`, state : { location }})}
             width="100px"
             height="100px"
             title="동네 모임"
@@ -46,7 +46,7 @@ const Community = (props) => {
           />
           <CommunityCategoryCard
             src={Community3}
-            clickEvent={()=>history.push(`/community/${village}/sharing`)}
+            clickEvent={()=>history.push({pathname:`/community/${location}/sharing`, state : { location }})}
             width="100px"
             height="100px"
             title="고양이 용품 나눔"

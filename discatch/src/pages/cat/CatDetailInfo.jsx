@@ -37,18 +37,20 @@ const CatDetailInfo = (props) => {
     locationList: state.mypage.userInfo.locationList,
   }));
 
-  const { image, diary, water, food, snack, createdAt, tags } = useSelector(
-    (state) => ({
-      image: state.cat.detail.catImages,
-      diary: state.cat.detail.diary,
-      water: state.cat.detail.water,
-      food: state.cat.detail.food,
-      snack: state.cat.detail.snack,
-      createdAt: state.cat.detail.createdAt,
-      tags: state.cat.detail.catTags,
-    }),
-    shallowEqual
-  );
+  const { image, diary, water, food, snack, createdAt, tags, likeCnt } =
+    useSelector(
+      (state) => ({
+        image: state.cat.detail.catImages,
+        diary: state.cat.detail.diary,
+        water: state.cat.detail.water,
+        food: state.cat.detail.food,
+        snack: state.cat.detail.snack,
+        createdAt: state.cat.detail.createdAt,
+        tags: state.cat.detail.catTags,
+        likeCnt: state.cat.detail.likeCnt,
+      }),
+      shallowEqual
+    );
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
   const userLiked = useSelector((state) => state.cat.detail.userLiked);
   const likeToggle = () => {
@@ -152,36 +154,81 @@ const CatDetailInfo = (props) => {
         </Grid>
       </Grid>
 
-      <Grid bgColor="diaryColor" padding="20px">
+      <Grid
+        bgColor="diaryColor"
+        padding="20px"
+        addstyle={() => {
+          return css`
+            display: flex;
+            flex-direction: column;
+          `;
+        }}
+      >
+        <Text margin="0 0 5% 0" fontWeight="500">
+          {diary}
+        </Text>
+
         <Grid
-          alignItems="center"
           addstyle={() => {
             return css`
-              ${flexBox("space-between")}
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
             `;
           }}
         >
-          <Text margin="0 0 5% 0" fontWeight="500">
-            {diary}
-          </Text>
-
-          <Button
-            padding="0"
-            bgColor="diaryColor"
-            color={userLiked ? "red" : "black"}
-            clickEvent={likeToggle}
+          <Grid>
+            {tags && tags.length > 0 ? (
+              tags.map((tag, idx) => {
+                return (
+                  <Text fontWeight="500" key={idx} width="80%">
+                    #{tag}
+                  </Text>
+                );
+              })
+            ) : (
+              <Grid width="80%"></Grid>
+            )}
+          </Grid>
+          <Grid
+            width="20%"
+            addstyle={() => {
+              return css`
+                display: flex;
+                justify-content: flex-end;
+              `;
+            }}
           >
-            <FavoriteIcon />
-          </Button>
+            <Button
+              bgColor="diaryColor"
+              color={userLiked ? "red" : "black"}
+              clickEvent={likeToggle}
+              addstyle={() => {
+                return css`
+                  padding: 0px;
+                  line-height: 20px;
+                `;
+              }}
+            >
+              <FavoriteIcon />
+            </Button>
+            {likeCnt ? (
+              <Text
+                addstyle={() => {
+                  return css`
+                    line-height: 24px;
+                    font-weight: bold;
+                    margin: 0px 5px;
+                  `;
+                }}
+              >
+                {likeCnt}
+              </Text>
+            ) : (
+              ""
+            )}
+          </Grid>
         </Grid>
-
-        {tags?.map((tag, idx) => {
-          return (
-            <Text fontWeight="500" key={idx}>
-              #{tag}
-            </Text>
-          );
-        })}
       </Grid>
       <CommentList
         props={commentList}

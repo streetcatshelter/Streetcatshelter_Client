@@ -89,32 +89,33 @@ const CatPost = ({ cat, location, path }) => {
               />
             </Button>
           </Grid>
-
-          {cat.catTagList ? (
-            <Grid
-              clickEvent={CatDetailBtn}
-              height="35px"
-              addstyle={() => {
-                return css`
-                  ${flexBox("flex-start")}
-                `;
-              }}
-            >
-              {cat.catTagList.map((tag, idx) => {
-                return (
-                  <Text
-                    margin="0 2% 0 0"
-                    padding="2px"
-                    key={idx}
-                    size="14px"
-                    fontWeight="bold"
-                  >
-                    #{tag.tag}
-                  </Text>
-                );
-              })}
-            </Grid>
-          ) : null}
+          <Grid
+            addstyle={() => {
+              return css`
+                display: flex;
+                flex-wrap: wrap;
+                height: 30px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+              `;
+            }}
+          >
+            {cat.catTagList?.map((tag, idx) => {
+              return (
+                <Text
+                  display="flex"
+                  margin="0 2% 0 0"
+                  padding="2px"
+                  key={idx}
+                  size="14px"
+                  fontWeight="bold"
+                >
+                  #{tag.tag}
+                </Text>
+              );
+            })}
+          </Grid>
         </Grid>
       </Grid>
     </React.Fragment>

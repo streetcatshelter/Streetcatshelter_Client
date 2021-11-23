@@ -34,22 +34,34 @@ const CatInfoWrite = (props) => {
   const pathLocation = props.match.params.location;
   console.log(pathLocation);
 
-  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
-  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
-  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
-  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
 
   let location;
   if (pathLocation === userVillage0) {
-    location = userVillageA
+    location = userVillageA;
   } else if (pathLocation === userVillage1) {
-    location = userVillageB
+    location = userVillageB;
   } else if (pathLocation === userVillage2) {
-    location = userVillageC
+    location = userVillageC;
   }
 
   location = location?.substring(0, location.length - 1);
@@ -238,18 +250,34 @@ const CatInfoWrite = (props) => {
             />
 
             {HashTags ? (
-              <Grid display="flex">
+              <Grid
+                display="flex"
+                width="95%"
+                margin="10px auto"
+                addstyle={() => {
+                  return css`
+                    display: flex;
+                    flex-wrap: wrap;
+                  `;
+                }}
+              >
                 {HashTags.map((hashtag, idx) => {
                   return (
                     <Grid
                       key={idx}
                       width="auto"
                       bgColor="yellow"
-                      height="20px"
+                      height="25px"
                       radius="20px"
-                      margin="5px 5px 0px 0px"
-                      padding="1px"
+                      margin="5px "
+                      padding="0px 5px 3px 5px"
                       style={{ fontSize: "12px" }}
+                      addstyle={() => {
+                        return css`
+                          display: flex;
+                          align-items: center;
+                        `;
+                      }}
                       onClick={() => DeleteHashTag(hashtag)}
                     >
                       {hashtag}
@@ -292,6 +320,7 @@ const Select = styled.select`
   padding: 5px 10px;
   width: 96%;
   border-radius: 10px;
+  background: white;
   outline: none;
 `;
 export default CatInfoWrite;

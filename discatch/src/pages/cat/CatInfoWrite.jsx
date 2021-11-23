@@ -108,8 +108,12 @@ const CatInfoWrite = (props) => {
     );
   };
   const publish = (catTag) => {
-    dispatch(addHashTag(catTag));
-    setCatTag("");
+    if (catTag !== "") {
+      dispatch(addHashTag(catTag));
+      setCatTag("");
+    } else {
+      alert("해쉬태그를 입력해주세요");
+    }
   };
 
   const DeleteHashTag = (hashtag) => {
@@ -227,6 +231,8 @@ const CatInfoWrite = (props) => {
               radius="10px"
               bgColor="#ffffff"
               placeholder="태그를 입력해주세요!"
+              type="text"
+              value={catTag}
               changeEvent={$catTag}
               onKeyPress={(e) => e.which === 13 && publish(catTag)}
             />

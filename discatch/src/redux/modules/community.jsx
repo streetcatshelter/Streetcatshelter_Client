@@ -64,7 +64,7 @@ export const getCommunityDB =
   };
 
 export const getMoreCommunityDB =
-  (category, location, limit = 11) =>
+  (category, location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     let start = getState().community.start;
 
@@ -85,7 +85,6 @@ export const getMoreCommunityDB =
         dispatch(getMoreCommunity(communityList, null));
         return;
       }
-      communityList.content.pop();
       dispatch(getMoreCommunity(communityList, start + limit));
     } catch (err) {
       console.error(err);

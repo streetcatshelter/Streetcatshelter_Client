@@ -2,10 +2,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// component
+// COMPONENTS
 import { Template, CatPost, SecondHeader } from "../../components";
 
-// element
+// ELEMENTS
 import { Button } from "../../elements";
 
 // ICON
@@ -15,7 +15,6 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 // REDUX
 import { history } from "../../redux/configureStore";
 import { __getCatLocation, __getMoreCat } from "../../redux/modules/cat";
-import { mypageActions } from "../../redux/modules/mypage";
 
 // FUNCTION
 import InfinityScroll from "../../shared/InfinityScroll";
@@ -55,7 +54,7 @@ const Home = (props) => {
     (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
   );
 
-  let location;
+  let location = 'asdasd';
   if (pathLocation === userVillage0) {
     location = userVillageA;
   } else if (pathLocation === userVillage1) {
@@ -66,17 +65,13 @@ const Home = (props) => {
 
   location = location?.substring(0, location.length - 1);
 
-  const getMoreCat = () => {
-    dispatch(__getMoreCat(location));
-  };
-
   useEffect(() => {
     dispatch(__getCatLocation(location));
   }, [location, dispatch]);
 
-  React.useEffect(() => {
-    dispatch(mypageActions._getUserInfo());
-  }, [dispatch]);
+  const getMoreCat = () => {
+    dispatch(__getMoreCat(location));
+  };
 
   return (
     <Template props={props} location={pathLocation}>

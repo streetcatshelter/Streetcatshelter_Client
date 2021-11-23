@@ -15,8 +15,10 @@ const CalendarDates = (props) => {
   const { lastDate, firstDate, elm, findToday, month, year, idx } = props;
 
   const [openModal, setOpenModal] = useState(false);
-  const Calendar = useSelector((state) => state.mypage.calendar);
-
+  const Calendar = useSelector((state) =>
+    props.path === "mypage" ? state.mypage.calendar : state.cat.calendar
+  );
+  console.log(Calendar);
   const DayOff = [];
   return (
     <>
@@ -47,13 +49,14 @@ const CalendarDates = (props) => {
                     workDate.date[2] === elm && workDate.date[1] === month
                 )
                   .sort()
-                  .map((workDate) => {
+                  .map((workDate, idx) => {
                     DayOff.unshift(workDate.date[2]);
                     const food = workDate.food;
                     const water = workDate.water;
                     const snack = workDate.snack;
                     return (
                       <div
+                        key={idx}
                         style={{
                           display: "flex",
                           margin: "auto",

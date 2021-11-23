@@ -99,6 +99,18 @@ export const __createCatDetailInfo = (
   };
 };
 
+// 지역에 따라 모든 게시물 불러오기
+export const __getAllCatLocation =
+  (location, limit = 99999) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const { data } = await catApi.getCatLocation(location, limit);
+      dispatch(getCatLocation(data, limit));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 // 지역에 따라 게시물 불러오기
 export const __getCatLocation =
   (location, limit = 10) =>
@@ -337,6 +349,7 @@ export const {
   createCatInfo,
   createCatDetailInfo,
   createCatDetailComment,
+  getCatAllLocation,
   getCatLocation,
   getMoreCat,
   getCatDetail,

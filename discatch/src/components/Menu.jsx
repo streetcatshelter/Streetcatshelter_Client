@@ -19,22 +19,34 @@ import { Home, Users, Compass, Send, User } from "react-feather";
 import { history } from "../redux/configureStore";
 
 const Menu = (props) => {
+  const path = props.props.props.match.path;
   const preLocation = props.props.props?.location.state?.location;
+  const pathLocation = props.props.props.match.params.village;
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
   let location = userLocation ? userLocation : preLocation;
   if (location === undefined) {
     location = userVillage;
+  } 
+  
+  if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
+    location = pathLocation;
   }
 
+  const catId = props.props.props.location.pathname.split('/')[3];
   const moveToCommunity = () => {
     history.push({pathname: '/community', state: { location }});
     history.go(0);
   }
 
   const moveToMap = () => {
-    history.push({pathname: `/map/${location}`, state: { location }});
-    history.go(0);
+    if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
+      history.push({pathname: `/map/${location}/${catId}`, state: { catId, location }});
+      history.go(0);
+    } else {
+      history.push({pathname: `/map/${location}`, state: { location }});
+      history.go(0);
+    }
   }
 
   const moveToChat = () => {

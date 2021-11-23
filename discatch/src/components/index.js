@@ -5,6 +5,7 @@ import Menu from "./Menu";
 import Template from "./Template";
 import EditModalSlide from "./EditModalSlide";
 import SecondHeader from "./SecondHeader";
+import ContentHeader from "./ContentHeader";
 
 // SLIDER
 import Slide from "./slider/Slide";
@@ -64,6 +65,7 @@ export {
   Template,
   EditModalSlide,
   SecondHeader,
+  ContentHeader,
   // SLIDER
   Slide,
   // MYPAGES

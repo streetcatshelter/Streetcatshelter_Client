@@ -51,6 +51,7 @@ const CatDetail = (props) => {
         addstyle={() => {
           return css`
             border-bottom: 2px solid #cbcf5e;
+            margin-bottom: 5px;
             ${flexBox("flex-start")}
           `;
         }}

@@ -23,10 +23,11 @@ const Notice = () => {
       <Title>
         <p>disCATch 공지사항🐈</p>
       </Title>
-      {NoticeList.map((notice, index) => {
+      {NoticeList.map((notice, idx) => {
         const modifiedAt = moment(notice.modifiedAt).format("YYYY-M-D");
         return (
           <Content
+            key={idx}
             onClick={() => {
               history.push(`/mypage/notice/${notice.id}`);
             }}

@@ -1,32 +1,32 @@
 // LIBRARY
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from "react";
 
 // STYLE
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // ROUTE
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const TextArea = ({ value, placeholder, changeEvent, keyPress, ...props }) => {
   const path = useLocation();
-  const pathCheck = path.pathname.split('/')[4];
+  const pathCheck = path.pathname.split("/")[4];
   const ref = useRef(null);
   useEffect(() => {
     if (ref === null || ref.current === null) {
       return;
     }
-    ref.current.style.height = '12px';
-    ref.current.style.height = ref.current.scrollHeight + 'px';
+    ref.current.style.height = "12px";
+    ref.current.style.height = ref.current.scrollHeight + "px";
   }, []);
   const handleResizeHeight = useCallback(() => {
     if (ref === null || ref.current === null) {
       return;
     }
-    ref.current.style.height = '12px';
-    ref.current.style.height = ref.current.scrollHeight + 'px';
+    ref.current.style.height = "12px";
+    ref.current.style.height = ref.current.scrollHeight + "px";
   }, []);
-  
-  if (pathCheck === 'postdetail') {
+
+  if (pathCheck === "postdetail") {
     return (
       <TextAreaStyle
         value={value}
@@ -49,7 +49,6 @@ const TextArea = ({ value, placeholder, changeEvent, keyPress, ...props }) => {
       />
     );
   }
-  
 };
 
 const TextAreaStyle = styled.textarea`
@@ -70,13 +69,13 @@ const TextAreaStyle = styled.textarea`
 `;
 
 TextArea.defaultProps = {
-  width: '100%',
-  height: '100px',
-  bgColor: 'none',
-  color: 'black',
-  padding: '6px 3px 3px 3px',
-  radius: '12px',
-  fontSize: '12px',
+  width: "100%",
+  height: "100px",
+  bgColor: "none",
+  color: "black",
+  padding: "6px 3px 3px 3px",
+  radius: "12px",
+  fontSize: "12px",
   keyPress: () => {},
   changeEvent: () => {},
   addstyle: () => {},

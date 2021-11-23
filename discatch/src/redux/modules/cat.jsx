@@ -54,7 +54,7 @@ export const __createCatInfo = (
 
 // 상세 정보 작성
 export const __createCatDetailInfo = (
-  catTags,
+  HashTags,
   diary,
   food,
   latitude,
@@ -72,7 +72,7 @@ export const __createCatDetailInfo = (
 
           const detailInfo = {
             catImages: imageUrl,
-            catTags: catTags,
+            catTags: HashTags,
             diary: diary,
             food: food,
             latitude: latitude,
@@ -81,10 +81,12 @@ export const __createCatDetailInfo = (
             water: water,
             catId: catId,
           };
+          console.log(detailInfo);
           instance
             .post(`/cat/detail/${catId}`, detailInfo)
             .then((res) => {
               dispatch(imgActions.setInitialState());
+              dispatch(setInitialState([]));
             })
             .catch((err) => {
               console.error(err);
@@ -232,13 +234,13 @@ export const __catDetailLike =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catDetailLike(catDetailId);
-      window.location.reload();
+      dispatch(__getCatDetail(catDetailId));
     } catch (err) {
       console.error(err);
     }
   };
 
-// Cat 상세정보 삭제 💩
+// Cat 상세정보 삭제
 export const __deleteCatDetail =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {

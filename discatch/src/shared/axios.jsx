@@ -52,21 +52,21 @@ export const myPageApi = {
 
 export const catApi = {
   getCatLocation: (location, limit) =>
-    instance.get(`/cat/${location}?page=1&size=${limit}`),
+    instance.get(`/cat/${location}/?page=1&size=${limit}`),
   getMoreCat: (location, start, limit) =>
-    instance.get(`/cat/${location}?page=${start + 1}&size=${limit}`),
+    instance.get(`/cat/${location}/?page=${start + 1}&size=${limit}`),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
   getCatInfo: (catId) => instance.get(`/cat/info/${catId}`),
   getCatCalendar: (catId, month, year) =>
-    instance.get(`/cat/calender/${catId}?month=${month}&year=${year}`),
+    instance.get(`/cat/calender/${catId}/?month=${month}&year=${year}`),
   getCatGallery: (catId, size) =>
-    instance.get(`/cat/gallery/${catId}?page=1&size=${size}`),
+    instance.get(`/cat/gallery/${catId}/?page=1&size=${size}`),
   getCatDiary: (catId, size) =>
-    instance.get(`/cat/diary/${catId}?page=1&size=${size}`),
+    instance.get(`/cat/diary/${catId}/?page=1&size=${size}`),
   getComment: (catId, size) =>
-    instance.get(`/cat/comment/${catId}?page=1&size=${size}`),
+    instance.get(`/cat/comment/${catId}/?page=1&size=${size}`),
   getDetailComment: (catDetailId, size) =>
-    instance.get(`/cat/detail/comment/${catDetailId}?page=1&size=${size}`),
+    instance.get(`/cat/detail/comment/${catDetailId}/?page=1&size=${size}`),
   createCatComment: (catId, contents) =>
     instance.post(`/cat/comment/${catId}`, { contents }),
   createCatDetailComment: (catDetailId, contents) =>
@@ -83,11 +83,11 @@ export const communityApi = {
   createCommunity: (postInfo) => instance.post("/community/create", postInfo),
   getCommunity: (category, location, limit) =>
     instance.get(
-      `/community/category/${category}?page=1&size=${limit}&location=${location}`
+      `/community/category/${category}/?page=1&size=${limit}&location=${location}`
     ),
   getMoreCommunity: (category, start, limit, location) =>
     instance.get(
-      `/community/category/${category}?page=${
+      `/community/category/${category}/?page=${
         start + 1
       }&size=${limit}&location=${location}`
     ),

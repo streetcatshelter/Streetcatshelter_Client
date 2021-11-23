@@ -22,9 +22,8 @@ const SearchAddress = (props) => {
   };
 
   const onCompletePost = (data) => {
-    let fullAddr = data.address;
+    let fullAddr = data.jibunAddress;
     let extraAddr = "";
-
     if (data.addressType === "R") {
       if (data.bname !== "") {
         extraAddr += data.bname;

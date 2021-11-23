@@ -91,7 +91,6 @@ const Location = (props) => {
   } else if (location === userVillage2) {
     location = userVillageC;
   }
-
   const secondUserVillage = `${userVillage?.split(' ')[0]} ${userVillage?.split(' ')[1]} ${userVillage?.split(' ')[2]}`;
   location = location?.substring(0, location.length - 1);
   const catList = useSelector((state) => state.cat.list);
@@ -181,7 +180,7 @@ const Location = (props) => {
 
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(userVillage, placesSearchCB);
-    
+
     // 고양이 마커 가져오기
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
@@ -193,8 +192,6 @@ const Location = (props) => {
         map.setBounds(bounds);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         ps.keywordSearch(secondUserVillage, placesSearchCB);
-        // alert('검색할 수 없는 지역입니다. 동네 설정을 다시 해주세요.');
-        // history.push('/userinfoedit');
       }
     } 
   }

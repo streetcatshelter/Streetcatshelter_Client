@@ -1,15 +1,15 @@
 // LIBRARY
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 // ELEMENTS
-import { Grid } from '../../elements';
+import { Grid } from "../../elements";
 
 // COMPONENTS
-import { Diary } from '..';
+import { Diary } from "..";
 
 // REDUX
-import { __getDiary } from '../../redux/modules/cat';
+import { __getDiary } from "../../redux/modules/cat";
 
 const CatDiary = (props) => {
   const location = props.location;

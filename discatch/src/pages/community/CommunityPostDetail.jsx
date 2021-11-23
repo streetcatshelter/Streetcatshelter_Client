@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CommentList, EditModalSlide } from "../../components";
+import { Template, CommentList, ContentHeader } from "../../components";
 
 // STYLE
 import { css } from "styled-components";
@@ -11,85 +11,46 @@ import { css } from "styled-components";
 // ELEMENTS
 import { Grid, Text, Image } from "../../elements/index";
 
-// ICON
-import Avatar from "@material-ui/core/Avatar";
-
 // REDUX
 import { history } from "../../redux/configureStore";
 import {
   getOneCommunityDB,
   deleteCommunityDB,
 } from "../../redux/modules/community";
-import { chatActions } from "../../redux/modules/chat";
 
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
 
-  const {
-    category,
-    contents,
-    imageList,
-    location,
-    title,
-    username,
-    createdAt,
-    nickname,
-    profileImageUrl,
-  } = useSelector((state) => ({
-    category: state.community.list.data?.category,
-    contents: state.community.list.data?.contents,
-    imageList: state.community.list.data?.communityImageList
-      ? state.community.list.data.communityImageList
-      : Array(1),
-    location: state.community.list.data?.location,
-    title: state.community.list.data?.title,
-    username: state.community.list.data?.username,
-    nickname: state.community.list.data?.nickname,
-    profileImageUrl: state.community.list.data?.profileImageUrl,
-    createdAt: state.community.list.data?.createdAt
-      ? state.community.list.data?.createdAt
-      : Array(1),
-  }));
+  const { category, contents, imageList, title, location } = useSelector(
+    (state) => ({
+      category: state.community.list.data?.category,
+      contents: state.community.list.data?.contents,
+      imageList: state.community.list.data?.communityImageList
+        ? state.community.list.data.communityImageList
+        : Array(1),
+      location: state.community.list.data?.location,
+      title: state.community.list.data?.title,
+    })
+  );
 
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo.split('"')[5];
-  const NickName = useSelector((state) => state.mypage.userInfo.nickname);
-  const [ProfileModal, setProfileModal] = useState(false);
-
-  const OpenProfile = () => {
-    if (userName !== username) {
-      setProfileModal(!ProfileModal);
-    }
-  };
-
-  const MakeChat = () => {
-    const chatuser = { chatUser: [name, NickName] };
-    dispatch(chatActions._createRoom(chatuser));
-  };
-
-  let name;
-  if (nickname === "" || nickname === null) {
-    name = username;
-  } else {
-    name = nickname;
-  }
-
-  let locationName = "";
-  if (location === "undefined") {
-    locationName = "";
-  } else if (location !== "undefined") {
-    locationName = location;
-  }
 
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
   return (
     <Template props={props}>
+      <ContentHeader
+        FirstBtn="수정"
+        SecondBtn="삭제"
+        FirstClick={() => {}}
+        SecondClick={deleteCommunity}
+      />
       <Grid
         bgColor="bgColor"
         addstyle={() => {
@@ -98,89 +59,6 @@ const CommunityPostDetail = (props) => {
           `;
         }}
       >
-        <Grid
-          addstyle={() => {
-            return css`
-              justify-content: space-between;
-              padding: 5px;
-              width: 100%;
-              height: 50px;
-              display: flex;
-              border-bottom: 1px solid
-                rgb(${(props) => props.theme.palette.olive});
-            `;
-          }}
-        >
-          <Grid display="flex">
-            <Avatar
-              src={profileImageUrl}
-              style={{
-                width: "30px",
-                height: "30px",
-                borderRadius: "15px",
-                alignItems: "center",
-              }}
-            />
-            <Grid
-              addstyle={() => {
-                return css`
-                  display: flex;
-                  margin-left: 10px;
-                `;
-              }}
-            >
-              <Grid>
-                <Text
-                  fontWeight="bold"
-                  onClick={OpenProfile}
-                  addstyle={() => {
-                    return css`
-                      cursor: pointer;
-                    `;
-                  }}
-                >
-                  {name}
-                </Text>
-                <Grid display="flex">
-                  <Text size="12px" lineHeight="12px" width="110px">
-                    {locationName}
-                  </Text>
-                  <Text
-                    fontWeight="bold"
-                    size="10px"
-                    width="140px"
-                    addstyle={() => {
-                      return css`
-                        line-height: 12px;
-                        position: relative;
-                        margin: 0px 0px 0px 5px;
-                      `;
-                    }}
-                  >
-                    {createdAt[0]}년 {createdAt[1]}월 {createdAt[2]}일{" "}
-                    {createdAt[3]}시 {createdAt[4]}분
-                  </Text>
-                </Grid>
-              </Grid>
-            </Grid>
-
-            {username === userName ? (
-              <EditModalSlide
-                FirstBtn={"게시글 수정"}
-                SecondBtn={"삭제"}
-                FirstClick={() => {
-                  history.push(
-                    `/community/${location}/${category}/postedit/${communityId}`
-                  );
-                }}
-                SecondClick={deleteCommunity}
-              />
-            ) : (
-              <Grid height="36px"></Grid>
-            )}
-          </Grid>
-        </Grid>
-
         <Grid width="95%">
           <Text
             size="16px"
@@ -260,14 +138,6 @@ const CommunityPostDetail = (props) => {
           <CommentList props={props} communityId={communityId} />
         </Grid>
       </Grid>
-      <EditModalSlide
-        FirstBtn="프로필보기"
-        SecondBtn="채팅하기"
-        Profile="profile"
-        openModal={ProfileModal}
-        FirstClick={() => {}}
-        SecondClick={MakeChat}
-      />
     </Template>
   );
 };

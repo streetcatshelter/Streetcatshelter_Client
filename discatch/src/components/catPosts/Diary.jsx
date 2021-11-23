@@ -1,82 +1,97 @@
 // LIBRARY
-import React from 'react';
-import { css } from 'styled-components';
-
+import React from "react";
+import { css } from "styled-components";
+import moment from "moment";
 // ELEMENTS
-import { Grid, Text, Button, Image } from '../../elements';
-import { flexBox } from '../../shared/style';
+import { Grid, Text, Button, Image } from "../../elements";
+import { flexBox } from "../../shared/style";
 
 // ICON
-import { Eye, MessageCircle } from 'react-feather';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Eye, MessageCircle } from "react-feather";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 // REDUX
-import { history } from '../../redux/configureStore';
+import { history } from "../../redux/configureStore";
 
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;
-
+  const CreatedAt = diary.createdAt
+    ? moment(diary.createdAt).format("YYYY-M-D hh:mm")
+    : "";
   return (
     <Grid
       bgColor="diaryColor"
-      padding="6px"
+      padding="10px 15px"
       width="95%"
-      margin="2%  auto"
-      clickEvent={() => history.push(`/catdetailinfo/${location}/${catDetailId}`)}
+      margin="5px auto"
+      cursor="pointer"
+      clickEvent={() =>
+        history.push(`/catdetailinfo/${location}/${catDetailId}`)
+      }
     >
       <Grid
-        margin="0 0 3% 0"
-        display="flex"
-        alignItems="center"
         addstyle={() => {
           return css`
-            ${flexBox('space-between')}
+            margin-bottom: 10px;
+            ${flexBox("space-between")}
           `;
         }}
       >
-        <Image
-          src={diary.profileImageUrl}
-          width="30px"
-          height="30px"
-          margin="0 3% 0 0"
-          borderRadius="20px"
-        />
-        <Text width="25%" margin="0 20% 0 0" fontWeight="bold" size="16px">
-          {diary.username}
-        </Text>
-        <Text margin="0 0 0 5%" width="45%" fontWeight="bold" size="14px">
-          {diary.createdAt ? (
-            `${diary.createdAt[0]}.${diary.createdAt[1]}.${diary.createdAt[2]} ${diary.createdAt[3]}시 ${diary.createdAt[4]}분`
-          ) : (
-            <></>
-          )}
+        <Grid display="flex" alignItems="center" width="auto">
+          <Image
+            src={diary.profileImageUrl}
+            width="30px"
+            height="30px"
+            margin="0 5px 0 0"
+            borderRadius="50%"
+          />
+          <Text fontWeight="bold" size="16px">
+            {diary.username}
+          </Text>
+        </Grid>
+        <Text fontWeight="bold" size="14px">
+          {CreatedAt}
         </Text>
       </Grid>
 
-      <Text size="16px">{diary.diary}</Text>
+      <Text
+        size="14px"
+        addstyle={() => {
+          return css`
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-bottom: 10px;
+          `;
+        }}
+      >
+        {diary.diary}
+      </Text>
 
       <Grid
         bgColor="diaryColor"
         addstyle={() => {
           return css`
-            ${flexBox('flex-end')}
+            ${flexBox("flex-end")}
           `;
         }}
       >
-        <Button bgColor="diaryColor">
-          <Eye size="18" />
+        <Grid bgColor="diaryColor" width="auto" display="flex">
+          <Eye size="18" style={{ margin: "3px " }} />
           {diary.viewCnt}
-        </Button>
-
-        <Button margin="0 3%" bgColor="diaryColor">
-          <MessageCircle size="18" />
+        </Grid>
+        <Grid bgColor="diaryColor" width="auto" display="flex" margin="0px 5px">
+          <MessageCircle size="18" style={{ margin: "3px" }} />
           {diary.commentCnt}
-        </Button>
+        </Grid>
 
-        <Button bgColor="diaryColor">
-          <FavoriteIcon style={{ fontSize: '18', color: 'red' }} />
+        <Grid bgColor="diaryColor" width="auto" display="flex">
+          <FavoriteIcon
+            style={{ fontSize: "18", color: "red", margin: "3px" }}
+          />
+
           {diary.likeCnt}
-        </Button>
+        </Grid>
       </Grid>
     </Grid>
   );

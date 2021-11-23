@@ -44,10 +44,21 @@ const Comment = ({ path }) => {
         addstyle={() => {
           return css`
             display: flex;
+            margin: 0px 0px 10px 10px;
+            height: 20px;
           `;
         }}
       >
-        <Text margin="2px 3px" fontWeight="700" size="16px">
+        <Text
+          fontWeight="700"
+          size="16px"
+          margin="0px 5px 0px 0px"
+          addstyle={() => {
+            return css`
+              line-height: 20px;
+            `;
+          }}
+        >
           댓글
         </Text>
         <Count>

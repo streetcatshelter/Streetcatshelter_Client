@@ -104,6 +104,7 @@ export const __getCatLocation =
   (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     try {
+      console.log(location);
       const { data } = await catApi.getCatLocation(location, limit);
       if (data.length < limit + 1) {
         dispatch(getCatLocation(data, null));
@@ -165,7 +166,7 @@ export const __getCatInfo =
 
 // 상세 페이지(캘린더)
 export const __getCalendar =
-  (catId, month, year) =>
+  (catId, year, month) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatCalendar(catId, month, year);

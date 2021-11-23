@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import { CalendarHead, CalendarBody } from "..";
 import { useDispatch } from "react-redux";
 import { mypageActions } from "../../redux/modules/mypage";
+// REDUX
+import { __getCalendar } from "../../redux/modules/cat";
 const Calendar = (props) => {
   const dispatch = useDispatch();
 
@@ -57,8 +59,10 @@ const Calendar = (props) => {
   }, [month]);
 
   useEffect(() => {
-    dispatch(mypageActions._getCalender(year, month));
-  }, [dispatch, year, month]);
+    props.path === "mypage"
+      ? dispatch(mypageActions._getCalender(year, month))
+      : dispatch(__getCalendar(props.catId, year, month));
+  }, [dispatch, year, month, props.catId]);
 
   const [today, setToday] = useState(0);
 

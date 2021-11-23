@@ -56,7 +56,10 @@ const Profile = (props) => {
               FirstBtn="프로필수정"
               SecondBtn="로그아웃"
               FirstClick={() => {
-                history.push({pathname : '/userinfoedit', state : { location }});
+                history.push({
+                  pathname: "/userinfoedit",
+                  state: { location },
+                });
               }}
               SecondClick={logout}
             />
@@ -69,8 +72,8 @@ const Profile = (props) => {
           <Grid display="flex">
             {UserInfo.locationList.map((location, idx) => {
               return (
-                <Text margin="0px 5px 0px 0px" size="12px">
-                  {location.split('@')[0]}
+                <Text margin="0px 5px 0px 0px" size="12px" key={idx}>
+                  {location.split("@")[0]}
                 </Text>
               );
             })}

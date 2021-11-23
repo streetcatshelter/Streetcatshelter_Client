@@ -1,11 +1,11 @@
 // LIBRARY
 import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { css } from "styled-components";
 
+import moment from "moment";
 // STYLE
 import { flexBox } from "../../shared/style";
-
+import { css } from "styled-components";
 // ELEMENTS
 import { Grid, Text, Image, Button } from "../../elements";
 
@@ -34,6 +34,7 @@ const CatDetailInfo = (props) => {
     userProfile: state.mypage.userInfo.profileImageUrl,
     nickname: state.mypage.userInfo.nickname,
     username: state.mypage.userInfo.username,
+    locationList: state.mypage.userInfo.locationList,
   }));
 
   const { image, diary, water, food, snack, createdAt, tags } = useSelector(
@@ -48,7 +49,7 @@ const CatDetailInfo = (props) => {
     }),
     shallowEqual
   );
-
+  const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
   const userLiked = useSelector((state) => state.cat.detail.userLiked);
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
@@ -72,7 +73,7 @@ const CatDetailInfo = (props) => {
         margin="2% auto"
         addstyle={() => {
           return css`
-            ${flexBox("space-evenly")}
+            ${flexBox("space-between")}
           `;
         }}
       >
@@ -89,18 +90,12 @@ const CatDetailInfo = (props) => {
         </Text>
 
         <Text width="35%" margin="0 -5% 0 0" size="12px" fontWeight="bold">
-          {createdAt ? (
-            `${createdAt[0]}.${createdAt[1]}.${createdAt[2]} ${createdAt[3]}시 ${createdAt[4]}분`
-          ) : (
-            <></>
-          )}
+          {CreatedAt}
         </Text>
 
         <EditModalSlide
-          FirstBtn={"홈으로"}
-          FirstClick={() => {
-            history.push("/");
-          }}
+          FirstBtn={"수정"}
+          FirstClick={() => {}}
           SecondBtn={"삭제"}
           SecondClick={deleteCatDetail}
         />

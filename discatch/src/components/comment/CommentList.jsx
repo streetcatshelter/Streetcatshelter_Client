@@ -15,7 +15,10 @@ import { Grid, Button, TextArea } from "../../elements/index";
 
 // REDUX
 import { addCommunityCommentDB } from "../../redux/modules/community";
-import { __createCatComment, __createCatDetailComment } from "../../redux/modules/comment";
+import {
+  __createCatComment,
+  __createCatDetailComment,
+} from "../../redux/modules/comment";
 
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
@@ -23,7 +26,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
 
   const [comments, setComment] = React.useState("");
   let commentList;
-  if (path === 'CatDetail' || path === 'CatDetailInfo') {
+  if (path === "CatDetail" || path === "CatDetailInfo") {
     commentList = props;
   } else {
     commentList = community.data?.commentList;
@@ -34,9 +37,9 @@ const CommentList = ({ props, path, catId, communityId }) => {
   };
 
   const addCommentBtn = () => {
-    if (path === 'CatDetail') {
-      dispatch(__createCatComment(catId, comments))
-    } else if (path === 'CatDetailInfo') {
+    if (path === "CatDetail") {
+      dispatch(__createCatComment(catId, comments));
+    } else if (path === "CatDetailInfo") {
       dispatch(__createCatDetailComment(catId, comments));
     } else {
       dispatch(addCommunityCommentDB(comments, communityId));
@@ -49,9 +52,10 @@ const CommentList = ({ props, path, catId, communityId }) => {
       <Grid
         width="95%"
         margin="0 auto"
+        height="auto"
         addstyle={() => {
           return css`
-            ${flexBox("flex-start")}
+            display: flex;
           `;
         }}
       >
@@ -67,21 +71,23 @@ const CommentList = ({ props, path, catId, communityId }) => {
               resize: none;
               overflow-y: hidden;
               height: 50px;
+              padding: 5px;
             `;
           }}
         />
         <Button
           width="40px"
           bgColor="yellow"
-          margin="4px"
           clickEvent={addCommentBtn}
           addstyle={() => {
             return css`
               display: flex;
-              position: sticky;
               height: 30px;
+              width: 50px;
               align-items: center;
               justify-content: center;
+              padding: 5px;
+              margin-left: 3px;
             `;
           }}
         >

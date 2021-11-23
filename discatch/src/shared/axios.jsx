@@ -48,7 +48,6 @@ export const myPageApi = {
   getLikedAllCat: () => instance.get("/mypage/mycat"),
   getUserInfo: () => instance.get("/mypage/user/information"),
   getLevelUp: () => instance.get("/leveluptest"),
-  // putUserInfo: (userInfo) => instance.put("/mypage/user/information", userInfo),
 };
 
 export const catApi = {

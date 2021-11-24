@@ -22,10 +22,10 @@ import { history } from '../../redux/configureStore';
 import { __getAllCatLocation } from '../../redux/modules/cat';
 
 const Location = (props) => {
-  const catId = props.props.match.params.id;
-  const path = useLocation();
-  const pathLength = path.pathname.split('/').length;
   const dispatch = useDispatch();
+  const path = useLocation();
+  const catId = props.props.match.params.id;
+  const pathLength = path.pathname.split('/').length;
   let vKeyword;
 
   const pathVillage = path.pathname.split('/')[2];
@@ -131,9 +131,9 @@ const Location = (props) => {
         
         // 마커 이미지를 생성합니다    
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-  
+        
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-        let iwContent = `<button 
+        const iwContent = `<button 
                            onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}'" 
                            style="padding:5px; 
                                   margin:0 10px;
@@ -142,11 +142,11 @@ const Location = (props) => {
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
   
         // 인포윈도우를 생성합니다
-        let infowindow = new kakao.maps.InfoWindow({
+        const infowindow = new kakao.maps.InfoWindow({
           content : iwContent,
           removable : iwRemoveable
         });
-        
+
         // 마커를 생성합니다
         const markers = new kakao.maps.Marker({
             map: map, // 마커를 표시할 지도
@@ -203,8 +203,9 @@ const Location = (props) => {
       for (let i = 0; i < catList.length; i ++) {
         positions.push({
           catName : catList[i].catName, 
-          latlng: new kakao.maps.LatLng(catList[i].latitude, catList[i].longitude),
-          catId: catList[i].catId
+          latlng : new kakao.maps.LatLng(catList[i].latitude, catList[i].longitude),
+          catId : catList[i].catId,
+          catImage : catList[i].catImage,
         });
       }
       return positions;
@@ -314,7 +315,9 @@ const Location = (props) => {
                            style="padding:5px; 
                                   margin:0 10px;
                                   border: 0;
-                                  background-color: white;">${position[i].catName}보러가기</button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                                  background-color: white;">
+                          ${position[i].catName}보러가기
+                          </button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
   
         // 인포윈도우를 생성합니다

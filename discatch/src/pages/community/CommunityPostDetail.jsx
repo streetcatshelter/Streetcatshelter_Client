@@ -11,6 +11,8 @@ import { css } from "styled-components";
 // ELEMENTS
 import { Grid, Text, Image } from "../../elements/index";
 
+// REDUX
+import { history } from "../../redux/configureStore";
 import {
   getOneCommunityDB,
   deleteCommunityDB,

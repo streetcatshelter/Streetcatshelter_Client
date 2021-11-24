@@ -1,6 +1,7 @@
 // LIBRARY
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { history } from "../redux/configureStore";
 
 // AUTH
 import Auth from "../shared/auth";
@@ -38,6 +39,12 @@ import test from "../pages/test";
 
 // * == ( Router ) -------------------- * //
 const Router = () => {
+  React.useEffect(() => {
+    const Onboarding = localStorage.getItem("onboarding");
+
+    if (!Onboarding) history.replace("/slider");
+  }, []);
+
   return (
     <Switch>
       {/* == Login */}

@@ -37,6 +37,13 @@ const Slider = (props) => {
     slideRef.current.style.transition = "all 0.5s ease-in-out";
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
   }, [currentSlide]);
+
+  useEffect(() => {
+    const Onboarding = localStorage.getItem("onboarding");
+
+    if (!Onboarding) localStorage.setItem("onboarding", "saw");
+  }, []);
+
   return (
     <Template props={props} page="slider">
       <Container>
@@ -56,13 +63,13 @@ const Slider = (props) => {
         </SliderContainer>
       </Container>
       <BtnWrap>
-        <Button onClick={prevSlide}>
+        <Button style={{ padding: "3px" }} onClick={prevSlide}>
           <ChevronLeft />
         </Button>
         <Dot background={currentSlide === 0 ? "#D19B61" : "#FBD986"} />
         <Dot background={currentSlide === 1 ? "#D19B61" : "#FBD986"} />
         <Dot background={currentSlide === 2 ? "#D19B61" : "#FBD986"} />
-        <Button onClick={nextSlide}>
+        <Button style={{ padding: "3px 4px" }} onClick={nextSlide}>
           <ChevronRight />
         </Button>
       </BtnWrap>
@@ -122,7 +129,7 @@ const CloseButton = styled.button`
   border-radius: 15px;
   border: none;
   background: #fbd986;
-  padding: 2px;
+  padding: 3px;
   z-index: 999;
   margin: 10px;
   &:hover {

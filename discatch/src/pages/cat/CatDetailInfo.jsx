@@ -1,11 +1,12 @@
 // LIBRARY
 import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-
 import moment from "moment";
+
 // STYLE
 import { flexBox } from "../../shared/style";
 import { css } from "styled-components";
+
 // ELEMENTS
 import { Grid, Text, Image, Button } from "../../elements";
 

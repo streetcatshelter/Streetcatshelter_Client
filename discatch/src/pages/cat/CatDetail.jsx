@@ -1,8 +1,8 @@
 // LIBRARY
 import React, { useState, useEffect } from "react";
-import { css } from "styled-components";
 
 // STYLE
+import { css } from "styled-components";
 import { flexBox } from "../../shared/style";
 
 // COMPONENTS
@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { __getCatInfo } from "../../redux/modules/cat";
 import { __getComment } from "../../redux/modules/comment";
+
 const CatDetail = (props) => {
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.mypage.isLoaded);

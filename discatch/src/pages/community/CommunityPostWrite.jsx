@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template } from "../../components";
+import { Template, SecondHeader } from "../../components";
 import { CommunityPreview } from "../../components/index";
 
 // STYLE
@@ -19,6 +19,7 @@ import { mypageActions } from "../../redux/modules/mypage";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
+import { history } from "../../redux/configureStore";
 
 // ICON
 import { Camera } from "react-feather";
@@ -150,21 +151,10 @@ const CommunityPostWrite = (props) => {
 
   return (
     <Template props={props}>
-      <Grid
-        bgColor="bgColor"
-        margin="-5vh auto"
-        addstyle={() => {
-          return css`
-            position: relative;
-            top: 80px;
-            @media screen and (max-width: 414px) {
-              margin: -10vh auto;
-            }
-          `;
-        }}
-      >
+      <SecondHeader title="커뮤니티글 등록" />
+      <Grid bgColor="bgColor" margin="auto" width="90%">
         <CommunityWriteStyle>
-          <Grid height="auto" margin="0 0 16px 0">
+          <Grid width="96%" margin="15px auto " height="auto">
             <Select
               onChange={onChangeHandler}
               value={category}
@@ -177,45 +167,29 @@ const CommunityPostWrite = (props) => {
               ))}
             </Select>
           </Grid>
-          <Grid width="335px" height="10%">
+          <Grid width="100%" margin="5px auto" height="auto">
             <Input
               onChange={$title}
               placeholder="제목을 입력해주세요."
-              width="103%"
-              addstyle={() => {
-                return css`
-                  border-radius: 10px;
-                  margin: 0 0 10px 0;
-                `;
-              }}
-            />
-            <Button
-              bgColor="olive"
-              fontWeight="bold"
-              onClick={() => delLastImageBtn()}
+              padding=" 7px 10px"
+              width="90%"
+              margin="auto"
               addstyle={() => {
                 return css`
                   display: flex;
+                  border-radius: 10px;
                   justify-content: center;
-                  align-items: center;
-                  height: 20px;
-                  width: 120px;
-                  position: relative;
-                  top: 3px;
-                  left: 4vw;
                 `;
               }}
-            >
-              마지막 사진 삭제
-            </Button>
+            />
 
             <Grid
-              margin="0 0 0 12px"
+              margin="10px"
               addstyle={() => {
                 return css`
                   white-space: nowrap;
                   overflow-x: auto;
-                  height: 120px;
+                  height: 90px;
                   -ms-overflow-style: none;
                   &::-webkit-scrollbar {
                     display: none;
@@ -227,10 +201,10 @@ const CommunityPostWrite = (props) => {
                 width="90px"
                 height="90px"
                 margin="5.5px"
+                bgColor="yellow"
                 addstyle={() => {
                   return css`
                     position: relative;
-                    background: lightgray;
                     display: inline-block;
                     text-align: center;
                     cursor: pointer;
@@ -268,7 +242,7 @@ const CommunityPostWrite = (props) => {
                     addstyle={() => {
                       return css`
                         position: relative;
-                        top: -12px;
+                        top: -14px;
                       `;
                     }}
                   >
@@ -292,46 +266,56 @@ const CommunityPostWrite = (props) => {
                 <CommunityPreview preview={preview} previewNum={4} />
               )}
             </Grid>
+            <Grid
+              width="93%"
+              height="25px"
+              bgColor="olive"
+              margin="5px auto 10px auto "
+              radius="10px"
+              clickEvent={() => delLastImageBtn()}
+              addstyle={() => {
+                return css`
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                `;
+              }}
+            >
+              <Text size="14px" fontWeight="bold">
+                마지막 사진 삭제
+              </Text>
+            </Grid>
             <TextArea
               onChange={$contents}
               placeholder="내용을 입력해주세요."
-              height="221px"
+              height="200px"
+              padding=" 7px 10px"
               width="90%"
               addstyle={() => {
                 return css`
                   resize: none;
-                  margin: -4px 10px;
+                  margin: 10px auto;
+                  display: flex;
+                  justify-content: center;
                 `;
               }}
             />
           </Grid>
 
           <Grid
-            width="325px"
-            height="500px"
-            addstyle={() => {
-              return css`
-                @media screen and (max-width: 414px) {
-                  height: 400px;
-                }
-              `;
-            }}
-          ></Grid>
-          <Grid
             width="225px"
             height="30px"
+            display="flex"
+            margin="20px auto 0px auto"
             addstyle={() => {
               return css`
-                display: flex;
-                margin: -50px 0 0 -80px;
-                @media screen and (max-width: 414px) {
-                  margin: 50px 0 0 -70px;
-                }
+                align-items: center;
+                justify-content: center;
               `;
             }}
           >
             <Button
-              width="108px"
+              width="100px"
               margin="0 auto"
               bgColor="olive"
               fontSize="18px"
@@ -340,35 +324,29 @@ const CommunityPostWrite = (props) => {
               addstyle={() => {
                 return css`
                   display: flex;
-                  height: 44px;
+                  height: 40px;
                   border-radius: 10px;
                   align-items: center;
                   justify-content: center;
-                  position: relative;
-                  top: -65px;
-                  left: 130px;
                 `;
               }}
             >
               작성하기
             </Button>
             <Button
-              width="108px"
+              width="100px"
               margin="0 auto"
               fontSize="18px"
               fontWeight="800"
               bgColor="olive"
-              onClick={() => window.location.replace(`${backPath}`)}
+              onClick={() => history.push(`${backPath}`)}
               addstyle={() => {
                 return css`
                   display: flex;
-                  height: 44px;
+                  height: 40px;
                   border-radius: 10px;
                   align-items: center;
                   justify-content: center;
-                  position: relative;
-                  top: -65px;
-                  left: 137px;
                 `;
               }}
             >
@@ -382,7 +360,7 @@ const CommunityPostWrite = (props) => {
 };
 
 const CommunityWriteStyle = styled.div`
-  width: 350px;
+  width: 100%;
   height: 60vh;
   margin: 10px auto;
   border-radius: 30px;
@@ -392,7 +370,7 @@ const Select = styled.select`
   background: rgb(${(props) => props.theme.palette.bgColor});
   height: 50px;
   border: 1px solid rgb(${(props) => props.theme.palette.olive});
-  width: 350px;
+  width: 100%;
   border-radius: 10px;
 `;
 

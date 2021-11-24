@@ -58,11 +58,7 @@ export const getCommunityDB =
     try {
       const data = await communityApi.getCommunity(category, location, limit);
       let communityList = data.data;
-      if (communityList.length < limit + 1) {
-        dispatch(getCommunity(communityList, null));
-        return;
-      }
-      dispatch(getCommunity(communityList, limit));
+      dispatch(getCommunity(communityList, null));
     } catch (err) {
       window.alert("페이지에 오류가 있어요!");
       console.error(err);
@@ -87,11 +83,7 @@ export const getMoreCommunityDB =
         location
       );
       const communityList = data.data;
-      if (communityList.length < limit + 1) {
-        dispatch(getMoreCommunity(communityList, null));
-        return;
-      }
-      dispatch(getMoreCommunity(communityList, start + limit));
+      dispatch(getMoreCommunity(communityList, null));
     } catch (err) {
       console.error(err);
     }

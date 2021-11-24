@@ -119,11 +119,7 @@ export const __getCatLocation =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatLocation(location, limit);
-      if (data.length < limit + 1) {
-        dispatch(getCatLocation(data, null));
-        return;
-      }
-      dispatch(getCatLocation(data, limit));
+      dispatch(getCatLocation(data, null));
     } catch (err) {
       console.error(err);
     }
@@ -143,11 +139,7 @@ export const __getMoreCat =
 
     try {
       const { data } = await catApi.getMoreCat(location, start, limit);
-      if (data.length < limit + 1) {
-        dispatch(getMoreCat(data, null));
-        return;
-      }
-      dispatch(getMoreCat(data, start + limit));
+      dispatch(getMoreCat(data, null));
     } catch (err) {
       console.error(err);
     }

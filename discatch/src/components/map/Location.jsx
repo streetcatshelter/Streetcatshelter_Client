@@ -193,8 +193,6 @@ const Location = (props) => {
         map.setBounds(bounds);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         ps.keywordSearch(secondUserVillage, placesSearchCB);
-        // alert('검색할 수 없는 지역입니다. 동네 설정을 다시 해주세요.');
-        // history.push('/userinfoedit');
       }
     } 
   }

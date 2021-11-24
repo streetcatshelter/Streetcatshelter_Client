@@ -85,10 +85,6 @@ const CommunityDetail = (props) => {
   const communityList = useSelector((state) => state.community.list);
 
   React.useEffect(() => {
-    dispatch(mypageActions._getUserInfo());
-  }, [dispatch]);
-
-  React.useEffect(() => {
     dispatch(getCommunityDB(category, location));
   }, [category, location, dispatch]);
 

@@ -118,7 +118,6 @@ export const __getCatLocation =
   (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     try {
-      console.log(location);
       const { data } = await catApi.getCatLocation(location, limit);
       if (data.length < limit + 1) {
         dispatch(getCatLocation(data, null));
@@ -132,7 +131,7 @@ export const __getCatLocation =
 
 // 게시물 더보기
 export const __getMoreCat =
-  (location, limit = 11) =>
+  (location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     let start = getState().cat.start;
 
@@ -148,7 +147,6 @@ export const __getMoreCat =
         dispatch(getMoreCat(data, null));
         return;
       }
-      data.content.pop();
       dispatch(getMoreCat(data, start + limit));
     } catch (err) {
       console.error(err);

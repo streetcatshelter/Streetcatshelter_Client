@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import { Grid } from "../elements";
 
 // ICON
-import { Search, Bell, ArrowLeft, LogOut } from "react-feather";
+import { Search, ArrowLeft, LogOut } from "react-feather";
 
 // REDUX
 import { history } from "../redux/configureStore";
@@ -90,7 +90,6 @@ const Header = (props) => {
     location2 = sameLocationList[1]?.split("@")[0];
     location3 = sameLocationList[2]?.split("@")[0];
   }
-  const [searchModal, setSearchModal] = useState(false);
 
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());

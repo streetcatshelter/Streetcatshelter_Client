@@ -76,7 +76,7 @@ const Home = (props) => {
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));
   };
-
+  
   return (
     <>
       <Spinner visible={isLoaded} />
@@ -105,7 +105,7 @@ const Home = (props) => {
           clickEvent={() => {
             history.push({
               pathname: `/map/${pathLocation}`,
-              state: { location },
+              state: { location : pathLocation },
             });
           }}
         >

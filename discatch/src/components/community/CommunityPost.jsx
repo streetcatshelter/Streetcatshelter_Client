@@ -69,8 +69,11 @@ const CommunityPost = ({ community }) => {
                 fontWeight="bold"
                 addstyle={() => {
                   return css`
-                    @media screen and (max-width: 375px) {
+                    @media screen and (max-width: 414px) {
                       margin: 0 0 0 100px;
+                    }
+                    @media screen and (max-width: 280px) {
+                      margin: 0 0 0 10px;
                     }
                   `;
                 }}
@@ -106,6 +109,9 @@ const CommunityPost = ({ community }) => {
                     position: relative;
                     justify-content: space-between;
                     margin: 10px 0 0 120px;
+                    @media screen and (max-width: 280px) {
+                      margin: 10px 0 0 12px;
+                    }
                   `;
                 }}
               >

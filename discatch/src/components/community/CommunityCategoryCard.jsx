@@ -28,14 +28,20 @@ const CommunityCategoryCard = ({ src, width, height, title, subtitle, clickEvent
         return css`
           position:relative;
           top: 20px;
+          @media screen and (max-width: 280px) {
+              font-size:15px;
+          }
         `;
       }}>{title}</Text>
     <Text
-      size="14px" 
+      size="14px"
       addstyle={() => {
           return css`
             position:relative;
             top: 30px;
+            @media screen and (max-width: 280px) {
+              font-size:11px;
+            }
           `;
         }}>
           {subtitle}

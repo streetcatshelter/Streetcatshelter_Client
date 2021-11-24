@@ -133,12 +133,34 @@ const Location = (props) => {
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
         
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-        const iwContent = `<button 
-                           onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}'" 
-                           style="padding:5px; 
-                                  margin:0 10px;
-                                  border: 0;
-                                  background-color: white;">${position[i].catName}보러가기</button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        const iwContent = `
+        <div style="display:flex">
+          <div style="width: 80px; height: 80px; border-radius:80px;">
+            <img width="80" 
+                 height="80"
+                 border-radius="80"
+                 src="${position[i].catImage}" 
+                 alt="고양이 사진">
+          </div>
+          <div style="display: flex; 
+                      width: 80px; 
+                      height: 80px; 
+                      justify-content: center; 
+                      align-items: center;">
+            <button 
+              onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/1'" 
+              style="width: 70px;
+                     height: 70px;
+                     box-shadow: 3px 3px lightgray;
+                     border: 0;
+                     border-radius: 10px;
+                     background-color: #fbd986;
+                     cursor: pointer;">
+                    ${position[i].catName}
+                    <div>보러 가기</div>
+            </button>
+          </div>
+        </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
   
         // 인포윈도우를 생성합니다

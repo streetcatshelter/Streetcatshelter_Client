@@ -15,9 +15,11 @@ import { history } from "../../redux/configureStore";
 const Notice = () => {
   const NoticeList = useSelector((state) => state.mypage.noticelist);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(mypageActions._getNotice());
   }, [dispatch]);
+  
   return (
     <Wrapper>
       <Title>

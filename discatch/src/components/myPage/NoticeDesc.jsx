@@ -14,9 +14,11 @@ import { mypageActions } from "../../redux/modules/mypage";
 const NoticeDesc = (props) => {
   const NoticeDetail = useSelector((state) => state.mypage.noticedetail);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(mypageActions._getOneNotice(props.id));
   }, [props.id, dispatch]);
+  
   const modifiedAt = moment(NoticeDetail.modifiedAt).format("YYYY-M-D");
 
   if (!NoticeDetail) {

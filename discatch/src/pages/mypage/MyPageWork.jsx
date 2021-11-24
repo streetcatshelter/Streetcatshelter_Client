@@ -3,6 +3,7 @@ import React from "react";
 
 // COMPONENTS
 import { MyPageDetail, Profile, Template, MyWork } from "../../components";
+
 const MyPageWork = (props) => {
   return (
     <Template props={props}>

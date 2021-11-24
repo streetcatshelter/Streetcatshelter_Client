@@ -34,6 +34,7 @@ const Menu = (props) => {
   }
 
   const catId = props.props.props.location.pathname.split('/')[3];
+
   const moveToCommunity = () => {
     history.push({pathname: '/community', state: { location }});
     history.go(0);

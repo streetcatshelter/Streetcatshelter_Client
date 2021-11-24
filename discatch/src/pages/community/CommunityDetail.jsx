@@ -27,7 +27,6 @@ import {
 
 // REDUX
 import { history } from "../../redux/configureStore";
-import { mypageActions } from "../../redux/modules/mypage";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();

@@ -17,7 +17,7 @@ import { history } from "../../redux/configureStore";
 const MyPageCat = () => {
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(mypageActions._getLikedAllCat());
   }, [dispatch]);

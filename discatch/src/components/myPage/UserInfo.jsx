@@ -13,12 +13,13 @@ import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
 import { imgActions } from "../../redux/modules/image";
 import { XCircle, Upload } from "react-feather";
 
-const UserInfo = (props) => {
+const UserInfo = () => {
   const dispatch = useDispatch();
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [NickName, setNickName] = useState(UserInfo.nickname);
   const Village = useSelector((state) => state.mypage.userVillage);
   const [fileUrl, setFileUrl] = useState(null);
+  
   const changeNickName = (e) => {
     setNickName(e.target.value);
   };

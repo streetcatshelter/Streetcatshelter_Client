@@ -12,7 +12,7 @@ import { flexBox } from '../../shared/style';
 import { history } from '../../redux/configureStore';
 
 const Gallery = ({ gallery, location }) => {
-const catDetailId = gallery.catDetailId;
+  const catDetailId = gallery.catDetailId;
 
   return (
     <Grid

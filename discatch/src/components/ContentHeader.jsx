@@ -1,7 +1,9 @@
+// LIBRARY
 import React, { useState } from "react";
-import moment from "moment";
+
 // ELEMENTS
-import { Grid, Text, Image } from "../elements/index";
+import { Grid, Text } from "../elements/index";
+
 // STYLE
 import { css } from "styled-components";
 import { chatActions } from "../redux/modules/chat";
@@ -9,6 +11,10 @@ import { chatActions } from "../redux/modules/chat";
 // COMPONENTS
 import { EditModalSlide } from "../components";
 import { useDispatch, useSelector } from "react-redux";
+
+// MOMENT
+import moment from "moment";
+
 const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const dispatch = useDispatch();
   const [ProfileModal, setProfileModal] = useState(false);

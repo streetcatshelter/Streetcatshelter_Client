@@ -8,7 +8,6 @@ import CommentCard from "./CommentCard";
 
 // STYLE
 import { css } from "styled-components";
-import { flexBox } from "../../shared/style";
 
 // ELEMENTS
 import { Grid, Button, TextArea } from "../../elements/index";

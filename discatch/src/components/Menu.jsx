@@ -6,9 +6,6 @@ import { useSelector } from 'react-redux';
 import { flexBox } from "../shared/style";
 import styled, { css } from "styled-components";
 
-// ROUTE
-import { Link } from "react-router-dom";
-
 // ELEMENTS
 import { Grid, Text } from "../elements";
 
@@ -21,12 +18,35 @@ import { history } from "../redux/configureStore";
 const Menu = (props) => {
   const path = props.props.props.match.path;
   const preLocation = props.props.props?.location.state?.location;
-  const pathLocation = props.props.props.match.params.village;
-  const userLocation = useSelector((state) => state.map.keywordList[0]);
-  const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
-  let location = userLocation ? userLocation : preLocation;
+  const pathLocation = props.props.props.match.params.village ? 
+                        props.props.props.match.params.village : 
+                        props.props.props.match.params.location;
+
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
+
+  let location = preLocation;
+
   if (location === undefined) {
-    location = userVillage;
+    location = pathLocation;
   } 
   
   if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
@@ -35,28 +55,45 @@ const Menu = (props) => {
 
   const catId = props.props.props.location.pathname.split('/')[3];
 
+  const moveToHome = () => {
+    if (path === '/map/:village') {
+      history.push({ pathname: '/', state: { location : pathLocation}});
+    } else if (preLocation+' ' === userVillageA) {
+      location = userVillage0;
+      history.push({ pathname: '/', state: { location }});
+    } else if (preLocation+' ' === userVillageB) {
+      location = userVillage1;
+      history.push({ pathname: '/', state: { location }});
+    } else if (preLocation+' ' === userVillageC) {
+      location = userVillage2;
+      history.push({ pathname: '/', state: { location }});
+    } else {
+      history.push({ pathname: '/', state: { location }});
+    }
+  }
+
   const moveToCommunity = () => {
-    history.push({pathname: '/community', state: { location }});
+    history.push({ pathname: '/community', state: { location }});
     history.go(0);
   }
 
   const moveToMap = () => {
     if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
-      history.push({pathname: `/map/${location}/${catId}`, state: { catId, location }});
-      history.go(0);
+      history.push({ pathname: `/map/${location}/${catId}`, state: { catId, location }});
+      history.go(0); 
     } else {
-      history.push({pathname: `/map/${location}`, state: { location }});
+      history.push({ pathname: `/map/${location}`, state: { location }});
       history.go(0);
     }
   }
 
   const moveToChat = () => {
-    history.push({pathname: '/chat', state: { location }});
+    history.push({ pathname: '/chat', state: { location }});
     history.go(0);
   }
 
   const moveToInfo = () => {
-    history.push({pathname: '/mypage', state: { location }});
+    history.push({ pathname: '/mypage', state: { location }});
     history.go(0);
   }
 
@@ -69,9 +106,8 @@ const Menu = (props) => {
           `;
         }}
       >
-        <Link 
-          to={{pathname: '/', 
-          state: { location }}}
+        <div 
+          onClick={()=>moveToHome()} 
           style={{
             textDecoration: "none",
             color: "black"
@@ -80,7 +116,7 @@ const Menu = (props) => {
           <Text textAlign="center" size="12px">
             홈
           </Text>
-        </Link>
+        </div>
 
         <div 
           onClick={()=>moveToCommunity()} 

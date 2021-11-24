@@ -55,9 +55,38 @@ const CatDetailInfoWrite = (props) => {
   const [snack, setSnack] = useState(false);
   const [water, setWater] = useState(false);
 
-  const loaction = props.location.state.location;
+  let location = props.location.state.location;
   const latitude = props.location.state.latitude;
   const longitude = props.location.state.longitude;
+
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
+
+  if (location+' ' === userVillageA) {
+    location = userVillage0
+  } else if (location+' ' === userVillageB) {
+    location = userVillage1
+  } else if (location+' ' === userVillageC) {
+    location = userVillage2
+  }
 
   const createBtn = () => {
     dispatch(
@@ -72,7 +101,7 @@ const CatDetailInfoWrite = (props) => {
         catId
       )
     );
-    history.push(`/catdetail/${loaction}/${catId}`);
+    history.push(`/catdetail/${location}/${catId}`);
   };
   const publish = (catTag) => {
     if (catTag !== "") {

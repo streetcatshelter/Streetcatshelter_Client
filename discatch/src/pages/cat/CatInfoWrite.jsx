@@ -103,7 +103,6 @@ const CatInfoWrite = (props) => {
 
   const latitude = props.history.location.state.latitude;
   const longitude = props.history.location.state.longitude;
-  console.log(location);
 
   const createBtn = () => {
     dispatch(

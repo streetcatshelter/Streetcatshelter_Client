@@ -1,12 +1,13 @@
+// LIBRARY
 import React from "react";
 
-/* == Library - style */
+// STYLE
 import styled from "styled-components";
 
-/* == Custom - Icon */
+// ICON
 import onboadingImg from "../../styles/images/onboadingImg(1).svg";
 
-/* == Redux */
+// REDUX
 import { history } from "../../redux/configureStore";
 
 const Slide = (props) => {

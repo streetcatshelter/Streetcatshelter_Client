@@ -18,7 +18,7 @@ const CalendarDates = (props) => {
   const Calendar = useSelector((state) =>
     props.path === "mypage" ? state.mypage.calendar : state.cat.calendar
   );
-  console.log(Calendar);
+  // console.log(Calendar);
   const DayOff = [];
   return (
     <>

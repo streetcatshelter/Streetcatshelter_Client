@@ -6,7 +6,13 @@ import instance, { communityApi } from "../../shared/axios";
 import { imgActions } from "./image";
 
 // 커뮤니티 글 등록
-export const addCommunityDB = (category, contents, location, title, detailLocation) => {
+export const addCommunityDB = (
+  category,
+  contents,
+  location,
+  title,
+  detailLocation
+) => {
   return function (dispatch, getState, { history }) {
     const userInfo = localStorage.getItem("userInfo");
     const path = category.split(" ");
@@ -152,7 +158,7 @@ export const editCommunityDB = (
             .then((res) => {
               window.alert("게시글 수정 완료!");
               history.goBack();
-              window.location.replace(
+              history.push(
                 `/community/${location}/${category}/postdetail/${communityId}`
               );
             })
@@ -254,7 +260,15 @@ const community = createSlice({
       const title = action.payload.title;
       const username = action.payload.username;
       const detailLocation = action.payload.username;
-      state.list.push(category, contents, image, location, title, username, detailLocation);
+      state.list.push(
+        category,
+        contents,
+        image,
+        location,
+        title,
+        username,
+        detailLocation
+      );
     },
 
     getCommunity: (state, action) => {

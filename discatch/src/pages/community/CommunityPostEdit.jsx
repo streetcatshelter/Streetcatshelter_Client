@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { CommunityPreview, Template } from "../../components";
+import { CommunityPreview, Template, SecondHeader } from "../../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -23,7 +23,7 @@ import { getOneCommunityDB } from "../../redux/modules/community";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
-
+import { history } from "../../redux/configureStore";
 const CommunityPostEdit = (props) => {
   const dispatch = useDispatch();
   const path = useLocation();
@@ -119,18 +119,10 @@ const CommunityPostEdit = (props) => {
 
   return (
     <Template props={props}>
-      <Grid
-        bgColor="bgColor"
-        margin="-10vh auto"
-        addstyle={() => {
-          return css`
-            position: relative;
-            top: 80px;
-          `;
-        }}
-      >
+      <SecondHeader title="커뮤니티글 수정" />
+      <Grid bgColor="bgColor" margin="auto" width="90%">
         <CommunityEditStyle>
-          <Grid width="335px" height="auto" margin="0 0 16px 0">
+          <Grid width="96%" margin="15px auto " height="auto">
             <Input
               disabled
               value={category}
@@ -142,44 +134,30 @@ const CommunityPostEdit = (props) => {
               }}
             />
           </Grid>
-          <Grid width="335px" height="10%">
+          <Grid width="100%" margin="5px auto" height="auto">
             <Input
               onChange={$title}
               placeholder="제목을 입력해주세요."
+              padding=" 7px 10px"
+              width="90%"
+              margin="auto"
               value={editTitle}
-              width="103%"
-              addstyle={() => {
-                return css`
-                  border-radius: 10px;
-                  margin: 0 0 10px 0;
-                `;
-              }}
-            />
-            <Button
-              bgColor="lightGray"
-              onClick={() => delLastImageBtn()}
               addstyle={() => {
                 return css`
                   display: flex;
+                  border-radius: 10px;
                   justify-content: center;
-                  align-items: center;
-                  height: 20px;
-                  width: 120px;
-                  position: relative;
-                  top: 3px;
-                  left: 4vw;
                 `;
               }}
-            >
-              마지막 사진 삭제
-            </Button>
+            />
+
             <Grid
-              margin="0 0 0 12px"
+              margin="10px"
               addstyle={() => {
                 return css`
                   white-space: nowrap;
                   overflow-x: auto;
-                  height: 120px;
+                  height: 90px;
                   -ms-overflow-style: none;
                   &::-webkit-scrollbar {
                     display: none;
@@ -191,10 +169,10 @@ const CommunityPostEdit = (props) => {
                 width="90px"
                 height="90px"
                 margin="5.5px"
+                bgColor="yellow"
                 addstyle={() => {
                   return css`
                     position: relative;
-                    background: lightgray;
                     display: inline-block;
                     text-align: center;
                     cursor: pointer;
@@ -231,7 +209,7 @@ const CommunityPostEdit = (props) => {
                     addstyle={() => {
                       return css`
                         position: relative;
-                        top: -12px;
+                        top: -14px;
                       `;
                     }}
                   >
@@ -280,75 +258,92 @@ const CommunityPostEdit = (props) => {
                 />
               )}
             </Grid>
+            <Grid
+              width="93%"
+              height="25px"
+              bgColor="olive"
+              margin="5px auto 10px auto "
+              radius="10px"
+              clickEvent={() => delLastImageBtn()}
+              addstyle={() => {
+                return css`
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                `;
+              }}
+            >
+              <Text size="14px" fontWeight="bold">
+                마지막 사진 삭제
+              </Text>
+            </Grid>
             <TextArea
               onChange={$contents}
               value={editcontents}
               placeholder="내용을 입력해주세요."
-              height="221px"
+              height="200px"
+              padding=" 7px 10px"
               width="90%"
               addstyle={() => {
                 return css`
                   resize: none;
-                  margin: -4px 10px;
+                  margin: 10px auto;
+                  display: flex;
+                  justify-content: center;
                 `;
               }}
             />
           </Grid>
 
-          <Grid width="325px"></Grid>
           <Grid
             width="225px"
             height="30px"
+            display="flex"
+            margin="20px auto 0px auto"
             addstyle={() => {
               return css`
-                display: flex;
-                margin: 60px 0 0 -70px;
+                align-items: center;
+                justify-content: center;
               `;
             }}
           >
             <Button
-              width="108px"
-              margin="auto"
-              fontSize="14px"
-              bgColor="D_yellow"
-              fontWeight="bold"
+              width="100px"
+              margin="0 auto"
+              bgColor="olive"
+              fontSize="18px"
+              fontWeight="800"
               onClick={editBtn}
               addstyle={() => {
                 return css`
                   display: flex;
-                  height: 24px;
+                  height: 40px;
                   border-radius: 10px;
                   align-items: center;
                   justify-content: center;
-                  position: relative;
-                  top: -65px;
-                  left: 130px;
                 `;
               }}
             >
               완료하기
             </Button>
             <Button
-              width="108px"
-              margin="auto"
-              fontSize="14px"
-              fontWeight="bold"
-              bgColor="D_yellow"
+              width="100px"
+              margin="0 auto"
+              fontSize="18px"
+              fontWeight="800"
+              bgColor="olive"
               onClick={() =>
-                window.location.replace(
+                history.push(
                   `/community/${location}/${category}/postdetail/${communityId}`
                 )
               }
               addstyle={() => {
                 return css`
                   display: flex;
-                  height: 24px;
+                  height: 40px;
                   border-radius: 10px;
                   align-items: center;
                   justify-content: center;
-                  position: relative;
-                  top: -65px;
-                  left: 137px;
                 `;
               }}
             >
@@ -362,7 +357,7 @@ const CommunityPostEdit = (props) => {
 };
 
 const CommunityEditStyle = styled.div`
-  width: 350px;
+  width: 100%;
   height: 60vh;
   margin: 10px auto;
   border-radius: 30px;

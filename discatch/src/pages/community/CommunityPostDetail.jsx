@@ -39,12 +39,17 @@ const CommunityPostDetail = (props) => {
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
+
   return (
     <Template props={props}>
       <ContentHeader
         FirstBtn="수정"
         SecondBtn="삭제"
-        FirstClick={() => {}}
+        FirstClick={() => {
+          history.push(
+            `/community/${location}/${category}/postedit/${communityId}`
+          );
+        }}
         SecondClick={deleteCommunity}
       />
       <Grid

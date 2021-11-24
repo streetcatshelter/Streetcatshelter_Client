@@ -19,7 +19,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const dispatch = useDispatch();
   const [ProfileModal, setProfileModal] = useState(false);
   const userInfo = localStorage.getItem("userInfo");
-  const userName = userInfo.split('"')[5];
+  const userName = userInfo?.split('"')[5];
   const { location, username, createdAt, nickname, profileImageUrl } =
     useSelector((state) => ({
       category: state.community.list.data?.category,

@@ -30,6 +30,7 @@ const Header = (props) => {
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location;
   const firstLocation = locationA.state?.location;
+  const category = locationA.pathname.split('/')[3];
 
   if (preLocation !== undefined) {
     location = preLocation;
@@ -134,11 +135,15 @@ const Header = (props) => {
   };
 
   const goBack = () => {
-    if (path === "/community/:village/:category") {
+    if (path === '/community/:village/:category') {
       history.push({ pathname: "/community", state: { location } });
       history.go(0);
-    } else if (path === "/catdetail/:village/:catId") {
-      history.push({ pathname: "/", state: { location } });
+    } else if (path === '/catdetail/:village/:catId') {
+      history.push({ pathname: '/', state: { location } });
+      history.go(0);
+    } else if (path === '/community/:village/:category/postdetail/:communityId') {
+      history.push({ pathname: `/community/${location}/${category}`, state: { location }});
+      history.go(0);
     } else {
       history.goBack();
     }

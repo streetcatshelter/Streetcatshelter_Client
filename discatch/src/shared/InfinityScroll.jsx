@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 const InfinityScroll = ({ length, children, root, next, index }) => {
   const [target, setTarget] = useState(null);
-  const isLast = index === length - 1;
+  const isLast = index === length - 4;
 
   useEffect(() => {
     const options = { threshold: 0.5, root: root };

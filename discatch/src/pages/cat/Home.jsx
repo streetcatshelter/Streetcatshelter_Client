@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CatPost, SecondHeader } from "../../components";
+import { Template, CatPost, SecondHeader, Spinner } from "../../components";
 
 // ELEMENTS
 import { Button } from "../../elements";
@@ -21,6 +21,7 @@ import InfinityScroll from "../../shared/InfinityScroll";
 
 const Home = (props) => {
   const dispatch = useDispatch();
+  const isLoaded = useSelector((state) => state.mypage.isLoaded);
   const menuLocation = props.location.state?.location;
   const catList = useSelector((state) => state.cat.list);
 
@@ -77,38 +78,41 @@ const Home = (props) => {
   };
 
   return (
-    <Template props={props} location={pathLocation}>
-      <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
+    <>
+      <Spinner visible={isLoaded} />
+      <Template props={props} location={pathLocation}>
+        <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
 
-      {catList.length ? (
-        catList.map((cat, idx) => {
-          return (
-            <InfinityScroll
-              next={getMoreCat}
-              index={idx}
-              length={catList.length}
-              key={cat.catId}
-            >
-              <CatPost cat={cat} location={pathLocation} />
-            </InfinityScroll>
-          );
-        })
-      ) : (
-        <></>
-      )}
+        {catList.length ? (
+          catList.map((cat, idx) => {
+            return (
+              <InfinityScroll
+                next={getMoreCat}
+                index={idx}
+                length={catList.length}
+                key={cat.catId}
+              >
+                <CatPost cat={cat} location={pathLocation} />
+              </InfinityScroll>
+            );
+          })
+        ) : (
+          <></>
+        )}
 
-      <Button
-        is_float="is_float"
-        clickEvent={() => {
-          history.push({
-            pathname: `/map/${pathLocation}`,
-            state: { location },
-          });
-        }}
-      >
-        <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-      </Button>
-    </Template>
+        <Button
+          is_float="is_float"
+          clickEvent={() => {
+            history.push({
+              pathname: `/map/${pathLocation}`,
+              state: { location },
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+        </Button>
+      </Template>
+    </>
   );
 };
 

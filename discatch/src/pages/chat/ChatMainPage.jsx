@@ -1,13 +1,21 @@
 // LIBRARY
 import React from "react";
-import { Template, ChatMain, SecondHeader } from "../../components";
+import { useSelector } from "react-redux";
+
+// COMPONENT
+import { Template, ChatMain, SecondHeader, Spinner } from "../../components";
 
 const ChatMainPage = (props) => {
+  const isLoaded = useSelector((state) => state.mypage.isLoaded);
+
   return (
-    <Template props={props} page="map">
-      <SecondHeader title="채팅" />
-      <ChatMain props={props} />
-    </Template>
+    <>
+      <Spinner visible={isLoaded} />
+      <Template props={props} page="map">
+        <SecondHeader title="채팅" />
+        <ChatMain props={props} />
+      </Template>
+    </>
   );
 };
 

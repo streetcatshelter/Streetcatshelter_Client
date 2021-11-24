@@ -22,6 +22,8 @@ const Menu = (props) => {
                         props.props.props.match.params.village : 
                         props.props.props.match.params.location;
 
+  const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
+
   const userVillage0 = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
   );
@@ -46,9 +48,9 @@ const Menu = (props) => {
   let location = preLocation;
 
   if (location === undefined) {
-    location = pathLocation;
-  } 
-  
+    location = pathLocation ? pathLocation : userVillage;
+  }
+
   if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
     location = pathLocation;
   }

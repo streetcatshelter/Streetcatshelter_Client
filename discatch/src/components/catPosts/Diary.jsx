@@ -1,14 +1,18 @@
 // LIBRARY
 import React from "react";
-import { css } from "styled-components";
 import moment from "moment";
+import { useSelector } from "react-redux";
+
 // ELEMENTS
-import { Grid, Text, Button, Image } from "../../elements";
+import { Grid, Text, Image } from "../../elements";
 import { flexBox } from "../../shared/style";
 
 // ICON
 import { Eye, MessageCircle } from "react-feather";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+
+// STYLE
+import { css } from "styled-components";
 
 // REDUX
 import { history } from "../../redux/configureStore";
@@ -18,6 +22,13 @@ const Diary = ({ diary, location }) => {
   const CreatedAt = diary.createdAt
     ? moment(diary.createdAt).format("YYYY-M-D hh:mm")
     : "";
+
+  const { userProfile, nickname, username } = useSelector((state) => ({
+    userProfile: state.mypage.userInfo.profileImageUrl,
+    nickname: state.mypage.userInfo.nickname,
+    username: state.mypage.userInfo.username,
+  }));
+
   return (
     <Grid
       bgColor="diaryColor"
@@ -39,14 +50,14 @@ const Diary = ({ diary, location }) => {
       >
         <Grid display="flex" alignItems="center" width="auto">
           <Image
-            src={diary.profileImageUrl}
+            src={userProfile}
             width="30px"
             height="30px"
             margin="0 5px 0 0"
             borderRadius="50%"
           />
           <Text fontWeight="bold" size="16px">
-            {diary.username}
+            {nickname ? nickname : username}
           </Text>
         </Grid>
         <Text fontWeight="bold" size="14px">

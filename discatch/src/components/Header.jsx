@@ -141,6 +141,9 @@ const Header = (props) => {
     } else if (path === '/community/:village/:category/postdetail/:communityId') {
       history.push({ pathname: `/community/${location}/${category}`, state: { location }});
       history.go(0);
+    } else if (path === '/catdetail/:village/:catId') {
+      history.push({ pathname: '/', state: { location } });
+      history.go(0);
     } else {
       history.goBack();
     }
@@ -198,7 +201,7 @@ const Header = (props) => {
         </Head>
 
         <Grid width="20%" height="100%" margin="auto">
-          <Grid margin="20px 10px" height="25px" width="60px">
+          <Grid margin="30px 10px" height="25px" width="60px">
             {/* <SearchBtn
               style={{ color: "gray" }}
               onClick={() => {

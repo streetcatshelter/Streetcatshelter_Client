@@ -158,9 +158,45 @@ const CommunityDetailStyle = styled.div`
   width: 100%;
   overflow-x: hidden;
   height: 85vh;
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: 414px) {
     height: 80vh;
     margin: -2vh 0 0;
+  }
+  @media screen and (max-height: 1366px) {
+    height: 89vh;
+    margin: 2vh 0 0;
+  }
+  @media screen and (max-height: 1024px) {
+    height: 85vh;
+    margin: 2vh 0 0;
+  }
+  @media screen and (max-height: 823px) {
+    height: 83vh;
+    margin: -0.2vh 0 0;
+  }
+  @media screen and (max-height: 812px) {
+    height: 80vh;
+    margin: -0.2vh 0 0;
+  }
+  @media screen and (max-height: 800px) {
+    height: 83vh;
+    margin: -0.3vh 0 0;
+  }
+  @media screen and (max-height: 736px) {
+    height: 81vh;
+    margin: -1vh 0 0;
+  }
+  @media screen and (max-height: 667px) {
+    height: 77vh;
+    margin: -2vh 0 0;
+  }
+  @media screen and (max-height: 600px) {
+    height: 78vh;
+    margin: -3vh 0 0;
+  }
+  @media screen and (max-height: 568px) {
+    height: 75vh;
+    margin: -3.6vh 0 0;
   }
 `;
 

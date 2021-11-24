@@ -19,5 +19,8 @@ const Header = styled.div`
   font-weight: 900;
   text-align: center;
   border-bottom: 0.2px solid rgba(203, 207, 94, 1);
+  @media screen and (min-height: 1366px) {
+    height: 60px;
+  }
 `;
 export default SecondHeader;

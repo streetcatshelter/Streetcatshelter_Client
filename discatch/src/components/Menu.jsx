@@ -176,7 +176,6 @@ const MenuStyle = styled.footer`
   background: #fbd986;
   position: fixed;
   z-index: 9;
-
   bottom: 0;
 `;
 

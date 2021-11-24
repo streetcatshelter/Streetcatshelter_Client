@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../../redux/modules/user";
 
 // * == ( Page > Login - redirect page for login ) -------------------- * //
-const LoginRedirect = (props) => {
+const LoginRedirect = () => {
   const dispatch = useDispatch();
 
   // parsing - kakao authorization code

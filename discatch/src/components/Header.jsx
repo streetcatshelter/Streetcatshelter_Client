@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import { Grid } from "../elements";
 
 // ICON
-import { Search, ArrowLeft, LogOut } from "react-feather";
+import { Search, Bell, ArrowLeft, LogOut } from "react-feather";
 
 // REDUX
 import { history } from "../redux/configureStore";
@@ -91,13 +91,15 @@ const Header = (props) => {
     location3 = sameLocationList[2]?.split("@")[0];
   }
 
-  useEffect(() => {
-    dispatch(mypageActions._getUserInfo());
-  }, [dispatch]);
+  const [place, setPlace] = useState(location);
 
   useEffect(() => {
     dispatch(searchMap(firstLocation));
   }, [firstLocation, dispatch]);
+
+  useEffect(() => {
+    dispatch(mypageActions._getUserInfo());
+  }, [dispatch])
 
   let options;
   if (location !== undefined && location2 === undefined) {
@@ -123,11 +125,12 @@ const Header = (props) => {
     ];
   }
 
-  const [place, setPlace] = useState(location);
   const onChangeHandler = (e) => {
     setPlace(e.target.value);
     const keyword = e.target.value;
     dispatch(searchMap(keyword));
+    history.push({pathname:'/', state: { location : keyword }});
+    history.go(0);
   };
 
   const goBack = () => {
@@ -162,7 +165,7 @@ const Header = (props) => {
         }}
       >
         <Grid width="20%" height="100%" margin="auto">
-          {path === "/" || path === "/community" || path === "/map/:village" ? (
+          {path === "/" || path === "/community" || path === "/map/:village"? (
             <SelectStyle onChange={onChangeHandler} value={place}>
               {options &&
                 options.map((pl, idx) => (
@@ -251,9 +254,9 @@ const Header = (props) => {
 //   display: flex;
 //   background: #fefdf8;
 // `;
-const SearchBtn = styled(Search)`
-  cursor: pointer;
-`;
+// const SearchBtn = styled(Search)`
+//   cursor: pointer;
+// `;
 
 const HeaderStyle = styled.header`
   max-width: 420px;

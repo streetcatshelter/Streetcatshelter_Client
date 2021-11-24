@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -11,8 +11,6 @@ import { css } from "styled-components";
 // ELEMENTS
 import { Grid, Text, Image } from "../../elements/index";
 
-// REDUX
-import { history } from "../../redux/configureStore";
 import {
   getOneCommunityDB,
   deleteCommunityDB,
@@ -37,8 +35,6 @@ const CommunityPostDetail = (props) => {
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
-  const userInfo = localStorage.getItem("userInfo");
-  const userName = userInfo.split('"')[5];
 
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));

@@ -22,7 +22,7 @@ const ChatMain = (props) => {
 
   useEffect(() => {
     dispatch(chatActions._getRooms());
-  }, []);
+  }, [dispatch]);
 
   return (
     <React.Fragment>

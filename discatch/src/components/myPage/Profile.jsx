@@ -25,9 +25,11 @@ const Profile = (props) => {
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, [dispatch]);
+
   const logout = () => {
     dispatch(userActions._logout());
   };
+  
   if (!UserInfo) {
     return <div></div>;
   }

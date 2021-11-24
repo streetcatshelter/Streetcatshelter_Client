@@ -20,8 +20,8 @@ import { __getCatLocation, __getMoreCat } from "../../redux/modules/cat";
 import InfinityScroll from "../../shared/InfinityScroll";
 
 const Home = (props) => {
-  const menuLocation = props.location.state?.location;
   const dispatch = useDispatch();
+  const menuLocation = props.location.state?.location;
   const catList = useSelector((state) => state.cat.list);
 
   const userLocation = useSelector((state) => state.map.keywordList[0]);
@@ -36,6 +36,7 @@ const Home = (props) => {
   const userVillage0 = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
   );
+
   const userVillageA = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
   );
@@ -43,6 +44,7 @@ const Home = (props) => {
   const userVillage1 = useSelector(
     (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
   );
+
   const userVillageB = useSelector(
     (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
   );
@@ -50,11 +52,12 @@ const Home = (props) => {
   const userVillage2 = useSelector(
     (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
   );
+
   const userVillageC = useSelector(
     (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
   );
 
-  let location = 'asdasd';
+  let location;
   if (pathLocation === userVillage0) {
     location = userVillageA;
   } else if (pathLocation === userVillage1) {

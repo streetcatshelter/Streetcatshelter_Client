@@ -1,7 +1,6 @@
 // LIBRARY
 import React from "react";
 import { useDispatch } from "react-redux";
-import { css } from "styled-components";
 
 // ELEMENTS
 import { Grid, Text, Image, Button } from "../../elements";
@@ -11,6 +10,7 @@ import { history } from "../../redux/configureStore";
 import { __catLike } from "../../redux/modules/cat";
 
 // STYLE
+import { css } from "styled-components";
 import { flexBox } from "../../shared/style";
 
 // ICON

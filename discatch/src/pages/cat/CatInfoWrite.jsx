@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
@@ -24,15 +24,24 @@ import { Camera } from "react-feather";
 
 // REDUX
 import { imgActions } from "../../redux/modules/image";
-import { __createCatInfo } from "../../redux/modules/cat";
-import { addHashTag, deleteHashTag } from "../../redux/modules/cat";
+import {
+  __createCatInfo,
+  __editCatInfo,
+  __getCatInfo,
+} from "../../redux/modules/cat";
+import {
+  addHashTag,
+  deleteHashTag,
+  setInitialState,
+} from "../../redux/modules/cat";
 import { mypageActions } from "../../redux/modules/mypage";
-
+import { history } from "../../redux/configureStore";
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
-
+  const edit = props.match.path?.split("/")[1] === "catinfoedit" ? true : false;
+  const catId = props.match.params.catId;
   const pathLocation = props.match.params.location;
-  console.log(pathLocation);
+  const catInfo = useSelector((state) => state.cat.catinfo);
 
   const userVillage0 = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
@@ -86,12 +95,13 @@ const CatInfoWrite = (props) => {
     { key: 4, value: "알수없음" },
   ];
 
-  const [catName, setCatName] = useState("");
+  const [catName, setCatName] = useState(edit ? catInfo.catName : "");
+
   const $catName = (e) => {
     setCatName(e.target.value);
   };
 
-  const [neutering, setNeutering] = useState("중성화 여부");
+  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "");
   const $neutering = (e) => {
     setNeutering(e.target.value);
   };
@@ -101,22 +111,24 @@ const CatInfoWrite = (props) => {
     setCatTag(e.target.value);
   };
 
-  const latitude = props.history.location.state.latitude;
-  const longitude = props.history.location.state.longitude;
+  const latitude = props.history.location.state?.latitude;
+  const longitude = props.history?.location.state?.longitude;
 
   const createBtn = () => {
-    dispatch(
-      __createCatInfo(
-        catName,
-        HashTags,
-        neutering,
-        location,
-        NickName,
-        latitude,
-        longitude,
-        pathLocation
-      )
-    );
+    edit
+      ? dispatch(__editCatInfo(catName, HashTags, neutering, catInfo.catId))
+      : dispatch(
+          __createCatInfo(
+            catName,
+            HashTags,
+            neutering,
+            location,
+            NickName,
+            latitude,
+            longitude,
+            pathLocation
+          )
+        );
   };
   const publish = (catTag) => {
     if (catTag !== "") {
@@ -131,13 +143,37 @@ const CatInfoWrite = (props) => {
     dispatch(deleteHashTag(hashtag));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(setInitialState([]));
+
+    if (edit) {
+      if (catInfo.catTagList) {
+        dispatch(imgActions.uploadImage(catInfo.catImage));
+        let tag;
+        for (let cattag of catInfo.catTagList) {
+          tag = cattag.tag;
+          if (tag !== "") {
+            dispatch(addHashTag(tag));
+          } else tag = [];
+        }
+      } else {
+        alert("잘못된 접근입니다.");
+        history.push("/");
+      }
+    }
+  }, []);
+
   return (
     <Template props={props}>
-      <SecondHeader title={`${pathLocation}  고양이등록`} />
+      {edit ? (
+        <SecondHeader title={`${catInfo.catName} 고양이정보수정`} />
+      ) : (
+        <SecondHeader title={`${pathLocation}  고양이등록`} />
+      )}
       <Grid>
         <Grid
           width="80%"
@@ -171,7 +207,7 @@ const CatInfoWrite = (props) => {
           />
         </Grid>
 
-        {fileUrl && (
+        {edit ? (
           <Grid
             width="60%"
             height="200px"
@@ -182,7 +218,32 @@ const CatInfoWrite = (props) => {
               `;
             }}
           >
-            <Image src={fileUrl} width="100%" height="100%" />
+            <Grid>
+              {fileUrl ? (
+                <Image src={fileUrl} width="100%" height="100%" />
+              ) : (
+                <Image src={catInfo.catImage} width="100%" height="100%" />
+              )}
+            </Grid>
+          </Grid>
+        ) : (
+          <Grid>
+            {fileUrl ? (
+              <Grid
+                width="60%"
+                height="200px"
+                margin="3% auto"
+                addstyle={() => {
+                  return css`
+                    ${flexBox()}
+                  `;
+                }}
+              >
+                <Image src={fileUrl} width="100%" height="100%" />
+              </Grid>
+            ) : (
+              ""
+            )}
           </Grid>
         )}
 
@@ -202,6 +263,7 @@ const CatInfoWrite = (props) => {
               bgColor="#ffffff"
               placeholder="고양이 이름"
               changeEvent={$catName}
+              value={catName}
             />
           </Grid>
           <Grid margin="10px auto">

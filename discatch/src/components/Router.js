@@ -96,6 +96,11 @@ const Router = () => {
       {/* == Cat */}
       <Route path="/catinfowrite" component={Auth(CatInfoWrite, true)} exact />
       <Route
+        path="/catinfoedit/:catId"
+        component={Auth(CatInfoWrite, true)}
+        exact
+      />
+      <Route
         path="/catinfowrite/:location"
         component={Auth(CatInfoWrite, true)}
         exact

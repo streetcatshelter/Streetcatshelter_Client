@@ -23,12 +23,6 @@ const Diary = ({ diary, location }) => {
     ? moment(diary.createdAt).format("YYYY-M-D hh:mm")
     : "";
 
-  const { userProfile, nickname, username } = useSelector((state) => ({
-    userProfile: state.mypage.userInfo.profileImageUrl,
-    nickname: state.mypage.userInfo.nickname,
-    username: state.mypage.userInfo.username,
-  }));
-
   return (
     <Grid
       bgColor="diaryColor"
@@ -50,14 +44,14 @@ const Diary = ({ diary, location }) => {
       >
         <Grid display="flex" alignItems="center" width="auto">
           <Image
-            src={userProfile}
+            src={diary.profileImageUrl}
             width="30px"
             height="30px"
             margin="0 5px 0 0"
             borderRadius="50%"
           />
           <Text fontWeight="bold" size="16px">
-            {nickname ? nickname : username}
+            {diary.nickname}
           </Text>
         </Grid>
         <Text fontWeight="bold" size="14px">

@@ -15,22 +15,39 @@ import { useDispatch, useSelector } from "react-redux";
 // MOMENT
 import moment from "moment";
 
-const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
+const ContentHeader = ({
+  FirstBtn,
+  FirstClick,
+  SecondBtn,
+  SecondClick,
+  path,
+}) => {
   const dispatch = useDispatch();
   const [ProfileModal, setProfileModal] = useState(false);
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo?.split('"')[5];
+  const UserNickName = useSelector((state) => state.mypage.userInfo?.nickname);
   const { location, username, createdAt, nickname, profileImageUrl } =
-    useSelector((state) => ({
-      category: state.community.list.data?.category,
-      location: state.community.list.data?.location,
-      username: state.community.list.data?.username,
-      nickname: state.community.list.data?.nickname,
-      profileImageUrl: state.community.list.data?.profileImageUrl,
-      createdAt: state.community.list.data?.createdAt
-        ? state.community.list.data?.createdAt
-        : Array(1),
-    }));
+    useSelector((state) =>
+      path === "catdetail"
+        ? {
+            location: null,
+            username: null,
+            createdAt: state.cat.detail?.createdAt,
+            nickname: state.cat.detail?.nickname,
+            profileImageUrl: state.cat.detail?.profileImageUrl,
+          }
+        : {
+            location: state.community.list.data?.location,
+            username: state.community.list.data?.username,
+            nickname: state.community.list.data?.nickname,
+            profileImageUrl: state.community.list.data?.profileImageUrl,
+            createdAt: state.community.list.data?.createdAt
+              ? state.community.list.data?.createdAt
+              : Array(1),
+          }
+    );
+
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
   const OpenProfile = () => {
     if (userName !== username) {
@@ -38,20 +55,13 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
     }
   };
   const MakeChat = () => {
-    const chatuser = { chatUser: [name, nickname] };
+    const chatuser = { chatUser: [UserNickName, nickname] };
     dispatch(chatActions._createRoom(chatuser));
   };
 
-  let name;
-  if (nickname === "" || nickname === null) {
-    name = username;
-  } else {
-    name = nickname;
-  }
-
   let locationName = "";
   if (location === "undefined") {
-    locationName = "";
+    locationName = null;
   } else if (location !== "undefined") {
     locationName = location;
   }
@@ -100,16 +110,22 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
               }}
             >
               <Grid>
-                <Text fontWeight="bold">{name}</Text>
+                {nickname !== null ? (
+                  <Text fontWeight="bold">{nickname}</Text>
+                ) : (
+                  <Text fontWeight="bold">{username}</Text>
+                )}
                 <Grid display="flex">
-                  <Text
-                    size="12px"
-                    lineHeight="12px"
-                    margin="0px 10px 0px 0px "
-                    width="auto"
-                  >
-                    {locationName}
-                  </Text>
+                  {locationName !== null && (
+                    <Text
+                      size="12px"
+                      lineHeight="12px"
+                      margin="0px 10px 0px 0px "
+                      width="auto"
+                    >
+                      {locationName}
+                    </Text>
+                  )}
                   <Text
                     fontWeight="bold"
                     size="10px"
@@ -117,7 +133,6 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
                       return css`
                         line-height: 12px;
                         position: relative;
-                        margin: 0px 0px 0px 5px;
                       `;
                     }}
                   >
@@ -128,7 +143,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
             </Grid>
           </Grid>
 
-          {username === userName ? (
+          {UserNickName === nickname ? (
             <EditModalSlide
               FirstBtn={FirstBtn}
               SecondBtn={SecondBtn}

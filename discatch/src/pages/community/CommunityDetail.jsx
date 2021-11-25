@@ -116,7 +116,7 @@ const CommunityDetail = (props) => {
             margin="-95vh 0 0 0"
             addstyle={() => {
               return css`
-                @media screen and (max-width: 375px) {
+                @media screen and (max-width: 414px) {
                   margin: -92.5vh 0 0 0;
                 }
               `;
@@ -158,10 +158,6 @@ const CommunityDetailStyle = styled.div`
   width: 100%;
   overflow-x: hidden;
   height: 85vh;
-  @media screen and (max-width: 414px) {
-    height: 80vh;
-    margin: -2vh 0 0;
-  }
   @media screen and (max-height: 1366px) {
     height: 89vh;
     margin: 2vh 0 0;
@@ -171,7 +167,7 @@ const CommunityDetailStyle = styled.div`
     margin: 2vh 0 0;
   }
   @media screen and (max-height: 823px) {
-    height: 83vh;
+    height: 80vh;
     margin: -0.2vh 0 0;
   }
   @media screen and (max-height: 812px) {
@@ -183,12 +179,20 @@ const CommunityDetailStyle = styled.div`
     margin: -0.3vh 0 0;
   }
   @media screen and (max-height: 736px) {
+    height: 79vh;
+    margin: -1vh 0 0;
+  }
+  @media screen and (max-height: 720px) {
     height: 81vh;
     margin: -1vh 0 0;
   }
   @media screen and (max-height: 667px) {
     height: 77vh;
     margin: -2vh 0 0;
+  }
+  @media screen and (max-height: 640px) {
+    height: 77vh;
+    margin: -2.5vh 0 0;
   }
   @media screen and (max-height: 600px) {
     height: 78vh;

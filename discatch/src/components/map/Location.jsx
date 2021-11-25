@@ -103,7 +103,7 @@ const Location = (props) => {
   const showCats = () => {
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
       mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(0, 0), // 지도의 중심좌표
         level: 2, // 지도의 확대 레벨
       };
 
@@ -261,7 +261,7 @@ const Location = (props) => {
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
     const container = document.getElementById("myMap");
     const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
+      center: new kakao.maps.LatLng(0, 0),
       level: 2,
     };
     const map = new kakao.maps.Map(container, options);
@@ -570,7 +570,34 @@ const ListWrap = styled.div`
 const MapWrap = styled.div`
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 500px;
+  @media screen and (max-height: 1366px) {
+    padding: 250px 0;
+  }
+  @media screen and (max-height: 1024px) {
+    padding: 100px 0;
+  }
+  @media screen and (max-height: 823px) {
+    padding: 50px 0;
+  }
+  @media screen and (max-height: 800px) {
+    padding: 30px 0;
+  }
+  @media screen and (max-height: 736px) {
+    padding:10px 0;
+  }
+  @media screen and (max-height: 720px) {
+    padding: 0;
+  }
+  @media screen and (max-height: 667px) {
+    padding: 5px 0;
+  }
+  @media screen and (max-height: 600px) {
+    padding: 0;
+  }
+  @media screen and (max-height: 568px) {
+    margin: -10px 0;
+  }
 `;
 
 const List = styled.div`

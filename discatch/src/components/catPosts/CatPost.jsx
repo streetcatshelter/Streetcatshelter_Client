@@ -10,12 +10,13 @@ import { history } from "../../redux/configureStore";
 import { __catLike } from "../../redux/modules/cat";
 
 // STYLE
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 import { flexBox } from "../../shared/style";
 
 // ICON
 import FavoriteIcon from "@material-ui/icons/Favorite";
-
+// ICON
+import { MoreHorizontal } from "react-feather";
 const CatPost = ({ cat, location, path }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
@@ -62,64 +63,80 @@ const CatPost = ({ cat, location, path }) => {
               `;
             }}
           >
-            <Text
-              fontWeight="bold"
-              size="16px"
-              width="35%"
-              clickEvent={CatDetailBtn}
+            <Grid
+              display="flex"
+              addstyle={() => {
+                return css`
+                  align-items: center;
+                  line-height: 20px;
+                `;
+              }}
             >
-              {cat.catName}
-            </Text>
+              <Text fontWeight="bold" size="16px" clickEvent={CatDetailBtn}>
+                {cat.catName}
+              </Text>
 
-            <Text
-              fontWeight="bold"
-              size="14px"
-              margin="0 0 0 0"
-              width="50%"
-              clickEvent={CatDetailBtn}
-            >
-              중성화: {cat.neutering}
-            </Text>
-
-            <Button padding="0" bgColor="diaryColor" clickEvent={likeToggle}>
-              <FavoriteIcon
-                style={{
-                  color: userLiked ? "red" : "gray",
-                }}
+              <Text
+                fontWeight="bold"
+                size="14px"
+                margin="0 0 0 10px"
+                clickEvent={CatDetailBtn}
+              >
+                중성화: {cat.neutering}
+              </Text>
+            </Grid>
+            {path === "detail" && (
+              <MoreHorizontalBtn
+                style={{ color: "rgb(249, 200, 82)" }}
+                onClick={() => history.push(`/catinfoedit/${catId}`)}
               />
-            </Button>
+            )}
           </Grid>
-          <Grid
-            addstyle={() => {
-              return css`
-                display: flex;
-                flex-wrap: wrap;
-                height: 30px;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-              `;
-            }}
-          >
-            {cat.catTagList?.map((tag, idx) => {
-              return (
-                <Text
-                  display="flex"
-                  margin="0 2% 0 0"
-                  padding="2px"
-                  key={idx}
-                  size="14px"
-                  fontWeight="bold"
-                >
-                  #{tag.tag}
-                </Text>
-              );
-            })}
+          <Grid display="flex" justifyContent="center">
+            <Grid
+              addstyle={() => {
+                return css`
+                  display: flex;
+                  flex-wrap: wrap;
+                  height: 25px;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  white-space: nowrap;
+                `;
+              }}
+            >
+              {cat.catTagList?.map((tag, idx) => {
+                return (
+                  <Text
+                    display="flex"
+                    margin="0 2% 0 0"
+                    padding="2px"
+                    key={idx}
+                    size="14px"
+                    fontWeight="bold"
+                  >
+                    #{tag.tag}
+                  </Text>
+                );
+              })}
+            </Grid>
+
+            <FavoriteIcon
+              onClick={likeToggle}
+              style={{
+                color: userLiked ? "red" : "gray",
+              }}
+            />
           </Grid>
         </Grid>
       </Grid>
     </React.Fragment>
   );
 };
+const MoreHorizontalBtn = styled(MoreHorizontal)`
+  &:hover {
+    color: #cbcf52;
+  }
+`;
 
 export default CatPost;

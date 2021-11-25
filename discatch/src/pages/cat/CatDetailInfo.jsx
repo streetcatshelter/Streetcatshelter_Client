@@ -14,8 +14,8 @@ import { Grid, Text, Image, Button } from "../../elements";
 import {
   Template,
   CommentList,
-  EditModalSlide,
   Spinner,
+  ContentHeader,
 } from "../../components";
 
 // ICON
@@ -36,29 +36,8 @@ const CatDetailInfo = (props) => {
   const commentList = useSelector((state) => state.comment.list);
   const catDetailId = props.match.params.catDetailId;
 
-  const { userProfile, nickname, username } = useSelector((state) => ({
-    userProfile: state.mypage.userInfo.profileImageUrl,
-    nickname: state.mypage.userInfo.nickname,
-    username: state.mypage.userInfo.username,
-    locationList: state.mypage.userInfo.locationList,
-  }));
-
-  const { image, diary, water, food, snack, createdAt, tags, likeCnt } =
-    useSelector(
-      (state) => ({
-        image: state.cat.detail.catImages,
-        diary: state.cat.detail.diary,
-        water: state.cat.detail.water,
-        food: state.cat.detail.food,
-        snack: state.cat.detail.snack,
-        createdAt: state.cat.detail.createdAt,
-        tags: state.cat.detail.catTags,
-        likeCnt: state.cat.detail.likeCnt,
-      }),
-      shallowEqual
-    );
-  const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
-  const userLiked = useSelector((state) => state.cat.detail.userLiked);
+  const detail = useSelector((state) => state.cat.detail);
+  const image = detail.catImages;
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
   };
@@ -79,37 +58,13 @@ const CatDetailInfo = (props) => {
     <>
       <Spinner visible={isLoaded} />
       <Template props={props}>
-        <Grid
-          margin="2% auto"
-          addstyle={() => {
-            return css`
-              ${flexBox("space-between")}
-            `;
-          }}
-        >
-          <Image
-            margin="0 0 0 5%"
-            src={userProfile}
-            width="35px"
-            height="35px"
-            borderRadius="25px"
-          />
-
-          <Text width="30%" size="14px" fontWeight="bold">
-            {nickname ? nickname : username}
-          </Text>
-
-          <Text width="35%" margin="0 -5% 0 0" size="12px" fontWeight="bold">
-            {CreatedAt}
-          </Text>
-
-          <EditModalSlide
-            FirstBtn={"수정"}
-            FirstClick={() => {}}
-            SecondBtn={"삭제"}
-            SecondClick={deleteCatDetail}
-          />
-        </Grid>
+        <ContentHeader
+          path="catdetail"
+          FirstBtn="수정"
+          SecondBtn="삭제"
+          FirstClick={() => {}}
+          SecondClick={deleteCatDetail}
+        />
         {image && image[0] && (
           <Image
             src={image[0]}
@@ -151,7 +106,7 @@ const CatDetailInfo = (props) => {
             }}
           >
             <Text fontWeight="bold">급수</Text>
-            <CheckSquare color={water === false ? "black" : "#cbcf5e"} />
+            <CheckSquare color={detail.water === false ? "black" : "#cbcf5e"} />
           </Grid>
 
           <Grid
@@ -162,7 +117,7 @@ const CatDetailInfo = (props) => {
             }}
           >
             <Text fontWeight="bold">사료</Text>
-            <CheckSquare color={food === false ? "black" : "#cbcf5e"} />
+            <CheckSquare color={detail.food === false ? "black" : "#cbcf5e"} />
           </Grid>
 
           <Grid
@@ -173,7 +128,7 @@ const CatDetailInfo = (props) => {
             }}
           >
             <Text fontWeight="bold">간식</Text>
-            <CheckSquare color={snack === false ? "black" : "#cbcf5e"} />
+            <CheckSquare color={detail.snack === false ? "black" : "#cbcf5e"} />
           </Grid>
         </Grid>
 
@@ -188,7 +143,7 @@ const CatDetailInfo = (props) => {
           }}
         >
           <Text margin="0 0 5% 0" fontWeight="500">
-            {diary}
+            {detail.diary}
           </Text>
 
           <Grid
@@ -200,31 +155,39 @@ const CatDetailInfo = (props) => {
               `;
             }}
           >
-            <Grid>
-              {tags && tags.length > 0 ? (
-                tags.map((tag, idx) => {
-                  return (
-                    <Text fontWeight="500" key={idx} width="80%">
-                      #{tag}
-                    </Text>
-                  );
-                })
-              ) : (
-                <Grid width="80%"></Grid>
-              )}
+            <Grid
+              width="80%"
+              display="flex"
+              addstyle={() => {
+                return css`
+                  flex-wrap: wrap;
+                `;
+              }}
+            >
+              {detail.catTags && detail.catTags.length > 0
+                ? detail.catTags.map((tag, idx) => {
+                    return (
+                      <Text fontWeight="500" key={idx} margin="0px 5px 0px 0px">
+                        #{tag}
+                      </Text>
+                    );
+                  })
+                : ""}
             </Grid>
             <Grid
               width="20%"
+              height="auto"
               addstyle={() => {
                 return css`
                   display: flex;
                   justify-content: flex-end;
+                  align-items: flex-end;
                 `;
               }}
             >
               <Button
                 bgColor="diaryColor"
-                color={userLiked ? "red" : "black"}
+                color={detail.userLiked ? "red" : "black"}
                 clickEvent={likeToggle}
                 addstyle={() => {
                   return css`
@@ -235,7 +198,7 @@ const CatDetailInfo = (props) => {
               >
                 <FavoriteIcon />
               </Button>
-              {likeCnt ? (
+              {detail.likeCnt ? (
                 <Text
                   addstyle={() => {
                     return css`
@@ -245,7 +208,7 @@ const CatDetailInfo = (props) => {
                     `;
                   }}
                 >
-                  {likeCnt}
+                  {detail.likeCnt}
                 </Text>
               ) : (
                 ""

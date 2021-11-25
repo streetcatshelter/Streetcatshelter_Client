@@ -51,6 +51,51 @@ export const __createCatInfo = (
     }
   };
 };
+// 기본 정보 수정
+export const __editCatInfo =
+  (catName, catTag, neutering, catId) =>
+  async (dispatch, getState, { history }) => {
+    const imgFile = getState().image.file;
+    if (imgFile.length) {
+      dispatch(
+        imgActions.uploadImageDB(() => {
+          const imageUrl = getState().image.imageUrl;
+          const catInfo = {
+            catImage: imageUrl,
+            catName: catName,
+            catTag: catTag,
+            neutering: neutering,
+          };
+          instance
+            .put(`/cat/${catId}`, catInfo)
+            .then((res) => {
+              dispatch(imgActions.setInitialState());
+              dispatch(setInitialState([]));
+              history.push("/");
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        })
+      );
+    } else {
+      const imageUrl = getState().image.imageUrl;
+      const catInfo = {
+        catImage: imageUrl,
+        catName: catName,
+        catTag: catTag,
+        neutering: neutering,
+      };
+      try {
+        const { data } = await catApi.editCatInfo(catInfo, catId);
+        dispatch(imgActions.setInitialState());
+        dispatch(setInitialState([]));
+        history.push("/");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
 
 // 상세 정보 작성
 export const __createCatDetailInfo = (

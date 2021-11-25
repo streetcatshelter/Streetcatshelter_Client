@@ -156,7 +156,7 @@ const CatDetailInfo = (props) => {
             }}
           >
             <Grid
-              width="80%"
+              width="90%"
               display="flex"
               addstyle={() => {
                 return css`
@@ -167,15 +167,30 @@ const CatDetailInfo = (props) => {
               {detail.catTags && detail.catTags.length > 0
                 ? detail.catTags.map((tag, idx) => {
                     return (
-                      <Text fontWeight="500" key={idx} margin="0px 5px 0px 0px">
+                      <Grid
+                        key={idx}
+                        width="auto"
+                        bgColor="yellow"
+                        height="25px"
+                        radius="20px"
+                        margin="5px 10px 5px 0px "
+                        padding="0px 5px 3px 5px"
+                        style={{ fontSize: "10px" }}
+                        addstyle={() => {
+                          return css`
+                            display: flex;
+                            align-items: center;
+                          `;
+                        }}
+                      >
                         #{tag}
-                      </Text>
+                      </Grid>
                     );
                   })
                 : ""}
             </Grid>
             <Grid
-              width="20%"
+              width="10%"
               height="auto"
               addstyle={() => {
                 return css`

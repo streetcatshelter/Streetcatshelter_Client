@@ -107,16 +107,24 @@ const CatPost = ({ cat, location, path }) => {
             >
               {cat.catTagList?.map((tag, idx) => {
                 return (
-                  <Text
-                    display="flex"
-                    margin="0 2% 0 0"
-                    padding="2px"
+                  <Grid
                     key={idx}
-                    size="14px"
-                    fontWeight="bold"
+                    width="auto"
+                    bgColor="yellow"
+                    height="25px"
+                    radius="20px"
+                    margin="5px 10px 5px 0px "
+                    padding="0px 5px 3px 5px"
+                    style={{ fontSize: "10px" }}
+                    addstyle={() => {
+                      return css`
+                        display: flex;
+                        align-items: center;
+                      `;
+                    }}
                   >
                     #{tag.tag}
-                  </Text>
+                  </Grid>
                 );
               })}
             </Grid>

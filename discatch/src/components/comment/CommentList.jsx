@@ -65,6 +65,8 @@ const CommentList = ({ props, path, catId, communityId }) => {
           placeholder="댓글 달기..."
           addstyle={() => {
             return css`
+              position: relative;
+              bottom: 10px;
               border: 1px solid rgb(${(props) => props.theme.palette.yellow});
               border-radius: 10px;
               resize: none;
@@ -81,12 +83,14 @@ const CommentList = ({ props, path, catId, communityId }) => {
           addstyle={() => {
             return css`
               display: flex;
+              position: relative;
               height: 30px;
               width: 50px;
               align-items: center;
               justify-content: center;
               padding: 5px;
               margin-left: 3px;
+              bottom: 6px;
             `;
           }}
         >

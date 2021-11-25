@@ -33,7 +33,7 @@ const CommunityPostDetail = (props) => {
       title: state.community.list.data?.title,
     })
   );
-
+  
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
@@ -49,7 +49,7 @@ const CommunityPostDetail = (props) => {
         SecondBtn="삭제"
         FirstClick={() => {
           history.push(
-            `/community/${location}/${category}/postedit/${communityId}`
+            `/community/${location.split(' ')[2]}/${category}/postedit/${communityId}`
           );
         }}
         SecondClick={deleteCommunity}

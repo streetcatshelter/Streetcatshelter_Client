@@ -41,7 +41,7 @@ const CatPost = ({ cat, location, path }) => {
         cursor={path === "detail" ? "" : "pointer"}
         addstyle={() => {
           return css`
-            ${flexBox("space-around")}
+            ${flexBox("space-around")};
           `;
         }}
       >

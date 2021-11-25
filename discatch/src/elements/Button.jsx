@@ -5,7 +5,7 @@ import styled from "styled-components";
 // STYLE
 import { borderBox } from "../shared/style";
 
-const Button = ({ is_float, children, clickEvent,...props }) => {
+const Button = ({ is_float, children, clickEvent, ...props }) => {
   if (is_float) {
     return (
       <React.Fragment>
@@ -53,7 +53,7 @@ const FloatButton = styled.button`
   font-size: 36px;
   font-weight: 700;
   position: fixed;
-  bottom: 60px;
+  bottom: 145px;
   margin-left: 350px;
   text-align: center;
   vertical-align: middle;
@@ -64,20 +64,32 @@ const FloatButton = styled.button`
     left: auto;
     right: 20px;
   }
-  @media screen and (max-height: 1024px) {
-    bottom: 84px;
+  @media screen and (max-height: 1366px) {
+    bottom: 145px;
   }
-  @media screen and (max-height: 731px) {
-    bottom: 71px;
+  @media screen and (max-height: 823px) {
+    bottom: 205px;
+  }
+  @media screen and (max-height: 812px) {
+    bottom: 195px;
+  }
+  @media screen and (max-height: 800px) {
+    bottom: 170px;
+  }
+  @media screen and (max-height: 736px) {
+    bottom: 141px;
   }
   @media screen and (max-height: 720px) {
-    bottom: 66px;
+    bottom: 140px;
   }
-  @media screen and (max-height: 667px) {
-    bottom: 72px;
+  @media screen and (max-height: 640px) {
+    bottom: 142px;
+  }
+  @media screen and (max-height: 600px) {
+    bottom: 145px;
   }
   @media screen and (max-height: 568px) {
-    bottom: 60px;
+    bottom: 141px;
   }
 `;
 export default Button;

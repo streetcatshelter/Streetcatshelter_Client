@@ -123,7 +123,7 @@ const ContentHeader = ({
                       margin="0px 10px 0px 0px "
                       width="auto"
                     >
-                      {locationName}
+                      {locationName?.split(' ')[2]}
                     </Text>
                   )}
                   <Text

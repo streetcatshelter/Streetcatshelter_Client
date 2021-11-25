@@ -64,5 +64,20 @@ const FloatButton = styled.button`
     left: auto;
     right: 20px;
   }
+  @media screen and (max-height: 1024px) {
+    bottom: 84px;
+  }
+  @media screen and (max-height: 731px) {
+    bottom: 71px;
+  }
+  @media screen and (max-height: 720px) {
+    bottom: 66px;
+  }
+  @media screen and (max-height: 667px) {
+    bottom: 72px;
+  }
+  @media screen and (max-height: 568px) {
+    bottom: 60px;
+  }
 `;
 export default Button;

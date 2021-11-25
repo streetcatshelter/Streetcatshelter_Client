@@ -172,11 +172,26 @@ const Menu = (props) => {
 const MenuStyle = styled.footer`
   max-width: 420px;
   width: 100%;
-  height: 50px;
+  height: 56px;
   background: #fbd986;
   position: fixed;
   z-index: 9;
   bottom: 0;
+  @media screen and (max-height: 1024px) {
+    height: 74px;
+  }
+  @media screen and (max-height: 731px) {
+    height: 61px;
+  }
+  @media screen and (max-height: 720px) {
+    height: 56px;
+  }
+  @media screen and (max-height: 667px) {
+    height: 62px;
+  }
+  @media screen and (max-height: 568px) {
+    height: 50px;
+  }
 `;
 
 export default Menu;

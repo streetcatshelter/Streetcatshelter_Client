@@ -120,21 +120,44 @@ const CommunityPostEdit = (props) => {
   return (
     <Template props={props}>
       <SecondHeader title="커뮤니티글 수정" />
-      <Grid bgColor="bgColor" margin="auto" width="90%">
+      <Grid 
+        bgColor="bgColor" 
+        margin="auto" 
+        width="90%"
+        addstyle={() => {
+          return css`
+            @media screen and (max-height: 640px) {
+              height: 82vh;
+            }
+            @media screen and (max-height: 600px) {
+              height: 90vh;
+            }
+            @media screen and (max-height: 568px) {
+              height: 90vh;
+            }
+            @media screen and (max-width: 280px) {
+              height: 80vh;
+            }
+          `;
+        }}>
         <CommunityEditStyle>
-          <Grid width="96%" margin="15px auto " height="auto">
+          <Grid width="100%" margin="15px auto " height="auto">
             <Input
               disabled
               value={category}
-              width="103%"
+              width="90%"
+              padding=" 7px 10px"
+              margin="auto"
               addstyle={() => {
                 return css`
+                  display: flex;
                   border-radius: 10px;
+                  justify-content: center;
                 `;
               }}
             />
           </Grid>
-          <Grid width="100%" margin="5px auto" height="auto">
+          <Grid width="100%" margin="15px auto" height="auto">
             <Input
               onChange={$title}
               placeholder="제목을 입력해주세요."
@@ -157,7 +180,6 @@ const CommunityPostEdit = (props) => {
                 return css`
                   white-space: nowrap;
                   overflow-x: auto;
-                  height: 90px;
                   -ms-overflow-style: none;
                   &::-webkit-scrollbar {
                     display: none;
@@ -281,7 +303,7 @@ const CommunityPostEdit = (props) => {
               onChange={$contents}
               value={editcontents}
               placeholder="내용을 입력해주세요."
-              height="200px"
+              height="180px"
               padding=" 7px 10px"
               width="90%"
               addstyle={() => {

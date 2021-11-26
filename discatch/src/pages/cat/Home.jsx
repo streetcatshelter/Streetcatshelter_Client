@@ -2,11 +2,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// STYLE
+import { css } from "styled-components";
+
 // COMPONENTS
 import { Template, CatPost, SecondHeader, Spinner } from "../../components";
 
 // ELEMENTS
-import { Button } from "../../elements";
+import { Button, Grid } from "../../elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -69,6 +72,11 @@ const Home = (props) => {
 
   location = location?.substring(0, location.length - 1);
 
+  const requestLocationInfo = () => {
+    history.push("/userinfoedit");
+    alert("동네 정보를 입력해주세요!");
+  };
+
   useEffect(() => {
     dispatch(__getCatLocation(location));
   }, [location, dispatch]);
@@ -80,12 +88,20 @@ const Home = (props) => {
   return (
     <>
       <Spinner visible={isLoaded} />
-      <Template props={props} location={pathLocation}>
+      {location !== undefined ? (
+        <Template props={props} location={pathLocation}>
         <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
-
+        
         {catList.length ? (
           catList.map((cat, idx) => {
             return (
+              <Grid
+                addstyle={() => {
+                  return css`
+                    position:relative;
+                    bottom: 10px;
+                  `;
+                }}>
               <InfinityScroll
                 next={getMoreCat}
                 index={idx}
@@ -94,6 +110,7 @@ const Home = (props) => {
               >
                 <CatPost cat={cat} location={pathLocation} />
               </InfinityScroll>
+              </Grid>
             );
           })
         ) : (
@@ -112,6 +129,16 @@ const Home = (props) => {
           <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
         </Button>
       </Template>
+      ) : (
+        <Template props={props} location={pathLocation}>
+        <SecondHeader title={'고양이들을 소개합니다!'} />
+        <Button
+          is_float="is_float"
+          clickEvent={() => {requestLocationInfo()}}>
+          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+        </Button>
+      </Template>
+      )}
     </>
   );
 };

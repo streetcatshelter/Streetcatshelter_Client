@@ -2,6 +2,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+// STYLE
+import { css } from "styled-components";
+
 // COMPONENTS
 import { CommunityCategoryCard, Template, Spinner } from "../../components";
 
@@ -30,7 +33,39 @@ const Community = (props) => {
       <Spinner visible={isLoaded} />
       <Template props={props}>
         {village !== undefined ? (
-          <Grid margin="10vh 0 0 0">
+          <Grid 
+            margin="10vh 0 0 0"
+            addstyle={() => {
+              return css`
+                @media screen and (max-height: 1366px) {
+                  margin: 30vh 0 0 0;
+                }
+                @media screen and (max-height: 1024px) {
+                  margin: 20vh 0 0 0;
+                }
+                @media screen and (max-height: 823px) {
+                  margin: 15vh 0 0 0;
+                }
+                @media screen and (max-height: 812px) {
+                  margin: 14vh 0 0 0;
+                }
+                @media screen and (max-height: 736px) {
+                  margin: 10vh 0 0 0;
+                }
+                @media screen and (max-height: 731px) {
+                  margin: 10vh 0 0 0;
+                }
+                @media screen and (max-height: 667px) {
+                  margin: 7vh 0 0 0
+                }
+                @media screen and (max-height: 600px) {
+                  margin: 4vh 0 0 0;
+                }
+                @media screen and (max-height: 568px) {
+                  margin: 10px 0 0 0;
+                }
+              `;
+            }}>
             <CommunityCategoryCard
               src={Community1}
               clickEvent={() => history.push(`/community/${village}/catinfo`)}
@@ -72,7 +107,7 @@ const Community = (props) => {
               clickEvent={() => requestLocationInfo()}
               width="100px"
               height="100px"
-              title={`${village} 동네 모임`}
+              title={`동네 모임`}
               subtitle="동네 고양이에 대해 얘기 나눠봐요!"
             />
             <CommunityCategoryCard
@@ -80,7 +115,7 @@ const Community = (props) => {
               clickEvent={() => requestLocationInfo()}
               width="100px"
               height="100px"
-              title={`${village} 고양이 물건 나눔`}
+              title={`고양이 물건 나눔`}
               subtitle="고양이를 위한 물건을 나눠봐요!"
             />
           </Grid>

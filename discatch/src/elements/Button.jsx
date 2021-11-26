@@ -53,43 +53,43 @@ const FloatButton = styled.button`
   font-size: 36px;
   font-weight: 700;
   position: fixed;
-  bottom: 145px;
+  bottom: 80px;
+  right:180px;
   margin-left: 350px;
   text-align: center;
   vertical-align: middle;
   border: none;
   border-radius: 22.5px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  @media (max-width: 420px) {
-    left: auto;
-    right: 20px;
+  @media screen and (min-width: 1280px) {
+    right: 670px
   }
-  @media screen and (max-height: 1366px) {
-    bottom: 145px;
+  @media screen and (max-width: 1280px) {
+    right: 610px
   }
-  @media screen and (max-height: 823px) {
-    bottom: 205px;
+  @media screen and (max-width: 1024px) {
+    right: 375px;
   }
   @media screen and (max-height: 812px) {
-    bottom: 195px;
+    right: 160px;
   }
-  @media screen and (max-height: 800px) {
-    bottom: 170px;
-  }
-  @media screen and (max-height: 736px) {
-    bottom: 141px;
+  @media screen and (max-width: 768px) {
+    right: 238px;
   }
   @media screen and (max-height: 720px) {
-    bottom: 140px;
+    right: 160px;
   }
-  @media screen and (max-height: 640px) {
-    bottom: 142px;
+  @media screen and (max-width: 540px) {
+    right: 122px;
   }
-  @media screen and (max-height: 600px) {
-    bottom: 145px;
+  @media screen and (max-width: 414px) {
+    right: 65px;
   }
-  @media screen and (max-height: 568px) {
-    bottom: 141px;
+  @media screen and (max-width: 375px) {
+    right: 60px;
+  }
+  @media screen and (max-width: 280px) {
+    right: 55px;
   }
 `;
 export default Button;

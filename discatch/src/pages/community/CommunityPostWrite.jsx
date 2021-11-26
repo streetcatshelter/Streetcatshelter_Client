@@ -152,7 +152,27 @@ const CommunityPostWrite = (props) => {
   return (
     <Template props={props}>
       <SecondHeader title="커뮤니티글 등록" />
-      <Grid bgColor="bgColor" margin="auto" width="90%">
+      <Grid 
+        bgColor="bgColor" 
+        margin="auto" 
+        width="90%" 
+        height="auto"
+        addstyle={() => {
+          return css`
+            @media screen and (max-height: 640px) {
+              height: 80vh;
+            }
+            @media screen and (max-height: 600px) {
+              height: 90vh;
+            }
+            @media screen and (max-height: 568px) {
+              height: 90vh;
+            }
+            @media screen and (max-width: 280px) {
+              height: 80vh;
+            }
+          `;
+        }}>
         <CommunityWriteStyle>
           <Grid width="96%" margin="15px auto " height="auto">
             <Select
@@ -189,7 +209,6 @@ const CommunityPostWrite = (props) => {
                 return css`
                   white-space: nowrap;
                   overflow-x: auto;
-                  height: 90px;
                   -ms-overflow-style: none;
                   &::-webkit-scrollbar {
                     display: none;
@@ -288,7 +307,7 @@ const CommunityPostWrite = (props) => {
             <TextArea
               onChange={$contents}
               placeholder="내용을 입력해주세요."
-              height="200px"
+              height="190px"
               padding=" 7px 10px"
               width="90%"
               addstyle={() => {
@@ -304,7 +323,7 @@ const CommunityPostWrite = (props) => {
 
           <Grid
             width="225px"
-            height="30px"
+            height="20px"
             display="flex"
             margin="20px auto 0px auto"
             addstyle={() => {

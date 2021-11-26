@@ -58,45 +58,70 @@ const Menu = (props) => {
   const catId = props.props.props.location.pathname.split('/')[3];
 
   const moveToHome = () => {
-    if (path === '/map/:village') {
-      history.push({ pathname: '/', state: { location : pathLocation}});
-    } else if (preLocation+' ' === userVillageA) {
-      location = userVillage0;
-      history.push({ pathname: '/', state: { location }});
-    } else if (preLocation+' ' === userVillageB) {
-      location = userVillage1;
-      history.push({ pathname: '/', state: { location }});
-    } else if (preLocation+' ' === userVillageC) {
-      location = userVillage2;
-      history.push({ pathname: '/', state: { location }});
+    if (location === undefined) {
+      history.push("/userinfoedit");
+      alert("동네 정보를 입력해주세요!");
     } else {
-      history.push({ pathname: '/', state: { location }});
+      if (path === '/map/:village') {
+        history.push({ pathname: '/', state: { location : pathLocation}});
+      } else if (preLocation+' ' === userVillageA) {
+        location = userVillage0;
+        history.push({ pathname: '/', state: { location }});
+      } else if (preLocation+' ' === userVillageB) {
+        location = userVillage1;
+        history.push({ pathname: '/', state: { location }});
+      } else if (preLocation+' ' === userVillageC) {
+        location = userVillage2;
+        history.push({ pathname: '/', state: { location }});
+      } else {
+        history.push({ pathname: '/', state: { location }});
+      }
     }
   }
 
   const moveToCommunity = () => {
-    history.push({ pathname: '/community', state: { location }});
-    history.go(0);
-  }
-
-  const moveToMap = () => {
-    if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
-      history.push({ pathname: `/map/${location}/${catId}`, state: { catId, location }});
-      history.go(0); 
+    if (location === undefined) {
+      history.push("/userinfoedit");
+      alert("동네 정보를 입력해주세요!");
     } else {
-      history.push({ pathname: `/map/${location}`, state: { location }});
+      history.push({ pathname: '/community', state: { location }});
       history.go(0);
     }
   }
 
+  const moveToMap = () => {
+    if (location === undefined) {
+      history.push("/userinfoedit");
+      alert("동네 정보를 입력해주세요!");
+    } else {
+      if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
+        history.push({ pathname: `/map/${location}/${catId}`, state: { catId, location }});
+        history.go(0); 
+      } else {
+        history.push({ pathname: `/map/${location}`, state: { location }});
+        history.go(0);
+      }
+    }
+  }
+
   const moveToChat = () => {
-    history.push({ pathname: '/chat', state: { location }});
-    history.go(0);
+    if (location === undefined) {
+      history.push("/userinfoedit");
+      alert("동네 정보를 입력해주세요!");
+    } else {
+      history.push({ pathname: '/chat', state: { location }});
+      history.go(0);
+    }
   }
 
   const moveToInfo = () => {
-    history.push({ pathname: '/mypage', state: { location }});
-    history.go(0);
+    if (location === undefined) {
+      history.push("/userinfoedit");
+      alert("동네 정보를 입력해주세요!");
+    } else {
+      history.push({ pathname: '/mypage', state: { location }});
+      history.go(0);
+    }
   }
 
   return (

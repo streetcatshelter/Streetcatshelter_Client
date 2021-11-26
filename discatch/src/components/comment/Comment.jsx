@@ -23,13 +23,12 @@ const Comment = ({ path }) => {
   const commentList = useSelector((state) => state.comment.list);
   const community = useSelector((state) => state.community.list);
   const communityId = community.data?.communityId;
-
   const userLike = community.data?.liked;
 
   const updateLikes = () => {
     dispatch(communityLikeToggleDB(communityId));
   };
-
+  
   return (
     <Grid
       margin="20px auto 15px auto"
@@ -63,8 +62,16 @@ const Comment = ({ path }) => {
         </Text>
         <Count>
           {path === "CatDetail" || path === "CatDetailInfo"
-            ? `${commentList.length}`
-            : `${community.data?.cntComment}`}
+            ? (String(commentList.length).length > 3
+            ? `${String(commentList.length)[0]}${"0".repeat(
+                String(commentList.length).length - 4
+              )}K`
+            : commentList.length)
+            : (String(community.data?.cntComment).length > 3
+            ? `${String(community.data?.cntComment)[0]}${"0".repeat(
+                String(community.data?.cntComment).length - 4
+              )}K`
+            : community.data?.cntComment)}
         </Count>
       </Grid>
 
@@ -95,7 +102,20 @@ const Comment = ({ path }) => {
                 }}
               />
             </Grid>
-            <Text fontWeight="bold" margin="0 0 0 -25px" width="32px">
+            <Text 
+              fontWeight="bold" 
+              margin="0 0 0 -25px" 
+              width="40px"
+              addstyle={() => {
+                return css`
+                @media screen and (max-width: 280px) {
+                    margin: 0 0 0 -10px;
+                  }
+                  @media screen and (max-height: 568px) {
+                    margin: 0;
+                  }
+                `;
+              }}>
               {community.data?.cntLikeit}
             </Text>
           </Grid>
@@ -109,7 +129,6 @@ const Count = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background: rgb(${(props) => props.theme.palette.D_yellow});
   font-size: 12px;
   text-align: center;
   line-height: 20px;

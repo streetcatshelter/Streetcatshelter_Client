@@ -77,8 +77,9 @@ export const catApi = {
   catLike: (catId) => instance.post(`/cat/like/${catId}`),
   catDetailLike: (catDetailId) =>
     instance.post(`/cat/detail/like/${catDetailId}`),
-
   editCatInfo: (catInfo, catId) => instance.put(`/cat/${catId}`, catInfo),
+  editCatDetailInfo: (detailInfo, catDeatilId) =>
+    instance.put(`/cat/detail/${catDeatilId}`, detailInfo),
 };
 
 export const communityApi = {

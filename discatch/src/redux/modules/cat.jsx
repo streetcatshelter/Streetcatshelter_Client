@@ -146,6 +146,28 @@ export const __createCatDetailInfo = (
   };
 };
 
+// 상세 정보 수정
+export const __editCatDetailInfo =
+  (HashTags, diary, food, snack, water, catDetailId, catImages) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const detailInfo = {
+        catImages: catImages,
+        catTags: HashTags,
+        diary: diary,
+        food: food,
+        snack: snack,
+        water: water,
+      };
+      console.log(detailInfo);
+      const { data } = await catApi.editCatDetailInfo(detailInfo, catDetailId);
+      console.log(data);
+      dispatch(setInitialState([]));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 // 지역에 따라 모든 게시물 불러오기
 export const __getAllCatLocation =
   (location, limit = 99999) =>

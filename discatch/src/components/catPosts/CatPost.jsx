@@ -41,7 +41,7 @@ const CatPost = ({ cat, location, path }) => {
         cursor={path === "detail" ? "" : "pointer"}
         addstyle={() => {
           return css`
-            ${flexBox("space-around")};
+            ${flexBox("space-around")}
           `;
         }}
       >
@@ -94,6 +94,7 @@ const CatPost = ({ cat, location, path }) => {
           </Grid>
           <Grid display="flex" justifyContent="center">
             <Grid
+              clickEvent={CatDetailBtn}
               addstyle={() => {
                 return css`
                   display: flex;

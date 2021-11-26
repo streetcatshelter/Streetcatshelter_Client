@@ -115,6 +115,11 @@ const Router = () => {
         component={Auth(CatDetailInfoWrite, true)}
         exact
       />
+      <Route
+        path="/catdetailinfoedit/:catDetailId"
+        component={Auth(CatDetailInfoWrite, true)}
+        exact
+      />
       <Route path="/catdetail" component={Auth(CatDetail, true)} exact />
       <Route
         path="/catdetail/:village/:catId"

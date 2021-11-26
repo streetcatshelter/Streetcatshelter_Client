@@ -1,10 +1,10 @@
 // LIBRARY
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
 // COMPONENTS
-import { Template } from "../../components";
+import { SecondHeader, Template } from "../../components";
 
 // ELEMENTS
 import { Grid, TextArea, Button, Input, Image, Text } from "../../elements";
@@ -18,13 +18,25 @@ import { Camera } from "react-feather";
 // REDUX
 import { history } from "../../redux/configureStore";
 import { imgActions } from "../../redux/modules/image";
-import { __createCatDetailInfo } from "../../redux/modules/cat";
-import { addHashTag, deleteHashTag } from "../../redux/modules/cat";
+import {
+  __createCatDetailInfo,
+  __editCatDetailInfo,
+} from "../../redux/modules/cat";
+import {
+  addHashTag,
+  deleteHashTag,
+  setInitialState,
+} from "../../redux/modules/cat";
 const CatDetailInfoWrite = (props) => {
   const dispatch = useDispatch();
+  const edit =
+    props.match.path?.split("/")[1] === "catdetailinfoedit" ? true : false;
+  const detail = useSelector((state) => state.cat.detail);
+  const catName = useSelector((state) => state.cat.catinfo.catName);
+  const CatId = useSelector((state) => state.cat.catinfo.catId);
   const HashTags = useSelector((state) => state.cat.hashtag);
   const preview = useSelector((state) => state.image.preview);
-  const catId = props.match.params.catId;
+  const catId = edit ? CatId : props.match.params.catId;
   const [fileNum, setFileNum] = useState(0);
 
   // S3
@@ -46,18 +58,20 @@ const CatDetailInfoWrite = (props) => {
     setTag(e.target.value);
   };
 
-  const [diary, setDiary] = useState("");
+  const [diary, setDiary] = useState(edit ? detail.diary : "");
   const $diary = (e) => {
     setDiary(e.target.value);
   };
 
-  const [food, setFood] = useState(false);
-  const [snack, setSnack] = useState(false);
-  const [water, setWater] = useState(false);
+  const [food, setFood] = useState(edit ? detail.food : false);
+  const [snack, setSnack] = useState(edit ? detail.snack : false);
+  const [water, setWater] = useState(edit ? detail.water : false);
 
-  let location = props.location.state.location;
-  const latitude = props.location.state.latitude;
-  const longitude = props.location.state.longitude;
+  let location = edit
+    ? props.location.state?.village
+    : props.location.state.location;
+  const latitude = edit ? "" : props.location.state.latitude;
+  const longitude = edit ? "" : props.location.state.longitude;
 
   const userVillage0 = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
@@ -80,27 +94,39 @@ const CatDetailInfoWrite = (props) => {
     (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
   );
 
-  if (location+' ' === userVillageA) {
-    location = userVillage0
-  } else if (location+' ' === userVillageB) {
-    location = userVillage1
-  } else if (location+' ' === userVillageC) {
-    location = userVillage2
+  if (location + " " === userVillageA) {
+    location = userVillage0;
+  } else if (location + " " === userVillageB) {
+    location = userVillage1;
+  } else if (location + " " === userVillageC) {
+    location = userVillage2;
   }
 
   const createBtn = () => {
-    dispatch(
-      __createCatDetailInfo(
-        HashTags,
-        diary,
-        food,
-        latitude,
-        longitude,
-        snack,
-        water,
-        catId
-      )
-    );
+    edit
+      ? dispatch(
+          __editCatDetailInfo(
+            HashTags,
+            diary,
+            food,
+            snack,
+            water,
+            detail.catDetailId,
+            detail.catImages
+          )
+        )
+      : dispatch(
+          __createCatDetailInfo(
+            HashTags,
+            diary,
+            food,
+            latitude,
+            longitude,
+            snack,
+            water,
+            catId
+          )
+        );
     history.push(`/catdetail/${location}/${catId}`);
   };
   const publish = (catTag) => {
@@ -115,85 +141,140 @@ const CatDetailInfoWrite = (props) => {
   const DeleteHashTag = (hashtag) => {
     dispatch(deleteHashTag(hashtag));
   };
+  useEffect(() => {
+    dispatch(setInitialState([]));
+
+    if (edit) {
+      if (detail.catTags) {
+        let tag;
+        for (let cattag of detail.catTags) {
+          tag = cattag;
+          if (tag !== "") {
+            dispatch(addHashTag(tag));
+          } else tag = [];
+        }
+      } else {
+        alert("잘못된 접근입니다.");
+        history.push("/");
+      }
+    }
+  }, []);
+
+  console.log(water, snack, food);
   return (
     <Template props={props}>
-      <Grid
-        width="80%"
-        bgColor="yellow"
-        padding="12px"
-        margin="5px auto"
-        radius="20px"
-        addstyle={() => {
-          return css`
-            ${flexBox()}
-            flex-direction:column;
-          `;
-        }}
-      >
-        <label htmlFor="imgFile">
-          <Camera width="100%" height="80" color="white" />
-        </label>
-        <Text>이곳을 클릭하여 사진을 등록해주세요!</Text>
-        <Input
-          id="imgFile"
-          name="imgFile"
-          type="file"
-          accept="image/png, image/jpeg"
-          changeEvent={handleInputFile}
+      {edit ? (
+        <SecondHeader title={`${catName}의 집사일기 수정`} />
+      ) : (
+        <Grid
+          width="80%"
+          bgColor="yellow"
+          padding="12px"
+          margin="5px auto"
+          radius="20px"
           addstyle={() => {
             return css`
-              display: none;
+              ${flexBox()}
+              flex-direction:column;
             `;
           }}
-        />
-      </Grid>
+        >
+          <label htmlFor="imgFile">
+            <Camera width="100%" height="80" color="white" />
+          </label>
+          <Text>이곳을 클릭하여 사진을 등록해주세요!</Text>
+          <Input
+            id="imgFile"
+            name="imgFile"
+            type="file"
+            accept="image/png, image/jpeg"
+            changeEvent={handleInputFile}
+            addstyle={() => {
+              return css`
+                display: none;
+              `;
+            }}
+          />
+        </Grid>
+      )}
+      {edit && detail.catImages ? (
+        <Grid
+          padding="5px 20px"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          margin="auto"
+        >
+          {detail.catImages.map((catImage, idx) => {
+            return (
+              <Grid
+                display="flex"
+                justifyContent="center"
+                margin="auto"
+                key={idx}
+              >
+                <Image
+                  src={catImage}
+                  alt="CatImage"
+                  width="100px"
+                  height="100px"
+                />
+              </Grid>
+            );
+          })}
+          <Text size="12px" style={{ textAlign: "center", marginTop: "10px" }}>
+            ❌집사일기는 사진을 수정할 수 없습니다❌
+          </Text>
+        </Grid>
+      ) : (
+        <Grid
+          padding="5px 20px"
+          display="flex"
+          justifyContent="center"
+          margin="auto"
+        >
+          {preview && preview[0] && (
+            <Grid width="33%" margin="auto">
+              <Image
+                borderRadius="10px"
+                src={preview[0].preview}
+                width="100px"
+                height="100px"
+                margin="auto"
+              />
+            </Grid>
+          )}
 
-      <Grid
-        padding="5px 20px"
-        display="flex"
-        justifyContent="center"
-        margin="auto"
-      >
-        {preview && preview[0] && (
-          <Grid width="33%" margin="auto">
-            <Image
-              borderRadius="10px"
-              src={preview[0].preview}
-              width="100px"
-              height="100px"
-              margin="auto"
-            />
-          </Grid>
-        )}
+          {preview && preview[1] && (
+            <Grid width="33%" margin="auto">
+              <Image
+                borderRadius="10px"
+                src={preview[1].preview}
+                width="100px"
+                height="100px"
+                margin="auto"
+              />
+            </Grid>
+          )}
 
-        {preview && preview[1] && (
-          <Grid width="33%" margin="auto">
-            <Image
-              borderRadius="10px"
-              src={preview[1].preview}
-              width="100px"
-              height="100px"
-              margin="auto"
-            />
-          </Grid>
-        )}
-
-        {preview && preview[2] && (
-          <Grid width="33%" margin="auto">
-            <Image
-              borderRadius="10px"
-              src={preview[2].preview}
-              width="100px"
-              height="100px"
-              margin="auto"
-            />
-          </Grid>
-        )}
-      </Grid>
-
-      <Text margin="5px auto 10px auto" fontWeight="bold">
-        {fileNum}/3
-      </Text>
+          {preview && preview[2] && (
+            <Grid width="33%" margin="auto">
+              <Image
+                borderRadius="10px"
+                src={preview[2].preview}
+                width="100px"
+                height="100px"
+                margin="auto"
+              />
+            </Grid>
+          )}
+        </Grid>
+      )}
+      {!edit && (
+        <Text margin="5px auto 10px auto" fontWeight="bold">
+          {fileNum}/3
+        </Text>
+      )}
 
       <Grid
         display="flex"
@@ -204,7 +285,17 @@ const CatDetailInfoWrite = (props) => {
         <CheckGrid>
           <CheckBox
             type="checkbox"
-            value="food"
+            checked={water}
+            onChange={(e) => {
+              setWater(e.target.checked);
+            }}
+          />
+          <CheckText>급수</CheckText>
+        </CheckGrid>
+        <CheckGrid>
+          <CheckBox
+            type="checkbox"
+            checked={food}
             onChange={(e) => {
               setFood(e.target.checked);
             }}
@@ -215,22 +306,12 @@ const CatDetailInfoWrite = (props) => {
         <CheckGrid>
           <CheckBox
             type="checkbox"
-            value="snack"
+            checked={snack}
             onChange={(e) => {
               setSnack(e.target.checked);
             }}
           />
           <CheckText>간식</CheckText>
-        </CheckGrid>
-        <CheckGrid>
-          <CheckBox
-            type="checkbox"
-            value="water"
-            onChange={(e) => {
-              setWater(e.target.checked);
-            }}
-          />
-          <CheckText>급수</CheckText>
         </CheckGrid>
       </Grid>
       <Grid width="85%" margin="auto">
@@ -244,6 +325,7 @@ const CatDetailInfoWrite = (props) => {
           width="90%"
           height="80px"
           type="text"
+          value={diary}
           placeholder="다이어리를 입력해주세요."
           addstyle={() => {
             return css`

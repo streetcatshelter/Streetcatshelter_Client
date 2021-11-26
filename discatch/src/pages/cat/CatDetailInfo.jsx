@@ -30,12 +30,14 @@ import {
 } from "../../redux/modules/cat";
 import { __getDetailComment } from "../../redux/modules/comment";
 
+import { history } from "../../redux/configureStore";
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
+
   const isLoaded = useSelector((state) => state.mypage.isLoaded);
   const commentList = useSelector((state) => state.comment.list);
   const catDetailId = props.match.params.catDetailId;
-
+  const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
   const image = detail.catImages;
   const likeToggle = () => {
@@ -54,6 +56,12 @@ const CatDetailInfo = (props) => {
     dispatch(__deleteCatDetail(catDetailId));
   };
 
+  const editCatDetail = () => {
+    history.push({
+      pathname: `/catdetailinfoedit/${catDetailId}`,
+      state: village,
+    });
+  };
   return (
     <>
       <Spinner visible={isLoaded} />
@@ -62,7 +70,7 @@ const CatDetailInfo = (props) => {
           path="catdetail"
           FirstBtn="수정"
           SecondBtn="삭제"
-          FirstClick={() => {}}
+          FirstClick={editCatDetail}
           SecondClick={deleteCatDetail}
         />
         {image && image[0] && (

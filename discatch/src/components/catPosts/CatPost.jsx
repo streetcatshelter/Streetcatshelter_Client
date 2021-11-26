@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 // ELEMENTS
-import { Grid, Text, Image, Button } from "../../elements";
+import { Grid, Text, Image } from "../../elements";
 
 // REDUX
 import { history } from "../../redux/configureStore";
@@ -33,7 +33,7 @@ const CatPost = ({ cat, location, path }) => {
   return (
     <React.Fragment>
       <Grid
-        margin="3% 0 0 0"
+        margin="2.4% 0 0 0"
         bgColor="diaryColor"
         display="flex"
         padding="8px"

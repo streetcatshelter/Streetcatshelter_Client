@@ -1,9 +1,9 @@
 // LIBRARY
 import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
 
 // STYLE
 import { flexBox } from "../shared/style";
+import styled, { css } from "styled-components";
 
 // ROUTE
 import { Link } from "react-router-dom";

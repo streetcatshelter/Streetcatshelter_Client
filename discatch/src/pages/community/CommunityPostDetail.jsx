@@ -21,7 +21,6 @@ import {
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
-
   const { category, contents, imageList, title, location } = useSelector(
     (state) => ({
       category: state.community.list.data?.category,

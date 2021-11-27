@@ -7,10 +7,19 @@ import styled from "styled-components";
 // ROUTE
 import { useLocation } from "react-router-dom";
 
-const TextArea = ({ value, placeholder, changeEvent, keyPress, ...props }) => {
-  const path = useLocation();
-  const pathCheck = path.pathname.split("/")[4];
+const TextArea = ({ value, placeholder, changeEvent, keyPress, onInput, ...props }) => {
   const ref = useRef(null);
+  const path = useLocation();
+  const pathCheck = path.pathname.split("/")[4] ? path.pathname.split("/")[4] : path.pathname.split("/")[1];
+
+  const handleResizeHeight = useCallback(() => {
+    if (ref === null || ref.current === null) {
+      return;
+    }
+    ref.current.style.height = '12px';
+    ref.current.style.height = ref.current.scrollHeight + "px";
+  }, []);
+
   useEffect(() => {
     if (ref === null || ref.current === null) {
       return;
@@ -18,15 +27,8 @@ const TextArea = ({ value, placeholder, changeEvent, keyPress, ...props }) => {
     ref.current.style.height = "12px";
     ref.current.style.height = ref.current.scrollHeight + "px";
   }, []);
-  const handleResizeHeight = useCallback(() => {
-    if (ref === null || ref.current === null) {
-      return;
-    }
-    ref.current.style.height = "12px";
-    ref.current.style.height = ref.current.scrollHeight + "px";
-  }, []);
 
-  if (pathCheck === "postdetail") {
+  if (pathCheck === "postdetail" || pathCheck === "catdetail" || pathCheck === "catdetailinfo") {
     return (
       <TextAreaStyle
         value={value}

@@ -23,8 +23,8 @@ import { chatActions } from "../../redux/modules/chat";
 import { __deleteComment } from "../../redux/modules/comment";
 
 const CommentCard = ({ comment, communityId }) => {
-  const commentId = comment.commentId;
   const dispatch = useDispatch();
+  const commentId = comment.commentId;
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [ProfileModal, setProfileModal] = useState(false);
   const CreatedAt = moment(comment.createdAt).format("YYYY-M-D hh:mm");

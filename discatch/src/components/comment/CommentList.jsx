@@ -22,7 +22,6 @@ import {
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
   const community = useSelector((state) => state.community.list);
-
   const [comments, setComment] = React.useState("");
   let commentList;
   if (path === "CatDetail" || path === "CatDetailInfo") {
@@ -35,16 +34,21 @@ const CommentList = ({ props, path, catId, communityId }) => {
     setComment(event.target.value);
   };
 
-  const addCommentBtn = () => {
-    if (path === "CatDetail") {
-      dispatch(__createCatComment(catId, comments));
-    } else if (path === "CatDetailInfo") {
-      dispatch(__createCatDetailComment(catId, comments));
+  const addCommentBtn = (inputRef) => {
+    if (comments === '') {
+      alert('댓글을 입력해주세요!');
     } else {
-      dispatch(addCommunityCommentDB(comments, communityId));
+      if (path === "CatDetail") {
+        dispatch(__createCatComment(catId, comments));
+      } else if (path === "CatDetailInfo") {
+        dispatch(__createCatDetailComment(catId, comments));
+      } else {
+        dispatch(addCommunityCommentDB(comments, communityId));
+      }
+      setComment("");
     }
-    setComment("");
   };
+
   return (
     <>
       <Comment path={path} />
@@ -71,7 +75,6 @@ const CommentList = ({ props, path, catId, communityId }) => {
               border-radius: 10px;
               resize: none;
               overflow-y: hidden;
-              height: 50px;
               padding: 5px;
             `;
           }}
@@ -90,7 +93,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
               justify-content: center;
               padding: 5px;
               margin-left: 3px;
-              bottom: 6px;
+              bottom: 7px;
             `;
           }}
         >

@@ -129,6 +129,7 @@ const ContentHeader = ({
                   <Text
                     fontWeight="bold"
                     size="10px"
+                    width="100px"
                     addstyle={() => {
                       return css`
                         line-height: 12px;

@@ -177,7 +177,43 @@ const ChatWrap = styled.div`
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1280px) {
+    height: 70vh;
+  }
+  @media screen and (max-width: 1024px) {
+    height: 85vh;
+  }
+  @media screen and (max-width: 1024px) and (min-height: 800px) {
+    height: 75vh;
+  }
+  @media screen and (max-width: 1024px) and (min-height: 1366px) {
+    height: 83vh;
+  }
+  @media screen and (max-width: 1024px) and (max-height: 600px) {
+    height: 65vh;
+  }
+  @media screen and (max-width: 768px) {
+    height: 78vh;
+  }
+  @media screen and (max-width: 768px) and (min-height: 800px) {
+    height: 74vh;
+  }
+  @media screen and (max-width: 540px) {
+    height: 70vh;
+  }
   @media screen and (max-width: 375px) {
+    height: 68vh;
+  }
+  @media screen and (max-width: 375px) and (min-height: 812px) {
+    height: 71vh;
+  }
+  @media screen and (max-width: 360px) {
+    height: 65vh;
+  }
+  @media screen and (max-width: 320px) {
+    height: 63vh;
+  }
+  @media screen and (max-width: 280px) {
     height: 65vh;
   }
 `;
@@ -192,6 +228,9 @@ const Header = styled.div`
   z-index: 1000;
   justify-content: space-between;
   border-bottom: 0.2px solid #d19b61;
+  @media screen and (max-width: 320px) {
+    width: 100%;
+  }
 `;
 
 const InfoBox = styled.div`
@@ -227,7 +266,7 @@ const CallBox = styled.div`
 
 const ChatSendBox = styled.div`
   position: fixed;
-  bottom: 60px;
+  bottom: 80px;
   display: flex;
   align-items: flex-end;
   background: #fefdf8;
@@ -238,8 +277,53 @@ const ChatSendBox = styled.div`
   border-radius: 10px;
   margin: auto;
   z-index: 1200;
+  @media screen and (max-width: 1024px) {
+    bottom: 70px;
+  }
+  @media screen and (max-width: 1024px) and (min-height: 800px) {
+    bottom: 80px;
+  }
+  @media screen and (max-width: 768px) {
+    bottom: 85px;
+  }
+  @media screen and (max-width: 540px) {
+    bottom: 70px;
+  }
+  @media screen and (max-width: 540px) and (min-height: 800px) {
+    bottom: 80px;
+  }
+  @media screen and (max-width: 414px) {
+    bottom: 80px;
+  }
+  @media screen and (max-width: 411px) {
+    bottom: 90px;
+  }
+  @media screen and (max-width: 411px) and (max-height: 731px) {
+    bottom: 80px;
+  }
   @media screen and (max-width: 375px) {
+    bottom: 75px;
     width: 90%;
+  }
+  @media screen and (max-width: 375px) and (min-height: 812px) {
+    bottom: 85px;
+    width: 90%;
+  }
+  @media screen and (max-width: 320px) {
+    bottom: 60px;
+    width: 88%;
+  }
+  @media screen and (max-width: 320px) and (min-height: 800px) {
+    bottom: 80px;
+    width: 88%;
+  }
+  @media screen and (max-width: 280px) {
+    bottom: 70px;
+    width: 87%;
+  }
+  @media screen and (max-width: 280px) and (min-height: 800px) {
+    bottom: 85px;
+    width: 88%;
   }
 `;
 const ChatInput = styled.textarea`

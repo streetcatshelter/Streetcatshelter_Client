@@ -200,7 +200,18 @@ const Header = (props) => {
           </Link>
         </Head>
 
-        <Grid width="20%" height="100%" margin="auto">
+        <Grid 
+          width="20%" 
+          height="100%" 
+          margin="auto"
+          addstyle={() => {
+            return css`
+              @media screen and (max-width: 280px) {
+                position: relative;
+                right: 25px;
+              }
+            `;
+          }}>
           <Grid margin="30px 10px" height="25px" width="60px">
             {/* <SearchBtn
               style={{ color: "gray" }}

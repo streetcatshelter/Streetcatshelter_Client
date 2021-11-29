@@ -88,7 +88,7 @@ const CommentCard = ({ comment, communityId }) => {
 
 const Wrap = styled.div`
   width: 95%;
-  margin: 20px auto;
+  margin: 0 auto 20px;
 `;
 const Header = styled.div`
   display: flex;

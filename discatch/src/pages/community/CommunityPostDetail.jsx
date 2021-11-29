@@ -87,7 +87,7 @@ const CommunityPostDetail = (props) => {
               <Image
                 width="286px"
                 height="286px"
-                margin="10px auto"
+                margin="20px auto"
                 src={imageList[0].image}
               />
             )}
@@ -95,7 +95,7 @@ const CommunityPostDetail = (props) => {
               <Image
                 width="286px"
                 height="286px"
-                margin="10px auto"
+                margin="20px auto"
                 src={imageList[1].image}
               />
             )}
@@ -103,7 +103,7 @@ const CommunityPostDetail = (props) => {
               <Image
                 width="286px"
                 height="286px"
-                margin="10px auto"
+                margin="20px auto"
                 src={imageList[2].image}
               />
             )}
@@ -111,7 +111,7 @@ const CommunityPostDetail = (props) => {
               <Image
                 width="286px"
                 height="286px"
-                margin="10px auto"
+                margin="20px auto"
                 src={imageList[3].image}
               />
             )}
@@ -119,7 +119,7 @@ const CommunityPostDetail = (props) => {
               <Image
                 width="286px"
                 height="286px"
-                margin="10px auto"
+                margin="20px auto"
                 src={imageList[4].image}
               />
             )}
@@ -129,6 +129,7 @@ const CommunityPostDetail = (props) => {
             addstyle={() => {
               return css`
                 position: relative;
+                bottom:10px;
                 margin: 5px 10px;
               `;
             }}

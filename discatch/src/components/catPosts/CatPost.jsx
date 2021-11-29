@@ -15,9 +15,9 @@ import { flexBox } from "../../shared/style";
 
 // ICON
 import FavoriteIcon from "@material-ui/icons/Favorite";
-// ICON
 import { MoreHorizontal } from "react-feather";
-const CatPost = ({ cat, location, path }) => {
+
+const CatPost = ({ cat, location, path, pathLocation }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
@@ -26,7 +26,7 @@ const CatPost = ({ cat, location, path }) => {
   };
   const CatDetailBtn = () => {
     if (path !== "detail") {
-      history.push(`/catdetail/${location}/${cat.catId}`);
+      history.push(`/catdetail/${pathLocation}/${cat.catId}`);
     } else return;
   };
 

@@ -70,7 +70,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
           addstyle={() => {
             return css`
               position: relative;
-              bottom: 10px;
+              bottom: 20px;
               border: 1px solid rgb(${(props) => props.theme.palette.yellow});
               border-radius: 10px;
               resize: none;
@@ -93,7 +93,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
               justify-content: center;
               padding: 5px;
               margin-left: 3px;
-              bottom: 7px;
+              bottom: 17px;
             `;
           }}
         >

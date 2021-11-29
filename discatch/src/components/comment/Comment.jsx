@@ -34,6 +34,8 @@ const Comment = ({ path }) => {
       margin="20px auto 15px auto"
       addstyle={() => {
         return css`
+          position: relative;
+          bottom: 15px;
           display: flex;
           border-bottom: 1px solid rgb(${(props) => props.theme.palette.olive});
         `;
@@ -117,7 +119,11 @@ const Comment = ({ path }) => {
                 `;
               }}
             >
-              {community.data?.cntLikeit}
+              {String(community.data?.cntLikeit).length > 3
+                ? `${String(community.data?.cntLikeit)[0]}${"0".repeat(
+                    String(community.data?.cntLikeit).length - 4
+                  )}K`
+                : community.data?.cntLikeit}
             </Text>
           </Grid>
         </Grid>

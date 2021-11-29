@@ -110,7 +110,11 @@ const Home = (props) => {
                     length={catList.length}
                     key={cat.catId}
                   >
-                    <CatPost cat={cat} location={pathLocation} />
+                    <CatPost
+                      cat={cat}
+                      pathLocation={pathLocation}
+                      location={location}
+                    />
                   </InfinityScroll>
                 </Grid>
               );

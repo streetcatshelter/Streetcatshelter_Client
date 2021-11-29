@@ -1,5 +1,5 @@
 // LIBRARY
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { history } from "../redux/configureStore";
 
@@ -39,7 +39,7 @@ import test from "../pages/test";
 
 // * == ( Router ) -------------------- * //
 const Router = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     const Onboarding = localStorage.getItem("onboarding");
 
     if (!Onboarding) history.replace("/slider");

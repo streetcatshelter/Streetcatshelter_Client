@@ -1,8 +1,6 @@
 // LIBRARY
 import React from "react";
 import moment from "moment";
-import { useSelector } from "react-redux";
-
 // ELEMENTS
 import { Grid, Text, Image } from "../../elements";
 import { flexBox } from "../../shared/style";

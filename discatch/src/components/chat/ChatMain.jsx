@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect } from "react";
+import React from "react";
 
 // STYLE
 import styled from "styled-components";
@@ -19,10 +19,6 @@ const ChatMain = (props) => {
   const location = props.props.location.state.location;
   const dispatch = useDispatch();
   const Rooms = useSelector((state) => state.chat.roomlist);
-
-  useEffect(() => {
-    dispatch(chatActions._getRooms());
-  }, [dispatch]);
 
   return (
     <React.Fragment>

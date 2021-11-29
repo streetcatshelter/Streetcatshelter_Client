@@ -9,10 +9,10 @@ import moment from "moment";
 import EditModalSlide from "../EditModalSlide";
 
 // ELEMENTS
-import { Text } from '../../elements/index';
+import { Text } from "../../elements/index";
 
 // STYLE
-import styled, { css }from "styled-components";
+import styled, { css } from "styled-components";
 
 // ICON
 import { Trash2 } from "react-feather";
@@ -28,7 +28,7 @@ const CommentCard = ({ comment, communityId }) => {
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [ProfileModal, setProfileModal] = useState(false);
   const CreatedAt = moment(comment.createdAt).format("YYYY-M-D hh:mm");
-  
+
   const OpenProfile = () => {
     if (UserInfo.nickname !== comment.nickname) {
       setProfileModal(!ProfileModal);
@@ -44,6 +44,10 @@ const CommentCard = ({ comment, communityId }) => {
     communityId
       ? dispatch(deleteCommunityCommentDB(commentId, communityId))
       : dispatch(__deleteComment(commentId));
+  };
+
+  const UserProfile = () => {
+    alert("버전2에서 준비중입니다!");
   };
   return (
     <Wrap>
@@ -65,21 +69,24 @@ const CommentCard = ({ comment, communityId }) => {
           )}
         </Right>
       </Header>
-      <Text 
-          width="280px" 
-          margin="0 0 0 10px" 
-          padding="4px"
-          addstyle={() => {
-            return css`
-              border-radius: 10px;
-            `;
-          }}>{comment.contents}</Text>
+      <Text
+        width="280px"
+        margin="0 0 0 10px"
+        padding="4px"
+        addstyle={() => {
+          return css`
+            border-radius: 10px;
+          `;
+        }}
+      >
+        {comment.contents}
+      </Text>
       <EditModalSlide
         FirstBtn="프로필보기"
         SecondBtn="채팅하기"
         Profile="profile"
         openModal={ProfileModal}
-        FirstClick={() => {}}
+        FirstClick={UserProfile}
         SecondClick={MakeChat}
       />
     </Wrap>

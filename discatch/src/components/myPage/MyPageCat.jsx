@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect } from "react";
+import React from "react";
 
 // MOMENT
 import moment from "moment";
@@ -12,12 +12,10 @@ import { Image } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
 
 // REDUX
-import { useDispatch, useSelector } from "react-redux";
-import { mypageActions } from "../../redux/modules/mypage";
+import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 
 const MyPageCat = () => {
-  const dispatch = useDispatch();
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
   let location = LikedAllCat.location;
 
@@ -42,18 +40,14 @@ const MyPageCat = () => {
     (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
   );
 
-  if (location === userVillageA + ' ') {
-    location = userVillage0
-  } else if (location === userVillageB + ' ') {
-    location = userVillage1
-  } else if (location === userVillageC + ' ') {
-    location = userVillage2
+  if (location === userVillageA + " ") {
+    location = userVillage0;
+  } else if (location === userVillageB + " ") {
+    location = userVillage1;
+  } else if (location === userVillageC + " ") {
+    location = userVillage2;
   }
 
-  useEffect(() => {
-    dispatch(mypageActions._getLikedAllCat());
-  }, [dispatch]);
-  
   return (
     <div>
       {LikedAllCat.map((LikedCat, idx) => {

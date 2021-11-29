@@ -1,19 +1,15 @@
 // LIBRARY
 import React, { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 // MOMENT
 import "moment/locale/ko";
 import moment from "moment";
 
-// REDUX
-import { chatActions } from "../../redux/modules/chat";
-
 // STYLE
 import styled from "styled-components";
 
 const ChatMessage = (props) => {
-  const dispatch = useDispatch();
   const commentsEndRef = useRef(null);
   const LastMessages = useSelector((state) => state.chat.chatmessage);
   const NickName = useSelector((state) => state.mypage.userInfo.nickname);
@@ -25,9 +21,6 @@ const ChatMessage = (props) => {
     scrollToBottom();
   }, [LastMessages]);
 
-  useEffect(() => {
-    dispatch(chatActions._getAllMessage(props.roomId));
-  }, []);
   return (
     <div>
       {LastMessages ? (

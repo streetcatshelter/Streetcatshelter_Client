@@ -65,15 +65,27 @@ const CommunityPost = ({ community }) => {
               <Text
                 width="100%"
                 size="10px"
-                margin="0 0 0 150px"
+                margin="0 0 0 120px"
                 fontWeight="bold"
                 addstyle={() => {
                   return css`
+                    @media screen and (max-width: 1024px) {
+                      margin: 0 0 0 80px;
+                    }
+                    @media screen and (max-width: 768px) {
+                      margin: 0 0 0 80px;
+                    }
                     @media screen and (max-width: 414px) {
-                      margin: 0 0 0 100px;
+                      margin: 0 0 0 70px;
+                    }
+                    @media screen and (max-width: 375px) {
+                      margin: 0 0 0 40px;
+                    }
+                    @media screen and (max-width: 320px) {
+                      margin: 0;
                     }
                     @media screen and (max-width: 280px) {
-                      margin: 0 0 0 10px;
+                      margin: 0 0 0 -50px;
                     }
                   `;
                 }}
@@ -101,13 +113,15 @@ const CommunityPost = ({ community }) => {
                 `;
               }}
             >
-              <Grid></Grid>
+              <Grid>
+              </Grid>
               <Grid
                 addstyle={() => {
                   return css`
                     display: flex;
                     position: relative;
                     justify-content: space-between;
+                    right: 20px;
                     margin: 10px 0 0 120px;
                     @media screen and (max-width: 280px) {
                       margin: 10px 0 0 12px;
@@ -123,7 +137,7 @@ const CommunityPost = ({ community }) => {
                   }}
                 >
                   <Eye style={{ width: "13px", margin: "-4px 3px 0 0" }} />
-                  <Text size={"12px"} fontWeight={"bold"}>
+                  <Text size={"12px"} fontWeight={"bold"} width="35px">
                     {String(community.cntView).length > 3
                       ? `${String(community.cntView)[0]}${"0".repeat(
                           String(community.cntView).length - 4
@@ -141,7 +155,7 @@ const CommunityPost = ({ community }) => {
                   <MessageCircle
                     style={{ width: "13px", margin: "-4px 3px 0 0" }}
                   />
-                  <Text size={"12px"} fontWeight={"bold"}>
+                  <Text size={"12px"} fontWeight={"bold"} width="35px">
                     {String(community.cntComment).length > 3
                       ? `${String(community.cntComment)[0]}${"0".repeat(
                           String(community.cntComment).length - 4
@@ -160,10 +174,10 @@ const CommunityPost = ({ community }) => {
                     style={{
                       width: "13px",
                       margin: "-4px 3px 0 0",
-                      color: "red",
+                      color: community.cntLikeit > 0 ? 'red' : 'gray',
                     }}
                   />
-                  <Text size={"12px"} fontWeight={"bold"}>
+                  <Text size={"12px"} fontWeight={"bold"} width="35px">
                     {String(community.cntLikeit).length > 3
                       ? `${String(community.cntLikeit)[0]}${"0".repeat(
                           String(community.cntLikeit).length - 4

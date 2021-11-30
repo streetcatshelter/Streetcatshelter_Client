@@ -14,7 +14,6 @@ import { EditModalSlide } from "..";
 // REDUX
 import { history } from "../../redux/configureStore";
 import { userActions } from "../../redux/modules/user";
-import { mypageActions } from "../../redux/modules/mypage";
 
 const Profile = (props) => {
   const dispatch = useDispatch();
@@ -22,14 +21,10 @@ const Profile = (props) => {
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const NickName = UserInfo.nickname === "string" ? "" : UserInfo.nickname;
 
-  useEffect(() => {
-    dispatch(mypageActions._getUserInfo());
-  }, [dispatch]);
-
   const logout = () => {
     dispatch(userActions._logout());
   };
-  
+
   if (!UserInfo) {
     return <div></div>;
   }

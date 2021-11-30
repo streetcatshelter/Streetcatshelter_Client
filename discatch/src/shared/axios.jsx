@@ -84,16 +84,16 @@ export const catApi = {
 
 export const communityApi = {
   createCommunity: (postInfo) => instance.post("/community/create", postInfo),
-  getCommunity: (category, location, limit) =>
+  getCommunity: (category, location, page) =>
     instance.get(
-      `/community/category/${category}/?page=1&size=${limit}&location=${location}`
+      `/community/category/${category}/?page=${page}&size=10&location=${location}`
     ),
-  getMoreCommunity: (category, start, limit, location) =>
-    instance.get(
-      `/community/category/${category}/?page=${
-        start + 1
-      }&size=${limit}&location=${location}`
-    ),
+  // getMoreCommunity: (category, start, limit, location) =>
+  //   instance.get(
+  //     `/community/category/${category}/?page=${
+  //       start + 1
+  //     }&size=${limit}&location=${location}`
+  //   ),
   getDetailCommunity: (communityId) =>
     instance.get(`/community/${communityId}`),
   updateCommunity: (

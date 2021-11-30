@@ -10,7 +10,6 @@ const _getUserInfo =
   () =>
   async (dispatch, getState, { history }) => {
     try {
-      dispatch(loading(true));
       const { data } = await myPageApi.getUserInfo();
       dispatch(setUserInfo(data));
     } catch (e) {
@@ -57,6 +56,7 @@ const _getLikedAllCat =
   () =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(pageLoading(true));
       const { data } = await myPageApi.getLikedAllCat();
       dispatch(setLikedAllCat(data));
     } catch (e) {
@@ -147,7 +147,8 @@ const initialState = {
     { catId: null, catName: null, food: false, snack: false, water: false },
   ],
   userVillage: [],
-  isLoaded: false,
+  pageLoaded: false,
+  userLoaded: false,
 };
 
 // REDUCER
@@ -163,12 +164,12 @@ const mypage = createSlice({
     },
     setLikedAllCat: (state, action) => {
       state.likedAllCat = action.payload;
+      state.pageLoaded = false;
     },
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
       const Village = [...action.payload.locationList];
       state.userVillage = Village;
-      state.isLoaded = false;
     },
     setCalendar: (state, action) => {
       state.calendar = action.payload;
@@ -188,8 +189,11 @@ const mypage = createSlice({
         ),
       };
     },
-    loading: (state, action) => {
-      state.isLoaded = action.payload;
+    pageLoading: (state, action) => {
+      state.pageLoaded = action.payload;
+    },
+    userLoading: (state, action) => {
+      state.userLoaded = action.payload;
     },
   },
 });
@@ -214,6 +218,7 @@ export const {
   setCalendarDetail,
   saveVillage,
   deleteVillage,
-  loading,
+  pageLoading,
+  userLoading,
 } = mypage.actions;
 export default mypage;

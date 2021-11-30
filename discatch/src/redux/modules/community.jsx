@@ -55,7 +55,6 @@ export const getCommunityDB =
     try {
       dispatch(itemLoading);
       const data = await communityApi.getCommunity(category, location, page);
-
       dispatch(getCommunity(data.data));
     } catch (err) {
       window.alert("페이지에 오류가 있어요!");

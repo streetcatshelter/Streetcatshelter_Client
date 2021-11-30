@@ -105,20 +105,26 @@ const CommunityPostWrite = (props) => {
     setCategory(e.currentTarget.value);
   };
 
-  const [title, setTitle] = React.useState();
+  const [title, setTitle] = React.useState('');
   const $title = (e) => {
     setTitle(e.target.value);
   };
 
-  const [contents, setContents] = React.useState();
+  const [contents, setContents] = React.useState('');
   const $contents = (e) => {
     setContents(e.target.value);
   };
 
   const writeBtn = () => {
-    dispatch(
-      addCommunityDB(category, contents, location, title, detailLocation, nickName)
-    );
+    if (title === '') {
+      alert('제목을 입력해주세요!');
+    } else if (contents === '') {
+      alert('내용을 입력해주세요!');
+    } else {
+      dispatch(
+        addCommunityDB(category, contents, location, title, detailLocation, nickName)
+      );
+    }
   };
 
   const cancelBtn = () => {

@@ -72,18 +72,24 @@ const CommunityPostEdit = (props) => {
   };
 
   const editBtn = () => {
-    dispatch(imgActions.setFiles(imageList, imageNum));
-    dispatch(
-      editCommunityDB(
-        communityId,
-        category,
-        editcontents,
-        location,
-        editTitle,
-        username,
-        imageList
-      )
-    );
+    if (editTitle === '') {
+      alert('제목을 입력해주세요!');
+    } else if (editcontents === '') {
+      alert('내용을 입력해주세요!');
+    } else {
+      dispatch(imgActions.setFiles(imageList, imageNum));
+      dispatch(
+        editCommunityDB(
+          communityId,
+          category,
+          editcontents,
+          location,
+          editTitle,
+          username,
+          imageList
+        )
+      );
+    }
   };
 
   const delLastImageBtn = () => {

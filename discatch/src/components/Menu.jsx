@@ -1,6 +1,6 @@
 // LIBRARY
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 // STYLE
 import { flexBox } from "../shared/style";

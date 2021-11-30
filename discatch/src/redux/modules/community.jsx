@@ -56,7 +56,7 @@ export const getCommunityDB =
     try {
       const data = await communityApi.getCommunity(category, location, limit);
       let communityList = data.data;
-      dispatch(getCommunity(communityList, null));
+      dispatch(getCommunity(communityList));
     } catch (err) {
       window.alert("페이지에 오류가 있어요!");
       console.error(err);
@@ -67,7 +67,6 @@ export const getMoreCommunityDB =
   (category, location, limit = 10) =>
   async (dispatch, getState, { history }) => {
     let start = getState().community.start;
-
     if (start === null) {
       return;
     } else {
@@ -81,7 +80,7 @@ export const getMoreCommunityDB =
         location
       );
       const communityList = data.data;
-      dispatch(getMoreCommunity(communityList, null));
+      dispatch(getMoreCommunity(communityList));
     } catch (err) {
       console.error(err);
     }
@@ -298,6 +297,7 @@ const community = createSlice({
   },
 });
 
+
 export const {
   addCommunity,
   getCommunity,
@@ -309,4 +309,5 @@ export const {
   getCommunityComment,
   deleteCommunityComment,
 } = community.actions;
+
 export default community;

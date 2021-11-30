@@ -17,36 +17,6 @@ import { history } from "../../redux/configureStore";
 
 const MyPageCat = () => {
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
-  let location = LikedAllCat.location;
-
-  const userVillage0 = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageA = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage1 = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageB = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage2 = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageC = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
-  );
-
-  if (location === userVillageA + " ") {
-    location = userVillage0;
-  } else if (location === userVillageB + " ") {
-    location = userVillage1;
-  } else if (location === userVillageC + " ") {
-    location = userVillage2;
-  }
 
   return (
     <div>
@@ -55,15 +25,14 @@ const MyPageCat = () => {
           "YYYY-M-D hh:mm"
         );
         const myActivity = moment(LikedCat.myActivity).format("YYYY-M-D hh:mm");
-
+        
         return (
           <CatPost
             key={idx}
             onClick={() => {
-              // history.push(`/catdetail/${LikedCat.catId}`);
               history.push({
-                pathname: `/catdetail/${location}/${LikedCat.catId}`,
-                state: { location },
+                pathname: `/catdetail/${LikedCat.location.split(' ')[2]}/${LikedCat.catId}`,
+                state: { location : LikedCat.location.split(' ')[2] },
               });
             }}
           >

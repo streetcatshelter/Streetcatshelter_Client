@@ -1,20 +1,20 @@
 // LIBRARY
 import React from "react";
+import { useSelector } from "react-redux";
 
 // MOMENT
 import moment from "moment";
 
 // STYLE
 import styled from "styled-components";
+import nocatimage from "../../styles/images/nocatimage.jpg";
 
 // ELEMENTS
 import { Image } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
 
 // REDUX
-import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
-import nocatimage from "../../styles/images/nocatimage.jpg";
 
 const MyPageCat = () => {
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);

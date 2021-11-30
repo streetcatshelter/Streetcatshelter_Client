@@ -1,11 +1,8 @@
 // LIBRARY
 import React from "react";
-import moment from "moment";
-import { useSelector } from "react-redux";
 
 // ELEMENTS
 import { Grid, Text, Image } from "../../elements";
-import { flexBox } from "../../shared/style";
 
 // ICON
 import { Eye, MessageCircle } from "react-feather";
@@ -13,9 +10,13 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 
 // STYLE
 import { css } from "styled-components";
+import { flexBox } from "../../shared/style";
 
 // REDUX
 import { history } from "../../redux/configureStore";
+
+// MOMENT
+import moment from "moment";
 
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;

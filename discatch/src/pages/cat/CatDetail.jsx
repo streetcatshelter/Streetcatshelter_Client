@@ -1,5 +1,6 @@
 // LIBRARY
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import { css } from "styled-components";
@@ -24,7 +25,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
-import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { __getCatInfo } from "../../redux/modules/cat";
 import { __getComment } from "../../redux/modules/comment";

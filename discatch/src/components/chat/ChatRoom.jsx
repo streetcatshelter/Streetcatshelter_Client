@@ -191,6 +191,21 @@ const ChatWrap = styled.div`
   @media screen and (max-width: 768px) and (min-height: 800px) {
     height: 74vh;
   }
+  @media screen and (max-height: 800px) {
+    height: 70vh;
+  }
+  @media screen and (max-height: 710px) {
+    height: 65vh;
+  }
+  @media screen and (max-height: 610px) {
+    height: 60vh;
+  }
+  @media screen and (max-height: 540px) {
+    height: 55vh;
+  }
+  @media screen and (max-height: 500px) {
+    height: 52vh;
+  }
   @media screen and (max-width: 540px) {
     height: 70vh;
   }

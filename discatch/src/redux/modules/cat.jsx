@@ -1,3 +1,4 @@
+/* eslint-disable */
 // API
 import { createSlice } from "@reduxjs/toolkit";
 import instance, { catApi } from "../../shared/axios";

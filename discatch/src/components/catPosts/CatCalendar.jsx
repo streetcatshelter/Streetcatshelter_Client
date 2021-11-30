@@ -1,6 +1,5 @@
 // LIBRARY
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 
 // COMPONENTS
 import { Calendar } from "..";
@@ -8,15 +7,8 @@ import { Calendar } from "..";
 // ELEMENTS
 import { Grid } from "../../elements/index";
 
-// REDUX
-import { __getCalendar } from "../../redux/modules/cat";
-
 const CatCalendar = (props) => {
   const catId = props.catId;
-
-  // useEffect(() => {
-  //   dispatch(__getCalendar(catId, MONTH, YEAR));
-  // }, [catId, MONTH, YEAR, dispatch]);
 
   return (
     <Grid>

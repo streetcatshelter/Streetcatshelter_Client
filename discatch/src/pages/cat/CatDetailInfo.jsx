@@ -1,7 +1,6 @@
 // LIBRARY
 import React, { useEffect } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import { flexBox } from "../../shared/style";

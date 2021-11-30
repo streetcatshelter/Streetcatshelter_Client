@@ -1,16 +1,24 @@
 // LIBRARY
-import React from "react";
+import React, { useEffect } from "react";
 
 // COMPONENTS
-import { Template, ChatRoom } from "../../components";
-
+import { Template, ChatRoom, ChatMessage } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+// REDUX
+import { chatActions } from "../../redux/modules/chat";
 const ChatRoomPage = (props) => {
-  const location = props.location.state?.location
+  const dispatch = useDispatch();
+  const location = props.location.state?.location;
   const roomId = props.match.params.roomId;
-  
+  useEffect(() => {
+    dispatch(chatActions._getAllMessage(roomId));
+    dispatch(chatActions._getRoomInfo(roomId));
+  }, []);
   return (
     <Template props={props} page="map">
-      <ChatRoom roomId={roomId} location={location}/>
+      <ChatRoom roomId={roomId} location={location}>
+        <ChatMessage />
+      </ChatRoom>
     </Template>
   );
 };

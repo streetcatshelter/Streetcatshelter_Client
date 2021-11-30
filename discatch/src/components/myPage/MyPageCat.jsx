@@ -1,6 +1,5 @@
 // LIBRARY
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
 // MOMENT
 import moment from "moment";
@@ -13,17 +12,42 @@ import { Image } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
 
 // REDUX
-import { mypageActions } from "../../redux/modules/mypage";
+import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 
 const MyPageCat = () => {
-  const dispatch = useDispatch();
   const LikedAllCat = useSelector((state) => state.mypage.likedAllCat);
-  
-  useEffect(() => {
-    dispatch(mypageActions._getLikedAllCat());
-  }, [dispatch]);
-  
+  let location = LikedAllCat.location;
+
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
+
+  if (location === userVillageA + " ") {
+    location = userVillage0;
+  } else if (location === userVillageB + " ") {
+    location = userVillage1;
+  } else if (location === userVillageC + " ") {
+    location = userVillage2;
+  }
+
   return (
     <div>
       {LikedAllCat.map((LikedCat, idx) => {
@@ -31,14 +55,15 @@ const MyPageCat = () => {
           "YYYY-M-D hh:mm"
         );
         const myActivity = moment(LikedCat.myActivity).format("YYYY-M-D hh:mm");
-        
+
         return (
           <CatPost
             key={idx}
             onClick={() => {
+              // history.push(`/catdetail/${LikedCat.catId}`);
               history.push({
-                pathname:`/catdetail/${LikedCat.location.split(' ')[2]}/${LikedCat.catId}`, 
-                state : { location: LikedCat.location.split(' ')[2] }
+                pathname: `/catdetail/${location}/${LikedCat.catId}`,
+                state: { location },
               });
             }}
           >

@@ -6,10 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Template, CommentList, ContentHeader } from "../../components";
 
 // STYLE
-import { css } from "styled-components";
-
-// ELEMENTS
-import { Grid, Text, Image } from "../../elements/index";
+import styled from "styled-components";
 
 // REDUX
 import { history } from "../../redux/configureStore";
@@ -32,20 +29,20 @@ const CommunityPostDetail = (props) => {
       title: state.community.list.data?.title,
     })
   );
-  
+
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
 
   let pathCategory;
-  if (category?.split(' ')[1] === '정보글') {
-    pathCategory = 'catinfo';
-  } else if (category?.split(' ')[1] === '동네'){
-    pathCategory = 'gathering';
+  if (category?.split(" ")[1] === "정보글") {
+    pathCategory = "catinfo";
+  } else if (category?.split(" ")[1] === "동네") {
+    pathCategory = "gathering";
   } else {
-    pathCategory = 'sharing';
+    pathCategory = "sharing";
   }
-  
+
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
@@ -57,101 +54,77 @@ const CommunityPostDetail = (props) => {
         SecondBtn="삭제"
         FirstClick={() => {
           history.push(
-            `/community/${location.split(' ')[2]}/${pathCategory}/postedit/${communityId}`
+            `/community/${
+              location.split(" ")[2]
+            }/${category}/postedit/${communityId}`
           );
         }}
         SecondClick={deleteCommunity}
       />
-      <Grid
-        bgColor="bgColor"
-        addstyle={() => {
-          return css`
-            top: 20px;
-          `;
-        }}
-      >
-        <Grid width="95%">
-          <Text
-            size="16px"
-            fontWeight="bold"
-            addstyle={() => {
-              return css`
-                line-height: 40px;
-                margin: 5px 10px;
-              `;
-            }}
-          >
-            {title}
-          </Text>
+      <div>
+        <Title>
+          <p> {title} </p>
+        </Title>
 
-          <Grid
-            margin="auto"
-            addstyle={() => {
-              return css`
-                position: relative;
-              `;
-            }}
-          >
-            {imageList[0] && (
-              <Image
-                width="286px"
-                height="286px"
-                margin="20px auto"
-                src={imageList[0].image}
-              />
-            )}
-            {imageList[1] && (
-              <Image
-                width="286px"
-                height="286px"
-                margin="20px auto"
-                src={imageList[1].image}
-              />
-            )}
-            {imageList[2] && (
-              <Image
-                width="286px"
-                height="286px"
-                margin="20px auto"
-                src={imageList[2].image}
-              />
-            )}
-            {imageList[3] && (
-              <Image
-                width="286px"
-                height="286px"
-                margin="20px auto"
-                src={imageList[3].image}
-              />
-            )}
-            {imageList[4] && (
-              <Image
-                width="286px"
-                height="286px"
-                margin="20px auto"
-                src={imageList[4].image}
-              />
-            )}
-          </Grid>
+        <ImageBox>
+          {imageList.map((catImage, idx) => {
+            return (
+              <CatImageBox>
+                <CatImage src={catImage.image} alt="catImage" key={idx} />
+              </CatImageBox>
+            );
+          })}
+        </ImageBox>
 
-          <Text
-            addstyle={() => {
-              return css`
-                position: relative;
-                bottom:10px;
-                margin: 5px 10px;
-              `;
-            }}
-          >
-            {contents}
-          </Text>
-        </Grid>
-        <Grid>
+        <Content>
+          <p> {contents} </p>
+        </Content>
+
+        <div style={{ margin: "10px 0px" }}>
           <CommentList props={props} communityId={communityId} />
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </Template>
   );
 };
+const CatImage = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgb(251, 216, 134);
+`;
 
+const ImageBox = styled.div`
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+`;
+
+const CatImageBox = styled.div`
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background: rgb(251, 216, 134);
+`;
+
+const Title = styled.div`
+  margin: 10px;
+  p {
+    font-size: 16px;
+    font-weight: 900;
+    margin: 0px;
+    width: auto;
+  }
+`;
+
+const Content = styled.div`
+  margin: 10px;
+  p {
+    font-size: 14px;
+    margin: 0px;
+  }
+`;
 export default CommunityPostDetail;

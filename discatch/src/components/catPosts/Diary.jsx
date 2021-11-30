@@ -1,6 +1,5 @@
 // LIBRARY
 import React from "react";
-
 // ELEMENTS
 import { Grid, Text, Image } from "../../elements";
 

@@ -6,6 +6,7 @@ const _getRooms =
   () =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(loading(true));
       const { data } = await chatApi.getRooms();
       dispatch(setRooms(data));
     } catch (e) {
@@ -17,6 +18,7 @@ const _getRoomInfo =
   (roomId) =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(loading(true));
       const { data } = await chatApi.getRoomInfo(roomId);
       dispatch(setChatInfo(data));
     } catch (e) {
@@ -60,6 +62,8 @@ const initialState = {
   roomlist: [],
   chatinfo: [],
   chatmessage: [],
+  loading: [],
+  isLoaded: false,
 };
 
 // 리듀서
@@ -69,15 +73,20 @@ const chat = createSlice({
   reducers: {
     setRooms: (state, action) => {
       state.roomlist = action.payload;
+      state.isLoaded = false;
     },
     setChatInfo: (state, action) => {
       state.chatinfo = action.payload;
+      state.isLoaded = false;
     },
     setChatMessage: (state, action) => {
       state.chatmessage = action.payload;
     },
     pushChatMessage: (state, action) => {
       state.chatmessage.push(action.payload);
+    },
+    loading: (state, action) => {
+      state.isLoaded = action.payload;
     },
   },
 });
@@ -89,6 +98,11 @@ export const chatActions = {
   _getAllMessage,
   _deleteRoom,
 };
-export const { setChatInfo, setRooms, setChatMessage, pushChatMessage } =
-  chat.actions;
+export const {
+  setChatInfo,
+  setRooms,
+  setChatMessage,
+  pushChatMessage,
+  loading,
+} = chat.actions;
 export default chat;

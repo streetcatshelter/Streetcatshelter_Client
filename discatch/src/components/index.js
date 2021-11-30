@@ -34,7 +34,6 @@ import CatCalendar from "./catPosts/CatCalendar";
 import CatDiary from "./catPosts/CatDiary";
 import CatGallery from "./catPosts/CatGallery";
 import Diary from "./catPosts/Diary";
-import Gallery from "./catPosts/Gallery";
 
 // COMMENT
 import Comment from "./comment/Comment";
@@ -90,7 +89,6 @@ export {
   CatDiary,
   CatGallery,
   Diary,
-  Gallery,
   // COMMENT
   Comment,
   CommentList,

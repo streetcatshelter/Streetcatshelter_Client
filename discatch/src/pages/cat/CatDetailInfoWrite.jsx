@@ -27,6 +27,7 @@ import {
   deleteHashTag,
   setInitialState,
 } from "../../redux/modules/cat";
+
 const CatDetailInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit =
@@ -160,7 +161,6 @@ const CatDetailInfoWrite = (props) => {
     }
   }, []);
 
-  console.log(water, snack, food);
   return (
     <Template props={props}>
       {edit ? (

@@ -39,7 +39,6 @@ export const addCommunityDB = (
         instance
           .post("/community/create", postInfo)
           .then((res) => {
-            dispatch(imgActions.setInitialState());
             history.push(`/community/${detailLocation}/${pathName}`);
             history.go(0);
           })
@@ -151,7 +150,7 @@ export const editCommunityDB = (
               window.alert("게시글 수정 완료!");
               history.goBack();
               history.push(
-                `/community/${location}/${category}/postdetail/${communityId}`
+                `/community/${location.split(' ')[2]}/${category}/postdetail/${communityId}`
               );
             })
             .catch((err) => {
@@ -183,7 +182,7 @@ export const deleteCommunityDB =
     try {
       const data = await communityApi.deleteCommunity(communityId);
       window.alert("게시물 삭제 완료!");
-      history.push(`/community/${location}/${pathName}`);
+      history.push(`/community/${location.split(' ')[2]}/${pathName}`);
     } catch (err) {
       console.error(err);
     }

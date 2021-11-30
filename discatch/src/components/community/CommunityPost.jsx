@@ -65,13 +65,10 @@ const CommunityPost = ({ community }) => {
               <Text
                 width="100%"
                 size="10px"
-                margin="0 0 0 120px"
+                margin="0 0 0 80px"
                 fontWeight="bold"
                 addstyle={() => {
                   return css`
-                    @media screen and (max-width: 1024px) {
-                      margin: 0 0 0 80px;
-                    }
                     @media screen and (max-width: 768px) {
                       margin: 0 0 0 80px;
                     }
@@ -123,6 +120,12 @@ const CommunityPost = ({ community }) => {
                     justify-content: space-between;
                     right: 20px;
                     margin: 10px 0 0 120px;
+                    @media screen and (max-width: 360px) {
+                      margin: 10px 0 0 210px;
+                    }
+                    @media screen and (max-width: 320px) {
+                      margin: 10px 0 0 175px;
+                    }
                     @media screen and (max-width: 280px) {
                       margin: 10px 0 0 12px;
                     }

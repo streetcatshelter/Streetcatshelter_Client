@@ -51,6 +51,7 @@ export const __createCatInfo = (
     }
   };
 };
+
 // 기본 정보 수정
 export const __editCatInfo =
   (catName, catTag, neutering, catId) =>
@@ -126,7 +127,6 @@ export const __createCatDetailInfo = (
             water: water,
             catId: catId,
           };
-          console.log(detailInfo);
           instance
             .post(`/cat/detail/${catId}`, detailInfo)
             .then((res) => {

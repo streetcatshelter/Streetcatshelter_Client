@@ -1,7 +1,6 @@
 // LIBRARY
 import React, { useEffect } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import { flexBox } from "../../shared/style";
@@ -40,6 +39,7 @@ const CatDetailInfo = (props) => {
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
   const image = detail.catImages;
+  
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
   };
@@ -62,6 +62,7 @@ const CatDetailInfo = (props) => {
       state: village,
     });
   };
+
   return (
     <>
       <Spinner visible={isLoaded} />

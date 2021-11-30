@@ -10,7 +10,6 @@ import { SecondHeader, Template } from "../../components";
 import {
   Grid,
   Image,
-  TextArea,
   Input,
   Button,
   Text,
@@ -27,7 +26,6 @@ import { imgActions } from "../../redux/modules/image";
 import {
   __createCatInfo,
   __editCatInfo,
-  __getCatInfo,
 } from "../../redux/modules/cat";
 import {
   addHashTag,
@@ -39,7 +37,6 @@ import { history } from "../../redux/configureStore";
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit = props.match.path?.split("/")[1] === "catinfoedit" ? true : false;
-  const catId = props.match.params.catId;
   const pathLocation = props.match.params.location;
   const catInfo = useSelector((state) => state.cat.catinfo);
 
@@ -165,7 +162,7 @@ const CatInfoWrite = (props) => {
         history.push("/");
       }
     }
-  }, []);
+  }, [edit, catInfo.catTagList, catInfo.catImage, dispatch]);
 
   return (
     <Template props={props}>

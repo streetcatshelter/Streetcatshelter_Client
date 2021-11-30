@@ -14,7 +14,7 @@ import { mypageActions } from "../../redux/modules/mypage";
 const MyPage = (props) => {
   const dispatch = useDispatch();
   const location = props.location.state?.location;
-  const isLoaded = useSelector((state) => state.mypage.isLoaded);
+  const isLoaded = useSelector((state) => state.mypage.pageLoaded);
   useEffect(() => {
     dispatch(mypageActions._getLikedAllCat());
   }, [dispatch]);

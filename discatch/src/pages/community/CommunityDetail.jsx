@@ -1,5 +1,7 @@
-// LIBRARY
-import React from "react";
+// App.js
+import React, { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -18,18 +20,22 @@ import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
-// FUNCTION
-import InfinityScroll from "../../shared/InfinityScroll";
-import {
-  getCommunityDB,
-  getMoreCommunityDB,
-} from "../../redux/modules/community";
+import { getCommunityDB, resetList } from "../../redux/modules/community";
 
 // REDUX
 import { history } from "../../redux/configureStore";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
+  const communityList = useSelector((state) => state.community.list);
+  const loading = useSelector((state) => state.community.itemLoded);
+
+  const [page, setPage] = useState(1);
+  const [ref, inView] = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+
   const pathLocation = props.match.params.village.split("@")[0];
   let location;
   const userVillage0 = useSelector(
@@ -77,15 +83,22 @@ const CommunityDetail = (props) => {
 
   location = location?.substring(0, location.length - 1);
 
-  const getMoreCommunity = () => {
-    dispatch(getMoreCommunityDB(category, location));
-  };
+  useEffect(() => {
+    dispatch(resetList([]));
+  }, []);
 
-  const communityList = useSelector((state) => state.community.list);
+  useEffect(() => {
+    dispatch(getCommunityDB(category, location, page));
+  }, [category, location, page, dispatch]);
 
-  React.useEffect(() => {
-    dispatch(getCommunityDB(category, location));
-  }, [category, location, dispatch]);
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && !loading) {
+      setPage((prevState) => prevState + 1);
+    } else {
+      return;
+    }
+  }, [inView, loading]);
 
   return (
     <Template props={props}>
@@ -122,22 +135,14 @@ const CommunityDetail = (props) => {
               `;
             }}
           >
-            {communityList?.length ? (
+            {communityList.length > 0 &&
               communityList.map((community, idx) => {
                 return (
-                  <InfinityScroll
-                    next={getMoreCommunity}
-                    index={idx}
-                    length={communityList.length}
-                    key={community.communityId}
-                  >
-                    <CommunityPost community={community} />
-                  </InfinityScroll>
+                  <div key={idx} ref={ref}>
+                    inView&&{<CommunityPost community={community} />}
+                  </div>
                 );
-              })
-            ) : (
-              <></>
-            )}
+              })}
           </Grid>
         </CommunityDetailStyle>
         <Button

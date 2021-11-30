@@ -18,11 +18,13 @@ import { history } from "../redux/configureStore";
 const Menu = (props) => {
   const path = props.props.props.match.path;
   const preLocation = props.props.props?.location.state?.location;
-  const pathLocation = props.props.props.match.params.village ? 
-                        props.props.props.match.params.village : 
-                        props.props.props.match.params.location;
+  const pathLocation = props.props.props.match.params.village
+    ? props.props.props.match.params.village
+    : props.props.props.match.params.location;
 
-  const userVillage = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]);
+  const userVillage = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]
+  );
 
   const userVillage0 = useSelector(
     (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
@@ -51,78 +53,82 @@ const Menu = (props) => {
     location = pathLocation ? pathLocation : userVillage;
   }
 
-  if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
+  if (
+    path === "/catdetail/:village/:catId" ||
+    path === "/catdetailinfo/:village/:catDetailId"
+  ) {
     location = pathLocation;
   }
 
-  const catId = props.props.props.location.pathname.split('/')[3];
+  const catId = props.props.props.location.pathname.split("/")[3];
 
   const moveToHome = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
       alert("동네 정보를 입력해주세요!");
     } else {
-      if (path === '/map/:village') {
-        history.push({ pathname: '/', state: { location : pathLocation}});
-      } else if (preLocation+' ' === userVillageA) {
+      if (path === "/map/:village") {
+        history.push({ pathname: "/", state: { location: pathLocation } });
+      } else if (preLocation + " " === userVillageA) {
         location = userVillage0;
-        history.push({ pathname: '/', state: { location }});
-      } else if (preLocation+' ' === userVillageB) {
+        history.push({ pathname: "/", state: { location } });
+      } else if (preLocation + " " === userVillageB) {
         location = userVillage1;
-        history.push({ pathname: '/', state: { location }});
-      } else if (preLocation+' ' === userVillageC) {
+        history.push({ pathname: "/", state: { location } });
+      } else if (preLocation + " " === userVillageC) {
         location = userVillage2;
-        history.push({ pathname: '/', state: { location }});
+        history.push({ pathname: "/", state: { location } });
       } else {
-        history.push({ pathname: '/', state: { location }});
+        history.push({ pathname: "/", state: { location } });
       }
     }
-  }
+  };
 
   const moveToCommunity = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
       alert("동네 정보를 입력해주세요!");
     } else {
-      history.push({ pathname: '/community', state: { location }});
-      history.go(0);
+      history.push({ pathname: "/community", state: { location } });
     }
-  }
+  };
 
   const moveToMap = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
       alert("동네 정보를 입력해주세요!");
     } else {
-      if (path === '/catdetail/:village/:catId' || path === '/catdetailinfo/:village/:catDetailId') {
-        history.push({ pathname: `/map/${location}/${catId}`, state: { catId, location }});
-        history.go(0); 
+      if (
+        path === "/catdetail/:village/:catId" ||
+        path === "/catdetailinfo/:village/:catDetailId"
+      ) {
+        history.push({
+          pathname: `/map/${location}/${catId}`,
+          state: { catId, location },
+        });
       } else {
-        history.push({ pathname: `/map/${location}`, state: { location }});
-        history.go(0);
+        history.push({ pathname: `/map/${location}`, state: { location } });
       }
     }
-  }
+  };
 
   const moveToChat = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
       alert("동네 정보를 입력해주세요!");
     } else {
-      history.push({ pathname: '/chat', state: { location }});
-      history.go(0);
+      history.push({ pathname: "/chat", state: { location } });
     }
-  }
+  };
 
   const moveToInfo = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
       alert("동네 정보를 입력해주세요!");
     } else {
-      history.push({ pathname: '/mypage', state: { location }});
-      history.go(0);
+      history.push({ pathname: "/mypage", state: { location } });
     }
-  }
+  };
 
   return (
     <MenuStyle>
@@ -133,32 +139,35 @@ const Menu = (props) => {
           `;
         }}
       >
-        <div 
-          onClick={()=>moveToHome()} 
+        <div
+          onClick={() => moveToHome()}
           style={{
             textDecoration: "none",
-            color: "black"
-          }}>
+            color: "black",
+          }}
+        >
           <Home />
           <Text textAlign="center" size="12px">
             홈
           </Text>
         </div>
 
-        <div 
-          onClick={()=>moveToCommunity()} 
+        <div
+          onClick={() => moveToCommunity()}
           style={{
-            cursor:'pointer',
-            textAlign: "center",}}>
-        <Users />
-        <Text size="12px">커뮤니티</Text>
+            cursor: "pointer",
+            textAlign: "center",
+          }}
+        >
+          <Users />
+          <Text size="12px">커뮤니티</Text>
         </div>
 
         <div
-          onClick={()=>moveToMap()}
+          onClick={() => moveToMap()}
           style={{
             textDecoration: "none",
-            color: "black"
+            color: "black",
           }}
         >
           <Compass />
@@ -167,7 +176,7 @@ const Menu = (props) => {
           </Text>
         </div>
         <div
-          onClick={()=>moveToChat()}
+          onClick={() => moveToChat()}
           style={{
             textDecoration: "none",
             color: "black",
@@ -179,7 +188,7 @@ const Menu = (props) => {
           </Text>
         </div>
         <div
-          onClick={()=>moveToInfo()}
+          onClick={() => moveToInfo()}
           style={{
             textDecoration: "none",
             color: "black",

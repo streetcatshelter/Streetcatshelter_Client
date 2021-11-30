@@ -1,6 +1,6 @@
 // LIBRARY
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 // STYLE
 import { css } from "styled-components";
@@ -13,21 +13,27 @@ import { Grid } from "../../elements/index";
 
 // REDUX
 import { history } from "../../redux/configureStore";
-
+import { pageLoading } from "../../redux/modules/community";
 // IMAGES
 import Community1 from "../../styles/images/Community1.png";
 import Community2 from "../../styles/images/Community2.png";
 import Community3 from "../../styles/images/Community3.png";
 
 const Community = (props) => {
-  const isLoaded = useSelector((state) => state.mypage.isLoaded);
+  const dispatch = useDispatch();
+  const isLoaded = useSelector((state) => state.community.pageLoaded);
   const village = useSelector((state) => state.map.keywordList[0]);
 
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
     alert("동네 정보를 입력해주세요!");
   };
-
+  useEffect(() => {
+    dispatch(pageLoading(true));
+    setTimeout(() => {
+      dispatch(pageLoading(false));
+    }, 300);
+  }, [dispatch]);
   return (
     <>
       <Spinner visible={isLoaded} />

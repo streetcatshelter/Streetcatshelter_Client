@@ -34,7 +34,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
     setComment(event.target.value);
   };
 
-  const addCommentBtn = (inputRef) => {
+  const addCommentBtn = () => {
     if (comments === '') {
       alert('댓글을 입력해주세요!');
     } else {

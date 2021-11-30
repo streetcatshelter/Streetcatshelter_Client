@@ -61,17 +61,20 @@ const FloatButton = styled.button`
   border: none;
   border-radius: 22.5px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  @media screen and (min-width: 1340px) {
-    right: 670px
+  @media screen and (min-width: 1750px) {
+    right: 45vw;
+  }
+  @media screen and (max-width: 1750px) {
+    right: 41vw;
   }
   @media screen and (max-width: 1340px) {
-    right: 670px
+    right: 670px;
   }
   @media screen and (max-width: 1280px) {
-    right: 570px
+    right: 570px;
   }
   @media screen and (max-width: 1280px) and (max-height: 800px) {
-    right: 510px
+    right: 510px;
   }
   @media screen and (max-width: 1024px) {
     right: 380px;

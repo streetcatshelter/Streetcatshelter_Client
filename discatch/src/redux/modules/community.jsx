@@ -283,6 +283,7 @@ const community = createSlice({
   },
 });
 
+
 export const {
   addCommunity,
   getCommunity,
@@ -298,4 +299,5 @@ export const {
   itemLoading,
   resetList,
 } = community.actions;
+
 export default community;

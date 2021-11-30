@@ -56,7 +56,7 @@ const CommunityPostDetail = (props) => {
           history.push(
             `/community/${
               location.split(" ")[2]
-            }/${category}/postedit/${communityId}`
+            }/${pathCategory}/postedit/${communityId}`
           );
         }}
         SecondClick={deleteCommunity}

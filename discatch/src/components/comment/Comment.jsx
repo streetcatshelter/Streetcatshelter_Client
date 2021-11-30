@@ -31,7 +31,7 @@ const Comment = ({ path }) => {
 
   return (
     <Grid
-      margin="20px auto 15px auto"
+      margin="30px auto 15px auto"
       addstyle={() => {
         return css`
           position: relative;

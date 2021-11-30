@@ -60,11 +60,10 @@ const MyPageCat = () => {
           <CatPost
             key={idx}
             onClick={() => {
+              // history.push(`/catdetail/${LikedCat.catId}`);
               history.push({
-                pathname: `/catdetail/${LikedCat.location.split(" ")[2]}/${
-                  LikedCat.catId
-                }`,
-                state: { location: LikedCat.location.split(" ")[2] },
+                pathname: `/catdetail/${location}/${LikedCat.catId}`,
+                state: { location },
               });
             }}
           >

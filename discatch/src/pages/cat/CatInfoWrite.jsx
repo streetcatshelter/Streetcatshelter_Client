@@ -7,13 +7,7 @@ import styled, { css } from "styled-components";
 import { SecondHeader, Template } from "../../components";
 
 // ELEMENTS
-import {
-  Grid,
-  Image,
-  Input,
-  Button,
-  Text,
-} from "../../elements/index";
+import { Grid, Image, Input, Button, Text } from "../../elements/index";
 
 // STYLE
 import { flexBox } from "../../shared/style";

@@ -28,8 +28,8 @@ import {
   __catDetailLike,
 } from "../../redux/modules/cat";
 import { __getDetailComment } from "../../redux/modules/comment";
-
 import { history } from "../../redux/configureStore";
+
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ const CatDetailInfo = (props) => {
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
   const image = detail.catImages;
-  
+
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
   };

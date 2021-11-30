@@ -1,22 +1,15 @@
 // LIBRARY
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled, { css } from "styled-components";
 
 // COMPONENTS
 import { SecondHeader, Template } from "../../components";
 
 // ELEMENTS
-import {
-  Grid,
-  Image,
-  TextArea,
-  Input,
-  Button,
-  Text,
-} from "../../elements/index";
+import { Grid, Image, Input, Button, Text } from "../../elements/index";
 
 // STYLE
+import styled, { css } from "styled-components";
 import { flexBox } from "../../shared/style";
 
 // ICON
@@ -24,22 +17,19 @@ import { Camera } from "react-feather";
 
 // REDUX
 import { imgActions } from "../../redux/modules/image";
+import { mypageActions } from "../../redux/modules/mypage";
+import { history } from "../../redux/configureStore";
 import {
   __createCatInfo,
   __editCatInfo,
-  __getCatInfo,
-} from "../../redux/modules/cat";
-import {
   addHashTag,
   deleteHashTag,
   setInitialState,
 } from "../../redux/modules/cat";
-import { mypageActions } from "../../redux/modules/mypage";
-import { history } from "../../redux/configureStore";
+
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit = props.match.path?.split("/")[1] === "catinfoedit" ? true : false;
-  const catId = props.match.params.catId;
   const pathLocation = props.match.params.location;
   const catInfo = useSelector((state) => state.cat.catinfo);
 

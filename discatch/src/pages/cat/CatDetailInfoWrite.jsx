@@ -1,7 +1,6 @@
 // LIBRARY
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled, { css } from "styled-components";
 
 // COMPONENTS
 import { SecondHeader, Template } from "../../components";
@@ -10,6 +9,7 @@ import { SecondHeader, Template } from "../../components";
 import { Grid, TextArea, Button, Input, Image, Text } from "../../elements";
 
 // STYLE
+import styled, { css } from "styled-components";
 import { flexBox } from "../../shared/style";
 
 // ICON
@@ -21,12 +21,11 @@ import { imgActions } from "../../redux/modules/image";
 import {
   __createCatDetailInfo,
   __editCatDetailInfo,
-} from "../../redux/modules/cat";
-import {
   addHashTag,
   deleteHashTag,
   setInitialState,
 } from "../../redux/modules/cat";
+
 const CatDetailInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit =

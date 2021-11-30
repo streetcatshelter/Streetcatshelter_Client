@@ -134,10 +134,6 @@ const CatInfoWrite = (props) => {
   };
 
   useEffect(() => {
-    dispatch(mypageActions._getUserInfo());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(setInitialState([]));
 
     if (edit) {

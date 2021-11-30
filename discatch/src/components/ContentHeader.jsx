@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // STYLE
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // COMPONENTS
 import { EditModalSlide } from "../components";
@@ -13,6 +13,9 @@ import { chatActions } from "../redux/modules/chat";
 
 // MOMENT
 import moment from "moment";
+
+// REDUX
+import { chatActions } from "../redux/modules/chat";
 
 const ContentHeader = ({
   FirstBtn,

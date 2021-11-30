@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
@@ -19,10 +19,6 @@ const ChatMain = (props) => {
   const dispatch = useDispatch();
   const location = props.props.location.state.location;
   const Rooms = useSelector((state) => state.chat.roomlist);
-
-  useEffect(() => {
-    dispatch(chatActions._getRooms());
-  }, [dispatch]);
 
   return (
     <React.Fragment>

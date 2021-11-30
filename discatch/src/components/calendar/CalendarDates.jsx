@@ -42,46 +42,43 @@ const CalendarDates = (props) => {
             <TodayCSS findToday={findToday}>
               <span>{elm}</span>
             </TodayCSS>
-            {props.path === "mypage" ? (
-              <Dots>
-                {Calendar.filter(
-                  (workDate) =>
-                    workDate.date[2] === elm && workDate.date[1] === month
-                )
-                  .sort()
-                  .map((workDate, idx) => {
-                    DayOff.unshift(workDate.date[2]);
-                    const food = workDate.food;
-                    const water = workDate.water;
-                    const snack = workDate.snack;
-                    return (
-                      <div
-                        key={idx}
-                        style={{
-                          display: "flex",
-                          margin: "auto",
-                        }}
-                      >
-                        <Gitlab width="5px" height="5px" />
-                        <Dot
-                          background="#D19B61"
-                          work={food ? "block" : "none"}
-                        />
-                        <Dot
-                          background="skyblue"
-                          work={water ? "block" : "none"}
-                        />
-                        <Dot
-                          background="#CBCF52"
-                          work={snack ? "block" : "none"}
-                        />
-                      </div>
-                    );
-                  })}
-              </Dots>
-            ) : (
-              ""
-            )}
+
+            <Dots>
+              {Calendar.filter(
+                (workDate) =>
+                  workDate.date[2] === elm && workDate.date[1] === month
+              )
+                .sort()
+                .map((workDate, idx) => {
+                  DayOff.unshift(workDate.date[2]);
+                  const food = workDate.food;
+                  const water = workDate.water;
+                  const snack = workDate.snack;
+                  return (
+                    <div
+                      key={idx}
+                      style={{
+                        display: "flex",
+                        margin: "auto",
+                      }}
+                    >
+                      <Gitlab width="5px" height="5px" />
+                      <Dot
+                        background="#D19B61"
+                        work={food ? "block" : "none"}
+                      />
+                      <Dot
+                        background="skyblue"
+                        work={water ? "block" : "none"}
+                      />
+                      <Dot
+                        background="#CBCF52"
+                        work={snack ? "block" : "none"}
+                      />
+                    </div>
+                  );
+                })}
+            </Dots>
           </DateNum>
         )}
       </Form>

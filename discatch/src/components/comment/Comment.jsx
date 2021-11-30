@@ -28,10 +28,10 @@ const Comment = ({ path }) => {
   const updateLikes = () => {
     dispatch(communityLikeToggleDB(communityId));
   };
-  
+
   return (
     <Grid
-      margin="20px auto 15px auto"
+      margin="30px auto 15px auto"
       addstyle={() => {
         return css`
           position: relative;
@@ -64,16 +64,16 @@ const Comment = ({ path }) => {
         </Text>
         <Count>
           {path === "CatDetail" || path === "CatDetailInfo"
-            ? (String(commentList.length).length > 3
-            ? `${String(commentList.length)[0]}${"0".repeat(
-                String(commentList.length).length - 4
-              )}K`
-            : commentList.length)
-            : (String(community.data?.cntComment).length > 3
+            ? String(commentList.length).length > 3
+              ? `${String(commentList.length)[0]}${"0".repeat(
+                  String(commentList.length).length - 4
+                )}K`
+              : commentList.length
+            : String(community.data?.cntComment).length > 3
             ? `${String(community.data?.cntComment)[0]}${"0".repeat(
                 String(community.data?.cntComment).length - 4
               )}K`
-            : community.data?.cntComment)}
+            : community.data?.cntComment}
         </Count>
       </Grid>
 
@@ -104,25 +104,26 @@ const Comment = ({ path }) => {
                 }}
               />
             </Grid>
-            <Text 
-              fontWeight="bold" 
-              margin="0 0 0 -25px" 
+            <Text
+              fontWeight="bold"
+              margin="0 0 0 -25px"
               width="40px"
               addstyle={() => {
                 return css`
-                @media screen and (max-width: 280px) {
+                  @media screen and (max-width: 280px) {
                     margin: 0 0 0 -10px;
                   }
                   @media screen and (max-height: 568px) {
                     margin: 0;
                   }
                 `;
-              }}>
-              {(String(community.data?.cntLikeit).length > 3
-            ? `${String(community.data?.cntLikeit)[0]}${"0".repeat(
-                String(community.data?.cntLikeit).length - 4
-              )}K`
-            : community.data?.cntLikeit)}
+              }}
+            >
+              {String(community.data?.cntLikeit).length > 3
+                ? `${String(community.data?.cntLikeit)[0]}${"0".repeat(
+                    String(community.data?.cntLikeit).length - 4
+                  )}K`
+                : community.data?.cntLikeit}
             </Text>
           </Grid>
         </Grid>
@@ -136,8 +137,10 @@ const Count = styled.div`
   height: 20px;
   border-radius: 10px;
   font-size: 12px;
+  font-weight: bold;
   text-align: center;
   line-height: 20px;
+  background: #f9c852;
 `;
 
 export default Comment;

@@ -1,55 +1,67 @@
 // LIBRARY
-import React from 'react';
+import React from "react";
 
 // ELEMENTS
-import { Image, Text } from '../../elements/index';
+import { Image, Text } from "../../elements/index";
 
 // STYLE
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-const CommunityCategoryCard = ({ src, width, height, title, subtitle, clickEvent }) => {
+const CommunityCategoryCard = ({
+  src,
+  width,
+  height,
+  title,
+  subtitle,
+  clickEvent,
+}) => {
   return (
-  <>
-    <CardStyle onClick={clickEvent}>
-    <Image
-      src={src}
-      width={width} 
-      height={height}
-      addstyle={() => {
-        return css`
-          margin: 0 20px 0 0;
-        `;
-      }}
-      />
-    <div>
-    <Text 
-      fontWeight="bold"
-      size="20px"addstyle={() => {
-        return css`
-          position:relative;
-          top: 20px;
-          @media screen and (max-width: 280px) {
-              font-size:15px;
-          }
-        `;
-      }}>{title}</Text>
-    <Text
-      size="14px"
-      addstyle={() => {
-          return css`
-            position:relative;
-            top: 30px;
-            @media screen and (max-width: 280px) {
-              font-size:11px;
-            }
-          `;
-        }}>
-          {subtitle}
-    </Text>
-    </div>
-    </CardStyle>
-  </>
-  )
+    <>
+      <CardStyle onClick={clickEvent}>
+        <Image
+          src={src}
+          width={width}
+          height={height}
+          addstyle={() => {
+            return css`
+              margin: 0 20px 0 0;
+            `;
+          }}
+        />
+        <div>
+          <Text
+            fontWeight="bold"
+            size="20px"
+            addstyle={() => {
+              return css`
+                position: relative;
+                top: 20px;
+                @media screen and (max-width: 280px) {
+                  font-size: 15px;
+                }
+              `;
+            }}
+          >
+            {title}
+          </Text>
+          <Text
+            size="14px"
+            addstyle={() => {
+              return css`
+                position: relative;
+                top: 30px;
+                @media screen and (max-width: 280px) {
+                  font-size: 11px;
+                }
+              `;
+            }}
+          >
+            {subtitle}
+          </Text>
+        </div>
+      </CardStyle>
+    </>
+  );
 };
 
 CommunityCategoryCard.defaultProps = {
@@ -61,7 +73,7 @@ const CardStyle = styled.div`
   width: 100%;
   height: 100px;
   margin: 30px auto;
-  display:flex;
+  display: flex;
   cursor: pointer;
 `;
 

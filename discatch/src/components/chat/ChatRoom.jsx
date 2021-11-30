@@ -13,7 +13,7 @@ import { Image, Grid } from "../../elements";
 import styled from "styled-components";
 
 // COMPONENTS
-import { EditModalSlide, ChatMessage } from "..";
+import { EditModalSlide } from "..";
 
 // REDUX
 import { chatActions } from "../../redux/modules/chat";
@@ -41,11 +41,6 @@ const ChatRoom = (props) => {
   // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
   const recentlyUpdated = moment(LastActivity).fromNow();
   const sendtime = hourDiff < 22 ? recentlyUpdated : updated;
-
-  useEffect(() => {
-    dispatch(chatActions._getAllMessage(props.roomId));
-    dispatch(chatActions._getRoomInfo(props.roomId));
-  }, []);
 
   useEffect(() => {
     connect();
@@ -146,9 +141,7 @@ const ChatRoom = (props) => {
           />
         </CallBox>
       </Header>
-      <Grid style={{ height: "60%" }}>
-        <ChatMessage props={props.roomId} />
-      </Grid>
+      <Grid style={{ height: "60%" }}>{props.children}</Grid>
 
       <ChatSendBox>
         <ChatInput

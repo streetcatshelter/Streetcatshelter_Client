@@ -43,9 +43,9 @@
 <img src="https://img.shields.io/badge/Redux-764ABC.svg?&style=for-the-badge&logo=Redux&logoColor=white" /> &nbsp;
 <img src="https://img.shields.io/badge/ReduxToolkit-blueviolet.svg?&style=for-the-badge&logo=ReduxToolkit&logoColor=white" /> &nbsp;
 <img src="https://img.shields.io/badge/Socket.io-010101.svg?&style=for-the-badge&logo=Socket.io&logoColor=white" /> &nbsp;
-<img src="https://img.shields.io/badge/Axios-pink.svg?&style=for-the-badge&logo=Axios&logoColor=white" /> &nbsp;
 <img src="https://img.shields.io/badge/styled--components-DB7093.svg?&style=for-the-badge&logo=styled-components&logoColor=white" /> &nbsp;
 
+<img src="https://img.shields.io/badge/Axios-pink.svg?&style=for-the-badge&logo=Axios&logoColor=white" /> &nbsp;
 <img src="https://img.shields.io/badge/React Router-E34F26.svg?&style=for-the-badge&logo=React Router&logoColor=white" /> &nbsp;
 <img src="https://img.shields.io/badge/Amazon S3-569A31.svg?&style=for-the-badge&logo=Amazon S3&logoColor=white" /> &nbsp;
 <img src="https://img.shields.io/badge/Material Design Icons-2196F3.svg?&style=for-the-badge&logo=Material Design Icons&logoColor=white" /> &nbsp;

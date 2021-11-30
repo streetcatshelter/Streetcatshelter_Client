@@ -84,60 +84,69 @@ const Home = (props) => {
   const getMoreCat = () => {
     dispatch(__getMoreCat(location));
   };
-  
+
   return (
     <>
       <Spinner visible={isLoaded} />
       {location !== undefined ? (
         <Template props={props} location={pathLocation}>
-        <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
-        
-        {catList.length ? (
-          catList.map((cat, idx) => {
-            return (
-              <Grid
-                addstyle={() => {
-                  return css`
-                    position:relative;
-                    bottom: 10px;
-                  `;
-                }}>
-              <InfinityScroll
-                next={getMoreCat}
-                index={idx}
-                length={catList.length}
-                key={cat.catId}
-              >
-                <CatPost cat={cat} pathLocation={pathLocation} location={location} />
-              </InfinityScroll>
-              </Grid>
-            );
-          })
-        ) : (
-          <></>
-        )}
+          <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
 
-        <Button
-          is_float="is_float"
-          clickEvent={() => {
-            history.push({
-              pathname: `/map/${pathLocation}`,
-              state: { location : pathLocation },
-            });
-          }}
-        >
-          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-        </Button>
-      </Template>
+          {catList.length ? (
+            catList.map((cat, idx) => {
+              return (
+                <Grid
+                  key={idx}
+                  addstyle={() => {
+                    return css`
+                      position: relative;
+                      bottom: 10px;
+                    `;
+                  }}
+                >
+                  <InfinityScroll
+                    next={getMoreCat}
+                    index={idx}
+                    length={catList.length}
+                    key={cat.catId}
+                  >
+                    <CatPost
+                      cat={cat}
+                      pathLocation={pathLocation}
+                      location={location}
+                    />
+                  </InfinityScroll>
+                </Grid>
+              );
+            })
+          ) : (
+            <></>
+          )}
+
+          <Button
+            is_float="is_float"
+            clickEvent={() => {
+              history.push({
+                pathname: `/map/${pathLocation}`,
+                state: { location: pathLocation },
+              });
+            }}
+          >
+            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+          </Button>
+        </Template>
       ) : (
         <Template props={props} location={pathLocation}>
-        <SecondHeader title={'고양이들을 소개합니다!'} />
-        <Button
-          is_float="is_float"
-          clickEvent={() => {requestLocationInfo()}}>
-          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-        </Button>
-      </Template>
+          <SecondHeader title={"고양이들을 소개합니다!"} />
+          <Button
+            is_float="is_float"
+            clickEvent={() => {
+              requestLocationInfo();
+            }}
+          >
+            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+          </Button>
+        </Template>
       )}
     </>
   );

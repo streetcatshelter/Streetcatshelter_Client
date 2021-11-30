@@ -20,10 +20,6 @@ const ChatMain = (props) => {
   const location = props.props.location.state.location;
   const Rooms = useSelector((state) => state.chat.roomlist);
 
-  useEffect(() => {
-    dispatch(chatActions._getRooms());
-  }, [dispatch]);
-
   return (
     <React.Fragment>
       <Wrapper>

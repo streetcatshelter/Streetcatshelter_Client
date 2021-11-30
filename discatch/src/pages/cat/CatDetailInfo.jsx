@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import { flexBox } from "../../shared/style";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 
 // ELEMENTS
 import { Grid, Text, Image, Button } from "../../elements";
@@ -74,30 +74,16 @@ const CatDetailInfo = (props) => {
           FirstClick={editCatDetail}
           SecondClick={deleteCatDetail}
         />
-        {image && image[0] && (
-          <Image
-            src={image[0]}
-            margin="10px auto"
-            width="300px"
-            height="300px"
-          />
-        )}
-        {image && image[1] && (
-          <Image
-            src={image[1]}
-            margin="10px auto"
-            width="300px"
-            height="300px"
-          />
-        )}
-        {image && image[2] && (
-          <Image
-            src={image[2]}
-            margin="10px auto"
-            width="300px"
-            height="300px"
-          />
-        )}
+        <ImageBox>
+          {detail.catImages &&
+            detail.catImages.map((catImage, idx) => {
+              return (
+                <CatImageBox>
+                  <CatImage src={catImage} alt="catImage" key={idx} />
+                </CatImageBox>
+              );
+            })}
+        </ImageBox>
 
         <Grid
           margin="5% 0"
@@ -184,9 +170,9 @@ const CatDetailInfo = (props) => {
                         radius="20px"
                         margin="5px 10px 5px 0px "
                         padding="0px 5px 3px 5px"
-                        style={{ fontSize: "10px" }}
                         addstyle={() => {
                           return css`
+                            font-size: 10px;
                             display: flex;
                             align-items: center;
                           `;
@@ -249,5 +235,27 @@ const CatDetailInfo = (props) => {
     </>
   );
 };
+const CatImage = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgb(251, 216, 134);
+`;
 
+const ImageBox = styled.div`
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+`;
+
+const CatImageBox = styled.div`
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background: rgb(251, 216, 134);
+  margin-bottom: 5px;
+`;
 export default CatDetailInfo;

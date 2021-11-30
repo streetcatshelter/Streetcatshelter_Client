@@ -55,8 +55,11 @@ const CalendarHead = (props) => {
 const Dots = styled.div`
   display: flex;
   justify-content: flex-end;
+  line-height: 20px;
   p {
     font-size: 12px;
+    line-height: 20px;
+    margin: 0px;
   }
 `;
 const Dot = styled.div`
@@ -65,6 +68,7 @@ const Dot = styled.div`
   border-radius: 5px;
   background: ${(props) => props.background};
   margin: 5px;
+  line-height: 20px;
 `;
 const Form = styled.section`
   display: flex;

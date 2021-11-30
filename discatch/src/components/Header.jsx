@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import { Grid } from "../elements";
 
 // ICON
-import { Search, Bell, ArrowLeft, LogOut } from "react-feather";
+import { ArrowLeft, LogOut } from "react-feather";
 
 // REDUX
 import { history } from "../redux/configureStore";
@@ -30,7 +30,7 @@ const Header = (props) => {
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location;
   const firstLocation = locationA.state?.location;
-  const category = locationA.pathname.split('/')[3];
+  const category = locationA.pathname.split("/")[3];
 
   if (preLocation !== undefined) {
     location = preLocation;
@@ -100,7 +100,7 @@ const Header = (props) => {
 
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
-  }, [dispatch])
+  }, [dispatch]);
 
   let options;
   if (location !== undefined && location2 === undefined) {
@@ -130,19 +130,24 @@ const Header = (props) => {
     setPlace(e.target.value);
     const keyword = e.target.value;
     dispatch(searchMap(keyword));
-    history.push({pathname:'/', state: { location : keyword }});
+    history.push({ pathname: "/", state: { location: keyword } });
     history.go(0);
   };
 
   const goBack = () => {
-    if (path === '/community/:village/:category') {
+    if (path === "/community/:village/:category") {
       history.push({ pathname: "/community", state: { location } });
       history.go(0);
-    } else if (path === '/community/:village/:category/postdetail/:communityId') {
-      history.push({ pathname: `/community/${location}/${category}`, state: { location }});
+    } else if (
+      path === "/community/:village/:category/postdetail/:communityId"
+    ) {
+      history.push({
+        pathname: `/community/${location}/${category}`,
+        state: { location },
+      });
       history.go(0);
-    } else if (path === '/catdetail/:village/:catId') {
-      history.push({ pathname: '/', state: { location } });
+    } else if (path === "/catdetail/:village/:catId") {
+      history.push({ pathname: "/", state: { location } });
       history.go(0);
     } else if (path === '/community/:village/:category/write') {
       history.push({ pathname: `/community/${location}/${category}`, state: { location } });
@@ -173,7 +178,7 @@ const Header = (props) => {
         }}
       >
         <Grid width="20%" height="100%" margin="auto">
-          {path === "/" || path === "/community" || path === "/map/:village"? (
+          {path === "/" || path === "/community" || path === "/map/:village" ? (
             <SelectStyle onChange={onChangeHandler} value={place}>
               {options &&
                 options.map((pl, idx) => (

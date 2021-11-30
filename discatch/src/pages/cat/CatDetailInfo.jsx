@@ -28,8 +28,8 @@ import {
   __catDetailLike,
 } from "../../redux/modules/cat";
 import { __getDetailComment } from "../../redux/modules/comment";
-
 import { history } from "../../redux/configureStore";
+
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
 

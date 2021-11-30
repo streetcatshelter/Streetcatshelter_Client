@@ -1,23 +1,24 @@
 // LIBRARY
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from "redux";
 
 // MIDDLEWARE
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 
 // REDUX ROUTER
-import { createBrowserHistory } from 'history';
-import { connectRouter } from 'connected-react-router';
+import { createBrowserHistory } from "history";
+import { connectRouter } from "connected-react-router";
 
 // REDUCER
-import image from './modules/image';
-import map from './modules/map';
-import community from './modules/community';
-import user from './modules/user';
-import cat from './modules/cat';
-import mypage from './modules/mypage';
-import chat from './modules/chat';
-import comment from './modules/comment';
+import image from "./modules/image";
+import map from "./modules/map";
+import community from "./modules/community";
+import user from "./modules/user";
+import cat from "./modules/cat";
+import mypage from "./modules/mypage";
+import chat from "./modules/chat";
+import comment from "./modules/comment";
+import spinner from "./modules/spinner";
 
 export const history = createBrowserHistory();
 
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   mypage: mypage.reducer,
   chat: chat.reducer,
   comment: comment.reducer,
+  spinner: spinner.reducer,
 });
 
 // history 넣기, 로거사용

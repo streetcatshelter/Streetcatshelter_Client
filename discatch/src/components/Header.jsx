@@ -131,13 +131,11 @@ const Header = (props) => {
     const keyword = e.target.value;
     dispatch(searchMap(keyword));
     history.push({ pathname: "/", state: { location: keyword } });
-    history.go(0);
   };
 
   const goBack = () => {
     if (path === "/community/:village/:category") {
       history.push({ pathname: "/community", state: { location } });
-      history.go(0);
     } else if (
       path === "/community/:village/:category/postdetail/:communityId"
     ) {
@@ -145,13 +143,13 @@ const Header = (props) => {
         pathname: `/community/${location}/${category}`,
         state: { location },
       });
-      history.go(0);
     } else if (path === "/catdetail/:village/:catId") {
       history.push({ pathname: "/", state: { location } });
-      history.go(0);
-    } else if (path === '/community/:village/:category/write') {
-      history.push({ pathname: `/community/${location}/${category}`, state: { location } });
-      history.go(0);
+    } else if (path === "/community/:village/:category/write") {
+      history.push({
+        pathname: `/community/${location}/${category}`,
+        state: { location },
+      });
     } else {
       history.goBack();
     }
@@ -208,9 +206,9 @@ const Header = (props) => {
           </Link>
         </Head>
 
-        <Grid 
-          width="20%" 
-          height="100%" 
+        <Grid
+          width="20%"
+          height="100%"
           margin="auto"
           addstyle={() => {
             return css`
@@ -219,7 +217,8 @@ const Header = (props) => {
                 right: 25px;
               }
             `;
-          }}>
+          }}
+        >
           <Grid margin="30px 10px" height="25px" width="60px">
             {/* <SearchBtn
               style={{ color: "gray" }}

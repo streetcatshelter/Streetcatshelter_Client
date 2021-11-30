@@ -39,7 +39,6 @@ export const addCommunityDB = (
           .post("/community/create", postInfo)
           .then((res) => {
             history.push(`/community/${detailLocation}/${pathName}`);
-            history.go(0);
           })
           .catch((err) => {
             console.log(err);
@@ -51,37 +50,15 @@ export const addCommunityDB = (
 
 // 커뮤니티 글 가져오기
 export const getCommunityDB =
-  (category, location, limit = 10) =>
+  (category, location, page) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await communityApi.getCommunity(category, location, limit);
-      let communityList = data.data;
-      dispatch(getCommunity(communityList));
+      dispatch(itemLoading);
+      const data = await communityApi.getCommunity(category, location, page);
+
+      dispatch(getCommunity(data.data));
     } catch (err) {
       window.alert("페이지에 오류가 있어요!");
-      console.error(err);
-    }
-  };
-
-export const getMoreCommunityDB =
-  (category, location, limit = 10) =>
-  async (dispatch, getState, { history }) => {
-    let start = getState().community.start;
-    if (start === null) {
-      return;
-    } else {
-      start += 1;
-    }
-    try {
-      const data = await communityApi.getMoreCommunity(
-        category,
-        start,
-        limit,
-        location
-      );
-      const communityList = data.data;
-      dispatch(getMoreCommunity(communityList));
-    } catch (err) {
       console.error(err);
     }
   };
@@ -148,7 +125,9 @@ export const editCommunityDB = (
               window.alert("게시글 수정 완료!");
               history.goBack();
               history.push(
-                `/community/${location.split(' ')[2]}/${category}/postdetail/${communityId}`
+                `/community/${
+                  location.split(" ")[2]
+                }/${category}/postdetail/${communityId}`
               );
             })
             .catch((err) => {
@@ -180,7 +159,7 @@ export const deleteCommunityDB =
     try {
       const data = await communityApi.deleteCommunity(communityId);
       window.alert("게시물 삭제 완료!");
-      history.push(`/community/${location.split(' ')[2]}/${pathName}`);
+      history.push(`/community/${location.split(" ")[2]}/${pathName}`);
     } catch (err) {
       console.error(err);
     }
@@ -233,7 +212,8 @@ export const communityLikeToggleDB = (communityId) => {
 const initialState = {
   list: [],
   page: 0,
-  start: 0,
+  pageLoaded: false,
+  itemLoaded: false,
 };
 
 // REDUCER
@@ -261,14 +241,10 @@ const community = createSlice({
     },
 
     getCommunity: (state, action) => {
-      state.list = action.payload;
-    },
-
-    getMoreCommunity: (state, action) => {
       return {
         ...state,
         list: [...state.list, ...action.payload],
-        start: state.start + 1,
+        itemLoaded: false,
       };
     },
 
@@ -294,6 +270,16 @@ const community = createSlice({
     deleteCommunityComment: (state, action) => {
       state.list = action.payload;
     },
+    pageLoading: (state, action) => {
+      state.pageLoaded = action.payload;
+    },
+
+    itemLoading: (state, action) => {
+      state.itemLoaded = action.payload;
+    },
+    resetList: (state, action) => {
+      state.list = [];
+    },
   },
 });
 
@@ -308,6 +294,10 @@ export const {
   addCommunityComment,
   getCommunityComment,
   deleteCommunityComment,
+  pageLoading,
+  startReset,
+  itemLoading,
+  resetList,
 } = community.actions;
 
 export default community;

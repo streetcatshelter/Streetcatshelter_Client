@@ -42,7 +42,6 @@ export const __createCatInfo = (
                 pathname: "/",
                 state: { location: pathLocation },
               });
-              history.go(0);
             })
             .catch((err) => {
               console.error(err);

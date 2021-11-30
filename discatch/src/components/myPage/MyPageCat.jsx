@@ -1,5 +1,6 @@
 // LIBRARY
 import React from "react";
+import { useSelector } from "react-redux";
 
 // MOMENT
 import moment from "moment";
@@ -12,7 +13,6 @@ import { Image } from "../../elements";
 import { FileText, MessageCircle } from "react-feather";
 
 // REDUX
-import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 
 const MyPageCat = () => {

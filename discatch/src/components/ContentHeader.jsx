@@ -1,11 +1,8 @@
 // LIBRARY
 import React, { useState } from "react";
 
-// ELEMENTS
-import { Grid, Text } from "../elements/index";
-
 // STYLE
-import { css } from "styled-components";
+import styled from "styled-components";
 import { chatActions } from "../redux/modules/chat";
 
 // COMPONENTS
@@ -151,18 +148,32 @@ const ContentHeader = ({
             </Grid>
           </Grid>
 
-          {UserNickName === nickname ? (
-            <EditModalSlide
-              FirstBtn={FirstBtn}
-              SecondBtn={SecondBtn}
-              FirstClick={FirstClick}
-              SecondClick={SecondClick}
-            />
-          ) : (
-            <Grid height="36px"></Grid>
-          )}
-        </Grid>
-      </Grid>{" "}
+      <Wrapper>
+        <UserInfoBox onClick={OpenProfile}>
+          <Avatar src={profileImageUrl} alt="profileImage" />
+          <UserInfoBoxRight>
+            <p>{nickname}</p>
+            <div style={{ display: "flex" }}>
+              {locationName !== null && (
+                <span>{locationName?.split(" ")[2]}</span>
+              )}
+              <span>{CreatedAt}</span>
+            </div>
+          </UserInfoBoxRight>
+        </UserInfoBox>
+
+
+        {UserNickName === nickname ? (
+          <EditModalSlide
+            FirstBtn={FirstBtn}
+            SecondBtn={SecondBtn}
+            FirstClick={FirstClick}
+            SecondClick={SecondClick}
+          />
+        ) : (
+          ""
+        )}
+      </Wrapper>
       <EditModalSlide
         FirstBtn="프로필보기"
         SecondBtn="채팅하기"
@@ -175,4 +186,42 @@ const ContentHeader = ({
   );
 };
 
+const Wrapper = styled.div`
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  border-bottom: 1px solid rgb(203, 207, 94);
+`;
+
+const UserInfoBox = styled.div`
+  display: inherit;
+  cursor: pointer;
+  margin-left: 5px;
+`;
+
+const Avatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0px;
+`;
+
+const UserInfoBoxRight = styled.div`
+  margin-left: 10px;
+  line-height: 20px;
+  p {
+    font-size: 16px;
+    margin: 0px;
+    font-weight: 900;
+  }
+  span {
+    font-size: 12px;
+    :nth-child(2) {
+      margin-left: 10px;
+    }
+  }
+`;
 export default ContentHeader;

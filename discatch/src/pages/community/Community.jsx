@@ -15,9 +15,9 @@ import { Grid } from "../../elements/index";
 import { history } from "../../redux/configureStore";
 
 // IMAGES
-import Community1 from "../../styles/images/Community1.svg";
-import Community2 from "../../styles/images/Community2.svg";
-import Community3 from "../../styles/images/Community3.svg";
+import Community1 from "../../styles/images/Community1.png";
+import Community2 from "../../styles/images/Community2.png";
+import Community3 from "../../styles/images/Community3.png";
 
 const Community = (props) => {
   const isLoaded = useSelector((state) => state.mypage.isLoaded);
@@ -33,7 +33,7 @@ const Community = (props) => {
       <Spinner visible={isLoaded} />
       <Template props={props}>
         {village !== undefined ? (
-          <Grid 
+          <Grid
             margin="10vh 0 0 0"
             addstyle={() => {
               return css`
@@ -56,7 +56,7 @@ const Community = (props) => {
                   margin: 10vh 0 0 0;
                 }
                 @media screen and (max-height: 667px) {
-                  margin: 7vh 0 0 0
+                  margin: 7vh 0 0 0;
                 }
                 @media screen and (max-height: 600px) {
                   margin: 4vh 0 0 0;
@@ -65,7 +65,8 @@ const Community = (props) => {
                   margin: 10px 0 0 0;
                 }
               `;
-            }}>
+            }}
+          >
             <CommunityCategoryCard
               src={Community1}
               clickEvent={() => history.push(`/community/${village}/catinfo`)}

@@ -75,6 +75,8 @@ const CommunityPostWrite = (props) => {
 
   const [fileNum, setFileNum] = useState(0);
 
+  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
+
   location = location?.substring(0, location.length - 1);
 
   // S3
@@ -115,7 +117,7 @@ const CommunityPostWrite = (props) => {
 
   const writeBtn = () => {
     dispatch(
-      addCommunityDB(category, contents, location, title, detailLocation)
+      addCommunityDB(category, contents, location, title, detailLocation, nickName)
     );
   };
 

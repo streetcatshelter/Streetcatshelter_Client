@@ -11,10 +11,10 @@ export const addCommunityDB = (
   contents,
   location,
   title,
-  detailLocation
+  detailLocation,
+  nickName
 ) => {
   return function (dispatch, getState, { history }) {
-    const userInfo = localStorage.getItem("userInfo");
     const path = category.split(" ");
     let pathName = null;
     if (path[1] === "정보글") {
@@ -24,7 +24,6 @@ export const addCommunityDB = (
     } else {
       pathName = "sharing";
     }
-    const username = userInfo.split('"')[5];
     dispatch(
       imgActions.uploadImagesDB(() => {
         const imageUrl = getState().image.imageUrls;
@@ -34,7 +33,7 @@ export const addCommunityDB = (
           image: imageUrl,
           location: location,
           title: title,
-          username: username,
+          username: nickName,
         };
         instance
           .post("/community/create", postInfo)

@@ -23,9 +23,13 @@ const UserInfo = () => {
   const changeNickName = (e) => {
     setNickName(e.target.value);
   };
-
+  
   const EditMyInfo = () => {
-    dispatch(mypageActions._editMyInfo(NickName, Village));
+    if (NickName === '') {
+      alert('닉네임을 입력해주세요!');
+    } else {
+      dispatch(mypageActions._editMyInfo(NickName, Village));
+    }
   };
 
   const processImage = (e) => {
@@ -145,7 +149,7 @@ const Inner = styled.div`
 
   p {
     justify-content: flex-start;
-    text-size: 16px;
+    font-size: 16px;
     font-weight: 700;
   }
   input {

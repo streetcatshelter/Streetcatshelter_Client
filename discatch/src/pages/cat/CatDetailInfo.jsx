@@ -38,7 +38,6 @@ const CatDetailInfo = (props) => {
   const catDetailId = props.match.params.catDetailId;
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
-  const image = detail.catImages;
 
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));

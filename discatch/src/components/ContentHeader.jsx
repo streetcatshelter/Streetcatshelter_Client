@@ -1,21 +1,18 @@
 // LIBRARY
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // COMPONENTS
 import { EditModalSlide } from "../components";
-import { useDispatch, useSelector } from "react-redux";
 
 // REDUX
 import { chatActions } from "../redux/modules/chat";
 
 // MOMENT
 import moment from "moment";
-
-// REDUX
-import { chatActions } from "../redux/modules/chat";
 
 const ContentHeader = ({
   FirstBtn,

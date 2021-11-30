@@ -6,7 +6,6 @@ import { Grid, Text } from "../elements/index";
 
 // STYLE
 import { css } from "styled-components";
-import { chatActions } from "../redux/modules/chat";
 
 // COMPONENTS
 import { EditModalSlide } from "../components";
@@ -14,6 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 // MOMENT
 import moment from "moment";
+
+// REDUX
+import { chatActions } from "../redux/modules/chat";
 
 const ContentHeader = ({
   FirstBtn,

@@ -26,8 +26,8 @@ import {
   deleteHashTag,
   setInitialState,
 } from "../../redux/modules/cat";
-import { mypageActions } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
+
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit = props.match.path?.split("/")[1] === "catinfoedit" ? true : false;
@@ -133,10 +133,6 @@ const CatInfoWrite = (props) => {
   const DeleteHashTag = (hashtag) => {
     dispatch(deleteHashTag(hashtag));
   };
-
-  useEffect(() => {
-    dispatch(mypageActions._getUserInfo());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setInitialState([]));

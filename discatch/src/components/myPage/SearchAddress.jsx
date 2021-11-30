@@ -1,12 +1,17 @@
 // LIBRARY
 import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
+import { useDispatch } from "react-redux";
 
+// STYLE
 import styled from "styled-components";
 
-import { saveVillage } from "../../redux/modules/mypage";
-import { useDispatch } from "react-redux";
+// ICON
 import { Search } from "react-feather";
+
+// REDUX
+import { saveVillage } from "../../redux/modules/mypage";
+
 const SearchAddress = (props) => {
   const dispatch = useDispatch();
 
@@ -22,7 +27,10 @@ const SearchAddress = (props) => {
   };
 
   const onCompletePost = (data) => {
-    let fullAddr = data.jibunAddress;
+    let fullAddr = `${data.sido} ${data.sigungu} ${data.bname}`;
+    if (fullAddr.split(' ').length === 4) {
+      fullAddr = `${data.sigungu} ${data.bname}`
+    }
     let extraAddr = "";
     if (data.addressType === "R") {
       if (data.bname !== "") {

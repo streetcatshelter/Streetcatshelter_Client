@@ -1,13 +1,15 @@
 // LIBRARY
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import styled from "styled-components";
-import { chatActions } from "../redux/modules/chat";
 
 // COMPONENTS
 import { EditModalSlide } from "../components";
-import { useDispatch, useSelector } from "react-redux";
+
+// REDUX
+import { chatActions } from "../redux/modules/chat";
 
 // MOMENT
 import moment from "moment";
@@ -24,26 +26,33 @@ const ContentHeader = ({
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo?.split('"')[5];
   const UserNickName = useSelector((state) => state.mypage.userInfo?.nickname);
-  const { location, username, createdAt, nickname, profileImageUrl } =
-    useSelector((state) =>
-      path === "catdetail"
-        ? {
-            location: null,
-            username: null,
-            createdAt: state.cat.detail?.createdAt,
-            nickname: state.cat.detail?.nickname,
-            profileImageUrl: state.cat.detail?.profileImageUrl,
-          }
-        : {
-            location: state.community.list.data?.location,
-            username: state.community.list.data?.username,
-            nickname: state.community.list.data?.nickname,
-            profileImageUrl: state.community.list.data?.profileImageUrl,
-            createdAt: state.community.list.data?.createdAt
-              ? state.community.list.data?.createdAt
-              : Array(1),
-          }
-    );
+  const {
+    location,
+    username,
+    createdAt,
+    nickname,
+    profileImageUrl,
+    userProfile,
+  } = useSelector((state) =>
+    path === "catdetail"
+      ? {
+          location: null,
+          username: null,
+          createdAt: state.cat.detail?.createdAt,
+          nickname: state.cat.detail?.nickname,
+          profileImageUrl: state.cat.detail?.profileImageUrl,
+          userProfile: state.mypage.userInfo.profileImageUrl,
+        }
+      : {
+          location: state.community.list.data?.location,
+          username: state.community.list.data?.username,
+          nickname: state.community.list.data?.nickname,
+          profileImageUrl: state.community.list.data?.profileImageUrl,
+          createdAt: state.community.list.data?.createdAt
+            ? state.community.list.data?.createdAt
+            : Array(1),
+        }
+  );
 
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
   const OpenProfile = () => {
@@ -66,7 +75,10 @@ const ContentHeader = ({
     <>
       <Wrapper>
         <UserInfoBox onClick={OpenProfile}>
-          <Avatar src={profileImageUrl} alt="profileImage" />
+          <Avatar
+            src={userProfile ? userProfile : profileImageUrl}
+            alt="profileImage"
+          />
           <UserInfoBoxRight>
             <p>{nickname}</p>
             <div style={{ display: "flex" }}>

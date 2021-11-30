@@ -17,7 +17,6 @@ import { Camera } from "react-feather";
 
 // REDUX
 import { imgActions } from "../../redux/modules/image";
-import { mypageActions } from "../../redux/modules/mypage";
 import { history } from "../../redux/configureStore";
 import {
   __createCatInfo,
@@ -132,10 +131,6 @@ const CatInfoWrite = (props) => {
   const DeleteHashTag = (hashtag) => {
     dispatch(deleteHashTag(hashtag));
   };
-
-  useEffect(() => {
-    dispatch(mypageActions._getUserInfo());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setInitialState([]));

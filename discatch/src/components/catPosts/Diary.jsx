@@ -1,5 +1,7 @@
 // LIBRARY
 import React from "react";
+import { useSelector } from "react-redux";
+
 // ELEMENTS
 import { Grid, Text, Image } from "../../elements";
 
@@ -19,6 +21,9 @@ import moment from "moment";
 
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;
+  const userProfile = useSelector(
+    (state) => state.mypage.userInfo.profileImageUrl
+  );
   const CreatedAt = diary.createdAt
     ? moment(diary.createdAt).format("YYYY-M-D hh:mm")
     : "";
@@ -44,7 +49,7 @@ const Diary = ({ diary, location }) => {
       >
         <Grid display="flex" alignItems="center" width="auto">
           <Image
-            src={diary.profileImageUrl}
+            src={userProfile ? userProfile : diary.profileImageUrl}
             width="30px"
             height="30px"
             margin="0 5px 0 0"

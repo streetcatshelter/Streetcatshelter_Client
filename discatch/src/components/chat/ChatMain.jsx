@@ -1,5 +1,6 @@
 // LIBRARY
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import styled from "styled-components";
@@ -13,11 +14,10 @@ import moment from "moment";
 // REDUX
 import { history } from "../../redux/configureStore";
 import { chatActions } from "../../redux/modules/chat";
-import { useDispatch, useSelector } from "react-redux";
 
 const ChatMain = (props) => {
-  const location = props.props.location.state.location;
   const dispatch = useDispatch();
+  const location = props.props.location.state.location;
   const Rooms = useSelector((state) => state.chat.roomlist);
 
   return (

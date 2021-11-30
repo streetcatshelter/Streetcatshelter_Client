@@ -37,6 +37,15 @@ const CommunityPostDetail = (props) => {
     dispatch(deleteCommunityDB(communityId, category, location));
   };
 
+  let pathCategory;
+  if (category?.split(' ')[1] === '정보글') {
+    pathCategory = 'catinfo';
+  } else if (category?.split(' ')[1] === '동네'){
+    pathCategory = 'gathering';
+  } else {
+    pathCategory = 'sharing';
+  }
+  
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
@@ -48,7 +57,7 @@ const CommunityPostDetail = (props) => {
         SecondBtn="삭제"
         FirstClick={() => {
           history.push(
-            `/community/${location.split(' ')[2]}/${category}/postedit/${communityId}`
+            `/community/${location.split(' ')[2]}/${pathCategory}/postedit/${communityId}`
           );
         }}
         SecondClick={deleteCommunity}

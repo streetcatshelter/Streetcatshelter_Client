@@ -39,6 +39,7 @@ const CatDetailInfo = (props) => {
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
   const image = detail.catImages;
+  
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
   };
@@ -61,6 +62,7 @@ const CatDetailInfo = (props) => {
       state: village,
     });
   };
+
   return (
     <>
       <Spinner visible={isLoaded} />

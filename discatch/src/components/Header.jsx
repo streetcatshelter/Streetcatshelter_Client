@@ -149,6 +149,9 @@ const Header = (props) => {
     } else if (path === "/catdetail/:village/:catId") {
       history.push({ pathname: "/", state: { location } });
       history.go(0);
+    } else if (path === '/community/:village/:category/write') {
+      history.push({ pathname: `/community/${location}/${category}`, state: { location } });
+      history.go(0);
     } else {
       history.goBack();
     }

@@ -24,6 +24,7 @@ import { getOneCommunityDB } from "../../redux/modules/community";
 // ROUTE
 import { useLocation } from "react-router-dom";
 import { history } from "../../redux/configureStore";
+
 const CommunityPostEdit = (props) => {
   const dispatch = useDispatch();
   const path = useLocation();
@@ -112,6 +113,15 @@ const CommunityPostEdit = (props) => {
       alert("삭제할 사진이 없어요!");
     }
   };
+
+  let pathCategory;
+  if (category?.split(' ')[1] === '정보글') {
+    pathCategory = 'catinfo';
+  } else if (category?.split(' ')[1] === '동네'){
+    pathCategory = 'gathering';
+  } else {
+    pathCategory = 'sharing';
+  }
 
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
@@ -356,7 +366,7 @@ const CommunityPostEdit = (props) => {
               bgColor="olive"
               onClick={() =>
                 history.push(
-                  `/community/${location}/${category}/postdetail/${communityId}`
+                  `/community/${location.split(' ')[2]}/${pathCategory}/postdetail/${communityId}`
                 )
               }
               addstyle={() => {

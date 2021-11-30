@@ -55,12 +55,17 @@ const MyPageCat = () => {
           "YYYY-M-D hh:mm"
         );
         const myActivity = moment(LikedCat.myActivity).format("YYYY-M-D hh:mm");
+
         return (
           <CatPost
             key={idx}
             onClick={() => {
-              history.push(`/catdetail/${LikedCat.catId}`);
-              // history.push({pathname:`/catdetail/${location}/${LikedCat.catId}`, state : { location }});
+              history.push({
+                pathname: `/catdetail/${LikedCat.location.split(" ")[2]}/${
+                  LikedCat.catId
+                }`,
+                state: { location: LikedCat.location.split(" ")[2] },
+              });
             }}
           >
             <Image

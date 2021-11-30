@@ -159,7 +159,6 @@ const CatDetailInfoWrite = (props) => {
     }
   }, []);
 
-  console.log(water, snack, food);
   return (
     <Template props={props}>
       {edit ? (

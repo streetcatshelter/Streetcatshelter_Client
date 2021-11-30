@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-// COMPONENT
+// COMPONENTS
 import { Template, ChatMain, SecondHeader, Spinner } from "../../components";
 // REDUX
 import { useDispatch } from "react-redux";

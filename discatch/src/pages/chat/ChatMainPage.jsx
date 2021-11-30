@@ -2,7 +2,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-// COMPONENT
+// COMPONENTS
 import { Template, ChatMain, SecondHeader, Spinner } from "../../components";
 
 const ChatMainPage = (props) => {

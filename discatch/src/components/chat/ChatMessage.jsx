@@ -27,7 +27,8 @@ const ChatMessage = (props) => {
 
   useEffect(() => {
     dispatch(chatActions._getAllMessage(props.roomId));
-  }, []);
+  }, [props.roomId, dispatch]);
+
   return (
     <div>
       {LastMessages ? (

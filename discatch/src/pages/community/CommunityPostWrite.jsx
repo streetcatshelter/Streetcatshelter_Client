@@ -119,6 +119,11 @@ const CommunityPostWrite = (props) => {
     );
   };
 
+  const cancelBtn = () => {
+    history.push({pathname:`${backPath}`, state: { location }});
+    history.go(0);
+  }
+
   const delLastImageBtn = () => {
     if (preview.lentgh === 5) {
       dispatch(imgActions.delPreview(4));
@@ -358,7 +363,7 @@ const CommunityPostWrite = (props) => {
               fontSize="18px"
               fontWeight="800"
               bgColor="olive"
-              onClick={() => history.push(`${backPath}`)}
+              onClick={cancelBtn}
               addstyle={() => {
                 return css`
                   display: flex;

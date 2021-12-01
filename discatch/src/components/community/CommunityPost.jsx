@@ -29,7 +29,7 @@ const CommunityPost = ({ community }) => {
   } else {
     name = community.nickname;
   }
-
+ 
   return (
     <Grid height="30px">
       <CommunityPostStyle>
@@ -203,9 +203,30 @@ const CommunityPostStyle = styled.div`
   background: rgb(${(props) => props.theme.palette.diaryColor});
   width: 100%;
   height: 77px;
-  margin: 80px 0;
+  margin: 66px 0;
   padding: 4px;
   cursor: pointer;
+  @media screen and (min-width: 1280px) {
+    margin: 59px 0;
+  }
+  @media screen and (max-width: 540px) {
+    margin: 61px 0;
+  }
+  @media screen and (max-width: 414px) {
+    margin: 62px 0;
+  }
+  @media screen and (max-width: 411px) and (max-height: 731px) {
+    margin: 61px 0;
+  }
+  @media screen and (max-width: 375px) {
+    margin: 63px 0;
+  }
+  @media screen and (max-width: 375px) and (max-height: 667px) {
+    margin: 66px 0;
+  }
+  @media screen and (max-width: 360px) {
+    margin: 61px 0;
+  }
 `;
 
 export default CommunityPost;

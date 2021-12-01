@@ -39,6 +39,7 @@ export const addCommunityDB = (
           .post("/community/create", postInfo)
           .then((res) => {
             history.push(`/community/${detailLocation}/${pathName}`);
+            dispatch(imgActions.setInitialState());
           })
           .catch((err) => {
             console.log(err);
@@ -55,20 +56,34 @@ export const getCommunityDB =
     try {
       dispatch(itemLoading);
       const data = await communityApi.getCommunity(category, location, page);
-      dispatch(getCommunity(data.data));
+      if (category.split(' ')[1] === '정보글') {
+        dispatch(getCatInfo(data.data));
+      } else if (category.split(' ')[1] === '동네') {
+        dispatch(getGathering(data.data));
+      } else if (category.split(' ')[1] === '고양이') {
+        dispatch(getSharing(data.data));
+      }
     } catch (err) {
       window.alert("페이지에 오류가 있어요!");
       console.error(err);
     }
   };
 
-// 커뮤니티 상세 가져오기
+// 커뮤니티 글 상세 가져오기
 export const getOneCommunityDB =
   (communityId = "") =>
   async (dispatch, getState, { history }) => {
     try {
       const data = await communityApi.getDetailCommunity(communityId);
-      dispatch(getOneCommunity(data));
+      const category = data.data.category;
+      console.log(category);
+      if (category.split(' ')[1] === '정보글') {
+        dispatch(getOneCatInfo(data));
+      } else if (category.split(' ')[1] === '동네') {
+        dispatch(getOneGathering(data));
+      } else if (category.split(' ')[1] === '고양이') {
+        dispatch(getOneSharing(data));
+      }
     } catch (err) {
       console.error(err);
     }
@@ -86,6 +101,15 @@ export const editCommunityDB = (
 ) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
+    console.log(category);
+    let path;
+    if (category.split(' ')[1] === '정보글') {
+      path = 'catinfo';
+    } else if (category.split(' ')[1] === '동네') {
+      path = 'gathering';
+    } else if (category.split(' ')[1] === '고양이') {
+      path = 'sharing';
+    }
     let newImageUrl = [];
     let newImages = [];
     if (imgFile.length < 6) {
@@ -121,12 +145,12 @@ export const editCommunityDB = (
               username: username,
             })
             .then((res) => {
+              dispatch(imgActions.setInitialState());
               window.alert("게시글 수정 완료!");
-              history.goBack();
               history.push(
                 `/community/${
                   location.split(" ")[2]
-                }/${category}/postdetail/${communityId}`
+                }/${path}/postdetail/${communityId}`
               );
             })
             .catch((err) => {
@@ -209,7 +233,9 @@ export const communityLikeToggleDB = (communityId) => {
 
 // INITIAL STATE
 const initialState = {
-  list: [],
+  catInfo: [],
+  gathering: [],
+  sharing: [],
   page: 0,
   pageLoaded: false,
   itemLoaded: false,
@@ -220,7 +246,7 @@ const community = createSlice({
   name: "community",
   initialState,
   reducers: {
-    addCommunity: (state, action) => {
+    addCatInfo: (state, action) => {
       const category = action.payload.category;
       const contents = action.payload.contents;
       const image = action.payload.image;
@@ -228,7 +254,7 @@ const community = createSlice({
       const title = action.payload.title;
       const username = action.payload.username;
       const detailLocation = action.payload.username;
-      state.list.push(
+      state.catInfo.push(
         category,
         contents,
         image,
@@ -238,36 +264,124 @@ const community = createSlice({
         detailLocation
       );
     },
-
-    getCommunity: (state, action) => {
+    addGathering: (state, action) => {
+      const category = action.payload.category;
+      const contents = action.payload.contents;
+      const image = action.payload.image;
+      const location = action.payload.location;
+      const title = action.payload.title;
+      const username = action.payload.username;
+      const detailLocation = action.payload.username;
+      state.gathering.push(
+        category,
+        contents,
+        image,
+        location,
+        title,
+        username,
+        detailLocation
+      );
+    },
+    addSharing: (state, action) => {
+      const category = action.payload.category;
+      const contents = action.payload.contents;
+      const image = action.payload.image;
+      const location = action.payload.location;
+      const title = action.payload.title;
+      const username = action.payload.username;
+      const detailLocation = action.payload.username;
+      state.sharing.push(
+        category,
+        contents,
+        image,
+        location,
+        title,
+        username,
+        detailLocation
+      );
+    },
+	
+    getCatInfo: (state, action) => {
       return {
         ...state,
-        list: [...state.list, ...action.payload],
+        catInfo: [...state.catInfo, ...action.payload],
+        itemLoaded: false,
+      };
+    },
+    getGathering: (state, action) => {
+      return {
+        ...state,
+        gathering: [...state.gathering, ...action.payload],
+        itemLoaded: false,
+      };
+    },
+    getSharing: (state, action) => {
+      return {
+        ...state,
+        sharing: [...state.sharing, ...action.payload],
         itemLoaded: false,
       };
     },
 
-    getOneCommunity: (state, action) => {
-      state.list = action.payload;
+    getOneCatInfo: (state, action) => {
+      state.catInfo = action.payload;
+    },
+    getOneGathering: (state, action) => {
+      state.gathering = action.payload;
+    },
+    getOneSharing: (state, action) => {
+      state.sharing = action.payload;
     },
 
-    editCommunity: (state, action) => {
+    editCatInfo: (state, action) => {
+      console.log("수정 요청 완료!");
+    },
+    editGathering: (state, action) => {
+      console.log("수정 요청 완료!");
+    },
+    editSharing: (state, action) => {
       console.log("수정 요청 완료!");
     },
 
-    deleteCommunity: (state, action) => {
+    deleteCatInfo: (state, action) => {
       console.log("삭제 요청 완료!");
     },
-    addCommunityComment: (state, action) => {
-      state.list = action.payload;
+    deleteGathering: (state, action) => {
+      console.log("삭제 요청 완료!");
+    },
+    deleteSharing: (state, action) => {
+      console.log("삭제 요청 완료!");
+    },
+    addCatInfoComment: (state, action) => {
+      state.catInfo = action.payload;
     },
 
-    getCommunityComment: (state, action) => {
-      state.list = action.payload;
+    getCatInfoComment: (state, action) => {
+      state.catInfo = action.payload;
+    },
+    addGatheringComment: (state, action) => {
+      state.gathering = action.payload;
     },
 
-    deleteCommunityComment: (state, action) => {
-      state.list = action.payload;
+    getGatheringComment: (state, action) => {
+      state.gathering = action.payload;
+    },
+    addSharingComment: (state, action) => {
+      state.sharing = action.payload;
+    },
+
+    getSharingComment: (state, action) => {
+      state.sharing = action.payload;
+    },
+
+    deleteCatInfoComment: (state, action) => {
+      state.catInfo = action.payload;
+    },
+    deleteGatheringComment: (state, action) => {
+      state.gathering = action.payload;
+    },
+    deleteSharingComment: (state, action) => {
+      state.sharing = action.payload;
     },
     pageLoading: (state, action) => {
       state.pageLoaded = action.payload;
@@ -277,22 +391,39 @@ const community = createSlice({
       state.itemLoaded = action.payload;
     },
     resetList: (state, action) => {
-      state.list = [];
+      state.catInfo = [];
+      state.gathering = [];
+      state.sharing = [];
     },
   },
 });
 
 
 export const {
-  addCommunity,
-  getCommunity,
-  editCommunity,
-  deleteCommunity,
-  getOneCommunity,
-  getMoreCommunity,
-  addCommunityComment,
-  getCommunityComment,
-  deleteCommunityComment,
+  addCatInfo,
+  addGathering,
+  addSharing,
+  getCatInfo,
+  getGathering,
+  getSharing,
+  editCatInfo,
+  editGathering,
+  editSharing,
+  deleteCatInfo,
+  deleteGathering,
+  deleteSharing,
+  getOneCatInfo,
+  getOneGathering,
+  getOneSharing,
+  addCatInfoComment,
+  addGatheringComment,
+  addSharingComment,
+  getCatInfoComment,
+  getGatheringComment,
+  getSharingComment,
+  deleteCatInfoComment,
+  deleteGatheringComment,
+  deleteSharingComment,
   pageLoading,
   startReset,
   itemLoading,

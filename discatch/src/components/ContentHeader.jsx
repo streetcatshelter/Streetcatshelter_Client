@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 // STYLE
 import styled from "styled-components";
 
+// ROUTE
+import { useLocation } from "react-router-dom";
+
 // COMPONENTS
 import { EditModalSlide } from "../components";
 
@@ -22,37 +25,91 @@ const ContentHeader = ({
   path,
 }) => {
   const dispatch = useDispatch();
+  const pathName = useLocation();
+  const pName = pathName.pathname.split('/')[3];
   const [ProfileModal, setProfileModal] = useState(false);
   const userInfo = localStorage.getItem("userInfo");
   const userName = userInfo?.split('"')[5];
   const UserNickName = useSelector((state) => state.mypage.userInfo?.nickname);
-  const {
-    location,
-    username,
-    createdAt,
-    nickname,
-    profileImageUrl,
-    userProfile,
-  } = useSelector((state) =>
-    path === "catdetail"
-      ? {
-          location: null,
-          username: null,
-          createdAt: state.cat.detail?.createdAt,
-          nickname: state.cat.detail?.nickname,
-          profileImageUrl: state.cat.detail?.profileImageUrl,
-          userProfile: state.mypage.userInfo.profileImageUrl,
-        }
-      : {
-          location: state.community.list.data?.location,
-          username: state.community.list.data?.username,
-          nickname: state.community.list.data?.nickname,
-          profileImageUrl: state.community.list.data?.profileImageUrl,
-          createdAt: state.community.list.data?.createdAt
-            ? state.community.list.data?.createdAt
-            : Array(1),
-        }
+  let location, username, createdAt, nickname, profileImageUrl, userProfile
+  const { catLocation, catUsername, catCreatedAt, catNickname, catProfileImageUrl, catUserProfile} = useSelector((state) => ({
+          catLocation: null,
+          catUsername: null,
+          catCreatedAt: state.cat.detail?.createdAt,
+          catNickname: state.cat.detail?.nickname,
+          catProfileImageUrl: state.cat.detail?.profileImageUrl,
+          catUserProfile: state.mypage.userInfo.profileImageUrl,
+        })
   );
+
+  const { cLocation, cUsername, cCreatedAt, cNickname, cProfileImageUrl, cUserProfile} = useSelector((state) => ({
+    cLocation: state.community.catInfo.data?.location,
+    cUsername: state.community.catInfo.data?.username,
+    cCreatedAt: state.community.catInfo.data?.createdAt
+          ? state.community.catInfo.data?.createdAt
+          : Array(1),
+    cNickname: state.community.catInfo.data?.nickname,
+    cProfileImageUrl: state.cat.detail?.profileImageUrl,
+    cUserProfile: state.mypage.userInfo.profileImageUrl,
+    })
+  );
+
+
+  const { gLocation, gUsername, gNickname, gCreatedAt, gProfileImageUrl, gUserProfile } = useSelector(
+    (state) => ({
+      gLocation: state.community.gathering.data?.location,
+      gUsername: state.community.gathering.data?.username,
+      gNickname: state.community.gathering.data?.nickname,
+      gCreatedAt: state.community.gathering.data?.createdAt
+        ? state.community.gathering.data.createdAt
+        : Array(1),
+        gProfileImageUrl: state.community.gathering.data?.profileImageUrl,
+        gUserProfile: state.mypage.userInfo.profileImageUrl,
+    })
+  );
+
+  const { sLocation, sUsername, sNickname, sCreatedAt, sProfileImageUrl, sUserProfile } = useSelector(
+    (state) => ({
+      sLocation: state.community.sharing.data?.location,
+      sUsername: state.community.sharing.data?.username,
+      sNickname: state.community.sharing.data?.nickname,
+      sCreatedAt: state.community.sharing.data?.createdAt
+        ? state.community.sharing.data.createdAt
+        : Array(1),
+      sProfileImageUrl: state.community.sharing.data?.profileImageUrl,
+      sUserProfile: state.mypage.userInfo.profileImageUrl,
+    })
+  );
+  
+  if (pName === 'catinfo') {
+    location = cLocation;
+    username = cUsername;
+    createdAt = cCreatedAt;
+    nickname = cNickname;
+    profileImageUrl = cProfileImageUrl;
+    userProfile = cUserProfile;
+  } else if (pName === 'gathering') {
+    location = gLocation;
+    username = gUsername;
+    createdAt = gCreatedAt;
+    nickname = gNickname;
+    profileImageUrl = gProfileImageUrl;
+    userProfile = gUserProfile;
+  } else if (pName === 'sharing') {
+    location = sLocation;
+    username = sUsername;
+    createdAt = sCreatedAt;
+    nickname = sNickname;
+    profileImageUrl = sProfileImageUrl;
+    userProfile = sUserProfile;
+  } else {
+    location = catLocation;
+    username = catUsername;
+    createdAt = catCreatedAt;
+    nickname = catNickname;
+    profileImageUrl = catProfileImageUrl;
+    userProfile = catUserProfile;
+  }
 
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
   const OpenProfile = () => {

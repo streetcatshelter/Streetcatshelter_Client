@@ -31,10 +31,13 @@ const Header = (props) => {
   let location;
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
-
   if (preLocation !== undefined) {
     location = preLocation;
   } else if (userInfo.locationList && path.length === 1) {
+    location = userInfo.locationList[0]?.split("@")[0];
+  } else if (userInfo.locationList && firstLocation !== userInfo.locationList[0]?.split("@")[0] &&
+            firstLocation !== userInfo.locationList[1]?.split("@")[0] &&
+            firstLocation !== userInfo.locationList[2]?.split("@")[0]) {
     location = userInfo.locationList[0]?.split("@")[0];
   } else {
     location = firstLocation;

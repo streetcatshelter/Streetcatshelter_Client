@@ -4,50 +4,62 @@ import { useSelector, useDispatch } from "react-redux";
 import { searchKeywordMap } from "../../redux/modules/map";
 
 // ROUTE
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 // STYLE
 import styled, { css } from "styled-components";
 import { Map } from "react-feather";
 
 // ELEMENTS
-import { Button } from '../../elements';
+import { Button } from "../../elements";
 
 // ICON
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
-import { history } from '../../redux/configureStore';
-import { __getAllCatLocation } from '../../redux/modules/cat';
+import { history } from "../../redux/configureStore";
+import { __getAllCatLocation } from "../../redux/modules/cat";
 
 const Location = (props) => {
   const dispatch = useDispatch();
   const path = useLocation();
   const catId = props.props.match.params.id;
-  const pathLength = path.pathname.split('/').length;
+  const pathLength = path.pathname.split("/").length;
   let vKeyword;
 
-  const pathVillage = path.pathname.split('/')[2];
+  const pathVillage = path.pathname.split("/")[2];
   let location = pathVillage;
   let userVillage;
-  const userVillage0 = useSelector((state) => state.mypage.userVillage[0]?.split('@')[0]?.split('(')[0]);
-  const userVillageA = useSelector((state) => state.mypage.userVillage[0]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage1 = useSelector((state) => state.mypage.userVillage[1]?.split('@')[0]?.split('(')[0]);
-  const userVillageB = useSelector((state) => state.mypage.userVillage[1]?.split('@')[1]?.split('(')[0]);
-  
-  const userVillage2 = useSelector((state) => state.mypage.userVillage[2]?.split('@')[0]?.split('(')[0]);
-  const userVillageC = useSelector((state) => state.mypage.userVillage[2]?.split('@')[1]?.split('(')[0]);
-  
+  const userVillage0 = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageA = useSelector(
+    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage1 = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageB = useSelector(
+    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
+  );
+
+  const userVillage2 = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
+  );
+  const userVillageC = useSelector(
+    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
+  );
+
   const villageKeyword = useSelector((state) => state.map.keywordList[0]);
 
   if (villageKeyword === userVillage0) {
     userVillage = userVillageA;
   } else if (villageKeyword === userVillage1) {
-    userVillage = userVillageB
+    userVillage = userVillageB;
   } else if (villageKeyword === userVillage2) {
-    userVillage = userVillageC
+    userVillage = userVillageC;
   } else if (userVillage0 === pathVillage) {
     userVillage = userVillageA;
   } else if (userVillage1 === pathVillage) {
@@ -92,13 +104,15 @@ const Location = (props) => {
     location = userVillageC;
   }
 
-  const secondUserVillage = `${userVillage?.split(' ')[0]} ${userVillage?.split(' ')[1]} ${userVillage?.split(' ')[2]}`;
+  const secondUserVillage = `${userVillage?.split(" ")[0]} ${
+    userVillage?.split(" ")[1]
+  } ${userVillage?.split(" ")[2]}`;
   location = location?.substring(0, location.length - 1);
   const catList = useSelector((state) => state.cat.list);
 
   useEffect(() => {
     dispatch(__getAllCatLocation(location));
-  },[location, dispatch]);
+  }, [location, dispatch]);
 
   const showCats = () => {
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
@@ -123,16 +137,19 @@ const Location = (props) => {
     // 지도 마커 표시하기
     const marker = new kakao.maps.Marker({ position: map.getCenter() });
 
-    const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-      for (let i = 0; i < position.length; i ++) {
-        // 마커 이미지의 이미지 크기 입니다
-        const imageSize = new kakao.maps.Size(24, 35); 
-        
-        // 마커 이미지를 생성합니다    
-        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-        
-        // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-        const iwContent = `
+    const imageSrc =
+      "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+    for (let i = 0; i < position.length; i++) {
+      // 마커 이미지의 이미지 크기 입니다
+      const imageSize = new kakao.maps.Size(24, 35);
+
+      // 마커 이미지를 생성합니다
+      const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+      // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+
+      const iwContent = `
         <div style="display:flex">
           <div style="width: 80px; height: 80px; border-radius:80px;">
             <img width="80" 
@@ -147,7 +164,7 @@ const Location = (props) => {
                       justify-content: center; 
                       align-items: center;">
             <button 
-              onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/1'" 
+              onclick="history.pushState(null, null, '/catdetail/${villageKeyword}/${position[i].catId}/1')" 
               style="width: 70px;
                      height: 70px;
                      box-shadow: 3px 3px lightgray;
@@ -160,31 +177,31 @@ const Location = (props) => {
             </button>
           </div>
         </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        
-        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-  
-        // 인포윈도우를 생성합니다
-        const infowindow = new kakao.maps.InfoWindow({
-          content : iwContent,
-          removable : iwRemoveable
-        });
 
-        // 마커를 생성합니다
-        const markers = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: position[i].latlng, // 마커를 표시할 위치
-            title : catList[i].catName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            image : markerImage // 마커 이미지 
-        });
-  
-        // 마커에 클릭이벤트를 등록합니다
-        kakao.maps.event.addListener(markers, 'click', function() {
-          // 마커 위에 인포윈도우를 표시합니다
-          infowindow.open(map, markers);  
-        });
-        markers.setMap(map)
-      }
-    
+        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+      // 인포윈도우를 생성합니다
+      const infowindow = new kakao.maps.InfoWindow({
+        content: iwContent,
+        removable: iwRemoveable,
+      });
+
+      // 마커를 생성합니다
+      const markers = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: position[i].latlng, // 마커를 표시할 위치
+        title: catList[i].catName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image: markerImage, // 마커 이미지
+      });
+
+      // 마커에 클릭이벤트를 등록합니다
+      kakao.maps.event.addListener(markers, "click", function () {
+        // 마커 위에 인포윈도우를 표시합니다
+        infowindow.open(map, markers);
+      });
+      markers.setMap(map);
+    }
+
     // 지도에 마커를 표시합니다.
     kakao.maps.event.addListener(map, "click", function (mouseEvent) {
       //클릭한 위도, 경도 정보를 가져옵니다.
@@ -198,12 +215,9 @@ const Location = (props) => {
       marker.setMap(map);
     });
 
-
-
-
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(userVillage, placesSearchCB);
-    
+
     // 고양이 마커 가져오기
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
@@ -216,25 +230,27 @@ const Location = (props) => {
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         ps.keywordSearch(secondUserVillage, placesSearchCB);
       }
-    } 
-  }
-
+    }
+  };
 
   const positions = [];
   const makePosition = () => {
-      for (let i = 0; i < catList.length; i ++) {
-        positions.push({
-          catName : catList[i].catName, 
-          latlng : new kakao.maps.LatLng(catList[i].latitude, catList[i].longitude),
-          catId : catList[i].catId,
-          catImage : catList[i].catImage,
-        });
-      }
-      return positions;
-  }
+    for (let i = 0; i < catList.length; i++) {
+      positions.push({
+        catName: catList[i].catName,
+        latlng: new kakao.maps.LatLng(
+          catList[i].latitude,
+          catList[i].longitude
+        ),
+        catId: catList[i].catId,
+        catImage: catList[i].catImage,
+      });
+    }
+    return positions;
+  };
   const position = useMemo(() => makePosition(), [catList]);
 
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [Pagination, SetPagination] = useState("");
   const [Places, setPlaces] = useState([]);
 
@@ -249,7 +265,7 @@ const Location = (props) => {
   };
 
   const CreateKeyword = () => {
-    setSearchKeyword('')
+    setSearchKeyword("");
     if (searchKeyword === "") {
       window.alert("검색어를 입력해주세요!");
       return;
@@ -269,7 +285,6 @@ const Location = (props) => {
     ps.keywordSearch(typeVillageKeyword, placesSearchCB);
 
     function placesSearchCB(data, status, pagination) {
-      
       if (status === kakao.maps.services.Status.OK) {
         let bounds = new kakao.maps.LatLngBounds();
         for (let i = 0; i < data.length; i++) {
@@ -282,7 +297,7 @@ const Location = (props) => {
         displayPagination(pagination);
         setPlaces(data);
       } else {
-        alert('검색 결과가 없습니다!');
+        alert("검색 결과가 없습니다!");
         showCats();
       }
     }
@@ -320,17 +335,18 @@ const Location = (props) => {
 
     function displayMarker(place) {
       // 지도 마커 표시하기
-    const catMarker = new kakao.maps.Marker({ position: map.getCenter() });
+      const catMarker = new kakao.maps.Marker({ position: map.getCenter() });
 
-    const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-    
-      for (let i = 0; i < position.length; i ++) {
+      const imageSrc =
+        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+      for (let i = 0; i < position.length; i++) {
         // 마커 이미지의 이미지 크기 입니다
-        const imageSize = new kakao.maps.Size(24, 35); 
-        
-        // 마커 이미지를 생성합니다    
-        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-  
+        const imageSize = new kakao.maps.Size(24, 35);
+
+        // 마커 이미지를 생성합니다
+        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
         let iwContent = `<button 
                            onclick="location.href='/catdetail/${location}/${position[i].catId}'"
@@ -340,59 +356,56 @@ const Location = (props) => {
                                   background-color: white;">
                           ${position[i].catName}보러가기
                           </button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-  
+          iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
         // 인포윈도우를 생성합니다
         let infowindow = new kakao.maps.InfoWindow({
-          content : iwContent,
-          removable : iwRemoveable
+          content: iwContent,
+          removable: iwRemoveable,
         });
-        
+
         // 마커를 생성합니다
         const markers = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: position[i].latlng, // 마커를 표시할 위치
-            title : catList[i].catName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            image : markerImage // 마커 이미지 
+          map: map, // 마커를 표시할 지도
+          position: position[i].latlng, // 마커를 표시할 위치
+          title: catList[i].catName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          image: markerImage, // 마커 이미지
         });
-  
+
         // 마커에 클릭이벤트를 등록합니다
-        kakao.maps.event.addListener(markers, 'click', function() {
+        kakao.maps.event.addListener(markers, "click", function () {
           // 마커 위에 인포윈도우를 표시합니다
-          infowindow.open(map, markers);  
+          infowindow.open(map, markers);
         });
-        markers.setMap(map)
+        markers.setMap(map);
       }
-    
+
       // 지도에 마커를 표시합니다.
       kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-      //클릭한 위도, 경도 정보를 가져옵니다.
-      const latlng = mouseEvent.latLng;
-      //위도 경도 값을 useState를 이용해서 useEffect 밖으로 빼냅니다.
-      setLatitude(latlng.getLat());
-      setLongitude(latlng.getLng());
-      //마커 위치를 클릭한 위치로 옮깁니다.
-      catMarker.setPosition(latlng);
-      //마커를 지도상에 보여줍니다.
-      catMarker.setMap(map);
-    });
+        //클릭한 위도, 경도 정보를 가져옵니다.
+        const latlng = mouseEvent.latLng;
+        //위도 경도 값을 useState를 이용해서 useEffect 밖으로 빼냅니다.
+        setLatitude(latlng.getLat());
+        setLongitude(latlng.getLng());
+        //마커 위치를 클릭한 위치로 옮깁니다.
+        catMarker.setPosition(latlng);
+        //마커를 지도상에 보여줍니다.
+        catMarker.setMap(map);
+      });
 
+      const ps = new kakao.maps.services.Places();
+      ps.keywordSearch(userVillage, placesSearchCB);
 
+      function placesSearchCB(data, status, pagination) {
+        if (status === kakao.maps.services.Status.OK) {
+          let bounds = new kakao.maps.LatLngBounds();
 
-
-    const ps = new kakao.maps.services.Places();
-    ps.keywordSearch(userVillage, placesSearchCB);
-
-    function placesSearchCB (data, status, pagination) {
-      if (status === kakao.maps.services.Status.OK) {
-        let bounds = new kakao.maps.LatLngBounds();
-
-        for (let i = 0; i < data.length; i++) {
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+          for (let i = 0; i < data.length; i++) {
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+          }
+          map.setBounds(bounds);
         }
-        map.setBounds(bounds);
-      } 
-    }
+      }
       let marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(place.y, place.x),
@@ -409,15 +422,14 @@ const Location = (props) => {
     }
     setModal(1);
     setListVisible(1);
-    setSearchKeyword('');
+    setSearchKeyword("");
   };
 
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
-
   useEffect(() => {
-    showCats(userVillage, vKeyword, catList, position, location)
+    showCats(userVillage, vKeyword, catList, position, location);
   }, [userVillage, vKeyword, catList, position, location, dispatch]);
 
   return (
@@ -509,29 +521,47 @@ const Location = (props) => {
       )}
       <Button
         addstyle={() => {
-          return css`
-          `;
+          return css``;
         }}
         is_float="is_float"
         clickEvent={() => {
-          if(latitude !== undefined && longitude !== undefined && pathLength === 3) {
+          if (
+            latitude !== undefined &&
+            longitude !== undefined &&
+            pathLength === 3
+          ) {
             history.push({
-              pathname:`/catinfowrite/${pathLocation}`, 
-              state: {latitude, longitude}});
-          } else if (latitude !== undefined && longitude !== undefined && pathLength === 4) {
+              pathname: `/catinfowrite/${pathLocation}`,
+              state: { latitude, longitude },
+            });
+          } else if (
+            latitude !== undefined &&
+            longitude !== undefined &&
+            pathLength === 4
+          ) {
             history.push({
-              pathname:`/catdetailinfowrite/${catId}`, 
-              state: {latitude, longitude, location}});
-          } else if (latitude === undefined && longitude === undefined && pathLength === 4) {
+              pathname: `/catdetailinfowrite/${catId}`,
+              state: { latitude, longitude, location },
+            });
+          } else if (
+            latitude === undefined &&
+            longitude === undefined &&
+            pathLength === 4
+          ) {
             history.push({
-              pathname:`/catdetailinfowrite/${catId}`, 
-              state: {location}});
-          } else if (latitude === undefined && longitude === undefined && pathLength === 3) {
-            alert('지도에 위치를 표시해주세요!');
+              pathname: `/catdetailinfowrite/${catId}`,
+              state: { location },
+            });
+          } else if (
+            latitude === undefined &&
+            longitude === undefined &&
+            pathLength === 3
+          ) {
+            alert("지도에 위치를 표시해주세요!");
           }
         }}
       >
-        <FontAwesomeIcon icon={faPencilAlt} style={{ width: '20px' }} />
+        <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
       </Button>
     </MapWrap>
   );
@@ -582,7 +612,7 @@ const MapWrap = styled.div`
     padding: 30px 0;
   }
   @media screen and (max-height: 736px) {
-    padding:10px 0;
+    padding: 10px 0;
   }
   @media screen and (max-height: 720px) {
     padding: 0;

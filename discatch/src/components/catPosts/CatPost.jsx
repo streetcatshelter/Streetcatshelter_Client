@@ -17,12 +17,12 @@ import { flexBox } from "../../shared/style";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { MoreHorizontal } from "react-feather";
 
-const CatPost = ({ cat, location, path, pathLocation }) => {
+const CatPost = ({ cat, location, path, pathLocation, page }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
   const likeToggle = () => {
-    dispatch(__catLike(catId, location, path));
+    dispatch(__catLike(catId, location, path, page));
   };
   const CatDetailBtn = () => {
     if (path !== "detail") {
@@ -42,15 +42,16 @@ const CatPost = ({ cat, location, path, pathLocation }) => {
 
       <LeftBox>
         <Header>
-          <p onClick={CatDetailBtn}>
-            이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}
-          </p>
+          <div style={{ display: "flex" }}>
+            <p onClick={CatDetailBtn}>
+              이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}
+            </p>
 
-          <p onClick={CatDetailBtn}> 중성화: {cat.neutering}</p>
-
+            <p onClick={CatDetailBtn}> 중성화: {cat.neutering}</p>
+          </div>
           {path === "detail" && (
             <MoreHorizontalBtn
-              style={{ color: "rgb(249, 200, 82)" }}
+              style={{ color: "rgb(249, 200, 82)", marginRight: "15px" }}
               onClick={() => history.push(`/catinfoedit/${catId}`)}
             />
           )}
@@ -115,12 +116,13 @@ const LeftBox = styled.div`
 const Header = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 40px;
   margin: auto;
   cursor: pointer;
   p {
-    font-size: 12px;
+    font-size: 14px;
     margin-left: 5px;
     :nth-child(2) {
       margin-left: 10px;

@@ -17,12 +17,12 @@ import { flexBox } from "../../shared/style";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { MoreHorizontal } from "react-feather";
 
-const CatPost = ({ cat, location, path, pathLocation }) => {
+const CatPost = ({ cat, location, path, pathLocation, page }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
   const likeToggle = () => {
-    dispatch(__catLike(catId, location, path));
+    dispatch(__catLike(catId, location, path, page));
   };
   const CatDetailBtn = () => {
     if (path !== "detail") {

@@ -274,13 +274,13 @@ export const __getGallery =
 
 // 기본 정보 좋아요
 export const __catLike =
-  (catId, location, path) =>
+  (catId, location, path, page) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catLike(catId);
       path === "detail"
         ? dispatch(__getCatInfo(catId))
-        : dispatch(__getCatLocation(location));
+        : dispatch(likeToggle(catId));
     } catch (err) {
       console.error(err);
     }
@@ -414,6 +414,11 @@ const cat = createSlice({
     resetList: (state, action) => {
       state.list = [];
     },
+
+    likeToggle: (state, action) => {
+      const idx = state.list.findIndex((c) => c.catId === action.payload);
+      state.list[idx].userLiked = !state.list[idx].userLiked;
+    },
   },
 });
 
@@ -435,6 +440,7 @@ export const {
   setInitialState,
   postLoading,
   resetList,
+  likeToggle,
 } = cat.actions;
 
 export default cat;

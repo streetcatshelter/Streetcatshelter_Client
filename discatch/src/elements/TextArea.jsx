@@ -28,7 +28,7 @@ const TextArea = ({ value, placeholder, changeEvent, keyPress, onInput, ...props
     ref.current.style.height = ref.current.scrollHeight + "px";
   }, []);
 
-  if (pathCheck === "postdetail" || pathCheck === "catdetail" || pathCheck === "catdetailinfo") {
+  if (pathCheck === "postdetail" || pathCheck === "catdetail" || pathCheck === "catdetailinfo" || pathCheck === '1') {
     return (
       <TextAreaStyle
         value={value}

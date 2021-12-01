@@ -106,7 +106,11 @@ const CommunityDetail = (props) => {
 
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있다면,
-    if (inView) {
+    if (
+      inView &&
+      communityList.length > 9 &&
+      communityList.length % page === 0
+    ) {
       setPage((prevState) => prevState + 1);
     } else {
       return;

@@ -1,5 +1,7 @@
 // LIBRARY
-import React, { useEffect } from "react";
+// App.js
+import React, { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
@@ -22,16 +24,25 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
 import { history } from "../../redux/configureStore";
-import { __getCatLocation, __getMoreCat } from "../../redux/modules/cat";
+import {
+  __getCatLocation,
+  __getMoreCat,
+  resetList,
+} from "../../redux/modules/cat";
 
 // FUNCTION
 import InfinityScroll from "../../shared/InfinityScroll";
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const isLoaded = useSelector((state) => state.cat.postLoaded);
-  console.log(isLoaded);
 
+  const isLoaded = useSelector((state) => state.cat.postLoaded);
+
+  const [page, setPage] = useState(1);
+  const [ref, inView] = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
   const menuLocation = props.location.state?.location;
   const catList = useSelector((state) => state.cat.list);
 
@@ -85,49 +96,40 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    dispatch(__getCatLocation(location));
-  }, [location, dispatch]);
+    dispatch(resetList([]));
+  }, []);
 
-  const getMoreCat = () => {
-    dispatch(__getMoreCat(location));
-  };
+  useEffect(() => {
+    dispatch(__getCatLocation(location, page));
+  }, [location, page, dispatch]);
 
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있다면,
+    if (inView && catList.length > 9 && catList.length % page === 0) {
+      setPage((prevState) => prevState + 1);
+    } else {
+      return;
+    }
+  }, [inView]);
   return (
     <>
       {location !== undefined ? (
         <Template props={props} location={pathLocation}>
           <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
           <SecondSpinner visible={isLoaded}>
-            {catList.length ? (
+            {catList &&
+              catList.length > 0 &&
               catList.map((cat, idx) => {
                 return (
-                  <Grid
-                    key={idx}
-                    addstyle={() => {
-                      return css`
-                        position: relative;
-                        bottom: 10px;
-                      `;
-                    }}
-                  >
-                    <InfinityScroll
-                      next={getMoreCat}
-                      index={idx}
-                      length={catList.length}
-                      key={cat.catId}
-                    >
-                      <CatPost
-                        cat={cat}
-                        pathLocation={pathLocation}
-                        location={location}
-                      />
-                    </InfinityScroll>
-                  </Grid>
+                  <div style={{ width: "100%" }} key={idx} ref={ref}>
+                    <CatPost
+                      cat={cat}
+                      pathLocation={pathLocation}
+                      location={location}
+                    />
+                  </div>
                 );
-              })
-            ) : (
-              <></>
-            )}
+              })}
           </SecondSpinner>
           <Button
             is_float="is_float"

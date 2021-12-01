@@ -137,6 +137,7 @@ const Location = (props) => {
     // 지도 마커 표시하기
     const marker = new kakao.maps.Marker({ position: map.getCenter() });
 
+
     const imageSrc =
       "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
@@ -177,6 +178,7 @@ const Location = (props) => {
             </button>
           </div>
         </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
       // 인포윈도우를 생성합니다
@@ -348,7 +350,7 @@ const Location = (props) => {
 
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
         let iwContent = `<button 
-                           onclick="location.href='/catdetail/${location}/${position[i].catId}'" 
+                           onclick="location.href='/catdetail/${location}/${position[i].catId}'"
                            style="padding:5px; 
                                   margin:0 10px;
                                   border: 0;

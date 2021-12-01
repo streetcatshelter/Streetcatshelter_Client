@@ -77,7 +77,7 @@ const CatDetailInfo = (props) => {
           {detail.catImages &&
             detail.catImages.map((catImage, idx) => {
               return (
-                <CatImageBox key={idx}>
+                <CatImageBox>
                   <CatImage src={catImage} alt="catImage" key={idx} />
                 </CatImageBox>
               );

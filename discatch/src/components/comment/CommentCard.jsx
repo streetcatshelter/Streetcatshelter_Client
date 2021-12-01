@@ -26,6 +26,9 @@ const CommentCard = ({ comment, communityId }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
   const UserInfo = useSelector((state) => state.mypage.userInfo);
+  const userProfile = useSelector(
+    (state) => state.mypage.userInfo.profileImageUrl
+  );
   const [ProfileModal, setProfileModal] = useState(false);
   const CreatedAt = moment(comment.createdAt).format("YYYY-M-D hh:mm");
 
@@ -54,7 +57,10 @@ const CommentCard = ({ comment, communityId }) => {
       <Header>
         <Left>
           <Profile onClick={OpenProfile} isMine={comment.isMine}>
-            <img src={comment.profileImageUrl} alt={comment.profileImageUrl} />
+            <img
+              src={userProfile ? userProfile : comment.profileImageUrl}
+              alt={comment.profileImageUrl}
+            />
             <p>{comment.nickname}</p>
           </Profile>
 

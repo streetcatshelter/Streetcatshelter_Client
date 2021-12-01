@@ -14,6 +14,7 @@ import { Grid } from "../../elements/index";
 // REDUX
 import { history } from "../../redux/configureStore";
 import { pageLoading } from "../../redux/modules/community";
+
 // IMAGES
 import Community1 from "../../styles/images/Community1.png";
 import Community2 from "../../styles/images/Community2.png";
@@ -23,11 +24,13 @@ const Community = (props) => {
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.community.pageLoaded);
   const village = useSelector((state) => state.map.keywordList[0]);
+  const userLocation = useSelector((state) => state.map.keywordList[0]);
 
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
     alert("동네 정보를 입력해주세요!");
   };
+  
   useEffect(() => {
     dispatch(pageLoading(true));
     setTimeout(() => {
@@ -75,7 +78,10 @@ const Community = (props) => {
           >
             <CommunityCategoryCard
               src={Community1}
-              clickEvent={() => history.push(`/community/${village}/catinfo`)}
+              clickEvent={() => history.push({
+                  pathname:`/community/${village}/catinfo`, 
+                  state : { location : userLocation}}
+              )}
               width="100px"
               height="100px"
               title="고양이 정보글!"
@@ -84,7 +90,10 @@ const Community = (props) => {
 
             <CommunityCategoryCard
               src={Community2}
-              clickEvent={() => history.push(`/community/${village}/gathering`)}
+              clickEvent={() => history.push({
+                pathname:`/community/${village}/gathering`, 
+                state : { location : userLocation }}
+              )}
               width="100px"
               height="100px"
               title={`${village} 동네 모임`}
@@ -92,7 +101,10 @@ const Community = (props) => {
             />
             <CommunityCategoryCard
               src={Community3}
-              clickEvent={() => history.push(`/community/${village}/sharing`)}
+              clickEvent={() => history.push({
+                pathname:`/community/${village}/sharing`, 
+                state: { location : userLocation}}
+              )}
               width="100px"
               height="100px"
               title={`${village} 고양이 물건 나눔`}

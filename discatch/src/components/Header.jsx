@@ -23,14 +23,15 @@ import { mypageActions } from "../redux/modules/mypage";
 import { userActions } from "../redux/modules/user";
 
 const Header = (props) => {
+  const dispatch = useDispatch();
   const preLocation = props.location;
   const locationA = useLocation();
-  const dispatch = useDispatch();
   const path = props.path;
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location;
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
+  
   if (preLocation !== undefined) {
     location = preLocation;
   } else if (userInfo.locationList && path.length === 1) {

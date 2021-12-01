@@ -16,19 +16,65 @@ import {
 } from "../../redux/modules/community";
 
 const CommunityPostDetail = (props) => {
+  let category, contents, imageList, title, location;
+  const path = props.location.pathname.split('/')[3];
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
-  const { category, contents, imageList, title, location } = useSelector(
+  const { cCategory, cContents, cImageList, cTitle, cLocation } = useSelector(
     (state) => ({
-      category: state.community.list.data?.category,
-      contents: state.community.list.data?.contents,
-      imageList: state.community.list.data?.communityImageList
-        ? state.community.list.data.communityImageList
+      cCategory: state.community.catInfo.data?.category,
+      cContents: state.community.catInfo.data?.contents,
+      cImageList: state.community.catInfo.data?.communityImageList
+        ? state.community.catInfo.data.communityImageList
         : Array(1),
-      location: state.community.list.data?.location,
-      title: state.community.list.data?.title,
+      cLocation: state.community.catInfo.data?.location,
+      cTitle: state.community.catInfo.data?.title,
     })
   );
+
+  const { gCategory, gContents, gImageList, gTitle, gLocation } = useSelector(
+    (state) => ({
+      gCategory: state.community.gathering.data?.category,
+      gContents: state.community.gathering.data?.contents,
+      gImageList: state.community.gathering.data?.communityImageList
+        ? state.community.gathering.data.communityImageList
+        : Array(1),
+        gLocation: state.community.gathering.data?.location,
+      gTitle: state.community.gathering.data?.title,
+    })
+  );
+
+  const { sCategory, sContents, sImageList, sTitle, sLocation } = useSelector(
+    (state) => ({
+      sCategory: state.community.sharing.data?.category,
+      sContents: state.community.sharing.data?.contents,
+      sImageList: state.community.sharing.data?.communityImageList
+        ? state.community.sharing.data.communityImageList
+        : Array(1),
+        sLocation: state.community.sharing.data?.location,
+      sTitle: state.community.sharing.data?.title,
+    })
+  );
+
+  if (path === 'catinfo') {
+    category = cCategory;
+    contents = cContents;
+    imageList = cImageList;
+    title = cTitle;
+    location = cLocation;
+  } else if (path === 'gathering') {
+    category = gCategory;
+    contents = gContents;
+    imageList = gImageList;
+    title = gTitle;
+    location = gLocation;
+  } else if (path === 'sharing') {
+    category = sCategory;
+    contents = sContents;
+    imageList = sImageList;
+    title = sTitle;
+    location = sLocation;
+  }
 
   const deleteCommunity = () => {
     dispatch(deleteCommunityDB(communityId, category, location));
@@ -44,7 +90,13 @@ const CommunityPostDetail = (props) => {
   }
 
   React.useEffect(() => {
-    dispatch(getOneCommunityDB(communityId));
+    // if (category?.split(" ")[1] === "정보글") {
+      dispatch(getOneCommunityDB(communityId));
+    // } else if (category?.split(" ")[1] === "동네") {
+    //   dispatch(getOneGatheringDB(communityId));
+    // } else {
+    //   dispatch(getOneSharingDB(communityId));
+    // }
   }, [communityId, dispatch]);
 
   return (
@@ -67,7 +119,7 @@ const CommunityPostDetail = (props) => {
         </Title>
 
         <ImageBox>
-          {imageList.map((catImage, idx) => {
+          {imageList?.map((catImage, idx) => {
             return (
               <CatImageBox>
                 <CatImage src={catImage.image} alt="catImage" key={idx} />

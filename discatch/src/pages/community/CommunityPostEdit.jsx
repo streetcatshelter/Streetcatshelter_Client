@@ -29,19 +29,68 @@ const CommunityPostEdit = (props) => {
   const dispatch = useDispatch();
   const path = useLocation();
   const preview = useSelector((state) => state.image.preview);
-  const communityId = path.pathname.split("/")[5];
-
-  const { category, contents, imageList, location, title, username } =
+  const communityId = path.pathname.split('/')[5];
+  const pathName = path.pathname.split('/')[3];
+  let category, contents, imageList, location, title, username;
+  const { cCategory, cContents, cImageList, cLocation, cTitle, cUsername } =
     useSelector((state) => ({
-      category: state.community.list.data?.category,
-      contents: state.community.list.data?.contents,
-      imageList: state.community.list.data?.communityImageList
-        ? state.community.list.data?.communityImageList
+      cCategory: state.community.catInfo.data?.category,
+      cContents: state.community.catInfo.data?.contents,
+      cImageList: state.community.catInfo.data?.communityImageList
+        ? state.community.catInfo.data?.communityImageList
         : Array(),
-      location: state.community.list.data?.location,
-      title: state.community.list.data?.title,
-      username: state.community.list.data?.username,
+      cLocation: state.community.catInfo.data?.location,
+      cTitle: state.community.catInfo.data?.title,
+      cUsername: state.community.catInfo.data?.username,
     }));
+
+    const { gCategory, gContents, gImageList, gLocation, gTitle, gUsername } =
+    useSelector((state) => ({
+      gCategory: state.community.gathering.data?.category,
+      gContents: state.community.gathering.data?.contents,
+      gImageList: state.community.gathering.data?.communityImageList
+        ? state.community.gathering.data?.communityImageList
+        : Array(),
+      gLocation: state.community.gathering.data?.location,
+      gTitle: state.community.gathering.data?.title,
+      gUsername: state.community.gathering.data?.username,
+    }));
+
+    const { sCategory, sContents, sImageList, sLocation, sTitle, sUsername } =
+    useSelector((state) => ({
+      sCategory: state.community.sharing.data?.category,
+      sContents: state.community.sharing.data?.contents,
+      sImageList: state.community.sharing.data?.communityImageList
+        ? state.community.sharing.data?.communityImageList
+        : Array(),
+      sLocation: state.community.sharing.data?.location,
+      sTitle: state.community.sharing.data?.title,
+      sUsername: state.community.sharing.data?.username,
+    }));
+
+    if (pathName === 'catinfo') {
+      category = cCategory;
+      contents = cContents;
+      imageList = cImageList;
+      location = cLocation;
+      title = cTitle;
+      username = cUsername;
+    } else if (pathName === 'gathering') {
+      category = gCategory;
+      contents = gContents;
+      imageList = gImageList;
+      location = gLocation;
+      title = gTitle;
+      username = gUsername;
+    } else {
+      category = sCategory;
+      contents = sContents;
+      imageList = sImageList;
+      location = sLocation;
+      title = sTitle;
+      username = sUsername;
+    }
+  
   const imageNum = imageList?.length;
 
   const [fileNum, setFileNum] = useState(imageNum);
@@ -128,10 +177,10 @@ const CommunityPostEdit = (props) => {
   } else {
     pathCategory = 'sharing';
   }
-
+  
   React.useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
-  }, [communityId, dispatch]);
+  }, [category, communityId, dispatch]);
 
   return (
     <Template props={props}>
@@ -372,7 +421,7 @@ const CommunityPostEdit = (props) => {
               bgColor="olive"
               onClick={() =>
                 history.push(
-                  `/community/${location.split(' ')[2]}/${pathCategory}/postdetail/${communityId}`
+                  `/community/${location?.split(' ')[2]}/${pathCategory}/postdetail/${communityId}`
                 )
               }
               addstyle={() => {

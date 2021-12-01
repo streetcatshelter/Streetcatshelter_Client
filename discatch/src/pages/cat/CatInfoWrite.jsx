@@ -79,9 +79,9 @@ const CatInfoWrite = (props) => {
 
   const Options = [
     { key: 1, value: "중성화 여부" },
-    { key: 2, value: "YES" },
-    { key: 3, value: "NO" },
-    { key: 4, value: "알수없음" },
+    { key: 2, value: "알수없음" },
+    { key: 3, value: "YES" },
+    { key: 4, value: "NO" },
   ];
 
   const [catName, setCatName] = useState(edit ? catInfo.catName : "");
@@ -104,20 +104,24 @@ const CatInfoWrite = (props) => {
   const longitude = props.history?.location.state?.longitude;
 
   const createBtn = () => {
-    edit
-      ? dispatch(__editCatInfo(catName, HashTags, neutering, catInfo.catId))
-      : dispatch(
-          __createCatInfo(
-            catName,
-            HashTags,
-            neutering,
-            location,
-            NickName,
-            latitude,
-            longitude,
-            pathLocation
-          )
-        );
+    if (neutering === "") {
+      alert("중성화 여부를 선택해주세요!");
+    } else {
+      edit
+        ? dispatch(__editCatInfo(catName, HashTags, neutering, catInfo.catId))
+        : dispatch(
+            __createCatInfo(
+              catName,
+              HashTags,
+              neutering,
+              location,
+              NickName,
+              latitude,
+              longitude,
+              pathLocation
+            )
+          );
+    }
   };
   const publish = (catTag) => {
     if (catTag !== "") {
@@ -255,19 +259,19 @@ const CatInfoWrite = (props) => {
             <Text fontWeight="bold"> 2. 중성화 여부 </Text>
             <Select value={neutering} onChange={$neutering}>
               {Options.map((item, index) => {
-                if (item.key === 1) {
-                  return (
-                    <option key={item.key} value={item.value} disabled>
-                      {item.value}
-                    </option>
-                  );
-                } else {
-                  return (
-                    <option key={item.key} value={item.value}>
-                      {item.value}
-                    </option>
-                  );
-                }
+                // if (item.key === 1) {
+                //   return (
+                //     <option key={item.key} value={item.value} disabled>
+                //       {item.value}
+                //     </option>
+                //   );
+                // } else {
+                return (
+                  <option key={item.key} value={item.value}>
+                    {item.value}
+                  </option>
+                );
+                // }
               })}
             </Select>
           </Grid>

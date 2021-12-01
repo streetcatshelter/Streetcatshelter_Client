@@ -111,111 +111,36 @@ const CommunityDetail = (props) => {
   return (
     <Template props={props}>
       <SecondHeader title={category} />
-      <Grid
-        bgColor="bgColor"
-        margin="-8vh 0 0 0"
-        addstyle={() => {
-          return css`
-            position: relative;
-            top: 67px;
-          `;
-        }}
+      <CommunityDetailStyle>
+        {communityList &&
+          communityList.length > 0 &&
+          communityList.map((community, idx) => {
+            return (
+              <div style={{ width: "100%" }} key={idx} ref={ref}>
+                <CommunityPost community={community} />
+              </div>
+            );
+          })}
+      </CommunityDetailStyle>
+      <Button
+        clickEvent={() =>
+          history.push(`/community/${pathLocation}/${nextPath}/write`)
+        }
+        is_float="is_float"
       >
-        <CommunityDetailStyle>
-          <Grid
-            addstyle={() => {
-              return css`
-                position: relative;
-                margin: 0 auto;
-                font-size: 18px;
-                font-weight: bold;
-                top: 90px;
-              `;
-            }}
-          ></Grid>
-          <Grid
-            margin="-95vh 0 0 0"
-            addstyle={() => {
-              return css`
-                @media screen and (max-width: 414px) {
-                  margin: -92.5vh 0 0 0;
-                }
-              `;
-            }}
-          >
-            {communityList &&
-              communityList.length > 0 &&
-              communityList.map((community, idx) => {
-                return (
-                  <div key={idx} ref={ref}>
-                    inView&&{<CommunityPost community={community} />}
-                  </div>
-                );
-              })}
-          </Grid>
-        </CommunityDetailStyle>
-        <Button
-          clickEvent={() =>
-            history.push(`/community/${pathLocation}/${nextPath}/write`)
-          }
-          is_float="is_float"
-        >
-          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-        </Button>
-      </Grid>
+        <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+      </Button>
     </Template>
   );
 };
 
 const CommunityDetailStyle = styled.div`
-  z-index: -1;
+  height: 80%;
   width: 100%;
-  overflow-x: hidden;
-  height: 85vh;
-  @media screen and (max-height: 1366px) {
-    height: 89vh;
-    margin: 2vh 0 0;
-  }
-  @media screen and (max-height: 1024px) {
-    height: 85vh;
-    margin: 2vh 0 0;
-  }
-  @media screen and (max-height: 823px) {
-    height: 80vh;
-    margin: -0.2vh 0 0;
-  }
-  @media screen and (max-height: 812px) {
-    height: 80vh;
-    margin: -0.2vh 0 0;
-  }
-  @media screen and (max-height: 800px) {
-    height: 83vh;
-    margin: -0.3vh 0 0;
-  }
-  @media screen and (max-height: 736px) {
-    height: 79vh;
-    margin: -1vh 0 0;
-  }
-  @media screen and (max-height: 720px) {
-    height: 81vh;
-    margin: -1vh 0 0;
-  }
-  @media screen and (max-height: 667px) {
-    height: 77vh;
-    margin: -2vh 0 0;
-  }
-  @media screen and (max-height: 640px) {
-    height: 77vh;
-    margin: -2.5vh 0 0;
-  }
-  @media screen and (max-height: 600px) {
-    height: 78vh;
-    margin: -3vh 0 0;
-  }
-  @media screen and (max-height: 568px) {
-    height: 75vh;
-    margin: -3.6vh 0 0;
-  }
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default CommunityDetail;

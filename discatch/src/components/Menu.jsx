@@ -63,6 +63,7 @@ const Menu = (props) => {
     location = userVillage;
   }
 
+  location = userLocation ? userLocation : location;
   const catId = props.props.props.location.pathname.split("/")[3];
 
   const moveToHome = () => {
@@ -87,7 +88,6 @@ const Menu = (props) => {
     }
   };
 
-  location = userLocation ? userLocation : location;
   const moveToCommunity = () => {
     if (location === undefined) {
       history.push("/userinfoedit");

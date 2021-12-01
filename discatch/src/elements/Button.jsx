@@ -9,9 +9,7 @@ const Button = ({ is_float, children, clickEvent, ...props }) => {
   if (is_float) {
     return (
       <React.Fragment>
-        <FloatButtonOut>
-          <FloatButton onClick={clickEvent}>{children}</FloatButton>{" "}
-        </FloatButtonOut>
+        <FloatButton onClick={clickEvent}>{children}</FloatButton>{" "}
       </React.Fragment>
     );
   }
@@ -59,20 +57,9 @@ const FloatButton = styled.button`
   text-align: center;
   border: none;
   border-radius: 50%;
-  position: relative;
+  position: fixed;
   margin-left: 300px;
+  bottom: 100px;
 `;
 
-const FloatButtonOut = styled.div`
-  position: fixed;
-  height: 80%;
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  @media screen and (max-height: 400px) {
-    height: 50%;
-  }
-`;
 export default Button;

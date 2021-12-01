@@ -63,6 +63,7 @@ const Menu = (props) => {
     location = userVillage;
   }
 
+  location = userLocation ? userLocation : location;
   const catId = props.props.props.location.pathname.split("/")[3];
 
   const moveToHome = () => {
@@ -71,14 +72,14 @@ const Menu = (props) => {
       alert("동네 정보를 입력해주세요!");
     } else {
       if (path === "/map/:village") {
-        history.push({ pathname: "/", state: { location: pathLocation } });
-      } else if (preLocation === userVillageA.split(' ')[2]) {
+        history.push({ pathname: "/", state: { location } });
+      } else if (preLocation === userVillageA?.split(' ')[2]) {
         location = userVillage0;
         history.push({ pathname: "/", state: { location } });
-      } else if (preLocation === userVillageB.split(' ')[2]) {
+      } else if (preLocation === userVillageB?.split(' ')[2]) {
         location = userVillage1;
         history.push({ pathname: "/", state: { location } });
-      } else if (preLocation === userVillageC.split(' ')[2]) {
+      } else if (preLocation === userVillageC?.split(' ')[2]) {
         location = userVillage2;
         history.push({ pathname: "/", state: { location } });
       } else {
@@ -87,7 +88,6 @@ const Menu = (props) => {
     }
   };
 
-  location = userLocation ? userLocation : location;
   const moveToCommunity = () => {
     if (location === undefined) {
       history.push("/userinfoedit");

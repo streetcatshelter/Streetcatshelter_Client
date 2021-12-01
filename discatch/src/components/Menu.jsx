@@ -59,7 +59,10 @@ const Menu = (props) => {
   ) {
     location = pathLocation;
   }
-
+  
+  if (location !== userVillage && location !== userVillage && location !== userVillage) {
+    location = userVillage;
+  }
   const catId = props.props.props.location.pathname.split("/")[3];
 
   const moveToHome = () => {

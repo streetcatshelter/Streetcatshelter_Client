@@ -73,7 +73,7 @@ const CatPost = ({ cat, location, path, pathLocation }) => {
               }}
             >
               <Text fontWeight="bold" size="16px" clickEvent={CatDetailBtn}>
-                {cat.catName}
+                {cat.catName ? cat.catName : "이름을 지어주세요!"}
               </Text>
 
               <Text

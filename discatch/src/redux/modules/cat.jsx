@@ -182,7 +182,7 @@ export const __getAllCatLocation =
 
 // 지역에 따라 게시물 불러오기
 export const __getCatLocation =
-  (location, limit = 10) =>
+  (location, limit = 11) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatLocation(location, limit);
@@ -241,7 +241,6 @@ export const __getCalendar =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getCatCalendar(catId, month, year);
-      console.log(data);
       dispatch(getCalendar(data.data));
     } catch (err) {
       console.error(err);

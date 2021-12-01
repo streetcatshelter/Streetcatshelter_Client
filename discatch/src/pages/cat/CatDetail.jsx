@@ -38,12 +38,11 @@ const CatDetail = (props) => {
   const commentList = useSelector((state) => state.comment.list);
   const [menu, setMenu] = useState("캘린더");
   const userInfo = useSelector((state) => state.mypage.userInfo);
-  console.log(userInfo.locationList.includes('반송동'));
+
   useEffect(() => {
     dispatch(__getCatInfo(catId));
   }, [catId, dispatch]);
-  console.log(location);
-  console.log(userInfo.locationList[0].split('@')[0]);
+
   useEffect(() => {
     dispatch(__getComment(catId));
   }, [catId, commentList.length, dispatch]);
@@ -106,9 +105,9 @@ const CatDetail = (props) => {
         ) : menu === "갤러리" ? (
           <CatGallery catId={catId} location={location} />
         ) : null}
-        {location === userInfo.locationList[0]?.split('@')[0] ||
-        location === userInfo.locationList[1]?.split('@')[0] ||
-        location === userInfo.locationList[2]?.split('@')[0] ? (
+        {userInfo.locationList && (location === userInfo?.locationList[0]?.split('@')[0] ||
+        location === userInfo?.locationList[1]?.split('@')[0] ||
+        location === userInfo?.locationList[2]?.split('@')[0]) ? (
         <Button
           is_float="is_float"
           clickEvent={() => {

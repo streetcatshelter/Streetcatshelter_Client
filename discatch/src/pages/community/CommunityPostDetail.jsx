@@ -17,7 +17,7 @@ import {
 
 const CommunityPostDetail = (props) => {
   let category, contents, imageList, title, location;
-  const path = props.location.pathname.split('/')[3];
+  const path = props.location.pathname.split("/")[3];
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
   const { cCategory, cContents, cImageList, cTitle, cLocation } = useSelector(
@@ -39,7 +39,7 @@ const CommunityPostDetail = (props) => {
       gImageList: state.community.gathering.data?.communityImageList
         ? state.community.gathering.data.communityImageList
         : Array(1),
-        gLocation: state.community.gathering.data?.location,
+      gLocation: state.community.gathering.data?.location,
       gTitle: state.community.gathering.data?.title,
     })
   );
@@ -51,24 +51,24 @@ const CommunityPostDetail = (props) => {
       sImageList: state.community.sharing.data?.communityImageList
         ? state.community.sharing.data.communityImageList
         : Array(1),
-        sLocation: state.community.sharing.data?.location,
+      sLocation: state.community.sharing.data?.location,
       sTitle: state.community.sharing.data?.title,
     })
   );
 
-  if (path === 'catinfo') {
+  if (path === "catinfo") {
     category = cCategory;
     contents = cContents;
     imageList = cImageList;
     title = cTitle;
     location = cLocation;
-  } else if (path === 'gathering') {
+  } else if (path === "gathering") {
     category = gCategory;
     contents = gContents;
     imageList = gImageList;
     title = gTitle;
     location = gLocation;
-  } else if (path === 'sharing') {
+  } else if (path === "sharing") {
     category = sCategory;
     contents = sContents;
     imageList = sImageList;
@@ -91,7 +91,7 @@ const CommunityPostDetail = (props) => {
 
   React.useEffect(() => {
     // if (category?.split(" ")[1] === "정보글") {
-      dispatch(getOneCommunityDB(communityId));
+    dispatch(getOneCommunityDB(communityId));
     // } else if (category?.split(" ")[1] === "동네") {
     //   dispatch(getOneGatheringDB(communityId));
     // } else {
@@ -121,7 +121,7 @@ const CommunityPostDetail = (props) => {
         <ImageBox>
           {imageList?.map((catImage, idx) => {
             return (
-              <CatImageBox>
+              <CatImageBox key={idx}>
                 <CatImage src={catImage.image} alt="catImage" key={idx} />
               </CatImageBox>
             );

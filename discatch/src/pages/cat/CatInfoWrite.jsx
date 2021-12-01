@@ -90,7 +90,7 @@ const CatInfoWrite = (props) => {
     setCatName(e.target.value);
   };
 
-  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "");
+  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "YES");
   const $neutering = (e) => {
     setNeutering(e.target.value);
   };
@@ -176,7 +176,7 @@ const CatInfoWrite = (props) => {
           <label htmlFor="imgFile">
             <Camera width="100%" height="100px" color="white" />
           </label>
-          <Text>이곳을 클릭하여 사진을 등록해주세요!</Text>
+          <Text>이곳을 클릭하여 사진을 한 장 이상 등록해 주세요!</Text>
           <Input
             id="imgFile"
             name="imgFile"
@@ -288,7 +288,7 @@ const CatInfoWrite = (props) => {
               width="90%"
               radius="10px"
               bgColor="#ffffff"
-              placeholder="태그를 입력해주세요!"
+              placeholder="태그는 5개까지 입력할 수 있습니다!"
               type="text"
               value={catTag}
               changeEvent={$catTag}

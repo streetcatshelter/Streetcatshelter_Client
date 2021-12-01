@@ -17,103 +17,52 @@ import { chatActions } from "../redux/modules/chat";
 // MOMENT
 import moment from "moment";
 
-const ContentHeader = ({
-  FirstBtn,
-  FirstClick,
-  SecondBtn,
-  SecondClick,
-  path,
-}) => {
+const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const dispatch = useDispatch();
   const pathName = useLocation();
-  const pName = pathName.pathname.split('/')[3];
+  const pName = pathName.pathname.split("/")[3];
   const [ProfileModal, setProfileModal] = useState(false);
-  const userInfo = localStorage.getItem("userInfo");
-  const userName = userInfo?.split('"')[5];
   const UserNickName = useSelector((state) => state.mypage.userInfo?.nickname);
-  let location, username, createdAt, nickname, profileImageUrl, userProfile
-  const { catLocation, catUsername, catCreatedAt, catNickname, catProfileImageUrl, catUserProfile} = useSelector((state) => ({
-          catLocation: null,
-          catUsername: null,
-          catCreatedAt: state.cat.detail?.createdAt,
-          catNickname: state.cat.detail?.nickname,
-          catProfileImageUrl: state.cat.detail?.profileImageUrl,
-          catUserProfile: state.mypage.userInfo.profileImageUrl,
-        })
+  const location = useSelector((state) =>
+    pName === "catinfo"
+      ? state.community.catInfo.data?.location
+      : pName === "gathering"
+      ? state.community.gathering.data?.location
+      : pName === "sharing"
+      ? state.community.sharing.data?.location
+      : null
   );
-
-  const { cLocation, cUsername, cCreatedAt, cNickname, cProfileImageUrl, cUserProfile} = useSelector((state) => ({
-    cLocation: state.community.catInfo.data?.location,
-    cUsername: state.community.catInfo.data?.username,
-    cCreatedAt: state.community.catInfo.data?.createdAt
-          ? state.community.catInfo.data?.createdAt
-          : Array(1),
-    cNickname: state.community.catInfo.data?.nickname,
-    cProfileImageUrl: state.cat.detail?.profileImageUrl,
-    cUserProfile: state.mypage.userInfo.profileImageUrl,
-    })
+  const nickname = useSelector((state) =>
+    pName === "catinfo"
+      ? state.community.catInfo.data?.nickname
+      : pName === "gathering"
+      ? state.community.gathering.data?.nickname
+      : pName === "sharing"
+      ? state.community.sharing.data?.nickname
+      : state.cat.detail?.nickname
   );
-
-
-  const { gLocation, gUsername, gNickname, gCreatedAt, gProfileImageUrl, gUserProfile } = useSelector(
-    (state) => ({
-      gLocation: state.community.gathering.data?.location,
-      gUsername: state.community.gathering.data?.username,
-      gNickname: state.community.gathering.data?.nickname,
-      gCreatedAt: state.community.gathering.data?.createdAt
-        ? state.community.gathering.data.createdAt
-        : Array(1),
-        gProfileImageUrl: state.community.gathering.data?.profileImageUrl,
-        gUserProfile: state.mypage.userInfo.profileImageUrl,
-    })
+  const createdAt = useSelector((state) =>
+    pName === "catinfo"
+      ? state.community.catInfo.data?.createdAt
+      : pName === "gathering"
+      ? state.community.gathering.data?.createdAt
+      : pName === "sharing"
+      ? state.community.sharing.data?.createdAt
+      : state.cat.detail?.createdAt
   );
-
-  const { sLocation, sUsername, sNickname, sCreatedAt, sProfileImageUrl, sUserProfile } = useSelector(
-    (state) => ({
-      sLocation: state.community.sharing.data?.location,
-      sUsername: state.community.sharing.data?.username,
-      sNickname: state.community.sharing.data?.nickname,
-      sCreatedAt: state.community.sharing.data?.createdAt
-        ? state.community.sharing.data.createdAt
-        : Array(1),
-      sProfileImageUrl: state.community.sharing.data?.profileImageUrl,
-      sUserProfile: state.mypage.userInfo.profileImageUrl,
-    })
+  const profileImageUrl = useSelector((state) =>
+    pName === "catinfo"
+      ? state.community.catInfo.data?.profileImageUrl
+      : pName === "gathering"
+      ? state.community.gathering.data?.profileImageUrl
+      : pName === "sharing"
+      ? state.community.sharing.data?.profileImageUrl
+      : state.cat.detail?.profileImageUrl
   );
-  
-  if (pName === 'catinfo') {
-    location = cLocation;
-    username = cUsername;
-    createdAt = cCreatedAt;
-    nickname = cNickname;
-    profileImageUrl = cProfileImageUrl;
-    userProfile = cUserProfile;
-  } else if (pName === 'gathering') {
-    location = gLocation;
-    username = gUsername;
-    createdAt = gCreatedAt;
-    nickname = gNickname;
-    profileImageUrl = gProfileImageUrl;
-    userProfile = gUserProfile;
-  } else if (pName === 'sharing') {
-    location = sLocation;
-    username = sUsername;
-    createdAt = sCreatedAt;
-    nickname = sNickname;
-    profileImageUrl = sProfileImageUrl;
-    userProfile = sUserProfile;
-  } else {
-    location = catLocation;
-    username = catUsername;
-    createdAt = catCreatedAt;
-    nickname = catNickname;
-    profileImageUrl = catProfileImageUrl;
-    userProfile = catUserProfile;
-  }
 
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
   const OpenProfile = () => {
-    if (userName !== username) {
+    if (nickname !== UserNickName) {
       setProfileModal(!ProfileModal);
     }
   };
@@ -132,10 +81,7 @@ const ContentHeader = ({
     <>
       <Wrapper>
         <UserInfoBox onClick={OpenProfile}>
-          <Avatar
-            src={userProfile ? userProfile : profileImageUrl}
-            alt="profileImage"
-          />
+          <Avatar src={profileImageUrl} alt="profileImage" />
           <UserInfoBoxRight>
             <p>{nickname}</p>
             <div style={{ display: "flex" }}>

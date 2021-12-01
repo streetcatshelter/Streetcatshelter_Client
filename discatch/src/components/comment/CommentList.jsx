@@ -9,6 +9,9 @@ import CommentCard from "./CommentCard";
 // STYLE
 import { css } from "styled-components";
 
+// ROUTE
+import { useLocation } from "react-router-dom";
+
 // ELEMENTS
 import { Grid, Button, TextArea } from "../../elements/index";
 
@@ -21,7 +24,18 @@ import {
 
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
-  const community = useSelector((state) => state.community.list);
+  const pathName = useLocation().pathname.split('/')[3];
+  let community;
+  const cCommunity = useSelector((state) => state.community.catInfo);
+  const gCommunity = useSelector((state) => state.community.gathering);
+  const sCommunity = useSelector((state) => state.community.sharing);
+  if (pathName === 'catinfo') {
+    community = cCommunity;
+  } else if (pathName === 'gathering') {
+    community = gCommunity;
+  } else if (pathName === 'sharing') {
+    community = sCommunity;
+  }
   const [comments, setComment] = React.useState("");
   let commentList;
   if (path === "CatDetail" || path === "CatDetailInfo") {

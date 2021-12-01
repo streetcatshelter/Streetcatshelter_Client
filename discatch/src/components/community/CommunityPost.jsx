@@ -15,6 +15,9 @@ import { history } from "../../redux/configureStore";
 // ROUTE
 import { useLocation } from "react-router-dom";
 
+// MOMENT
+import moment from "moment";
+
 const CommunityPost = ({ community }) => {
   const path = useLocation();
   const location = path.pathname.split("/")[2];
@@ -26,7 +29,7 @@ const CommunityPost = ({ community }) => {
   } else {
     name = community.nickname;
   }
-
+  const createdAt = moment(community.createdAt).format("YYYY-M-D hh:mm");
   return (
     <CommunityPostStyle
       onClick={() =>
@@ -43,7 +46,7 @@ const CommunityPost = ({ community }) => {
           />
           <p>{name}</p>
         </RightBox>
-        <p>{community.createdAt}</p>
+        <p>{createdAt}</p>
       </UserInfoBox>
 
       <ContentBox>
@@ -106,7 +109,7 @@ const UserInfoBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  width: 93%;
   height: 40px;
   margin: auto;
   p {
@@ -130,12 +133,17 @@ const ContentBox = styled.div`
   margin: auto;
   p {
     font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
 const InfoBox = styled.div`
   display: flex;
-  width: 95%;
+  width: 93%;
   height: 20px;
   margin: auto;
   justify-content: flex-end;

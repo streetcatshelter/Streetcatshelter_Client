@@ -76,7 +76,6 @@ export const getOneCommunityDB =
     try {
       const data = await communityApi.getDetailCommunity(communityId);
       const category = data.data.category;
-      console.log(category);
       if (category.split(' ')[1] === '정보글') {
         dispatch(getOneCatInfo(data));
       } else if (category.split(' ')[1] === '동네') {
@@ -101,7 +100,6 @@ export const editCommunityDB = (
 ) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
-    console.log(category);
     let path;
     if (category.split(' ')[1] === '정보글') {
       path = 'catinfo';

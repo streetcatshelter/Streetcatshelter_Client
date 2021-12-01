@@ -102,31 +102,35 @@ const CatDetailInfoWrite = (props) => {
   }
 
   const createBtn = () => {
-    edit
-      ? dispatch(
-          __editCatDetailInfo(
-            HashTags,
-            diary,
-            food,
-            snack,
-            water,
-            detail.catDetailId,
-            detail.catImages
+    if (diary === "") {
+      alert("다이어리를 입력해 주세요.");
+    } else {
+      edit
+        ? dispatch(
+            __editCatDetailInfo(
+              HashTags,
+              diary,
+              food,
+              snack,
+              water,
+              detail.catDetailId,
+              detail.catImages
+            )
           )
-        )
-      : dispatch(
-          __createCatDetailInfo(
-            HashTags,
-            diary,
-            food,
-            latitude,
-            longitude,
-            snack,
-            water,
-            catId
-          )
-        );
-    history.push(`/catdetail/${location}/${catId}`);
+        : dispatch(
+            __createCatDetailInfo(
+              HashTags,
+              diary,
+              food,
+              latitude,
+              longitude,
+              snack,
+              water,
+              catId
+            )
+          );
+      history.push(`/catdetail/${location}/${catId}`);
+    }
   };
   const publish = (catTag) => {
     if (catTag !== "") {

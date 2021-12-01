@@ -49,7 +49,7 @@ const Diary = ({ diary, location }) => {
       >
         <Grid display="flex" alignItems="center" width="auto">
           <Image
-            src={userProfile ? userProfile : diary.profileImageUrl}
+            src={diary.profileImageUrl}
             width="30px"
             height="30px"
             margin="0 5px 0 0"

@@ -33,6 +33,7 @@ const MyPage = (props) => {
             <Profile location={location} />
           </div>
           <MyPageDetail menu="myCat" location={location} />
+
           <MyPageCat location={location} />
         </div>
       </Template>

@@ -182,35 +182,36 @@ export const __getAllCatLocation =
 
 // 지역에 따라 게시물 불러오기
 export const __getCatLocation =
-  (location, limit = 11) =>
+  (location, page) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.getCatLocation(location, limit);
+      dispatch(postLoading(true));
+      const { data } = await catApi.getCatLocation(location, page);
       dispatch(getCatLocation(data, null));
     } catch (err) {
       console.error(err);
     }
   };
 
-// 게시물 더보기
-export const __getMoreCat =
-  (location, limit = 10) =>
-  async (dispatch, getState, { history }) => {
-    let start = getState().cat.start;
+// // 게시물 더보기
+// export const __getMoreCat =
+//   (location, limit = 10) =>
+//   async (dispatch, getState, { history }) => {
+//     let start = getState().cat.start;
 
-    if (start === null) {
-      return;
-    } else {
-      start += 1;
-    }
+//     if (start === null) {
+//       return;
+//     } else {
+//       start += 1;
+//     }
 
-    try {
-      const { data } = await catApi.getMoreCat(location, start, limit);
-      dispatch(getMoreCat(data, null));
-    } catch (err) {
-      console.error(err);
-    }
-  };
+//     try {
+//       const { data } = await catApi.getMoreCat(location, start, limit);
+//       dispatch(getMoreCat(data, null));
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
 
 // 상세 정보
 export const __getCatDetail =
@@ -320,6 +321,7 @@ const initialState = {
   start: 0,
   catinfo: [],
   hashtag: [],
+  postLoaded: false,
 };
 
 const cat = createSlice({
@@ -355,16 +357,20 @@ const cat = createSlice({
     },
 
     getCatLocation: (state, action) => {
-      state.list = action.payload;
-    },
-
-    getMoreCat: (state, action) => {
       return {
         ...state,
         list: [...state.list, ...action.payload],
-        start: state.start + 1,
+        postLoaded: false,
       };
     },
+
+    // getMoreCat: (state, action) => {
+    //   return {
+    //     ...state,
+    //     list: [...state.list, ...action.payload],
+    //     start: state.start + 1,
+    //   };
+    // },
 
     getCatDetail: (state, action) => {
       state.detail = action.payload;
@@ -402,6 +408,12 @@ const cat = createSlice({
     setInitialState: (state, action) => {
       state.hashtag = initialState.hashtag;
     },
+    postLoading: (state, action) => {
+      state.postLoaded = action.payload;
+    },
+    resetList: (state, action) => {
+      state.list = [];
+    },
   },
 });
 
@@ -421,6 +433,8 @@ export const {
   addHashTag,
   deleteHashTag,
   setInitialState,
+  postLoading,
+  resetList,
 } = cat.actions;
 
 export default cat;

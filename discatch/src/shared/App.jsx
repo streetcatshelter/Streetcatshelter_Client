@@ -12,6 +12,7 @@ import { loading } from "../redux/modules/spinner";
 function App() {
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.spinner.isLoaded);
+
   useEffect(() => {
     dispatch(loading(true));
     setTimeout(() => {

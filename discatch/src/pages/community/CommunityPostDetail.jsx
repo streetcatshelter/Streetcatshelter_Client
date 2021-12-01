@@ -3,7 +3,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CommentList, ContentHeader } from "../../components";
+import {
+  Template,
+  CommentList,
+  ContentHeader,
+  SecondSpinner,
+} from "../../components";
 
 // STYLE
 import styled from "styled-components";
@@ -20,6 +25,8 @@ const CommunityPostDetail = (props) => {
   const path = props.location.pathname.split("/")[3];
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
+  const isLoaded = useSelector((state) => state.community.itemDetailLoaded);
+
   const { cCategory, cContents, cImageList, cTitle, cLocation } = useSelector(
     (state) => ({
       cCategory: state.community.catInfo.data?.category,
@@ -90,52 +97,49 @@ const CommunityPostDetail = (props) => {
   }
 
   React.useEffect(() => {
-    // if (category?.split(" ")[1] === "정보글") {
     dispatch(getOneCommunityDB(communityId));
-    // } else if (category?.split(" ")[1] === "동네") {
-    //   dispatch(getOneGatheringDB(communityId));
-    // } else {
-    //   dispatch(getOneSharingDB(communityId));
-    // }
   }, [communityId, dispatch]);
 
   return (
     <Template props={props}>
-      <ContentHeader
-        FirstBtn="수정"
-        SecondBtn="삭제"
-        FirstClick={() => {
-          history.push(
-            `/community/${
-              location.split(" ")[2]
-            }/${pathCategory}/postedit/${communityId}`
-          );
-        }}
-        SecondClick={deleteCommunity}
-      />
-      <div>
-        <Title>
-          <p> {title} </p>
-        </Title>
-
-        <ImageBox>
-          {imageList?.map((catImage, idx) => {
-            return (
-              <CatImageBox key={idx}>
-                <CatImage src={catImage.image} alt="catImage" key={idx} />
-              </CatImageBox>
+      <SecondSpinner visible={isLoaded}>
+        <ContentHeader
+          FirstBtn="수정"
+          SecondBtn="삭제"
+          FirstClick={() => {
+            history.push(
+              `/community/${
+                location.split(" ")[2]
+              }/${pathCategory}/postedit/${communityId}`
             );
-          })}
-        </ImageBox>
+          }}
+          SecondClick={deleteCommunity}
+        />
 
-        <Content>
-          <p> {contents} </p>
-        </Content>
+        <div>
+          <Title>
+            <p> {title} </p>
+          </Title>
 
-        <div style={{ margin: "10px 0px" }}>
-          <CommentList props={props} communityId={communityId} />
+          <ImageBox>
+            {imageList?.map((catImage, idx) => {
+              return (
+                <CatImageBox key={idx}>
+                  <CatImage src={catImage.image} alt="catImage" key={idx} />
+                </CatImageBox>
+              );
+            })}
+          </ImageBox>
+
+          <Content>
+            <p> {contents} </p>
+          </Content>
+
+          <div style={{ margin: "10px 0px" }}>
+            <CommentList props={props} communityId={communityId} />
+          </div>
         </div>
-      </div>
+      </SecondSpinner>
     </Template>
   );
 };

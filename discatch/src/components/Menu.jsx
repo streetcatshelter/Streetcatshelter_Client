@@ -46,9 +46,8 @@ const Menu = (props) => {
   const userVillageC = useSelector(
     (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
   );
-
+  const userLocation = useSelector((state) => state.map.keywordList[0]);
   let location = preLocation;
-
   if (location === undefined) {
     location = pathLocation ? pathLocation : userVillage;
   }
@@ -59,10 +58,11 @@ const Menu = (props) => {
   ) {
     location = pathLocation;
   }
-  
+
   if (location !== userVillage && location !== userVillage && location !== userVillage) {
     location = userVillage;
   }
+
   const catId = props.props.props.location.pathname.split("/")[3];
 
   const moveToHome = () => {
@@ -72,13 +72,13 @@ const Menu = (props) => {
     } else {
       if (path === "/map/:village") {
         history.push({ pathname: "/", state: { location: pathLocation } });
-      } else if (preLocation + " " === userVillageA) {
+      } else if (preLocation === userVillageA.split(' ')[2]) {
         location = userVillage0;
         history.push({ pathname: "/", state: { location } });
-      } else if (preLocation + " " === userVillageB) {
+      } else if (preLocation === userVillageB.split(' ')[2]) {
         location = userVillage1;
         history.push({ pathname: "/", state: { location } });
-      } else if (preLocation + " " === userVillageC) {
+      } else if (preLocation === userVillageC.split(' ')[2]) {
         location = userVillage2;
         history.push({ pathname: "/", state: { location } });
       } else {
@@ -87,6 +87,7 @@ const Menu = (props) => {
     }
   };
 
+  location = userLocation ? userLocation : location;
   const moveToCommunity = () => {
     if (location === undefined) {
       history.push("/userinfoedit");

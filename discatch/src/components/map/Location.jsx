@@ -137,7 +137,6 @@ const Location = (props) => {
     // 지도 마커 표시하기
     const marker = new kakao.maps.Marker({ position: map.getCenter() });
 
-
     const imageSrc =
       "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 

@@ -1,6 +1,7 @@
-// LIBRARY
+// App.js
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -13,7 +14,7 @@ import styled, { css } from "styled-components";
 import { Grid, Button } from "../../elements/index";
 
 // ROUTE
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 //ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,10 +27,15 @@ import { history } from "../../redux/configureStore";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
-  let communityList;
-  const catInfoList = useSelector((state) => state.community.catInfo);
-  const gatheringList = useSelector((state) => state.community.gathering);
-  const sharingList = useSelector((state) => state.community.sharing);
+  const Params = useParams();
+
+  const communityList = useSelector((state) =>
+    Params.category === "catinfo"
+      ? state.community.catInfo
+      : Params.category === "gathering"
+      ? state.community.gathering
+      : state.community.sharing
+  );
   const loading = useSelector((state) => state.community.itemLoded);
 
   const [page, setPage] = useState(1);
@@ -75,15 +81,12 @@ const CommunityDetail = (props) => {
   if (path.pathname === `/community/${pathLocation}/catinfo`) {
     category = "고양이 정보글";
     nextPath = "catinfo";
-    communityList = catInfoList;
   } else if (path.pathname === `/community/${pathLocation}/gathering`) {
     category = `${pathLocation} 동네 모임`;
     nextPath = "gathering";
-    communityList = gatheringList;
   } else if (path.pathname === `/community/${pathLocation}/sharing`) {
     category = `${pathLocation} 고양이 용품 나눔`;
     nextPath = "sharing";
-    communityList = sharingList;
   }
 
   location = location?.substring(0, location.length - 1);
@@ -140,7 +143,8 @@ const CommunityDetail = (props) => {
               `;
             }}
           >
-            {communityList?.length > 0 &&
+            {communityList &&
+              communityList.length > 0 &&
               communityList.map((community, idx) => {
                 return (
                   <div key={idx} ref={ref}>

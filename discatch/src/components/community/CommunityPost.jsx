@@ -23,13 +23,13 @@ const CommunityPost = ({ community }) => {
   const location = path.pathname.split("/")[2];
   const communityId = community.communityId;
   const category = path.pathname.split("/")[3];
-  let name ;
+  let name;
   if (community.nickname === "" || community.nickname === null) {
     name = community.username;
   } else {
     name = community.nickname;
   }
- 
+
   return (
     <Grid height="30px">
       <CommunityPostStyle>
@@ -110,8 +110,7 @@ const CommunityPost = ({ community }) => {
                 `;
               }}
             >
-              <Grid>
-              </Grid>
+              <Grid></Grid>
               <Grid
                 addstyle={() => {
                   return css`
@@ -177,7 +176,7 @@ const CommunityPost = ({ community }) => {
                     style={{
                       width: "13px",
                       margin: "-4px 3px 0 0",
-                      color: community.cntLikeit > 0 ? 'red' : 'gray',
+                      color: community.cntLikeit > 0 ? "red" : "gray",
                     }}
                   />
                   <Text size={"12px"} fontWeight={"bold"} width="35px">

@@ -6,7 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { css } from "styled-components";
 
 // COMPONENTS
-import { Template, CatPost, SecondHeader, Spinner } from "../../components";
+import {
+  Template,
+  CatPost,
+  SecondHeader,
+  SecondSpinner,
+} from "../../components";
 
 // ELEMENTS
 import { Button, Grid } from "../../elements";
@@ -24,7 +29,9 @@ import InfinityScroll from "../../shared/InfinityScroll";
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const isLoaded = useSelector((state) => state.mypage.isLoaded);
+  const isLoaded = useSelector((state) => state.cat.postLoaded);
+  console.log(isLoaded);
+
   const menuLocation = props.location.state?.location;
   const catList = useSelector((state) => state.cat.list);
 
@@ -87,42 +94,41 @@ const Home = (props) => {
 
   return (
     <>
-      <Spinner visible={isLoaded} />
       {location !== undefined ? (
         <Template props={props} location={pathLocation}>
           <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
-
-          {catList.length ? (
-            catList.map((cat, idx) => {
-              return (
-                <Grid
-                  key={idx}
-                  addstyle={() => {
-                    return css`
-                      position: relative;
-                      bottom: 10px;
-                    `;
-                  }}
-                >
-                  <InfinityScroll
-                    next={getMoreCat}
-                    index={idx}
-                    length={catList.length}
-                    key={cat.catId}
+          <SecondSpinner visible={isLoaded}>
+            {catList.length ? (
+              catList.map((cat, idx) => {
+                return (
+                  <Grid
+                    key={idx}
+                    addstyle={() => {
+                      return css`
+                        position: relative;
+                        bottom: 10px;
+                      `;
+                    }}
                   >
-                    <CatPost
-                      cat={cat}
-                      pathLocation={pathLocation}
-                      location={location}
-                    />
-                  </InfinityScroll>
-                </Grid>
-              );
-            })
-          ) : (
-            <></>
-          )}
-
+                    <InfinityScroll
+                      next={getMoreCat}
+                      index={idx}
+                      length={catList.length}
+                      key={cat.catId}
+                    >
+                      <CatPost
+                        cat={cat}
+                        pathLocation={pathLocation}
+                        location={location}
+                      />
+                    </InfinityScroll>
+                  </Grid>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </SecondSpinner>
           <Button
             is_float="is_float"
             clickEvent={() => {

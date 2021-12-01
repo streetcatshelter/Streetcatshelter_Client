@@ -5,7 +5,12 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CommunityPost, SecondHeader } from "../../components";
+import {
+  Template,
+  CommunityPost,
+  SecondHeader,
+  SecondSpinner,
+} from "../../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -36,8 +41,8 @@ const CommunityDetail = (props) => {
       ? state.community.gathering
       : state.community.sharing
   );
-  const loading = useSelector((state) => state.community.itemLoded);
-
+  const loading = useSelector((state) => state.community.itemLoaded);
+  console.log(loading);
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
     threshold: 0,
@@ -100,13 +105,13 @@ const CommunityDetail = (props) => {
   }, [category, location, page, dispatch]);
 
   useEffect(() => {
-    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
-    if (inView && !loading) {
+    // 사용자가 마지막 요소를 보고 있다면,
+    if (inView) {
       setPage((prevState) => prevState + 1);
     } else {
       return;
     }
-  }, [inView, loading]);
+  }, [inView]);
 
   return (
     <Template props={props}>
@@ -122,6 +127,7 @@ const CommunityDetail = (props) => {
             );
           })}
       </CommunityDetailStyle>
+      <SecondSpinner visible={loading} />
       <Button
         clickEvent={() =>
           history.push(`/community/${pathLocation}/${nextPath}/write`)

@@ -185,6 +185,7 @@ export const __getCatLocation =
   (location, limit = 11) =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(postLoading(true));
       const { data } = await catApi.getCatLocation(location, limit);
       dispatch(getCatLocation(data, null));
     } catch (err) {
@@ -320,6 +321,7 @@ const initialState = {
   start: 0,
   catinfo: [],
   hashtag: [],
+  postLoaded: false,
 };
 
 const cat = createSlice({
@@ -356,6 +358,7 @@ const cat = createSlice({
 
     getCatLocation: (state, action) => {
       state.list = action.payload;
+      state.postLoaded = false;
     },
 
     getMoreCat: (state, action) => {
@@ -402,6 +405,9 @@ const cat = createSlice({
     setInitialState: (state, action) => {
       state.hashtag = initialState.hashtag;
     },
+    postLoading: (state, action) => {
+      state.postLoaded = action.payload;
+    },
   },
 });
 
@@ -421,6 +427,7 @@ export const {
   addHashTag,
   deleteHashTag,
   setInitialState,
+  postLoading,
 } = cat.actions;
 
 export default cat;

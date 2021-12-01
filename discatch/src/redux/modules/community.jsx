@@ -54,13 +54,13 @@ export const getCommunityDB =
   (category, location, page) =>
   async (dispatch, getState, { history }) => {
     try {
-      dispatch(itemLoading);
+      dispatch(itemLoading(true));
       const data = await communityApi.getCommunity(category, location, page);
-      if (category.split(' ')[1] === '정보글') {
+      if (category.split(" ")[1] === "정보글") {
         dispatch(getCatInfo(data.data));
-      } else if (category.split(' ')[1] === '동네') {
+      } else if (category.split(" ")[1] === "동네") {
         dispatch(getGathering(data.data));
-      } else if (category.split(' ')[1] === '고양이') {
+      } else if (category.split(" ")[1] === "고양이") {
         dispatch(getSharing(data.data));
       }
     } catch (err) {
@@ -74,13 +74,14 @@ export const getOneCommunityDB =
   (communityId = "") =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(itemDetailLoading(true));
       const data = await communityApi.getDetailCommunity(communityId);
       const category = data.data.category;
-      if (category.split(' ')[1] === '정보글') {
+      if (category.split(" ")[1] === "정보글") {
         dispatch(getOneCatInfo(data));
-      } else if (category.split(' ')[1] === '동네') {
+      } else if (category.split(" ")[1] === "동네") {
         dispatch(getOneGathering(data));
-      } else if (category.split(' ')[1] === '고양이') {
+      } else if (category.split(" ")[1] === "고양이") {
         dispatch(getOneSharing(data));
       }
     } catch (err) {
@@ -101,12 +102,12 @@ export const editCommunityDB = (
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
     let path;
-    if (category.split(' ')[1] === '정보글') {
-      path = 'catinfo';
-    } else if (category.split(' ')[1] === '동네') {
-      path = 'gathering';
-    } else if (category.split(' ')[1] === '고양이') {
-      path = 'sharing';
+    if (category.split(" ")[1] === "정보글") {
+      path = "catinfo";
+    } else if (category.split(" ")[1] === "동네") {
+      path = "gathering";
+    } else if (category.split(" ")[1] === "고양이") {
+      path = "sharing";
     }
     let newImageUrl = [];
     let newImages = [];
@@ -237,6 +238,7 @@ const initialState = {
   page: 0,
   pageLoaded: false,
   itemLoaded: false,
+  itemDetailLoaded: false,
 };
 
 // REDUCER
@@ -298,7 +300,7 @@ const community = createSlice({
         detailLocation
       );
     },
-	
+
     getCatInfo: (state, action) => {
       return {
         ...state,
@@ -323,12 +325,15 @@ const community = createSlice({
 
     getOneCatInfo: (state, action) => {
       state.catInfo = action.payload;
+      state.itemDetailLoaded = false;
     },
     getOneGathering: (state, action) => {
       state.gathering = action.payload;
+      state.itemDetailLoaded = false;
     },
     getOneSharing: (state, action) => {
       state.sharing = action.payload;
+      state.itemDetailLoaded = false;
     },
 
     editCatInfo: (state, action) => {
@@ -388,6 +393,9 @@ const community = createSlice({
     itemLoading: (state, action) => {
       state.itemLoaded = action.payload;
     },
+    itemDetailLoading: (state, action) => {
+      state.itemDetailLoaded = action.payload;
+    },
     resetList: (state, action) => {
       state.catInfo = [];
       state.gathering = [];
@@ -395,7 +403,6 @@ const community = createSlice({
     },
   },
 });
-
 
 export const {
   addCatInfo,
@@ -425,6 +432,7 @@ export const {
   pageLoading,
   startReset,
   itemLoading,
+  itemDetailLoading,
   resetList,
 } = community.actions;
 

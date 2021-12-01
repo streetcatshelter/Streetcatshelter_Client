@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 // STYLE
 import styled from "styled-components";
-import SpinnerCat from "../styles/images/spinnerCat.png";
+import SpinnerCat from "../../styles/images/spinnerCat.png";
 
 const Spinner = (props) => {
   if (!props.visible) {

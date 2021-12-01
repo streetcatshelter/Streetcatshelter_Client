@@ -79,9 +79,9 @@ const CatInfoWrite = (props) => {
 
   const Options = [
     { key: 1, value: "중성화 여부" },
-    { key: 2, value: "YES" },
-    { key: 3, value: "NO" },
-    { key: 4, value: "알수없음" },
+    { key: 2, value: "알수없음" },
+    { key: 3, value: "YES" },
+    { key: 4, value: "NO" },
   ];
 
   const [catName, setCatName] = useState(edit ? catInfo.catName : "");
@@ -90,7 +90,7 @@ const CatInfoWrite = (props) => {
     setCatName(e.target.value);
   };
 
-  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "");
+  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "YES");
   const $neutering = (e) => {
     setNeutering(e.target.value);
   };
@@ -104,20 +104,24 @@ const CatInfoWrite = (props) => {
   const longitude = props.history?.location.state?.longitude;
 
   const createBtn = () => {
-    edit
-      ? dispatch(__editCatInfo(catName, HashTags, neutering, catInfo.catId))
-      : dispatch(
-          __createCatInfo(
-            catName,
-            HashTags,
-            neutering,
-            location,
-            NickName,
-            latitude,
-            longitude,
-            pathLocation
-          )
-        );
+    if (neutering === "") {
+      alert("중성화 여부를 선택해주세요!");
+    } else {
+      edit
+        ? dispatch(__editCatInfo(catName, HashTags, neutering, catInfo.catId))
+        : dispatch(
+            __createCatInfo(
+              catName,
+              HashTags,
+              neutering,
+              location,
+              NickName,
+              latitude,
+              longitude,
+              pathLocation
+            )
+          );
+    }
   };
   const publish = (catTag) => {
     if (catTag !== "") {
@@ -176,7 +180,7 @@ const CatInfoWrite = (props) => {
           <label htmlFor="imgFile">
             <Camera width="100%" height="100px" color="white" />
           </label>
-          <Text>이곳을 클릭하여 사진을 등록해주세요!</Text>
+          <Text>이곳을 클릭하여 사진을 한 장 이상 등록해 주세요!</Text>
           <Input
             id="imgFile"
             name="imgFile"
@@ -255,19 +259,19 @@ const CatInfoWrite = (props) => {
             <Text fontWeight="bold"> 2. 중성화 여부 </Text>
             <Select value={neutering} onChange={$neutering}>
               {Options.map((item, index) => {
-                if (item.key === 1) {
-                  return (
-                    <option key={item.key} value={item.value} disabled>
-                      {item.value}
-                    </option>
-                  );
-                } else {
-                  return (
-                    <option key={item.key} value={item.value}>
-                      {item.value}
-                    </option>
-                  );
-                }
+                // if (item.key === 1) {
+                //   return (
+                //     <option key={item.key} value={item.value} disabled>
+                //       {item.value}
+                //     </option>
+                //   );
+                // } else {
+                return (
+                  <option key={item.key} value={item.value}>
+                    {item.value}
+                  </option>
+                );
+                // }
               })}
             </Select>
           </Grid>
@@ -288,7 +292,7 @@ const CatInfoWrite = (props) => {
               width="90%"
               radius="10px"
               bgColor="#ffffff"
-              placeholder="태그를 입력해주세요!"
+              placeholder="태그는 5개까지 입력할 수 있습니다!"
               type="text"
               value={catTag}
               changeEvent={$catTag}

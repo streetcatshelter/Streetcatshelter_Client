@@ -133,7 +133,6 @@ const Header = (props) => {
     setPlace(e.target.value);
     const keyword = e.target.value;
     dispatch(searchMap(keyword));
-    history.push({ pathname: "/", state: { location: keyword } });
   };
 
   const goBack = () => {

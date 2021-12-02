@@ -88,14 +88,13 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    if (catList.length === 0) {
-      dispatch(__getCatLocation(location, page));
-    }
-  }, []);
+    setPage(1);
+    dispatch(__getCatLocation(location));
+  }, [location]);
 
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고 catList의 length가 10의 배수인 경우
-    if (inView && catList.length % (page * 10) === 0) {
+    if (inView && catList.length > 9 && catList.length / 10 === page) {
       setPage((prevState) => prevState + 1);
       dispatch(__getMoreCatLocation(location, page + 1));
     } else {

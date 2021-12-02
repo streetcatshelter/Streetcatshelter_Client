@@ -97,16 +97,19 @@ const CommunityDetail = (props) => {
   location = location?.substring(0, location.length - 1);
 
   useEffect(() => {
-    if (communityList.length === 0) {
-      dispatch(getCommunityDB(category, location, page));
-    }
-  }, []);
+    setPage(1);
+    dispatch(getCommunityDB(category, location, page));
+  }, [category, location]);
 
   useEffect(() => {
-    // 사용자가 마지막 요소를 보고 있다면,
-    if (inView && communityList.length % (page * 10) === 0) {
+    console.log(" 호출");
+    if (
+      inView &&
+      communityList.length > 9 &&
+      communityList.length / 10 === page
+    ) {
       setPage((prevState) => prevState + 1);
-      dispatch(getMoreCommunityDB(category, location, page));
+      dispatch(getMoreCommunityDB(category, location, page + 1));
     } else {
       return;
     }

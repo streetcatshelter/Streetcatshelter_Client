@@ -1,5 +1,4 @@
 // LIBRARY
-// App.js
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,10 +20,7 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
 import { history } from "../../redux/configureStore";
-import {
-  __getCatLocation,
-  resetList,
-} from "../../redux/modules/cat";
+import { __getCatLocation, resetList } from "../../redux/modules/cat";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -90,7 +86,7 @@ const Home = (props) => {
 
   useEffect(() => {
     dispatch(resetList([]));
-  }, []);
+  }, [location, dispatch]);
 
   useEffect(() => {
     dispatch(__getCatLocation(location, page));

@@ -113,12 +113,14 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   width: 100%;
   height: 40px;
   margin: auto;
   cursor: pointer;
   p {
     font-size: 14px;
+
     margin-left: 5px;
     :nth-child(2) {
       margin-left: 10px;
@@ -128,7 +130,7 @@ const Header = styled.div`
 const BodyBox = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 95%;
+  width: 100%;
   margin: auto;
   height: 40px;
 `;
@@ -138,6 +140,7 @@ const TagOutBox = styled.div`
   width: 280px;
   flex-wrap: wrap;
   overflow: hidden;
+  margin-left: 5px;
 `;
 
 const TagBox = styled.div`
@@ -152,7 +155,8 @@ const TagBox = styled.div`
   background: #fbd986;
 `;
 const LikeBox = styled.div`
-  width: 30px;
+  width: 24x;
+  margin: auto;
 `;
 
 export default CatPost;

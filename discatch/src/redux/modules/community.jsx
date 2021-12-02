@@ -51,17 +51,41 @@ export const addCommunityDB = (
 
 // 커뮤니티 글 가져오기
 export const getCommunityDB =
-  (category, location, page) =>
+  (category, location) =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(itemLoading(true));
-      const data = await communityApi.getCommunity(category, location, page);
+      const data = await communityApi.getCommunity(category, location);
       if (category.split(" ")[1] === "정보글") {
         dispatch(getCatInfo(data.data));
       } else if (category.split(" ")[1] === "동네") {
         dispatch(getGathering(data.data));
       } else if (category.split(" ")[1] === "고양이") {
         dispatch(getSharing(data.data));
+      }
+    } catch (err) {
+      window.alert("페이지에 오류가 있어요!");
+      console.error(err);
+    }
+  };
+
+// 커뮤니티 글  (추가 가져오기
+export const getMoreCommunityDB =
+  (category, location, page) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(itemLoading(true));
+      const data = await communityApi.getMoreCommunity(
+        category,
+        location,
+        page
+      );
+      if (category.split(" ")[1] === "정보글") {
+        dispatch(getMoreCatInfo(data.data));
+      } else if (category.split(" ")[1] === "동네") {
+        dispatch(getMoreGathering(data.data));
+      } else if (category.split(" ")[1] === "고양이") {
+        dispatch(getMoreSharing(data.data));
       }
     } catch (err) {
       window.alert("페이지에 오류가 있어요!");
@@ -302,20 +326,32 @@ const community = createSlice({
     },
 
     getCatInfo: (state, action) => {
+      state.catInfo = action.payload;
+      state.itemLoaded = false;
+    },
+    getGathering: (state, action) => {
+      state.gathering = action.payload;
+      state.itemLoaded = false;
+    },
+    getSharing: (state, action) => {
+      state.sharing = action.payload;
+      state.itemLoaded = false;
+    },
+    getMoreCatInfo: (state, action) => {
       return {
         ...state,
         catInfo: [...state.catInfo, ...action.payload],
         itemLoaded: false,
       };
     },
-    getGathering: (state, action) => {
+    getMoreGathering: (state, action) => {
       return {
         ...state,
         gathering: [...state.gathering, ...action.payload],
         itemLoaded: false,
       };
     },
-    getSharing: (state, action) => {
+    getMoreSharing: (state, action) => {
       return {
         ...state,
         sharing: [...state.sharing, ...action.payload],
@@ -411,6 +447,9 @@ export const {
   getCatInfo,
   getGathering,
   getSharing,
+  getMoreCatInfo,
+  getMoreGathering,
+  getMoreSharing,
   editCatInfo,
   editGathering,
   editSharing,

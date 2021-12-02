@@ -25,7 +25,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
-import { getCommunityDB, resetList } from "../../redux/modules/community";
+import {
+  getCommunityDB,
+  getMoreCommunityDB,
+} from "../../redux/modules/community";
 import { history } from "../../redux/configureStore";
 
 const CommunityDetail = (props) => {
@@ -94,21 +97,16 @@ const CommunityDetail = (props) => {
   location = location?.substring(0, location.length - 1);
 
   useEffect(() => {
-    dispatch(resetList([]));
+    if (communityList.length === 0) {
+      dispatch(getCommunityDB(category, location, page));
+    }
   }, []);
 
   useEffect(() => {
-    dispatch(getCommunityDB(category, location, page));
-  }, [category, location, page, dispatch]);
-
-  useEffect(() => {
     // 사용자가 마지막 요소를 보고 있다면,
-    if (
-      inView &&
-      communityList.length > 9 &&
-      communityList.length % page === 0
-    ) {
+    if (inView && communityList.length % (page * 10) === 0) {
       setPage((prevState) => prevState + 1);
+      dispatch(getMoreCommunityDB(category, location, page));
     } else {
       return;
     }
@@ -128,7 +126,7 @@ const CommunityDetail = (props) => {
             );
           })}
       </CommunityDetailStyle>
-      <SecondSpinner visible={loading} />
+      <SecondSpinner visible={loading} path="scroll" />
       <Button
         clickEvent={() =>
           history.push(`/community/${pathLocation}/${nextPath}/write`)

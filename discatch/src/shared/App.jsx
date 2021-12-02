@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 // STYLE
@@ -7,23 +7,20 @@ import theme from "../shared/style";
 
 //COMPONENTS
 import { Router, Spinner } from "../components";
-import { useDispatch, useSelector } from "react-redux";
-import { loading } from "../redux/modules/spinner";
 
 function App() {
-  const dispatch = useDispatch();
-  const isLoaded = useSelector((state) => state.spinner.isLoaded);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(loading(true));
+    setLoading(true);
     setTimeout(() => {
-      dispatch(loading(false));
+      setLoading(false);
     }, 1500);
-  }, [dispatch]);
-  
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
-      <Spinner visible={isLoaded} />
+      <Spinner visible={loading} />
       <Router />
     </ThemeProvider>
   );

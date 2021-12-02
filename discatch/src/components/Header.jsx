@@ -136,17 +136,17 @@ const Header = (props) => {
     const keyword = e.target.value;
     dispatch(searchMap(keyword));
   };
-
+  
   const goBack = () => {
     if (path === "/community/:village/:category") {
       history.push({ pathname: "/community", state: { location } });
-    } else if (
-      path === "/community/:village/:category/postdetail/:communityId"
-    ) {
+    } else if (path === "/community/:village/:category/postdetail/:communityId") {
       history.push({
         pathname: `/community/${location}/${category}`,
         state: { location },
       });
+    } else if (path === '/catdetail/:village/:catId/1') {
+      history.push({ pathname: `/map/${location}`, state : { location }})
     } else if (path === "/catdetail/:village/:catId") {
       history.push({ pathname: "/", state: { location } });
     } else if (path === "/community/:village/:category/write") {

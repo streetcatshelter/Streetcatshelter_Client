@@ -3,9 +3,11 @@ import React, { useEffect } from "react";
 
 // COMPONENTS
 import { Template, ChatRoom, ChatMessage } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 // REDUX
 import { chatActions } from "../../redux/modules/chat";
+
 const ChatRoomPage = (props) => {
   const dispatch = useDispatch();
   const location = props.location.state?.location;

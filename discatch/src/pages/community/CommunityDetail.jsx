@@ -1,7 +1,6 @@
-// App.js
+// LIBRARY
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -13,10 +12,10 @@ import {
 } from "../../components";
 
 // STYLE
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // ELEMENTS
-import { Grid, Button } from "../../elements/index";
+import { Button } from "../../elements/index";
 
 // ROUTE
 import { useLocation, useParams } from "react-router-dom";
@@ -25,9 +24,8 @@ import { useLocation, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
-import { getCommunityDB, resetList } from "../../redux/modules/community";
-
 // REDUX
+import { getCommunityDB, resetList } from "../../redux/modules/community";
 import { history } from "../../redux/configureStore";
 
 const CommunityDetail = (props) => {
@@ -42,7 +40,6 @@ const CommunityDetail = (props) => {
       : state.community.sharing
   );
   const loading = useSelector((state) => state.community.itemLoaded);
-  console.log(loading);
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
     threshold: 0,

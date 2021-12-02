@@ -1,5 +1,6 @@
 // LIBRARY
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import {
@@ -9,8 +10,10 @@ import {
   MyPageCat,
   Spinner,
 } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
+
+// REDUX
 import { mypageActions } from "../../redux/modules/mypage";
+
 const MyPage = (props) => {
   const dispatch = useDispatch();
   const location = props.location.state?.location;
@@ -18,6 +21,7 @@ const MyPage = (props) => {
   useEffect(() => {
     dispatch(mypageActions._getLikedAllCat());
   }, [dispatch]);
+  
   return (
     <>
       <Spinner visible={isLoaded} />

@@ -4,9 +4,6 @@ import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 
-// STYLE
-import { css } from "styled-components";
-
 // COMPONENTS
 import {
   Template,
@@ -16,7 +13,7 @@ import {
 } from "../../components";
 
 // ELEMENTS
-import { Button, Grid } from "../../elements";
+import { Button } from "../../elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,12 +23,8 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { history } from "../../redux/configureStore";
 import {
   __getCatLocation,
-  __getMoreCat,
   resetList,
 } from "../../redux/modules/cat";
-
-// FUNCTION
-import InfinityScroll from "../../shared/InfinityScroll";
 
 const Home = (props) => {
   const dispatch = useDispatch();

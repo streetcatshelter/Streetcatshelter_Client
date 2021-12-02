@@ -16,10 +16,10 @@ import { Grid, Button, Input, TextArea, Text } from "../../elements/index";
 import { imgActions } from "../../redux/modules/image";
 import { addCommunityDB } from "../../redux/modules/community";
 import { mypageActions } from "../../redux/modules/mypage";
+import { history } from "../../redux/configureStore";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
-import { history } from "../../redux/configureStore";
 
 // ICON
 import { Camera } from "react-feather";

@@ -9,7 +9,7 @@ import moment from "moment";
 // STYLE
 import styled from "styled-components";
 
-const ChatMessage = (props) => {
+const ChatMessage = () => {
   const commentsEndRef = useRef(null);
   const LastMessages = useSelector((state) => state.chat.chatmessage);
   const NickName = useSelector((state) => state.mypage.userInfo.nickname);

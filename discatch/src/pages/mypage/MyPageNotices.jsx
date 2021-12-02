@@ -1,12 +1,15 @@
 // LIBRARY
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 // STYLE
 import styled from "styled-components";
+
 // COMPONENTS
 import { MyPageDetail, Profile, Template, NoticeDesc } from "../../components";
+
 // REDUX
 import { mypageActions } from "../../redux/modules/mypage";
-import { useDispatch } from "react-redux";
 
 const MyPageNotices = (props) => {
   const dispatch = useDispatch();

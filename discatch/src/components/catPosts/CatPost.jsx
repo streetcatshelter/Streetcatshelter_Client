@@ -2,16 +2,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-// ELEMENTS
-import { Grid, p, Image } from "../../elements";
-
 // REDUX
 import { history } from "../../redux/configureStore";
 import { __catLike } from "../../redux/modules/cat";
 
 // STYLE
-import styled, { css } from "styled-components";
-import { flexBox } from "../../shared/style";
+import styled from "styled-components";
 
 // ICON
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -142,8 +138,8 @@ const TagOutBox = styled.div`
   width: 280px;
   flex-wrap: wrap;
   overflow: hidden;
-=
 `;
+
 const TagBox = styled.div`
   height: 25px;
   width: auto;

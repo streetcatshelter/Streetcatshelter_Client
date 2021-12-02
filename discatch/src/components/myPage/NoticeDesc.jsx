@@ -8,7 +8,7 @@ import moment from "moment";
 // STYLE
 import styled from "styled-components";
 
-const NoticeDesc = (props) => {
+const NoticeDesc = () => {
   const NoticeDetail = useSelector((state) => state.mypage.noticedetail);
 
   const modifiedAt = moment(NoticeDetail.modifiedAt).format("YYYY-M-D");

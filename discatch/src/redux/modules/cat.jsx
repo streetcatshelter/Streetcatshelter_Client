@@ -169,10 +169,11 @@ export const __editCatDetailInfo =
 
 // 지역에 따라 모든 게시물 불러오기
 export const __getAllCatLocation =
-  (location, limit = 99999) =>
+  (location, page = 1, limit = 99999) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.getCatLocation(location, limit);
+      dispatch(postLoading(true));
+      const { data } = await catApi.getCatLocation(location, page);
       dispatch(getCatLocation(data, limit));
     } catch (err) {
       console.error(err);

@@ -63,6 +63,8 @@ const CatPost = ({ cat, location, path, pathLocation, page }) => {
             <FavoriteIcon
               onClick={likeToggle}
               style={{
+                position: 'relative',
+                left: '12px',
                 color: userLiked ? "red" : "gray",
               }}
             />
@@ -72,6 +74,7 @@ const CatPost = ({ cat, location, path, pathLocation, page }) => {
     </CatPostStyle>
   );
 };
+
 const MoreHorizontalBtn = styled(MoreHorizontal)`
   &:hover {
     color: #cbcf52;
@@ -90,7 +93,6 @@ const CatPostStyle = styled.div`
 `;
 const RightBox = styled.div`
   width: 20%;
-  min-width: 80px;
 `;
 
 const CatImage = styled.img`
@@ -99,9 +101,11 @@ const CatImage = styled.img`
 `;
 
 const LeftBox = styled.div`
+  position: relative;
+  left: 10px;
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 70%;
   height: 80px;
   p {
     font-size: 14px;

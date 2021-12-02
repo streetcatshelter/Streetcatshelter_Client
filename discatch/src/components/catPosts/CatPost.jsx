@@ -13,13 +13,15 @@ import styled from "styled-components";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { MoreHorizontal } from "react-feather";
 
-const CatPost = ({ cat, location, path, pathLocation, page }) => {
+const CatPost = ({ cat, path, pathLocation }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
+  
   const likeToggle = () => {
-    dispatch(__catLike(catId, location, path, page));
+    dispatch(__catLike(catId, path));
   };
+
   const CatDetailBtn = () => {
     if (path !== "detail") {
       history.push(`/catdetail/${pathLocation}/${cat.catId}`);

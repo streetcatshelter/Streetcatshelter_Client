@@ -87,10 +87,14 @@ const CatInfoWrite = (props) => {
   const [catName, setCatName] = useState(edit ? catInfo.catName : "");
 
   const $catName = (e) => {
-    setCatName(e.target.value);
+    if (e.target.value.length > 8) {
+      alert("최대 8글자까지 입력가능합니다");
+    } else {
+      setCatName(e.target.value);
+    }
   };
 
-  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "YES");
+  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "");
   const $neutering = (e) => {
     setNeutering(e.target.value);
   };
@@ -104,7 +108,11 @@ const CatInfoWrite = (props) => {
   const longitude = props.history?.location.state?.longitude;
 
   const createBtn = () => {
-    if (neutering === "") {
+    if (!edit && fileUrl === null) {
+      alert("고양이 사진을 등록해주세요!");
+    } else if (catName === "") {
+      alert("고양이 이름을 지어주세요!");
+    } else if (neutering === "" || neutering === "중성화 여부") {
       alert("중성화 여부를 선택해주세요!");
     } else {
       edit
@@ -180,7 +188,7 @@ const CatInfoWrite = (props) => {
           <label htmlFor="imgFile">
             <Camera width="100%" height="100px" color="white" />
           </label>
-          <Text>이곳을 클릭하여 사진을 한 장 이상 등록해 주세요!</Text>
+          <Text>이곳을 클릭하여 사진을 등록해 주세요!</Text>
           <Input
             id="imgFile"
             name="imgFile"

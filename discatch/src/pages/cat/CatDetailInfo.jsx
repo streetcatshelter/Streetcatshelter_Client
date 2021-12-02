@@ -7,7 +7,7 @@ import { flexBox } from "../../shared/style";
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Text, Image, Button } from "../../elements";
+import { Grid, Text, Button } from "../../elements";
 
 // COMPONENTS
 import {

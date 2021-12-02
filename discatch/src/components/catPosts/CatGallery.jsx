@@ -3,15 +3,15 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // ELEMENTS
-import { Grid, Image } from "../../elements";
 import styled from "styled-components";
+
 // REDUX
 import { __getGallery } from "../../redux/modules/cat";
-// REDUX
 import { history } from "../../redux/configureStore";
+
 const CatGallery = (props) => {
-  const location = props.location;
   const dispatch = useDispatch();
+  const location = props.location;
   const catId = props.catId;
 
   const galleryList = useSelector((state) => state.cat.gallery);

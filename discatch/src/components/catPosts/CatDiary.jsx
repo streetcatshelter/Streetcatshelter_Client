@@ -12,8 +12,8 @@ import { Diary } from "..";
 import { __getDiary } from "../../redux/modules/cat";
 
 const CatDiary = (props) => {
-  const location = props.location;
   const dispatch = useDispatch();
+  const location = props.location;
   const catId = props.catId;
 
   const diaryList = useSelector((state) => state.cat.diary);

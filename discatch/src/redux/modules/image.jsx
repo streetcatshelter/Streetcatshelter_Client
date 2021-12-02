@@ -115,7 +115,7 @@ const uploadImageDB = (callNext) => {
   };
 };
 
-// reducer
+// REDUCER
 function image(state = initialState, action) {
   switch (action.type) {
     case UPLOAD_IMAGES:

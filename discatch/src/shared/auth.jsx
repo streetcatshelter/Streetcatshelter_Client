@@ -1,9 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
 // LIBRARY
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 // REDUX
-import { useDispatch } from "react-redux";
 import { userActions } from "../redux/modules/user";
 /**src/component/Router.js
  * Page 			: 해당 라우트에서 보여줄 페이지

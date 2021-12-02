@@ -9,6 +9,7 @@ import theme from "../shared/style";
 import { Router, Spinner } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { loading } from "../redux/modules/spinner";
+
 function App() {
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.spinner.isLoaded);
@@ -19,6 +20,7 @@ function App() {
       dispatch(loading(false));
     }, 1500);
   }, [dispatch]);
+  
   return (
     <ThemeProvider theme={theme}>
       <Spinner visible={isLoaded} />

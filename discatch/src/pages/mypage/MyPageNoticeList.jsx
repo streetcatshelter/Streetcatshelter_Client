@@ -1,9 +1,12 @@
 // LIBRARY
 import React, { useEffect } from "react";
+
 // STYLE
 import styled from "styled-components";
+
 // COMPONENTS
 import { MyPageDetail, Profile, Template, Notice } from "../../components";
+
 // REDUX
 import { mypageActions } from "../../redux/modules/mypage";
 import { useDispatch } from "react-redux";

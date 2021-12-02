@@ -1,10 +1,14 @@
 // LIBRARY
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
-import { CheckSquare } from "react-feather";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+
+// ICON
+import { CheckSquare } from "react-feather";
+
+// REDUX
 import { mypageActions } from "../../redux/modules/mypage";
 
 const CalendarModal = (props) => {
@@ -15,6 +19,7 @@ const CalendarModal = (props) => {
   useEffect(() => {
     dispatch(mypageActions._getCalenderDetail(year, month, elm));
   }, [year, month, elm, dispatch]);
+
   return (
     <>
       <Background>
@@ -81,6 +86,7 @@ const CalendarModal = (props) => {
     </>
   );
 };
+
 const Background = styled.div`
   position: fixed;
   overflow-x: hidden;

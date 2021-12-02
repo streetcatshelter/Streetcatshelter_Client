@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 // ELEMENTS
-import { Grid, Text, Image } from "../../elements";
+import { Grid, p, Image } from "../../elements";
 
 // REDUX
 import { history } from "../../redux/configureStore";
@@ -17,12 +17,12 @@ import { flexBox } from "../../shared/style";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { MoreHorizontal } from "react-feather";
 
-const CatPost = ({ cat, location, path, pathLocation }) => {
+const CatPost = ({ cat, location, path, pathLocation, page }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
   const likeToggle = () => {
-    dispatch(__catLike(catId, location, path));
+    dispatch(__catLike(catId, location, path, page));
   };
   const CatDetailBtn = () => {
     if (path !== "detail") {
@@ -31,121 +31,132 @@ const CatPost = ({ cat, location, path, pathLocation }) => {
   };
 
   return (
-    <React.Fragment>
-      <Grid
-        margin="2.4% 0 0 0"
-        bgColor="diaryColor"
-        display="flex"
-        padding="8px"
-        height="80px"
-        cursor={path === "detail" ? "" : "pointer"}
-        addstyle={() => {
-          return css`
-            ${flexBox("space-around")}
-          `;
-        }}
-      >
-        <Image
+    <CatPostStyle>
+      <RightBox>
+        <CatImage
           src={cat.catImage}
           alt={cat.catImage}
-          width="80px"
-          height="80px"
-          clickEvent={CatDetailBtn}
+          onClick={CatDetailBtn}
         />
+      </RightBox>
 
-        <Grid padding="3px" width="75%" height="70px">
-          <Grid
-            height="35px"
-            line-height="14px"
-            addstyle={() => {
-              return css`
-                ${flexBox("space-between")}
-              `;
-            }}
-          >
-            <Grid
-              display="flex"
-              addstyle={() => {
-                return css`
-                  align-items: center;
-                  line-height: 20px;
-                `;
-              }}
-            >
-              <Text fontWeight="bold" size="16px" clickEvent={CatDetailBtn}>
-                {cat.catName ? cat.catName : "이름을 지어주세요!"}
-              </Text>
+      <LeftBox>
+        <Header>
+          <div style={{ display: "flex" }}>
+            <p onClick={CatDetailBtn}>
+              이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}
+            </p>
 
-              <Text
-                fontWeight="bold"
-                size="14px"
-                margin="0 0 0 10px"
-                clickEvent={CatDetailBtn}
-              >
-                중성화: {cat.neutering}
-              </Text>
-            </Grid>
-            {path === "detail" && (
-              <MoreHorizontalBtn
-                style={{ color: "rgb(249, 200, 82)" }}
-                onClick={() => history.push(`/catinfoedit/${catId}`)}
-              />
-            )}
-          </Grid>
-          <Grid display="flex" justifyContent="center">
-            <Grid
-              clickEvent={CatDetailBtn}
-              addstyle={() => {
-                return css`
-                  display: flex;
-                  flex-wrap: wrap;
-                  height: 25px;
-                  text-overflow: ellipsis;
-                  overflow: hidden;
-                  white-space: nowrap;
-                `;
-              }}
-            >
-              {cat.catTagList?.map((tag, idx) => {
-                return (
-                  <Grid
-                    key={idx}
-                    width="auto"
-                    bgColor="yellow"
-                    height="25px"
-                    radius="20px"
-                    margin="5px 10px 5px 0px "
-                    padding="0px 5px 3px 5px"
-                    style={{ fontSize: "10px" }}
-                    addstyle={() => {
-                      return css`
-                        display: flex;
-                        align-items: center;
-                      `;
-                    }}
-                  >
-                    #{tag.tag}
-                  </Grid>
-                );
-              })}
-            </Grid>
-
+            <p onClick={CatDetailBtn}> 중성화: {cat.neutering}</p>
+          </div>
+          {path === "detail" && (
+            <MoreHorizontalBtn
+              style={{ color: "rgb(249, 200, 82)", marginRight: "15px" }}
+              onClick={() => history.push(`/catinfoedit/${catId}`)}
+            />
+          )}
+        </Header>
+        <BodyBox>
+          <TagOutBox onClick={CatDetailBtn}>
+            {cat.catTagList?.map((tag, idx) => {
+              return <TagBox key={idx}>#{tag.tag}</TagBox>;
+            })}
+          </TagOutBox>
+          <LikeBox>
+            {" "}
             <FavoriteIcon
               onClick={likeToggle}
               style={{
                 color: userLiked ? "red" : "gray",
               }}
             />
-          </Grid>
-        </Grid>
-      </Grid>
-    </React.Fragment>
+          </LikeBox>
+        </BodyBox>
+      </LeftBox>
+    </CatPostStyle>
   );
 };
 const MoreHorizontalBtn = styled(MoreHorizontal)`
   &:hover {
     color: #cbcf52;
   }
+`;
+
+const CatPostStyle = styled.div`
+  background: rgb(${(props) => props.theme.palette.diaryColor});
+  width: 100%;
+  display: flex;
+  margin: 5px auto;
+  p {
+    margin: 0px;
+    line-height: 20px;
+  }
+`;
+const RightBox = styled.div`
+  width: 20%;
+  min-width: 80px;
+`;
+
+const CatImage = styled.img`
+  width: 80px;
+  height: 80px;
+`;
+
+const LeftBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 80px;
+  p {
+    font-size: 14px;
+    font-weight: 900;
+  }
+`;
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  margin: auto;
+  cursor: pointer;
+  p {
+    font-size: 14px;
+    margin-left: 5px;
+    :nth-child(2) {
+      margin-left: 10px;
+    }
+  }
+`;
+const BodyBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: auto;
+  height: 40px;
+`;
+
+const TagOutBox = styled.div`
+  display: flex;
+  width: 280px;
+  flex-wrap: wrap;
+  overflow: hidden;
+=
+`;
+const TagBox = styled.div`
+  height: 25px;
+  width: auto;
+  border-radius: 20px;
+  margin: 5px 10px 5px 0px;
+  padding: 0px 5px 3px 5px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  background: #fbd986;
+`;
+const LikeBox = styled.div`
+  width: 30px;
 `;
 
 export default CatPost;

@@ -51,10 +51,11 @@ export const myPageApi = {
 };
 
 export const catApi = {
-  getCatLocation: (location, limit) =>
-    instance.get(`/cat/${location}/?page=1&size=${limit}`),
-  getMoreCat: (location, start, limit) =>
-    instance.get(`/cat/${location}/?page=${start + 1}&size=${limit}`),
+  getCatLocation: (location, page) =>
+    instance.get(`/cat/${location}/?page=${page}&size=10`),
+
+  // getMoreCat: (location, start, limit) =>
+  //   instance.get(`/cat/${location}/?page=${start + 1}&size=${limit}`),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
   getCatInfo: (catId) => instance.get(`/cat/info/${catId}`),
   getCatCalendar: (catId, month, year) =>

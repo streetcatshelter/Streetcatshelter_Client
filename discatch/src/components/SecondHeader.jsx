@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const SecondHeader = (props) => {
   const PageTitle = props.title;
-  
+
   return (
     <div>
       <Header>{PageTitle}</Header>

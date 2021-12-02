@@ -182,35 +182,36 @@ export const __getAllCatLocation =
 
 // 지역에 따라 게시물 불러오기
 export const __getCatLocation =
-  (location, limit = 11) =>
+  (location, page) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.getCatLocation(location, limit);
+      dispatch(postLoading(true));
+      const { data } = await catApi.getCatLocation(location, page);
       dispatch(getCatLocation(data, null));
     } catch (err) {
       console.error(err);
     }
   };
 
-// 게시물 더보기
-export const __getMoreCat =
-  (location, limit = 10) =>
-  async (dispatch, getState, { history }) => {
-    let start = getState().cat.start;
+// // 게시물 더보기
+// export const __getMoreCat =
+//   (location, limit = 10) =>
+//   async (dispatch, getState, { history }) => {
+//     let start = getState().cat.start;
 
-    if (start === null) {
-      return;
-    } else {
-      start += 1;
-    }
+//     if (start === null) {
+//       return;
+//     } else {
+//       start += 1;
+//     }
 
-    try {
-      const { data } = await catApi.getMoreCat(location, start, limit);
-      dispatch(getMoreCat(data, null));
-    } catch (err) {
-      console.error(err);
-    }
-  };
+//     try {
+//       const { data } = await catApi.getMoreCat(location, start, limit);
+//       dispatch(getMoreCat(data, null));
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
 
 // 상세 정보
 export const __getCatDetail =
@@ -273,13 +274,13 @@ export const __getGallery =
 
 // 기본 정보 좋아요
 export const __catLike =
-  (catId, location, path) =>
+  (catId, location, path, page) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catLike(catId);
       path === "detail"
         ? dispatch(__getCatInfo(catId))
-        : dispatch(__getCatLocation(location));
+        : dispatch(likeToggle(catId));
     } catch (err) {
       console.error(err);
     }
@@ -320,6 +321,7 @@ const initialState = {
   start: 0,
   catinfo: [],
   hashtag: [],
+  postLoaded: false,
 };
 
 const cat = createSlice({
@@ -355,16 +357,20 @@ const cat = createSlice({
     },
 
     getCatLocation: (state, action) => {
-      state.list = action.payload;
-    },
-
-    getMoreCat: (state, action) => {
       return {
         ...state,
         list: [...state.list, ...action.payload],
-        start: state.start + 1,
+        postLoaded: false,
       };
     },
+
+    // getMoreCat: (state, action) => {
+    //   return {
+    //     ...state,
+    //     list: [...state.list, ...action.payload],
+    //     start: state.start + 1,
+    //   };
+    // },
 
     getCatDetail: (state, action) => {
       state.detail = action.payload;
@@ -402,6 +408,17 @@ const cat = createSlice({
     setInitialState: (state, action) => {
       state.hashtag = initialState.hashtag;
     },
+    postLoading: (state, action) => {
+      state.postLoaded = action.payload;
+    },
+    resetList: (state, action) => {
+      state.list = [];
+    },
+
+    likeToggle: (state, action) => {
+      const idx = state.list.findIndex((c) => c.catId === action.payload);
+      state.list[idx].userLiked = !state.list[idx].userLiked;
+    },
   },
 });
 
@@ -421,6 +438,9 @@ export const {
   addHashTag,
   deleteHashTag,
   setInitialState,
+  postLoading,
+  resetList,
+  likeToggle,
 } = cat.actions;
 
 export default cat;

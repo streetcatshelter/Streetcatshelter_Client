@@ -53,8 +53,9 @@ import ChatRoom from "./chat/ChatRoom";
 import ChatMessage from "./chat/ChatMessage";
 
 import GoogleLoginBtn from "./GoogleLoginBtn";
-
-import Spinner from "./Spinner";
+//SPINNER
+import Spinner from "./spinner/Spinner";
+import SecondSpinner from "./spinner/SecondSpinner";
 
 export {
   // TEMPLATES
@@ -104,5 +105,7 @@ export {
   ChatMessage,
   // LOGIN
   GoogleLoginBtn,
+  //SPINNER
   Spinner,
+  SecondSpinner,
 };

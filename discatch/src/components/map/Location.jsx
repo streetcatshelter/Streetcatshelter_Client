@@ -107,7 +107,9 @@ const Location = (props) => {
   const secondUserVillage = `${userVillage?.split(" ")[0]} ${
     userVillage?.split(" ")[1]
   } ${userVillage?.split(" ")[2]}`;
+
   location = location?.substring(0, location.length - 1);
+
   const catList = useSelector((state) => state.cat.list);
 
   useEffect(() => {
@@ -143,7 +145,6 @@ const Location = (props) => {
     for (let i = 0; i < position.length; i++) {
       // 마커 이미지의 이미지 크기 입니다
       const imageSize = new kakao.maps.Size(24, 35);
-
       // 마커 이미지를 생성합니다
       const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
@@ -356,7 +357,7 @@ const Location = (props) => {
                                   background-color: white;">
                           ${position[i].catName}보러가기
                           </button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-          iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
         // 인포윈도우를 생성합니다
         let infowindow = new kakao.maps.InfoWindow({
@@ -374,8 +375,8 @@ const Location = (props) => {
 
         // 마커에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(markers, "click", function () {
-          // 마커 위에 인포윈도우를 표시합니다
-          infowindow.open(map, markers);
+        // 마커 위에 인포윈도우를 표시합니다
+        infowindow.open(map, markers);
         });
         markers.setMap(map);
       }
@@ -581,6 +582,7 @@ const MapIcon = styled(Map)`
     background: #cbcf52;
   }
 `;
+
 const ListWrap = styled.div`
   display: ${(props) => (props.visible ? "block" : "none")};
   position: fixed;
@@ -595,6 +597,7 @@ const ListWrap = styled.div`
   font-size: 12px;
   border-radius: 10px;
 `;
+
 const MapWrap = styled.div`
   position: relative;
   width: 100%;
@@ -642,6 +645,7 @@ const ListNum = styled.span`
   font-weight: 900;
   margin: 0px 10px;
 `;
+
 const ListDesc = styled.div`
   p {
     margin: 0px;

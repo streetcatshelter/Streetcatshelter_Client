@@ -1,5 +1,4 @@
 // LIBRARY
-// App.js
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
@@ -103,6 +102,7 @@ const Home = (props) => {
       return;
     }
   }, [inView]);
+
   return (
     <>
       {location !== undefined ? (

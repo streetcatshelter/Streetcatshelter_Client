@@ -7,6 +7,7 @@ const initialState = {
   keywordList: [],
   typeKeywordList: [],
   resultList: [],
+  itemLoaded: [],
 };
 
 // REDUCER
@@ -26,9 +27,13 @@ const map = createSlice({
       const ResultList = action.payload;
       state.resultList.unshift(ResultList);
     },
+    itemLoading: (state, action) => {
+      state.itemLoaded = action.payload;
+    },
   },
 });
 
 export const mapActions = {};
-export const { searchMap, searchKeywordMap, searchResult } = map.actions;
+export const { searchMap, searchKeywordMap, searchResult, itemLoading } =
+  map.actions;
 export default map;

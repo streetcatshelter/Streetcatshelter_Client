@@ -182,12 +182,24 @@ export const __getAllCatLocation =
 
 // 지역에 따라 게시물 불러오기
 export const __getCatLocation =
+  (location) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(postLoading(true));
+      const { data } = await catApi.getCatLocation(location);
+      dispatch(getCatLocation(data, null));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+// 지역에 따라 게시물 불러오기
+export const __getMoreCatLocation =
   (location, page) =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(postLoading(true));
-      const { data } = await catApi.getCatLocation(location, page);
-      dispatch(getCatLocation(data, null));
+      const { data } = await catApi.getMoreCatLocation(location, page);
+      dispatch(getMoreCatLocation(data, null));
     } catch (err) {
       console.error(err);
     }
@@ -337,6 +349,10 @@ const cat = createSlice({
     },
 
     getCatLocation: (state, action) => {
+      state.list = action.payload;
+      state.postLoaded = false;
+    },
+    getMoreCatLocation: (state, action) => {
       return {
         ...state,
         list: [...state.list, ...action.payload],
@@ -400,7 +416,7 @@ export const {
   createCatDetailComment,
   getCatAllLocation,
   getCatLocation,
-  getMoreCat,
+  getMoreCatLocation,
   getCatDetail,
   getCatInfo,
   getCalendar,

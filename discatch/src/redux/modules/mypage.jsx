@@ -56,7 +56,7 @@ const _getLikedAllCat =
   () =>
   async (dispatch, getState, { history }) => {
     try {
-      dispatch(pageLoading(true));
+      dispatch(itemLoading(true));
       const { data } = await myPageApi.getLikedAllCat();
       dispatch(setLikedAllCat(data));
     } catch (e) {
@@ -148,6 +148,7 @@ const initialState = {
   ],
   userVillage: [],
   pageLoaded: false,
+  itemLoaded: false,
   userLoaded: false,
 };
 
@@ -164,7 +165,7 @@ const mypage = createSlice({
     },
     setLikedAllCat: (state, action) => {
       state.likedAllCat = action.payload;
-      state.pageLoaded = false;
+      state.itemLoaded = false;
     },
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
@@ -195,6 +196,9 @@ const mypage = createSlice({
     userLoading: (state, action) => {
       state.userLoaded = action.payload;
     },
+    itemLoading: (state, action) => {
+      state.itemLoaded = action.payload;
+    },
   },
 });
 
@@ -220,5 +224,6 @@ export const {
   deleteVillage,
   pageLoading,
   userLoading,
+  itemLoading,
 } = mypage.actions;
 export default mypage;

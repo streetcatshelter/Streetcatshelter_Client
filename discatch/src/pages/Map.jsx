@@ -1,17 +1,22 @@
 // LIBRARY
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 
 // COMPONENTS
 import { Template, Location, Spinner } from "../components";
 
 const Map = (props) => {
-  const isLoaded = useSelector((state) => state.mypage.isLoaded);
-
+  const [loading, setLoading] = useState(false);
+  console.log("map");
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 300);
+  }, []);
   return (
     <>
-      <Spinner visible={isLoaded} />
       <Template props={props} page="map">
+        <Spinner visible={loading} />
         <Location props={props} />
       </Template>
     </>

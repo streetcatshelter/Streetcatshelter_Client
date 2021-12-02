@@ -18,7 +18,6 @@ import cat from "./modules/cat";
 import mypage from "./modules/mypage";
 import chat from "./modules/chat";
 import comment from "./modules/comment";
-import spinner from "./modules/spinner";
 
 export const history = createBrowserHistory();
 
@@ -32,7 +31,6 @@ const rootReducer = combineReducers({
   mypage: mypage.reducer,
   chat: chat.reducer,
   comment: comment.reducer,
-  spinner: spinner.reducer,
 });
 
 // history 넣기, 로거사용

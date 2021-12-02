@@ -20,7 +20,10 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
 import { history } from "../../redux/configureStore";
-import { __getCatLocation, resetList } from "../../redux/modules/cat";
+import {
+  __getCatLocation,
+  __getMoreCatLocation,
+} from "../../redux/modules/cat";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -85,17 +88,16 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    dispatch(resetList([]));
+    if (catList.length === 0) {
+      dispatch(__getCatLocation(location, page));
+    }
   }, []);
 
   useEffect(() => {
-    dispatch(__getCatLocation(location, page));
-  }, [location, page, dispatch]);
-
-  useEffect(() => {
-    // 사용자가 마지막 요소를 보고 있다면,
-    if (inView && catList.length > 9 && catList.length % page === 0) {
+    // 사용자가 마지막 요소를 보고 있고 catList의 length가 10의 배수인 경우
+    if (inView && catList.length % (page * 10) === 0) {
       setPage((prevState) => prevState + 1);
+      dispatch(__getMoreCatLocation(location, page + 1));
     } else {
       return;
     }
@@ -106,7 +108,7 @@ const Home = (props) => {
       {location !== undefined ? (
         <Template props={props} location={pathLocation}>
           <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
-          <SecondSpinner visible={isLoaded}>
+          <SecondSpinner visible={isLoaded} path="scroll">
             {catList &&
               catList.length > 0 &&
               catList.map((cat, idx) => {

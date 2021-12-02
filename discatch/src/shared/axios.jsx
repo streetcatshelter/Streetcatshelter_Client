@@ -52,10 +52,10 @@ export const myPageApi = {
 
 export const catApi = {
   getCatLocation: (location, page) =>
+    instance.get(`/cat/${location}/?page=1&size=10`),
+  getMoreCatLocation: (location, page) =>
     instance.get(`/cat/${location}/?page=${page}&size=10`),
 
-  // getMoreCat: (location, start, limit) =>
-  //   instance.get(`/cat/${location}/?page=${start + 1}&size=${limit}`),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
   getCatInfo: (catId) => instance.get(`/cat/info/${catId}`),
   getCatCalendar: (catId, month, year) =>
@@ -85,16 +85,15 @@ export const catApi = {
 
 export const communityApi = {
   createCommunity: (postInfo) => instance.post("/community/create", postInfo),
-  getCommunity: (category, location, page) =>
+  getCommunity: (category, location) =>
+    instance.get(
+      `/community/category/${category}/?page=1&size=10&location=${location}`
+    ),
+  getMoreCommunity: (category, location, page) =>
     instance.get(
       `/community/category/${category}/?page=${page}&size=10&location=${location}`
     ),
-  // getMoreCommunity: (category, start, limit, location) =>
-  //   instance.get(
-  //     `/community/category/${category}/?page=${
-  //       start + 1
-  //     }&size=${limit}&location=${location}`
-  //   ),
+
   getDetailCommunity: (communityId) =>
     instance.get(`/community/${communityId}`),
   updateCommunity: (

@@ -8,15 +8,21 @@ import styled from "styled-components";
 
 const SecondSpinner = (props) => {
   const visible = props.visible;
-
+  const path = props.path;
   return (
     <>
       {visible ? (
-        <SpinnerBG>
+        path === "scroll" ? (
+          <SpinnerBG>
+            <SpinnerInner>
+              <FadeLoader color="rgba(251,216,134,1);" />
+            </SpinnerInner>
+          </SpinnerBG>
+        ) : (
           <SpinnerInner>
             <FadeLoader color="rgba(251,216,134,1);" />
-          </SpinnerInner>{" "}
-        </SpinnerBG>
+          </SpinnerInner>
+        )
       ) : (
         <>{props.children}</>
       )}

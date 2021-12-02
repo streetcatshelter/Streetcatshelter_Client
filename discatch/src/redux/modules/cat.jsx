@@ -1,4 +1,3 @@
-/* eslint-disable */
 // API
 import { createSlice } from "@reduxjs/toolkit";
 import instance, { catApi } from "../../shared/axios";
@@ -193,26 +192,6 @@ export const __getCatLocation =
     }
   };
 
-// // 게시물 더보기
-// export const __getMoreCat =
-//   (location, limit = 10) =>
-//   async (dispatch, getState, { history }) => {
-//     let start = getState().cat.start;
-
-//     if (start === null) {
-//       return;
-//     } else {
-//       start += 1;
-//     }
-
-//     try {
-//       const { data } = await catApi.getMoreCat(location, start, limit);
-//       dispatch(getMoreCat(data, null));
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
 // 상세 정보
 export const __getCatDetail =
   (catDetailId) =>
@@ -303,7 +282,7 @@ export const __deleteCatDetail =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.deleteCatDetail(catDetailId);
+      const { data } = await catApi.deleteCatDetail(catDetailId);
       window.alert("게시물 삭제 완료!");
       history.goBack();
     } catch (err) {
@@ -363,14 +342,6 @@ const cat = createSlice({
         postLoaded: false,
       };
     },
-
-    // getMoreCat: (state, action) => {
-    //   return {
-    //     ...state,
-    //     list: [...state.list, ...action.payload],
-    //     start: state.start + 1,
-    //   };
-    // },
 
     getCatDetail: (state, action) => {
       state.detail = action.payload;

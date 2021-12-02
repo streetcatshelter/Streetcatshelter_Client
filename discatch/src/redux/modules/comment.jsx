@@ -1,4 +1,3 @@
-/* eslint-disable */
 // API
 import { createSlice } from "@reduxjs/toolkit";
 import { catApi } from "../../shared/axios";
@@ -8,7 +7,7 @@ export const __createCatComment =
   (catId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.createCatComment(catId, contents);
+      const { data } = await catApi.createCatComment(catId, contents);
 
       dispatch(createCatComment({ contents }));
     } catch (err) {
@@ -21,7 +20,10 @@ export const __createCatDetailComment =
   (catDetailId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await catApi.createCatDetailComment(catDetailId, contents);
+      const { data } = await catApi.createCatDetailComment(
+        catDetailId,
+        contents
+      );
 
       dispatch(createCatDetailComment({ contents }));
     } catch (err) {

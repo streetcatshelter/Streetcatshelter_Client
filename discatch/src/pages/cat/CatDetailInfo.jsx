@@ -158,30 +158,31 @@ const CatDetailInfo = (props) => {
                 `;
               }}
             >
-              {detail.catTags && detail.catTags.length > 0
-                ? detail.catTags.map((tag, idx) => {
-                    return (
-                      <Grid
-                        key={idx}
-                        width="auto"
-                        bgColor="yellow"
-                        height="25px"
-                        radius="20px"
-                        margin="5px 10px 5px 0px "
-                        padding="0px 5px 3px 5px"
-                        addstyle={() => {
-                          return css`
-                            font-size: 10px;
-                            display: flex;
-                            align-items: center;
-                          `;
-                        }}
-                      >
-                        #{tag}
-                      </Grid>
-                    );
-                  })
-                : ""}
+              {detail.catTags && detail.catTags.length > 0 ? (
+                detail.catTags.map((tag, idx) => {
+                  return (
+                    <Grid
+                      width="auto"
+                      bgColor="yellow"
+                      height="25px"
+                      radius="20px"
+                      margin="5px 10px 5px 0px "
+                      padding="0px 5px 3px 5px"
+                      addstyle={() => {
+                        return css`
+                          font-size: 10px;
+                          display: flex;
+                          align-items: center;
+                        `;
+                      }}
+                    >
+                      <Text key={idx}>#{tag}</Text>
+                    </Grid>
+                  );
+                })
+              ) : (
+                <></>
+              )}
             </Grid>
             <Grid
               width="10%"

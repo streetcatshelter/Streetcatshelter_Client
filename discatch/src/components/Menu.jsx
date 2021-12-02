@@ -12,10 +12,14 @@ import { Grid, Text } from "../elements";
 // ICON
 import { Home, Users, Compass, Send, User } from "react-feather";
 
+// ROUTE
+import { useLocation } from "react-router-dom";
+
 // REDUX
 import { history } from "../redux/configureStore";
 
 const Menu = (props) => {
+  const pathName = useLocation();
   const path = props.props.props.match.path;
   const preLocation = props.props.props?.location.state?.location;
   const pathLocation = props.props.props.match.params.village
@@ -58,12 +62,15 @@ const Menu = (props) => {
   ) {
     location = pathLocation;
   }
-
+  
   if (location !== userVillage && location !== userVillage && location !== userVillage) {
     location = userVillage;
   }
 
   location = userLocation ? userLocation : location;
+  if (path === '/catdetail/:village/:catId/1') {
+    location = pathName.pathname.split('/')[2];
+  }
 
   const catId = props.props.props.location.pathname.split("/")[3];
 
@@ -73,6 +80,8 @@ const Menu = (props) => {
       alert("동네 정보를 입력해주세요!");
     } else {
       if (path === "/map/:village") {
+        history.push({ pathname: "/", state: { location } });
+      } else if (path === '/catdetail/:village/:catId/1') {
         history.push({ pathname: "/", state: { location } });
       } else if (preLocation === userVillageA?.split(' ')[2]) {
         location = userVillage0;

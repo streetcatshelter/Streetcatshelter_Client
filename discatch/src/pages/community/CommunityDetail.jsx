@@ -28,6 +28,7 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import {
   getCommunityDB,
   getMoreCommunityDB,
+  resetList,
 } from "../../redux/modules/community";
 import { history } from "../../redux/configureStore";
 
@@ -98,11 +99,11 @@ const CommunityDetail = (props) => {
 
   useEffect(() => {
     setPage(1);
+    dispatch(resetList());
     dispatch(getCommunityDB(category, location, page));
-  }, [category, location]);
+  }, [category, location, dispatch]);
 
   useEffect(() => {
-    console.log(" 호출");
     if (
       inView &&
       communityList.length > 9 &&
@@ -113,7 +114,7 @@ const CommunityDetail = (props) => {
     } else {
       return;
     }
-  }, [inView]);
+  }, [inView, dispatch]);
 
   return (
     <Template props={props}>

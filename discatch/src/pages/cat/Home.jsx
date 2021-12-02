@@ -1,4 +1,5 @@
 // LIBRARY
+// App.js
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,7 +87,7 @@ const Home = (props) => {
 
   useEffect(() => {
     dispatch(resetList([]));
-  }, [location, dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(__getCatLocation(location, page));
@@ -119,18 +120,18 @@ const Home = (props) => {
                   </div>
                 );
               })}
+            <Button
+              is_float="is_float"
+              clickEvent={() => {
+                history.push({
+                  pathname: `/map/${pathLocation}`,
+                  state: { location: pathLocation },
+                });
+              }}
+            >
+              <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+            </Button>{" "}
           </SecondSpinner>
-          <Button
-            is_float="is_float"
-            clickEvent={() => {
-              history.push({
-                pathname: `/map/${pathLocation}`,
-                state: { location: pathLocation },
-              });
-            }}
-          >
-            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-          </Button>
         </Template>
       ) : (
         <Template props={props} location={pathLocation}>

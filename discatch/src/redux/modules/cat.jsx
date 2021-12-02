@@ -253,7 +253,7 @@ export const __getGallery =
 
 // 기본 정보 좋아요
 export const __catLike =
-  (catId, location, path, page) =>
+  (catId, path) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catLike(catId);

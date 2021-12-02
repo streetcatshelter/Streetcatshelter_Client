@@ -13,7 +13,9 @@ const SecondSpinner = (props) => {
     <>
       {visible ? (
         <SpinnerBG>
-          <FadeLoader color="rgba(251,216,134,1);" />
+          <SpinnerInner>
+            <FadeLoader color="rgba(251,216,134,1);" />
+          </SpinnerInner>{" "}
         </SpinnerBG>
       ) : (
         <>{props.children}</>
@@ -26,14 +28,26 @@ SecondSpinner.propTypes = {
   visible: PropTypes.bool,
 };
 const SpinnerBG = styled.div`
-  display: fixed;
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  z-index: 1000;
+`;
+
+const SpinnerInner = styled.div`
+  display: flex;
   flex-direction: column;
   position: absolute;
   justify-content: center;
   align-items: center;
-  left: 45%;
-  top: 45%;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
 `;
-
 export default SecondSpinner;

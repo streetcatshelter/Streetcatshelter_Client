@@ -5,14 +5,21 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 // COMPONENTS
-import { MyPageDetail, Profile, Template, Notice } from "../../components";
+import {
+  MyPageDetail,
+  Profile,
+  Template,
+  Notice,
+  SecondSpinner,
+} from "../../components";
 
 // REDUX
 import { mypageActions } from "../../redux/modules/mypage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const MyPageNoticeList = (props) => {
   const dispatch = useDispatch();
+  const isLoaded = useSelector((state) => state.mypage.itemLoaded);
   useEffect(() => {
     dispatch(mypageActions._getNotice());
   }, [dispatch]);
@@ -33,6 +40,7 @@ const MyPageNoticeList = (props) => {
         </Title>
         <Notice />
       </div>
+      <SecondSpinner visible={isLoaded} />
     </Template>
   );
 };

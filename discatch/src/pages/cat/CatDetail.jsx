@@ -32,7 +32,7 @@ import { __getComment } from "../../redux/modules/comment";
 const CatDetail = (props) => {
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.mypage.isLoaded);
-  const location = props.location.state.location;
+  const location = props.location.state?.location;
   const catId = props.match.params.catId;
   const cat = useSelector((state) => state.cat.catinfo);
   const commentList = useSelector((state) => state.comment.list);

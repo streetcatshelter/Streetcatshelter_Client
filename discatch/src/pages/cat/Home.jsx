@@ -35,13 +35,14 @@ const Home = (props) => {
     threshold: 0,
     triggerOnce: true,
   });
-  const menuLocation = props.location.state?.location;
+
+  const stateLocation = props.location.state?.location;
   const catList = useSelector((state) => state.cat.list);
 
   const userLocation = useSelector((state) => state.map.keywordList[0]);
 
   const villageList = useSelector((state) => state.mypage.userVillage);
-  let location = menuLocation ? menuLocation : villageList[0];
+  let location = stateLocation ? stateLocation : villageList[0];
 
   if (villageList[0] && userLocation === villageList[0]?.split(' ')[2]) {
     location = villageList[0];
@@ -58,7 +59,7 @@ const Home = (props) => {
   const pathLocation = userLocation
     ? userLocation
     : userVillage?.split(' ')[2];
-    
+  
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
     alert("동네 정보를 입력해주세요!");

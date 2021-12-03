@@ -27,7 +27,7 @@ const Diary = ({ diary, location }) => {
   const CreatedAt = diary.createdAt
     ? moment(diary.createdAt).format("YYYY-M-D hh:mm")
     : "";
-
+    
   return (
     <Grid
       bgColor="diaryColor"
@@ -36,7 +36,7 @@ const Diary = ({ diary, location }) => {
       margin="5px auto"
       cursor="pointer"
       clickEvent={() =>
-        history.push(`/catdetailinfo/${location.split(' ')[2]}/${catDetailId}`)
+        history.push(`/catdetailinfo/${location?.split(' ')[2]}/${catDetailId}`)
       }
     >
       <Grid

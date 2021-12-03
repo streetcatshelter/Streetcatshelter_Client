@@ -81,9 +81,10 @@ const BubbleTop = styled.div`
     text-align:right;
   `
       : ` text-align:left`}
-  font-size:12px;
+
   margin: 0px;
   font-weight: 900;
+  font-size: 12px;
 `;
 
 const BubbleBox = styled.div`
@@ -101,6 +102,17 @@ const BubbleBox = styled.div`
     margin: 10px 5px;
     align-items: end;
   }
+  @keyframes fadeIn {
+    from {
+      tranform: translateX(5px);
+      opacity: 0;
+    }
+    to {
+      transfrom: none;
+      opacity: 1;
+    }
+  }
+  animation: fadeIn 0.3s linear;
 `;
 
 const Bubble = styled.div`

@@ -134,7 +134,9 @@ const ChatRoom = (props) => {
           <EditModalSlide
             FirstBtn="상대방 프로필보기"
             SecondBtn="채팅방 삭제하기"
-            FirstClick={() => {}}
+            FirstClick={() => {
+              alert("준비중입니다.");
+            }}
             SecondClick={() => {
               dispatch(chatActions._deleteRoom(props.roomId));
             }}
@@ -146,7 +148,7 @@ const ChatRoom = (props) => {
       <ChatSendBox>
         <ChatInput
           type={"text"}
-          placeholder={"Please Enter for send message"}
+          placeholder={""}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={(e) => e.which === 13 && publish(message)}
@@ -233,7 +235,7 @@ const Header = styled.div`
   display: flex;
   height: 60px;
   padding: 5px;
-  z-index: 1000;
+  z-index: 500;
   justify-content: space-between;
   border-bottom: 0.2px solid #d19b61;
   @media screen and (max-width: 320px) {
@@ -284,7 +286,7 @@ const ChatSendBox = styled.div`
   border: 1px solid #cbcf52;
   border-radius: 10px;
   margin: auto;
-  z-index: 1200;
+  z-index: 500;
   @media screen and (max-width: 1024px) {
     bottom: 70px;
   }
@@ -343,6 +345,7 @@ const ChatInput = styled.textarea`
   background: #fefdf8;
   resize: none;
   border: none;
+  outline: none;
 `;
 const SendText = styled.div`
   position: relative;

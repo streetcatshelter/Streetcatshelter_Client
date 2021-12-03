@@ -10,10 +10,10 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 // ELEMENTS
-import { Grid } from "../elements";
+import { div } from "../elements";
 
 // ICON
-import { ArrowLeft, LogOut } from "react-feather";
+import { ArrowLeft, LogOut, Bell, Search } from "react-feather";
 
 // REDUX
 import { history } from "../redux/configureStore";
@@ -31,21 +31,21 @@ const Header = (props) => {
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
 
-  const userLocation = useSelector((state) => state.map.keywordList[0])
+  const userLocation = useSelector((state) => state.map.keywordList[0]);
   location = userLocation ? userLocation : firstLocation;
 
   if (
     path === "/catdetail/:village/:catId" ||
     path === "/catdetailinfo/:village/:catDetailId" ||
-    path === '/catdetail/:village/:catId/1' ||
-    path === '/community/:village/:category/postdetail/:communityId' ||
-    path === '/catinfowrite/:location'
+    path === "/catdetail/:village/:catId/1" ||
+    path === "/community/:village/:category/postdetail/:communityId" ||
+    path === "/catinfowrite/:location"
   ) {
-    location = locationA.pathname.split('/')[2];;
+    location = locationA.pathname.split("/")[2];
   }
 
   if (userInfo.locationList && location === undefined) {
-    location = userInfo?.locationList[0]?.split(' ')[2];
+    location = userInfo?.locationList[0]?.split(" ")[2];
   }
 
   const sameLocationList = userInfo.locationList?.filter(
@@ -60,25 +60,25 @@ const Header = (props) => {
   let location3;
   if (userInfo.locationList !== undefined && sameLocationList.length === 1) {
     if (userInfo.locationList.length === 3) {
-      location2 = locationList[0]?.split(' ')[2];
-      location3 = locationList[1]?.split(' ')[2];
+      location2 = locationList[0]?.split(" ")[2];
+      location3 = locationList[1]?.split(" ")[2];
     } else if (userInfo.locationList.length === 2) {
-      location2 = locationList[0]?.split(' ')[2];
+      location2 = locationList[0]?.split(" ")[2];
     }
   } else if (
     userInfo.locationList !== undefined &&
     sameLocationList.length === 2
   ) {
-    location = sameLocationList[0]?.split(' ')[2];
-    location2 = sameLocationList[1]?.split(' ')[2];
-    location3 = locationList[0]?.split(' ')[2];
+    location = sameLocationList[0]?.split(" ")[2];
+    location2 = sameLocationList[1]?.split(" ")[2];
+    location3 = locationList[0]?.split(" ")[2];
   } else if (
     userInfo.locationList !== undefined &&
     sameLocationList.length === 3
   ) {
-    location = sameLocationList[0]?.split(' ')[2];
-    location2 = sameLocationList[1]?.split(' ')[2];
-    location3 = sameLocationList[2]?.split(' ')[2];
+    location = sameLocationList[0]?.split(" ")[2];
+    location2 = sameLocationList[1]?.split(" ")[2];
+    location3 = sameLocationList[2]?.split(" ")[2];
   }
 
   const [place, setPlace] = useState(location);
@@ -120,17 +120,19 @@ const Header = (props) => {
     const keyword = e.target.value;
     dispatch(searchMap(keyword));
   };
-  
+
   const goBack = () => {
     if (path === "/community/:village/:category") {
       history.push({ pathname: "/community", state: { location } });
-    } else if (path === "/community/:village/:category/postdetail/:communityId") {
+    } else if (
+      path === "/community/:village/:category/postdetail/:communityId"
+    ) {
       history.push({
         pathname: `/community/${location}/${category}`,
         state: { location },
       });
-    } else if (path === '/catdetail/:village/:catId/1') {
-      history.push({ pathname: `/map/${location}`, state : { location }})
+    } else if (path === "/catdetail/:village/:catId/1") {
+      history.push({ pathname: `/map/${location}`, state: { location } });
     } else if (path === "/catdetail/:village/:catId") {
       history.push({ pathname: "/", state: { location } });
     } else if (path === "/community/:village/:category/write") {
@@ -155,15 +157,8 @@ const Header = (props) => {
 
   return (
     <HeaderStyle>
-      <Grid
-        display="flex"
-        addstyle={() => {
-          return css`
-            ${flexBox("space-between")}
-          `;
-        }}
-      >
-        <Grid width="20%" height="100%" margin="auto">
+      <HeaderInner>
+        <SideBtnBox>
           {path === "/" || path === "/community" || path === "/map/:village" ? (
             <SelectStyle onChange={onChangeHandler} value={place}>
               {options &&
@@ -175,12 +170,11 @@ const Header = (props) => {
             </SelectStyle>
           ) : (
             <ArrowLeft
-              style={{ margin: "20px", color: "gray" }}
+              style={{ margin: "18px", color: "gray" }}
               onClick={goBack}
             />
           )}
-        </Grid>
-
+        </SideBtnBox>
         <Head>
           <Link
             to="/"
@@ -193,81 +187,93 @@ const Header = (props) => {
             </p>{" "}
           </Link>
         </Head>
+        <SideBtnBox>
+          <SearchBtn
+            style={{ color: "gray", margin: "18px auto" }}
+            onClick={() => {
+              // setSearchModal(!searchModal);
+              alert("준비중입니다.");
+            }}
+          />
+          <Bell
+            style={{ margin: "18px 0px 18px 10px", color: "gray" }}
+            onClick={() => {
+              // setSearchModal(!searchModal);
+              alert("준비중입니다.");
+            }}
+          />
 
-        <Grid
-          width="20%"
-          height="100%"
-          margin="auto"
-          addstyle={() => {
-            return css`
-              @media screen and (max-width: 280px) {
-                position: relative;
-                right: 25px;
-              }
-            `;
-          }}
-        >
-          <Grid margin="30px 10px" height="25px" width="60px">
-            {/* <SearchBtn
-              style={{ color: "gray" }}
-              onClick={() => {
-                setSearchModal(!searchModal);
-              }}
-            />
-            <Bell style={{ margin: "auto 0px auto 10px", color: "gray" }} /> */}
-
-            <LogOut
+          {/* <LogOut
               onClick={Logout}
               style={{ color: "gray", marginLeft: "30px", cursor: "pointer" }}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
+            /> */}
+        </SideBtnBox>
+      </HeaderInner>
       {/* {searchModal ? (
-        <Grid width="100%" height="45px" background="#fefdf8">
+        <div width="100%" height="45px" background="#fefdf8">
           <SearchBar>
             <SearchInput />
             <SearchBarBtn>
               <p>검색</p>
             </SearchBarBtn>
           </SearchBar>
-        </Grid>
+        </div>
       ) : (
-        ''
+        ""
       )} */}
     </HeaderStyle>
   );
 };
-// const SearchInput = styled.input`
-//   width: 90%;
-//   height: 30px;
-//   border: none;
-//   margin-left: 10px;
-// `;
-// const SearchBarBtn = styled.div`
-//   width: 50px;
-//   height: 35px;
-//   border-radius: 15px;
 
-//   background: #fbd986;
-//   margin: auto;
-//   p {
-//     margin: 5px;
-//     font-weight: 900;
-//   }
-// `;
-// const SearchBar = styled.div`
-//   width: 90%;
-//   height: 35px;
-//   border-radius: 15px;
-//   border: 1px solid #fbd986;
-//   margin: auto;
-//   display: flex;
-//   background: #fefdf8;
-// `;
-// const SearchBtn = styled(Search)`
-//   cursor: pointer;
-// `;
+const HeaderInner = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+`;
+
+const SideBtnBox = styled.div`
+  margin: auto;
+  width: 18%;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  svg {
+    @media screen and (max-width: 359px) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+`;
+const SearchInput = styled.input`
+  width: 90%;
+  height: 30px;
+  border: none;
+  margin-left: 10px;
+`;
+const SearchBarBtn = styled.div`
+  width: 50px;
+  height: 35px;
+  border-radius: 15px;
+
+  background: #fbd986;
+  margin: auto;
+  p {
+    margin: 5px;
+    font-weight: 900;
+  }
+`;
+const SearchBar = styled.div`
+  width: 90%;
+  height: 35px;
+  border-radius: 15px;
+  border: 1px solid #fbd986;
+  margin: auto;
+  display: flex;
+  background: #fefdf8;
+`;
+const SearchBtn = styled(Search)`
+  cursor: pointer;
+`;
 
 const HeaderStyle = styled.header`
   max-width: 420px;
@@ -293,20 +299,31 @@ const SelectStyle = styled.select`
   }
 `;
 const Head = styled.div`
+  width:64%;
   margin: auto;
+  text-align:center;
   p {
+    height:60px;
+    line-height:60px;
     margin: 0px auto;
     font-size: 35px;
     font-weight: 700;
     color: #fbd986;
-  }
+    @media screen and (max-width: 359px) {
+      font-size: 30px;
+    }
   span {
     font-size: 45px;
     font-weight: 800;
     color: #cbcf52;
+    @media screen and (max-width: 359px) {
+      font-size: 40px;
+    }
     :nth-child(2) {
       color: #d19b61;
+      
     }
+   
   }
 `;
 export default Header;

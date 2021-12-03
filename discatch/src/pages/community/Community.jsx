@@ -23,20 +23,21 @@ import Community3 from "../../styles/images/Community3.png";
 const Community = (props) => {
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.community.pageLoaded);
-  const village = useSelector((state) => state.map.keywordList[0]);
   const userLocation = useSelector((state) => state.map.keywordList[0]);
+  const village = userLocation ? userLocation : props.location.state?.location;
 
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
     alert("동네 정보를 입력해주세요!");
   };
-  
+
   useEffect(() => {
     dispatch(pageLoading(true));
     setTimeout(() => {
       dispatch(pageLoading(false));
     }, 300);
   }, [dispatch]);
+
   return (
     <>
       <Spinner visible={isLoaded} />
@@ -80,7 +81,7 @@ const Community = (props) => {
               src={Community1}
               clickEvent={() => history.push({
                   pathname:`/community/${village}/catinfo`, 
-                  state : { location : userLocation}}
+                  state : { location : village}}
               )}
               width="100px"
               height="100px"
@@ -92,7 +93,7 @@ const Community = (props) => {
               src={Community2}
               clickEvent={() => history.push({
                 pathname:`/community/${village}/gathering`, 
-                state : { location : userLocation }}
+                state : { location : village }}
               )}
               width="100px"
               height="100px"
@@ -103,7 +104,7 @@ const Community = (props) => {
               src={Community3}
               clickEvent={() => history.push({
                 pathname:`/community/${village}/sharing`, 
-                state: { location : userLocation}}
+                state: { location : village}}
               )}
               width="100px"
               height="100px"

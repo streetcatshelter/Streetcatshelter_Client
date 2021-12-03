@@ -43,10 +43,10 @@ const SearchAddress = (props) => {
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
 
-    if (props.Village[0]?.split('@')[0] !== data.bname && 
-      props.Village[1]?.split('@')[0] !== data.bname && 
-      props.Village[2]?.split('@')[0] !== data.bname) {
-      dispatch(saveVillage(`${data.bname}@${fullAddr}`));
+    if (props.Village[0]?.split(' ')[2] !== data.bname && 
+      props.Village[1]?.split(' ')[2] !== data.bname && 
+      props.Village[2]?.split(' ')[2] !== data.bname) {
+      dispatch(saveVillage(`${fullAddr.split(' (')[0]}`));
     } else {
       alert('이름이 같은 동은 한 곳만 등록 가능합니다.');
     }

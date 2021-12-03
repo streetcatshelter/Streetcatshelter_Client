@@ -158,9 +158,7 @@ export const __editCatDetailInfo =
         snack: snack,
         water: water,
       };
-      console.log(detailInfo);
       const { data } = await catApi.editCatDetailInfo(detailInfo, catDetailId);
-      console.log(data);
       dispatch(setInitialState([]));
     } catch (err) {
       console.error(err);

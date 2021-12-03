@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 // COMPONENTS
-import { Template, Location, Spinner } from "../components";
+import { Template, Location, SecondSpinner } from "../components";
 
 const Map = (props) => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ const Map = (props) => {
   return (
     <>
       <Template props={props} page="map">
-        <Spinner visible={loading} />
+        <SecondSpinner visible={loading} />
         <Location props={props} />
       </Template>
     </>

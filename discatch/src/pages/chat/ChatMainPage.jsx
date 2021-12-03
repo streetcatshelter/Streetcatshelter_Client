@@ -3,7 +3,12 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, ChatMain, SecondHeader, Spinner } from "../../components";
+import {
+  Template,
+  ChatMain,
+  SecondHeader,
+  SecondSpinner,
+} from "../../components";
 // REDUX
 import { useDispatch } from "react-redux";
 import { chatActions } from "../../redux/modules/chat";
@@ -17,7 +22,7 @@ const ChatMainPage = (props) => {
 
   return (
     <>
-      <Spinner visible={isLoaded} />
+      <SecondSpinner visible={isLoaded} />
       <Template props={props} page="map">
         <SecondHeader title="채팅" />
         <ChatMain props={props} />

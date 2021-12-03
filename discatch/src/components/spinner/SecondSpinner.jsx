@@ -43,7 +43,7 @@ const SpinnerBG = styled.div`
   bottom: 0;
   right: 0;
 
-  z-index: 1000;
+  z-index: 10;
 `;
 
 const SpinnerInner = styled.div`

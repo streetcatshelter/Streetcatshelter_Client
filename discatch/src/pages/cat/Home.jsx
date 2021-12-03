@@ -9,6 +9,7 @@ import {
   CatPost,
   SecondHeader,
   SecondSpinner,
+  EmptyPost,
 } from "../../components";
 
 // ELEMENTS
@@ -107,32 +108,33 @@ const Home = (props) => {
       {location !== undefined ? (
         <Template props={props} location={pathLocation}>
           <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
-          <SecondSpinner visible={isLoaded} path="scroll">
-            {catList &&
-              catList.length > 0 &&
-              catList.map((cat, idx) => {
-                return (
-                  <div style={{ width: "100%" }} key={idx} ref={ref}>
-                    <CatPost
-                      cat={cat}
-                      pathLocation={pathLocation}
-                      location={location}
-                    />
-                  </div>
-                );
-              })}
-            <Button
-              is_float="is_float"
-              clickEvent={() => {
-                history.push({
-                  pathname: `/map/${pathLocation}`,
-                  state: { location: pathLocation },
-                });
-              }}
-            >
-              <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-            </Button>{" "}
-          </SecondSpinner>
+          {catList && catList.length > 0 ? (
+            catList.map((cat, idx) => {
+              return (
+                <div style={{ width: "100%" }} key={idx} ref={ref}>
+                  <CatPost
+                    cat={cat}
+                    pathLocation={pathLocation}
+                    location={location}
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <EmptyPost path="home" />
+          )}
+          <SecondSpinner visible={isLoaded} path="scroll" />
+          <Button
+            is_float="is_float"
+            clickEvent={() => {
+              history.push({
+                pathname: `/map/${pathLocation}`,
+                state: { location: pathLocation },
+              });
+            }}
+          >
+            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+          </Button>{" "}
         </Template>
       ) : (
         <Template props={props} location={pathLocation}>

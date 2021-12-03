@@ -63,6 +63,17 @@ const _getLikedAllCat =
       console.log(e);
     }
   };
+const _getMoreLikedAllCat =
+  (page) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(itemLoading(true));
+      const { data } = await myPageApi.getMoreLikedAllCat(page);
+      dispatch(setMoreLikedAllCat(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 const _getNotice =
   () =>
   async (dispatch, getState, { history }) => {
@@ -167,6 +178,13 @@ const mypage = createSlice({
       state.likedAllCat = action.payload;
       state.itemLoaded = false;
     },
+    setMoreLikedAllCat: (state, action) => {
+      return {
+        ...state,
+        likedAllCat: [...state.likedAllCat, ...action.payload],
+        itemLoaded: false,
+      };
+    },
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
       const Village = [...action.payload.locationList];
@@ -199,6 +217,16 @@ const mypage = createSlice({
     itemLoading: (state, action) => {
       state.itemLoaded = action.payload;
     },
+
+    deleteUserLikedCat: (state, action) => {
+      console.log(" 호출됨");
+      return {
+        ...state,
+        likedAllCat: state.likedAllCat.filter(
+          (cat) => cat.catId !== action.payload
+        ),
+      };
+    },
   },
 });
 
@@ -208,6 +236,7 @@ export const mypageActions = {
   _getCalender,
   _getCalenderDetail,
   _getLikedAllCat,
+  _getMoreLikedAllCat,
   _getUserInfo,
   _editMyInfo,
   _getLevelUp,
@@ -217,6 +246,7 @@ export const {
   setNotice,
   setOneNotice,
   setLikedAllCat,
+  setMoreLikedAllCat,
   setUserInfo,
   setCalendar,
   setCalendarDetail,
@@ -225,5 +255,6 @@ export const {
   pageLoading,
   userLoading,
   itemLoading,
+  deleteUserLikedCat,
 } = mypage.actions;
 export default mypage;

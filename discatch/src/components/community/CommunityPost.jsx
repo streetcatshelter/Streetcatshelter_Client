@@ -103,6 +103,9 @@ const CommunityPostStyle = styled.div`
     margin: 0px;
     line-height: 20px;
   }
+  &:hover {
+    filter: brightness(90%);
+  }
 `;
 
 const UserInfoBox = styled.div`

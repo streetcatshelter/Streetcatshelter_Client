@@ -17,7 +17,7 @@ const CatPost = ({ cat, path, pathLocation }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
-  
+
   const likeToggle = () => {
     dispatch(__catLike(catId, path));
   };
@@ -65,8 +65,8 @@ const CatPost = ({ cat, path, pathLocation }) => {
             <FavoriteIcon
               onClick={likeToggle}
               style={{
-                position: 'relative',
-                left: '12px',
+                position: "relative",
+                left: "12px",
                 color: userLiked ? "red" : "gray",
               }}
             />
@@ -91,6 +91,9 @@ const CatPostStyle = styled.div`
   p {
     margin: 0px;
     line-height: 20px;
+  }
+  &:hover {
+    filter: brightness(90%);
   }
 `;
 const RightBox = styled.div`

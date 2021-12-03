@@ -6,7 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { css } from "styled-components";
 
 // COMPONENTS
-import { CommunityCategoryCard, Template, Spinner } from "../../components";
+import {
+  CommunityCategoryCard,
+  Template,
+  SecondSpinner,
+} from "../../components";
 
 // ELEMENTS
 import { Grid } from "../../elements/index";
@@ -30,7 +34,7 @@ const Community = (props) => {
     history.push("/userinfoedit");
     alert("동네 정보를 입력해주세요!");
   };
-  
+
   useEffect(() => {
     dispatch(pageLoading(true));
     setTimeout(() => {
@@ -39,7 +43,7 @@ const Community = (props) => {
   }, [dispatch]);
   return (
     <>
-      <Spinner visible={isLoaded} />
+      <SecondSpinner visible={isLoaded} />
       <Template props={props}>
         {village !== undefined ? (
           <Grid
@@ -78,10 +82,12 @@ const Community = (props) => {
           >
             <CommunityCategoryCard
               src={Community1}
-              clickEvent={() => history.push({
-                  pathname:`/community/${village}/catinfo`, 
-                  state : { location : userLocation}}
-              )}
+              clickEvent={() =>
+                history.push({
+                  pathname: `/community/${village}/catinfo`,
+                  state: { location: userLocation },
+                })
+              }
               width="100px"
               height="100px"
               title="고양이 정보글!"
@@ -90,10 +96,12 @@ const Community = (props) => {
 
             <CommunityCategoryCard
               src={Community2}
-              clickEvent={() => history.push({
-                pathname:`/community/${village}/gathering`, 
-                state : { location : userLocation }}
-              )}
+              clickEvent={() =>
+                history.push({
+                  pathname: `/community/${village}/gathering`,
+                  state: { location: userLocation },
+                })
+              }
               width="100px"
               height="100px"
               title={`${village} 동네 모임`}
@@ -101,10 +109,12 @@ const Community = (props) => {
             />
             <CommunityCategoryCard
               src={Community3}
-              clickEvent={() => history.push({
-                pathname:`/community/${village}/sharing`, 
-                state: { location : userLocation}}
-              )}
+              clickEvent={() =>
+                history.push({
+                  pathname: `/community/${village}/sharing`,
+                  state: { location: userLocation },
+                })
+              }
               width="100px"
               height="100px"
               title={`${village} 고양이 물건 나눔`}

@@ -118,7 +118,7 @@ const CommunityDetail = (props) => {
 
   return (
     <Template props={props}>
-      <SecondHeader title={category} />
+      <SecondHeader title={category} path="scroll" />
       <CommunityDetailStyle>
         {communityList &&
           communityList.length > 0 &&

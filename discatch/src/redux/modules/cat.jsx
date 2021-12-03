@@ -1,7 +1,7 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
 import instance, { catApi } from "../../shared/axios";
-
+import { deleteUserLikedCat } from "./mypage";
 // REDUX
 import { imgActions } from "./image";
 
@@ -406,6 +406,10 @@ const cat = createSlice({
     likeToggle: (state, action) => {
       const idx = state.list.findIndex((c) => c.catId === action.payload);
       state.list[idx].userLiked = !state.list[idx].userLiked;
+      if (!state.list[idx].userLiked) {
+        console.log("호출");
+        deleteUserLikedCat(action.payload);
+      }
     },
   },
 });

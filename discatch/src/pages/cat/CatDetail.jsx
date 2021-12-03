@@ -30,10 +30,9 @@ import { __getCatInfo } from "../../redux/modules/cat";
 import { __getComment } from "../../redux/modules/comment";
 
 const CatDetail = (props) => {
-
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.mypage.isLoaded);
-  const location = props.location.pathname.split("/")[2];
+  const location = props.location.state.location;
   const catId = props.match.params.catId;
   const cat = useSelector((state) => state.cat.catinfo);
   const commentList = useSelector((state) => state.comment.list);
@@ -47,7 +46,7 @@ const CatDetail = (props) => {
   useEffect(() => {
     dispatch(__getComment(catId));
   }, [catId, commentList.length, dispatch]);
-  
+
   return (
     <>
       <Spinner visible={isLoaded} />
@@ -106,9 +105,9 @@ const CatDetail = (props) => {
         ) : menu === "갤러리" ? (
           <CatGallery catId={catId} location={location} />
         ) : null}
-        {userInfo.locationList && (location === userInfo?.locationList[0]?.split(' ')[2] ||
-        location === userInfo?.locationList[1]?.split(' ')[2] ||
-        location === userInfo?.locationList[2]?.split(' ')[2]) ? (
+        {userInfo.locationList && (location === userInfo?.locationList[0] ||
+        location === userInfo?.locationList[1] ||
+        location === userInfo?.locationList[2]) ? (
         <Button
           is_float="is_float"
           clickEvent={() => {

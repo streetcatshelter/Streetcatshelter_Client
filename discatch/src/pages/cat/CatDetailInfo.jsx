@@ -32,7 +32,6 @@ import { history } from "../../redux/configureStore";
 
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
-
   const isLoaded = useSelector((state) => state.mypage.isLoaded);
   const commentList = useSelector((state) => state.comment.list);
   const catDetailId = props.match.params.catDetailId;
@@ -58,10 +57,10 @@ const CatDetailInfo = (props) => {
   const editCatDetail = () => {
     history.push({
       pathname: `/catdetailinfoedit/${catDetailId}`,
-      state: village,
+      state: { location : village },
     });
   };
-
+  console.log(village);
   return (
     <>
       <Spinner visible={isLoaded} />

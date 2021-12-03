@@ -14,8 +14,14 @@ const Notice = () => {
   const NoticeList = useSelector((state) => state.mypage.noticelist);
   return (
     <Wrapper>
+      <Content>
+        <Number style={{ fontSize: "14px" }}>순번</Number>
+        <Title style={{ fontSize: "14px", textAlign: "center" }}>이름</Title>
+
+        <DateBox style={{ fontSize: "14px", fontWeight: "900" }}>날짜</DateBox>
+      </Content>
       {NoticeList.map((notice, idx) => {
-        const modifiedAt = moment(notice.modifiedAt).format("YYYY-M-D");
+        const modifiedAt = moment(notice.modifiedAt).format("YYYY-M-DD");
         return (
           <Content
             key={idx}
@@ -23,8 +29,11 @@ const Notice = () => {
               history.push(`/mypage/notice/${notice.id}`);
             }}
           >
-            <p>{notice.title}</p>
-            <span>{modifiedAt}</span>
+            <Number> {notice.id}.</Number>
+            <Title>
+              <p>{notice.title}</p>
+            </Title>
+            <DateBox>{modifiedAt}</DateBox>
           </Content>
         );
       })}
@@ -34,23 +43,36 @@ const Notice = () => {
 const Wrapper = styled.div``;
 
 const Content = styled.div`
-  height: 40px;
-  border-bottom: 0.5px solid #b5bb19;
+  height: 50px;
+  width: 100%;
+  border-bottom: 0.2px solid #b5bb19;
   line-height: 16px;
-  margin: 12px 0px;
+
   cursor: pointer;
-  &:hover {
-    color: #be701d;
-  }
+  display: flex;
+`;
+
+const Number = styled.div`
+  font-weight: 900;
+  font-size: 12px;
+  margin: auto;
+  width: 12%;
+  text-align: center;
+`;
+const Title = styled.div`
+  font-weight: 900;
+  font-size: 12px;
+  margin: auto;
+  width: 68%;
   p {
-    font-weight: 900;
-    font-size: 14px;
-    margin: 0px 10px;
+    margin: auto auto auto 10px;
   }
-  span {
-    font-weight: normal;
-    font-size: 10px;
-    margin: 0px 10px;
-  }
+`;
+const DateBox = styled.div`
+  font-weight: normal;
+  font-size: 10px;
+  margin: auto;
+  width: 20%;
+  text-align: center;
 `;
 export default Notice;

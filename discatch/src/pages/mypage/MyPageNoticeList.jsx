@@ -46,16 +46,20 @@ const MyPageNoticeList = (props) => {
 };
 
 const Title = styled.div`
-  height: 50px;
-  margin: auto;
+  height: 40px;
+  width: 100%;
+  margin: 10px auto;
   display: flex;
   justify-content: center;
+  background: #fbd986;
+  border-radius: 10px;
 
   p {
     text-align: center;
     font-weight: 900;
     font-size: 24px;
     color: #000000;
+    margin: auto;
   }
 `;
 export default MyPageNoticeList;

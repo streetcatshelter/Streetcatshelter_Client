@@ -59,7 +59,7 @@ const Home = (props) => {
   const pathLocation = userLocation
     ? userLocation
     : userVillage?.split(' ')[2];
-
+  
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
     alert("동네 정보를 입력해주세요!");

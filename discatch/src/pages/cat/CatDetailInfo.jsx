@@ -32,11 +32,20 @@ import { history } from "../../redux/configureStore";
 
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.mypage.userInfo);
   const isLoaded = useSelector((state) => state.mypage.isLoaded);
   const commentList = useSelector((state) => state.comment.list);
   const catDetailId = props.match.params.catDetailId;
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
+  let location;
+  if (village === userInfo.locationList[0]?.split(' ')[2]) {
+    location = userInfo.locationList[0];
+  } else if (village === userInfo.locationList[1]?.split(' ')[2]) {
+    location = userInfo.locationList[1];
+  } else if (village === userInfo.locationList[2]?.split(' ')[2]) {
+    location = userInfo.locationList[2];
+  }
 
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
@@ -57,10 +66,10 @@ const CatDetailInfo = (props) => {
   const editCatDetail = () => {
     history.push({
       pathname: `/catdetailinfoedit/${catDetailId}`,
-      state: { location : village },
+      state: { location },
     });
   };
-  console.log(village);
+
   return (
     <>
       <Spinner visible={isLoaded} />

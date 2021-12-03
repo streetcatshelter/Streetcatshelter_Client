@@ -461,7 +461,7 @@ const Location = (props) => {
           ) {
             history.push({
               pathname: `/catinfowrite/${pathLocation?.split(' ')[2]}`,
-              state: { latitude, longitude },
+              state: { latitude, longitude, location },
             });
           } else if (
             latitude !== undefined &&

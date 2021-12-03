@@ -34,7 +34,6 @@ const Header = (props) => {
   const userLocation = useSelector((state) => state.map.keywordList[0])
   location = userLocation ? userLocation : firstLocation;
 
-
   if (
     path === "/catdetail/:village/:catId" ||
     path === "/catdetailinfo/:village/:catDetailId" ||
@@ -44,7 +43,7 @@ const Header = (props) => {
   ) {
     location = locationA.pathname.split('/')[2];;
   }
-  
+
   if (userInfo.locationList && location === undefined) {
     location = userInfo?.locationList[0]?.split(' ')[2];
   }

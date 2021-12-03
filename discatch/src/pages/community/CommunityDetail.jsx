@@ -72,7 +72,7 @@ const CommunityDetail = (props) => {
     setPage(1);
     dispatch(resetList());
     dispatch(getCommunityDB(category, location, page));
-  }, [category, location, page, dispatch]);
+  }, [category, location, dispatch]);
 
   useEffect(() => {
     if (

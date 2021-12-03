@@ -27,8 +27,8 @@ import Community3 from "../../styles/images/Community3.png";
 const Community = (props) => {
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.community.pageLoaded);
-  const village = useSelector((state) => state.map.keywordList[0]);
   const userLocation = useSelector((state) => state.map.keywordList[0]);
+  const village = userLocation ? userLocation : props.location.state?.location;
 
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
@@ -41,6 +41,7 @@ const Community = (props) => {
       dispatch(pageLoading(false));
     }, 300);
   }, [dispatch]);
+
   return (
     <>
       <SecondSpinner visible={isLoaded} />
@@ -85,7 +86,7 @@ const Community = (props) => {
               clickEvent={() =>
                 history.push({
                   pathname: `/community/${village}/catinfo`,
-                  state: { location: userLocation },
+                  state: { location: village },
                 })
               }
               width="100px"
@@ -99,7 +100,7 @@ const Community = (props) => {
               clickEvent={() =>
                 history.push({
                   pathname: `/community/${village}/gathering`,
-                  state: { location: userLocation },
+                  state: { location: village },
                 })
               }
               width="100px"
@@ -112,7 +113,7 @@ const Community = (props) => {
               clickEvent={() =>
                 history.push({
                   pathname: `/community/${village}/sharing`,
-                  state: { location: userLocation },
+                  state: { location: village },
                 })
               }
               width="100px"

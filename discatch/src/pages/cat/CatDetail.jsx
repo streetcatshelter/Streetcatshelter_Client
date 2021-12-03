@@ -31,8 +31,7 @@ import { __getComment } from "../../redux/modules/comment";
 
 const CatDetail = (props) => {
   const dispatch = useDispatch();
-
-  const location = props.location.pathname.split("/")[2];
+  const location = props.location.state.location;
   const catId = props.match.params.catId;
   const cat = useSelector((state) => state.cat.catinfo);
   const commentList = useSelector((state) => state.comment.list);
@@ -105,9 +104,9 @@ const CatDetail = (props) => {
           <CatGallery catId={catId} location={location} />
         ) : null}
         {userInfo.locationList &&
-        (location === userInfo?.locationList[0]?.split("@")[0] ||
-          location === userInfo?.locationList[1]?.split("@")[0] ||
-          location === userInfo?.locationList[2]?.split("@")[0]) ? (
+        (location === userInfo?.locationList[0] ||
+          location === userInfo?.locationList[1] ||
+          location === userInfo?.locationList[2]) ? (
           <Button
             is_float="is_float"
             clickEvent={() => {

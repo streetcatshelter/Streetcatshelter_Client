@@ -6,7 +6,7 @@ import { Template, Location, SecondSpinner } from "../components";
 
 const Map = (props) => {
   const [loading, setLoading] = useState(false);
-  console.log("map");
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {

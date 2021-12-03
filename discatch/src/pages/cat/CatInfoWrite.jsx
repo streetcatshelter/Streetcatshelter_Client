@@ -31,38 +31,16 @@ const CatInfoWrite = (props) => {
   const edit = props.match.path?.split("/")[1] === "catinfoedit" ? true : false;
   const pathLocation = props.match.params.location;
   const catInfo = useSelector((state) => state.cat.catinfo);
-
-  const userVillage0 = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageA = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage1 = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageB = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage2 = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageC = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
-  );
-
-  let location;
-  if (pathLocation === userVillage0) {
-    location = userVillageA;
-  } else if (pathLocation === userVillage1) {
-    location = userVillageB;
-  } else if (pathLocation === userVillage2) {
-    location = userVillageC;
+  let location = pathLocation;
+  const villageList = useSelector((state) => state.mypage.userVillage);
+  if (location === villageList[0]?.split(' ')[2]) {
+    location = villageList[0]
+  } else if (location === villageList[1]?.split(' ')[2]) {
+    location = villageList[1]
+  } else if (location === villageList[2]?.split(' ')[2]) {
+    location = villageList[2]
   }
 
-  location = location?.substring(0, location.length - 1);
   const NickName = useSelector((state) => state.mypage.userInfo.nickname);
   const HashTags = useSelector((state) => state.cat.hashtag);
   const [fileUrl, setFileUrl] = useState(null);

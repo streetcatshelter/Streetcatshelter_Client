@@ -36,7 +36,7 @@ const Diary = ({ diary, location }) => {
       margin="5px auto"
       cursor="pointer"
       clickEvent={() =>
-        history.push(`/catdetailinfo/${location}/${catDetailId}`)
+        history.push(`/catdetailinfo/${location.split(' ')[2]}/${catDetailId}`)
       }
     >
       <Grid

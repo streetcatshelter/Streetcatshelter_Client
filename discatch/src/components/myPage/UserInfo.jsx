@@ -90,7 +90,7 @@ const UserInfo = () => {
                   <div
                     style={{ display: "flex", width: "90px", height: "20px" }}
                   >
-                    <div> {village.split('@')[0]}</div>
+                    <div> {village.split(' ')[2]}</div>
 
                     <XCircle
                       width="18px"

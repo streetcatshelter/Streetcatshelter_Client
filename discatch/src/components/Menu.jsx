@@ -22,56 +22,34 @@ const Menu = (props) => {
   const pathName = useLocation();
   const path = props.props.props.match.path;
   const preLocation = props.props.props?.location.state?.location;
+  const userInfo = useSelector((state) => state.mypage.userInfo);
+  const firstLocation = userInfo.locationList ? userInfo?.locationList[0]?.split(' ')[2] : null;
   const pathLocation = props.props.props.match.params.village
     ? props.props.props.match.params.village
     : props.props.props.match.params.location;
 
-  const userVillage = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[0]
-  );
-
-  const userVillage0 = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageA = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage1 = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageB = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage2 = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageC = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
-  );
   const userLocation = useSelector((state) => state.map.keywordList[0]);
-  let location = preLocation;
-  if (location === undefined) {
-    location = pathLocation ? pathLocation : userVillage;
+
+  let location;
+  location = userLocation ? userLocation : preLocation;
+
+  if (location === undefined && pathLocation !== undefined) {
+    location = pathLocation;
+  } else if (location === undefined && pathLocation === undefined) {
+    location = firstLocation;
   }
 
   if (
     path === "/catdetail/:village/:catId" ||
-    path === "/catdetailinfo/:village/:catDetailId"
+    path === "/catdetailinfo/:village/:catDetailId" ||
+    path === '/catdetail/:village/:catId/1' ||
+    path === '/community/:village/:category/postdetail/:communityId'
   ) {
-    location = pathLocation;
+    location = pathName.pathname.split('/')[2];;
+  } else if (path === '/catdetailinfowrite/:catId') {
+    location = location.split(' ')[2];
   }
   
-  if (location !== userVillage && location !== userVillage && location !== userVillage) {
-    location = userVillage;
-  }
-
-  location = userLocation ? userLocation : location;
-  if (path === '/catdetail/:village/:catId/1') {
-    location = pathName.pathname.split('/')[2];
-  }
-
   const catId = props.props.props.location.pathname.split("/")[3];
 
   const moveToHome = () => {
@@ -79,22 +57,7 @@ const Menu = (props) => {
       history.push("/userinfoedit");
       alert("동네 정보를 입력해주세요!");
     } else {
-      if (path === "/map/:village") {
-        history.push({ pathname: "/", state: { location } });
-      } else if (path === '/catdetail/:village/:catId/1') {
-        history.push({ pathname: "/", state: { location } });
-      } else if (preLocation === userVillageA?.split(' ')[2]) {
-        location = userVillage0;
-        history.push({ pathname: "/", state: { location } });
-      } else if (preLocation === userVillageB?.split(' ')[2]) {
-        location = userVillage1;
-        history.push({ pathname: "/", state: { location } });
-      } else if (preLocation === userVillageC?.split(' ')[2]) {
-        location = userVillage2;
-        history.push({ pathname: "/", state: { location } });
-      } else {
-        history.push({ pathname: "/", state: { location } });
-      }
+      history.push({ pathname: "/", state: { location } });
     }
   };
 

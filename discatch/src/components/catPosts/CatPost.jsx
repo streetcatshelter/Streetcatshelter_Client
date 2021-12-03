@@ -13,18 +13,20 @@ import styled from "styled-components";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { MoreHorizontal } from "react-feather";
 
-const CatPost = ({ cat, path, pathLocation }) => {
+const CatPost = ({ cat, path, location }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
-
   const likeToggle = () => {
     dispatch(__catLike(catId, path));
   };
 
   const CatDetailBtn = () => {
     if (path !== "detail") {
-      history.push(`/catdetail/${pathLocation}/${cat.catId}`);
+      history.push({
+        pathname: `/catdetail/${location.split(" ")[2]}/${cat.catId}`,
+        state: { location },
+      });
     } else return;
   };
 
@@ -50,7 +52,12 @@ const CatPost = ({ cat, path, pathLocation }) => {
           {path === "detail" && (
             <MoreHorizontalBtn
               style={{ color: "rgb(249, 200, 82)", marginRight: "15px" }}
-              onClick={() => history.push(`/catinfoedit/${catId}`)}
+              onClick={() =>
+                history.push({
+                  pathname: `/catinfoedit/${catId}`,
+                  state: { location },
+                })
+              }
             />
           )}
         </Header>

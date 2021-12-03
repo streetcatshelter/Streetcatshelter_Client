@@ -24,7 +24,6 @@ import { userActions } from "../redux/modules/user";
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const preLocation = props.location;
   const locationA = useLocation();
   const path = props.path;
   const userInfo = useSelector((state) => state.mypage.userInfo);
@@ -32,69 +31,55 @@ const Header = (props) => {
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
 
-  if (preLocation !== undefined) {
-    location = preLocation;
-  } else if (userInfo.locationList && path.length === 1) {
-    location = userInfo.locationList[0]?.split("@")[0];
-  } else if (userInfo.locationList && firstLocation !== userInfo.locationList[0]?.split("@")[0] &&
-            firstLocation !== userInfo.locationList[1]?.split("@")[0] &&
-            firstLocation !== userInfo.locationList[2]?.split("@")[0]) {
-    location = userInfo.locationList[0]?.split("@")[0];
-  } else {
-    location = firstLocation;
-  }
-  const userLocation = useSelector((state) => state.map.keywordList[0]);
-  location = userLocation ? userLocation : location;
+  const userLocation = useSelector((state) => state.map.keywordList[0])
+  location = userLocation ? userLocation : firstLocation;
+
+
   if (
-    userInfo?.locationList &&
-    location + " " === userInfo?.locationList[0]?.split("@")[1]?.split("(")[0]
+    path === "/catdetail/:village/:catId" ||
+    path === "/catdetailinfo/:village/:catDetailId" ||
+    path === '/catdetail/:village/:catId/1' ||
+    path === '/community/:village/:category/postdetail/:communityId' ||
+    path === '/catinfowrite/:location'
   ) {
-    location = userInfo?.locationList[0]?.split("@")[0];
-  } else if (
-    userInfo?.locationList &&
-    location + " " === userInfo?.locationList[1]?.split("@")[1]?.split("(")[0]
-  ) {
-    location = userInfo?.locationList[1]?.split("@")[0];
-  } else if (
-    userInfo?.locationList &&
-    location + " " === userInfo?.locationList[2]?.split("@")[1]?.split("(")[0]
-  ) {
-    location = userInfo?.locationList[2]?.split("@")[0];
-  } else if (location === undefined) {
-    location = locationA.pathname.split("/")[2];
+    location = locationA.pathname.split('/')[2];;
+  }
+  
+  if (userInfo.locationList && location === undefined) {
+    location = userInfo?.locationList[0]?.split(' ')[2];
   }
 
   const sameLocationList = userInfo.locationList?.filter(
-    (v) => v.split("@")[0] === location
+    (v) => v.split(" ")[2] === location
   );
 
   const locationList = userInfo.locationList?.filter(
-    (v) => v.split("@")[0] !== location
+    (v) => v.split(" ")[2] !== location
   );
 
   let location2;
   let location3;
   if (userInfo.locationList !== undefined && sameLocationList.length === 1) {
     if (userInfo.locationList.length === 3) {
-      location2 = locationList[0]?.split("@")[0];
-      location3 = locationList[1]?.split("@")[0];
+      location2 = locationList[0]?.split(' ')[2];
+      location3 = locationList[1]?.split(' ')[2];
     } else if (userInfo.locationList.length === 2) {
-      location2 = locationList[0]?.split("@")[0];
+      location2 = locationList[0]?.split(' ')[2];
     }
   } else if (
     userInfo.locationList !== undefined &&
     sameLocationList.length === 2
   ) {
-    location = sameLocationList[0]?.split("@")[0];
-    location2 = sameLocationList[1]?.split("@")[0];
-    location3 = locationList[0]?.split("@")[0];
+    location = sameLocationList[0]?.split(' ')[2];
+    location2 = sameLocationList[1]?.split(' ')[2];
+    location3 = locationList[0]?.split(' ')[2];
   } else if (
     userInfo.locationList !== undefined &&
     sameLocationList.length === 3
   ) {
-    location = sameLocationList[0]?.split("@")[0];
-    location2 = sameLocationList[1]?.split("@")[0];
-    location3 = sameLocationList[2]?.split("@")[0];
+    location = sameLocationList[0]?.split(' ')[2];
+    location2 = sameLocationList[1]?.split(' ')[2];
+    location3 = sameLocationList[2]?.split(' ')[2];
   }
 
   const [place, setPlace] = useState(location);

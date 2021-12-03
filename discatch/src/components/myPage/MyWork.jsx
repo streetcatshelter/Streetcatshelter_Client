@@ -2,16 +2,19 @@
 import React from "react";
 
 // COMPONENTS
-import { ProgressBar, Calendar } from "..";
+import { ProgressBar, Calendar, SecondSpinner } from "..";
 
 // STYLE
 import styled from "styled-components";
 
+import { useSelector } from "react-redux";
 const Mywork = () => {
+  const isLoaded = useSelector((state) => state.mypage.itemLoaded);
   return (
     <Wrapper>
       <ProgressBar />
       <Calendar path="mypage" />
+      <SecondSpinner visible={isLoaded} />
     </Wrapper>
   );
 };

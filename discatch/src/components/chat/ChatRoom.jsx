@@ -238,14 +238,28 @@ const Header = styled.div`
   z-index: 500;
   justify-content: space-between;
   border-bottom: 0.2px solid #d19b61;
+  @media screen and (max-width: 420px) {
+    width: 100%;
+  }
   @media screen and (max-width: 320px) {
     width: 100%;
+    height: 40px;
   }
 `;
 
 const InfoBox = styled.div`
   display: flex;
   align-items: center;
+  :nth-child(1) {
+    margin: 0 0 3px;
+    font-size: 14px;
+    font-weight: 900;
+  }
+  :nth-child(2) {
+    margin: 0;
+    font-size: 12px;
+    color: #999999;
+  }
 `;
 
 const InfoBlock = styled.div`
@@ -254,12 +268,23 @@ const InfoBlock = styled.div`
   p {
     :nth-child(1) {
       margin: 0 0 3px;
-      font-size: 16px;
+      font-size: 14px;
+      font-weight: 900;
     }
     :nth-child(2) {
       margin: 0;
       font-size: 12px;
       color: #999999;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    p {
+      :nth-child(1) {
+        font-size: 12px;
+      }
+      :nth-child(2) {
+        font-size: 10px;
+      }
     }
   }
 `;
@@ -270,7 +295,7 @@ const CallBox = styled.div`
   align-items: center;
   @media screen and (max-width: 375px) {
     position: relative;
-    right: 30px;
+    right: 15px;
   }
 `;
 

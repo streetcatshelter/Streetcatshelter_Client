@@ -101,10 +101,13 @@ const BubbleBox = styled.div`
     font-size: 10px;
     margin: 10px 5px;
     align-items: end;
+    @media screen and (max-width: 320px) {
+      font-size: 8px;
+    }
   }
   @keyframes fadeIn {
     from {
-      tranform: translateX(5px);
+      tranform: translateX(10px);
       opacity: 0;
     }
     to {
@@ -119,7 +122,10 @@ const Bubble = styled.div`
   margin: 5px 0;
   display: inline-block;
   max-width: 300px;
-  font-size: 14px;
+  font-size: 12px;
+  @media screen and (max-width: 320px) {
+    font-size: 10px;
+  }
   position: relative;
   ${(props) =>
     props.user === "my"

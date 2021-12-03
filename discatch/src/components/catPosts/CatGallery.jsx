@@ -41,7 +41,7 @@ const CatGallery = (props) => {
               cursor: "pointer",
             }}
             onClick={() =>
-              history.push(`/catdetailinfo/${location}/${gallery.catDetailId}`)
+              history.push(`/catdetailinfo/${location.split(' ')[2]}/${gallery.catDetailId}`)
             }
           >
             <img

@@ -25,7 +25,7 @@ const CatPost = ({ cat, path, location }) => {
     if (path !== "detail") {
       history.push({
         pathname:`/catdetail/${location.split(' ')[2]}/${cat.catId}`, 
-        state: { location : location.split(' ')[2] }});
+        state: { location }});
     } else return;
   };
 
@@ -51,7 +51,7 @@ const CatPost = ({ cat, path, location }) => {
           {path === "detail" && (
             <MoreHorizontalBtn
               style={{ color: "rgb(249, 200, 82)", marginRight: "15px" }}
-              onClick={() => history.push(`/catinfoedit/${catId}`)}
+              onClick={() => history.push({pathname : `/catinfoedit/${catId}`, state : { location}})}
             />
           )}
         </Header>

@@ -28,12 +28,23 @@ const Header = (props) => {
   const path = props.path;
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location;
-  const firstLocation = locationA.state.location;
+  const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
 
   const userLocation = useSelector((state) => state.map.keywordList[0])
   location = userLocation ? userLocation : firstLocation;
 
+
+  if (
+    path === "/catdetail/:village/:catId" ||
+    path === "/catdetailinfo/:village/:catDetailId" ||
+    path === '/catdetail/:village/:catId/1' ||
+    path === '/community/:village/:category/postdetail/:communityId' ||
+    path === '/catinfowrite/:location'
+  ) {
+    location = locationA.pathname.split('/')[2];;
+  }
+  
   if (userInfo.locationList && location === undefined) {
     location = userInfo?.locationList[0]?.split(' ')[2];
   }

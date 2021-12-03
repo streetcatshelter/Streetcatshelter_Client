@@ -22,6 +22,8 @@ const Menu = (props) => {
   const pathName = useLocation();
   const path = props.props.props.match.path;
   const preLocation = props.props.props?.location.state?.location;
+  const userInfo = useSelector((state) => state.mypage.userInfo);
+  const firstLocation = userInfo.locationList ? userInfo?.locationList[0]?.split(' ')[2] : null;
   const pathLocation = props.props.props.match.params.village
     ? props.props.props.match.params.village
     : props.props.props.match.params.location;
@@ -31,17 +33,23 @@ const Menu = (props) => {
   let location;
   location = userLocation ? userLocation : preLocation;
 
+  if (location === undefined && pathLocation !== undefined) {
+    location = pathLocation;
+  } else if (location === undefined && pathLocation === undefined) {
+    location = firstLocation;
+  }
+
   if (
     path === "/catdetail/:village/:catId" ||
-    path === "/catdetailinfo/:village/:catDetailId"
+    path === "/catdetailinfo/:village/:catDetailId" ||
+    path === '/catdetail/:village/:catId/1' ||
+    path === '/community/:village/:category/postdetail/:communityId'
   ) {
-    location = pathLocation;
+    location = pathName.pathname.split('/')[2];;
+  } else if (path === '/catdetailinfowrite/:catId') {
+    location = location.split(' ')[2];
   }
-
-  if (path === '/catdetail/:village/:catId/1') {
-    location = pathName.pathname.split('/')[2];
-  }
-
+  
   const catId = props.props.props.location.pathname.split("/")[3];
 
   const moveToHome = () => {

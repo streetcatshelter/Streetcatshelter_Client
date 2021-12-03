@@ -121,7 +121,7 @@ const Header = (props) => {
     const keyword = e.target.value;
     dispatch(searchMap(keyword));
   };
-
+  
   const goBack = () => {
     if (path === "/community/:village/:category") {
       history.push({ pathname: "/community", state: { location } });

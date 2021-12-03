@@ -6,12 +6,12 @@ import Template from "./Template";
 import EditModalSlide from "./EditModalSlide";
 import SecondHeader from "./SecondHeader";
 import ContentHeader from "./ContentHeader";
-
+import EmptyPost from "./EmptyPost";
 // SLIDER
 import Slide from "./slider/Slide";
 
 // MYPAGE
-import MyPageCat from "./myPage/MyPageCat";
+import MyPageCatPost from "./myPage/MyPageCatPost";
 import Notice from "./myPage/Notice";
 import NoticeDesc from "./myPage/NoticeDesc";
 import Profile from "./myPage/Profile";
@@ -66,10 +66,11 @@ export {
   EditModalSlide,
   SecondHeader,
   ContentHeader,
+  EmptyPost,
   // SLIDER
   Slide,
   // MYPAGES
-  MyPageCat,
+  MyPageCatPost,
   Notice,
   NoticeDesc,
   Profile,

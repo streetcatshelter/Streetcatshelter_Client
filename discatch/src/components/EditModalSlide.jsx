@@ -34,7 +34,7 @@ const EditDeleteModal = (props) => {
     if (openModal === true) {
       setOpen(!open);
     }
-  }, [openModal, open]);
+  }, [openModal]);
 
   return (
     <div>

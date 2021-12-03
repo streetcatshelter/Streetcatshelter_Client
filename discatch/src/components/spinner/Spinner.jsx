@@ -26,7 +26,7 @@ const Spinner = (props) => {
           </MainText>
           <p
             style={{
-              fontSize: "30px",
+              fontSize: "20px",
               fontWeight: "700",
               color: "#d19b61",
               margin: "20px auto",
@@ -60,11 +60,40 @@ const SpinnerBG = styled.div`
 const MainText = styled.div`
   p {
     margin: 0px auto;
-    font-size: 60px;
+    font-size: 80px;
     font-weight: 900;
     color: #fbd986;
     span {
       color: #cbcf52;
+    }
+  }
+  -webkit-animation: focus-in-contract 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: focus-in-contract 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  @-webkit-keyframes focus-in-contract {
+    0% {
+      letter-spacing: 1em;
+      -webkit-filter: blur(12px);
+      filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+      filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes focus-in-contract {
+    0% {
+      letter-spacing: 1em;
+      -webkit-filter: blur(12px);
+      filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+      filter: blur(0px);
+      opacity: 1;
     }
   }
 `;

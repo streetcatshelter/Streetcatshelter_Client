@@ -24,8 +24,9 @@ const CatPost = ({ cat, path, location }) => {
   const CatDetailBtn = () => {
     if (path !== "detail") {
       history.push({
-        pathname:`/catdetail/${location.split(' ')[2]}/${cat.catId}`, 
-        state: { location }});
+        pathname: `/catdetail/${location.split(" ")[2]}/${cat.catId}`,
+        state: { location },
+      });
     } else return;
   };
 
@@ -51,7 +52,12 @@ const CatPost = ({ cat, path, location }) => {
           {path === "detail" && (
             <MoreHorizontalBtn
               style={{ color: "rgb(249, 200, 82)", marginRight: "15px" }}
-              onClick={() => history.push({pathname : `/catinfoedit/${catId}`, state : { location}})}
+              onClick={() =>
+                history.push({
+                  pathname: `/catinfoedit/${catId}`,
+                  state: { location },
+                })
+              }
             />
           )}
         </Header>
@@ -66,8 +72,8 @@ const CatPost = ({ cat, path, location }) => {
             <FavoriteIcon
               onClick={likeToggle}
               style={{
-                position: 'relative',
-                left: '12px',
+                position: "relative",
+                left: "12px",
                 color: userLiked ? "red" : "gray",
               }}
             />
@@ -92,6 +98,9 @@ const CatPostStyle = styled.div`
   p {
     margin: 0px;
     line-height: 20px;
+  }
+  &:hover {
+    filter: brightness(90%);
   }
 `;
 const RightBox = styled.div`

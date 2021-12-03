@@ -31,7 +31,6 @@ import { __getComment } from "../../redux/modules/comment";
 
 const CatDetail = (props) => {
   const dispatch = useDispatch();
-  const isLoaded = useSelector((state) => state.mypage.isLoaded);
   const location = props.location.state?.location;
   const catId = props.match.params.catId;
   const cat = useSelector((state) => state.cat.catinfo);
@@ -49,7 +48,6 @@ const CatDetail = (props) => {
 
   return (
     <>
-      <Spinner visible={isLoaded} />
       <Template props={props}>
         <CatPost cat={cat} location={location} path="detail" />
         <Grid
@@ -105,22 +103,22 @@ const CatDetail = (props) => {
         ) : menu === "갤러리" ? (
           <CatGallery catId={catId} location={location} />
         ) : null}
-        {userInfo.locationList && (location === userInfo?.locationList[0] ||
-        location === userInfo?.locationList[1] ||
-        location === userInfo?.locationList[2]) ? (
-        <Button
-          is_float="is_float"
-          clickEvent={() => {
-            history.push({
-              pathname: `/map/${location}/${catId}`,
-              state: { catId, location },
-            });
-          }}
-        >
-          <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
-        </Button>
+        {userInfo.locationList &&
+        (location === userInfo?.locationList[0] ||
+          location === userInfo?.locationList[1] ||
+          location === userInfo?.locationList[2]) ? (
+          <Button
+            is_float="is_float"
+            clickEvent={() => {
+              history.push({
+                pathname: `/map/${location}/${catId}`,
+                state: { catId, location },
+              });
+            }}
+          >
+            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+          </Button>
         ) : null}
-        
 
         <CommentList props={commentList} path="CatDetail" catId={catId} />
       </Template>

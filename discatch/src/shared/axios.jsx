@@ -45,17 +45,18 @@ export const myPageApi = {
     instance.get(`/mypage/calendar?year=${year}&month=${month}`),
   getCalendarDetail: (year, month, elm) =>
     instance.get(`/mypage/calendar/day/${elm}?year=${year}&month=${month}`),
-  getLikedAllCat: () => instance.get("/mypage/mycat"),
+  getLikedAllCat: () => instance.get(`/mypage/mycat/?page=1&size=10`),
+  getMoreLikedAllCat: (page) =>
+    instance.get(`/mypage/mycat/?page=${page}&size=10`),
   getUserInfo: () => instance.get("/mypage/user/information"),
   getLevelUp: () => instance.get("/leveluptest"),
 };
 
 export const catApi = {
-  getCatLocation: (location, page) =>
+  getCatLocation: (location) =>
     instance.get(`/cat/${location}/?page=1&size=10`),
   getMoreCatLocation: (location, page) =>
     instance.get(`/cat/${location}/?page=${page}&size=10`),
-
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),
   getCatInfo: (catId) => instance.get(`/cat/info/${catId}`),
   getCatCalendar: (catId, month, year) =>

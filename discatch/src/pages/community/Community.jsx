@@ -6,7 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { css } from "styled-components";
 
 // COMPONENTS
-import { CommunityCategoryCard, Template, Spinner } from "../../components";
+import {
+  CommunityCategoryCard,
+  Template,
+  SecondSpinner,
+} from "../../components";
 
 // ELEMENTS
 import { Grid } from "../../elements/index";
@@ -40,7 +44,7 @@ const Community = (props) => {
 
   return (
     <>
-      <Spinner visible={isLoaded} />
+      <SecondSpinner visible={isLoaded} />
       <Template props={props}>
         {village !== undefined ? (
           <Grid
@@ -79,10 +83,12 @@ const Community = (props) => {
           >
             <CommunityCategoryCard
               src={Community1}
-              clickEvent={() => history.push({
-                  pathname:`/community/${village}/catinfo`, 
-                  state : { location : village}}
-              )}
+              clickEvent={() =>
+                history.push({
+                  pathname: `/community/${village}/catinfo`,
+                  state: { location: village },
+                })
+              }
               width="100px"
               height="100px"
               title="고양이 정보글!"
@@ -91,10 +97,12 @@ const Community = (props) => {
 
             <CommunityCategoryCard
               src={Community2}
-              clickEvent={() => history.push({
-                pathname:`/community/${village}/gathering`, 
-                state : { location : village }}
-              )}
+              clickEvent={() =>
+                history.push({
+                  pathname: `/community/${village}/gathering`,
+                  state: { location: village },
+                })
+              }
               width="100px"
               height="100px"
               title={`${village} 동네 모임`}
@@ -102,10 +110,12 @@ const Community = (props) => {
             />
             <CommunityCategoryCard
               src={Community3}
-              clickEvent={() => history.push({
-                pathname:`/community/${village}/sharing`, 
-                state: { location : village}}
-              )}
+              clickEvent={() =>
+                history.push({
+                  pathname: `/community/${village}/sharing`,
+                  state: { location: village },
+                })
+              }
               width="100px"
               height="100px"
               title={`${village} 고양이 물건 나눔`}

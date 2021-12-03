@@ -2,7 +2,7 @@
 import React from "react";
 
 // COMPONENTS
-import { MyPageCat, MyWork, Notice } from "..";
+import { MyPageCatPost, MyWork, Notice } from "..";
 
 const MyPageContent = (props) => {
   return (
@@ -12,7 +12,7 @@ const MyPageContent = (props) => {
       ) : props.menu === "notice" ? (
         <Notice />
       ) : (
-        <MyPageCat />
+        <MyPageCatPost />
       )}
     </div>
   );

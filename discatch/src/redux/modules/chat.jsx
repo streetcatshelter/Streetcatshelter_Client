@@ -43,6 +43,7 @@ const _getAllMessage =
   (roomId) =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(loading(true));
       const { data } = await chatApi.getAllMessage(roomId);
       dispatch(setChatMessage(data));
     } catch (e) {
@@ -77,10 +78,10 @@ const chat = createSlice({
     },
     setChatInfo: (state, action) => {
       state.chatinfo = action.payload;
-      state.isLoaded = false;
     },
     setChatMessage: (state, action) => {
       state.chatmessage = action.payload;
+      state.isLoaded = false;
     },
     pushChatMessage: (state, action) => {
       state.chatmessage.push(action.payload);

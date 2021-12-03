@@ -51,37 +51,42 @@ const CommentCard = ({ comment, communityId }) => {
   };
 
   return (
-    <Wrap>
-      <Header>
-        <Left>
-          <Profile onClick={OpenProfile} isMine={comment.isMine}>
-            <img src={comment.profileImageUrl} alt={comment.profileImageUrl} />
-            <p>{comment.nickname}</p>
-          </Profile>
+    <>
+      <Wrap>
+        <Header>
+          <Left>
+            <Profile onClick={OpenProfile} isMine={comment.isMine}>
+              <img
+                src={comment.profileImageUrl}
+                alt={comment.profileImageUrl}
+              />
+              <p>{comment.nickname}</p>
+            </Profile>
 
-          {comment.createdAt ? <span>{CreatedAt}</span> : ""}
-        </Left>
+            {comment.createdAt ? <span>{CreatedAt}</span> : ""}
+          </Left>
 
-        <Right>
-          {UserInfo.username === comment.username ? (
-            <Trash2 size="14px" color="red" onClick={deleteBtn} />
-          ) : (
-            ""
-          )}
-        </Right>
-      </Header>
-      <Text
-        width="280px"
-        margin="0 0 0 10px"
-        padding="4px"
-        addstyle={() => {
-          return css`
-            border-radius: 10px;
-          `;
-        }}
-      >
-        {comment.contents}
-      </Text>
+          <Right>
+            {UserInfo.username === comment.username ? (
+              <Trash2 size="14px" color="red" onClick={deleteBtn} />
+            ) : (
+              ""
+            )}
+          </Right>
+        </Header>
+        <Text
+          width="280px"
+          margin="0 0 0 10px"
+          padding="4px"
+          addstyle={() => {
+            return css`
+              border-radius: 10px;
+            `;
+          }}
+        >
+          {comment.contents}
+        </Text>
+      </Wrap>
       <EditModalSlide
         FirstBtn="프로필보기"
         SecondBtn="채팅하기"
@@ -90,7 +95,7 @@ const CommentCard = ({ comment, communityId }) => {
         FirstClick={UserProfile}
         SecondClick={MakeChat}
       />
-    </Wrap>
+    </>
   );
 };
 

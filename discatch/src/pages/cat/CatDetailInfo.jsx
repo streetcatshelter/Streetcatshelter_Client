@@ -69,7 +69,7 @@ const CatDetailInfo = (props) => {
       state: { location },
     });
   };
-  
+
   return (
     <>
       <Spinner visible={isLoaded} />

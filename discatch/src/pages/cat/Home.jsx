@@ -44,7 +44,6 @@ const Home = (props) => {
 
   const villageList = useSelector((state) => state.mypage.userVillage);
   let location = stateLocation ? stateLocation : villageList[0];
-
   if (villageList[0] && userLocation === villageList[0]?.split(' ')[2]) {
     location = villageList[0];
   } else if (villageList[1] && userLocation === villageList[1]?.split(' ')[2]) {
@@ -52,7 +51,6 @@ const Home = (props) => {
   } else if (villageList[2] && userLocation === villageList[2]?.split(' ')[2]) {
     location = villageList[2];
   }
-
   const userVillage = useSelector(
     (state) => state.mypage.userVillage[0]
   );
@@ -67,8 +65,10 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    setPage(1);
-    dispatch(__getCatLocation(location));
+    if (location?.length !== 3 && location !== undefined) {
+      setPage(1);
+      dispatch(__getCatLocation(location));
+    }
   }, [location, dispatch]);
 
   useEffect(() => {

@@ -23,11 +23,10 @@ import {
 const CommunityPostDetail = (props) => {
   let category, contents, imageList, title, location;
   const path = props.location.pathname.split("/")[3];
-  const pathLocation = props.location.pathname.split("/")[2];
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
   const isLoaded = useSelector((state) => state.community.itemDetailLoaded);
-  
+
   const { cCategory, cContents, cImageList, cTitle, cLocation } = useSelector(
     (state) => ({
       cCategory: state.community.catInfo.data?.category,
@@ -108,10 +107,11 @@ const CommunityPostDetail = (props) => {
           FirstBtn="수정"
           SecondBtn="삭제"
           FirstClick={() => {
-            history.push({
-              pathname:`/community/${pathLocation}/${pathCategory}/postedit/${communityId}`,
-              state : { location : pathLocation }
-            });
+            history.push(
+              `/community/${
+                location.split(" ")[2]
+              }/${pathCategory}/postedit/${communityId}`
+            );
           }}
           SecondClick={deleteCommunity}
         />

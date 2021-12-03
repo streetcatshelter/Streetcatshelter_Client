@@ -26,92 +26,22 @@ const Location = (props) => {
   const path = useLocation();
   const catId = props.props.match.params.id;
   const pathLength = path.pathname.split("/").length;
-  let vKeyword;
 
-  const pathVillage = path.pathname.split("/")[2];
-  let location = pathVillage;
-  let userVillage;
-  const userVillage0 = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageA = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
-  );
+  let location;
 
-  const userVillage1 = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageB = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage2 = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageC = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
-  );
-
-  const villageKeyword = useSelector((state) => state.map.keywordList[0]);
-
-  if (villageKeyword === userVillage0) {
-    userVillage = userVillageA;
-  } else if (villageKeyword === userVillage1) {
-    userVillage = userVillageB;
-  } else if (villageKeyword === userVillage2) {
-    userVillage = userVillageC;
-  } else if (userVillage0 === pathVillage) {
-    userVillage = userVillageA;
-  } else if (userVillage1 === pathVillage) {
-    userVillage = userVillageB;
-  } else if (userVillage2 === pathVillage) {
-    userVillage = userVillageC;
-  }
-
-  if (userVillage0 === villageKeyword) {
-    location = userVillage0;
-  } else if (userVillage1 === villageKeyword) {
-    location = userVillage1;
-  } else if (userVillage2 === villageKeyword) {
-    location = userVillage2;
-  }
-
-  if (villageKeyword === undefined) {
-    if (userVillage0 === pathVillage) {
-      vKeyword = userVillageA;
-    } else if (userVillage1 === pathVillage) {
-      vKeyword = userVillageB;
-    } else if (userVillage2 === pathVillage) {
-      vKeyword = userVillageC;
-    }
-  } else {
-    if (userVillage0 === villageKeyword) {
-      vKeyword = userVillageA;
-    } else if (userVillage1 === villageKeyword) {
-      vKeyword = userVillageB;
-    } else if (userVillage2 === villageKeyword) {
-      vKeyword = userVillageC;
-    }
+  const villageKeyword = useSelector((state) => state.map.keywordList[0])
+  location = villageKeyword;
+  const villageList = useSelector((state) => state.mypage.userVillage);
+  if (location === villageList[0]?.split(' ')[2]) {
+    location = villageList[0]
+  } else if (location === villageList[1]?.split(' ')[2]) {
+    location = villageList[1]
+  } else if (location === villageList[2]?.split(' ')[2]) {
+    location = villageList[2]
   }
 
   const pathLocation = location;
-
-  if (location === userVillage0) {
-    location = userVillageA;
-  } else if (location === userVillage1) {
-    location = userVillageB;
-  } else if (location === userVillage2) {
-    location = userVillageC;
-  }
-
-  const secondUserVillage = `${userVillage?.split(" ")[0]} ${
-    userVillage?.split(" ")[1]
-  } ${userVillage?.split(" ")[2]}`;
-
-  location = location?.substring(0, location.length - 1);
-
   const catList = useSelector((state) => state.cat.list);
-
   useEffect(() => {
     dispatch(__getAllCatLocation(location));
   }, [location, dispatch]);
@@ -217,7 +147,7 @@ const Location = (props) => {
     });
 
     const ps = new kakao.maps.services.Places();
-    ps.keywordSearch(userVillage, placesSearchCB);
+    ps.keywordSearch(location, placesSearchCB);
 
     // 고양이 마커 가져오기
     function placesSearchCB(data, status, pagination) {
@@ -228,9 +158,7 @@ const Location = (props) => {
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         map.setBounds(bounds);
-      } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-        ps.keywordSearch(secondUserVillage, placesSearchCB);
-      }
+      } 
     }
   };
 
@@ -259,7 +187,7 @@ const Location = (props) => {
   const [listvisible, setListVisible] = useState(0);
   const [modal, setModal] = useState(0);
 
-  const typeVillageKeyword = vKeyword + searchKeyword;
+  const typeVillageKeyword = location + searchKeyword;
 
   const ChangeKeyword = (e) => {
     setSearchKeyword(e.target.value);
@@ -395,7 +323,7 @@ const Location = (props) => {
       });
 
       const ps = new kakao.maps.services.Places();
-      ps.keywordSearch(userVillage, placesSearchCB);
+      ps.keywordSearch(location, placesSearchCB);
 
       function placesSearchCB(data, status, pagination) {
         if (status === kakao.maps.services.Status.OK) {
@@ -430,8 +358,8 @@ const Location = (props) => {
   const [longitude, setLongitude] = useState();
 
   useEffect(() => {
-    showCats(userVillage, vKeyword, catList, position, location);
-  }, [userVillage, vKeyword, catList, position, location, dispatch]);
+    showCats(catList, position, location);
+  }, [catList, position, location, dispatch]);
 
   return (
     <MapWrap>
@@ -532,7 +460,7 @@ const Location = (props) => {
             pathLength === 3
           ) {
             history.push({
-              pathname: `/catinfowrite/${pathLocation}`,
+              pathname: `/catinfowrite/${pathLocation?.split(' ')[2]}`,
               state: { latitude, longitude },
             });
           } else if (

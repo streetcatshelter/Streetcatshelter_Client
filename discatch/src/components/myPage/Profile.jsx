@@ -70,7 +70,7 @@ const Profile = (props) => {
             {UserInfo.locationList.map((location, idx) => {
               return (
                 <Text margin="0px 5px 0px 0px" size="12px" key={idx}>
-                  {location.split("@")[0]}
+                  {location.split(" ")[2]}
                 </Text>
               );
             })}

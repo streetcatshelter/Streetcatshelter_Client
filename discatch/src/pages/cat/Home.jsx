@@ -40,47 +40,24 @@ const Home = (props) => {
 
   const userLocation = useSelector((state) => state.map.keywordList[0]);
 
-  const userVillage = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[0]
-  );
-  const pathLocation = userLocation
-    ? userLocation
-    : menuLocation || userVillage;
+  const villageList = useSelector((state) => state.mypage.userVillage);
+  let location = villageList[0];
 
-  const userVillage0 = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
-  );
-
-  const userVillageA = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage1 = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
-  );
-
-  const userVillageB = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage2 = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
-  );
-
-  const userVillageC = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
-  );
-
-  let location;
-  if (pathLocation === userVillage0) {
-    location = userVillageA;
-  } else if (pathLocation === userVillage1) {
-    location = userVillageB;
-  } else if (pathLocation === userVillage2) {
-    location = userVillageC;
+  if (villageList[0] && userLocation === villageList[0]?.split(' ')[2]) {
+    location = villageList[0];
+  } else if (villageList[1] && userLocation === villageList[1]?.split(' ')[2]) {
+    location = villageList[1];
+  } else if (villageList[2] && userLocation === villageList[2]?.split(' ')[2]) {
+    location = villageList[2];
   }
 
-  location = location?.substring(0, location.length - 1);
+  const userVillage = useSelector(
+    (state) => state.mypage.userVillage[0]
+  );
+
+  const pathLocation = userLocation
+    ? userLocation
+    : menuLocation || userVillage.split(' ')[2];
 
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
@@ -90,7 +67,7 @@ const Home = (props) => {
   useEffect(() => {
     setPage(1);
     dispatch(__getCatLocation(location));
-  }, [location]);
+  }, [location, dispatch]);
 
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고 catList의 length가 10의 배수인 경우

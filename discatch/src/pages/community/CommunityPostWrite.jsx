@@ -34,35 +34,7 @@ const CommunityPostWrite = (props) => {
     state.image.preview ? state.image.preview : Array(1)
   );
 
-  const userVillage0 = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageA = useSelector(
-    (state) => state.mypage.userVillage[0]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage1 = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageB = useSelector(
-    (state) => state.mypage.userVillage[1]?.split("@")[1]?.split("(")[0]
-  );
-
-  const userVillage2 = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[0]?.split("(")[0]
-  );
-  const userVillageC = useSelector(
-    (state) => state.mypage.userVillage[2]?.split("@")[1]?.split("(")[0]
-  );
-
-  let location;
-  if (detailLocation === userVillage0) {
-    location = userVillageA;
-  } else if (detailLocation === userVillage1) {
-    location = userVillageB;
-  } else if (detailLocation === userVillage2) {
-    location = userVillageC;
-  }
+  let location = detailLocation;
 
   let firstCategory;
   if (pathName[3] === "catinfo") {
@@ -76,8 +48,6 @@ const CommunityPostWrite = (props) => {
   const [fileNum, setFileNum] = useState(0);
 
   const nickName = useSelector((state) => state.mypage.userInfo.nickname);
-
-  location = location?.substring(0, location.length - 1);
 
   // S3
   const handleInputFile = (e) => {

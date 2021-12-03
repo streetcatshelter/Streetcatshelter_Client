@@ -189,14 +189,12 @@ const Header = (props) => {
         </Head>
         <SideBtnBox>
           <SearchBtn
-            style={{ color: "gray", margin: "18px auto" }}
             onClick={() => {
               // setSearchModal(!searchModal);
               alert("준비중입니다.");
             }}
           />
           <Bell
-            style={{ margin: "18px 0px 18px 10px", color: "gray" }}
             onClick={() => {
               // setSearchModal(!searchModal);
               alert("준비중입니다.");
@@ -229,19 +227,27 @@ const HeaderInner = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: space-around;
 `;
 
 const SideBtnBox = styled.div`
   margin: auto;
-  width: 18%;
+  width: 25%;
   height: 100%;
   display: flex;
   flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
   svg {
-    @media screen and (max-width: 359px) {
+    color: gray;
+    margin: 18px auto;
+    @media screen and (max-width: 400px) {
       width: 20px;
       height: 20px;
     }
+  }
+  @media screen and (max-width: 320px) {
+    width: 25%;
   }
 `;
 const SearchInput = styled.input`
@@ -286,7 +292,7 @@ const HeaderStyle = styled.header`
 `;
 
 const SelectStyle = styled.select`
-  width: 60px;
+  width: 100%
   height: 25px;
   margin: 20px 10px;
   border: none;
@@ -299,7 +305,7 @@ const SelectStyle = styled.select`
   }
 `;
 const Head = styled.div`
-  width:64%;
+  width:50%;
   margin: auto;
   text-align:center;
   p {
@@ -312,12 +318,18 @@ const Head = styled.div`
     @media screen and (max-width: 359px) {
       font-size: 30px;
     }
+    @media screen and (max-width: 320px) {
+      font-size: 25px;
+    }
   span {
     font-size: 45px;
     font-weight: 800;
     color: #cbcf52;
     @media screen and (max-width: 359px) {
       font-size: 40px;
+    }
+    @media screen and (max-width: 320px) {
+      font-size: 35px;
     }
     :nth-child(2) {
       color: #d19b61;

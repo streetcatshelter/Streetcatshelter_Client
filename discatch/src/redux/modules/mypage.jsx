@@ -31,6 +31,7 @@ const _getCalender =
   (year, month) =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(itemLoading(true));
       const { data } = await myPageApi.getCalendar(year, month);
       dispatch(setCalendar(data));
     } catch (e) {
@@ -78,6 +79,7 @@ const _getNotice =
   () =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(itemLoading(true));
       const { data } = await myPageApi.getNotice();
       dispatch(setNotice(data));
     } catch (e) {
@@ -89,6 +91,7 @@ const _getOneNotice =
   (id) =>
   async (dispatch, getState, { history }) => {
     try {
+      dispatch(itemLoading(true));
       const { data } = await myPageApi.getOneNotice(id);
       dispatch(setOneNotice(data));
     } catch (e) {
@@ -170,9 +173,11 @@ const mypage = createSlice({
   reducers: {
     setNotice: (state, action) => {
       state.noticelist = action.payload;
+      state.itemLoaded = false;
     },
     setOneNotice: (state, action) => {
       state.noticedetail = action.payload;
+      state.itemLoaded = false;
     },
     setLikedAllCat: (state, action) => {
       state.likedAllCat = action.payload;
@@ -192,6 +197,7 @@ const mypage = createSlice({
     },
     setCalendar: (state, action) => {
       state.calendar = action.payload;
+      state.itemLoaded = false;
     },
     setCalendarDetail: (state, action) => {
       state.calendardetail = action.payload;

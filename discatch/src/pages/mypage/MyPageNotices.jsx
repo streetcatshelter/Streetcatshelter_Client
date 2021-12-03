@@ -1,19 +1,26 @@
 // LIBRARY
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 // STYLE
 import styled from "styled-components";
 
 // COMPONENTS
-import { MyPageDetail, Profile, Template, NoticeDesc } from "../../components";
+import {
+  MyPageDetail,
+  Profile,
+  Template,
+  NoticeDesc,
+  SecondSpinner,
+} from "../../components";
 
 // REDUX
 import { mypageActions } from "../../redux/modules/mypage";
+import { useDispatch, useSelector } from "react-redux";
 
 const MyPageNotices = (props) => {
   const dispatch = useDispatch();
   const id = props.match.params.noticeId;
+  const isLoaded = useSelector((state) => state.mypage.itemLoaded);
   useEffect(() => {
     dispatch(mypageActions._getOneNotice(id));
   }, [id, dispatch]);
@@ -36,20 +43,25 @@ const MyPageNotices = (props) => {
         </Title>
         <NoticeDesc />
       </div>
+      <SecondSpinner visible={isLoaded} />
     </Template>
   );
 };
 const Title = styled.div`
-  height: 50px;
-  margin: auto;
+  height: 40px;
+  width: 100%;
+  margin: 10px auto;
   display: flex;
   justify-content: center;
+  background: #fbd986;
+  border-radius: 10px;
 
   p {
     text-align: center;
     font-weight: 900;
     font-size: 24px;
     color: #000000;
+    margin: auto;
   }
 `;
 export default MyPageNotices;

@@ -30,16 +30,17 @@ const ChatMain = (props) => {
           return (
             <ChatRoom key={idx}>
               <InnerBox>
-                <ProfileImg
-                  onClick={() => {
-                    history.push(`api/chat/enter/${room.roomId}`);
-                  }}
-                  src={room.opponentImage}
-                  alt={room.opponentImage}
-                />
+                <LeftBox>
+                  <ProfileImg
+                    onClick={() => {
+                      history.push(`api/chat/enter/${room.roomId}`);
+                    }}
+                    src={room.opponentImage}
+                    alt={room.opponentImage}
+                  />
+                </LeftBox>
                 <ChatInfo>
                   <InfoHead>
-                    {" "}
                     <InfoInner
                       onClick={() => {
                         history.push(`api/chat/enter/${room.roomId}`);
@@ -99,10 +100,20 @@ const ChatRoom = styled.div`
 const InnerBox = styled.div`
   display: flex;
   height: 70px;
-  width: 90%;
+  width: 95%;
   margin: auto;
 `;
-
+const LeftBox = styled.div`
+  display: felx;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+`;
+const ProfileImg = styled.img`
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+`;
 const ChatInfo = styled.div`
   width: 80%;
   height: 70px;
@@ -117,6 +128,7 @@ const InfoHead = styled.div`
 `;
 const InfoInner = styled.div`
   display: flex;
+  flex-wrap: wrap;
   height: 25px;
   align-items: center;
   p {
@@ -124,10 +136,16 @@ const InfoInner = styled.div`
       font-weight: 900;
       font-size: 14px;
       margin: auto 10px auto 0px;
+      @media screen and (max-width: 320px) {
+        font-size: 12px;
+      }
     }
     :nth-child(2) {
       font-size: 12px;
       margin: 0px;
+      @media screen and (max-width: 320px) {
+        font-size: 10px;
+      }
     }
   }
 `;
@@ -144,12 +162,6 @@ const ChatMsg = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-`;
-const ProfileImg = styled.img`
-  border-radius: 32.5px;
-  width: 65px;
-  height: 65px;
-  margin-right: 15px;
 `;
 
 export default ChatMain;

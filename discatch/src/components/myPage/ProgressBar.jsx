@@ -59,7 +59,16 @@ const Bar = styled.div`
   background: #f9c852;
   height: 100%;
   border-radius: 10px;
-  width: ${(props) => props.width};
+  animation: progress 0.5s linear;
+  animation-fill-mode: forwards;
+  @keyframes progress {
+    from {
+      width: 0;
+    }
+    to {
+      width: ${(props) => props.width};
+    }
+  }
 `;
 
 export default ProgressBar;

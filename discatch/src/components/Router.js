@@ -41,8 +41,7 @@ import test from "../pages/test";
 const Router = () => {
   useEffect(() => {
     const Onboarding = localStorage.getItem("onboarding");
-
-    if (!Onboarding) history.replace("/slider");
+    if (!Onboarding || Onboarding === null) history.push("/slider");
   }, []);
 
   return (

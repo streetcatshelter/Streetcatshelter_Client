@@ -99,6 +99,19 @@ const _getOneNotice =
     }
   };
 
+const _getUserProfile =
+  (userRandomId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(userLoading(true));
+      const { data } = await myPageApi.getUserProfile(userRandomId);
+      console.log(data);
+      dispatch(setUserProfile(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
 const _editMyInfo = (NickName, Village) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
@@ -195,6 +208,11 @@ const mypage = createSlice({
       const Village = [...action.payload.locationList];
       state.userVillage = Village;
     },
+
+    setUserProfile: (state, action) => {
+      state.userProfile = action.payload;
+      state.userLoaded = false;
+    },
     setCalendar: (state, action) => {
       state.calendar = action.payload;
       state.itemLoaded = false;
@@ -244,6 +262,7 @@ export const mypageActions = {
   _getLikedAllCat,
   _getMoreLikedAllCat,
   _getUserInfo,
+  _getUserProfile,
   _editMyInfo,
   _getLevelUp,
 };
@@ -262,5 +281,6 @@ export const {
   userLoading,
   itemLoading,
   deleteUserLikedCat,
+  setUserProfile,
 } = mypage.actions;
 export default mypage;

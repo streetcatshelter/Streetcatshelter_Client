@@ -16,12 +16,14 @@ import { chatActions } from "../redux/modules/chat";
 
 // MOMENT
 import moment from "moment";
+import UserProfileModal from "./UserProfileModal";
 
 const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const dispatch = useDispatch();
   const pathName = useLocation();
   const pName = pathName.pathname.split("/")[3];
   const [ProfileModal, setProfileModal] = useState(false);
+  const [openProfileModal, setOpenProfileModal] = useState(false);
   const UserNickName = useSelector((state) => state.mypage.userInfo?.nickname);
   const location = useSelector((state) =>
     pName === "catinfo"
@@ -58,6 +60,16 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
       : pName === "sharing"
       ? state.community.sharing.data?.profileImageUrl
       : state.cat.detail?.profileImageUrl
+  );
+
+  const userRandomId = useSelector((state) =>
+    pName === "catinfo"
+      ? state.community.catInfo.data?.userRandomId
+      : pName === "gathering"
+      ? state.community.gathering.data?.userRandomId
+      : pName === "sharing"
+      ? state.community.sharing.data?.userRandomId
+      : state.cat.detail?.userRandomId
   );
 
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
@@ -109,9 +121,14 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
         SecondBtn="채팅하기"
         Profile="profile"
         openModal={ProfileModal}
-        FirstClick={() => {}}
+        FirstClick={() => {
+          setOpenProfileModal(true);
+        }}
         SecondClick={MakeChat}
       />
+      {openProfileModal && userRandomId && (
+        <UserProfileModal userRandomId={userRandomId} />
+      )}
     </>
   );
 };

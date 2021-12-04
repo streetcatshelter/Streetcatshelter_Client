@@ -37,29 +37,24 @@ const Slider = (props) => {
     slideRef.current.style.transition = "all 0.5s ease-in-out";
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
   }, [currentSlide]);
-
-  useEffect(() => {
+  const GoHome = () => {
     const Onboarding = localStorage.getItem("onboarding");
-
+    history.push("/login");
     if (!Onboarding) localStorage.setItem("onboarding", "saw");
-  }, []);
+  };
 
   return (
     <Template props={props} page="slider">
       <Container>
         <ButtonWrap>
-          <CloseButton
-            onClick={() => {
-              history.push("/");
-            }}
-          >
+          <CloseButton onClick={GoHome}>
             <X />
           </CloseButton>
         </ButtonWrap>
         <SliderContainer ref={slideRef}>
           <Slide />
           <Slide number="2" />
-          <Slide number="3" />
+          <Slide GoHome={GoHome} number="3" />
         </SliderContainer>
       </Container>
       <BtnWrap>

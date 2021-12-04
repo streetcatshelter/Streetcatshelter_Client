@@ -50,6 +50,7 @@ export const myPageApi = {
     instance.get(`/mypage/mycat/?page=${page}&size=10`),
   getUserInfo: () => instance.get("/mypage/user/information"),
   getLevelUp: () => instance.get("/leveluptest"),
+  getUserProfile: (userRandomId) => instance.get(`/userinfo/${userRandomId}`),
 };
 
 export const catApi = {

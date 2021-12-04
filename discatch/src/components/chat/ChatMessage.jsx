@@ -31,10 +31,11 @@ const ChatMessage = () => {
             );
             const MinuteDiff = moment(ChatTime).diff(moment(), "minutes");
             // format 1, 전송한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-            const SendMsg = moment(ChatTime).format(" YYYY- M-D hh:mm:ss");
+            const SendMsg = moment(ChatTime).format(" YYYY- M-D hh:mm");
             // format 2, 전송한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
             const RecentlySendChat = moment(ChatTime).fromNow();
-            const SendTime = MinuteDiff > -60 ? RecentlySendChat : SendMsg;
+
+            const SendTime = MinuteDiff > -60 * 12 ? RecentlySendChat : SendMsg;
             return (
               <div key={idx}>
                 {lastmessage.sender === NickName ? (

@@ -15,8 +15,7 @@ const Notice = () => {
   return (
     <Wrapper>
       <Content>
-        <Number style={{ fontSize: "14px" }}>순번</Number>
-        <Title style={{ fontSize: "14px", textAlign: "center" }}>이름</Title>
+        <Title style={{ fontSize: "14px", textAlign: "center" }}>제목</Title>
 
         <DateBox style={{ fontSize: "14px", fontWeight: "900" }}>날짜</DateBox>
       </Content>
@@ -29,7 +28,6 @@ const Notice = () => {
               history.push(`/mypage/notice/${notice.id}`);
             }}
           >
-            <Number> {notice.id}.</Number>
             <Title>
               <p>{notice.title}</p>
             </Title>
@@ -52,13 +50,6 @@ const Content = styled.div`
   display: flex;
 `;
 
-const Number = styled.div`
-  font-weight: 900;
-  font-size: 12px;
-  margin: auto;
-  width: 12%;
-  text-align: center;
-`;
 const Title = styled.div`
   font-weight: 900;
   font-size: 12px;

@@ -1,5 +1,6 @@
 // LIBRARY
 import React from "react";
+import { useSelector } from "react-redux";
 
 // MOMENT
 import moment from "moment";
@@ -13,18 +14,26 @@ import { FileText, MessageCircle } from "react-feather";
 // REDUX
 import { history } from "../../redux/configureStore";
 
-const MyPageCatPost = ({ LikedCat }) => {
+const MyPageCatPost = ({ LikedCat, location }) => {
   const lastActivity =
     LikedCat && moment(LikedCat.lastActivity).format("YYYY-M-D hh:mm");
   const myActivity =
     LikedCat && moment(LikedCat.myActivity).format("YYYY-M-D hh:mm");
+  const userInfo = useSelector((state) => state.mypage.userInfo);
+
+  let userLocation = LikedCat.location;
+  if (userLocation !== userInfo.locationList[0]?.split(' ')[2] &&
+  userLocation !== userInfo.locationList[1]?.split(' ')[2] &&
+  userLocation !== userInfo.locationList[2]?.split(' ')[2]) {
+        userLocation = location;
+  }
 
   return (
     <CatPost
       onClick={() => {
         history.push({
           pathname: `/catdetail/${LikedCat.location}/${LikedCat.catId}/1`,
-          state: { location: LikedCat.location },
+          state: { location: userLocation },
         });
       }}
     >

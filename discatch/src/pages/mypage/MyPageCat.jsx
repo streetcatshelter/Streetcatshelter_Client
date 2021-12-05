@@ -1,6 +1,7 @@
 // LIBRARY
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+
 // COMPONENTS
 import {
   MyPageDetail,
@@ -43,6 +44,7 @@ const MyPage = (props) => {
       return;
     }
   }, [inView]);
+
   return (
     <>
       <Template props={props}>
@@ -63,7 +65,7 @@ const MyPage = (props) => {
                 LikedAllCat.map((LikedCat, idx) => {
                   return (
                     <div style={{ width: "100%" }} key={idx} ref={ref}>
-                      <MyPageCatPost LikedCat={LikedCat} />
+                      <MyPageCatPost LikedCat={LikedCat} location={location} />
                     </div>
                   );
                 })

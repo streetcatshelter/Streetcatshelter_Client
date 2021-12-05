@@ -14,7 +14,6 @@ import {
   CatGallery,
   CommentList,
   CatPost,
-  Spinner,
 } from "../../components";
 
 // ELEMENTS

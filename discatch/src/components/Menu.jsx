@@ -49,6 +49,12 @@ const Menu = (props) => {
   } else if (path === '/catdetailinfowrite/:catId') {
     location = location.split(' ')[2];
   }
+
+  if (userInfo.locationList && location !== userInfo?.locationList[0]?.split(' ')[2] &&
+  location !== userInfo?.locationList[1]?.split(' ')[2] &&
+  location !== userInfo?.locationList[2]?.split(' ')[2]) {
+    location = preLocation;
+  }
   
   const catId = props.props.props.location.pathname.split("/")[3];
 

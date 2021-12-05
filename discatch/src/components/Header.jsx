@@ -1,23 +1,19 @@
 // LIBRARY
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
-import { flexBox } from "../shared/style";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // ROUTE
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
-// ELEMENTS
-import { div } from "../elements";
 
 // ICON
 import { ArrowLeft, LogOut, Bell, Search } from "react-feather";
 
 // REDUX
 import { history } from "../redux/configureStore";
-import { useDispatch, useSelector } from "react-redux";
 import { searchMap } from "../redux/modules/map";
 import { mypageActions } from "../redux/modules/mypage";
 import { userActions } from "../redux/modules/user";
@@ -43,6 +39,13 @@ const Header = (props) => {
   ) {
     location = locationA.pathname.split("/")[2];
   }
+
+  if (userInfo.locationList && 
+      location !== userInfo?.locationList[0]?.split(' ')[2] &&
+      location !== userInfo?.locationList[1]?.split(' ')[2] &&
+      location !== userInfo?.locationList[2]?.split(' ')[2]) {
+      location = firstLocation;
+  } 
 
   if (userInfo.locationList && location === undefined) {
     location = userInfo?.locationList[0]?.split(" ")[2];
@@ -132,7 +135,7 @@ const Header = (props) => {
         state: { location },
       });
     } else if (path === "/catdetail/:village/:catId/1") {
-      history.push({ pathname: `/map/${location}`, state: { location } });
+      history.push({ pathname: '/mypage', state: { location } });
     } else if (path === "/catdetail/:village/:catId") {
       history.push({ pathname: "/", state: { location } });
     } else if (path === "/community/:village/:category/write") {
@@ -280,7 +283,6 @@ const SearchBar = styled.div`
 const SearchBtn = styled(Search)`
   cursor: pointer;
 `;
-
 const HeaderStyle = styled.header`
   max-width: 420px;
   width: 100%;
@@ -290,9 +292,8 @@ const HeaderStyle = styled.header`
   top: 0;
   z-index: 9;
 `;
-
 const SelectStyle = styled.select`
-  width: 100%
+  width: 100%;
   height: 25px;
   margin: 20px 10px;
   border: none;
@@ -321,6 +322,7 @@ const Head = styled.div`
     @media screen and (max-width: 320px) {
       font-size: 25px;
     }
+  }
   span {
     font-size: 45px;
     font-weight: 800;
@@ -333,9 +335,8 @@ const Head = styled.div`
     }
     :nth-child(2) {
       color: #d19b61;
-      
     }
-   
   }
 `;
+
 export default Header;

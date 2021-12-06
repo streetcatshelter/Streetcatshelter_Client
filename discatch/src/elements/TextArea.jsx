@@ -64,7 +64,6 @@ const TextAreaStyle = styled.textarea`
   border-radius: ${(props) => props.radius};
   padding: ${(props) => props.padding};
   ${(props) => props.addstyle()};
-
   &:focus {
     outline: none;
   }

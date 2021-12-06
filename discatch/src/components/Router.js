@@ -185,7 +185,6 @@ const Router = () => {
         component={Auth(ChatRoomPage, true)}
         exact
       />
-
       <Route path="/test" component={Auth(test, true)} exact />
       <Route path={"*"} exact component={NotFound} />
     </Switch>

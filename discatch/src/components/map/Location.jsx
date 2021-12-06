@@ -26,12 +26,11 @@ const Location = (props) => {
   const path = useLocation();
   const catId = props.props.match.params.id;
   const pathLength = path.pathname.split("/").length;
-
   let location;
-
   const villageKeyword = useSelector((state) => state.map.keywordList[0])
   location = villageKeyword;
   const villageList = useSelector((state) => state.mypage.userVillage);
+
   if (location === villageList[0]?.split(' ')[2]) {
     location = villageList[0]
   } else if (location === villageList[1]?.split(' ')[2]) {
@@ -42,6 +41,7 @@ const Location = (props) => {
 
   const pathLocation = location;
   const catList = useSelector((state) => state.cat.list);
+
   useEffect(() => {
     dispatch(__getAllCatLocation(location));
   }, [location, dispatch]);
@@ -510,7 +510,6 @@ const MapIcon = styled(Map)`
     background: #cbcf52;
   }
 `;
-
 const ListWrap = styled.div`
   display: ${(props) => (props.visible ? "block" : "none")};
   position: fixed;
@@ -525,7 +524,6 @@ const ListWrap = styled.div`
   font-size: 12px;
   border-radius: 10px;
 `;
-
 const MapWrap = styled.div`
   position: relative;
   width: 100%;
@@ -558,7 +556,6 @@ const MapWrap = styled.div`
     margin: -10px 0;
   }
 `;
-
 const List = styled.div`
   margin-top: 20px;
   display: flex;
@@ -568,12 +565,10 @@ const List = styled.div`
     border-radius: 10px;
   }
 `;
-
 const ListNum = styled.span`
   font-weight: 900;
   margin: 0px 10px;
 `;
-
 const ListDesc = styled.div`
   p {
     margin: 0px;
@@ -584,7 +579,6 @@ const ListDesc = styled.div`
     font-size: 10px;
   }
 `;
-
 const TotalPage = styled.p`
   display: flex;
   font-weight: 900;
@@ -597,7 +591,6 @@ const TotalPage = styled.p`
     padding: 1px 1px 2px 1px;
   }
 `;
-
 const PagenationWrap = styled.div`
   margin: 10px auto;
   text-align: center;

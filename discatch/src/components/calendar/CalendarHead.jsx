@@ -19,6 +19,7 @@ const CalendarHead = (props) => {
     setYear(month === 1 ? year - 1 : year);
     setMonth(month === 1 ? 12 : month - 1);
   };
+  
   return (
     <Form>
       <Nav>

@@ -4,10 +4,7 @@ import React from "react";
 // COMPONENTS
 import { MyPageDetail, Profile, Template, MyWork } from "../../components";
 
-// REDUX
-import { useSelector } from "react-redux";
 const MyPageWork = (props) => {
-  const isLoaded = useSelector((state) => state.mypage.pageLoaded);
   return (
     <Template props={props}>
       <div

@@ -10,12 +10,12 @@ import styled from "styled-components";
 
 const NoticeDesc = () => {
   const NoticeDetail = useSelector((state) => state.mypage.noticedetail);
-
   const modifiedAt = moment(NoticeDetail.modifiedAt).format("YYYY-M-D");
 
   if (!NoticeDetail) {
     return <div></div>;
   }
+
   return (
     <Wrap>
       <Header>
@@ -33,7 +33,6 @@ const Wrap = styled.div`
   width: 100%;
   margin-top: 10px;
 `;
-
 const Header = styled.div`
   height: 45px;
   border-bottom: 0.5px solid #b5bb19;

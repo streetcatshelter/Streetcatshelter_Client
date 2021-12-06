@@ -95,7 +95,6 @@ export const communityApi = {
     instance.get(
       `/community/category/${category}/?page=${page}&size=10&location=${location}`
     ),
-
   getDetailCommunity: (communityId) =>
     instance.get(`/community/${communityId}`),
   updateCommunity: (

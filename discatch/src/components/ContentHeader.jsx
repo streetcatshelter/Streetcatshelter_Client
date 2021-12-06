@@ -142,20 +142,17 @@ const Wrapper = styled.div`
   display: flex;
   border-bottom: 1px solid rgb(203, 207, 94);
 `;
-
 const UserInfoBox = styled.div`
   display: inherit;
   cursor: pointer;
   margin-left: 5px;
 `;
-
 const Avatar = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin: 0px;
 `;
-
 const UserInfoBoxRight = styled.div`
   margin-left: 10px;
   line-height: 20px;
@@ -171,4 +168,5 @@ const UserInfoBoxRight = styled.div`
     }
   }
 `;
+
 export default ContentHeader;

@@ -38,7 +38,6 @@ const Head = styled.p`
   font-size: 16px;
   font-weight: 900;
 `;
-
 const BarWrap = styled.div`
   width: 100%;
   height: 15px;
@@ -46,7 +45,6 @@ const BarWrap = styled.div`
   border: 1px solid #f9c852;
   margin: 10px auto 5px;
 `;
-
 const LevelDetail = styled.div`
   font-size: 12px;
   text-align: right;

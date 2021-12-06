@@ -75,7 +75,6 @@ const Button = styled.button`
     color: #ffffff;
   }
 `;
-
 const SlideImage = styled.img`
   width: 100vw;
   height: 100%;

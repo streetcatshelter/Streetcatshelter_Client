@@ -66,6 +66,7 @@ const ChatMessage = () => {
     </div>
   );
 };
+
 const ChatBox = styled.div`
   padding: 12px 10px;
   display: flex;
@@ -74,7 +75,6 @@ const ChatBox = styled.div`
   height: 60%;
   margin-top: 65px;
 `;
-
 const BubbleTop = styled.div`
   ${(props) =>
     props.user === "my"
@@ -87,7 +87,6 @@ const BubbleTop = styled.div`
   font-weight: 900;
   font-size: 12px;
 `;
-
 const BubbleBox = styled.div`
   margin-bottom: 5px;
   display: flex;
@@ -118,7 +117,6 @@ const BubbleBox = styled.div`
   }
   animation: fadeIn 0.3s linear;
 `;
-
 const Bubble = styled.div`
   margin: 5px 0;
   display: inline-block;
@@ -145,4 +143,5 @@ const Bubble = styled.div`
       clear: both;
       color: #000000;`}
 `;
+
 export default ChatMessage;

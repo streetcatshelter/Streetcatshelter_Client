@@ -12,7 +12,6 @@ import { history } from "../../redux/configureStore";
 
 const MyPageDetail = (props) => {
   const location = props.location;
-  
   return (
     <Wrapper>
       <Grid>

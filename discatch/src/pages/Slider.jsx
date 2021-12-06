@@ -78,12 +78,10 @@ const ButtonWrap = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-
 const Container = styled.div`
   width: 100%;
   overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록 처리합니다.
 `;
-
 const BtnWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -97,7 +95,6 @@ const Button = styled.button`
   background: #fbd986;
   margin: auto;
   padding: 2px;
-
   &:hover {
     transition: all 0.3s ease-in-out;
     background-color: #cbcf52;
@@ -108,7 +105,6 @@ const SliderContainer = styled.div`
   width: 100%;
   display: flex; //이미지들을 가로로 나열합니다.
 `;
-
 const Dot = styled.div`
   width: 10px;
   height: 10px;
@@ -116,7 +112,6 @@ const Dot = styled.div`
   background: ${(props) => props.background};
   margin: 5px;
 `;
-
 const CloseButton = styled.button`
   display: flex;
   width: 30px;
@@ -133,4 +128,5 @@ const CloseButton = styled.button`
     color: #fff;
   }
 `;
+
 export default Slider;

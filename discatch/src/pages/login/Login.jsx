@@ -70,6 +70,7 @@ const Login = (props) => {
     </Template>
   );
 };
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -125,12 +126,10 @@ const Img = styled.img`
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.borderRadius};
 `;
-
 const LoginWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const LoginBtn = styled.div`
   display: flex;
   width: 250px;
@@ -149,7 +148,6 @@ const LoginBtn = styled.div`
     color: #191919;
   }
 `;
-
 const Body = styled.div`
   height: 65%;
 `;

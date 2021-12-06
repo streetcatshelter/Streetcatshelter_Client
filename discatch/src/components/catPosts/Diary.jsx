@@ -1,6 +1,5 @@
 // LIBRARY
 import React from "react";
-import { useSelector } from "react-redux";
 
 // ELEMENTS
 import { Grid, Text, Image } from "../../elements";
@@ -21,9 +20,6 @@ import moment from "moment";
 
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;
-  const userProfile = useSelector(
-    (state) => state.mypage.userInfo.profileImageUrl
-  );
   const CreatedAt = diary.createdAt
     ? moment(diary.createdAt).format("YYYY-M-D hh:mm")
     : "";
@@ -99,7 +95,6 @@ const Diary = ({ diary, location }) => {
           <FavoriteIcon
             style={{ fontSize: "18", color: "red", margin: "3px" }}
           />
-
           {diary.likeCnt}
         </Grid>
       </Grid>

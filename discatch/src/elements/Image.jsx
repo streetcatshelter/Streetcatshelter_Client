@@ -17,6 +17,7 @@ const Image = ({ src, width, clickEvent, height, ...props }) => {
     </React.Fragment>
   );
 };
+
 Image.defaultProps = {
   src: "https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_1280.jpg",
   width: "50px",

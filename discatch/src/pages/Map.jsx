@@ -13,6 +13,7 @@ const Map = (props) => {
       setLoading(false);
     }, 300);
   }, []);
+  
   return (
     <>
       <Template props={props} page="map">

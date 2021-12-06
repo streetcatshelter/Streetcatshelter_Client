@@ -115,6 +115,7 @@ const UserInfo = () => {
     </React.Fragment>
   );
 };
+
 const ImageInput = styled.input`
   display: none;
 `;
@@ -146,7 +147,6 @@ const Inner = styled.div`
   display: inherit;
   flex-direction: inherit;
   margin-top: 10px;
-
   p {
     justify-content: flex-start;
     font-size: 16px;
@@ -172,7 +172,6 @@ const Inner = styled.div`
     margin: 30px auto 0px;
   }
 `;
-
 const VillageWrap = styled.div`
   height: 35px;
   border: 1px solid #b5bb19;
@@ -180,7 +179,6 @@ const VillageWrap = styled.div`
   display: flex;
   padding: 4px 10px;
 `;
-
 const Wrapper = styled.div`
   width: 100%;
   height: 80vh;

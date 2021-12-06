@@ -232,7 +232,6 @@ const HeaderInner = styled.div`
   display: flex;
   justify-content: space-around;
 `;
-
 const SideBtnBox = styled.div`
   margin: auto;
   width: 25%;
@@ -263,7 +262,6 @@ const SearchBarBtn = styled.div`
   width: 50px;
   height: 35px;
   border-radius: 15px;
-
   background: #fbd986;
   margin: auto;
   p {

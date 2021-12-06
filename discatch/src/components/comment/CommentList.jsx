@@ -26,9 +26,11 @@ const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
   const pathName = useLocation().pathname.split('/')[3];
   let community;
+
   const cCommunity = useSelector((state) => state.community.catInfo);
   const gCommunity = useSelector((state) => state.community.gathering);
   const sCommunity = useSelector((state) => state.community.sharing);
+
   if (pathName === 'catinfo') {
     community = cCommunity;
   } else if (pathName === 'gathering') {
@@ -36,8 +38,10 @@ const CommentList = ({ props, path, catId, communityId }) => {
   } else if (pathName === 'sharing') {
     community = sCommunity;
   }
+
   const [comments, setComment] = React.useState("");
   let commentList;
+
   if (path === "CatDetail" || path === "CatDetailInfo") {
     commentList = props;
   } else {
@@ -114,7 +118,6 @@ const CommentList = ({ props, path, catId, communityId }) => {
           작성
         </Button>
       </Grid>
-
       {commentList &&
         commentList.map((comment, idx) => {
           return (

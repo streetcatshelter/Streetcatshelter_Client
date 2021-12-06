@@ -139,7 +139,6 @@ const Header = styled.div`
 const Head = styled.div`
   height: 30%;
 `;
-
 const ViewDate = styled.div`
   padding-top: 20px;
   font-size: 12px;
@@ -170,12 +169,10 @@ const Events = styled.div`
     }
   }
 `;
-
 const EventBox = styled.div``;
 const Footer = styled.div`
   height: 20%;
 `;
-
 const Close = styled.div`
   margin: auto;
   margin-top: 10px;
@@ -189,4 +186,5 @@ const Close = styled.div`
   text-align: center;
   cursor: pointer;
 `;
+
 export default CalendarModal;

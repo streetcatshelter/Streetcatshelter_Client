@@ -190,6 +190,7 @@ export const __getCatLocation =
       console.error(err);
     }
   };
+  
 // 지역에 따라 게시물 불러오기
 export const __getMoreCatLocation =
   (location, page) =>

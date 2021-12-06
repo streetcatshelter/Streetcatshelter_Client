@@ -18,8 +18,8 @@ const CalendarDates = (props) => {
   const Calendar = useSelector((state) =>
     props.path === "mypage" ? state.mypage.calendar : state.cat.calendar
   );
-  // console.log(Calendar);
   const DayOff = [];
+
   return (
     <>
       <Form
@@ -95,6 +95,7 @@ const CalendarDates = (props) => {
     </>
   );
 };
+
 const Form = styled.li`
   background: #fefdf8;
   list-style: none;
@@ -114,7 +115,6 @@ const Form = styled.li`
   :nth-child(7) {
     border-top: none;
   }
-
   :nth-child(7n + 1) {
     background-color: #f5f5f5;
     border-left: none;
@@ -141,7 +141,6 @@ const Dot = styled.div`
   margin: 2px;
   display: ${(props) => props.work};
 `;
-
 const DateNum = styled.div`
   padding: auto;
   ${(props) => props.idx < props.lastDate && `color: #969696;`};
@@ -152,7 +151,6 @@ const DateNum = styled.div`
     color: #969696;
   `};
 `;
-
 const TodayCSS = styled.div`
   span {
     margin: 2px;

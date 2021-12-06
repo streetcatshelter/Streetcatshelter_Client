@@ -22,7 +22,6 @@ const Mywork = () => {
 const Wrapper = styled.div`
   width: 90%;
   margin: 10px auto;
-
   p {
     font-weight: bold;
     font-size: 16px;

@@ -50,7 +50,6 @@ const CommunityPreview = (preview) => {
                 `;
             }}
             >
-            
             <Image 
                 src={previewImage || newImage} 
                 width="100%" 

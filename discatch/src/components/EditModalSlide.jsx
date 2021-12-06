@@ -32,7 +32,9 @@ const EditDeleteModal = (props) => {
 
   useEffect(() => {
     if (openModal === true) {
-      setOpen(!open);
+      setOpen(true);
+    } else {
+      setOpen(false);
     }
   }, [openModal]);
 

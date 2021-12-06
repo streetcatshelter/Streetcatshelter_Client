@@ -23,7 +23,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const pathName = useLocation();
   const pName = pathName.pathname.split("/")[3];
   const [ProfileModal, setProfileModal] = useState(false);
-  const [openProfileModal, setOpenProfileModal] = useState(false);
+  const [openRandomProfileModal, setOpenRandomProfileModal] = useState(false);
   const UserNickName = useSelector((state) => state.mypage.userInfo?.nickname);
   const location = useSelector((state) =>
     pName === "catinfo"
@@ -83,6 +83,11 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
     dispatch(chatActions._createRoom(chatuser));
   };
 
+  const ChangeRandomModalState = () => {
+    setProfileModal(false);
+    setOpenRandomProfileModal(!openRandomProfileModal);
+  };
+
   let locationName = "";
   if (location === "undefined") {
     locationName = null;
@@ -104,30 +109,20 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
             </div>
           </UserInfoBoxRight>
         </UserInfoBox>
-
-        {UserNickName === nickname ? (
-          <EditModalSlide
-            FirstBtn={FirstBtn}
-            SecondBtn={SecondBtn}
-            FirstClick={FirstClick}
-            SecondClick={SecondClick}
-          />
-        ) : (
-          ""
-        )}
       </Wrapper>
       <EditModalSlide
         FirstBtn="프로필보기"
         SecondBtn="채팅하기"
         Profile="profile"
         openModal={ProfileModal}
-        FirstClick={() => {
-          setOpenProfileModal(true);
-        }}
+        FirstClick={ChangeRandomModalState}
         SecondClick={MakeChat}
       />
-      {openProfileModal && userRandomId && (
-        <UserProfileModal userRandomId={userRandomId} />
+      {openRandomProfileModal && userRandomId && (
+        <UserProfileModal
+          userRandomId={userRandomId}
+          openModal={ChangeRandomModalState}
+        />
       )}
     </>
   );

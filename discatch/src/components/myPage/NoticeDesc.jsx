@@ -60,12 +60,13 @@ const Header = styled.div`
 const Body = styled.div`
   padding: 10px;
   p {
-    margin: 0px;
+    margin: 5px;
+    line-height: 20px;
     font-size: 14px;
     word-break: break-all;
     white-space: normal;
     @media screen and (max-width: 320px) {
-      font-size:12px;
+      font-size: 12px;
     }
   }
 `;

@@ -40,7 +40,7 @@ const CalendarModal = (props) => {
           <Events>
             {WorkDetail.map((EachCatWork, idx) => {
               return (
-                <EventBox>
+                <EventBox key={idx}>
                   😺 고양이이름: {EachCatWork.catName}
                   <ul>
                     {EachCatWork.food ? (

@@ -8,6 +8,7 @@ import moment from "moment";
 // STYLE
 import styled from "styled-components";
 
+// REDUX
 import { history } from "../../redux/configureStore";
 
 const Notice = () => {

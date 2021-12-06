@@ -13,7 +13,6 @@ const CatGallery = (props) => {
   const dispatch = useDispatch();
   const location = props.location;
   const catId = props.catId;
-
   const galleryList = useSelector((state) => state.cat.gallery);
 
   useEffect(() => {

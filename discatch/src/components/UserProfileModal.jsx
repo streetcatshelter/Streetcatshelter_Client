@@ -1,6 +1,10 @@
+// LIBRARY
 import React, { useEffect } from "react";
-import { mypageActions } from "../redux/modules/mypage";
 import { useDispatch } from "react-redux";
+
+// REDUX
+import { mypageActions } from "../redux/modules/mypage";
+
 const UserProfileModal = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {

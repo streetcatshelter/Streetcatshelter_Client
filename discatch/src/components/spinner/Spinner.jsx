@@ -56,7 +56,6 @@ const SpinnerBG = styled.div`
   background: #fefdf8;
   z-index: 1000;
 `;
-
 const MainText = styled.div`
   p {
     margin: 0px auto;
@@ -97,7 +96,6 @@ const MainText = styled.div`
     }
   }
 `;
-
 const SpinnerInner = styled.div`
   display: flex;
   flex-direction: column;

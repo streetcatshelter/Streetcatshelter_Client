@@ -1,5 +1,6 @@
 // LIBRARY
 import React from "react";
+import { useSelector } from "react-redux";
 
 // COMPONENTS
 import { ProgressBar, Calendar, SecondSpinner } from "..";
@@ -7,7 +8,6 @@ import { ProgressBar, Calendar, SecondSpinner } from "..";
 // STYLE
 import styled from "styled-components";
 
-import { useSelector } from "react-redux";
 const Mywork = () => {
   const isLoaded = useSelector((state) => state.mypage.itemLoaded);
   return (

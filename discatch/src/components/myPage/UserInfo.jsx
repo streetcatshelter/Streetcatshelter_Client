@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 // STYLE
 import styled from "styled-components";
 
+// ICON
+import { XCircle, Upload } from "react-feather";
+
 // COMPONENTS
 import SearchAddress from "./SearchAddress";
 
 // REDUX
 import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
 import { imgActions } from "../../redux/modules/image";
-import { XCircle, Upload } from "react-feather";
 
 const UserInfo = () => {
   const dispatch = useDispatch();

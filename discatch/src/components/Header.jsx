@@ -26,7 +26,6 @@ const Header = (props) => {
   let location;
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
-
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   location = userLocation ? userLocation : firstLocation;
 

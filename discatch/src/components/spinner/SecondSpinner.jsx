@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect } from "react";
+import React from "react";
 import { FadeLoader } from "react-spinners";
 import PropTypes from "prop-types";
 
@@ -42,10 +42,8 @@ const SpinnerBG = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-
   z-index: 10;
 `;
-
 const SpinnerInner = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,4 +54,5 @@ const SpinnerInner = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
 `;
+
 export default SecondSpinner;

@@ -10,13 +10,13 @@ import { useLocation } from "react-router-dom";
 
 // COMPONENTS
 import { EditModalSlide } from "../components";
+import UserProfileModal from "./UserProfileModal";
 
 // REDUX
 import { chatActions } from "../redux/modules/chat";
 
 // MOMENT
 import moment from "moment";
-import UserProfileModal from "./UserProfileModal";
 
 const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const dispatch = useDispatch();

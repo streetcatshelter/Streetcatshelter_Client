@@ -17,6 +17,7 @@ const CatPost = ({ cat, path, location }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
+  
   const likeToggle = () => {
     dispatch(__catLike(catId, path));
   };

@@ -39,7 +39,6 @@ const Location = (props) => {
     location = villageList[2]
   }
 
-  const pathLocation = location;
   const catList = useSelector((state) => state.cat.list);
 
   useEffect(() => {
@@ -95,7 +94,7 @@ const Location = (props) => {
                       justify-content: center; 
                       align-items: center;">
             <button 
-              onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/1'" 
+              onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
               style="width: 70px;
                      height: 70px;
                      box-shadow: 3px 3px lightgray;
@@ -460,7 +459,7 @@ const Location = (props) => {
             pathLength === 3
           ) {
             history.push({
-              pathname: `/catinfowrite/${pathLocation?.split(' ')[2]}`,
+              pathname: `/catinfowrite/${location?.split(' ')[2]}`,
               state: { latitude, longitude, location },
             });
           } else if (

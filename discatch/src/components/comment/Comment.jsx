@@ -26,7 +26,7 @@ const Comment = ({ path }) => {
   const cCommunity = useSelector((state) => state.community.catInfo);
   const gCommunity = useSelector((state) => state.community.gathering);
   const sCommunity = useSelector((state) => state.community.sharing);
-  console.log(cCommunity);
+
   const cCommunityId = cCommunity.data?.communityId;
   const gCommunityId = gCommunity.data?.communityId;
   const sCommunityId = sCommunity.data?.communityId;

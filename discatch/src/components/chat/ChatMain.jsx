@@ -18,7 +18,6 @@ import { chatActions } from "../../redux/modules/chat";
 const ChatMain = (props) => {
   const dispatch = useDispatch();
   const location = props.props.location.state.location;
-  console.log(location);
   const Rooms = useSelector((state) => state.chat.roomlist);
 
   return (

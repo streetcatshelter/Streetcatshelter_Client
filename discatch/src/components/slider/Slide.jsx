@@ -7,9 +7,6 @@ import styled from "styled-components";
 // ICON
 import onboadingImg from "../../styles/images/onboadingImg(1).svg";
 
-// REDUX
-import { history } from "../../redux/configureStore";
-
 const Slide = (props) => {
   return (
     <Background>
@@ -51,6 +48,7 @@ const Slide = (props) => {
     </Background>
   );
 };
+
 const Background = styled.div`
   width: 300%;
   height: 100%;
@@ -94,4 +92,5 @@ const InnerBox = styled.div`
     transform: translate(-50%, 0%);
   }
 `;
+
 export default Slide;

@@ -38,6 +38,7 @@ export const chatApi = {
   getAllMessage: (roomId) => instance.get(`/api/chat/message/${roomId}`),
   deleteRoom: (roomId) => instance.put(`/api/chat/quit/${roomId}`),
 };
+
 export const myPageApi = {
   getNotice: () => instance.get("/mypage/notice"),
   getOneNotice: (noticeId) => instance.get(`/mypage/notice/${noticeId}`),

@@ -99,7 +99,6 @@ const CommunityPostWrite = (props) => {
 
   const cancelBtn = () => {
     history.push({pathname:`${backPath}`, state: { location }});
-    history.go(0);
   }
 
   const delLastImageBtn = () => {

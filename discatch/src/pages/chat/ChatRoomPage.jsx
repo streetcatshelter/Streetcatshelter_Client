@@ -12,6 +12,7 @@ import {
 // REDUX
 import { chatActions } from "../../redux/modules/chat";
 import { useDispatch, useSelector } from "react-redux";
+
 const ChatRoomPage = (props) => {
   const dispatch = useDispatch();
   const location = props.location.state?.location;

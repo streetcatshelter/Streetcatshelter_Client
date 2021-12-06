@@ -67,7 +67,6 @@ const ChatRoom = (props) => {
         console.error(frame);
       },
     });
-
     client.current.activate();
   };
 
@@ -86,7 +85,6 @@ const ChatRoom = (props) => {
           time: res.time,
           mine: null,
         };
-
         dispatch(pushChatMessage(message));
       }
     );

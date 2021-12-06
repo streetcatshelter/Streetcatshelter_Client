@@ -243,6 +243,7 @@ const CatDetailInfo = (props) => {
     </>
   );
 };
+
 const CatImage = styled.img`
   position: absolute;
   width: 100%;

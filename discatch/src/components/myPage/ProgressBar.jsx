@@ -7,7 +7,6 @@ import styled from "styled-components";
 
 const ProgressBar = () => {
   const UserInfo = useSelector((state) => state.mypage.userInfo);
-
   const workPercent =
     (UserInfo.score / (UserInfo.score + UserInfo.scoreLeft)) * 100 + "%";
 

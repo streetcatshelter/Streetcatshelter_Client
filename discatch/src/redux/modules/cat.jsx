@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance, { catApi } from "../../shared/axios";
 import { deleteUserLikedCat } from "./mypage";
+
 // REDUX
 import { imgActions } from "./image";
 

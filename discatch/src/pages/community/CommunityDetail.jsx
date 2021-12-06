@@ -9,6 +9,7 @@ import {
   CommunityPost,
   SecondHeader,
   SecondSpinner,
+  EmptyPost,
 } from "../../components";
 
 // STYLE
@@ -90,15 +91,17 @@ const CommunityDetail = (props) => {
     <Template props={props}>
       <SecondHeader title={category} path="scroll" />
       <CommunityDetailStyle>
-        {communityList &&
-          communityList.length > 0 &&
+        {communityList && communityList.length > 0 ? (
           communityList.map((community, idx) => {
             return (
               <div style={{ width: "100%" }} key={idx} ref={ref}>
                 <CommunityPost community={community} />
               </div>
             );
-          })}
+          })
+        ) : (
+          <EmptyPost path="community" />
+        )}
       </CommunityDetailStyle>
       <SecondSpinner visible={loading} path="scroll" />
       <Button

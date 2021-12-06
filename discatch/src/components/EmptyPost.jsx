@@ -45,13 +45,17 @@ const EmptyPost = ({ path }) => {
           <div>
             <span>앗 !</span>
           </div>
-          <div style={{ width: "90%", marginTop: "20px" }}>
+          <div style={{ width: "100%", marginTop: "20px" }}>
             <p>아직 등록된 커뮤니티 글이 없다옹! 😹</p>
             <p>
-              <span>최초로 글을 등록해 </span> 고양이를 위한 활동을 해보자옹!
+              <span>최초로 글을 등록해 </span>{" "}
             </p>
-            <p>우리 동네 고양이를 동네 집사들과 함께 사랑할 수 있다옹!❤ </p>
+            <p>고양이를 위한 활동을 해보자옹!</p>
+            <p>우리 동네 고양이를 동네 집사들과</p>{" "}
+            <p>함께 사랑할 수 있다옹!❤ </p>
           </div>
+          <CatImage src={nocatimage} alt="nocatimage" />
+          <p style={{ fontSize: "25px", fontWeight: "900" }}>등록해다옹!!! </p>
         </>
       )}
     </NoCatBox>

@@ -27,7 +27,7 @@ const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
   const isLoaded = useSelector((state) => state.community.itemDetailLoaded);
-  
+
   const { cCategory, cContents, cImageList, cTitle, cLocation } = useSelector(
     (state) => ({
       cCategory: state.community.catInfo.data?.category,
@@ -109,8 +109,8 @@ const CommunityPostDetail = (props) => {
           SecondBtn="삭제"
           FirstClick={() => {
             history.push({
-              pathname:`/community/${pathLocation}/${pathCategory}/postedit/${communityId}`,
-              state : { location : pathLocation }
+              pathname: `/community/${pathLocation}/${pathCategory}/postedit/${communityId}`,
+              state: { location: pathLocation },
             });
           }}
           SecondClick={deleteCommunity}

@@ -18,6 +18,7 @@ import { chatActions } from "../../redux/modules/chat";
 const ChatMain = (props) => {
   const dispatch = useDispatch();
   const location = props.props.location.state.location;
+  console.log(location);
   const Rooms = useSelector((state) => state.chat.roomlist);
 
   return (
@@ -52,7 +53,9 @@ const ChatMain = (props) => {
                     <EditModalSlide
                       FirstBtn="상대방 프로필보기"
                       SecondBtn="채팅방 삭제하기"
-                      FirstClick={() => {}}
+                      FirstClick={() => {
+                        alert("준비중입니다.");
+                      }}
                       SecondClick={() => {
                         dispatch(chatActions._deleteRoom(room.roomId));
                       }}
@@ -67,7 +70,7 @@ const ChatMain = (props) => {
                       });
                     }}
                   >
-                    {room.lastMessage === "메세지가없어요"
+                    {room.lastMessage === null
                       ? `${room.opponent}와 채팅을 시작해보세요!`
                       : room.lastMessage}
                   </ChatMsg>

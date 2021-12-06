@@ -40,7 +40,7 @@ const ChatRoom = (props) => {
   const updated = moment(LastActivity).format(" YYYY. M. D hh:mm");
   // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
   const recentlyUpdated = moment(LastActivity).fromNow();
-  const sendtime = hourDiff < 22 ? recentlyUpdated : updated;
+  const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
 
   useEffect(() => {
     connect();
@@ -138,7 +138,7 @@ const ChatRoom = (props) => {
               alert("준비중입니다.");
             }}
             SecondClick={() => {
-              dispatch(chatActions._deleteRoom(props.roomId));
+              dispatch(chatActions._deleteRoom(props.roomId, props.location));
             }}
           />
         </CallBox>

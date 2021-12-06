@@ -20,7 +20,7 @@ import UserInfo from "./myPage/UserInfo";
 import MyPageDetail from "./myPage/MyPageDetail";
 import MyWork from "./myPage/MyWork";
 import MyPageContent from "./myPage/MyPageContent";
-
+import UserProfileModal from "./UserProfileModal";
 // CALENDAR
 import Calendar from "./calendar/Calendar";
 import CalendarBody from "./calendar/CalendarBody";
@@ -67,6 +67,7 @@ export {
   SecondHeader,
   ContentHeader,
   EmptyPost,
+  UserProfileModal,
   // SLIDER
   Slide,
   // MYPAGES

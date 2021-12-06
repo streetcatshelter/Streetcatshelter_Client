@@ -51,10 +51,14 @@ const _getAllMessage =
     }
   };
 const _deleteRoom =
-  (roomId) =>
+  (roomId, location) =>
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await chatApi.deleteRoom(roomId);
+      history.push({
+        pathname: "/chat",
+        state: { location },
+      });
     } catch (e) {
       console.log(e);
     }

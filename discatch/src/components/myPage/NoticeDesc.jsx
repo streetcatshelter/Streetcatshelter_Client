@@ -20,7 +20,7 @@ const NoticeDesc = () => {
     <Wrap>
       <Header>
         <p>{NoticeDetail.title}</p>
-        <small>{modifiedAt}</small>
+        <p>{modifiedAt}</p>
       </Header>
       <Body>
         <p>{NoticeDetail.contents}</p>
@@ -34,14 +34,27 @@ const Wrap = styled.div`
   margin-top: 10px;
 `;
 const Header = styled.div`
-  height: 30px;
+  height: 45px;
   border-bottom: 0.5px solid #b5bb19;
-  display: flex;
   justify-content: space-between;
   padding: 0px 10px;
   p {
     margin: 0px;
     font-size: 16px;
+    font-weight: 900;
+    :nth-child(2) {
+      font-size: 12px;
+      font-weight: 700;
+    }
+    @media screen and (max-width: 320px) {
+      font-size: 12px;
+      :nth-child(2) {
+        font-size: 10px;
+      }
+    }
+  }
+  @media screen and (max-width: 320px) {
+    height: 30px;
   }
 `;
 const Body = styled.div`
@@ -49,6 +62,10 @@ const Body = styled.div`
   p {
     margin: 0px;
     font-size: 14px;
+    word-break: break-all;
+    white-space: normal;
+    @media screen and (max-width: 320px) {
+      font-size:12px;
   }
 `;
 

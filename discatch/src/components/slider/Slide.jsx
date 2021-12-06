@@ -12,88 +12,67 @@ import { history } from "../../redux/configureStore";
 
 const Slide = (props) => {
   return (
-    <>
+    <Background>
       {props.number === "3" ? (
-        <div
-          style={{
-            alignItems: "center",
-            height: "80vh",
-            background: "#FEFDF8",
-          }}
-        >
-          <SlideImage src={onboadingImg} alt={onboadingImg} />
-
-          <Button
-            onClick={() => {
-              history.push("/login");
-            }}
-          >
-            우리동네 고양이 집사가 되기!
-          </Button>
-        </div>
-      ) : props.number === "2" ? (
-        <div
-          style={{
-            display: "inline-block",
-            alignItems: "center",
-            height: "80vh",
-            background: "#FEFDF8",
-          }}
-        >
+        <InnerBox>
           <SlideImage src={onboadingImg} alt={onboadingImg} />
           <p
             style={{
-              position: "absolute",
-              top: "72%",
-              left: "115%",
-              fontWeight: "700",
-              width: "300px",
+              left: "250%",
             }}
           >
-            우리 어플은 이러쿵저러쿵 쓰면됩니다! 설명을 여기다가 쓰면 되겠죠?
+            우리동네 집사로 취직하기!
           </p>
-        </div>
-      ) : (
-        <div
-          style={{
-            display: "inline-block",
-            alignItems: "center",
-            height: "80vh",
-            background: "#FEFDF8",
-          }}
-        >
+          <Button onClick={props.GoHome}>disCATch Start!</Button>
+        </InnerBox>
+      ) : props.number === "2" ? (
+        <InnerBox>
           <SlideImage src={onboadingImg} alt={onboadingImg} />
           <p
             style={{
-              position: "absolute",
-              top: "72%",
-              left: "15%",
-              fontWeight: "700",
+              left: "150%",
             }}
           >
             우리동네 고양이의 집사가 되어보세요!
           </p>
-        </div>
+        </InnerBox>
+      ) : (
+        <InnerBox>
+          <SlideImage src={onboadingImg} alt={onboadingImg} />
+          <p
+            style={{
+              left: "50%",
+            }}
+          >
+            우리동네 고양이를 기록해보세요!
+          </p>
+        </InnerBox>
       )}
-    </>
+    </Background>
   );
 };
-
+const Background = styled.div`
+  width: 300%;
+  height: 100%;
+`;
 const Button = styled.button`
   position: absolute;
   top: 85%;
-  left: 220%;
+  left: 250%;
+  transform: translate(-50%, 0%);
   font-weight: 700;
   width: 240px;
   height: 50px;
   border-radius: 20px;
   border: none;
-  background: #b5bb19;
-  color: #ffffff;
-  font-size: 16px;
+  background: #fbd986;
+  color: #000000;
+  font-size: 20px;
   cursor: pointer;
+  border: 2px dashed #d19b61;
   &:hover {
-    background: #fbd986;
+    background: #b5bb19;
+    color: #ffffff;
   }
 `;
 const SlideImage = styled.img`
@@ -101,5 +80,18 @@ const SlideImage = styled.img`
   height: 100%;
   max-width: 420px;
 `;
-
+const InnerBox = styled.div`
+  width: 100%;
+  height: 80vh;
+  background: #fefdf8;
+  p {
+    position: absolute;
+    top: 72%;
+    font-weight: 700;
+    text-align: center;
+    width: 300px;
+    font-size: 14px;
+    transform: translate(-50%, 0%);
+  }
+`;
 export default Slide;

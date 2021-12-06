@@ -5,8 +5,13 @@ import { useSelector } from "react-redux";
 // STYLE
 import styled from "styled-components";
 
-const ProgressBar = () => {
-  const UserInfo = useSelector((state) => state.mypage.userInfo);
+const ProgressBar = (props) => {
+  const UserInfo = useSelector((state) =>
+    props.path === "random"
+      ? state.mypage.userRandomProfile
+      : state.mypage.userInfo
+  );
+
   const workPercent =
     (UserInfo.score / (UserInfo.score + UserInfo.scoreLeft)) * 100 + "%";
 
@@ -19,15 +24,21 @@ const ProgressBar = () => {
       <BarWrap>
         <Bar width={workPercent}></Bar>
       </BarWrap>
-      {UserInfo.nextLevel === "null" ? (
-        <LevelDetail>
-          <span>✨이제 나도 프로집사 ! 😎</span>
-        </LevelDetail>
+      {props.path === "random" ? (
+        ""
       ) : (
-        <LevelDetail>
-          🏃‍♀️<span>{UserInfo.nextLevel}</span>를 위해 남은 점수는
-          <span>{UserInfo.scoreLeft}</span>점 입니다!!!
-        </LevelDetail>
+        <>
+          {UserInfo.nextLevel === "null" ? (
+            <LevelDetail>
+              <span>✨이제 나도 프로집사 ! 😎</span>
+            </LevelDetail>
+          ) : (
+            <LevelDetail>
+              🏃‍♀️<span>{UserInfo.nextLevel}</span>를 위해 남은 점수는
+              <span>{UserInfo.scoreLeft}</span>점 입니다!!!
+            </LevelDetail>
+          )}
+        </>
       )}
     </React.Fragment>
   );

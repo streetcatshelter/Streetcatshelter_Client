@@ -20,13 +20,13 @@ import { communityLikeToggleDB } from "../../redux/modules/community";
 const Comment = ({ path }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const pathName = location.pathname.split('/')[3];
+  const pathName = location.pathname.split("/")[3];
   const commentList = useSelector((state) => state.comment.list);
 
   const cCommunity = useSelector((state) => state.community.catInfo);
   const gCommunity = useSelector((state) => state.community.gathering);
   const sCommunity = useSelector((state) => state.community.sharing);
-  
+
   const cCommunityId = cCommunity.data?.communityId;
   const gCommunityId = gCommunity.data?.communityId;
   const sCommunityId = sCommunity.data?.communityId;
@@ -34,17 +34,17 @@ const Comment = ({ path }) => {
   const cUserLike = cCommunity.data?.liked;
   const gUserLike = gCommunity.data?.liked;
   const sUserLike = sCommunity.data?.liked;
-  
+
   let community, userLike, communityId;
-  if (pathName === 'catinfo') {
+  if (pathName === "catinfo") {
     community = cCommunity;
     userLike = cUserLike;
     communityId = cCommunityId;
-  } else if (pathName === 'gathering') {
+  } else if (pathName === "gathering") {
     community = gCommunity;
     userLike = gUserLike;
     communityId = gCommunityId;
-  } else if (pathName === 'sharing') {
+  } else if (pathName === "sharing") {
     community = sCommunity;
     userLike = sUserLike;
     communityId = sCommunityId;

@@ -182,6 +182,7 @@ const initialState = {
   pageLoaded: false,
   itemLoaded: false,
   userLoaded: false,
+  userRandomProfile: [],
 };
 
 // REDUCER
@@ -215,7 +216,7 @@ const mypage = createSlice({
     },
 
     setUserProfile: (state, action) => {
-      state.userProfile = action.payload;
+      state.userRandomProfile = action.payload;
       state.userLoaded = false;
     },
     setCalendar: (state, action) => {

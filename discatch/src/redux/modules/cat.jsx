@@ -191,7 +191,7 @@ export const __getCatLocation =
       console.error(err);
     }
   };
-  
+
 // 지역에 따라 게시물 불러오기
 export const __getMoreCatLocation =
   (location, page) =>
@@ -233,8 +233,10 @@ export const __getCalendar =
   (catId, year, month) =>
   async (dispatch, getState, { history }) => {
     try {
+      console.log(catId, year, month);
       const { data } = await catApi.getCatCalendar(catId, month, year);
-      dispatch(getCalendar(data.data));
+      console.log(data);
+      dispatch(getCalendar(data.date));
     } catch (err) {
       console.error(err);
     }

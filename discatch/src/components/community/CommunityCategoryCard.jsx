@@ -36,7 +36,8 @@ const CommunityCategoryCard = ({
               return css`
                 position: relative;
                 top: 20px;
-                @media screen and (max-width: 280px) {
+
+                @media screen and (max-width: 320px) {
                   font-size: 15px;
                 }
               `;
@@ -50,7 +51,7 @@ const CommunityCategoryCard = ({
               return css`
                 position: relative;
                 top: 30px;
-                @media screen and (max-width: 280px) {
+                @media screen and (max-width: 320px) {
                   font-size: 11px;
                 }
               `;

@@ -25,7 +25,7 @@ const ChatRoomPage = (props) => {
 
   return (
     <Template props={props} page="map">
-      <ChatRoom roomId={roomId} location={location}>
+      <ChatRoom roomId={roomId} location={location} props={props}>
         <ChatMessage />
         <SecondSpinner visible={isLoaded} />
       </ChatRoom>

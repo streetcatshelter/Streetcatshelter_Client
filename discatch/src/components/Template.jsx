@@ -8,10 +8,10 @@ import styled from "styled-components";
 import { Header, Menu } from "./";
 
 const Template = (props) => {
-  const path = props.props.match.path;
+  const path = props.props?.match.path;
   const location = props.location
     ? props.location
-    : props.props.location?.state?.pathLocation;
+    : props.props?.location?.state?.pathLocation;
 
   return (
     <>

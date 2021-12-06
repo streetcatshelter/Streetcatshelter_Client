@@ -405,10 +405,10 @@ const cat = createSlice({
     likeToggle: (state, action) => {
       const idx = state.list.findIndex((c) => c.catId === action.payload);
       state.list[idx].userLiked = !state.list[idx].userLiked;
-      if (!state.list[idx].userLiked) {
-        console.log("호출");
-        deleteUserLikedCat(action.payload);
-      }
+      // if (!state.list[idx].userLiked) {
+      //   console.log("호출");
+      //   deleteUserLikedCat(action.payload);
+      // }
     },
   },
 });

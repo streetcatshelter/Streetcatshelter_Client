@@ -17,6 +17,7 @@ const _getUserInfo =
       dispatch(userActions._logout());
     }
   };
+
 const _getLevelUp =
   () =>
   async (dispatch, getState, { history }) => {
@@ -27,6 +28,7 @@ const _getLevelUp =
       dispatch(userActions._logout());
     }
   };
+
 const _getCalender =
   (year, month) =>
   async (dispatch, getState, { history }) => {
@@ -38,6 +40,7 @@ const _getCalender =
       console.log(e);
     }
   };
+
 const _getCalenderDetail =
   (year, month, elm) =>
   async (dispatch, getState, { history }) => {
@@ -64,6 +67,7 @@ const _getLikedAllCat =
       console.log(e);
     }
   };
+
 const _getMoreLikedAllCat =
   (page) =>
   async (dispatch, getState, { history }) => {
@@ -75,6 +79,7 @@ const _getMoreLikedAllCat =
       console.log(e);
     }
   };
+
 const _getNotice =
   () =>
   async (dispatch, getState, { history }) => {
@@ -263,4 +268,5 @@ export const {
   itemLoading,
   deleteUserLikedCat,
 } = mypage.actions;
+
 export default mypage;

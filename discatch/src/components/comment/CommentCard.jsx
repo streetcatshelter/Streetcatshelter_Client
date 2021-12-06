@@ -108,7 +108,6 @@ const Header = styled.div`
   line-height: 15px;
   justify-content: space-between;
 `;
-
 const Left = styled.div`
   display: flex;
   span {
@@ -117,7 +116,6 @@ const Left = styled.div`
     margin-left: 5px;
   }
 `;
-
 const Profile = styled.div`
   display: flex;
   ${(props) => (props.isMine ? "" : `cursor: pointer`)};

@@ -28,9 +28,7 @@ import {
 
 const Home = (props) => {
   const dispatch = useDispatch();
-
   const isLoaded = useSelector((state) => state.cat.postLoaded);
-
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
     threshold: 0,
@@ -39,10 +37,9 @@ const Home = (props) => {
 
   const stateLocation = props.location.state?.location;
   const catList = useSelector((state) => state.cat.list);
-
   const userLocation = useSelector((state) => state.map.keywordList[0]);
-
   const villageList = useSelector((state) => state.mypage.userVillage);
+  
   let location = stateLocation ? stateLocation : villageList[0];
   if (villageList[0] && userLocation === villageList[0]?.split(' ')[2]) {
     location = villageList[0];

@@ -25,7 +25,7 @@ const MyPageCatPost = ({ LikedCat, location }) => {
   if (userLocation !== userInfo.locationList[0]?.split(' ')[2] &&
   userLocation !== userInfo.locationList[1]?.split(' ')[2] &&
   userLocation !== userInfo.locationList[2]?.split(' ')[2]) {
-        userLocation = location;
+    userLocation = location;
   }
 
   return (
@@ -76,12 +76,10 @@ const CatPost = styled.div`
   display: flex;
   margin: 10px 0px;
   cursor: pointer;
-
   &:hover {
     filter: brightness(90%);
   }
 `;
-
 const CatInfo = styled.div`
   width: 80%;
   p {
@@ -89,7 +87,6 @@ const CatInfo = styled.div`
     font-size: 12px;
   }
 `;
-
 const InfoIcon = styled.div`
   justify-content: flex-end;
   display: flex;

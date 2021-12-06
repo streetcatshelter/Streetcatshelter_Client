@@ -8,7 +8,6 @@ export const __createCatComment =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.createCatComment(catId, contents);
-
       dispatch(createCatComment({ contents }));
     } catch (err) {
       console.error(err);
@@ -24,7 +23,6 @@ export const __createCatDetailComment =
         catDetailId,
         contents
       );
-
       dispatch(createCatDetailComment({ contents }));
     } catch (err) {
       console.error(err);
@@ -37,7 +35,6 @@ export const __getComment =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getComment(catId, size);
-
       dispatch(getComment(data));
     } catch (err) {
       console.error(err);
@@ -50,7 +47,6 @@ export const __getDetailComment =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.getDetailComment(catDetailId, size);
-
       dispatch(getDetailComment(data));
     } catch (err) {
       console.error(err);
@@ -63,7 +59,6 @@ export const __deleteComment =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.deleteCatComment(commentId);
-
       dispatch(deleteCatComment(commentId));
     } catch (err) {
       console.error(err);
@@ -82,20 +77,16 @@ const comment = createSlice({
       const contents = action.payload.contents;
       state.list.push({ contents });
     },
-
     createCatDetailComment: (state, action) => {
       const contents = action.payload.contents;
       state.list.push({ contents });
     },
-
     getComment: (state, action) => {
       state.list = action.payload;
     },
-
     getDetailComment: (state, action) => {
       state.list = action.payload;
     },
-
     deleteCatComment: (state, action) => {
       return {
         ...state,

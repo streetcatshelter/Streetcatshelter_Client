@@ -96,7 +96,6 @@ const Button = styled.button`
     background: #fbd986;
   }
 `;
-
 const SlideImage = styled.img`
   width: 100vw;
   height: 100%;

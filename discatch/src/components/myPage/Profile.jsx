@@ -82,6 +82,7 @@ const Profile = (props) => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   display: flex;
 `;

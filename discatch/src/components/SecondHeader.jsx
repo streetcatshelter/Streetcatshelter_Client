@@ -6,13 +6,13 @@ import styled from "styled-components";
 
 const SecondHeader = (props) => {
   const PageTitle = props.title;
-
   return (
     <div>
       <Header>{PageTitle}</Header>
     </div>
   );
 };
+
 const Header = styled.div`
   height: 30px;
   font-size: 16px;
@@ -27,4 +27,5 @@ const Header = styled.div`
     height: 20px;
   }
 `;
+
 export default SecondHeader;

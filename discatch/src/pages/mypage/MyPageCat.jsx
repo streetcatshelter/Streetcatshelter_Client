@@ -30,6 +30,7 @@ const MyPage = (props) => {
     threshold: 0,
     triggerOnce: true,
   });
+
   useEffect(() => {
     setPage(1);
     dispatch(mypageActions._getLikedAllCat());
@@ -88,4 +89,5 @@ const CatPostStyle = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 export default MyPage;

@@ -1,7 +1,10 @@
+// LIBRARY
 import React from "react";
+
 // STYLE
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import nocatimage from "../styles/images/nocatimage.jpg";
+
 const EmptyPost = ({ path }) => {
   return (
     <NoCatBox>
@@ -67,7 +70,6 @@ const CatImage = styled.img`
     }
   }
 `;
-
 const NoCatBox = styled.div`
   min-width: 240px;
   min-height: 300px;
@@ -93,4 +95,5 @@ const NoCatBox = styled.div`
     }
   }
 `;
+
 export default EmptyPost;

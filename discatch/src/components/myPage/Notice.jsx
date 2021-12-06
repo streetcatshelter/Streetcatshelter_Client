@@ -40,18 +40,16 @@ const Notice = () => {
     </Wrapper>
   );
 };
-const Wrapper = styled.div``;
 
+const Wrapper = styled.div``;
 const Content = styled.div`
   height: 50px;
   width: 100%;
   border-bottom: 0.2px solid #b5bb19;
   line-height: 16px;
-
   cursor: pointer;
   display: flex;
 `;
-
 const Number = styled.div`
   font-weight: 900;
   font-size: 12px;
@@ -75,4 +73,5 @@ const DateBox = styled.div`
   width: 20%;
   text-align: center;
 `;
+
 export default Notice;

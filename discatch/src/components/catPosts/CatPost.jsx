@@ -89,7 +89,6 @@ const MoreHorizontalBtn = styled(MoreHorizontal)`
     color: #cbcf52;
   }
 `;
-
 const CatPostStyle = styled.div`
   background: rgb(${(props) => props.theme.palette.diaryColor});
   width: 100%;
@@ -106,12 +105,10 @@ const CatPostStyle = styled.div`
 const RightBox = styled.div`
   width: 20%;
 `;
-
 const CatImage = styled.img`
   width: 80px;
   height: 80px;
 `;
-
 const LeftBox = styled.div`
   position: relative;
   left: 10px;
@@ -124,19 +121,16 @@ const LeftBox = styled.div`
     font-weight: 900;
   }
 `;
-
 const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   width: 100%;
   height: 40px;
   margin: auto;
   cursor: pointer;
   p {
     font-size: 14px;
-
     margin-left: 5px;
     :nth-child(2) {
       margin-left: 10px;
@@ -150,7 +144,6 @@ const BodyBox = styled.div`
   margin: auto;
   height: 40px;
 `;
-
 const TagOutBox = styled.div`
   display: flex;
   width: 280px;
@@ -158,7 +151,6 @@ const TagOutBox = styled.div`
   overflow: hidden;
   margin-left: 5px;
 `;
-
 const TagBox = styled.div`
   height: 25px;
   width: auto;

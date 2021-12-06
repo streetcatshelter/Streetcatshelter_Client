@@ -43,10 +43,13 @@
 //     </div>
 //   );
 // }
-
+// LIBRARY
 import React from "react";
+
+// STYLE
 import styled from "styled-components";
 import Google from "../styles/images/icon-Google.png";
+
 const GoogleLoginBtn = () => {
   return (
     <div>
@@ -72,8 +75,6 @@ const GoogleLoginBtn = () => {
   );
 };
 
-export default GoogleLoginBtn;
-
 const LoginBtn = styled.div`
   display: flex;
   width: 250px;
@@ -98,3 +99,5 @@ const Img = styled.img`
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.borderRadius};
 `;
+
+export default GoogleLoginBtn;

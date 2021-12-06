@@ -404,13 +404,11 @@ const CheckGrid = styled.div`
   display: flex;
   justify-content: center;
 `;
-
 const CheckText = styled.p`
   font-weight: 800;
   font-size: 16px;
   margin: 0px 5px;
 `;
-
 const CheckBox = styled.input`
   width: 20x;
   height: 20px;

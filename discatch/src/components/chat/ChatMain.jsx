@@ -82,7 +82,6 @@ const ChatMain = (props) => {
 };
 
 const Wrapper = styled.div``;
-
 const ChatRoom = styled.div`
   background: rgba(203, 207, 94, 0.3);
   width: 100%;
@@ -149,7 +148,6 @@ const InfoInner = styled.div`
     }
   }
 `;
-
 const ChatMsg = styled.div`
   margin: auto 0px;
   display: flex;

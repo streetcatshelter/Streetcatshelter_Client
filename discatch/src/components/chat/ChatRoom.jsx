@@ -246,7 +246,6 @@ const Header = styled.div`
     height: 40px;
   }
 `;
-
 const InfoBox = styled.div`
   display: flex;
   align-items: center;
@@ -261,7 +260,6 @@ const InfoBox = styled.div`
     color: #999999;
   }
 `;
-
 const InfoBlock = styled.div`
   margin-left: 12px;
   margin-right: 95px;
@@ -288,7 +286,6 @@ const InfoBlock = styled.div`
     }
   }
 `;
-
 const CallBox = styled.div`
   display: flex;
   width: 60px;
@@ -298,7 +295,6 @@ const CallBox = styled.div`
     right: 15px;
   }
 `;
-
 const ChatSendBox = styled.div`
   position: fixed;
   bottom: 80px;
@@ -387,7 +383,6 @@ const SendText = styled.div`
     text-align: center;
   }
 `;
-
 const SendButton = styled.div`
   width: 15%;
   height: 100%;

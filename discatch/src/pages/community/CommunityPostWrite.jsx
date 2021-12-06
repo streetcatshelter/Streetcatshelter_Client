@@ -367,7 +367,6 @@ const CommunityWriteStyle = styled.div`
   margin: 10px auto;
   border-radius: 30px;
 `;
-
 const Select = styled.select`
   background: rgb(${(props) => props.theme.palette.bgColor});
   height: 50px;
@@ -375,7 +374,6 @@ const Select = styled.select`
   width: 100%;
   border-radius: 10px;
 `;
-
 const Upload = styled.input`
   background-color: white;
   width: 100%;
@@ -385,7 +383,6 @@ const Upload = styled.input`
   justify-content: flex-end;
   align-items: flex-end;
 `;
-
 const UploadButton = styled.label`
   position: relative;
   top: 16px;

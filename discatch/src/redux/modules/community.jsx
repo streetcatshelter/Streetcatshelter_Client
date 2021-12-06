@@ -69,7 +69,7 @@ export const getCommunityDB =
     }
   };
 
-// 커뮤니티 글  (추가 가져오기
+// 커뮤니티 글 추가 가져오기
 export const getMoreCommunityDB =
   (category, location, page) =>
   async (dispatch, getState, { history }) => {
@@ -324,7 +324,6 @@ const community = createSlice({
         detailLocation
       );
     },
-
     getCatInfo: (state, action) => {
       state.catInfo = action.payload;
       state.itemLoaded = false;
@@ -358,7 +357,6 @@ const community = createSlice({
         itemLoaded: false,
       };
     },
-
     getOneCatInfo: (state, action) => {
       state.catInfo = action.payload;
       state.itemDetailLoaded = false;
@@ -371,7 +369,6 @@ const community = createSlice({
       state.sharing = action.payload;
       state.itemDetailLoaded = false;
     },
-
     editCatInfo: (state, action) => {
       console.log("수정 요청 완료!");
     },
@@ -394,25 +391,21 @@ const community = createSlice({
     addCatInfoComment: (state, action) => {
       state.catInfo = action.payload;
     },
-
     getCatInfoComment: (state, action) => {
       state.catInfo = action.payload;
     },
     addGatheringComment: (state, action) => {
       state.gathering = action.payload;
     },
-
     getGatheringComment: (state, action) => {
       state.gathering = action.payload;
     },
     addSharingComment: (state, action) => {
       state.sharing = action.payload;
     },
-
     getSharingComment: (state, action) => {
       state.sharing = action.payload;
     },
-
     deleteCatInfoComment: (state, action) => {
       state.catInfo = action.payload;
     },
@@ -425,7 +418,6 @@ const community = createSlice({
     pageLoading: (state, action) => {
       state.pageLoaded = action.payload;
     },
-
     itemLoading: (state, action) => {
       state.itemLoaded = action.payload;
     },

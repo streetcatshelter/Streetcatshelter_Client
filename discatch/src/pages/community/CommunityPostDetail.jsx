@@ -143,13 +143,13 @@ const CommunityPostDetail = (props) => {
     </Template>
   );
 };
+
 const CatImage = styled.img`
   position: absolute;
   width: 100%;
   height: 100%;
   background: rgb(251, 216, 134);
 `;
-
 const ImageBox = styled.div`
   width: 100%;
   margin: auto;
@@ -158,14 +158,12 @@ const ImageBox = styled.div`
   align-items: center;
   box-sizing: border-box;
 `;
-
 const CatImageBox = styled.div`
   position: relative;
   width: 100%;
   padding-bottom: 100%;
   background: rgb(251, 216, 134);
 `;
-
 const Title = styled.div`
   margin: 10px;
   p {
@@ -175,7 +173,6 @@ const Title = styled.div`
     width: auto;
   }
 `;
-
 const Content = styled.div`
   margin: 10px;
   p {
@@ -183,4 +180,5 @@ const Content = styled.div`
     margin: 0px;
   }
 `;
+
 export default CommunityPostDetail;

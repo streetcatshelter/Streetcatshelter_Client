@@ -30,6 +30,7 @@ const CommunityPost = ({ community }) => {
     name = community.nickname;
   }
   const createdAt = moment(community.createdAt).format("YYYY-M-D hh:mm");
+
   return (
     <CommunityPostStyle
       onClick={() =>
@@ -107,7 +108,6 @@ const CommunityPostStyle = styled.div`
     filter: brightness(90%);
   }
 `;
-
 const UserInfoBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -119,7 +119,6 @@ const UserInfoBox = styled.div`
     font-size: 12px;
   }
 `;
-
 const RightBox = styled.div`
   display: flex;
   height: 30px;
@@ -129,7 +128,6 @@ const RightBox = styled.div`
     font-weight: 900;
   }
 `;
-
 const ContentBox = styled.div`
   width: 90%;
   height: 30px;
@@ -143,7 +141,6 @@ const ContentBox = styled.div`
     text-overflow: ellipsis;
   }
 `;
-
 const InfoBox = styled.div`
   display: flex;
   width: 93%;
@@ -151,7 +148,6 @@ const InfoBox = styled.div`
   margin: auto;
   justify-content: flex-end;
 `;
-
 const IconBox = styled.div`
   display: flex;
   margin-left: 10px;
@@ -166,4 +162,5 @@ const IconBox = styled.div`
     font-size: 14px;
   }
 `;
+
 export default CommunityPost;

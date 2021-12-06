@@ -6,11 +6,13 @@ const Toast = () => {
   const handleToast = () => {
     setToastStatus(true);
   };
+  
   useEffect(() => {
     if (ToastStatus) {
       setTimeout(() => setToastStatus(false), 2000);
     }
   }, [ToastStatus]);
+
   return (
     <div className="App">
       <div className="btnWrap">

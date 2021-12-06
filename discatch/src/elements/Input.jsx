@@ -42,33 +42,26 @@ const InputStyle = styled.input`
   box-shadow: ${(props) => props.shadow};
   font-size: ${(props) => props.fontSize};
   ${(props) => props.addstyle()}
-
   &:focus {
     color: ${(props) => `rgb(${props.theme.palette.black})`};
     background: ${(props) => `rgb(${props.theme.palette.white})`};
     outline: none;
-
     &::placeholder {
       color: ${(props) => `rgb(${props.theme.palette.black})`};
     }
-
     &::-webkit-input-placeholder {
       color: ${(props) => `rgb(${props.theme.palette.black})`};
     }
-
     &:-ms-input-placeholder {
       color: ${(props) => `rgb(${props.theme.palette.black})`};
     }
   }
-
   &::placeholder {
     color: ${(props) => `rgb(${props.theme.palette.lightGray})`};
   }
-
   &::-webkit-input-placeholder {
     color: ${(props) => `rgb(${props.theme.palette.lightGray})`};
   }
-
   &:-ms-input-placeholder {
     color: ${(props) => `rgb(${props.theme.palette.lightGray})`};
   }

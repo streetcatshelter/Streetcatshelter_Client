@@ -47,6 +47,7 @@ const MyPageNotices = (props) => {
     </Template>
   );
 };
+
 const Title = styled.div`
   height: 40px;
   width: 100%;
@@ -55,7 +56,6 @@ const Title = styled.div`
   justify-content: center;
   background: #fbd986;
   border-radius: 10px;
-
   p {
     text-align: center;
     font-weight: 900;
@@ -64,4 +64,5 @@ const Title = styled.div`
     margin: auto;
   }
 `;
+
 export default MyPageNotices;

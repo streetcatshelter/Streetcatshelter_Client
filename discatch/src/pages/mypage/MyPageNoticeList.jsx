@@ -1,5 +1,6 @@
 // LIBRARY
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import styled from "styled-components";
@@ -15,7 +16,6 @@ import {
 
 // REDUX
 import { mypageActions } from "../../redux/modules/mypage";
-import { useDispatch, useSelector } from "react-redux";
 
 const MyPageNoticeList = (props) => {
   const dispatch = useDispatch();
@@ -53,7 +53,6 @@ const Title = styled.div`
   justify-content: center;
   background: #fbd986;
   border-radius: 10px;
-
   p {
     text-align: center;
     font-weight: 900;

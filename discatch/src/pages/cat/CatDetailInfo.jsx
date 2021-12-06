@@ -249,7 +249,6 @@ const CatImage = styled.img`
   height: 100%;
   background: rgb(251, 216, 134);
 `;
-
 const ImageBox = styled.div`
   width: 100%;
   margin: auto;
@@ -258,7 +257,6 @@ const ImageBox = styled.div`
   align-items: center;
   box-sizing: border-box;
 `;
-
 const CatImageBox = styled.div`
   position: relative;
   width: 100%;
@@ -266,4 +264,5 @@ const CatImageBox = styled.div`
   background: rgb(251, 216, 134);
   margin-bottom: 5px;
 `;
+
 export default CatDetailInfo;

@@ -67,7 +67,6 @@ const CommunityDetail = (props) => {
     nextPath = "sharing";
   }
 
-
   useEffect(() => {
     setPage(1);
     dispatch(resetList());

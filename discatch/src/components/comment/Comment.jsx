@@ -22,15 +22,19 @@ const Comment = ({ path }) => {
   const location = useLocation();
   const pathName = location.pathname.split('/')[3];
   const commentList = useSelector((state) => state.comment.list);
+
   const cCommunity = useSelector((state) => state.community.catInfo);
   const gCommunity = useSelector((state) => state.community.gathering);
   const sCommunity = useSelector((state) => state.community.sharing);
+
   const cCommunityId = cCommunity.data?.communityId;
   const gCommunityId = gCommunity.data?.communityId;
   const sCommunityId = sCommunity.data?.communityId;
+
   const cUserLike = cCommunity.data?.liked;
   const gUserLike = gCommunity.data?.liked;
   const sUserLike = sCommunity.data?.liked;
+  
   let community, userLike, communityId;
   if (pathName === 'catinfo') {
     community = cCommunity;

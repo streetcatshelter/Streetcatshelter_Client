@@ -40,7 +40,6 @@ const Background = styled.div`
   height: 100%;
   background: #fefdf8;
 `;
-
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;

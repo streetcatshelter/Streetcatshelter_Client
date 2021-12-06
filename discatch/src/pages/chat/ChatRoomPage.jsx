@@ -17,10 +17,12 @@ const ChatRoomPage = (props) => {
   const location = props.location.state?.location;
   const roomId = props.match.params.roomId;
   const isLoaded = useSelector((state) => state.chat.isLoaded);
+  
   useEffect(() => {
     dispatch(chatActions._getAllMessage(roomId));
     dispatch(chatActions._getRoomInfo(roomId));
   }, []);
+
   return (
     <Template props={props} page="map">
       <ChatRoom roomId={roomId} location={location}>

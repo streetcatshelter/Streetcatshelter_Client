@@ -359,4 +359,5 @@ const Select = styled.select`
   background: white;
   outline: none;
 `;
+
 export default CatInfoWrite;

@@ -11,18 +11,16 @@ import styled, { css } from "styled-components";
 // ELEMENTS
 import { Grid, Button, Input, TextArea, Text } from "../../elements/index";
 
-// REDUX
-import { imgActions } from "../../redux/modules/image";
-import { editCommunityDB } from "../../redux/modules/community";
-
 // ICON
 import { Camera } from "react-feather";
 
-// REDUX
-import { getOneCommunityDB } from "../../redux/modules/community";
-
 // ROUTE
 import { useLocation } from "react-router-dom";
+
+// REDUX
+import { imgActions } from "../../redux/modules/image";
+import { editCommunityDB } from "../../redux/modules/community";
+import { getOneCommunityDB } from "../../redux/modules/community";
 import { history } from "../../redux/configureStore";
 
 const CommunityPostEdit = (props) => {
@@ -449,7 +447,6 @@ const CommunityEditStyle = styled.div`
   margin: 10px auto;
   border-radius: 30px;
 `;
-
 const Upload = styled.input`
   background-color: white;
   width: 100%;
@@ -459,7 +456,6 @@ const Upload = styled.input`
   justify-content: flex-end;
   align-items: flex-end;
 `;
-
 const UploadButton = styled.label`
   position: relative;
   top: 16px;

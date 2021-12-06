@@ -48,7 +48,6 @@ const theme = {
     diaryColor: '252, 246, 222',
     red: '255, 0, 0',
   },
-
   size: {
     defaultWidth: '540px',
   },

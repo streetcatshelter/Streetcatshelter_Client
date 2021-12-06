@@ -73,9 +73,12 @@ const CardStyle = styled.div`
   background: rgb(${(props) => props.theme.palette.diaryColor});
   width: 100%;
   height: 100px;
-  margin: 30px auto;
+  margin: 20px auto;
   display: flex;
   cursor: pointer;
+  @media screen and (max-height: 736px) {
+    margin: 15px auto;
+  }
 `;
 
 export default CommunityCategoryCard;

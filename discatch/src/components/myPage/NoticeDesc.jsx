@@ -66,6 +66,7 @@ const Body = styled.div`
     white-space: normal;
     @media screen and (max-width: 320px) {
       font-size:12px;
+    }
   }
 `;
 

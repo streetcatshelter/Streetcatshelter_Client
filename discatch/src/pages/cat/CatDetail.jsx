@@ -30,12 +30,24 @@ import { __getComment } from "../../redux/modules/comment";
 
 const CatDetail = (props) => {
   const dispatch = useDispatch();
-  const location = props.location.state?.location;
+  let location = props.location.state?.location;
   const catId = props.match.params.catId;
   const cat = useSelector((state) => state.cat.catinfo);
   const commentList = useSelector((state) => state.comment.list);
   const [menu, setMenu] = useState("캘린더");
   const userInfo = useSelector((state) => state.mypage.userInfo);
+
+  if (location === undefined) {
+    location = props.match.params.village;
+  }
+
+  if (userInfo.locationList && location === userInfo?.locationList[0].split(' ')[2]) {
+    location = userInfo?.locationList[0];
+  } else if (userInfo.locationList && location === userInfo?.locationList[1].split(' ')[2]) {
+    location = userInfo?.locationList[1];
+  } else if (userInfo.locationList && location === userInfo?.locationList[2].split(' ')[2]) {
+    location = userInfo?.locationList[2];
+  }
 
   useEffect(() => {
     dispatch(__getCatInfo(catId));

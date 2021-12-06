@@ -94,7 +94,7 @@ const Location = (props) => {
                       justify-content: center; 
                       align-items: center;">
             <button 
-              onclick="location.href='/catdetail/${villageKeyword.split(' ')[2]}/${position[i].catId}/1'" 
+              onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/1'" 
               style="width: 70px;
                      height: 70px;
                      box-shadow: 3px 3px lightgray;

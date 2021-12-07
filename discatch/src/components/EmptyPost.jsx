@@ -11,7 +11,7 @@ const EmptyPost = ({ path }) => {
       {path === "mypage" ? (
         <>
           <div>
-            <span>앗 !</span>
+            <span>야옹 !</span>
           </div>
           <div style={{ width: "90%", marginTop: "20px" }}>
             <p>아직 좋아요를 누른 고양이가 없다옹! 😹</p>
@@ -26,7 +26,7 @@ const EmptyPost = ({ path }) => {
         <>
           {" "}
           <div>
-            <span>앗 !</span>
+            <span>야옹 !</span>
           </div>
           <div style={{ width: "100%", marginTop: "20px" }}>
             <p>아직 등록된 고양이가 없다옹! 😹</p>
@@ -40,10 +40,25 @@ const EmptyPost = ({ path }) => {
           <CatImage src={nocatimage} alt="nocatimage" />
           <p style={{ fontSize: "25px", fontWeight: "900" }}>등록해다옹!!! </p>
         </>
+      ) : path === "chat" ? (
+        <>
+          <div>
+            <span>야옹 !</span>
+          </div>
+          <div style={{ width: "100%", marginTop: "20px" }}>
+            <p>아직 시작한 채팅이 없다옹! 😹</p>
+            <p>
+              <span>상대방 프로필을 클릭해 </span>
+            </p>
+            <p>우리 동네 멋진 집사들과 </p>
+            <p> 고양이에 대해 즐겁게 이야기해보자옹!</p>
+          </div>
+          <CatImage src={nocatimage} alt="nocatimage" />
+        </>
       ) : (
         <>
           <div>
-            <span>앗 !</span>
+            <span>야옹 !</span>
           </div>
           <div style={{ width: "100%", marginTop: "20px" }}>
             <p>아직 등록된 커뮤니티 글이 없다옹! 😹</p>

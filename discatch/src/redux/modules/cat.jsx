@@ -241,6 +241,19 @@ export const __getCalendar =
       console.error(err);
     }
   };
+// 상세 페이지(캘린더디테일)
+export const __getCalendarDetail =
+  (catId, day, month, year) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      console.log(catId, day, month, year);
+      const { data } = await catApi.getCalendarDetail(catId, day, month, year);
+      console.log(data);
+      dispatch(getDetailCalendar(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
 // 상세 페이지(집사일기)
 export const __getDiary =
@@ -316,6 +329,7 @@ const initialState = {
   catinfo: [],
   hashtag: [],
   postLoaded: false,
+  calendardetail: [],
 };
 
 const cat = createSlice({
@@ -373,6 +387,10 @@ const cat = createSlice({
       state.calendar = action.payload;
     },
 
+    getDetailCalendar: (state, action) => {
+      state.calendardetail = action.payload;
+    },
+
     getDiary: (state, action) => {
       state.diary = action.payload;
     },
@@ -426,6 +444,7 @@ export const {
   getCatDetail,
   getCatInfo,
   getCalendar,
+  getDetailCalendar,
   getDiary,
   getGallery,
   deleteCatDetail,

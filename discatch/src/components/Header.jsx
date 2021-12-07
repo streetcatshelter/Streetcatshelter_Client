@@ -11,12 +11,13 @@ import { useLocation } from "react-router-dom";
 
 // ICON
 import { ArrowLeft, LogOut, Bell, Search } from "react-feather";
-
 // REDUX
 import { history } from "../redux/configureStore";
 import { searchMap } from "../redux/modules/map";
 import { mypageActions } from "../redux/modules/mypage";
 import { userActions } from "../redux/modules/user";
+
+import { EventAlram } from "./";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -39,12 +40,14 @@ const Header = (props) => {
     location = locationA.pathname.split("/")[2];
   }
 
-  if (userInfo.locationList && 
-      location !== userInfo?.locationList[0]?.split(' ')[2] &&
-      location !== userInfo?.locationList[1]?.split(' ')[2] &&
-      location !== userInfo?.locationList[2]?.split(' ')[2]) {
-      location = firstLocation;
-  } 
+  if (
+    userInfo.locationList &&
+    location !== userInfo?.locationList[0]?.split(" ")[2] &&
+    location !== userInfo?.locationList[1]?.split(" ")[2] &&
+    location !== userInfo?.locationList[2]?.split(" ")[2]
+  ) {
+    location = firstLocation;
+  }
 
   if (userInfo.locationList && location === undefined) {
     location = userInfo?.locationList[0]?.split(" ")[2];
@@ -84,7 +87,7 @@ const Header = (props) => {
   }
 
   const [place, setPlace] = useState(location);
-
+  const [openAlram, setOpenAlram] = useState(false);
   useEffect(() => {
     dispatch(searchMap(firstLocation));
   }, [firstLocation, dispatch]);
@@ -134,7 +137,7 @@ const Header = (props) => {
         state: { location },
       });
     } else if (path === "/catdetail/:village/:catId/1") {
-      history.push({ pathname: '/mypage', state: { location } });
+      history.push({ pathname: "/mypage", state: { location } });
     } else if (path === "/catdetail/:village/:catId") {
       history.push({ pathname: "/", state: { location } });
     } else if (path === "/community/:village/:category/write") {
@@ -190,16 +193,16 @@ const Header = (props) => {
           </Link>
         </Head>
         <SideBtnBox>
-          <SearchBtn
+          {/* <SearchBtn
             onClick={() => {
               // setSearchModal(!searchModal);
               alert("준비중입니다.");
             }}
-          />
+          /> */}
           <Bell
             onClick={() => {
               // setSearchModal(!searchModal);
-              alert("준비중입니다.");
+              setOpenAlram(true);
             }}
           />
 
@@ -221,6 +224,7 @@ const Header = (props) => {
       ) : (
         ""
       )} */}
+      {openAlram && <EventAlram />}
     </HeaderStyle>
   );
 };
@@ -303,12 +307,12 @@ const SelectStyle = styled.select`
   }
 `;
 const Head = styled.div`
-  width:50%;
+  width: 50%;
   margin: auto;
-  text-align:center;
+  text-align: center;
   p {
-    height:60px;
-    line-height:60px;
+    height: 60px;
+    line-height: 60px;
     margin: 0px auto;
     font-size: 35px;
     font-weight: 700;

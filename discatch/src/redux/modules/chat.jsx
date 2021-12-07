@@ -59,6 +59,7 @@ const _deleteRoom =
         pathname: "/chat",
         state: { location },
       });
+      dispatch(deleteRoom(roomId));
     } catch (e) {
       console.log(e);
     }
@@ -93,6 +94,15 @@ const chat = createSlice({
     loading: (state, action) => {
       state.isLoaded = action.payload;
     },
+    deleteRoom: (state, action) => {
+      console.log(action.payload);
+      return {
+        ...state,
+        roomlist: state.roomlist.filter(
+          (room) => room.roomId !== action.payload
+        ),
+      };
+    },
   },
 });
 
@@ -109,5 +119,6 @@ export const {
   setChatMessage,
   pushChatMessage,
   loading,
+  deleteRoom,
 } = chat.actions;
 export default chat;

@@ -57,6 +57,8 @@ export const myPageApi = {
 export const catApi = {
   getCatLocation: (location) =>
     instance.get(`/cat/${location}/?page=1&size=10`),
+  getCatAllLocation: (location) =>
+    instance.get(`/cat/${location}/?page=1&size=9999`),
   getMoreCatLocation: (location, page) =>
     instance.get(`/cat/${location}/?page=${page}&size=10`),
   getCatDetail: (catDetailId) => instance.get(`/cat/detail/${catDetailId}`),

@@ -50,7 +50,7 @@ const Community = (props) => {
           <Grid
             addstyle={() => {
               return css`
-                width:100%
+                width:100%;
                 max-width:420px;
                 height:80vh;
                 display:flex;

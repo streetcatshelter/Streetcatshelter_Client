@@ -1,11 +1,20 @@
 // LIBRARY
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import { ProgressBar } from "./";
-import { mypageActions } from "../redux/modules/mypage";
 import { useDispatch, useSelector } from "react-redux";
+
+// STYLE
+import styled from "styled-components";
+
+// COMPONENTS
+import { ProgressBar } from "./";
+
+// ICON
 import { X } from "react-feather";
+
+// REDUX
 import { history } from "../redux/configureStore";
+import { mypageActions } from "../redux/modules/mypage";
+
 
 const UserProfileModal = (props) => {
   const dispatch = useDispatch();
@@ -143,13 +152,10 @@ const Window = styled.div`
     }
   }
 `;
-
 const Wrapper = styled.div`
-width:100%
+width:100%;
 height:100%;
-
 `;
-
 const Head = styled.div`
   width: 90%;
   height: 80px;
@@ -186,10 +192,8 @@ const Body = styled.div`
   width: 90%;
   height: 100%;
   margin: auto;
-
   margin-bottom: 10px;
 `;
-
 const Left = styled.div`
   width: 25%;
   height: 100%;
@@ -210,7 +214,6 @@ const Right = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-
 const UserActive = styled.div`
   width: 100%;
   height: 100%;
@@ -233,9 +236,8 @@ const LikeCat = styled.div`
     position: absolute;
   }
 `;
-
 const ActiveBox = styled.div`
-width:100%
+width:100%;
 height: 100%;
 display: flex;
 div{
@@ -246,10 +248,8 @@ div{
   display:flex;
   border:0.2px solid rgba(203, 207, 94, 1);
   border-radius:10px;
-
   p{
     text-align:center;
-    
     font-size:12px;
     :nth-child(1){
       font-weight:900;
@@ -268,19 +268,16 @@ div{
 const ActiveDate = styled.div`
   border: 0.2px solid rgba(203, 207, 94, 1);
   border-radius: 10px;
-  width: 100%
+  width: 100%;
   height: 100%;
   margin: 5px;
-
   p {
     margin: 5px auto;
     font-size: 12px;
     width: 95%;
     :nth-child(1){font-weight:900;}
-
   }
 `;
-
 const LikedCatBox = styled.div`
   width: 98%;
   height: 100%;
@@ -297,14 +294,13 @@ const LikedCatBox = styled.div`
     }
   }
 `;
-
 const LikeCatWrapper = styled.div`
-  width:100%
+  width:100%;
   height: 100%;
   display: grid;
   margin: auto;
   grid-template-columns: repeat(4, 1fr);
   gap: 3px;
-
 `;
+
 export default UserProfileModal;

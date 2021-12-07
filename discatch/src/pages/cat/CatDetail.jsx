@@ -41,11 +41,11 @@ const CatDetail = (props) => {
     location = props.match.params.village;
   }
 
-  if (userInfo.locationList && location === userInfo?.locationList[0].split(' ')[2]) {
+  if (userInfo.locationList && location === userInfo?.locationList[0]?.split(' ')[2]) {
     location = userInfo?.locationList[0];
-  } else if (userInfo.locationList && location === userInfo?.locationList[1].split(' ')[2]) {
+  } else if (userInfo.locationList && location === userInfo?.locationList[1]?.split(' ')[2]) {
     location = userInfo?.locationList[1];
-  } else if (userInfo.locationList && location === userInfo?.locationList[2].split(' ')[2]) {
+  } else if (userInfo.locationList && location === userInfo?.locationList[2]?.split(' ')[2]) {
     location = userInfo?.locationList[2];
   }
 

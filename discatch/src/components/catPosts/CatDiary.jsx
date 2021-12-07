@@ -15,7 +15,6 @@ const CatDiary = (props) => {
   const dispatch = useDispatch();
   const location = props.location;
   const catId = props.catId;
-
   const diaryList = useSelector((state) => state.cat.diary);
 
   useEffect(() => {

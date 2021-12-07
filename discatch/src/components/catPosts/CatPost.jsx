@@ -2,10 +2,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-// REDUX
-import { history } from "../../redux/configureStore";
-import { __catLike } from "../../redux/modules/cat";
-
 // STYLE
 import styled from "styled-components";
 
@@ -13,11 +9,15 @@ import styled from "styled-components";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { MoreHorizontal } from "react-feather";
 
+// REDUX
+import { history } from "../../redux/configureStore";
+import { __catLike } from "../../redux/modules/cat";
+
 const CatPost = ({ cat, path, location }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
-  
+
   const likeToggle = () => {
     dispatch(__catLike(catId, path));
   };

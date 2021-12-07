@@ -1,4 +1,7 @@
+// LIBRARY
 import React from "react";
+
+// COMPONENTS
 import { Template } from "../components";
 
 const UserProfile = (props) => {

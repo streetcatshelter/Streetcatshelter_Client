@@ -22,7 +22,7 @@ const ChatRoomPage = (props) => {
   useEffect(() => {
     dispatch(chatActions._getAllMessage(roomId));
     dispatch(chatActions._getRoomInfo(roomId));
-  }, []);
+  }, [roomId, dispatch]);
 
   return (
     <Template props={props} page="map">

@@ -23,7 +23,7 @@ const UserProfileModal = (props) => {
   );
   useEffect(() => {
     dispatch(mypageActions._getUserProfile(props.userRandomId));
-  }, []);
+  }, [props.userRandomId, dispatch]);
 
   return (
     <Background>

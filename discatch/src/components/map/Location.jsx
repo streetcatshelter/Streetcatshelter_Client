@@ -256,7 +256,6 @@ const Location = (props) => {
       }
       paginationEl.appendChild(fragment);
     }
-
     function displayMarker(place) {
       // 지도 마커 표시하기
       const catMarker = new kakao.maps.Marker({ position: map.getCenter() });
@@ -373,7 +372,7 @@ const Location = (props) => {
   const [longitude, setLongitude] = useState();
 
   useEffect(() => {
-    showCats(catList, position, location);
+    showCats();
   }, [catList, position, location, dispatch]);
 
   return (
@@ -443,14 +442,68 @@ const Location = (props) => {
             <div id="result-list">
               {Places.map((item, i) => (
                 <List onClick={()=> function (){
-                  let bounds = new kakao.maps.LatLngBounds();
-                  bounds.extend(new kakao.maps.LatLng(item.y, item.x));
                   const mapContainer = document.getElementById("myMap"),
                   mapOption = {
                     center: new kakao.maps.LatLng(item.y, item.x),
                     level: 2,
                   };
                   const map = new kakao.maps.Map(mapContainer, mapOption);
+                  for (let i = 0; i < position.length; i++) {
+                  const imageSrc =
+                  "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                  const imageSize = new kakao.maps.Size(24, 35);
+                  const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+                  const markers = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: position[i].latlng, // 마커를 표시할 위치
+                    title: catList[i].catName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    image: markerImage, // 마커 이미지
+                  });
+                  const iwContent = `
+                    <div style="display:flex">
+                      <div style="width: 80px; height: 80px; border-radius:80px;">
+                        <img width="80" 
+                            height="80"
+                            border-radius="80"
+                            src="${position[i].catImage}" 
+                            alt="고양이 사진">
+                      </div>
+                      <div style="display: flex; 
+                                  width: 80px; 
+                                  height: 80px; 
+                                  justify-content: center; 
+                                  align-items: center;">
+                        <button 
+                          onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
+                          style="width: 70px;
+                                height: 70px;
+                                box-shadow: 3px 3px lightgray;
+                                border: 0;
+                                border-radius: 10px;
+                                background-color: #fbd986;
+                                cursor: pointer;">
+                                ${position[i].catName}
+                                <div>보러 가기</div>
+                        </button>
+                      </div>
+                    </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+                  // 인포윈도우를 생성합니다
+                  const infowindow = new kakao.maps.InfoWindow({
+                    content: iwContent,
+                    removable: iwRemoveable,
+                  });
+                  kakao.maps.event.addListener(markers, "click", function () {
+                    // 마커 위에 인포윈도우를 표시합니다
+                    infowindow.open(map, markers);
+                  });
+                  markers.setMap(map);
+                  }
+                  console.log(position)
+                  let bounds = new kakao.maps.LatLngBounds();
+                  bounds.extend(new kakao.maps.LatLng(item.y, item.x));
+                  
                   const catMarker = new kakao.maps.Marker({ position: map.getCenter() });
                   let marker = new kakao.maps.Marker({
                     map:map,

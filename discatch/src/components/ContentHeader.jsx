@@ -181,7 +181,7 @@ const UserInfoBoxCenter = styled.div`
   margin-left: 10px;
   line-height: 20px;
   p {
-    font-size: 16px;
+    font-size: 14px;
     margin: 0px;
     font-weight: 900;
   }

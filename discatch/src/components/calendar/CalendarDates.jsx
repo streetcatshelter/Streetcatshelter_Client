@@ -84,6 +84,7 @@ const CalendarDates = (props) => {
       </Form>
       {openModal && (
         <CalendarModal
+          path={props.path}
           elm={elm}
           month={month}
           year={year}

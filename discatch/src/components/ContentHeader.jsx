@@ -17,8 +17,9 @@ import moment from "moment";
 
 // REDUX
 import { chatActions } from "../redux/modules/chat";
+import { history } from "../redux/configureStore";
 
-const ContentHeader = () => {
+const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const dispatch = useDispatch();
   const pathName = useLocation();
   const pName = pathName.pathname.split("/")[3];
@@ -74,9 +75,7 @@ const ContentHeader = () => {
 
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
   const OpenProfile = () => {
-    if (nickname !== UserNickName) {
-      setProfileModal(!ProfileModal);
-    }
+    setProfileModal(!ProfileModal);
   };
   const MakeChat = () => {
     const chatuser = { chatUser: [UserNickName, nickname] };
@@ -97,27 +96,56 @@ const ContentHeader = () => {
   return (
     <>
       <Wrapper>
-        <UserInfoBox onClick={OpenProfile}>
+        <UserInfoBox>
           <Avatar src={profileImageUrl} alt="profileImage" />
-          <UserInfoBoxRight>
-            <p>{nickname}</p>
-            <div style={{ display: "flex" }}>
-              {locationName !== null && (
-                <span>{locationName?.split(" ")[2]}</span>
-              )}
-              <span>{CreatedAt}</span>
-            </div>
-          </UserInfoBoxRight>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <UserInfoBoxCenter onClick={OpenProfile}>
+              <p>{nickname}</p>
+              <div style={{ display: "flex" }}>
+                {locationName !== null && (
+                  <span>{locationName?.split(" ")[2]}</span>
+                )}
+                <span>{CreatedAt}</span>
+              </div>
+            </UserInfoBoxCenter>
+            {nickname === UserNickName && (
+              <EditModalSlide
+                FirstBtn={FirstBtn}
+                SecondBtn={SecondBtn}
+                FirstClick={FirstClick}
+                SecondClick={SecondClick}
+              />
+            )}
+          </div>
         </UserInfoBox>
       </Wrapper>
-      <EditModalSlide
-        FirstBtn="프로필보기"
-        SecondBtn="채팅하기"
-        Profile="profile"
-        openModal={ProfileModal}
-        FirstClick={ChangeRandomModalState}
-        SecondClick={MakeChat}
-      />
+      {nickname !== UserNickName ? (
+        <EditModalSlide
+          FirstBtn="프로필보기"
+          SecondBtn="채팅하기"
+          Profile="profile"
+          openModal={ProfileModal}
+          FirstClick={ChangeRandomModalState}
+          SecondClick={MakeChat}
+        />
+      ) : (
+        <EditModalSlide
+          FirstBtn="내프로필보기"
+          SecondBtn="내프로필수정"
+          Profile="profile"
+          openModal={ProfileModal}
+          FirstClick={ChangeRandomModalState}
+          SecondClick={() => {
+            history.push("/userinfoedit");
+          }}
+        />
+      )}
       {openRandomProfileModal && userRandomId && (
         <UserProfileModal
           userRandomId={userRandomId}
@@ -141,6 +169,7 @@ const UserInfoBox = styled.div`
   display: inherit;
   cursor: pointer;
   margin-left: 5px;
+  width: 100%;
 `;
 const Avatar = styled.img`
   width: 40px;
@@ -148,7 +177,7 @@ const Avatar = styled.img`
   border-radius: 50%;
   margin: 0px;
 `;
-const UserInfoBoxRight = styled.div`
+const UserInfoBoxCenter = styled.div`
   margin-left: 10px;
   line-height: 20px;
   p {

@@ -6,82 +6,120 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 // ICON
-import { CheckSquare } from "react-feather";
+import { X, CheckSquare } from "react-feather";
 
 // REDUX
 import { mypageActions } from "../../redux/modules/mypage";
-
+import { __getCalendarDetail } from "../../redux/modules/cat";
+import { history } from "../../redux/configureStore";
 const CalendarModal = (props) => {
-  const { elm, month, year, setOpenModal } = props;
+  const { elm, month, year, setOpenModal, path } = props;
   const dispatch = useDispatch();
-  const WorkDetail = useSelector((state) => state.mypage.calendardetail);
-
+  const WorkDetail = useSelector((state) =>
+    path === "mypage" ? state.mypage.calendardetail : state.cat.calendardetail
+  );
+  const CatId = useSelector((state) => state.cat.catinfo?.catId);
+  const CatName = useSelector((state) => state.cat.catinfo?.catName);
   useEffect(() => {
-    dispatch(mypageActions._getCalenderDetail(year, month, elm));
-  }, [year, month, elm, dispatch]);
+    path === "mypage"
+      ? dispatch(mypageActions._getCalenderDetail(year, month, elm))
+      : dispatch(__getCalendarDetail(CatId, elm, month, year));
+  }, [year, month, elm, CatId, dispatch]);
 
   return (
     <>
       <Background>
-        <Form>
-          <Head>
-            <Header>
-              <p>
-                dis<span>C</span>
-                <span>A</span>
-                <span>T</span>ch
-              </p>
-            </Header>
-            <ViewDate>
-              <span>활동일지</span>({year}년{month}월{elm}일)
-            </ViewDate>
-          </Head>
+        <Overlay
+          onClick={() => {
+            setOpenModal(false);
+          }}
+        />
+        <Window>
+          <Wrapper>
+            <Head>
+              <ViewDate>
+                {path === "mypage" ? (
+                  <p>
+                    활동일지
+                    <span>
+                      ({year}년{month}월{elm}일)
+                    </span>
+                  </p>
+                ) : (
+                  <p>
+                    {CatName} 활동일지
+                    <br />
+                    <span>
+                      ({year}년{month}월{elm}일)
+                    </span>
+                  </p>
+                )}
+                <div>
+                  <X
+                    onClick={() => {
+                      setOpenModal(false);
+                    }}
+                  />{" "}
+                </div>
+              </ViewDate>
+            </Head>
+            <Events>
+              {WorkDetail.map((EachCatWork, idx) => {
+                return (
+                  <EventBox
+                    key={idx}
+                    onClick={() => {
+                      history.push({
+                        pathname: `/catdetail/${EachCatWork.location}/${EachCatWork.catId}/1`,
+                        state: { location: EachCatWork.location },
+                      });
+                    }}
+                  >
+                    <CatLeft>
+                      <img src={EachCatWork.catImage} alt="catImage" />
+                    </CatLeft>
+                    <CatRight>
+                      {path === "mypage" ? (
+                        <p>이름: {EachCatWork.catName}</p>
+                      ) : (
+                        ""
+                      )}
+                      <p>동네: {EachCatWork.location}</p>
 
-          <Events>
-            {WorkDetail.map((EachCatWork, idx) => {
-              return (
-                <EventBox key={idx}>
-                  😺 고양이이름: {EachCatWork.catName}
-                  <ul>
-                    {EachCatWork.food ? (
-                      <li>
-                        <CheckSquare />
-                        밥주기
-                      </li>
-                    ) : (
-                      ""
-                    )}
-                    {EachCatWork.water ? (
-                      <li>
-                        <CheckSquare />
-                        급수하기
-                      </li>
-                    ) : (
-                      ""
-                    )}
-                    {EachCatWork.snack ? (
-                      <li>
-                        <CheckSquare />
-                        간식주기
-                      </li>
-                    ) : (
-                      ""
-                    )}
-                  </ul>
-                </EventBox>
-              );
-            })}
-          </Events>
-          <Footer>
-            <Close
-              onClick={() => {
-                setOpenModal(false);
-              }}
-            >
-              닫기
-            </Close>
-          </Footer>
-        </Form>
+                      <CatWorkBox>
+                        <p>활동: </p>
+                        {EachCatWork.food ? (
+                          <CheckBox>
+                            <CheckSquare />
+                            <p>밥주기</p>
+                          </CheckBox>
+                        ) : (
+                          ""
+                        )}
+                        {EachCatWork.water ? (
+                          <CheckBox>
+                            <CheckSquare />
+                            <p>급수하기</p>
+                          </CheckBox>
+                        ) : (
+                          ""
+                        )}
+                        {EachCatWork.snack ? (
+                          <CheckBox>
+                            <CheckSquare />
+                            <p>간식주기</p>
+                          </CheckBox>
+                        ) : (
+                          ""
+                        )}
+                      </CatWorkBox>
+                    </CatRight>
+                  </EventBox>
+                );
+              })}
+            </Events>
+          </Wrapper>
+        </Window>
       </Background>
     </>
   );
@@ -89,102 +127,140 @@ const CalendarModal = (props) => {
 
 const Background = styled.div`
   position: fixed;
-  overflow-x: hidden;
-  overflow-y: auto;
-  outline: 0;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 100vw;
+  height: 100%;
 `;
-const Form = styled.div`
+const Overlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Window = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  height: 300px;
-  border-radius: 10px;
-  background-color: #fef7ea;
-  text-align: center;
-  color: black;
-  z-index: 99;
-`;
-const Header = styled.div`
-  font-weight: 700;
-  font-size: 24px;
-  border-bottom: 0.5 px solid #d3d3d3;
-  height: 30px;
-  margin: auto;
-  padding-top: 20px;
-  color: #b5bb19;
-  p {
-    margin: 0px auto;
-    font-size: 25px;
-    font-weight: 700;
-    color: #fbd986;
-  }
-  span {
-    font-size: 30px;
-    font-weight: 800;
-    margin-left: -1.5px;
-    color: #cbcf52;
-    :nth-child(2) {
-      color: #d19b61;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  max-width: 420px;
+  width: 100vw;
+  height: 50vh;
+  min-height: 450px;
+  border-radius: 20px;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  background: #fefdf8;
+  z-index: 1000;
+  overflow: auto;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 `;
+const Wrapper = styled.div`
+  width: 100%;
+`;
 const Head = styled.div`
-  height: 30%;
+  height: 15%;
+  width: 100%;
+  margin: auto;
+  text-align: center;
 `;
 const ViewDate = styled.div`
   padding-top: 20px;
-  font-size: 12px;
-  span {
-    font-size: 15px;
-    margin-left: -2px;
-    font-weight: 700;
+  display: flex;
+  justify-content: center;
+  p {
+    width: 85%;
+    font-size: 16px;
+    font-weight: 900;
+    margin: 0px 0px 0px 25px;
+    span {
+      font-size: 12px;
+    }
+  }
+  div {
+    width: 15%;
+    svg {
+      width: 20px;
+      height: 20px;
+      margin: auto;
+      padding: 5px;
+      border-radius: 50%;
+      background: #fbd986;
+    }
   }
 `;
 const Events = styled.div`
-  height: 150px;
-  text-align: left;
-  font-weight: 700;
-  overflow-y: auto;
-  font-size: 14px;
-  padding: 0px 20px;
-  ul {
-    padding: 0px 20px;
-    font-size: 12px;
-    li {
-      list-style: none;
-      margin: 10px auto;
-    }
-    svg {
-      margin: auto 4px -4px auto;
-      width: 15px;
-      height: 15px;
+  height: 85%;
+  width: 100%;
+  margin: auto;
+`;
+const EventBox = styled.div`
+  width: 90%;
+  height: 100px;
+  margin: auto;
+  display: flex;
+  border-bottom: 0.2px solid rgba(203, 207, 94, 1);
+`;
+
+const CatLeft = styled.div`
+  width: 20%;
+  min-width: 60px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    @media screen and (max-width: 320px) {
+      width: 60px;
+      height: 60px;
     }
   }
 `;
-const EventBox = styled.div``;
-const Footer = styled.div`
-  height: 20%;
+
+const CatRight = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    margin: 5px;
+    line-height: 20px;
+    font-size: 14px;
+  }
 `;
-const Close = styled.div`
-  margin: auto;
-  margin-top: 10px;
-  padding: auto;
-  width: 80px;
-  height: 30px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  background-color: #cbcf52;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
+
+const CatWorkBox = styled.div`
+  width: 100%;
+  display: flex;
+`;
+const CheckBox = styled.div`
+  display: flex;
+  svg {
+    width: 18px;
+    height: 18px;
+    margin: 5px 0px;
+  }
+  p {
+    font-size: 12px;
+    margin: 5px 0px;
+  }
 `;
 
 export default CalendarModal;

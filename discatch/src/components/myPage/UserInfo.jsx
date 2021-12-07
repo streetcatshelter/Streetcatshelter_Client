@@ -21,14 +21,14 @@ const UserInfo = () => {
   const [NickName, setNickName] = useState(UserInfo.nickname);
   const Village = useSelector((state) => state.mypage.userVillage);
   const [fileUrl, setFileUrl] = useState(null);
-  
+
   const changeNickName = (e) => {
     setNickName(e.target.value);
   };
-  
+
   const EditMyInfo = () => {
-    if (NickName === '') {
-      alert('닉네임을 입력해주세요!');
+    if (NickName === "") {
+      alert("닉네임을 입력해주세요!");
     } else {
       dispatch(mypageActions._editMyInfo(NickName, Village));
     }
@@ -92,7 +92,7 @@ const UserInfo = () => {
                   <div
                     style={{ display: "flex", width: "90px", height: "20px" }}
                   >
-                    <div> {village.split(' ')[2]}</div>
+                    <div> {village.split(" ")[2]}</div>
 
                     <XCircle
                       width="18px"
@@ -183,7 +183,7 @@ const VillageWrap = styled.div`
 `;
 const Wrapper = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

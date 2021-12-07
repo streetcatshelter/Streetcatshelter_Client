@@ -17,7 +17,7 @@ const CatPost = ({ cat, path, location }) => {
   const dispatch = useDispatch();
   const catId = cat.catId;
   const userLiked = cat.userLiked;
-  
+
   const likeToggle = () => {
     dispatch(__catLike(catId, path));
   };
@@ -33,15 +33,15 @@ const CatPost = ({ cat, path, location }) => {
 
   return (
     <CatPostStyle>
-      <RightBox>
+      <LeftBox>
         <CatImage
           src={cat.catImage}
           alt={cat.catImage}
           onClick={CatDetailBtn}
         />
-      </RightBox>
+      </LeftBox>
 
-      <LeftBox>
+      <RightBox>
         <Header>
           <div style={{ display: "flex" }}>
             <p onClick={CatDetailBtn}>
@@ -80,7 +80,7 @@ const CatPost = ({ cat, path, location }) => {
             />
           </LikeBox>
         </BodyBox>
-      </LeftBox>
+      </RightBox>
     </CatPostStyle>
   );
 };
@@ -103,23 +103,32 @@ const CatPostStyle = styled.div`
     filter: brightness(90%);
   }
 `;
-const RightBox = styled.div`
+const LeftBox = styled.div`
   width: 20%;
+  @media screen and (max-width: 320px) {
+    width: 25%;
+  }
 `;
 const CatImage = styled.img`
   width: 80px;
   height: 80px;
 `;
-const LeftBox = styled.div`
-  position: relative;
-  left: 10px;
+const RightBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 80%;
   height: 80px;
-  p {
-    font-size: 14px;
-    font-weight: 900;
+  @media screen and (max-width: 320px) {
+    width: 75%;
+  }
+  div {
+    p {
+      font-size: 14px;
+      font-weight: 900;
+      @media screen and (max-width: 320px) {
+        font-size: 12px;
+      }
+    }
   }
 `;
 const Header = styled.div`
@@ -147,10 +156,13 @@ const BodyBox = styled.div`
 `;
 const TagOutBox = styled.div`
   display: flex;
-  width: 280px;
+  width: 85%;
   flex-wrap: wrap;
   overflow: hidden;
   margin-left: 5px;
+  @media screen and (max-width: 320px) {
+    width: 80%;
+  }
 `;
 const TagBox = styled.div`
   height: 25px;
@@ -164,8 +176,13 @@ const TagBox = styled.div`
   background: #fbd986;
 `;
 const LikeBox = styled.div`
-  width: 24x;
+  width: 24px;
+
   margin: auto;
+  width: 15%;
+  @media screen and (max-width: 320px) {
+    width: 20%;
+  }
 `;
 
 export default CatPost;

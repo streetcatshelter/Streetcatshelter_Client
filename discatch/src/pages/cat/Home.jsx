@@ -48,6 +48,7 @@ const Home = (props) => {
   } else if (villageList[2] && userLocation === villageList[2]?.split(' ')[2]) {
     location = villageList[2];
   }
+
   const userVillage = useSelector(
     (state) => state.mypage.userVillage[0]
   );

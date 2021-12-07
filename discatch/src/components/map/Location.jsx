@@ -25,21 +25,23 @@ const Location = (props) => {
   const dispatch = useDispatch();
   const path = useLocation();
   const catId = props.props.match.params.id;
-  const pathLength = path.pathname.split("/").length;
+  const pathLength = path.pathname.split('/').length;
   let location;
   const villageKeyword = useSelector((state) => state.map.keywordList[0]);
   location = villageKeyword;
   const villageList = useSelector((state) => state.mypage.userVillage);
 
-  if (location === villageList[0]?.split(" ")[2]) {
+  if (location === villageList[0]?.split(' ')[2]) {
     location = villageList[0];
-  } else if (location === villageList[1]?.split(" ")[2]) {
+  } else if (location === villageList[1]?.split(' ')[2]) {
     location = villageList[1];
-  } else if (location === villageList[2]?.split(" ")[2]) {
+  } else if (location === villageList[2]?.split(' ')[2]) {
     location = villageList[2];
   }
 
   const catList = useSelector((state) => state.cat.list);
+
+
 
   useEffect(() => {
     dispatch(__getAllCatLocation(location));
@@ -47,13 +49,11 @@ const Location = (props) => {
 
   const showCats = () => {
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
-      mapOption = {
-        center: new kakao.maps.LatLng(0, 0), // 지도의 중심좌표
-        level: 2, // 지도의 확대 레벨
-      };
-
+    mapOption = {
+      center: new kakao.maps.LatLng(0, 0), // 지도의 중심좌표
+      level: 2, // 지도의 확대 레벨
+    };
     const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
     // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
     const mapTypeControl = new kakao.maps.MapTypeControl();
 
@@ -198,8 +198,8 @@ const Location = (props) => {
       return;
     }
     dispatch(searchKeywordMap(searchKeyword));
-
-    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+    const iwRemoveable = true;
+    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1, removable: iwRemoveable });
     const container = document.getElementById("myMap");
     const options = {
       center: new kakao.maps.LatLng(0, 0),
@@ -218,13 +218,14 @@ const Location = (props) => {
           displayMarker(data[i]);
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
-
-        map.setBounds(bounds);
         // 페이지 목록 보여주는 displayPagination() 추가
         displayPagination(pagination);
         setPlaces(data);
       } else {
-        alert("검색 결과가 없습니다!");
+        setModal(0);
+        setTimeout(() => {
+          alert("검색 결과가 없습니다!");
+        }, 100);
         showCats();
       }
     }
@@ -235,16 +236,13 @@ const Location = (props) => {
       var paginationEl = document.getElementById("pagination"),
         fragment = document.createDocumentFragment(),
         i;
-
       // 기존에 추가된 페이지 번호 삭제
       while (paginationEl.hasChildNodes()) {
         paginationEl.removeChild(paginationEl.lastChild);
       }
-
       for (i = 1; i <= pagination.last; i++) {
         var el = document.createElement("a");
         el.innerHTML = i;
-
         if (i === pagination.current) {
           el.className = "on";
         } else {
@@ -254,7 +252,6 @@ const Location = (props) => {
             };
           })(i);
         }
-
         fragment.appendChild(el);
       }
       paginationEl.appendChild(fragment);
@@ -275,15 +272,35 @@ const Location = (props) => {
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-        let iwContent = `<button 
-                           onclick="location.href='/catdetail/${location}/${position[i].catId}'"
-                           style="padding:5px; 
-                                  margin:0 10px;
-                                  border: 0;
-                                  background-color: white;">
-                          ${position[i].catName}보러가기
-                          </button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-          iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+        let iwContent = `
+          <div style="display:flex">
+            <div style="width: 80px; height: 80px; border-radius:80px;">
+              <img width="80" 
+                  height="80"
+                  border-radius="80"
+                  src="${position[i].catImage}" 
+                  alt="고양이 사진">
+            </div>
+            <div style="display: flex; 
+                        width: 80px; 
+                        height: 80px; 
+                        justify-content: center; 
+                        align-items: center;">
+              <button 
+                onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
+                style="width: 70px;
+                      height: 70px;
+                      box-shadow: 3px 3px lightgray;
+                      border: 0;
+                      border-radius: 10px;
+                      background-color: #fbd986;
+                      cursor: pointer;">
+                      ${position[i].catName}
+                      <div>보러 가기</div>
+              </button>
+            </div>
+          </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
         // 인포윈도우를 생성합니다
         let infowindow = new kakao.maps.InfoWindow({
@@ -342,7 +359,7 @@ const Location = (props) => {
         infowindow.setContent(
           '<div style="padding:5px;font-size:12px;">' +
             place.place_name +
-            "</div>"
+          '</div>'
         );
         infowindow.open(map, marker);
       });
@@ -425,7 +442,39 @@ const Location = (props) => {
             )}
             <div id="result-list">
               {Places.map((item, i) => (
-                <List props={Places} key={i}>
+                <List onClick={()=> function (){
+                  let bounds = new kakao.maps.LatLngBounds();
+                  bounds.extend(new kakao.maps.LatLng(item.y, item.x));
+                  const mapContainer = document.getElementById("myMap"),
+                  mapOption = {
+                    center: new kakao.maps.LatLng(item.y, item.x),
+                    level: 2,
+                  };
+                  const map = new kakao.maps.Map(mapContainer, mapOption);
+                  const catMarker = new kakao.maps.Marker({ position: map.getCenter() });
+                  let marker = new kakao.maps.Marker({
+                    map:map,
+                    position: new kakao.maps.LatLng(item.y, item.x),
+                  });
+                  const iwRemoveable = true;
+                  var infowindow = new kakao.maps.InfoWindow({ zIndex: 1, removable: iwRemoveable });
+                  kakao.maps.event.addListener(marker, "click", function () {
+                    infowindow.setContent(
+                      '<div style="padding:5px;font-size:12px;">' +
+                        item.place_name +
+                      '</div>'
+                    );
+                    infowindow.open(map, marker);
+                  });
+                  marker.setMap(map);
+                  kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+                    const latlng = mouseEvent.latLng;
+                    setLatitude(latlng.getLat());
+                    setLongitude(latlng.getLng());
+                    catMarker.setPosition(latlng);
+                    catMarker.setMap(map);
+                  });
+                }()} props={Places} key={i}>
                   <ListNum>{i + 1}</ListNum>
                   <ListDesc>
                     <p>{item.place_name}</p>
@@ -550,7 +599,7 @@ const MapWrap = styled.div`
   width: 100%;
   height: 80vh;
   @media screen and (max-height: 568px) {
-    margin: -10px 0;
+    margin: 10px 0;
   }
 `;
 const List = styled.div`

@@ -168,12 +168,12 @@ export const __editCatDetailInfo =
 
 // 지역에 따라 모든 게시물 불러오기
 export const __getAllCatLocation =
-  (location, page = 1, limit = 99999) =>
+  (location) =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(postLoading(true));
-      const { data } = await catApi.getCatLocation(location, page);
-      dispatch(getCatLocation(data, limit));
+      const { data } = await catApi.getCatAllLocation(location);
+      dispatch(getCatAllLocation(data, null));
     } catch (err) {
       console.error(err);
     }
@@ -365,6 +365,10 @@ const cat = createSlice({
     },
 
     getCatLocation: (state, action) => {
+      state.list = action.payload;
+      state.postLoaded = false;
+    },
+    getCatAllLocation: (state, action) => {
       state.list = action.payload;
       state.postLoaded = false;
     },

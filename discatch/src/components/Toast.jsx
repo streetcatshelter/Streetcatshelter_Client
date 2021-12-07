@@ -1,7 +1,7 @@
 // LIBRARY
 import React from "react";
 // STYLE
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Toast = ({ message, message2 }) => {
   return (
@@ -15,6 +15,7 @@ const Toast = ({ message, message2 }) => {
     </>
   );
 };
+
 const Background = styled.div`
   position: fixed;
   top: 0;
@@ -56,7 +57,7 @@ const ToastBox = styled.div`
   margin: ${(props) => (props.message2 ? "0px auto" : "auto")};
   font-weight: 700;
   word-break: keep-all;
-  visibility: visible
+  visibility: visible;
   animation:  ${fadeIn} 0.5s, ${fadeOut} 0.5s 1.0s; 
   -webkit-animation: ${fadeIn} 0.5s, ${fadeOut} 0.5s 1.0s;
   animation-fill-mode: forwards;

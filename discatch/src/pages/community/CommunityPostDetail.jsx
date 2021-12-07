@@ -1,5 +1,5 @@
 // LIBRARY
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -8,6 +8,7 @@ import {
   CommentList,
   ContentHeader,
   SecondSpinner,
+  Toast,
 } from "../../components";
 
 // STYLE
@@ -27,7 +28,7 @@ const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
   const isLoaded = useSelector((state) => state.community.itemDetailLoaded);
-
+  const [deleteStatus, setDeleteStatus] = useState(false);
   const { cCategory, cContents, cImageList, cTitle, cLocation } = useSelector(
     (state) => ({
       cCategory: state.community.catInfo.data?.category,
@@ -85,7 +86,10 @@ const CommunityPostDetail = (props) => {
   }
 
   const deleteCommunity = () => {
-    dispatch(deleteCommunityDB(communityId, category, location));
+    setDeleteStatus(true);
+    setTimeout(() => {
+      dispatch(deleteCommunityDB(communityId, category, location));
+    }, 1000);
   };
 
   let pathCategory;
@@ -97,9 +101,17 @@ const CommunityPostDetail = (props) => {
     pathCategory = "sharing";
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
+
+  useEffect(() => {
+    if (deleteStatus) {
+      setTimeout(() => {
+        setDeleteStatus(false);
+      }, 1500);
+    }
+  }, [deleteStatus]);
 
   return (
     <Template props={props}>
@@ -140,6 +152,7 @@ const CommunityPostDetail = (props) => {
           </div>
         </div>
       </SecondSpinner>
+      {deleteStatus && <Toast message="게시물 삭제 완료!" />}
     </Template>
   );
 };

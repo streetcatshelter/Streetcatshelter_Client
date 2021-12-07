@@ -1,10 +1,11 @@
 // LIBRARY
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import { Template, SecondHeader } from "../../components";
 import { CommunityPreview } from "../../components/index";
+import { Toast } from "../../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -46,7 +47,6 @@ const CommunityPostWrite = (props) => {
   }
 
   const [fileNum, setFileNum] = useState(0);
-
   const nickName = useSelector((state) => state.mypage.userInfo.nickname);
 
   // S3
@@ -59,11 +59,21 @@ const CommunityPostWrite = (props) => {
       dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum + 1);
     } else {
-      alert("사진은 최대 5장까지 등록할 수 있어요!");
+      setMaxPhotoStatus(true);
     }
   };
 
+  const maxPhotoAlert = () => {
+    if (fileNum === 5) {
+      setMaxPhotoStatus(true);
+    }
+  }
+
   const [category, setCategory] = React.useState(firstCategory);
+  const [titleStatus, setTitleStatus] = useState(false);
+  const [contentStatus, setContentStatus] = useState(false);
+  const [photoStatus, setPhotoStatus] = useState(false);
+  const [maxPhotoStatus, setMaxPhotoStatus] = useState(false);
 
   const Options = [
     { key: 1, value: "고양이 정보글" },
@@ -87,9 +97,9 @@ const CommunityPostWrite = (props) => {
 
   const writeBtn = () => {
     if (title === '') {
-      alert('제목을 입력해주세요!');
+      setTitleStatus(true);
     } else if (contents === '') {
-      alert('내용을 입력해주세요!');
+      setContentStatus(true);
     } else {
       dispatch(
         addCommunityDB(category, contents, location, title, detailLocation, nickName)
@@ -99,10 +109,11 @@ const CommunityPostWrite = (props) => {
 
   const cancelBtn = () => {
     history.push({pathname:`${backPath}`, state: { location }});
+    dispatch(imgActions.setInitialState());
   }
 
   const delLastImageBtn = () => {
-    if (preview.lentgh === 5) {
+    if (preview.length === 5) {
       dispatch(imgActions.delPreview(4));
       dispatch(imgActions.delFile(4));
       setFileNum(fileNum - 1);
@@ -123,13 +134,45 @@ const CommunityPostWrite = (props) => {
       dispatch(imgActions.delFile(0));
       setFileNum(fileNum - 1);
     } else {
-      alert("삭제할 사진이 없어요!");
+      setPhotoStatus(true);
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (titleStatus) {
+      setTimeout(() => {
+        setTitleStatus(false);
+      }, 1500);
+    }
+  }, [titleStatus]);
+
+  useEffect(() => {
+    if (contentStatus) {
+      setTimeout(() => {
+        setContentStatus(false);
+      }, 1500);
+    }
+  }, [contentStatus]);
+
+  useEffect(() => {
+    if (photoStatus) {
+      setTimeout(() => {
+        setPhotoStatus(false);
+      }, 1500);
+    }
+  }, [photoStatus]);
+
+  useEffect(() => {
+    if (maxPhotoStatus) {
+      setTimeout(() => {
+        setMaxPhotoStatus(false);
+      }, 1500);
+    }
+  }, [maxPhotoStatus]);
 
   return (
     <Template props={props}>
@@ -236,6 +279,7 @@ const CommunityPostWrite = (props) => {
                     accept="image/png, image/jpeg"
                     style={{ display: "none" }}
                     onChange={handleInputFile}
+                    onClick={maxPhotoAlert}
                   />
                   <Text
                     size="9px"
@@ -356,6 +400,10 @@ const CommunityPostWrite = (props) => {
           </Grid>
         </CommunityWriteStyle>
       </Grid>
+      {titleStatus && <Toast message="제목을 입력해주세요!" />}
+      {contentStatus && <Toast message="내용을 입력해주세요!" />}
+      {photoStatus && <Toast message="삭제할 사진이 없어요!" />}
+      {maxPhotoStatus && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
     </Template>
   );
 };

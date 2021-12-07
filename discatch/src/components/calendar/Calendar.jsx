@@ -11,7 +11,6 @@ import { __getCalendar } from "../../redux/modules/cat";
 
 const Calendar = (props) => {
   const dispatch = useDispatch();
-
   let DATE = new Date();
   const YEAR = DATE.getFullYear();
   const MONTH = DATE.getMonth();

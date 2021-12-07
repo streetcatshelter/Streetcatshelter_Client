@@ -40,7 +40,7 @@ const CalendarModal = (props) => {
               <ViewDate>
                 {path === "mypage" ? (
                   <p>
-                    활동일지
+                    집사일기
                     <span>
                       ({year}년{month}월{elm}일)
                     </span>
@@ -54,14 +54,14 @@ const CalendarModal = (props) => {
                     </span>
                   </p>
                 )}
-                <div>
-                  <X
-                    onClick={() => {
-                      setOpenModal(false);
-                    }}
-                  />{" "}
-                </div>
               </ViewDate>
+              <CancleBox>
+                <X
+                  onClick={() => {
+                    setOpenModal(false);
+                  }}
+                />
+              </CancleBox>
             </Head>
             <Events>
               {WorkDetail.map((EachCatWork, idx) => {
@@ -171,36 +171,37 @@ const Window = styled.div`
 `;
 const Wrapper = styled.div`
   width: 100%;
+  height: 100%;
 `;
 const Head = styled.div`
   height: 15%;
   width: 100%;
-  margin: auto;
-  text-align: center;
-`;
-const ViewDate = styled.div`
-  padding-top: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
+`;
+const ViewDate = styled.div`
   p {
-    width: 85%;
+    width: 100%;
     font-size: 16px;
     font-weight: 900;
-    margin: 0px 0px 0px 25px;
+    margin: auto;
     span {
       font-size: 12px;
     }
   }
-  div {
-    width: 15%;
-    svg {
-      width: 20px;
-      height: 20px;
-      margin: auto;
-      padding: 5px;
-      border-radius: 50%;
-      background: #fbd986;
-    }
+`;
+const CancleBox = styled.div`
+  position: fixed;
+  top: 4%;
+  left: 85%;
+  svg {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fbd986;
   }
 `;
 const Events = styled.div`
@@ -243,6 +244,7 @@ const CatRight = styled.div`
     margin: 5px;
     line-height: 20px;
     font-size: 14px;
+    font-weight: 700;
   }
 `;
 

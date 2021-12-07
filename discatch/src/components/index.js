@@ -61,6 +61,7 @@ import GoogleLoginBtn from "./GoogleLoginBtn";
 import Spinner from "./spinner/Spinner";
 import SecondSpinner from "./spinner/SecondSpinner";
 
+import EventAlram from "./EventAlram";
 export {
   // TEMPLATES
   Router,
@@ -114,4 +115,5 @@ export {
   //SPINNER
   Spinner,
   SecondSpinner,
+  EventAlram,
 };

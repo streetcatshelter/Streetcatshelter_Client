@@ -28,8 +28,8 @@ const SearchAddress = (props) => {
 
   const onCompletePost = (data) => {
     let fullAddr = `${data.sido} ${data.sigungu} ${data.bname}`;
-    if (fullAddr.split(' ').length === 4) {
-      fullAddr = `${data.sigungu} ${data.bname}`
+    if (fullAddr.split(" ").length === 4) {
+      fullAddr = `${data.sigungu} ${data.bname}`;
     }
     let extraAddr = "";
     if (data.addressType === "R") {
@@ -43,23 +43,30 @@ const SearchAddress = (props) => {
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
 
-    if (props.Village[0]?.split(' ')[2] !== data.bname && 
-      props.Village[1]?.split(' ')[2] !== data.bname && 
-      props.Village[2]?.split(' ')[2] !== data.bname) {
-      dispatch(saveVillage(`${fullAddr.split(' (')[0]}`));
+    if (
+      props.Village[0]?.split(" ")[2] !== data.bname &&
+      props.Village[1]?.split(" ")[2] !== data.bname &&
+      props.Village[2]?.split(" ")[2] !== data.bname
+    ) {
+      dispatch(saveVillage(`${fullAddr.split(" (")[0]}`));
     } else {
-      alert('이름이 같은 동은 한 곳만 등록 가능합니다.');
+      alert("이름이 같은 동은 한 곳만 등록 가능합니다.");
     }
     setIsOpenPost(false);
   };
 
   const postCodeStyle = {
-    display: "block",
-    position: "relative",
-    top: "0%",
-    width: "400px",
-    height: "400px",
-    padding: "7px",
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: " translate(-50%, -50%)",
+    boxShadow:
+      "0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)",
+    maxWidth: "420px",
+    width: "100vw",
+    height: "50vh",
+    minHeight: " 450px",
+    borderRadius: "20px",
   };
 
   return (
@@ -69,11 +76,14 @@ const SearchAddress = (props) => {
         <Search />
       </SearchButton>
       {isOpenPost ? (
-        <DaumPostcode
-          style={postCodeStyle}
-          autoClose
-          onComplete={onCompletePost}
-        />
+        <Background>
+          <Overlay onClick={() => setIsOpenPost(!isOpenPost)} />
+          <DaumPostcode
+            style={postCodeStyle}
+            autoClose
+            onComplete={onCompletePost}
+          />{" "}
+        </Background>
       ) : null}
     </>
   );
@@ -100,6 +110,21 @@ const SearchButton = styled.div`
     width: 16px;
     margin: auto;
   }
+`;
+
+const Background = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100%;
+`;
+const Overlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export default SearchAddress;

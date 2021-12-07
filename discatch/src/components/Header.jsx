@@ -15,9 +15,8 @@ import { ArrowLeft, LogOut, Bell, Search } from "react-feather";
 import { history } from "../redux/configureStore";
 import { searchMap } from "../redux/modules/map";
 import { mypageActions } from "../redux/modules/mypage";
-import { userActions } from "../redux/modules/user";
 
-import { EventAlram } from "./";
+import { Toast } from "./";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -27,6 +26,7 @@ const Header = (props) => {
   let location;
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
+
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   location = userLocation ? userLocation : firstLocation;
 
@@ -87,7 +87,7 @@ const Header = (props) => {
   }
 
   const [place, setPlace] = useState(location);
-  const [openAlram, setOpenAlram] = useState(false);
+  // const [openAlram, setOpenAlram] = useState(false);
   useEffect(() => {
     dispatch(searchMap(firstLocation));
   }, [firstLocation, dispatch]);
@@ -149,12 +149,15 @@ const Header = (props) => {
       history.goBack();
     }
   };
+  const [ToastStatus, setToastStatus] = useState(false);
 
-  const Logout = () => {
-    if (window.confirm("정말로 로그아웃하시겠습니까?") === true) {
-      dispatch(userActions._logout());
+  useEffect(() => {
+    if (ToastStatus) {
+      setTimeout(() => {
+        setToastStatus(false);
+      }, 1500);
     }
-  };
+  }, [ToastStatus]);
 
   if (!userInfo) {
     return <div></div>;
@@ -199,17 +202,12 @@ const Header = (props) => {
               alert("준비중입니다.");
             }}
           /> */}
+
           <Bell
             onClick={() => {
-              // setSearchModal(!searchModal);
-              setOpenAlram(true);
+              setToastStatus(true);
             }}
           />
-
-          {/* <LogOut
-              onClick={Logout}
-              style={{ color: "gray", marginLeft: "30px", cursor: "pointer" }}
-            /> */}
         </SideBtnBox>
       </HeaderInner>
       {/* {searchModal ? (
@@ -224,7 +222,7 @@ const Header = (props) => {
       ) : (
         ""
       )} */}
-      {openAlram && <EventAlram />}
+      {ToastStatus && <Toast message="버전2에서 준비중입니다." />}
     </HeaderStyle>
   );
 };
@@ -235,6 +233,7 @@ const HeaderInner = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
 const SideBtnBox = styled.div`
   margin: auto;
   width: 25%;

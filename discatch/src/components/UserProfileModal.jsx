@@ -94,7 +94,7 @@ const UserProfileModal = (props) => {
                           });
                         }}
                       >
-                        <img src={cat.catImage} alt="likedCat" key={idx} />
+                        <img src={cat} alt="likedCat" key={idx} />
                       </LikeCat>
                     );
                   })}

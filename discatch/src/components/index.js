@@ -7,7 +7,7 @@ import EditModalSlide from "./EditModalSlide";
 import SecondHeader from "./SecondHeader";
 import ContentHeader from "./ContentHeader";
 import EmptyPost from "./EmptyPost";
-
+import Toast from "./Toast";
 // SLIDER
 import Slide from "./slider/Slide";
 
@@ -40,6 +40,7 @@ import Diary from "./catPosts/Diary";
 // COMMENT
 import Comment from "./comment/Comment";
 import CommentList from "./comment/CommentList";
+import CommentCard from "./comment/CommentCard";
 
 // COMMUNITY
 import CommunityCategoryCard from "./community/CommunityCategoryCard";
@@ -73,6 +74,7 @@ export {
   ContentHeader,
   EmptyPost,
   UserProfileModal,
+  Toast,
   // SLIDER
   Slide,
   // MYPAGES
@@ -100,6 +102,7 @@ export {
   // COMMENT
   Comment,
   CommentList,
+  CommentCard,
   // COMMUNITY
   CommunityCategoryCard,
   CommunityPost,

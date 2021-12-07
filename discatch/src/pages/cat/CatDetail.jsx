@@ -122,7 +122,7 @@ const CatDetail = (props) => {
             is_float="is_float"
             clickEvent={() => {
               history.push({
-                pathname: `/map/${location?.split(' ')[2]}/${catId}`,
+                pathname: `/map/${location?.split(" ")[2]}/${catId}`,
                 state: { catId, location },
               });
             }}

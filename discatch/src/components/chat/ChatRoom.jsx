@@ -13,7 +13,7 @@ import { Image, Grid } from "../../elements";
 import styled from "styled-components";
 
 // COMPONENTS
-import { EditModalSlide } from "..";
+import { EditModalSlide, Toast } from "..";
 
 // REDUX
 import { history } from "../../redux/configureStore";
@@ -28,6 +28,17 @@ const ChatRoom = (props) => {
   const token = localStorage.getItem("token");
   const ChatInfo = useSelector((state) => state.chat.chatinfo);
   const username = useSelector((state) => state.mypage.userInfo.username);
+
+  //토스트모달
+  const [ToastStatus, setToastStatus] = useState(false);
+
+  useEffect(() => {
+    if (ToastStatus) {
+      setTimeout(() => {
+        setToastStatus(false);
+      }, 1500);
+    }
+  }, [ToastStatus]);
 
   const client = useRef({});
   const [message, setMessage] = useState("");
@@ -95,7 +106,7 @@ const ChatRoom = (props) => {
     if (!client.current.connected) {
       return;
     }
-    if (message.length > 0) {
+    if (message.length > 1) {
       client.current.publish({
         destination: "/pub/api/chat/message",
         headers: { token: token },
@@ -108,7 +119,7 @@ const ChatRoom = (props) => {
 
       setMessage("");
     } else {
-      alert("메세지를 입력해주세요!");
+      setToastStatus(true);
     }
   };
 
@@ -158,6 +169,7 @@ const ChatRoom = (props) => {
           </SendText>
         </SendButton>
       </ChatSendBox>
+      {ToastStatus && <Toast message="메세지를 입력해주세요!" />}
     </ChatWrap>
   );
 };

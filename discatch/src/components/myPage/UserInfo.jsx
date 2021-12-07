@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { XCircle, Upload } from "react-feather";
 
 // COMPONENTS
-import SearchAddress from "./SearchAddress";
+import { SearchAddress, Toast } from "..";
 
 // REDUX
 import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
@@ -22,13 +22,30 @@ const UserInfo = () => {
   const Village = useSelector((state) => state.mypage.userVillage);
   const [fileUrl, setFileUrl] = useState(null);
 
+  //토스트모달
+  const [ToastStatus, setToastStatus] = useState(false);
+  const [SecondToastStatus, setSecondToastStatus] = useState(false);
+  useEffect(() => {
+    if (ToastStatus) {
+      setTimeout(() => {
+        setToastStatus(false);
+      }, 1500);
+    } else if (SecondToastStatus) {
+      setTimeout(() => {
+        setSecondToastStatus(false);
+      }, 1500);
+    }
+  }, [ToastStatus, SecondToastStatus]);
+
   const changeNickName = (e) => {
     setNickName(e.target.value);
   };
 
   const EditMyInfo = () => {
     if (NickName === "") {
-      alert("닉네임을 입력해주세요!");
+      setToastStatus(true);
+    } else if (Village.length === 0) {
+      setSecondToastStatus(true);
     } else {
       dispatch(mypageActions._editMyInfo(NickName, Village));
     }
@@ -45,6 +62,14 @@ const UserInfo = () => {
 
   return (
     <React.Fragment>
+      {ToastStatus ? (
+        <Toast message="닉네임을 입력해주세요!" />
+      ) : SecondToastStatus ? (
+        <Toast message="동네를 입력해주세요!" />
+      ) : (
+        ""
+      )}
+
       <Wrapper>
         <Inner>
           <p>닉네임</p>

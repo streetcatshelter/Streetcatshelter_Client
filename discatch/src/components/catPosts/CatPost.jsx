@@ -93,6 +93,7 @@ const MoreHorizontalBtn = styled(MoreHorizontal)`
 const CatPostStyle = styled.div`
   background: rgb(${(props) => props.theme.palette.diaryColor});
   width: 100%;
+  height: 80px;
   display: flex;
   margin: 5px auto;
   p {
@@ -105,6 +106,7 @@ const CatPostStyle = styled.div`
 `;
 const LeftBox = styled.div`
   width: 20%;
+  min-width: 80px;
   @media screen and (max-width: 320px) {
     width: 25%;
   }
@@ -118,7 +120,7 @@ const RightBox = styled.div`
   flex-direction: column;
   width: 80%;
   height: 80px;
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 400px) {
     width: 75%;
   }
   div {

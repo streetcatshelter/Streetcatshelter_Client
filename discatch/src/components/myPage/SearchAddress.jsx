@@ -16,15 +16,22 @@ import { saveVillage } from "../../redux/modules/mypage";
 const SearchAddress = (props) => {
   const dispatch = useDispatch();
   const [isOpenPost, setIsOpenPost] = useState(false);
-  const [ToastStatus, setToastStatus] = useState(false);
 
+  //토스트모달
+  const [ToastStatus, setToastStatus] = useState(false);
+  const [SecondToastStatus, setSecondToastStatus] = useState(false);
   useEffect(() => {
     if (ToastStatus) {
       setTimeout(() => {
         setToastStatus(false);
       }, 1500);
+    } else if (SecondToastStatus) {
+      setTimeout(() => {
+        setSecondToastStatus(false);
+      }, 1500);
     }
-  }, [ToastStatus]);
+  }, [ToastStatus, SecondToastStatus]);
+
   const onChangeOpenPost = () => {
     if (isOpenPost === false && props.Village.length === 3) {
       setToastStatus(true);
@@ -57,7 +64,7 @@ const SearchAddress = (props) => {
     ) {
       dispatch(saveVillage(`${fullAddr.split(" (")[0]}`));
     } else {
-      alert("이름이 같은 동은 한 곳만 등록 가능합니다.");
+      setSecondToastStatus(true);
     }
     setIsOpenPost(false);
   };
@@ -92,11 +99,15 @@ const SearchAddress = (props) => {
           />
         </Background>
       ) : null}
-      {ToastStatus && (
+      {ToastStatus ? (
         <Toast
           message="최대 3동네까지 등록하실 수 있습니다"
           message2="수정을 원하시면 동네 삭제 후 다시 시도해주세요!"
         />
+      ) : SecondToastStatus ? (
+        <Toast message="이름이 같은 동은 한 곳만 등록 가능합니다." />
+      ) : (
+        ""
       )}
     </>
   );

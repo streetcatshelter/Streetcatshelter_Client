@@ -8,6 +8,7 @@ import SecondHeader from "./SecondHeader";
 import ContentHeader from "./ContentHeader";
 import EmptyPost from "./EmptyPost";
 import Toast from "./Toast";
+
 // SLIDER
 import Slide from "./slider/Slide";
 
@@ -21,7 +22,7 @@ import UserInfo from "./myPage/UserInfo";
 import MyPageDetail from "./myPage/MyPageDetail";
 import MyWork from "./myPage/MyWork";
 import MyPageContent from "./myPage/MyPageContent";
-
+import SearchAddress from "./myPage/SearchAddress";
 // CALENDAR
 import Calendar from "./calendar/Calendar";
 import CalendarBody from "./calendar/CalendarBody";
@@ -62,6 +63,7 @@ import Spinner from "./spinner/Spinner";
 import SecondSpinner from "./spinner/SecondSpinner";
 
 import EventAlram from "./EventAlram";
+
 export {
   // TEMPLATES
   Router,
@@ -73,6 +75,7 @@ export {
   ContentHeader,
   EmptyPost,
   Toast,
+  SearchAddress,
   // SLIDER
   Slide,
   // MYPAGES

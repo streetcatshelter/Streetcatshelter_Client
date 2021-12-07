@@ -63,6 +63,11 @@ export const catApi = {
   getCatInfo: (catId) => instance.get(`/cat/info/${catId}`),
   getCatCalendar: (catId, month, year) =>
     instance.get(`/cat/calender/${catId}/?month=${month}&year=${year}`),
+  getCalendarDetail: (catId, day, month, year) =>
+    instance.get(
+      `/cat/calender/detail/${catId}?day=${day}&month=${month}&year=${year}`
+    ),
+
   getCatGallery: (catId, size) =>
     instance.get(`/cat/gallery/${catId}/?page=1&size=${size}`),
   getCatDiary: (catId, size) =>

@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 // ICON
-import { ArrowLeft, LogOut, Bell, Search } from "react-feather";
+import { ArrowLeft, Bell, Search } from "react-feather";
 
 // REDUX
 import { history } from "../redux/configureStore";
@@ -247,6 +247,7 @@ const SideBtnBox = styled.div`
   svg {
     color: gray;
     margin: 18px auto;
+    cursor: pointer;
     @media screen and (max-width: 400px) {
       width: 20px;
       height: 20px;

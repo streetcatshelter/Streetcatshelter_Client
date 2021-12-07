@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 // COMPONENTS
-import { EditModalSlide } from "../../components";
+import { EditModalSlide, EmptyPost } from "../../components";
 
 // MOMENT
 import moment from "moment";
@@ -23,61 +23,67 @@ const ChatMain = (props) => {
   return (
     <React.Fragment>
       <Wrapper>
-        {Rooms.map((room, idx) => {
-          const LastActivity = moment(room.lastActivity).format(
-            "YYYY-M-D hh:mm"
-          );
-          return (
-            <ChatRoom key={idx}>
-              <InnerBox>
-                <LeftBox>
-                  <ProfileImg
-                    onClick={() => {
-                      history.push(`api/chat/enter/${room.roomId}`);
-                    }}
-                    src={room.opponentImage}
-                    alt={room.opponentImage}
-                  />
-                </LeftBox>
-                <ChatInfo>
-                  <InfoHead>
-                    <InfoInner
-                      onClick={() => {
-                        history.push(`api/chat/enter/${room.roomId}`);
-                      }}
-                    >
-                      <p>{room.opponent}</p>
-                      {room.lastActivity ? <p>{LastActivity}</p> : ""}
-                    </InfoInner>
-                    <EditModalSlide
-                      FirstBtn="상대방 프로필보기"
-                      SecondBtn="채팅방 삭제하기"
-                      FirstClick={() => {
-                        alert("준비중입니다.");
-                      }}
-                      SecondClick={() => {
-                        dispatch(chatActions._deleteRoom(room.roomId));
-                      }}
-                    />
-                  </InfoHead>
+        {Rooms && Rooms.length > 0 ? (
+          <>
+            {Rooms.map((room, idx) => {
+              const LastActivity = moment(room.lastActivity).format(
+                "YYYY-M-D hh:mm"
+              );
+              return (
+                <ChatRoom key={idx}>
+                  <InnerBox>
+                    <LeftBox>
+                      <ProfileImg
+                        onClick={() => {
+                          history.push(`api/chat/enter/${room.roomId}`);
+                        }}
+                        src={room.opponentImage}
+                        alt={room.opponentImage}
+                      />
+                    </LeftBox>
+                    <ChatInfo>
+                      <InfoHead>
+                        <InfoInner
+                          onClick={() => {
+                            history.push(`api/chat/enter/${room.roomId}`);
+                          }}
+                        >
+                          <p>{room.opponent}</p>
+                          {room.lastActivity ? <p>{LastActivity}</p> : ""}
+                        </InfoInner>
+                        <EditModalSlide
+                          FirstBtn="상대방 프로필보기"
+                          SecondBtn="채팅방 삭제하기"
+                          FirstClick={() => {
+                            alert("준비중입니다.");
+                          }}
+                          SecondClick={() => {
+                            dispatch(chatActions._deleteRoom(room.roomId));
+                          }}
+                        />
+                      </InfoHead>
 
-                  <ChatMsg
-                    onClick={() => {
-                      history.push({
-                        pathname: `api/chat/enter/${room.roomId}`,
-                        state: { location },
-                      });
-                    }}
-                  >
-                    {room.lastMessage === null
-                      ? `${room.opponent}와 채팅을 시작해보세요!`
-                      : room.lastMessage}
-                  </ChatMsg>
-                </ChatInfo>
-              </InnerBox>
-            </ChatRoom>
-          );
-        })}
+                      <ChatMsg
+                        onClick={() => {
+                          history.push({
+                            pathname: `api/chat/enter/${room.roomId}`,
+                            state: { location },
+                          });
+                        }}
+                      >
+                        {room.lastMessage === null
+                          ? `${room.opponent}와 채팅을 시작해보세요!`
+                          : room.lastMessage}
+                      </ChatMsg>
+                    </ChatInfo>
+                  </InnerBox>
+                </ChatRoom>
+              );
+            })}
+          </>
+        ) : (
+          <EmptyPost path="chat" />
+        )}
       </Wrapper>
     </React.Fragment>
   );

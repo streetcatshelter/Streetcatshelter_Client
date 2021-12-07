@@ -14,7 +14,6 @@ import { saveVillage } from "../../redux/modules/mypage";
 
 const SearchAddress = (props) => {
   const dispatch = useDispatch();
-
   const [isOpenPost, setIsOpenPost] = useState(false);
   const onChangeOpenPost = () => {
     if (isOpenPost === false && props.Village.length === 3) {

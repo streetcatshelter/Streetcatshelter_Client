@@ -7,6 +7,7 @@ import EditModalSlide from "./EditModalSlide";
 import SecondHeader from "./SecondHeader";
 import ContentHeader from "./ContentHeader";
 import EmptyPost from "./EmptyPost";
+
 // SLIDER
 import Slide from "./slider/Slide";
 
@@ -21,6 +22,7 @@ import MyPageDetail from "./myPage/MyPageDetail";
 import MyWork from "./myPage/MyWork";
 import MyPageContent from "./myPage/MyPageContent";
 import UserProfileModal from "./UserProfileModal";
+
 // CALENDAR
 import Calendar from "./calendar/Calendar";
 import CalendarBody from "./calendar/CalendarBody";
@@ -52,7 +54,9 @@ import ChatMain from "./chat/ChatMain";
 import ChatRoom from "./chat/ChatRoom";
 import ChatMessage from "./chat/ChatMessage";
 
+// LOGIN
 import GoogleLoginBtn from "./GoogleLoginBtn";
+
 //SPINNER
 import Spinner from "./spinner/Spinner";
 import SecondSpinner from "./spinner/SecondSpinner";

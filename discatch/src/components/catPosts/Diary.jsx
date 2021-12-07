@@ -12,11 +12,11 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { css } from "styled-components";
 import { flexBox } from "../../shared/style";
 
-// REDUX
-import { history } from "../../redux/configureStore";
-
 // MOMENT
 import moment from "moment";
+
+// REDUX
+import { history } from "../../redux/configureStore";
 
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;

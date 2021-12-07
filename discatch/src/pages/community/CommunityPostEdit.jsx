@@ -1,9 +1,10 @@
 // LIBRARY
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import { CommunityPreview, Template, SecondHeader } from "../../components";
+import { Toast } from "../../components";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -92,6 +93,11 @@ const CommunityPostEdit = (props) => {
   const imageNum = imageList?.length;
 
   const [fileNum, setFileNum] = useState(imageNum);
+  const [titleStatus, setTitleStatus] = useState(false);
+  const [contentStatus, setContentStatus] = useState(false);
+  const [photoStatus, setPhotoStatus] = useState(false);
+  const [maxPhotoStatus, setMaxPhotoStatus] = useState(false);
+  const [prePhotoStatus, setPrePhotoStatus] = useState(false);
 
   // S3
   const handleInputFile = (e) => {
@@ -104,7 +110,7 @@ const CommunityPostEdit = (props) => {
       dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum + 1);
     } else {
-      alert("사진은 최대 5장까지 등록할 수 있어요!");
+      setMaxPhotoStatus(true);
     }
   };
 
@@ -120,9 +126,9 @@ const CommunityPostEdit = (props) => {
 
   const editBtn = () => {
     if (editTitle === '') {
-      alert('제목을 입력해주세요!');
+      setTitleStatus(true);
     } else if (editcontents === '') {
-      alert('내용을 입력해주세요!');
+      setContentStatus(true);
     } else {
       dispatch(imgActions.setFiles(imageList, imageNum));
       dispatch(
@@ -140,7 +146,7 @@ const CommunityPostEdit = (props) => {
   };
 
   const delLastImageBtn = () => {
-    if (preview.lentgh === 5) {
+    if (preview.length === 5) {
       dispatch(imgActions.delPreview(fileNum - 1));
       dispatch(imgActions.delFile(fileNum - 1));
       setFileNum(fileNum - 1);
@@ -161,9 +167,9 @@ const CommunityPostEdit = (props) => {
       dispatch(imgActions.delFile(fileNum - 1));
       setFileNum(fileNum - 1);
     } else if (preview.length === 0 && imageNum !== 0) {
-      alert("이전에 추가한 사진은 삭제할 수 없어요!");
+      setPrePhotoStatus(true);
     } else {
-      alert("삭제할 사진이 없어요!");
+      setPhotoStatus(true);
     }
   };
 
@@ -176,9 +182,49 @@ const CommunityPostEdit = (props) => {
     pathCategory = 'sharing';
   }
   
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [category, communityId, dispatch]);
+
+  useEffect(() => {
+    if (titleStatus) {
+      setTimeout(() => {
+        setTitleStatus(false);
+      }, 1500);
+    }
+  }, [titleStatus]);
+
+  useEffect(() => {
+    if (contentStatus) {
+      setTimeout(() => {
+        setContentStatus(false);
+      }, 1500);
+    }
+  }, [contentStatus]);
+
+  useEffect(() => {
+    if (photoStatus) {
+      setTimeout(() => {
+        setPhotoStatus(false);
+      }, 1500);
+    }
+  }, [photoStatus]);
+
+  useEffect(() => {
+    if (maxPhotoStatus) {
+      setTimeout(() => {
+        setMaxPhotoStatus(false);
+      }, 1500);
+    }
+  }, [maxPhotoStatus]);
+
+  useEffect(() => {
+    if (prePhotoStatus) {
+      setTimeout(() => {
+        setPrePhotoStatus(false);
+      }, 1500);
+    }
+  }, [prePhotoStatus]);
 
   return (
     <Template props={props}>
@@ -437,6 +483,11 @@ const CommunityPostEdit = (props) => {
           </Grid>
         </CommunityEditStyle>
       </Grid>
+      {titleStatus && <Toast message="제목을 입력해주세요!" />}
+      {contentStatus && <Toast message="내용을 입력해주세요!" />}
+      {photoStatus && <Toast message="삭제할 사진이 없어요!" />}
+      {maxPhotoStatus && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
+      {prePhotoStatus && <Toast message="이전에 추가한 사진은 삭제할 수 없어요!" />}
     </Template>
   );
 };

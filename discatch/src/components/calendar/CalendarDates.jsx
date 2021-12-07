@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 
 const CalendarDates = (props) => {
   const { lastDate, firstDate, elm, findToday, month, year, idx } = props;
-
   const [openModal, setOpenModal] = useState(false);
   const Calendar = useSelector((state) =>
     props.path === "mypage" ? state.mypage.calendar : state.cat.calendar

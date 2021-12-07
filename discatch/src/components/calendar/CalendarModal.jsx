@@ -12,6 +12,7 @@ import { X, CheckSquare } from "react-feather";
 import { mypageActions } from "../../redux/modules/mypage";
 import { __getCalendarDetail } from "../../redux/modules/cat";
 import { history } from "../../redux/configureStore";
+
 const CalendarModal = (props) => {
   const { elm, month, year, setOpenModal, path } = props;
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const CalendarModal = (props) => {
   );
   const CatId = useSelector((state) => state.cat.catinfo?.catId);
   const CatName = useSelector((state) => state.cat.catinfo?.catName);
+  
   useEffect(() => {
     path === "mypage"
       ? dispatch(mypageActions._getCalenderDetail(year, month, elm))

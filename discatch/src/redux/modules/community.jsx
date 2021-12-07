@@ -204,8 +204,7 @@ export const deleteCommunityDB =
     }
     try {
       const data = await communityApi.deleteCommunity(communityId);
-      window.alert("게시물 삭제 완료!");
-      history.push(`/community/${location.split(" ")[2]}/${pathName}`);
+      history.push({pathname:`/community/${location}/${pathName}`, state : { location }});
     } catch (err) {
       console.error(err);
     }

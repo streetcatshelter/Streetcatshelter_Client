@@ -3,6 +3,8 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { searchKeywordMap } from "../../redux/modules/map";
 
+import { Toast } from "../";
+
 // ROUTE
 import { useLocation } from "react-router-dom";
 
@@ -44,6 +46,19 @@ const Location = (props) => {
   useEffect(() => {
     dispatch(__getAllCatLocation(location));
   }, [location, dispatch]);
+  const [ToastStatus, setToastStatus] = useState(false);
+  const [keywordToastStatus, setKeywordToastStatus] = useState(false);
+  useEffect(() => {
+    if (ToastStatus) {
+      setTimeout(() => {
+        setToastStatus(false);
+      }, 1500);
+    } else if (keywordToastStatus) {
+      setTimeout(() => {
+        setKeywordToastStatus(false);
+      }, 1500);
+    }
+  }, [ToastStatus, keywordToastStatus]);
 
   const showCats = () => {
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
@@ -194,7 +209,6 @@ const Location = (props) => {
   const CreateKeyword = () => {
     setSearchKeyword("");
     if (searchKeyword === "") {
-      window.alert("검색어를 입력해주세요!");
       return;
     }
     dispatch(searchKeywordMap(searchKeyword));
@@ -224,7 +238,7 @@ const Location = (props) => {
         displayPagination(pagination);
         setPlaces(data);
       } else {
-        alert("검색 결과가 없습니다!");
+        setKeywordToastStatus(true);
         showCats();
       }
     }
@@ -486,12 +500,19 @@ const Location = (props) => {
             longitude === undefined &&
             pathLength === 3
           ) {
-            alert("지도에 위치를 표시해주세요!");
+            setToastStatus(true);
           }
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
       </Button>
+      {keywordToastStatus ? (
+        <Toast message="검색 결과가 없습니다." />
+      ) : ToastStatus ? (
+        <Toast message="지도에 위치를 표시해 주세요!" />
+      ) : (
+        ""
+      )}
     </MapWrap>
   );
 };

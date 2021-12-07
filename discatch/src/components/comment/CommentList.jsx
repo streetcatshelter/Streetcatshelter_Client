@@ -1,10 +1,9 @@
 // LIBRARY
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import Comment from "./Comment";
-import CommentCard from "./CommentCard";
+import { Comment, CommentCard, Toast } from "..";
 
 // STYLE
 import { css } from "styled-components";
@@ -24,18 +23,27 @@ import {
 
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
-  const pathName = useLocation().pathname.split('/')[3];
+  const pathName = useLocation().pathname.split("/")[3];
+  const [ToastStatus, setToastStatus] = useState(false);
+
+  useEffect(() => {
+    if (ToastStatus) {
+      setTimeout(() => {
+        setToastStatus(false);
+      }, 1500);
+    }
+  }, [ToastStatus]);
   let community;
 
   const cCommunity = useSelector((state) => state.community.catInfo);
   const gCommunity = useSelector((state) => state.community.gathering);
   const sCommunity = useSelector((state) => state.community.sharing);
 
-  if (pathName === 'catinfo') {
+  if (pathName === "catinfo") {
     community = cCommunity;
-  } else if (pathName === 'gathering') {
+  } else if (pathName === "gathering") {
     community = gCommunity;
-  } else if (pathName === 'sharing') {
+  } else if (pathName === "sharing") {
     community = sCommunity;
   }
 
@@ -53,8 +61,8 @@ const CommentList = ({ props, path, catId, communityId }) => {
   };
 
   const addCommentBtn = () => {
-    if (comments === '') {
-      alert('댓글을 입력해주세요!');
+    if (comments === "") {
+      setToastStatus(true);
     } else {
       if (path === "CatDetail") {
         dispatch(__createCatComment(catId, comments));
@@ -128,6 +136,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
             />
           );
         })}
+      {ToastStatus && <Toast message="댓글을 입력해주세요!" />}
     </>
   );
 };

@@ -1,8 +1,9 @@
 // LIBRARY
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { useDispatch } from "react-redux";
 
+import { Toast } from "..";
 // STYLE
 import styled from "styled-components";
 
@@ -15,11 +16,18 @@ import { saveVillage } from "../../redux/modules/mypage";
 const SearchAddress = (props) => {
   const dispatch = useDispatch();
   const [isOpenPost, setIsOpenPost] = useState(false);
+  const [ToastStatus, setToastStatus] = useState(false);
+
+  useEffect(() => {
+    if (ToastStatus) {
+      setTimeout(() => {
+        setToastStatus(false);
+      }, 1500);
+    }
+  }, [ToastStatus]);
   const onChangeOpenPost = () => {
     if (isOpenPost === false && props.Village.length === 3) {
-      window.alert(
-        "최대 3동네까지 등록하실 수 있습니다. 수정을 원하시면 동네 삭제 후 다시 시도해주세요!"
-      );
+      setToastStatus(true);
     } else {
       setIsOpenPost(!isOpenPost);
     }
@@ -81,9 +89,15 @@ const SearchAddress = (props) => {
             style={postCodeStyle}
             autoClose
             onComplete={onCompletePost}
-          />{" "}
+          />
         </Background>
       ) : null}
+      {ToastStatus && (
+        <Toast
+          message="최대 3동네까지 등록하실 수 있습니다"
+          message2="수정을 원하시면 동네 삭제 후 다시 시도해주세요!"
+        />
+      )}
     </>
   );
 };

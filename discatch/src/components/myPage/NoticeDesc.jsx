@@ -15,7 +15,7 @@ const NoticeDesc = () => {
   if (!NoticeDetail) {
     return <div></div>;
   }
-
+  let codes = NoticeDetail.contents;
   return (
     <Wrap>
       <Header>
@@ -23,7 +23,7 @@ const NoticeDesc = () => {
         <p>{modifiedAt}</p>
       </Header>
       <Body>
-        <p>{NoticeDetail.contents}</p>
+        <p dangerouslySetInnerHTML={{ __html: codes }}></p>
       </Body>
     </Wrap>
   );

@@ -15,7 +15,6 @@ import { X } from "react-feather";
 import { history } from "../redux/configureStore";
 import { mypageActions } from "../redux/modules/mypage";
 
-
 const UserProfileModal = (props) => {
   const dispatch = useDispatch();
   const userRandomProfile = useSelector(
@@ -153,8 +152,7 @@ const Window = styled.div`
   }
 `;
 const Wrapper = styled.div`
-width:100%;
-height:100%;
+  width: 100%;
 `;
 const Head = styled.div`
   width: 90%;
@@ -201,8 +199,8 @@ const Left = styled.div`
   align-items: center;
   justify-content: center;
   img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     margin: auto;
   }
@@ -216,7 +214,7 @@ const Right = styled.div`
 `;
 const UserActive = styled.div`
   width: 100%;
-  height: 100%;
+  // height: 100%;
   margin: auto;
 `;
 const LikeCat = styled.div`
@@ -237,50 +235,49 @@ const LikeCat = styled.div`
   }
 `;
 const ActiveBox = styled.div`
-width:100%;
-height: 100%;
-display: flex;
-div{
-  margin:10px 5px;
-  justify-content:center;
-  width:33%;
-  height:100%;
-  display:flex;
-  border:0.2px solid rgba(203, 207, 94, 1);
-  border-radius:10px;
-  p{
-    text-align:center;
-    font-size:12px;
-    :nth-child(1){
-      font-weight:900;
-    }
-    :nth-child(2){
-      background:#f9c852;
-      width:18px;
-      height:18px;
-      border-radius:50%;
-      text-align:center;
-      font-weight:900;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  div {
+    margin: 10px 5px;
+    justify-content: center;
+    width: 33%;
+    display: flex;
+    border: 0.2px solid rgba(203, 207, 94, 1);
+    border-radius: 10px;
+    p {
+      text-align: center;
+      font-size: 12px;
+      :nth-child(1) {
+        font-weight: 900;
+      }
+      :nth-child(2) {
+        background: #f9c852;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        text-align: center;
+        font-weight: 900;
+      }
     }
   }
-}
 `;
 const ActiveDate = styled.div`
   border: 0.2px solid rgba(203, 207, 94, 1);
   border-radius: 10px;
-  width: 100%;
   height: 100%;
   margin: 5px;
   p {
     margin: 5px auto;
     font-size: 12px;
     width: 95%;
-    :nth-child(1){font-weight:900;}
+    :nth-child(1) {
+      font-weight: 900;
+    }
   }
 `;
 const LikedCatBox = styled.div`
   width: 98%;
-  height: 100%;
   margin: 15px auto 10px auto;
   p {
     font-size: 14px;
@@ -295,7 +292,7 @@ const LikedCatBox = styled.div`
   }
 `;
 const LikeCatWrapper = styled.div`
-  width:100%;
+  width: 100%;
   height: 100%;
   display: grid;
   margin: auto;

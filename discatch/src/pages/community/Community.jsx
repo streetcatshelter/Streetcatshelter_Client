@@ -48,35 +48,17 @@ const Community = (props) => {
       <Template props={props}>
         {village !== undefined ? (
           <Grid
-            margin="10vh 0 0 0"
             addstyle={() => {
               return css`
-                @media screen and (max-height: 1366px) {
-                  margin: 30vh 0 0 0;
-                }
-                @media screen and (max-height: 1024px) {
-                  margin: 20vh 0 0 0;
-                }
-                @media screen and (max-height: 823px) {
-                  margin: 15vh 0 0 0;
-                }
-                @media screen and (max-height: 812px) {
-                  margin: 14vh 0 0 0;
-                }
+                width:100%
+                max-width:420px;
+                height:80vh;
+                display:flex;
+                flex-direction:column;
+                justify-content:center;
+                overflow:hidden;
                 @media screen and (max-height: 736px) {
-                  margin: 10vh 0 0 0;
-                }
-                @media screen and (max-height: 731px) {
-                  margin: 10vh 0 0 0;
-                }
-                @media screen and (max-height: 667px) {
-                  margin: 7vh 0 0 0;
-                }
-                @media screen and (max-height: 600px) {
-                  margin: 4vh 0 0 0;
-                }
-                @media screen and (max-height: 568px) {
-                  margin: 10px 0 0 0;
+                  height:78vh;
                 }
               `;
             }}

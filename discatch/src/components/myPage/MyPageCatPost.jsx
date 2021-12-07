@@ -16,15 +16,17 @@ import { history } from "../../redux/configureStore";
 
 const MyPageCatPost = ({ LikedCat, location }) => {
   const lastActivity =
-    LikedCat && moment(LikedCat.lastActivity).format("YYYY-M-D hh:mm");
+    LikedCat && moment(LikedCat.lastActivity).format("YYYY-MM-DD hh:mm");
   const myActivity =
-    LikedCat && moment(LikedCat.myActivity).format("YYYY-M-D hh:mm");
+    LikedCat && moment(LikedCat.myActivity).format("YYYY-MM-DD hh:mm");
   const userInfo = useSelector((state) => state.mypage.userInfo);
 
   let userLocation = LikedCat.location;
-  if (userLocation !== userInfo.locationList[0]?.split(' ')[2] &&
-  userLocation !== userInfo.locationList[1]?.split(' ')[2] &&
-  userLocation !== userInfo.locationList[2]?.split(' ')[2]) {
+  if (
+    userLocation !== userInfo.locationList[0]?.split(" ")[2] &&
+    userLocation !== userInfo.locationList[1]?.split(" ")[2] &&
+    userLocation !== userInfo.locationList[2]?.split(" ")[2]
+  ) {
     userLocation = location;
   }
 
@@ -58,7 +60,7 @@ const MyPageCatPost = ({ LikedCat, location }) => {
           이름 : {LikedCat.catName}
         </p>
         <p>최근활동: {lastActivity}</p>
-        <p>나의 최근활동: {myActivity}</p>
+        <p>나의 최근활동: {myActivity === null ? "-" : myActivity}</p>
         <InfoIcon>
           <FileText width="15px" height="15px" /> <p>{LikedCat.cntCatDetail}</p>
           <MessageCircle width="15px" height="15px" />{" "}

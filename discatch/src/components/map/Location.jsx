@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 
 // STYLE
 import styled, { css } from "styled-components";
-import { Map } from "react-feather";
+import { X } from "react-feather";
 
 // ELEMENTS
 import { Button } from "../../elements";
@@ -27,16 +27,16 @@ const Location = (props) => {
   const catId = props.props.match.params.id;
   const pathLength = path.pathname.split("/").length;
   let location;
-  const villageKeyword = useSelector((state) => state.map.keywordList[0])
+  const villageKeyword = useSelector((state) => state.map.keywordList[0]);
   location = villageKeyword;
   const villageList = useSelector((state) => state.mypage.userVillage);
 
-  if (location === villageList[0]?.split(' ')[2]) {
-    location = villageList[0]
-  } else if (location === villageList[1]?.split(' ')[2]) {
-    location = villageList[1]
-  } else if (location === villageList[2]?.split(' ')[2]) {
-    location = villageList[2]
+  if (location === villageList[0]?.split(" ")[2]) {
+    location = villageList[0];
+  } else if (location === villageList[1]?.split(" ")[2]) {
+    location = villageList[1];
+  } else if (location === villageList[2]?.split(" ")[2]) {
+    location = villageList[2];
   }
 
   const catList = useSelector((state) => state.cat.list);
@@ -107,7 +107,6 @@ const Location = (props) => {
             </button>
           </div>
         </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
       // 인포윈도우를 생성합니다
@@ -157,7 +156,7 @@ const Location = (props) => {
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         map.setBounds(bounds);
-      } 
+      }
     }
   };
 
@@ -284,7 +283,7 @@ const Location = (props) => {
                                   background-color: white;">
                           ${position[i].catName}보러가기
                           </button>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+          iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
         // 인포윈도우를 생성합니다
         let infowindow = new kakao.maps.InfoWindow({
@@ -302,8 +301,8 @@ const Location = (props) => {
 
         // 마커에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(markers, "click", function () {
-        // 마커 위에 인포윈도우를 표시합니다
-        infowindow.open(map, markers);
+          // 마커 위에 인포윈도우를 표시합니다
+          infowindow.open(map, markers);
         });
         markers.setMap(map);
       }
@@ -404,46 +403,48 @@ const Location = (props) => {
           </p>
         </button>
       </div>
-      <div
-        id="myMap"
-        style={{ width: "100%", height: "500px", margin: "auto" }}
-      />
-      <MapIcon
-        listvisible={listvisible}
-        onClick={() => {
-          setModal(!modal);
-        }}
-      />
+      <div id="myMap" style={{ width: "100%", height: "500px" }} />
+
       {modal ? (
-        <ListWrap visible={PlaceVisible}>
-          {Pagination === "" ? (
-            ""
-          ) : (
-            <TotalPage>
-              총<span> {Pagination.totalCount}</span> 개의 결과가 있습니다.
-            </TotalPage>
-          )}
-          <div id="result-list">
-            {Places.map((item, i) => (
-              <List props={Places} key={i}>
-                <ListNum>{i + 1}</ListNum>
-                <ListDesc>
-                  <p>{item.place_name}</p>
-                  {item.road_address_name ? (
-                    <div>
-                      <span>{item.road_address_name}</span>
+        <Window>
+          <ListWrap visible={PlaceVisible}>
+            {Pagination === "" ? (
+              ""
+            ) : (
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <TotalPage>
+                  총<span> {Pagination.totalCount}</span> 개의 결과
+                </TotalPage>{" "}
+                <CloseModal
+                  listvisible={listvisible}
+                  onClick={() => {
+                    setModal(!modal);
+                  }}
+                />
+              </div>
+            )}
+            <div id="result-list">
+              {Places.map((item, i) => (
+                <List props={Places} key={i}>
+                  <ListNum>{i + 1}</ListNum>
+                  <ListDesc>
+                    <p>{item.place_name}</p>
+                    {item.road_address_name ? (
+                      <div>
+                        <span>{item.road_address_name}</span>
+                        <span>{item.address_name}</span>
+                      </div>
+                    ) : (
                       <span>{item.address_name}</span>
-                    </div>
-                  ) : (
-                    <span>{item.address_name}</span>
-                  )}
-                  <span>{item.phone}</span>
-                </ListDesc>
-              </List>
-            ))}
-            <PagenationWrap id="pagination"></PagenationWrap>
-          </div>
-        </ListWrap>
+                    )}
+                    <span>{item.phone}</span>
+                  </ListDesc>
+                </List>
+              ))}
+              <PagenationWrap id="pagination"></PagenationWrap>
+            </div>
+          </ListWrap>
+        </Window>
       ) : (
         ""
       )}
@@ -459,7 +460,7 @@ const Location = (props) => {
             pathLength === 3
           ) {
             history.push({
-              pathname: `/catinfowrite/${location?.split(' ')[2]}`,
+              pathname: `/catinfowrite/${location?.split(" ")[2]}`,
               state: { latitude, longitude, location },
             });
           } else if (
@@ -495,62 +496,59 @@ const Location = (props) => {
   );
 };
 
-const MapIcon = styled(Map)`
+const CloseModal = styled(X)`
   display: ${(props) => (props.listvisible ? "block" : "none")};
-  position: fixed;
-  top: 110px;
-  margin: 10px;
-  background: #fbd986;
-  padding: 5px;
-  border-radius: 10px;
-  z-index: 1;
   cursor: pointer;
-  &:hover {
-    background: #cbcf52;
+  z-index: 1000;
+`;
+
+const Window = styled.div`
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  max-width: 200px;
+  position: fixed;
+  width: 50vw;
+  min-width: 200px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+  overflow: auto;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @media screen and (max-height: 568px) {
+    height: 400px;
+    margin-top: 40px;
   }
 `;
 const ListWrap = styled.div`
   display: ${(props) => (props.visible ? "block" : "none")};
-  position: fixed;
-  top: 150px;
-  width: 200px;
-  height: 400px;
-  margin: 10px 0 30px 10px;
+  width: 90%;
+  height: 95%;
+  margin: 10px auto;
   padding: 5px;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.7);
   z-index: 1;
   font-size: 12px;
   border-radius: 10px;
 `;
 const MapWrap = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  height: 500px;
-  @media screen and (max-height: 1366px) {
-    padding: 250px 0;
-  }
-  @media screen and (max-height: 1024px) {
-    padding: 100px 0;
-  }
-  @media screen and (max-height: 823px) {
-    padding: 50px 0;
-  }
-  @media screen and (max-height: 800px) {
-    padding: 30px 0;
-  }
-  @media screen and (max-height: 736px) {
-    padding: 10px 0;
-  }
-  @media screen and (max-height: 720px) {
-    padding: 0;
-  }
-  @media screen and (max-height: 667px) {
-    padding: 5px 0;
-  }
-  @media screen and (max-height: 600px) {
-    padding: 0;
-  }
+  height: 80vh;
   @media screen and (max-height: 568px) {
     margin: -10px 0;
   }
@@ -581,6 +579,7 @@ const ListDesc = styled.div`
 const TotalPage = styled.p`
   display: flex;
   font-weight: 900;
+  margin: 5px 0px;
   span {
     background: #fbd986;
     display: block;

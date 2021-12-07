@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
 // COMPONENTS
-import EditModalSlide from "../EditModalSlide";
+import { EditModalSlide, UserProfileModal } from "../";
 
 // ELEMENTS
 import { Text } from "../../elements/index";
@@ -27,8 +27,8 @@ const CommentCard = ({ comment, communityId }) => {
   const commentId = comment.commentId;
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [ProfileModal, setProfileModal] = useState(false);
-  const CreatedAt = moment(comment.createdAt).format("YYYY-M-D hh:mm");
-
+  const CreatedAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
+  const [openRandomProfileModal, setOpenRandomProfileModal] = useState(false);
   const OpenProfile = () => {
     if (UserInfo.nickname !== comment.nickname) {
       setProfileModal(!ProfileModal);
@@ -45,9 +45,9 @@ const CommentCard = ({ comment, communityId }) => {
       ? dispatch(deleteCommunityCommentDB(commentId, communityId))
       : dispatch(__deleteComment(commentId));
   };
-
-  const UserProfile = () => {
-    alert("버전2에서 준비중입니다!");
+  const ChangeRandomModalState = () => {
+    setProfileModal(false);
+    setOpenRandomProfileModal(!openRandomProfileModal);
   };
 
   return (
@@ -92,9 +92,15 @@ const CommentCard = ({ comment, communityId }) => {
         SecondBtn="채팅하기"
         Profile="profile"
         openModal={ProfileModal}
-        FirstClick={UserProfile}
+        FirstClick={ChangeRandomModalState}
         SecondClick={MakeChat}
       />
+      {openRandomProfileModal && comment.userRandomId && (
+        <UserProfileModal
+          userRandomId={comment.userRandomId}
+          openModal={ChangeRandomModalState}
+        />
+      )}
     </>
   );
 };

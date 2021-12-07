@@ -21,9 +21,9 @@ import { history } from "../../redux/configureStore";
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;
   const CreatedAt = diary.createdAt
-    ? moment(diary.createdAt).format("YYYY-M-D hh:mm")
+    ? moment(diary.createdAt).format("YYYY-MM-DD hh:mm")
     : "";
-    
+
   return (
     <Grid
       bgColor="diaryColor"
@@ -32,7 +32,7 @@ const Diary = ({ diary, location }) => {
       margin="5px auto"
       cursor="pointer"
       clickEvent={() =>
-        history.push(`/catdetailinfo/${location?.split(' ')[2]}/${catDetailId}`)
+        history.push(`/catdetailinfo/${location?.split(" ")[2]}/${catDetailId}`)
       }
     >
       <Grid

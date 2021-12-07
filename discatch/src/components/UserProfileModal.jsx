@@ -75,16 +75,16 @@ const UserProfileModal = (props) => {
                 <p>최근 활동</p>
                 <p>
                   {userRandomProfile.lastActivity === null
-                    ? "최근 활동 내역이 없습니다."
+                    ? "-"
                     : userRandomProfile.lastActivity}
                 </p>
               </ActiveDate>
             </UserActive>
             <LikedCatBox>
               <p>❤좋아요한 고양이❤</p>
-              <LikeCatWrapper>
-                {userRandomProfile.cat &&
-                  userRandomProfile.cat.map((cat, idx) => {
+              {userRandomProfile.cat && userRandomProfile.cat.length > 0 ? (
+                <LikeCatWrapper>
+                  {userRandomProfile.cat.map((cat, idx) => {
                     const location = cat.catLocation;
                     return (
                       <LikeCat
@@ -99,7 +99,10 @@ const UserProfileModal = (props) => {
                       </LikeCat>
                     );
                   })}
-              </LikeCatWrapper>
+                </LikeCatWrapper>
+              ) : (
+                <p>아직 좋아요한 고양이가 없다옹!</p>
+              )}
             </LikedCatBox>
           </Body>
         </Wrapper>
@@ -130,7 +133,8 @@ const Window = styled.div`
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   max-width: 420px;
   width: 100vw;
-  height: 80vh;
+  height: 50vh;
+  min-height: 450px;
   border-radius: 20px;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
@@ -282,6 +286,12 @@ const LikedCatBox = styled.div`
     font-size: 14px;
     font-weight: 900;
     margin: 5px 0px;
+    :nth-child(2) {
+      font-weight: 700;
+      font-size: 12px;
+      text-align: center;
+      margin: 10px 0px;
+    }
   }
 `;
 const LikeCatWrapper = styled.div`

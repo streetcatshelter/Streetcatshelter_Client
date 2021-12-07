@@ -18,13 +18,12 @@ const CalendarDates = (props) => {
   const Calendar = useSelector((state) =>
     props.path === "mypage" ? state.mypage.calendar : state.cat.calendar
   );
-  const DayOff = [];
-
+  let WorkDay = [];
   return (
     <>
       <Form
         onClick={() => {
-          if (DayOff.length > 0) {
+          if (WorkDay.length > 0) {
             setOpenModal(true);
           } else return;
         }}
@@ -51,7 +50,7 @@ const CalendarDates = (props) => {
                 )
                   .sort()
                   .map((workDate, idx) => {
-                    DayOff.unshift(workDate.date[2]);
+                    WorkDay.unshift(workDate.date[2]);
                     const food = workDate.food;
                     const water = workDate.water;
                     const snack = workDate.snack;

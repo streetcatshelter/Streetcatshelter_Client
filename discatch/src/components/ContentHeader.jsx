@@ -10,7 +10,6 @@ import { useLocation } from "react-router-dom";
 
 // COMPONENTS
 import { EditModalSlide } from "../components";
-import UserProfileModal from "./UserProfileModal";
 
 // MOMENT
 import moment from "moment";
@@ -24,7 +23,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const pathName = useLocation();
   const pName = pathName.pathname.split("/")[3];
   const [ProfileModal, setProfileModal] = useState(false);
-  const [openRandomProfileModal, setOpenRandomProfileModal] = useState(false);
+
   const UserNickName = useSelector((state) => state.mypage.userInfo?.nickname);
   const location = useSelector((state) =>
     pName === "catinfo"
@@ -82,11 +81,6 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
     dispatch(chatActions._createRoom(chatuser));
   };
 
-  const ChangeRandomModalState = () => {
-    setProfileModal(false);
-    setOpenRandomProfileModal(!openRandomProfileModal);
-  };
-
   let locationName = "";
   if (location === "undefined") {
     locationName = null;
@@ -131,7 +125,9 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
           SecondBtn="채팅하기"
           Profile="profile"
           openModal={ProfileModal}
-          FirstClick={ChangeRandomModalState}
+          FirstClick={() => {
+            history.push(`/user/${userRandomId}`);
+          }}
           SecondClick={MakeChat}
         />
       ) : (
@@ -140,16 +136,12 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
           SecondBtn="내프로필수정"
           Profile="profile"
           openModal={ProfileModal}
-          FirstClick={ChangeRandomModalState}
+          FirstClick={() => {
+            history.push(`/user/${userRandomId}`);
+          }}
           SecondClick={() => {
             history.push("/userinfoedit");
           }}
-        />
-      )}
-      {openRandomProfileModal && userRandomId && (
-        <UserProfileModal
-          userRandomId={userRandomId}
-          openModal={ChangeRandomModalState}
         />
       )}
     </>

@@ -16,10 +16,11 @@ import { chatActions } from "../../redux/modules/chat";
 
 const ChatMainPage = (props) => {
   const isLoaded = useSelector((state) => state.chat.isLoaded);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(chatActions._getRooms());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>

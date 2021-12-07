@@ -8,7 +8,7 @@ import MyPageNoticeList from "./mypage/MyPageNoticeList";
 import MyPageNotices from "./mypage/MyPageNotices";
 import MyPageWork from "./mypage/MyPageWork";
 import UserInfoWrite from "./mypage/UserInfoWrite";
-
+import RandomUserProfile from "./mypage/RandomUserProfile";
 // LOGIN
 import Login from "./login/Login";
 import LoginRedirectGoogle from "./login/LoginRedirectGoogle";
@@ -46,6 +46,7 @@ export {
   MyPageNoticeList,
   MyPageNotices,
   MyPageWork,
+  RandomUserProfile,
   // LOGIN
   Login,
   LoginRedirectGoogle,

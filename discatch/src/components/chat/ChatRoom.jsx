@@ -16,6 +16,7 @@ import styled from "styled-components";
 import { EditModalSlide } from "..";
 
 // REDUX
+import { history } from "../../redux/configureStore";
 import { chatActions } from "../../redux/modules/chat";
 import { pushChatMessage } from "../../redux/modules/chat";
 
@@ -133,7 +134,7 @@ const ChatRoom = (props) => {
             FirstBtn="상대방 프로필보기"
             SecondBtn="채팅방 삭제하기"
             FirstClick={() => {
-              alert("준비중입니다.");
+              history.push(`/user/${ChatInfo.userRandomId}`);
             }}
             SecondClick={() => {
               dispatch(chatActions._deleteRoom(props.roomId, props.location));

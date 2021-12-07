@@ -1,9 +1,12 @@
 // LIBRARY
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import styled from "styled-components";
+
+// ICON
+import { MoreHorizontal } from "react-feather";
 
 // COMPONENTS
 import { EditModalSlide, EmptyPost } from "../../components";
@@ -19,7 +22,7 @@ const ChatMain = (props) => {
   const dispatch = useDispatch();
   const location = props.props.location.state.location;
   const Rooms = useSelector((state) => state.chat.roomlist);
-
+  const [openModal, setOpenModal] = useState(false);
   return (
     <React.Fragment>
       <Wrapper>
@@ -51,16 +54,28 @@ const ChatMain = (props) => {
                           <p>{room.opponent}</p>
                           {room.lastActivity ? <p>{LastActivity}</p> : ""}
                         </InfoInner>
-                        <EditModalSlide
-                          FirstBtn="상대방 프로필보기"
-                          SecondBtn="채팅방 삭제하기"
-                          FirstClick={() => {
-                            alert("준비중입니다.");
-                          }}
-                          SecondClick={() => {
-                            dispatch(chatActions._deleteRoom(room.roomId));
-                          }}
-                        />
+                        <EditBtn>
+                          <MoreHorizontalBtn
+                            onClick={() => {
+                              setOpenModal(!openModal);
+                            }}
+                          />
+                        </EditBtn>
+                        {openModal && (
+                          <EditModalSlide
+                            FirstBtn="상대방 프로필보기"
+                            SecondBtn="채팅방 삭제하기"
+                            Profile="profile"
+                            FirstClick={() => {
+                              history.push(`/user/${room.userRandomId}`);
+                            }}
+                            openModal={openModal}
+                            SecondClick={() => {
+                              dispatch(chatActions._deleteRoom(room.roomId));
+                              setOpenModal(false);
+                            }}
+                          />
+                        )}
                       </InfoHead>
 
                       <ChatMsg
@@ -88,7 +103,16 @@ const ChatMain = (props) => {
     </React.Fragment>
   );
 };
-
+const EditBtn = styled.div`
+  width: 15%;
+  color: rgb(249, 200, 82);
+  margin: auto;
+`;
+const MoreHorizontalBtn = styled(MoreHorizontal)`
+  &:hover {
+    color: #cbcf52;
+  }
+`;
 const Wrapper = styled.div``;
 const ChatRoom = styled.div`
   background: rgba(203, 207, 94, 0.3);
@@ -129,6 +153,7 @@ const ChatInfo = styled.div`
 `;
 const InfoHead = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-between;
   line-height: 14px;
   align-items: center;
@@ -136,6 +161,7 @@ const InfoHead = styled.div`
 const InfoInner = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 85%;
   height: 25px;
   align-items: center;
   p {

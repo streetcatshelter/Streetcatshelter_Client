@@ -32,6 +32,7 @@ import {
   LoginRedirectKakao,
   LoginRedirectNaver,
   LoginRedirectGoogle,
+  RandomUserProfile,
 } from "../pages";
 
 // 배포 시 해당 라우트 삭제 예정
@@ -72,6 +73,11 @@ const Router = () => {
 
       {/* == MyPage */}
       <Route path="/mypage" component={Auth(MyPageCat, true)} exact />
+      <Route
+        path="/user/:userRandomId"
+        component={Auth(RandomUserProfile, true)}
+        exact
+      />
       <Route
         path="/mypage/notice"
         component={Auth(MyPageNoticeList, true)}

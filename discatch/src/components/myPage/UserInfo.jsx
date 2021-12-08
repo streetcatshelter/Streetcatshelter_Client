@@ -25,6 +25,8 @@ const UserInfo = () => {
   //토스트모달
   const [ToastStatus, setToastStatus] = useState(false);
   const [SecondToastStatus, setSecondToastStatus] = useState(false);
+  const [editStatus, setEditStatus] = useState(false);
+
   useEffect(() => {
     if (ToastStatus) {
       setTimeout(() => {
@@ -47,7 +49,10 @@ const UserInfo = () => {
     } else if (Village.length === 0) {
       setSecondToastStatus(true);
     } else {
-      dispatch(mypageActions._editMyInfo(NickName, Village));
+      setEditStatus(true);
+      setTimeout(() => {
+        dispatch(mypageActions._editMyInfo(NickName, Village));
+      }, 1000);
     }
   };
 
@@ -60,6 +65,14 @@ const UserInfo = () => {
     setFileUrl(imageUrl);
   };
 
+  useEffect(() => {
+    if (editStatus) {
+      setTimeout(() => {
+        setEditStatus(false);
+      }, 1500);
+    }
+  }, [editStatus]);
+
   return (
     <React.Fragment>
       {ToastStatus ? (
@@ -69,7 +82,7 @@ const UserInfo = () => {
       ) : (
         ""
       )}
-
+      {editStatus && <Toast message="사용자 정보가 수정됐어요!" />}
       <Wrapper>
         <Inner>
           <p>닉네임</p>

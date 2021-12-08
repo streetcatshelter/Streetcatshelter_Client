@@ -134,7 +134,6 @@ const _editMyInfo = (NickName, Village) => {
             .put("/mypage/user/information", userInfo)
             .then((res) => {
               dispatch(imgActions.setInitialState());
-              window.alert("사용자 정보가 수정됐습니다.");
               history.push("/mypage");
             })
             .catch((err) => {
@@ -155,7 +154,6 @@ const _editMyInfo = (NickName, Village) => {
         .put("/mypage/user/information", userInfo)
         .then((res) => {
           dispatch(imgActions.setInitialState());
-          window.alert("사용자 정보가 수정됐습니다.");
           history.push("/mypage");
         })
         .catch((err) => {

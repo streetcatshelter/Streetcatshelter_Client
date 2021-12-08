@@ -138,8 +138,6 @@ export const __createCatDetailInfo = (
             });
         })
       );
-    } else if (imgFile.length > 3) {
-      alert("사진은 최대 3장까지 등록할 수 있어요!");
     } else {
       return;
     }
@@ -311,7 +309,6 @@ export const __deleteCatDetail =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.deleteCatDetail(catDetailId);
-      window.alert("게시물 삭제 완료!");
       history.goBack();
     } catch (err) {
       console.error(err);

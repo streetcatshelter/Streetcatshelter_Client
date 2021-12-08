@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { SecondHeader, Template } from "../../components";
+import { SecondHeader, Template, Toast } from "../../components";
 
 // ELEMENTS
 import { Grid, TextArea, Button, Input, Image, Text } from "../../elements";
@@ -48,7 +48,7 @@ const CatDetailInfoWrite = (props) => {
       dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum + 1);
     } else {
-      alert("사진은 최대 3장까지 등록할 수 있어요!");
+      setMaxPhotoStatus(true);
     }
   };
 
@@ -66,6 +66,11 @@ const CatDetailInfoWrite = (props) => {
   const [snack, setSnack] = useState(edit ? detail.snack : false);
   const [water, setWater] = useState(edit ? detail.water : false);
 
+  const [maxPhotoStatus, setMaxPhotoStatus] = useState(false);
+  const [diaryStatus, setDiaryStatus] = useState(false);
+  const [tagStatus, setTagStatus] = useState(false);
+  const [accessStatus, setAccessStatus] = useState(false);
+
   let location = edit
     ? props.location.state?.village
     : props.location.state.location;
@@ -76,7 +81,7 @@ const CatDetailInfoWrite = (props) => {
 
   const createBtn = () => {
     if (diary === "") {
-      alert("다이어리를 입력해 주세요.");
+      setDiaryStatus(true);
     } else {
       edit
         ? dispatch(
@@ -110,7 +115,7 @@ const CatDetailInfoWrite = (props) => {
       dispatch(addHashTag(catTag));
       setTag("");
     } else {
-      alert("해쉬태그를 입력해주세요");
+      setTagStatus(true);
     }
   };
 
@@ -130,11 +135,43 @@ const CatDetailInfoWrite = (props) => {
           } else tag = [];
         }
       } else {
-        alert("잘못된 접근입니다.");
+        setAccessStatus(true);
         history.push("/");
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (maxPhotoStatus) {
+      setTimeout(() => {
+        setMaxPhotoStatus(false);
+      }, 1500);
+    }
+  }, [maxPhotoStatus]);
+
+  useEffect(() => {
+    if (diaryStatus) {
+      setTimeout(() => {
+        setDiaryStatus(false);
+      }, 1500);
+    }
+  }, [diaryStatus]);
+
+  useEffect(() => {
+    if (tagStatus) {
+      setTimeout(() => {
+        setTagStatus(false);
+      }, 1500);
+    }
+  }, [tagStatus]);
+
+  useEffect(() => {
+    if (accessStatus) {
+      setTimeout(() => {
+        setAccessStatus(false);
+      }, 1500);
+    }
+  }, [accessStatus]);
 
   return (
     <Template props={props}>
@@ -396,6 +433,10 @@ const CatDetailInfoWrite = (props) => {
           작성하기
         </Button>
       </Grid>
+      {maxPhotoStatus && <Toast message="사진은 최대 3장까지 등록할 수 있어요!" />}
+      {diaryStatus && <Toast message="다이어리를 입력해 주세요!" />}
+      {tagStatus && <Toast message="해쉬태그를 입력해주세요!" />}
+      {accessStatus && <Toast message="잘못된 접근입니다." />}
     </Template>
   );
 };

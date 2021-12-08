@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { SecondHeader, Template } from "../../components";
+import { SecondHeader, Template, Toast } from "../../components";
 
 // ELEMENTS
 import { Grid, Image, Input, Button, Text } from "../../elements/index";
@@ -63,10 +63,16 @@ const CatInfoWrite = (props) => {
   ];
 
   const [catName, setCatName] = useState(edit ? catInfo.catName : "");
+  const [maxTextStatus, setMaxTextStatus] = useState(false);
+  const [photoStatus, setPhotoStatus] = useState(false);
+  const [nameStatus, setNameStatus] = useState(false);
+  const [neuteringStatus, setNeuteringStatus] = useState(false);
+  const [tagStatus, setTagStatus] = useState(false);
+  const [accessStatus, setAccessStatus] = useState(false);
 
   const $catName = (e) => {
     if (e.target.value.length > 8) {
-      alert("최대 8글자까지 입력가능합니다");
+      setMaxTextStatus(true);
     } else {
       setCatName(e.target.value);
     }
@@ -87,11 +93,11 @@ const CatInfoWrite = (props) => {
 
   const createBtn = () => {
     if (!edit && fileUrl === null) {
-      alert("고양이 사진을 등록해주세요!");
+      setPhotoStatus(true);
     } else if (catName === "") {
-      alert("고양이 이름을 지어주세요!");
+      setNameStatus(true);
     } else if (neutering === "" || neutering === "중성화 여부") {
-      alert("중성화 여부를 선택해주세요!");
+      setNeuteringStatus(true);
     } else {
       edit
         ? dispatch(__editCatInfo(catName, HashTags, neutering, catInfo.catId))
@@ -114,7 +120,7 @@ const CatInfoWrite = (props) => {
       dispatch(addHashTag(catTag));
       setCatTag("");
     } else {
-      alert("해쉬태그를 입력해주세요");
+      setTagStatus(true);
     }
   };
 
@@ -136,11 +142,59 @@ const CatInfoWrite = (props) => {
           } else tag = [];
         }
       } else {
-        alert("잘못된 접근입니다.");
+        setAccessStatus(true);
         history.push("/");
       }
     }
   }, [edit, catInfo.catTagList, catInfo.catImage, dispatch]);
+
+  useEffect(() => {
+    if (maxTextStatus) {
+      setTimeout(() => {
+        setMaxTextStatus(false);
+      }, 1500);
+    }
+  }, [maxTextStatus]);
+  
+  useEffect(() => {
+    if (photoStatus) {
+      setTimeout(() => {
+        setPhotoStatus(false);
+      }, 1500);
+    }
+  }, [photoStatus]);
+
+  useEffect(() => {
+    if (nameStatus) {
+      setTimeout(() => {
+        setNameStatus(false);
+      }, 1500);
+    }
+  }, [nameStatus]);
+
+  useEffect(() => {
+    if (neuteringStatus) {
+      setTimeout(() => {
+        setNeuteringStatus(false);
+      }, 1500);
+    }
+  }, [neuteringStatus]);
+
+  useEffect(() => {
+    if (tagStatus) {
+      setTimeout(() => {
+        setTagStatus(false);
+      }, 1500);
+    }
+  }, [tagStatus]);
+
+  useEffect(() => {
+    if (accessStatus) {
+      setTimeout(() => {
+        setAccessStatus(false);
+      }, 1500);
+    }
+  }, [accessStatus]);
 
   return (
     <Template props={props}>
@@ -344,6 +398,12 @@ const CatInfoWrite = (props) => {
           </Button>
         </Grid>
       </Grid>
+      {maxTextStatus && <Toast message="최대 8글자까지 입력가능해요!" />}
+      {photoStatus && <Toast message="고양이 사진을 등록해주세요!" />}
+      {nameStatus && <Toast message="고양이 이름을 지어주세요!" />}
+      {neuteringStatus && <Toast message="중성화 여부를 선택해주세요!" />}
+      {tagStatus && <Toast message="해쉬태그를 입력해주세요!" />}
+      {accessStatus && <Toast message="잘못된 접근입니다." />}
     </Template>
   );
 };

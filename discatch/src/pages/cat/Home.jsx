@@ -4,17 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import {
-  Template,
-  CatPost,
-  SecondHeader,
-  SecondSpinner,
-  EmptyPost,
-  Toast,
-} from "../../components";
-
-// STYLE
-import { css } from "styled-components";
+import { Template, CatPost, SecondHeader, SecondSpinner, EmptyPost, Toast } from "../../components";
 
 // ELEMENTS
 import { Button } from "../../elements";
@@ -25,11 +15,7 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
 import { history } from "../../redux/configureStore";
-import {
-  __getCatLocation,
-  __getMoreCatLocation,
-  resetList,
-} from "../../redux/modules/cat";
+import { __getCatLocation, __getMoreCatLocation, resetList } from "../../redux/modules/cat";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -103,11 +89,7 @@ const Home = (props) => {
             catList.map((cat, idx) => {
               return (
                 <div style={{ width: "100%" }} key={idx} ref={ref}>
-                  <CatPost
-                    cat={cat}
-                    pathLocation={pathLocation}
-                    location={location}
-                  />
+                  <CatPost cat={cat} pathLocation={pathLocation} location={location} />
                 </div>
               );
             })

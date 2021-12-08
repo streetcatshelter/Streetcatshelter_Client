@@ -22,7 +22,7 @@ const CatPost = ({ cat, path, location }) => {
     dispatch(__catLike(catId, path));
   };
 
-  const CatDetailBtn = () => {
+  const catDetailBtn = () => {
     if (path !== "detail") {
       history.push({
         pathname: `/catdetail/${location.split(" ")[2]}/${cat.catId}`,
@@ -34,21 +34,15 @@ const CatPost = ({ cat, path, location }) => {
   return (
     <CatPostStyle>
       <LeftBox>
-        <CatImage
-          src={cat.catImage}
-          alt={cat.catImage}
-          onClick={CatDetailBtn}
-        />
+        <CatImage src={cat.catImage} alt={cat.catImage} onClick={catDetailBtn} />
       </LeftBox>
 
       <RightBox>
         <Header>
           <div style={{ display: "flex" }}>
-            <p onClick={CatDetailBtn}>
-              이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}
-            </p>
+            <p onClick={catDetailBtn}>이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}</p>
 
-            <p onClick={CatDetailBtn}> 중성화: {cat.neutering}</p>
+            <p onClick={catDetailBtn}> 중성화: {cat.neutering}</p>
           </div>
           {path === "detail" && (
             <MoreHorizontalBtn
@@ -63,7 +57,7 @@ const CatPost = ({ cat, path, location }) => {
           )}
         </Header>
         <BodyBox>
-          <TagOutBox onClick={CatDetailBtn}>
+          <TagOutBox onClick={catDetailBtn}>
             {cat.catTagList?.map((tag, idx) => {
               return <TagBox key={idx}>#{tag.tag}</TagBox>;
             })}
@@ -76,7 +70,7 @@ const CatPost = ({ cat, path, location }) => {
                 position: "relative",
                 left: "12px",
                 color: userLiked ? "red" : "gray",
-                cursor: 'pointer',
+                cursor: "pointer",
               }}
             />
           </LikeBox>
@@ -122,7 +116,7 @@ const RightBox = styled.div`
   flex-direction: column;
   width: 80%;
   height: 80px;
-  cursor:auto;
+  cursor: auto;
   @media screen and (max-width: 400px) {
     width: 75%;
   }
@@ -153,7 +147,7 @@ const Header = styled.div`
   }
 `;
 const BodyBox = styled.div`
-  cursor:pointer;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   width: 100%;

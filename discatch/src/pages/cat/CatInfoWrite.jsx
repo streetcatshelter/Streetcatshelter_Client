@@ -33,12 +33,12 @@ const CatInfoWrite = (props) => {
   const catInfo = useSelector((state) => state.cat.catinfo);
   let location = pathLocation;
   const villageList = useSelector((state) => state.mypage.userVillage);
-  if (location === villageList[0]?.split(' ')[2]) {
-    location = villageList[0]
-  } else if (location === villageList[1]?.split(' ')[2]) {
-    location = villageList[1]
-  } else if (location === villageList[2]?.split(' ')[2]) {
-    location = villageList[2]
+  if (location === villageList[0]?.split(" ")[2]) {
+    location = villageList[0];
+  } else if (location === villageList[1]?.split(" ")[2]) {
+    location = villageList[1];
+  } else if (location === villageList[2]?.split(" ")[2]) {
+    location = villageList[2];
   }
 
   const nickName = useSelector((state) => state.mypage.userInfo.nickname);
@@ -69,9 +69,13 @@ const CatInfoWrite = (props) => {
   const [neuteringState, setNeuteringState] = useState(false);
   const [tagState, setTagState] = useState(false);
   const [accessState, setAccessState] = useState(false);
+  const [editToastState, setEditToastState] = useState(false);
 
   const $catName = (e) => {
-    if (e.target.value.length > 8) {
+    const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
+    if (regExp.test(e.target.value) || e.target.value.search(/\s/) !== -1) {
+      setEditToastState(true);
+    } else if (e.target.value.length > 8) {
       setMaxTextState(true);
     } else {
       setCatName(e.target.value);
@@ -155,7 +159,7 @@ const CatInfoWrite = (props) => {
       }, 1500);
     }
   }, [maxTextState]);
-  
+
   useEffect(() => {
     if (photoState) {
       setTimeout(() => {
@@ -195,6 +199,13 @@ const CatInfoWrite = (props) => {
       }, 1500);
     }
   }, [accessState]);
+  useEffect(() => {
+    if (editToastState) {
+      setTimeout(() => {
+        setEditToastState(false);
+      }, 1500);
+    }
+  }, [editToastState]);
 
   return (
     <Template props={props}>
@@ -405,6 +416,9 @@ const CatInfoWrite = (props) => {
       {neuteringState && <Toast message="중성화 여부를 선택해주세요!" />}
       {tagState && <Toast message="해쉬태그를 입력해주세요!" />}
       {accessState && <Toast message="잘못된 접근입니다." />}
+      {editToastState && (
+        <Toast message="특수문자 및 공백을 사용할 수 없습니다." />
+      )}
     </Template>
   );
 };

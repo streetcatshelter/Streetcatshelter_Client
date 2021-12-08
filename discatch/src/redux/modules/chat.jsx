@@ -31,7 +31,7 @@ const _createRoom =
   async (dispatch, getState, { history }) => {
     console.log(chatuser);
     try {
-      const { data } = await chatApi.createRoom();
+      const { data } = await chatApi.createRoom(chatuser);
       history.push(`/api/chat/enter/${data.roomId}`);
     } catch (e) {
       console.log(e);

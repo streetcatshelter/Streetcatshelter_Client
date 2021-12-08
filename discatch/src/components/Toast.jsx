@@ -54,7 +54,7 @@ const ToastBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: ${(props) => (props.message2 ? "12px" : "16px")};
+  font-size: ${(props) => (props.message2 ? "12px" : "13px")};
   margin: ${(props) => (props.message2 ? "0px auto" : "auto")};
   font-weight: 700;
   word-break: keep-all;

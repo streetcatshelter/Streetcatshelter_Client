@@ -1,6 +1,7 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
 import instance, { communityApi } from "../../shared/axios";
+import { changeToast } from "./chat";
 
 // REDUX
 import { imgActions } from "./image";
@@ -64,7 +65,7 @@ export const getCommunityDB =
         dispatch(getSharing(data.data));
       }
     } catch (err) {
-      window.alert("페이지에 오류가 있어요!");
+      dispatch(errorToast(true));
       console.error(err);
     }
   };
@@ -88,7 +89,7 @@ export const getMoreCommunityDB =
         dispatch(getMoreSharing(data.data));
       }
     } catch (err) {
-      window.alert("페이지에 오류가 있어요!");
+      dispatch(errorToast(true));
       console.error(err);
     }
   };
@@ -199,7 +200,10 @@ export const deleteCommunityDB =
     }
     try {
       const data = await communityApi.deleteCommunity(communityId);
-      history.push({pathname:`/community/${location}/${pathName}`, state : { location }});
+      history.push({
+        pathname: `/community/${location}/${pathName}`,
+        state: { location },
+      });
     } catch (err) {
       console.error(err);
     }
@@ -255,6 +259,7 @@ const initialState = {
   pageLoaded: false,
   itemLoaded: false,
   itemDetailLoaded: false,
+  toast: false,
 };
 
 // REDUCER
@@ -421,6 +426,9 @@ const community = createSlice({
       state.gathering = [];
       state.sharing = [];
     },
+    errorToast: (state, action) => {
+      state.toast = action.payload;
+    },
   },
 });
 
@@ -457,6 +465,7 @@ export const {
   itemLoading,
   itemDetailLoading,
   resetList,
+  errorToast,
 } = community.actions;
 
 export default community;

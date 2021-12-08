@@ -24,6 +24,7 @@ import { history } from "../../redux/configureStore";
 import {
   __getCatLocation,
   __getMoreCatLocation,
+  resetList,
 } from "../../redux/modules/cat";
 
 const Home = (props) => {
@@ -63,6 +64,7 @@ const Home = (props) => {
   };
 
   useEffect(() => {
+    dispatch(resetList());
     if (location?.length !== 3 && location !== undefined) {
       setPage(1);
       dispatch(__getCatLocation(location));

@@ -31,12 +31,9 @@ const CommentCard = ({ comment, communityId }) => {
   const [ProfileModal, setProfileModal] = useState(false);
   const createdAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
   const [commentState, setCommentState] = useState(false);
-  const [openRandomProfileModal, setOpenRandomProfileModal] = useState(false);
-  
+
   const OpenProfile = () => {
-    if (userInfo.nickname !== comment.nickname) {
-      setProfileModal(!ProfileModal);
-    }
+    setProfileModal(!ProfileModal);
   };
 
   const MakeChat = () => {
@@ -46,7 +43,7 @@ const CommentCard = ({ comment, communityId }) => {
   };
 
   const deleteCommunityComment = () => {
-    setCommentState(true);
+    // setCommentState(true);
     setTimeout(() => {
       dispatch(deleteCommunityCommentDB(commentId, communityId));
     }, 1000);

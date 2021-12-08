@@ -12,7 +12,7 @@ export const __createCatInfo = (
   catTag,
   neutering,
   location,
-  nickName,
+  NickName,
   latitude,
   longitude,
   pathLocation
@@ -31,7 +31,7 @@ export const __createCatInfo = (
             location: location,
             longitude: longitude,
             neutering: neutering,
-            username: nickName,
+            username: NickName,
           };
           instance
             .post("/cat/create", catInfo)
@@ -100,7 +100,7 @@ export const __editCatInfo =
 
 // 상세 정보 작성
 export const __createCatDetailInfo = (
-  hashTags,
+  HashTags,
   diary,
   food,
   latitude,
@@ -118,7 +118,7 @@ export const __createCatDetailInfo = (
 
           const detailInfo = {
             catImages: imageUrl,
-            catTags: hashTags,
+            catTags: HashTags,
             diary: diary,
             food: food,
             latitude: latitude,
@@ -146,12 +146,12 @@ export const __createCatDetailInfo = (
 
 // 상세 정보 수정
 export const __editCatDetailInfo =
-  (hashTags, diary, food, snack, water, catDetailId, catImages) =>
+  (HashTags, diary, food, snack, water, catDetailId, catImages) =>
   async (dispatch, getState, { history }) => {
     try {
       const detailInfo = {
         catImages: catImages,
-        catTags: hashTags,
+        catTags: HashTags,
         diary: diary,
         food: food,
         snack: snack,
@@ -426,10 +426,6 @@ const cat = createSlice({
     likeToggle: (state, action) => {
       const idx = state.list.findIndex((c) => c.catId === action.payload);
       state.list[idx].userLiked = !state.list[idx].userLiked;
-      // if (!state.list[idx].userLiked) {
-      //   console.log("호출");
-      //   deleteUserLikedCat(action.payload);
-      // }
     },
   },
 });

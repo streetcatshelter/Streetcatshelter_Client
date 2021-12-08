@@ -101,14 +101,7 @@ export const getOneCommunityDB =
     try {
       dispatch(itemDetailLoading(true));
       const data = await communityApi.getDetailCommunity(communityId);
-      const category = data.data.category;
-      if (category.split(" ")[1] === "정보글") {
-        dispatch(getOneCatInfo(data));
-      } else if (category.split(" ")[1] === "동네") {
-        dispatch(getOneGathering(data));
-      } else if (category.split(" ")[1] === "고양이") {
-        dispatch(getOneSharing(data));
-      }
+      dispatch(getOneCommunity(data.data));
     } catch (err) {
       console.error(err);
     }
@@ -230,7 +223,7 @@ export const deleteCommunityCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const data = await communityApi.deleteCommunityComment(commentId);
-      dispatch(getOneCommunityDB(communityId));
+      dispatch(deleteComment(commentId));
     } catch (err) {
       console.error(err);
     }
@@ -255,6 +248,7 @@ const initialState = {
   catInfo: [],
   gathering: [],
   sharing: [],
+  communityDetail: [],
   page: 0,
   pageLoaded: false,
   itemLoaded: false,
@@ -354,18 +348,7 @@ const community = createSlice({
         itemLoaded: false,
       };
     },
-    getOneCatInfo: (state, action) => {
-      state.catInfo = action.payload;
-      state.itemDetailLoaded = false;
-    },
-    getOneGathering: (state, action) => {
-      state.gathering = action.payload;
-      state.itemDetailLoaded = false;
-    },
-    getOneSharing: (state, action) => {
-      state.sharing = action.payload;
-      state.itemDetailLoaded = false;
-    },
+
     editCatInfo: (state, action) => {
       console.log("수정 요청 완료!");
     },
@@ -429,6 +412,18 @@ const community = createSlice({
     errorToast: (state, action) => {
       state.toast = action.payload;
     },
+    getOneCommunity: (state, action) => {
+      state.communityDetail = action.payload;
+      state.itemDetailLoaded = false;
+    },
+    deleteComment: (state, action) => {
+      const idx = state.communityDetail.commentList.findIndex(
+        (c) => c.commentId === action.payload
+      );
+      if (idx !== -1) {
+        state.communityDetail.commentList.splice(idx, 1);
+      }
+    },
   },
 });
 
@@ -448,9 +443,7 @@ export const {
   deleteCatInfo,
   deleteGathering,
   deleteSharing,
-  getOneCatInfo,
-  getOneGathering,
-  getOneSharing,
+
   addCatInfoComment,
   addGatheringComment,
   addSharingComment,
@@ -466,6 +459,8 @@ export const {
   itemDetailLoading,
   resetList,
   errorToast,
+  getOneCommunity,
+  deleteComment,
 } = community.actions;
 
 export default community;

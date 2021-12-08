@@ -1,5 +1,6 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
+import { connectAdvanced } from "react-redux";
 import { catApi } from "../../shared/axios";
 
 // detail 댓글 작성
@@ -8,6 +9,7 @@ export const __createCatComment =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.createCatComment(catId, contents);
+
       dispatch(createCatComment({ contents }));
     } catch (err) {
       console.error(err);
@@ -75,6 +77,7 @@ const comment = createSlice({
   reducers: {
     createCatComment: (state, action) => {
       const contents = action.payload.contents;
+      console.log(contents);
       state.list.push({ contents });
     },
     createCatDetailComment: (state, action) => {

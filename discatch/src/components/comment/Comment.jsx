@@ -20,38 +20,14 @@ import { communityLikeToggleDB } from "../../redux/modules/community";
 const Comment = ({ path }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const pathName = location.pathname.split("/")[3];
   const commentList = useSelector((state) => state.comment.list);
 
-  const cCommunity = useSelector((state) => state.community.catInfo);
-  const gCommunity = useSelector((state) => state.community.gathering);
-  const sCommunity = useSelector((state) => state.community.sharing);
-
-  const cCommunityId = cCommunity.data?.communityId;
-  const gCommunityId = gCommunity.data?.communityId;
-  const sCommunityId = sCommunity.data?.communityId;
-
-  const cUserLike = cCommunity.data?.liked;
-  const gUserLike = gCommunity.data?.liked;
-  const sUserLike = sCommunity.data?.liked;
-
-  let community, userLike, communityId;
-  if (pathName === "catinfo") {
-    community = cCommunity;
-    userLike = cUserLike;
-    communityId = cCommunityId;
-  } else if (pathName === "gathering") {
-    community = gCommunity;
-    userLike = gUserLike;
-    communityId = gCommunityId;
-  } else if (pathName === "sharing") {
-    community = sCommunity;
-    userLike = sUserLike;
-    communityId = sCommunityId;
-  }
+  const communityDetail = useSelector(
+    (state) => state.community.communityDetail
+  );
 
   const updateLikes = () => {
-    dispatch(communityLikeToggleDB(communityId));
+    dispatch(communityLikeToggleDB(communityDetail.communityId));
   };
 
   return (
@@ -94,11 +70,7 @@ const Comment = ({ path }) => {
                   String(commentList.length).length - 4
                 )}K`
               : commentList.length
-            : String(community.data?.cntComment).length > 3
-            ? `${String(community.data?.cntComment)[0]}${"0".repeat(
-                String(community.data?.cntComment).length - 4
-              )}K`
-            : community.data?.cntComment}
+            : communityDetail.commentList?.length}
         </Count>
       </Grid>
 
@@ -123,7 +95,7 @@ const Comment = ({ path }) => {
               <FavoriteIcon
                 onClick={updateLikes}
                 style={{
-                  color: userLike ? "red" : "gray",
+                  color: communityDetail.liked ? "red" : "gray",
                   position: "relative",
                   bottom: "2px",
                   cursor: "pointer",
@@ -145,11 +117,7 @@ const Comment = ({ path }) => {
                 `;
               }}
             >
-              {String(community.data?.cntLikeit).length > 3
-                ? `${String(community.data?.cntLikeit)[0]}${"0".repeat(
-                    String(community.data?.cntLikeit).length - 4
-                  )}K`
-                : community.data?.cntLikeit}
+              {communityDetail.cntLikeit}
             </Text>
           </Grid>
         </Grid>

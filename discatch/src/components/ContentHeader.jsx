@@ -25,51 +25,21 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const [ProfileModal, setProfileModal] = useState(false);
 
   const userNickName = useSelector((state) => state.mypage.userInfo?.nickname);
-  const location = useSelector((state) =>
-    pName === "catinfo"
-      ? state.community.catInfo.data?.location
-      : pName === "gathering"
-      ? state.community.gathering.data?.location
-      : pName === "sharing"
-      ? state.community.sharing.data?.location
-      : null
+  const location = useSelector(
+    (state) => state.community.communityDetail.location
   );
-  const nickname = useSelector((state) =>
-    pName === "catinfo"
-      ? state.community.catInfo.data?.nickname
-      : pName === "gathering"
-      ? state.community.gathering.data?.nickname
-      : pName === "sharing"
-      ? state.community.sharing.data?.nickname
-      : state.cat.detail?.nickname
+  const nickname = useSelector(
+    (state) => state.community.communityDetail.nickname
   );
-  const createdAt = useSelector((state) =>
-    pName === "catinfo"
-      ? state.community.catInfo.data?.createdAt
-      : pName === "gathering"
-      ? state.community.gathering.data?.createdAt
-      : pName === "sharing"
-      ? state.community.sharing.data?.createdAt
-      : state.cat.detail?.createdAt
+  const createdAt = useSelector(
+    (state) => state.community.communityDetail.createdAt
   );
-  const profileImageUrl = useSelector((state) =>
-    pName === "catinfo"
-      ? state.community.catInfo.data?.profileImageUrl
-      : pName === "gathering"
-      ? state.community.gathering.data?.profileImageUrl
-      : pName === "sharing"
-      ? state.community.sharing.data?.profileImageUrl
-      : state.cat.detail?.profileImageUrl
+  const profileImageUrl = useSelector(
+    (state) => state.community.communityDetail.profileImageUrl
   );
 
-  const userRandomId = useSelector((state) =>
-    pName === "catinfo"
-      ? state.community.catInfo.data?.userRandomId
-      : pName === "gathering"
-      ? state.community.gathering.data?.userRandomId
-      : pName === "sharing"
-      ? state.community.sharing.data?.userRandomId
-      : state.cat.detail?.userRandomId
+  const userRandomId = useSelector(
+    (state) => state.community.communityDetail.userRandomId
   );
 
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");

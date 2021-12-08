@@ -25,80 +25,29 @@ import {
 } from "../../redux/modules/community";
 
 const CommunityPostDetail = (props) => {
-  let category, contents, imageList, title, location;
   const path = props.location.pathname.split("/")[3];
   const pathLocation = props.location.pathname.split("/")[2];
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
   const isLoaded = useSelector((state) => state.community.itemDetailLoaded);
   const [deleteState, setDeleteState] = useState(false);
-  const { cCategory, cContents, cImageList, cTitle, cLocation } = useSelector(
-    (state) => ({
-      cCategory: state.community.catInfo.data?.category,
-      cContents: state.community.catInfo.data?.contents,
-      cImageList: state.community.catInfo.data?.communityImageList
-        ? state.community.catInfo.data.communityImageList
-        : Array(1),
-      cLocation: state.community.catInfo.data?.location,
-      cTitle: state.community.catInfo.data?.title,
-    })
+  const communityDetail = useSelector(
+    (state) => state.community.communityDetail
   );
-
-  const { gCategory, gContents, gImageList, gTitle, gLocation } = useSelector(
-    (state) => ({
-      gCategory: state.community.gathering.data?.category,
-      gContents: state.community.gathering.data?.contents,
-      gImageList: state.community.gathering.data?.communityImageList
-        ? state.community.gathering.data.communityImageList
-        : Array(1),
-      gLocation: state.community.gathering.data?.location,
-      gTitle: state.community.gathering.data?.title,
-    })
-  );
-
-  const { sCategory, sContents, sImageList, sTitle, sLocation } = useSelector(
-    (state) => ({
-      sCategory: state.community.sharing.data?.category,
-      sContents: state.community.sharing.data?.contents,
-      sImageList: state.community.sharing.data?.communityImageList
-        ? state.community.sharing.data.communityImageList
-        : Array(1),
-      sLocation: state.community.sharing.data?.location,
-      sTitle: state.community.sharing.data?.title,
-    })
-  );
-
-  if (path === "catinfo") {
-    category = cCategory;
-    contents = cContents;
-    imageList = cImageList;
-    title = cTitle;
-    location = cLocation;
-  } else if (path === "gathering") {
-    category = gCategory;
-    contents = gContents;
-    imageList = gImageList;
-    title = gTitle;
-    location = gLocation;
-  } else if (path === "sharing") {
-    category = sCategory;
-    contents = sContents;
-    imageList = sImageList;
-    title = sTitle;
-    location = sLocation;
-  }
-
+  console.log(communityDetail);
   const deleteCommunity = () => {
     setDeleteState(true);
     setTimeout(() => {
-      dispatch(deleteCommunityDB(communityId, category, location));
+      dispatch(
+        deleteCommunityDB(communityId, communityDetail.category, Location)
+      );
     }, 1000);
   };
 
   let pathCategory;
-  if (category?.split(" ")[1] === "정보글") {
+  if (communityDetail.category?.split(" ")[1] === "정보글") {
     pathCategory = "catinfo";
-  } else if (category?.split(" ")[1] === "동네") {
+  } else if (communityDetail.category?.split(" ")[1] === "동네") {
     pathCategory = "gathering";
   } else {
     pathCategory = "sharing";
@@ -106,7 +55,7 @@ const CommunityPostDetail = (props) => {
 
   useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
-  }, [communityId, dispatch]);
+  }, [communityId]);
 
   useEffect(() => {
     if (deleteState) {
@@ -133,11 +82,11 @@ const CommunityPostDetail = (props) => {
 
         <div>
           <Title>
-            <p> {title} </p>
+            <p> {communityDetail.title} </p>
           </Title>
 
           <ImageBox>
-            {imageList?.map((catImage, idx) => {
+            {communityDetail.communityImageList?.map((catImage, idx) => {
               return (
                 <CatImageBox key={idx}>
                   <CatImage src={catImage.image} alt="catImage" key={idx} />
@@ -146,9 +95,7 @@ const CommunityPostDetail = (props) => {
             })}
           </ImageBox>
 
-          <Text margin="15px">
-            {contents}
-          </Text>
+          <Text margin="15px">{communityDetail.contents}</Text>
 
           <div style={{ margin: "10px 0px" }}>
             <CommentList props={props} communityId={communityId} />

@@ -109,7 +109,6 @@ const CommentCard = ({ comment, communityId }) => {
         </Text>
       </Wrap>
       {userInfo.nickname === comment.nickname ? (
-        openModal={ProfileModal}
         <EditModalSlide
           FirstBtn="내프로필보기"
           SecondBtn="내프로필수정"
@@ -134,7 +133,7 @@ const CommentCard = ({ comment, communityId }) => {
           SecondClick={MakeChat}
         />
       )}
-      {commentStatus && <Toast message="댓글을 삭제했어요!" />}
+      {commentState && <Toast message="댓글을 삭제했어요!" />}
     </>
   );
 };

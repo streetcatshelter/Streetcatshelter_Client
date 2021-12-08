@@ -19,6 +19,7 @@ import { ArrowLeft, Bell, Search } from "react-feather";
 import { history } from "../redux/configureStore";
 import { searchMap } from "../redux/modules/map";
 import { mypageActions } from "../redux/modules/mypage";
+import { changeToast } from "../redux/modules/chat";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -151,8 +152,9 @@ const Header = (props) => {
       history.goBack();
     }
   };
-  const [toastState, setToastState] = useState(false);
 
+  const [toastState, setToastState] = useState(false);
+  const chatToastState = useSelector((state) => state.chat.toast);
   useEffect(() => {
     if (toastState) {
       setTimeout(() => {
@@ -160,6 +162,13 @@ const Header = (props) => {
       }, 1500);
     }
   }, [toastState]);
+  useEffect(() => {
+    if (chatToastState) {
+      setTimeout(() => {
+        dispatch(changeToast(false));
+      }, 1500);
+    }
+  }, [chatToastState]);
 
   if (!userInfo) {
     return <div></div>;
@@ -225,6 +234,12 @@ const Header = (props) => {
         ""
       )} */}
       {toastState && <Toast message="버전2에서 준비중입니다." />}
+      {chatToastState && (
+        <Toast
+          message="채팅방 만들기에 실패하였습니다."
+          message2="다시 한번 시도해주세요."
+        />
+      )}
     </HeaderStyle>
   );
 };

@@ -40,10 +40,10 @@ to{
 }
 `;
 const ToastBox = styled.div`
-  flex-direction:${(props) => (props.message2 ? "column" : "row")};
+  flex-direction: ${(props) => (props.message2 ? "column" : "row")};
   position: absolute;
   border-radius: 20px;
-  min-width:  ${(props) => (props.message2 ? "300px" : "250px")};
+  min-width: ${(props) => (props.message2 ? "300px" : "250px")};
   height: ${(props) => (props.message2 ? "100px" : "70px")};
   top: 50%;
   left: 50%;
@@ -59,8 +59,8 @@ const ToastBox = styled.div`
   font-weight: 700;
   word-break: keep-all;
   visibility: visible;
-  animation:  ${fadeIn} 0.5s, ${fadeOut} 0.5s 1.0s; 
-  -webkit-animation: ${fadeIn} 0.5s, ${fadeOut} 0.5s 1.0s;
+  animation: ${fadeIn} 0.5s, ${fadeOut} 0.5s 1s;
+  -webkit-animation: ${fadeIn} 0.5s, ${fadeOut} 0.5s 1s;
   animation-fill-mode: forwards;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 `;

@@ -79,6 +79,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const MakeChat = () => {
     const chatuser = { chatUser: [userNickName, nickname] };
     dispatch(chatActions._createRoom(chatuser));
+    setProfileModal(!ProfileModal);
   };
 
   let locationName = "";

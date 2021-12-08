@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
@@ -15,6 +15,7 @@ import {
   CommentList,
   Spinner,
   ContentHeader,
+  Toast,
 } from "../../components";
 
 // ICON
@@ -47,6 +48,8 @@ const CatDetailInfo = (props) => {
     location = userInfo.locationList[2];
   }
 
+  const [deleteStatus, setDeleteStatus] = useState(false);
+
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
   };
@@ -60,7 +63,10 @@ const CatDetailInfo = (props) => {
   }, [catDetailId, commentList.length, dispatch]);
 
   const deleteCatDetail = () => {
-    dispatch(__deleteCatDetail(catDetailId));
+    setDeleteStatus(true);
+    setTimeout(() => {
+      dispatch(__deleteCatDetail(catDetailId));
+    }, 1000);
   };
 
   const editCatDetail = () => {
@@ -69,6 +75,14 @@ const CatDetailInfo = (props) => {
       state: { location },
     });
   };
+
+  useEffect(() => {
+    if (deleteStatus) {
+      setTimeout(() => {
+        setDeleteStatus(false);
+      }, 1500);
+    }
+  }, [deleteStatus]);
 
   return (
     <>
@@ -239,6 +253,7 @@ const CatDetailInfo = (props) => {
           path="CatDetailInfo"
           catId={catDetailId}
         />
+        {deleteStatus && <Toast message="게시물 삭제 완료!" />}
       </Template>
     </>
   );

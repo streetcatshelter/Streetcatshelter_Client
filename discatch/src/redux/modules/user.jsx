@@ -22,7 +22,6 @@ const _loginKakao =
       history.push("/");
     } catch (e) {
       console.log(e);
-      window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
       history.push("/login");
     }
   };
@@ -32,18 +31,11 @@ const _loginNaver =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await userApi.getNaver(authorization_code);
-      if (data === "") {
-        console.log("데이터가없음");
-        window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
-        history.push("/login");
-        return;
-      }
       const userInfo = {
         userId: data.userId,
         name: data.username,
         picture: data.profileImage,
       };
-
       dispatch(loginNaver(userInfo));
       setToken(data.token);
       const str_userInfo = JSON.stringify(userInfo);
@@ -51,7 +43,6 @@ const _loginNaver =
       history.push("/");
     } catch (e) {
       console.log(e);
-      window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
       history.push("/login");
     }
   };
@@ -61,13 +52,11 @@ const _loginGoogle =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await userApi.getGoogle(authorization_code);
-
       const userInfo = {
         userId: data.userId,
         name: data.username,
         picture: data.profileImage,
       };
-
       dispatch(loginGoogle(userInfo));
       setToken(data.token);
       const str_userInfo = JSON.stringify(userInfo);
@@ -75,7 +64,6 @@ const _loginGoogle =
       history.push("/");
     } catch (e) {
       console.log(e);
-      window.alert("로그인에 실패하였습니다. 다시 로그인 해 주세요.");
       history.push("/login");
     }
   };

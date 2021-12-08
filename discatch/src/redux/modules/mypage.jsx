@@ -116,7 +116,7 @@ const _getUserProfile =
     }
   };
 
-const _editMyInfo = (nickName, village) => {
+const _editMyInfo = (nickName, village, setUserToastState) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
     if (imgFile.length) {
@@ -137,9 +137,7 @@ const _editMyInfo = (nickName, village) => {
             })
             .catch((err) => {
               console.error(err);
-              window.alert(
-                "사용자 정보 수정에 실패하였습니다. 다시 시도해주시길 바랍니다."
-              );
+              setUserToastState(true);
             });
         })
       );
@@ -157,9 +155,7 @@ const _editMyInfo = (nickName, village) => {
         })
         .catch((err) => {
           console.error(err);
-          window.alert(
-            "사용자 정보 수정에 실패하였습니다. 다시 시도해주시길 바랍니다."
-          );
+          setUserToastState(true);
         });
     }
   };

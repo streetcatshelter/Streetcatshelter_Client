@@ -19,7 +19,7 @@ const Profile = (props) => {
   const dispatch = useDispatch();
   const location = props.location;
   const UserInfo = useSelector((state) => state.mypage.userInfo);
-  const NickName = UserInfo.nickname === "string" ? "" : UserInfo.nickname;
+  const nickName = UserInfo.nickname === "string" ? "" : UserInfo.nickname;
 
   const logout = () => {
     dispatch(userActions._logout());
@@ -46,7 +46,7 @@ const Profile = (props) => {
             positon="relative"
           >
             <Text fontWeight="800" margin="5px 0px">
-              {UserInfo.username}({NickName})
+              {UserInfo.username}({nickName})
             </Text>
 
             <EditModalSlide

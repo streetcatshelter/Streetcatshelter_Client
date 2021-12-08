@@ -26,7 +26,6 @@ const Header = (props) => {
   const locationA = useLocation();
   const path = props.path;
   const userInfo = useSelector((state) => state.mypage.userInfo);
-
   let location;
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
@@ -153,17 +152,16 @@ const Header = (props) => {
       history.goBack();
     }
   };
-  const [ToastState, setToastState] = useState(false);
 
+  const [toastState, setToastState] = useState(false);
+  const chatToastState = useSelector((state) => state.chat.toast);
   useEffect(() => {
-    if (ToastState) {
+    if (toastState) {
       setTimeout(() => {
         setToastState(false);
       }, 1500);
     }
-  }, [ToastState]);
-
-  const chatToastState = useSelector((state) => state.chat.toast);
+  }, [toastState]);
   useEffect(() => {
     if (chatToastState) {
       setTimeout(() => {
@@ -235,7 +233,7 @@ const Header = (props) => {
       ) : (
         ""
       )} */}
-      {ToastState && <Toast message="버전2에서 준비중입니다." />}
+      {toastState && <Toast message="버전2에서 준비중입니다." />}
       {chatToastState && (
         <Toast
           message="채팅방 만들기에 실패하였습니다."

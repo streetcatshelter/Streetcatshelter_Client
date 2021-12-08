@@ -48,7 +48,7 @@ const CatDetailInfoWrite = (props) => {
       dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum + 1);
     } else {
-      setMaxPhotoStatus(true);
+      setMaxPhotoState(true);
     }
   };
 
@@ -66,10 +66,10 @@ const CatDetailInfoWrite = (props) => {
   const [snack, setSnack] = useState(edit ? detail.snack : false);
   const [water, setWater] = useState(edit ? detail.water : false);
 
-  const [maxPhotoStatus, setMaxPhotoStatus] = useState(false);
-  const [diaryStatus, setDiaryStatus] = useState(false);
-  const [tagStatus, setTagStatus] = useState(false);
-  const [accessStatus, setAccessStatus] = useState(false);
+  const [maxPhotoState, setMaxPhotoState] = useState(false);
+  const [diaryState, setDiaryState] = useState(false);
+  const [tagState, setTagState] = useState(false);
+  const [accessState, setAccessState] = useState(false);
 
   let location = edit
     ? props.location.state?.village
@@ -81,7 +81,7 @@ const CatDetailInfoWrite = (props) => {
 
   const createBtn = () => {
     if (diary === "") {
-      setDiaryStatus(true);
+      setDiaryState(true);
     } else {
       edit
         ? dispatch(
@@ -115,7 +115,7 @@ const CatDetailInfoWrite = (props) => {
       dispatch(addHashTag(catTag));
       setTag("");
     } else {
-      setTagStatus(true);
+      setTagState(true);
     }
   };
 
@@ -135,43 +135,43 @@ const CatDetailInfoWrite = (props) => {
           } else tag = [];
         }
       } else {
-        setAccessStatus(true);
+        setAccessState(true);
         history.push("/");
       }
     }
   }, []);
 
   useEffect(() => {
-    if (maxPhotoStatus) {
+    if (maxPhotoState) {
       setTimeout(() => {
-        setMaxPhotoStatus(false);
+        setMaxPhotoState(false);
       }, 1500);
     }
-  }, [maxPhotoStatus]);
+  }, [maxPhotoState]);
 
   useEffect(() => {
-    if (diaryStatus) {
+    if (diaryState) {
       setTimeout(() => {
-        setDiaryStatus(false);
+        setDiaryState(false);
       }, 1500);
     }
-  }, [diaryStatus]);
+  }, [diaryState]);
 
   useEffect(() => {
-    if (tagStatus) {
+    if (setTagState) {
       setTimeout(() => {
-        setTagStatus(false);
+        setTagState(false);
       }, 1500);
     }
-  }, [tagStatus]);
+  }, [tagState]);
 
   useEffect(() => {
-    if (accessStatus) {
+    if (accessState) {
       setTimeout(() => {
-        setAccessStatus(false);
+        setAccessState(false);
       }, 1500);
     }
-  }, [accessStatus]);
+  }, [accessState]);
 
   return (
     <Template props={props}>
@@ -433,10 +433,10 @@ const CatDetailInfoWrite = (props) => {
           작성하기
         </Button>
       </Grid>
-      {maxPhotoStatus && <Toast message="사진은 최대 3장까지 등록할 수 있어요!" />}
-      {diaryStatus && <Toast message="다이어리를 입력해 주세요!" />}
-      {tagStatus && <Toast message="해쉬태그를 입력해주세요!" />}
-      {accessStatus && <Toast message="잘못된 접근입니다." />}
+      {maxPhotoState && <Toast message="사진은 최대 3장까지 등록할 수 있어요!" />}
+      {diaryState && <Toast message="다이어리를 입력해 주세요!" />}
+      {tagState && <Toast message="해쉬태그를 입력해주세요!" />}
+      {accessState && <Toast message="잘못된 접근입니다." />}
     </Template>
   );
 };

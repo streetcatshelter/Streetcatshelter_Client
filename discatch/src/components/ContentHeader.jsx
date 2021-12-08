@@ -24,7 +24,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const pName = pathName.pathname.split("/")[3];
   const [ProfileModal, setProfileModal] = useState(false);
 
-  const UserNickName = useSelector((state) => state.mypage.userInfo?.nickname);
+  const userNickName = useSelector((state) => state.mypage.userInfo?.nickname);
   const location = useSelector((state) =>
     pName === "catinfo"
       ? state.community.catInfo.data?.location
@@ -77,7 +77,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
     setProfileModal(!ProfileModal);
   };
   const MakeChat = () => {
-    const chatuser = { chatUser: [UserNickName, nickname] };
+    const chatuser = { chatUser: [userNickName, nickname] };
     dispatch(chatActions._createRoom(chatuser));
     setProfileModal(!ProfileModal);
   };
@@ -109,7 +109,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
                 <span>{CreatedAt}</span>
               </div>
             </UserInfoBoxCenter>
-            {nickname === UserNickName && (
+            {nickname === userNickName && (
               <EditModalSlide
                 FirstBtn={FirstBtn}
                 SecondBtn={SecondBtn}
@@ -120,7 +120,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
           </div>
         </UserInfoBox>
       </Wrapper>
-      {nickname !== UserNickName ? (
+      {nickname !== userNickName ? (
         <EditModalSlide
           FirstBtn="프로필보기"
           SecondBtn="채팅하기"

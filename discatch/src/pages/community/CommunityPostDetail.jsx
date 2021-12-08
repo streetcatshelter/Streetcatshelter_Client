@@ -31,7 +31,7 @@ const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
   const isLoaded = useSelector((state) => state.community.itemDetailLoaded);
-  const [deleteStatus, setDeleteStatus] = useState(false);
+  const [deleteState, setDeleteState] = useState(false);
   const { cCategory, cContents, cImageList, cTitle, cLocation } = useSelector(
     (state) => ({
       cCategory: state.community.catInfo.data?.category,
@@ -89,7 +89,7 @@ const CommunityPostDetail = (props) => {
   }
 
   const deleteCommunity = () => {
-    setDeleteStatus(true);
+    setDeleteState(true);
     setTimeout(() => {
       dispatch(deleteCommunityDB(communityId, category, location));
     }, 1000);
@@ -109,12 +109,12 @@ const CommunityPostDetail = (props) => {
   }, [communityId, dispatch]);
 
   useEffect(() => {
-    if (deleteStatus) {
+    if (deleteState) {
       setTimeout(() => {
-        setDeleteStatus(false);
+        setDeleteState(false);
       }, 1500);
     }
-  }, [deleteStatus]);
+  }, [deleteState]);
 
   return (
     <Template props={props}>
@@ -155,7 +155,7 @@ const CommunityPostDetail = (props) => {
           </div>
         </div>
       </SecondSpinner>
-      {deleteStatus && <Toast message="게시물 삭제 완료!" />}
+      {deleteState && <Toast message="게시물 삭제 완료!" />}
     </Template>
   );
 };

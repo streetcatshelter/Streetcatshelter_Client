@@ -93,12 +93,12 @@ const CommunityPostEdit = (props) => {
   const imageNum = imageList?.length;
 
   const [fileNum, setFileNum] = useState(imageNum);
-  const [titleStatus, setTitleStatus] = useState(false);
-  const [contentStatus, setContentStatus] = useState(false);
-  const [photoStatus, setPhotoStatus] = useState(false);
-  const [maxPhotoStatus, setMaxPhotoStatus] = useState(false);
-  const [prePhotoStatus, setPrePhotoStatus] = useState(false);
-  const [editStatus, setEditStatus] = useState(false);
+  const [titleState, setTitleState] = useState(false);
+  const [contentState, setContentState] = useState(false);
+  const [photoState, setPhotoState] = useState(false);
+  const [maxPhotoState, setMaxPhotoState] = useState(false);
+  const [prePhotoState, setPrePhotoState] = useState(false);
+  const [editState, setEditState] = useState(false);
 
   // S3
   const handleInputFile = (e) => {
@@ -111,7 +111,7 @@ const CommunityPostEdit = (props) => {
       dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum + 1);
     } else {
-      setMaxPhotoStatus(true);
+      setMaxPhotoState(true);
     }
   };
 
@@ -127,11 +127,11 @@ const CommunityPostEdit = (props) => {
 
   const editBtn = () => {
     if (editTitle === '') {
-      setTitleStatus(true);
+      setTitleState(true);
     } else if (editcontents === '') {
-      setContentStatus(true);
+      setContentState(true);
     } else {
-      setEditStatus(true);
+      setEditState(true);
       setTimeout(() => {
         dispatch(imgActions.setFiles(imageList, imageNum));
         dispatch(
@@ -172,9 +172,9 @@ const CommunityPostEdit = (props) => {
       dispatch(imgActions.delFile(fileNum - 1));
       setFileNum(fileNum - 1);
     } else if (preview.length === 0 && imageNum !== 0) {
-      setPrePhotoStatus(true);
+      setPrePhotoState(true);
     } else {
-      setPhotoStatus(true);
+      setPhotoState(true);
     }
   };
 
@@ -192,52 +192,52 @@ const CommunityPostEdit = (props) => {
   }, [category, communityId, dispatch]);
 
   useEffect(() => {
-    if (titleStatus) {
+    if (titleState) {
       setTimeout(() => {
-        setTitleStatus(false);
+        setTitleState(false);
       }, 1500);
     }
-  }, [titleStatus]);
+  }, [titleState]);
 
   useEffect(() => {
-    if (contentStatus) {
+    if (contentState) {
       setTimeout(() => {
-        setContentStatus(false);
+        setContentState(false);
       }, 1500);
     }
-  }, [contentStatus]);
+  }, [contentState]);
 
   useEffect(() => {
-    if (photoStatus) {
+    if (photoState) {
       setTimeout(() => {
-        setPhotoStatus(false);
+        setPhotoState(false);
       }, 1500);
     }
-  }, [photoStatus]);
+  }, [photoState]);
 
   useEffect(() => {
-    if (maxPhotoStatus) {
+    if (maxPhotoState) {
       setTimeout(() => {
-        setMaxPhotoStatus(false);
+        setMaxPhotoState(false);
       }, 1500);
     }
-  }, [maxPhotoStatus]);
+  }, [maxPhotoState]);
 
   useEffect(() => {
-    if (prePhotoStatus) {
+    if (prePhotoState) {
       setTimeout(() => {
-        setPrePhotoStatus(false);
+        setPrePhotoState(false);
       }, 1500);
     }
-  }, [prePhotoStatus]);
+  }, [prePhotoState]);
 
   useEffect(() => {
-    if (editStatus) {
+    if (editState) {
       setTimeout(() => {
-        setEditStatus(false);
+        setEditState(false);
       }, 1500);
     }
-  }, [editStatus]);
+  }, [editState]);
 
   return (
     <Template props={props}>
@@ -496,12 +496,12 @@ const CommunityPostEdit = (props) => {
           </Grid>
         </CommunityEditStyle>
       </Grid>
-      {titleStatus && <Toast message="제목을 입력해주세요!" />}
-      {contentStatus && <Toast message="내용을 입력해주세요!" />}
-      {photoStatus && <Toast message="삭제할 사진이 없어요!" />}
-      {maxPhotoStatus && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
-      {prePhotoStatus && <Toast message="이전에 추가한 사진은 삭제할 수 없어요!" />}
-      {editStatus && <Toast message="게시글 수정 완료!" />}
+      {titleState && <Toast message="제목을 입력해주세요!" />}
+      {contentState && <Toast message="내용을 입력해주세요!" />}
+      {photoState && <Toast message="삭제할 사진이 없어요!" />}
+      {maxPhotoState && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
+      {prePhotoState && <Toast message="이전에 추가한 사진은 삭제할 수 없어요!" />}
+      {editState && <Toast message="게시글 수정 완료!" />}
     </Template>
   );
 };

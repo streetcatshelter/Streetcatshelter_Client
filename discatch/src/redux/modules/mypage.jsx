@@ -255,6 +255,9 @@ const mypage = createSlice({
         ),
       };
     },
+    resetList: (state, action) => {
+      state.likedAllCat = [];
+    },
   },
 });
 
@@ -286,6 +289,7 @@ export const {
   itemLoading,
   deleteUserLikedCat,
   setUserProfile,
+  resetList,
 } = mypage.actions;
 
 export default mypage;

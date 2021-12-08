@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // MOMENT
@@ -7,6 +7,7 @@ import moment from "moment";
 
 // COMPONENTS
 import { EditModalSlide } from "../";
+import { Toast } from "../";
 
 // ELEMENTS
 import { Text } from "../../elements/index";
@@ -29,6 +30,7 @@ const CommentCard = ({ comment, communityId }) => {
   const UserInfo = useSelector((state) => state.mypage.userInfo);
   const [ProfileModal, setProfileModal] = useState(false);
   const CreatedAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
+  const [commentStatus, setCommentStatus] = useState(false);
   const [openRandomProfileModal, setOpenRandomProfileModal] = useState(false);
   const OpenProfile = () => {
     if (UserInfo.nickname !== comment.nickname) {
@@ -40,12 +42,34 @@ const CommentCard = ({ comment, communityId }) => {
     const chatuser = { chatUser: [comment.nickname, UserInfo.nickname] };
     dispatch(chatActions._createRoom(chatuser));
   };
+  
+  const deleteCommunityComment = () => {
+    setCommentStatus(true);
+    setTimeout(() => {
+      dispatch(deleteCommunityCommentDB(commentId, communityId));
+    }, 1000);
+  }
+
+  const deleteComment = () => {
+    setCommentStatus(true);
+    setTimeout(() => {
+      dispatch(__deleteComment(commentId));
+    }, 1000);
+  }
 
   const deleteBtn = () => {
     communityId
-      ? dispatch(deleteCommunityCommentDB(commentId, communityId))
-      : dispatch(__deleteComment(commentId));
+      ? deleteCommunityComment()
+      : deleteComment()
   };
+
+  useEffect(() => {
+    if (commentStatus) {
+      setTimeout(() => {
+        setCommentStatus(false);
+      }, 1500);
+    }
+  }, [commentStatus]);
 
   return (
     <>
@@ -64,7 +88,7 @@ const CommentCard = ({ comment, communityId }) => {
           </Left>
 
           <Right>
-            {UserInfo.username === comment.username ? (
+            {UserInfo.nickname === comment.nickname ? (
               <Trash2 size="14px" color="red" onClick={deleteBtn} />
             ) : (
               ""
@@ -94,6 +118,7 @@ const CommentCard = ({ comment, communityId }) => {
         }}
         SecondClick={MakeChat}
       />
+      {commentStatus && <Toast message="댓글을 삭제했어요!" />}
     </>
   );
 };

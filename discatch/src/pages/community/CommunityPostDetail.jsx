@@ -11,6 +11,9 @@ import {
   Toast,
 } from "../../components";
 
+// ELEMENTS
+import { Text } from "../../elements";
+
 // STYLE
 import styled from "styled-components";
 
@@ -143,9 +146,9 @@ const CommunityPostDetail = (props) => {
             })}
           </ImageBox>
 
-          <Content>
-            <p> {contents} </p>
-          </Content>
+          <Text margin="15px">
+            {contents}
+          </Text>
 
           <div style={{ margin: "10px 0px" }}>
             <CommentList props={props} communityId={communityId} />
@@ -184,13 +187,6 @@ const Title = styled.div`
     font-weight: 900;
     margin: 0px;
     width: auto;
-  }
-`;
-const Content = styled.div`
-  margin: 10px;
-  p {
-    font-size: 14px;
-    margin: 0px;
   }
 `;
 

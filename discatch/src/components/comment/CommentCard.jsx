@@ -31,36 +31,33 @@ const CommentCard = ({ comment, communityId }) => {
   const [ProfileModal, setProfileModal] = useState(false);
   const CreatedAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
   const [commentStatus, setCommentStatus] = useState(false);
-  const [openRandomProfileModal, setOpenRandomProfileModal] = useState(false);
+
   const OpenProfile = () => {
-    if (UserInfo.nickname !== comment.nickname) {
-      setProfileModal(!ProfileModal);
-    }
+    setProfileModal(!ProfileModal);
   };
 
   const MakeChat = () => {
     const chatuser = { chatUser: [comment.nickname, UserInfo.nickname] };
     dispatch(chatActions._createRoom(chatuser));
+    setProfileModal(!ProfileModal);
   };
-  
+
   const deleteCommunityComment = () => {
     setCommentStatus(true);
     setTimeout(() => {
       dispatch(deleteCommunityCommentDB(commentId, communityId));
     }, 1000);
-  }
+  };
 
   const deleteComment = () => {
     setCommentStatus(true);
     setTimeout(() => {
       dispatch(__deleteComment(commentId));
     }, 1000);
-  }
+  };
 
   const deleteBtn = () => {
-    communityId
-      ? deleteCommunityComment()
-      : deleteComment()
+    communityId ? deleteCommunityComment() : deleteComment();
   };
 
   useEffect(() => {
@@ -76,7 +73,7 @@ const CommentCard = ({ comment, communityId }) => {
       <Wrap>
         <Header>
           <Left>
-            <Profile onClick={OpenProfile} isMine={comment.isMine}>
+            <Profile onClick={OpenProfile}>
               <img
                 src={comment.profileImageUrl}
                 alt={comment.profileImageUrl}
@@ -108,16 +105,31 @@ const CommentCard = ({ comment, communityId }) => {
           {comment.contents}
         </Text>
       </Wrap>
-      <EditModalSlide
-        FirstBtn="프로필보기"
-        SecondBtn="채팅하기"
-        Profile="profile"
-        openModal={ProfileModal}
-        FirstClick={() => {
-          history.push(`/user/${comment.userRandomId}`);
-        }}
-        SecondClick={MakeChat}
-      />
+      {UserInfo.nickname === comment.nickname ? (
+        <EditModalSlide
+          FirstBtn="내프로필보기"
+          SecondBtn="내프로필수정"
+          Profile="profile"
+          openModal={ProfileModal}
+          FirstClick={() => {
+            history.push(`/user/${comment.userRandomId}`);
+          }}
+          SecondClick={() => {
+            history.push("/userinfoedit");
+          }}
+        />
+      ) : (
+        <EditModalSlide
+          FirstBtn="프로필보기"
+          SecondBtn="채팅하기"
+          Profile="profile"
+          openModal={ProfileModal}
+          FirstClick={() => {
+            history.push(`/user/${comment.userRandomId}`);
+          }}
+          SecondClick={MakeChat}
+        />
+      )}
       {commentStatus && <Toast message="댓글을 삭제했어요!" />}
     </>
   );
@@ -142,7 +154,7 @@ const Left = styled.div`
 `;
 const Profile = styled.div`
   display: flex;
-  ${(props) => (props.isMine ? "" : `cursor: pointer`)};
+  cursor: pointer;
   img {
     width: 30px;
     height: 30px;

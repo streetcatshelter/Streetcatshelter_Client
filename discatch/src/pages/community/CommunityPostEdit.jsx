@@ -98,6 +98,7 @@ const CommunityPostEdit = (props) => {
   const [photoStatus, setPhotoStatus] = useState(false);
   const [maxPhotoStatus, setMaxPhotoStatus] = useState(false);
   const [prePhotoStatus, setPrePhotoStatus] = useState(false);
+  const [editStatus, setEditStatus] = useState(false);
 
   // S3
   const handleInputFile = (e) => {
@@ -130,18 +131,22 @@ const CommunityPostEdit = (props) => {
     } else if (editcontents === '') {
       setContentStatus(true);
     } else {
-      dispatch(imgActions.setFiles(imageList, imageNum));
-      dispatch(
-        editCommunityDB(
-          communityId,
-          category,
-          editcontents,
-          location,
-          editTitle,
-          username,
-          imageList
-        )
-      );
+      setEditStatus(true);
+      setTimeout(() => {
+        dispatch(imgActions.setFiles(imageList, imageNum));
+        dispatch(
+          editCommunityDB(
+            communityId,
+            category,
+            editcontents,
+            location,
+            editTitle,
+            username,
+            imageList
+          )
+        );
+      }, 1000);
+      
     }
   };
 
@@ -225,6 +230,14 @@ const CommunityPostEdit = (props) => {
       }, 1500);
     }
   }, [prePhotoStatus]);
+
+  useEffect(() => {
+    if (editStatus) {
+      setTimeout(() => {
+        setEditStatus(false);
+      }, 1500);
+    }
+  }, [editStatus]);
 
   return (
     <Template props={props}>
@@ -488,6 +501,7 @@ const CommunityPostEdit = (props) => {
       {photoStatus && <Toast message="삭제할 사진이 없어요!" />}
       {maxPhotoStatus && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
       {prePhotoStatus && <Toast message="이전에 추가한 사진은 삭제할 수 없어요!" />}
+      {editStatus && <Toast message="게시글 수정 완료!" />}
     </Template>
   );
 };

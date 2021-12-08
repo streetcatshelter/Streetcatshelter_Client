@@ -169,11 +169,8 @@ export const editCommunityDB = (
             })
             .then((res) => {
               dispatch(imgActions.setInitialState());
-              window.alert("게시글 수정 완료!");
               history.push(
-                `/community/${
-                  location.split(" ")[2]
-                }/${path}/postdetail/${communityId}`
+                `/community/${location}/${path}/postdetail/${communityId}`
               );
             })
             .catch((err) => {
@@ -181,8 +178,6 @@ export const editCommunityDB = (
             });
         })
       );
-    } else if (newImages.length > 5) {
-      alert("사진은 최대 5장까지 등록할 수 있어요!");
     } else {
       return;
     }
@@ -231,11 +226,9 @@ export const deleteCommunityCommentDB =
   async (dispatch, getState, { history }) => {
     try {
       const data = await communityApi.deleteCommunityComment(commentId);
-      window.alert("댓글을 삭제했습니다.");
       dispatch(getOneCommunityDB(communityId));
     } catch (err) {
       console.error(err);
-      window.alert("댓글을 삭제할 수 없습니다. 다시 시도해주세요!");
     }
   };
 

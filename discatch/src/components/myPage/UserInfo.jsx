@@ -18,12 +18,14 @@ import { imgActions } from "../../redux/modules/image";
 const UserInfo = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.mypage.userInfo);
-  const [nickName, setNickName] = useState(UserInfo.nickname);
+  const [nickName, setNickName] = useState(userInfo.nickname);
+  console.log(nickName);
   const village = useSelector((state) => state.mypage.userVillage);
   const [fileUrl, setFileUrl] = useState(null);
 
   //토스트모달
   const [toastState, setToastState] = useState(false);
+  const [editToastState, setEditToastState] = useState(false);
   const [secondToastState, setSecondToastState] = useState(false);
   const [editState, setEditState] = useState(false);
 
@@ -36,23 +38,29 @@ const UserInfo = () => {
       setTimeout(() => {
         setSecondToastState(false);
       }, 1500);
+    } else if (editToastState) {
+      setTimeout(() => {
+        setEditToastState(false);
+      }, 1500);
     }
-  }, [toastState, secondToastState]);
+  }, [toastState, secondToastState, editToastState]);
 
   const changeNickName = (e) => {
-    setNickName(e.target.value);
+    const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
+    if (regExp.test(e.target.value) || e.target.value.search(/\s/) !== -1) {
+      setEditToastState(true);
+    } else {
+      setNickName(e.target.value);
+    }
   };
 
   const EditMyInfo = () => {
-    if (nickName === "") {
+    if (nickName === "" || nickName === null || nickName === undefined) {
       setToastState(true);
     } else if (village.length === 0) {
       setSecondToastState(true);
     } else {
-      setEditState(true);
-      setTimeout(() => {
-        dispatch(mypageActions._editMyInfo(nickName, village));
-      }, 1000);
+      dispatch(mypageActions._editMyInfo(nickName, village));
     }
   };
 
@@ -65,20 +73,14 @@ const UserInfo = () => {
     setFileUrl(imageUrl);
   };
 
-  useEffect(() => {
-    if (editState) {
-      setTimeout(() => {
-        setEditState(false);
-      }, 1500);
-    }
-  }, [editState]);
-
   return (
     <React.Fragment>
       {toastState ? (
         <Toast message="닉네임을 입력해주세요!" />
       ) : secondToastState ? (
         <Toast message="동네를 입력해주세요!" />
+      ) : editToastState ? (
+        <Toast message="특수문자 및 공백을 사용할 수 없습니다." />
       ) : (
         ""
       )}

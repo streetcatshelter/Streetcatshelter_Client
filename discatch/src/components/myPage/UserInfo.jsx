@@ -26,6 +26,7 @@ const UserInfo = () => {
   const [toastState, setToastState] = useState(false);
   const [editToastState, setEditToastState] = useState(false);
   const [secondToastState, setSecondToastState] = useState(false);
+  const [userToastState, setUserToastState] = useState(false);
 
   useEffect(() => {
     if (toastState) {
@@ -40,8 +41,12 @@ const UserInfo = () => {
       setTimeout(() => {
         setEditToastState(false);
       }, 1500);
+    } else if (userToastState) {
+      setTimeout(() => {
+        setUserToastState(false);
+      }, 1500);
     }
-  }, [toastState, secondToastState, editToastState]);
+  }, [toastState, secondToastState, editToastState, userToastState]);
 
   const changeNickName = (e) => {
     const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
@@ -58,7 +63,7 @@ const UserInfo = () => {
     } else if (village.length === 0) {
       setSecondToastState(true);
     } else {
-      dispatch(mypageActions._editMyInfo(nickName, village));
+      dispatch(mypageActions._editMyInfo(nickName, village, setUserToastState));
     }
   };
 
@@ -79,6 +84,8 @@ const UserInfo = () => {
         <Toast message="동네를 입력해주세요!" />
       ) : editToastState ? (
         <Toast message="특수문자 및 공백을 사용할 수 없습니다." />
+      ) : userToastState ? (
+        <Toast message="사용자 정보 수정에 실패했어요!" message2="다시 시도해주세요!"/>
       ) : (
         ""
       )}

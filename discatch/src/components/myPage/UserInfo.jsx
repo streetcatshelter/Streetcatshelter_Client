@@ -19,7 +19,6 @@ const UserInfo = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.mypage.userInfo);
   const [nickName, setNickName] = useState(userInfo.nickname);
-  console.log(nickName);
   const village = useSelector((state) => state.mypage.userVillage);
   const [fileUrl, setFileUrl] = useState(null);
 
@@ -150,7 +149,9 @@ const UserInfo = () => {
         <SearchAddress Village={village} />
 
         <Inner>
-          <button onClick={EditMyInfo} style={{cursor: 'pointer'}}>등록</button>
+          <button onClick={EditMyInfo} style={{ cursor: "pointer" }}>
+            등록
+          </button>
         </Inner>
       </Wrapper>
     </React.Fragment>

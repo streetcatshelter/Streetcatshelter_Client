@@ -116,7 +116,7 @@ const _getUserProfile =
     }
   };
 
-const _editMyInfo = (NickName, Village) => {
+const _editMyInfo = (nickName, village) => {
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
     if (imgFile.length) {
@@ -125,8 +125,8 @@ const _editMyInfo = (NickName, Village) => {
           const imageUrl = getState().image.imageUrl;
 
           const userInfo = {
-            location: Village,
-            nickname: NickName,
+            location: village,
+            nickname: nickName,
             profileUrl: imageUrl,
           };
           instance
@@ -145,8 +145,8 @@ const _editMyInfo = (NickName, Village) => {
       );
     } else {
       const userInfo = {
-        location: Village,
-        nickname: NickName,
+        location: village,
+        nickname: nickName,
         profileUrl: null,
       };
       instance

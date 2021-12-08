@@ -11,7 +11,7 @@ import { ChevronLeft, ChevronRight, X } from "react-feather";
 // REDUX
 import { history } from "../redux/configureStore";
 
-const TOTAL_SLIDES = 2;
+const TOTAL_SLIDES = 4;
 
 const Slider = (props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -52,9 +52,11 @@ const Slider = (props) => {
           </CloseButton>
         </ButtonWrap>
         <SliderContainer ref={slideRef}>
-          <Slide />
+          <Slide number="1" />
           <Slide number="2" />
-          <Slide GoHome={GoHome} number="3" />
+          <Slide number="3" />
+          <Slide number="4" />
+          <Slide GoHome={GoHome} number="5" />
         </SliderContainer>
       </Container>
       <BtnWrap>
@@ -64,6 +66,8 @@ const Slider = (props) => {
         <Dot background={currentSlide === 0 ? "#D19B61" : "#FBD986"} />
         <Dot background={currentSlide === 1 ? "#D19B61" : "#FBD986"} />
         <Dot background={currentSlide === 2 ? "#D19B61" : "#FBD986"} />
+        <Dot background={currentSlide === 3 ? "#D19B61" : "#FBD986"} />
+        <Dot background={currentSlide === 4 ? "#D19B61" : "#FBD986"} />
         <Button style={{ padding: "3px 4px" }} onClick={nextSlide}>
           <ChevronRight />
         </Button>

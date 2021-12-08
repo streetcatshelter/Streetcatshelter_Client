@@ -77,7 +77,7 @@ const CatDetailInfoWrite = (props) => {
   const latitude = edit ? "" : props.location.state.latitude;
   const longitude = edit ? "" : props.location.state.longitude;
 
-  location = location?.split(' ')[2];
+  location = location?.split(" ")[2];
 
   const createBtn = () => {
     if (diary === "") {
@@ -369,7 +369,11 @@ const CatDetailInfoWrite = (props) => {
             type="text"
             value={tag}
             changeEvent={$tag}
-            onKeyPress={(e) => e.which === 13 && publish(tag)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                publish(tag);
+              }
+            }}
           />
 
           {hashTags ? (
@@ -433,7 +437,9 @@ const CatDetailInfoWrite = (props) => {
           작성하기
         </Button>
       </Grid>
-      {maxPhotoState && <Toast message="사진은 최대 3장까지 등록할 수 있어요!" />}
+      {maxPhotoState && (
+        <Toast message="사진은 최대 3장까지 등록할 수 있어요!" />
+      )}
       {diaryState && <Toast message="다이어리를 입력해 주세요!" />}
       {tagState && <Toast message="해쉬태그를 입력해주세요!" />}
       {accessState && <Toast message="잘못된 접근입니다." />}

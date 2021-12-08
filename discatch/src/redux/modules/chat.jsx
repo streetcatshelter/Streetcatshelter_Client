@@ -31,11 +31,11 @@ const _createRoom =
   async (dispatch, getState, { history }) => {
     console.log(chatuser);
     try {
-      const { data } = await chatApi.createRoom(chatuser);
+      const { data } = await chatApi.createRoom();
       history.push(`/api/chat/enter/${data.roomId}`);
     } catch (e) {
       console.log(e);
-      alert("채팅방 만들기에 실패하였습니다😹다시 시도해주세요!");
+      dispatch(changeToast(true));
     }
   };
 
@@ -70,6 +70,7 @@ const initialState = {
   chatmessage: [],
   loading: [],
   isLoaded: false,
+  toast: false,
 };
 
 // 리듀서
@@ -103,6 +104,9 @@ const chat = createSlice({
         ),
       };
     },
+    changeToast: (state, action) => {
+      state.toast = action.payload;
+    },
   },
 });
 
@@ -120,5 +124,6 @@ export const {
   pushChatMessage,
   loading,
   deleteRoom,
+  changeToast,
 } = chat.actions;
 export default chat;

@@ -41,26 +41,25 @@ const CommentCard = ({ comment, communityId }) => {
   const MakeChat = () => {
     const chatuser = { chatUser: [comment.nickname, userInfo.nickname] };
     dispatch(chatActions._createRoom(chatuser));
+    setProfileModal(!ProfileModal);
   };
-  
+
   const deleteCommunityComment = () => {
     setCommentState(true);
     setTimeout(() => {
       dispatch(deleteCommunityCommentDB(commentId, communityId));
     }, 1000);
-  }
+  };
 
   const deleteComment = () => {
     setCommentState(true);
     setTimeout(() => {
       dispatch(__deleteComment(commentId));
     }, 1000);
-  }
+  };
 
   const deleteBtn = () => {
-    communityId
-      ? deleteCommunityComment()
-      : deleteComment()
+    communityId ? deleteCommunityComment() : deleteComment();
   };
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const CommentCard = ({ comment, communityId }) => {
       <Wrap>
         <Header>
           <Left>
-            <Profile onClick={OpenProfile} isMine={comment.isMine}>
+            <Profile onClick={OpenProfile}>
               <img
                 src={comment.profileImageUrl}
                 alt={comment.profileImageUrl}
@@ -108,16 +107,31 @@ const CommentCard = ({ comment, communityId }) => {
           {comment.contents}
         </Text>
       </Wrap>
-      <EditModalSlide
-        FirstBtn="프로필보기"
-        SecondBtn="채팅하기"
-        Profile="profile"
-        openModal={ProfileModal}
-        FirstClick={() => {
-          history.push(`/user/${comment.userRandomId}`);
-        }}
-        SecondClick={MakeChat}
-      />
+      {userInfo.nickname === comment.nickname ? (
+        <EditModalSlide
+          FirstBtn="내프로필보기"
+          SecondBtn="내프로필수정"
+          Profile="profile"
+          openModal={ProfileModal}
+          FirstClick={() => {
+            history.push(`/user/${comment.userRandomId}`);
+          }}
+          SecondClick={() => {
+            history.push("/userinfoedit");
+          }}
+        />
+      ) : (
+        <EditModalSlide
+          FirstBtn="프로필보기"
+          SecondBtn="채팅하기"
+          Profile="profile"
+          openModal={ProfileModal}
+          FirstClick={() => {
+            history.push(`/user/${comment.userRandomId}`);
+          }}
+          SecondClick={MakeChat}
+        />
+      )}
       {commentState && <Toast message="댓글을 삭제했어요!" />}
     </>
   );
@@ -142,7 +156,7 @@ const Left = styled.div`
 `;
 const Profile = styled.div`
   display: flex;
-  ${(props) => (props.isMine ? "" : `cursor: pointer`)};
+  cursor: pointer;
   img {
     width: 30px;
     height: 30px;

@@ -122,7 +122,7 @@ const CommunityDetail = (props) => {
         }
         is_float="is_float"
       >
-        <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+        <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px", cursor: "pointer" }} />
       </Button>
     </Template>
   );

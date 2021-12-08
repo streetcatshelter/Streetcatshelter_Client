@@ -144,6 +144,7 @@ const Menu = (props) => {
         <div
           onClick={() => moveToHome()}
           style={{
+            cursor: "pointer",
             textDecoration: "none",
             color: "black",
           }}
@@ -168,6 +169,7 @@ const Menu = (props) => {
         <div
           onClick={() => moveToMap()}
           style={{
+            cursor: "pointer",
             textDecoration: "none",
             color: "black",
           }}
@@ -180,6 +182,7 @@ const Menu = (props) => {
         <div
           onClick={() => moveToChat()}
           style={{
+            cursor: "pointer",
             textDecoration: "none",
             color: "black",
           }}
@@ -192,6 +195,7 @@ const Menu = (props) => {
         <div
           onClick={() => moveToInfo()}
           style={{
+            cursor: "pointer",
             textDecoration: "none",
             color: "black",
             textAlign: "center",

@@ -10,6 +10,7 @@ import {
   SecondHeader,
   SecondSpinner,
   EmptyPost,
+  Toast,
 } from "../../components";
 
 // ELEMENTS
@@ -30,6 +31,18 @@ import {
 const Home = (props) => {
   const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.cat.postLoaded);
+  //토스트모달
+  const [toastState, setToastState] = useState(false);
+
+  useEffect(() => {
+    if (toastState) {
+      setTimeout(() => {
+        setToastState(false);
+      }, 1500);
+    }
+  }, [toastState]);
+
+  //무한 스크롤
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
     threshold: 0,
@@ -40,27 +53,23 @@ const Home = (props) => {
   const catList = useSelector((state) => state.cat.list);
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   const villageList = useSelector((state) => state.mypage.userVillage);
-  
+
   let location = stateLocation ? stateLocation : villageList[0];
-  if (villageList[0] && userLocation === villageList[0]?.split(' ')[2]) {
+  if (villageList[0] && userLocation === villageList[0]?.split(" ")[2]) {
     location = villageList[0];
-  } else if (villageList[1] && userLocation === villageList[1]?.split(' ')[2]) {
+  } else if (villageList[1] && userLocation === villageList[1]?.split(" ")[2]) {
     location = villageList[1];
-  } else if (villageList[2] && userLocation === villageList[2]?.split(' ')[2]) {
+  } else if (villageList[2] && userLocation === villageList[2]?.split(" ")[2]) {
     location = villageList[2];
   }
 
-  const userVillage = useSelector(
-    (state) => state.mypage.userVillage[0]
-  );
+  const userVillage = useSelector((state) => state.mypage.userVillage[0]);
 
-  const pathLocation = userLocation
-    ? userLocation
-    : userVillage?.split(' ')[2];
-  
+  const pathLocation = userLocation ? userLocation : userVillage?.split(" ")[2];
+
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
-    alert("동네 정보를 입력해주세요!");
+    setToastState(true);
   };
 
   useEffect(() => {
@@ -85,6 +94,7 @@ const Home = (props) => {
     <>
       {location !== undefined ? (
         <Template props={props} location={pathLocation}>
+          {toastState && <Toast message="동네 정보를 입력해주세요!" />}
           <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
           {catList && catList.length > 0 ? (
             catList.map((cat, idx) => {

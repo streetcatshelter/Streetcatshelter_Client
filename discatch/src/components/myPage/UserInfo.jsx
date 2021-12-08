@@ -27,7 +27,6 @@ const UserInfo = () => {
   const [toastState, setToastState] = useState(false);
   const [editToastState, setEditToastState] = useState(false);
   const [secondToastState, setSecondToastState] = useState(false);
-  const [editState, setEditState] = useState(false);
 
   useEffect(() => {
     if (toastState) {
@@ -84,7 +83,7 @@ const UserInfo = () => {
       ) : (
         ""
       )}
-      {editState && <Toast message="사용자 정보가 수정됐어요!" />}
+
       <Wrapper>
         <Inner>
           <p>닉네임</p>

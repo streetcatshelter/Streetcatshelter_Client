@@ -10,6 +10,7 @@ import {
   SecondHeader,
   SecondSpinner,
   EmptyPost,
+  Toast,
 } from "../../components";
 
 // STYLE
@@ -30,13 +31,13 @@ import {
   getCommunityDB,
   getMoreCommunityDB,
   resetList,
+  errorToast,
 } from "../../redux/modules/community";
 import { history } from "../../redux/configureStore";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
-
   const communityList = useSelector((state) =>
     params.category === "catinfo"
       ? state.community.catInfo
@@ -45,6 +46,8 @@ const CommunityDetail = (props) => {
       : state.community.sharing
   );
   const loading = useSelector((state) => state.community.itemLoaded);
+  const toastState = useSelector((state) => state.community.toast);
+
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
     threshold: 0,
@@ -87,8 +90,17 @@ const CommunityDetail = (props) => {
     }
   }, [inView, dispatch]);
 
+  useEffect(() => {
+    if (toastState) {
+      setTimeout(() => {
+        dispatch(errorToast(false));
+      }, 1500);
+    }
+  }, [toastState]);
+
   return (
     <Template props={props}>
+      {toastState && <Toast message="페이지에 오류가있어요" />}
       <SecondHeader title={category} path="scroll" />
       <CommunityDetailStyle>
         {communityList && communityList.length > 0 ? (

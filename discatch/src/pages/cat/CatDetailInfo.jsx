@@ -48,7 +48,7 @@ const CatDetailInfo = (props) => {
     location = userInfo.locationList[2];
   }
 
-  const [deleteStatus, setDeleteStatus] = useState(false);
+  const [deleteState, setDeleteState] = useState(false);
 
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
@@ -63,7 +63,7 @@ const CatDetailInfo = (props) => {
   }, [catDetailId, commentList.length, dispatch]);
 
   const deleteCatDetail = () => {
-    setDeleteStatus(true);
+    setDeleteState(true);
     setTimeout(() => {
       dispatch(__deleteCatDetail(catDetailId));
     }, 1000);
@@ -77,12 +77,12 @@ const CatDetailInfo = (props) => {
   };
 
   useEffect(() => {
-    if (deleteStatus) {
+    if (deleteState) {
       setTimeout(() => {
-        setDeleteStatus(false);
+        setDeleteState(false);
       }, 1500);
     }
-  }, [deleteStatus]);
+  }, [deleteState]);
 
   return (
     <>
@@ -253,7 +253,7 @@ const CatDetailInfo = (props) => {
           path="CatDetailInfo"
           catId={catDetailId}
         />
-        {deleteStatus && <Toast message="게시물 삭제 완료!" />}
+        {deleteState && <Toast message="게시물 삭제 완료!" />}
       </Template>
     </>
   );

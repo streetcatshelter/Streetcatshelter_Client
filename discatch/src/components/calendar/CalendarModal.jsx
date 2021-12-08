@@ -16,17 +16,17 @@ import { history } from "../../redux/configureStore";
 const CalendarModal = (props) => {
   const { elm, month, year, setOpenModal, path } = props;
   const dispatch = useDispatch();
-  const WorkDetail = useSelector((state) =>
+  const workDetail = useSelector((state) =>
     path === "mypage" ? state.mypage.calendardetail : state.cat.calendardetail
   );
-  const CatId = useSelector((state) => state.cat.catinfo?.catId);
-  const CatName = useSelector((state) => state.cat.catinfo?.catName);
+  const catId = useSelector((state) => state.cat.catinfo?.catId);
+  const catName = useSelector((state) => state.cat.catinfo?.catName);
   
   useEffect(() => {
     path === "mypage"
       ? dispatch(mypageActions._getCalenderDetail(year, month, elm))
-      : dispatch(__getCalendarDetail(CatId, elm, month, year));
-  }, [year, month, elm, CatId, dispatch]);
+      : dispatch(__getCalendarDetail(catId, elm, month, year));
+  }, [year, month, elm, catId, dispatch]);
 
   return (
     <>
@@ -49,7 +49,7 @@ const CalendarModal = (props) => {
                   </p>
                 ) : (
                   <p>
-                    {CatName} 활동일지
+                    {catName} 활동일지
                     <br />
                     <span>
                       ({year}년{month}월{elm}일)
@@ -66,31 +66,31 @@ const CalendarModal = (props) => {
               </CancleBox>
             </Head>
             <Events>
-              {WorkDetail.map((EachCatWork, idx) => {
+              {workDetail.map((eachCatWork, idx) => {
                 return (
                   <EventBox
                     key={idx}
                     onClick={() => {
                       history.push({
-                        pathname: `/catdetail/${EachCatWork.location}/${EachCatWork.catId}/1`,
-                        state: { location: EachCatWork.location },
+                        pathname: `/catdetail/${eachCatWork.location}/${eachCatWork.catId}/1`,
+                        state: { location: eachCatWork.location },
                       });
                     }}
                   >
                     <CatLeft>
-                      <img src={EachCatWork.catImage} alt="catImage" />
+                      <img src={eachCatWork.catImage} alt="catImage" />
                     </CatLeft>
                     <CatRight>
                       {path === "mypage" ? (
-                        <p>이름: {EachCatWork.catName}</p>
+                        <p>이름: {eachCatWork.catName}</p>
                       ) : (
                         ""
                       )}
-                      <p>동네: {EachCatWork.location}</p>
+                      <p>동네: {eachCatWork.location}</p>
 
                       <CatWorkBox>
                         <p>활동: </p>
-                        {EachCatWork.food ? (
+                        {eachCatWork.food ? (
                           <CheckBox>
                             <CheckSquare />
                             <p>밥주기</p>
@@ -98,7 +98,7 @@ const CalendarModal = (props) => {
                         ) : (
                           ""
                         )}
-                        {EachCatWork.water ? (
+                        {eachCatWork.water ? (
                           <CheckBox>
                             <CheckSquare />
                             <p>급수하기</p>
@@ -106,7 +106,7 @@ const CalendarModal = (props) => {
                         ) : (
                           ""
                         )}
-                        {EachCatWork.snack ? (
+                        {eachCatWork.snack ? (
                           <CheckBox>
                             <CheckSquare />
                             <p>간식주기</p>

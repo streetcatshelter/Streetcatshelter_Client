@@ -18,23 +18,24 @@ const SearchAddress = (props) => {
   const [isOpenPost, setIsOpenPost] = useState(false);
 
   //토스트모달
-  const [ToastStatus, setToastStatus] = useState(false);
-  const [SecondToastStatus, setSecondToastStatus] = useState(false);
+  const [toastState, setToastState] = useState(false);
+  const [secondToastState, setSecondToastState] = useState(false);
+
   useEffect(() => {
-    if (ToastStatus) {
+    if (setSecondToastState) {
       setTimeout(() => {
-        setToastStatus(false);
+        setToastState(false);
       }, 1500);
-    } else if (SecondToastStatus) {
+    } else if (secondToastState) {
       setTimeout(() => {
-        setSecondToastStatus(false);
+        setSecondToastState(false);
       }, 1500);
     }
-  }, [ToastStatus, SecondToastStatus]);
+  }, [toastState, secondToastState]);
 
   const onChangeOpenPost = () => {
     if (isOpenPost === false && props.Village.length === 3) {
-      setToastStatus(true);
+      setToastState(true);
     } else {
       setIsOpenPost(!isOpenPost);
     }
@@ -64,7 +65,7 @@ const SearchAddress = (props) => {
     ) {
       dispatch(saveVillage(`${fullAddr.split(" (")[0]}`));
     } else {
-      setSecondToastStatus(true);
+      setSecondToastState(true);
     }
     setIsOpenPost(false);
   };
@@ -99,12 +100,12 @@ const SearchAddress = (props) => {
           />
         </Background>
       ) : null}
-      {ToastStatus ? (
+      {toastState ? (
         <Toast
           message="최대 3동네까지 등록하실 수 있습니다"
           message2="수정을 원하시면 동네 삭제 후 다시 시도해주세요!"
         />
-      ) : SecondToastStatus ? (
+      ) : secondToastState ? (
         <Toast message="이름이 같은 동은 한 곳만 등록 가능합니다." />
       ) : (
         ""
@@ -135,7 +136,6 @@ const SearchButton = styled.div`
     margin: auto;
   }
 `;
-
 const Background = styled.div`
   position: fixed;
   top: 0;

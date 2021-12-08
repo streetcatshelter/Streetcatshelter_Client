@@ -27,30 +27,33 @@ import { history } from "../../redux/configureStore";
 const CommentCard = ({ comment, communityId }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
-  const UserInfo = useSelector((state) => state.mypage.userInfo);
+  const userInfo = useSelector((state) => state.mypage.userInfo);
   const [ProfileModal, setProfileModal] = useState(false);
-  const CreatedAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
-  const [commentStatus, setCommentStatus] = useState(false);
-
+  const createdAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
+  const [commentState, setCommentState] = useState(false);
+  const [openRandomProfileModal, setOpenRandomProfileModal] = useState(false);
+  
   const OpenProfile = () => {
-    setProfileModal(!ProfileModal);
+    if (userInfo.nickname !== comment.nickname) {
+      setProfileModal(!ProfileModal);
+    }
   };
 
   const MakeChat = () => {
-    const chatuser = { chatUser: [comment.nickname, UserInfo.nickname] };
+    const chatuser = { chatUser: [comment.nickname, userInfo.nickname] };
     dispatch(chatActions._createRoom(chatuser));
     setProfileModal(!ProfileModal);
   };
 
   const deleteCommunityComment = () => {
-    setCommentStatus(true);
+    setCommentState(true);
     setTimeout(() => {
       dispatch(deleteCommunityCommentDB(commentId, communityId));
     }, 1000);
   };
 
   const deleteComment = () => {
-    setCommentStatus(true);
+    setCommentState(true);
     setTimeout(() => {
       dispatch(__deleteComment(commentId));
     }, 1000);
@@ -61,12 +64,12 @@ const CommentCard = ({ comment, communityId }) => {
   };
 
   useEffect(() => {
-    if (commentStatus) {
+    if (commentState) {
       setTimeout(() => {
-        setCommentStatus(false);
+        setCommentState(false);
       }, 1500);
     }
-  }, [commentStatus]);
+  }, [commentState]);
 
   return (
     <>
@@ -81,11 +84,11 @@ const CommentCard = ({ comment, communityId }) => {
               <p>{comment.nickname}</p>
             </Profile>
 
-            {comment.createdAt ? <span>{CreatedAt}</span> : ""}
+            {comment.createdAt ? <span>{createdAt}</span> : ""}
           </Left>
 
           <Right>
-            {UserInfo.nickname === comment.nickname ? (
+            {userInfo.nickname === comment.nickname ? (
               <Trash2 size="14px" color="red" onClick={deleteBtn} />
             ) : (
               ""
@@ -105,7 +108,8 @@ const CommentCard = ({ comment, communityId }) => {
           {comment.contents}
         </Text>
       </Wrap>
-      {UserInfo.nickname === comment.nickname ? (
+      {userInfo.nickname === comment.nickname ? (
+        openModal={ProfileModal}
         <EditModalSlide
           FirstBtn="내프로필보기"
           SecondBtn="내프로필수정"

@@ -12,15 +12,14 @@ import styled from "styled-components";
 import { history } from "../../redux/configureStore";
 
 const Notice = () => {
-  const NoticeList = useSelector((state) => state.mypage.noticelist);
+  const noticeList = useSelector((state) => state.mypage.noticelist);
   return (
     <Wrapper>
       <Content>
         <Title style={{ fontSize: "14px", textAlign: "center" }}>제목</Title>
-
         <DateBox style={{ fontSize: "14px", fontWeight: "900" }}>날짜</DateBox>
       </Content>
-      {NoticeList.map((notice, idx) => {
+      {noticeList.map((notice, idx) => {
         const modifiedAt = moment(notice.modifiedAt).format("YYYY-M-DD");
         return (
           <Content

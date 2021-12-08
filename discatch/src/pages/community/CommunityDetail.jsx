@@ -35,12 +35,12 @@ import { history } from "../../redux/configureStore";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
-  const Params = useParams();
+  const params = useParams();
 
   const communityList = useSelector((state) =>
-    Params.category === "catinfo"
+    params.category === "catinfo"
       ? state.community.catInfo
-      : Params.category === "gathering"
+      : params.category === "gathering"
       ? state.community.gathering
       : state.community.sharing
   );

@@ -17,41 +17,41 @@ import { imgActions } from "../../redux/modules/image";
 
 const UserInfo = () => {
   const dispatch = useDispatch();
-  const UserInfo = useSelector((state) => state.mypage.userInfo);
-  const [NickName, setNickName] = useState(UserInfo.nickname);
-  const Village = useSelector((state) => state.mypage.userVillage);
+  const userInfo = useSelector((state) => state.mypage.userInfo);
+  const [nickName, setNickName] = useState(UserInfo.nickname);
+  const village = useSelector((state) => state.mypage.userVillage);
   const [fileUrl, setFileUrl] = useState(null);
 
   //토스트모달
-  const [ToastStatus, setToastStatus] = useState(false);
-  const [SecondToastStatus, setSecondToastStatus] = useState(false);
-  const [editStatus, setEditStatus] = useState(false);
+  const [toastState, setToastState] = useState(false);
+  const [secondToastState, setSecondToastState] = useState(false);
+  const [editState, setEditState] = useState(false);
 
   useEffect(() => {
-    if (ToastStatus) {
+    if (toastState) {
       setTimeout(() => {
-        setToastStatus(false);
+        setToastState(false);
       }, 1500);
-    } else if (SecondToastStatus) {
+    } else if (secondToastState) {
       setTimeout(() => {
-        setSecondToastStatus(false);
+        setSecondToastState(false);
       }, 1500);
     }
-  }, [ToastStatus, SecondToastStatus]);
+  }, [toastState, secondToastState]);
 
   const changeNickName = (e) => {
     setNickName(e.target.value);
   };
 
   const EditMyInfo = () => {
-    if (NickName === "") {
-      setToastStatus(true);
-    } else if (Village.length === 0) {
-      setSecondToastStatus(true);
+    if (nickName === "") {
+      setToastState(true);
+    } else if (village.length === 0) {
+      setSecondToastState(true);
     } else {
-      setEditStatus(true);
+      setEditState(true);
       setTimeout(() => {
-        dispatch(mypageActions._editMyInfo(NickName, Village));
+        dispatch(mypageActions._editMyInfo(nickName, village));
       }, 1000);
     }
   };
@@ -66,23 +66,23 @@ const UserInfo = () => {
   };
 
   useEffect(() => {
-    if (editStatus) {
+    if (editState) {
       setTimeout(() => {
-        setEditStatus(false);
+        setEditState(false);
       }, 1500);
     }
-  }, [editStatus]);
+  }, [editState]);
 
   return (
     <React.Fragment>
-      {ToastStatus ? (
+      {toastState ? (
         <Toast message="닉네임을 입력해주세요!" />
-      ) : SecondToastStatus ? (
+      ) : secondToastState ? (
         <Toast message="동네를 입력해주세요!" />
       ) : (
         ""
       )}
-      {editStatus && <Toast message="사용자 정보가 수정됐어요!" />}
+      {editState && <Toast message="사용자 정보가 수정됐어요!" />}
       <Wrapper>
         <Inner>
           <p>닉네임</p>
@@ -90,7 +90,7 @@ const UserInfo = () => {
             type="text"
             placeholder="닉네임을 입력해주세요."
             onChange={changeNickName}
-            defaultValue={NickName}
+            defaultValue={nickName}
           />
         </Inner>
         <Inner>
@@ -118,9 +118,9 @@ const UserInfo = () => {
         )}
         <Inner>
           <p>내동네</p>
-          {Village.length > 0 ? (
+          {village.length > 0 ? (
             <VillageWrap>
-              {Village.map((village, key) => {
+              {village.map((village, key) => {
                 const DeleteVillage = () => {
                   if (window.confirm("정말로 동네를 지우시겠습니까?")) {
                     dispatch(deleteVillage(village));
@@ -146,7 +146,7 @@ const UserInfo = () => {
             ""
           )}
         </Inner>
-        <SearchAddress Village={Village} />
+        <SearchAddress Village={village} />
 
         <Inner>
           <button onClick={EditMyInfo}>등록</button>

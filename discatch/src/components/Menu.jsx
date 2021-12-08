@@ -67,20 +67,20 @@ const Menu = (props) => {
   }
 
   const catId = props.props.props.location.pathname.split("/")[3];
-  const [ToastStatus, setToastStatus] = useState(false);
+  const [toastState, setToastState] = useState(false);
 
   useEffect(() => {
-    if (ToastStatus) {
+    if (toastState) {
       setTimeout(() => {
-        setToastStatus(false);
+        setToastState(false);
       }, 1500);
     }
-  }, [ToastStatus]);
+  }, [toastState]);
 
   const moveToHome = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
-      setToastStatus(true);
+      setToastState(true);
     } else {
       history.push({ pathname: "/", state: { location } });
     }
@@ -89,7 +89,7 @@ const Menu = (props) => {
   const moveToCommunity = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
-      setToastStatus(true);
+      setToastState(true);
     } else {
       history.push({ pathname: "/community", state: { location } });
     }
@@ -98,7 +98,7 @@ const Menu = (props) => {
   const moveToMap = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
-      setToastStatus(true);
+      setToastState(true);
     } else {
       if (
         path === "/catdetail/:village/:catId" ||
@@ -117,7 +117,7 @@ const Menu = (props) => {
   const moveToChat = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
-      setToastStatus(true);
+      setToastState(true);
     } else {
       history.push({ pathname: "/chat", state: { location } });
     }
@@ -126,7 +126,7 @@ const Menu = (props) => {
   const moveToInfo = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
-      setToastStatus(true);
+      setToastState(true);
     } else {
       history.push({ pathname: "/mypage", state: { location } });
     }
@@ -201,7 +201,7 @@ const Menu = (props) => {
           <Text size="12px">내정보</Text>
         </div>
       </Grid>
-      {ToastStatus && <Toast message="동네정보를 입력해주세요!" />}
+      {toastState && <Toast message="동네 정보를 입력해주세요!" />}
     </MenuStyle>
   );
 };

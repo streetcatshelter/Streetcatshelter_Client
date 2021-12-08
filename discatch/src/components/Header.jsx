@@ -26,7 +26,6 @@ const Header = (props) => {
   const locationA = useLocation();
   const path = props.path;
   const userInfo = useSelector((state) => state.mypage.userInfo);
-
   let location;
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];

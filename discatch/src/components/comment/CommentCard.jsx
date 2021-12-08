@@ -32,6 +32,7 @@ const CommentCard = ({ comment, communityId }) => {
   const createdAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
   const [commentState, setCommentState] = useState(false);
   const [openRandomProfileModal, setOpenRandomProfileModal] = useState(false);
+  
   const OpenProfile = () => {
     if (userInfo.nickname !== comment.nickname) {
       setProfileModal(!ProfileModal);

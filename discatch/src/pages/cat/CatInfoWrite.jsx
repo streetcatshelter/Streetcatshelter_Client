@@ -212,13 +212,14 @@ const CatInfoWrite = (props) => {
           radius="20px"
           addstyle={() => {
             return css`
+              cursor: pointer;
               ${flexBox()}
               flex-direction:column;
             `;
           }}
         >
           <label htmlFor="imgFile">
-            <Camera width="100%" height="100px" color="white" />
+            <Camera width="100%" height="100px" color="white" style={{ cursor:'pointer' }}/>
           </label>
           <Text>이곳을 클릭하여 사진을 등록해 주세요!</Text>
           <Input

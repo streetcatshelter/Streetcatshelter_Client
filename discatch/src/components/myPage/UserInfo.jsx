@@ -149,7 +149,7 @@ const UserInfo = () => {
         <SearchAddress Village={village} />
 
         <Inner>
-          <button onClick={EditMyInfo}>등록</button>
+          <button onClick={EditMyInfo} style={{cursor: 'pointer'}}>등록</button>
         </Inner>
       </Wrapper>
     </React.Fragment>

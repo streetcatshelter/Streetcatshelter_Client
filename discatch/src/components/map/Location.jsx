@@ -428,6 +428,7 @@ const Location = (props) => {
               margin: "5px auto",
               textAlign: "center",
               fontWeight: "900",
+              cursor: "pointer",
             }}
           >
             검색
@@ -607,7 +608,7 @@ const Location = (props) => {
           }
         }}
       >
-        <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+        <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px", cursor: "pointer" }} />
       </Button>
       {keywordToastState ? (
         <Toast message="검색 결과가 없습니다." />

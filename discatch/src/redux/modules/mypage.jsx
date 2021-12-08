@@ -110,7 +110,6 @@ const _getUserProfile =
     try {
       dispatch(userLoading(true));
       const { data } = await myPageApi.getUserProfile(userRandomId);
-      console.log(data);
       dispatch(setUserProfile(data));
     } catch (e) {
       console.log(e);

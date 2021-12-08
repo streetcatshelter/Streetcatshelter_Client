@@ -12,6 +12,9 @@ import {
   EmptyPost,
 } from "../../components";
 
+// STYLE
+import { css } from "styled-components";
+
 // ELEMENTS
 import { Button } from "../../elements";
 
@@ -111,7 +114,7 @@ const Home = (props) => {
               });
             }}
           >
-            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px", cursor: "pointer" }} />
           </Button>{" "}
         </Template>
       ) : (
@@ -123,7 +126,7 @@ const Home = (props) => {
               requestLocationInfo();
             }}
           >
-            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
+            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px", cursor: "pointer" }} />
           </Button>
         </Template>
       )}

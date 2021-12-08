@@ -43,24 +43,24 @@ const Location = (props) => {
 
   const catList = useSelector((state) => state.cat.list);
 
-
-
   useEffect(() => {
     dispatch(__getAllCatLocation(location));
   }, [location, dispatch]);
-  const [ToastStatus, setToastStatus] = useState(false);
-  const [keywordToastStatus, setKeywordToastStatus] = useState(false);
+
+  const [toastState, setToastState] = useState(false);
+  const [keywordToastState, setKeywordToastState] = useState(false);
+
   useEffect(() => {
-    if (ToastStatus) {
+    if (toastState) {
       setTimeout(() => {
-        setToastStatus(false);
+        setToastState(false);
       }, 1500);
-    } else if (keywordToastStatus) {
+    } else if (keywordToastState) {
       setTimeout(() => {
-        setKeywordToastStatus(false);
+        setKeywordToastState(false);
       }, 1500);
     }
-  }, [ToastStatus, keywordToastStatus]);
+  }, [toastState, keywordToastState]);
 
   const showCats = () => {
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
@@ -239,7 +239,7 @@ const Location = (props) => {
 
         setModal(0);
         setTimeout(() => {
-          setKeywordToastStatus(true);
+          setKeywordToastState(true);
         }, 100);
         showCats();
       }
@@ -603,15 +603,15 @@ const Location = (props) => {
             longitude === undefined &&
             pathLength === 3
           ) {
-            setToastStatus(true);
+            setToastState(true);
           }
         }}
       >
         <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px" }} />
       </Button>
-      {keywordToastStatus ? (
+      {keywordToastState ? (
         <Toast message="검색 결과가 없습니다." />
-      ) : ToastStatus ? (
+      ) : toastState ? (
         <Toast message="지도에 위치를 표시해 주세요!" />
       ) : (
         ""

@@ -41,8 +41,8 @@ const CatInfoWrite = (props) => {
     location = villageList[2]
   }
 
-  const NickName = useSelector((state) => state.mypage.userInfo.nickname);
-  const HashTags = useSelector((state) => state.cat.hashtag);
+  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
+  const hashTags = useSelector((state) => state.cat.hashtag);
   const [fileUrl, setFileUrl] = useState(null);
 
   // S3
@@ -63,16 +63,16 @@ const CatInfoWrite = (props) => {
   ];
 
   const [catName, setCatName] = useState(edit ? catInfo.catName : "");
-  const [maxTextStatus, setMaxTextStatus] = useState(false);
-  const [photoStatus, setPhotoStatus] = useState(false);
-  const [nameStatus, setNameStatus] = useState(false);
-  const [neuteringStatus, setNeuteringStatus] = useState(false);
-  const [tagStatus, setTagStatus] = useState(false);
-  const [accessStatus, setAccessStatus] = useState(false);
+  const [maxTextState, setMaxTextState] = useState(false);
+  const [photoState, setPhotoState] = useState(false);
+  const [nameState, setNameState] = useState(false);
+  const [neuteringState, setNeuteringState] = useState(false);
+  const [tagState, setTagState] = useState(false);
+  const [accessState, setAccessState] = useState(false);
 
   const $catName = (e) => {
     if (e.target.value.length > 8) {
-      setMaxTextStatus(true);
+      setMaxTextState(true);
     } else {
       setCatName(e.target.value);
     }
@@ -93,21 +93,21 @@ const CatInfoWrite = (props) => {
 
   const createBtn = () => {
     if (!edit && fileUrl === null) {
-      setPhotoStatus(true);
+      setPhotoState(true);
     } else if (catName === "") {
-      setNameStatus(true);
+      setNameState(true);
     } else if (neutering === "" || neutering === "중성화 여부") {
-      setNeuteringStatus(true);
+      setNeuteringState(true);
     } else {
       edit
-        ? dispatch(__editCatInfo(catName, HashTags, neutering, catInfo.catId))
+        ? dispatch(__editCatInfo(catName, hashTags, neutering, catInfo.catId))
         : dispatch(
             __createCatInfo(
               catName,
-              HashTags,
+              hashTags,
               neutering,
               location,
-              NickName,
+              nickName,
               latitude,
               longitude,
               pathLocation
@@ -120,7 +120,7 @@ const CatInfoWrite = (props) => {
       dispatch(addHashTag(catTag));
       setCatTag("");
     } else {
-      setTagStatus(true);
+      setTagState(true);
     }
   };
 
@@ -142,59 +142,59 @@ const CatInfoWrite = (props) => {
           } else tag = [];
         }
       } else {
-        setAccessStatus(true);
+        setAccessState(true);
         history.push("/");
       }
     }
   }, [edit, catInfo.catTagList, catInfo.catImage, dispatch]);
 
   useEffect(() => {
-    if (maxTextStatus) {
+    if (maxTextState) {
       setTimeout(() => {
-        setMaxTextStatus(false);
+        setMaxTextState(false);
       }, 1500);
     }
-  }, [maxTextStatus]);
+  }, [maxTextState]);
   
   useEffect(() => {
-    if (photoStatus) {
+    if (photoState) {
       setTimeout(() => {
-        setPhotoStatus(false);
+        setPhotoState(false);
       }, 1500);
     }
-  }, [photoStatus]);
+  }, [photoState]);
 
   useEffect(() => {
-    if (nameStatus) {
+    if (nameState) {
       setTimeout(() => {
-        setNameStatus(false);
+        setNameState(false);
       }, 1500);
     }
-  }, [nameStatus]);
+  }, [nameState]);
 
   useEffect(() => {
-    if (neuteringStatus) {
+    if (neuteringState) {
       setTimeout(() => {
-        setNeuteringStatus(false);
+        setNeuteringState(false);
       }, 1500);
     }
-  }, [neuteringStatus]);
+  }, [neuteringState]);
 
   useEffect(() => {
-    if (tagStatus) {
+    if (tagState) {
       setTimeout(() => {
-        setTagStatus(false);
+        setTagState(false);
       }, 1500);
     }
-  }, [tagStatus]);
+  }, [tagState]);
 
   useEffect(() => {
-    if (accessStatus) {
+    if (accessState) {
       setTimeout(() => {
-        setAccessStatus(false);
+        setAccessState(false);
       }, 1500);
     }
-  }, [accessStatus]);
+  }, [accessState]);
 
   return (
     <Template props={props}>
@@ -339,7 +339,7 @@ const CatInfoWrite = (props) => {
               onKeyPress={(e) => e.which === 13 && publish(catTag)}
             />
 
-            {HashTags ? (
+            {hashTags ? (
               <Grid
                 display="flex"
                 width="95%"
@@ -351,7 +351,7 @@ const CatInfoWrite = (props) => {
                   `;
                 }}
               >
-                {HashTags.map((hashtag, idx) => {
+                {hashTags.map((hashtag, idx) => {
                   return (
                     <Grid
                       key={idx}
@@ -398,12 +398,12 @@ const CatInfoWrite = (props) => {
           </Button>
         </Grid>
       </Grid>
-      {maxTextStatus && <Toast message="최대 8글자까지 입력가능해요!" />}
-      {photoStatus && <Toast message="고양이 사진을 등록해주세요!" />}
-      {nameStatus && <Toast message="고양이 이름을 지어주세요!" />}
-      {neuteringStatus && <Toast message="중성화 여부를 선택해주세요!" />}
-      {tagStatus && <Toast message="해쉬태그를 입력해주세요!" />}
-      {accessStatus && <Toast message="잘못된 접근입니다." />}
+      {maxTextState && <Toast message="최대 8글자까지 입력가능해요!" />}
+      {photoState && <Toast message="고양이 사진을 등록해주세요!" />}
+      {nameState && <Toast message="고양이 이름을 지어주세요!" />}
+      {neuteringState && <Toast message="중성화 여부를 선택해주세요!" />}
+      {tagState && <Toast message="해쉬태그를 입력해주세요!" />}
+      {accessState && <Toast message="잘못된 접근입니다." />}
     </Template>
   );
 };

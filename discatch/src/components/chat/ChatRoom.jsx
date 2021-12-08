@@ -26,25 +26,25 @@ import moment from "moment";
 const ChatRoom = (props) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  const ChatInfo = useSelector((state) => state.chat.chatinfo);
+  const chatInfo = useSelector((state) => state.chat.chatinfo);
   const username = useSelector((state) => state.mypage.userInfo.username);
 
   //토스트모달
-  const [ToastStatus, setToastStatus] = useState(false);
+  const [toastState, setToastState] = useState(false);
 
   useEffect(() => {
-    if (ToastStatus) {
+    if (toastState) {
       setTimeout(() => {
-        setToastStatus(false);
+        setToastState(false);
       }, 1500);
     }
-  }, [ToastStatus]);
+  }, [toastState]);
 
   const client = useRef({});
   const [message, setMessage] = useState("");
 
   //header 마지막 활동 시간
-  const LastActivity = moment(ChatInfo.lastActivity).format(
+  const LastActivity = moment(chatInfo.lastActivity).format(
     "YYYY-M-D HH:mm:ss"
   );
   const hourDiff = moment(LastActivity).diff(moment(), "hours");
@@ -119,7 +119,7 @@ const ChatRoom = (props) => {
 
       setMessage("");
     } else {
-      setToastStatus(true);
+      setToastState(true);
     }
   };
 
@@ -131,12 +131,12 @@ const ChatRoom = (props) => {
             width="40px"
             height="40px"
             borderRadius="20px"
-            src={ChatInfo.opponentImage}
-            alt={ChatInfo.opponentImage}
+            src={chatInfo.opponentImage}
+            alt={chatInfo.opponentImage}
           />
           <InfoBlock>
-            <p>{ChatInfo.opponent}</p>
-            {ChatInfo.lastActivity ? <p>{sendtime}에 활동</p> : ""}
+            <p>{chatInfo.opponent}</p>
+            {chatInfo.lastActivity ? <p>{sendtime}에 활동</p> : ""}
           </InfoBlock>
         </InfoBox>
 
@@ -145,7 +145,7 @@ const ChatRoom = (props) => {
             FirstBtn="상대방 프로필보기"
             SecondBtn="채팅방 삭제하기"
             FirstClick={() => {
-              history.push(`/user/${ChatInfo.userRandomId}`);
+              history.push(`/user/${chatInfo.userRandomId}`);
             }}
             SecondClick={() => {
               dispatch(chatActions._deleteRoom(props.roomId, props.location));
@@ -169,7 +169,7 @@ const ChatRoom = (props) => {
           </SendText>
         </SendButton>
       </ChatSendBox>
-      {ToastStatus && <Toast message="메세지를 입력해주세요!" />}
+      {toastState && <Toast message="메세지를 입력해주세요!" />}
     </ChatWrap>
   );
 };

@@ -24,15 +24,15 @@ import {
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
   const pathName = useLocation().pathname.split("/")[3];
-  const [ToastStatus, setToastStatus] = useState(false);
+  const [toastState, setToastState] = useState(false);
 
   useEffect(() => {
-    if (ToastStatus) {
+    if (toastState) {
       setTimeout(() => {
-        setToastStatus(false);
+        setToastState(false);
       }, 1500);
     }
-  }, [ToastStatus]);
+  }, [toastState]);
   let community;
 
   const cCommunity = useSelector((state) => state.community.catInfo);
@@ -62,7 +62,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
 
   const addCommentBtn = () => {
     if (comments === "") {
-      setToastStatus(true);
+      setToastState(true);
     } else {
       if (path === "CatDetail") {
         dispatch(__createCatComment(catId, comments));
@@ -136,7 +136,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
             />
           );
         })}
-      {ToastStatus && <Toast message="댓글을 입력해주세요!" />}
+      {toastState && <Toast message="댓글을 입력해주세요!" />}
     </>
   );
 };

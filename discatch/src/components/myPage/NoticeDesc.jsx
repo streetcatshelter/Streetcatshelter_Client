@@ -9,17 +9,17 @@ import moment from "moment";
 import styled from "styled-components";
 
 const NoticeDesc = () => {
-  const NoticeDetail = useSelector((state) => state.mypage.noticedetail);
-  const modifiedAt = moment(NoticeDetail.modifiedAt).format("YYYY-M-D");
+  const noticeDetail = useSelector((state) => state.mypage.noticedetail);
+  const modifiedAt = moment(noticeDetail.modifiedAt).format("YYYY-M-D");
 
-  if (!NoticeDetail) {
+  if (!noticeDetail) {
     return <div></div>;
   }
-  let codes = NoticeDetail.contents;
+  let codes = noticeDetail.contents;
   return (
     <Wrap>
       <Header>
-        <p>{NoticeDetail.title}</p>
+        <p>{noticeDetail.title}</p>
         <p>{modifiedAt}</p>
       </Header>
       <Body>

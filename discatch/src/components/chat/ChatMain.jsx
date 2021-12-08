@@ -21,14 +21,14 @@ import { chatActions } from "../../redux/modules/chat";
 const ChatMain = (props) => {
   const dispatch = useDispatch();
   const location = props.props.location.state.location;
-  const Rooms = useSelector((state) => state.chat.roomlist);
+  const rooms = useSelector((state) => state.chat.roomlist);
   const [openModal, setOpenModal] = useState(false);
   return (
     <React.Fragment>
       <Wrapper>
-        {Rooms && Rooms.length > 0 ? (
+        {rooms && rooms.length > 0 ? (
           <>
-            {Rooms.map((room, idx) => {
+            {rooms.map((room, idx) => {
               const LastActivity = moment(room.lastActivity).format(
                 "YYYY-M-D hh:mm"
               );

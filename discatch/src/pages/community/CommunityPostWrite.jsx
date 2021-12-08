@@ -59,21 +59,21 @@ const CommunityPostWrite = (props) => {
       dispatch(imgActions.setFiles(file, fileNum));
       setFileNum(fileNum + 1);
     } else {
-      setMaxPhotoStatus(true);
+      setMaxPhotoState(true);
     }
   };
 
   const maxPhotoAlert = () => {
     if (fileNum === 5) {
-      setMaxPhotoStatus(true);
+      setMaxPhotoState(true);
     }
   }
 
   const [category, setCategory] = React.useState(firstCategory);
-  const [titleStatus, setTitleStatus] = useState(false);
-  const [contentStatus, setContentStatus] = useState(false);
-  const [photoStatus, setPhotoStatus] = useState(false);
-  const [maxPhotoStatus, setMaxPhotoStatus] = useState(false);
+  const [titleState, setTitleState] = useState(false);
+  const [contentState, setContentState] = useState(false);
+  const [photoState, setPhotoState] = useState(false);
+  const [maxPhotoState, setMaxPhotoState] = useState(false);
 
   const Options = [
     { key: 1, value: "고양이 정보글" },
@@ -97,9 +97,9 @@ const CommunityPostWrite = (props) => {
 
   const writeBtn = () => {
     if (title === '') {
-      setTitleStatus(true);
+      setTitleState(true);
     } else if (contents === '') {
-      setContentStatus(true);
+      setContentState(true);
     } else {
       dispatch(
         addCommunityDB(category, contents, location, title, detailLocation, nickName)
@@ -134,7 +134,7 @@ const CommunityPostWrite = (props) => {
       dispatch(imgActions.delFile(0));
       setFileNum(fileNum - 1);
     } else {
-      setPhotoStatus(true);
+      setPhotoState(true);
     }
   };
 
@@ -143,36 +143,36 @@ const CommunityPostWrite = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (titleStatus) {
+    if (titleState) {
       setTimeout(() => {
-        setTitleStatus(false);
+        setTitleState(false);
       }, 1500);
     }
-  }, [titleStatus]);
+  }, [titleState]);
 
   useEffect(() => {
-    if (contentStatus) {
+    if (contentState) {
       setTimeout(() => {
-        setContentStatus(false);
+        setContentState(false);
       }, 1500);
     }
-  }, [contentStatus]);
+  }, [contentState]);
 
   useEffect(() => {
-    if (photoStatus) {
+    if (photoState) {
       setTimeout(() => {
-        setPhotoStatus(false);
+        setPhotoState(false);
       }, 1500);
     }
-  }, [photoStatus]);
+  }, [photoState]);
 
   useEffect(() => {
-    if (maxPhotoStatus) {
+    if (maxPhotoState) {
       setTimeout(() => {
-        setMaxPhotoStatus(false);
+        setMaxPhotoState(false);
       }, 1500);
     }
-  }, [maxPhotoStatus]);
+  }, [maxPhotoState]);
 
   return (
     <Template props={props}>
@@ -400,10 +400,10 @@ const CommunityPostWrite = (props) => {
           </Grid>
         </CommunityWriteStyle>
       </Grid>
-      {titleStatus && <Toast message="제목을 입력해주세요!" />}
-      {contentStatus && <Toast message="내용을 입력해주세요!" />}
-      {photoStatus && <Toast message="삭제할 사진이 없어요!" />}
-      {maxPhotoStatus && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
+      {titleState && <Toast message="제목을 입력해주세요!" />}
+      {contentState && <Toast message="내용을 입력해주세요!" />}
+      {photoState && <Toast message="삭제할 사진이 없어요!" />}
+      {maxPhotoState && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
     </Template>
   );
 };

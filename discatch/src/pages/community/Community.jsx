@@ -30,22 +30,22 @@ const Community = (props) => {
   const isLoaded = useSelector((state) => state.community.pageLoaded);
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   const village = userLocation ? userLocation : props.location.state?.location;
-  const [villageStatus, setVillageStatus] = useState(false);
+  const [villageState, setVillageState] = useState(false);
 
   const requestLocationInfo = () => {
-    setVillageStatus(true);
+    setVillageState(true);
     setTimeout(() => {
       history.push("/userinfoedit");
     }, 1000);
   };
 
   useEffect(() => {
-    if (villageStatus) {
+    if (villageState) {
       setTimeout(() => {
-        setVillageStatus(false);
+        setVillageState(false);
       }, 1500);
     }
-  }, [villageStatus]);
+  }, [villageState]);
 
   useEffect(() => {
     dispatch(pageLoading(true));
@@ -144,7 +144,7 @@ const Community = (props) => {
             />
           </Grid>
         )}
-        {villageStatus && <Toast message="동네 정보를 입력해주세요!" />}
+        {villageState && <Toast message="동네 정보를 입력해주세요!" />}
       </Template>
     </>
   );

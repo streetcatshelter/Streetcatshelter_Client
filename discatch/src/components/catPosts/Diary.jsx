@@ -20,7 +20,7 @@ import { history } from "../../redux/configureStore";
 
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;
-  const CreatedAt = diary.createdAt
+  const createdAt = diary.createdAt
     ? moment(diary.createdAt).format("YYYY-MM-DD hh:mm")
     : "";
 
@@ -56,7 +56,7 @@ const Diary = ({ diary, location }) => {
           </Text>
         </Grid>
         <Text fontWeight="bold" size="14px">
-          {CreatedAt}
+          {createdAt}
         </Text>
       </Grid>
 

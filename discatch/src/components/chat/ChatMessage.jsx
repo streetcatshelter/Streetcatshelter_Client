@@ -11,21 +11,21 @@ import styled from "styled-components";
 
 const ChatMessage = () => {
   const commentsEndRef = useRef(null);
-  const LastMessages = useSelector((state) => state.chat.chatmessage);
-  const NickName = useSelector((state) => state.mypage.userInfo.nickname);
+  const lastMessages = useSelector((state) => state.chat.chatmessage);
+  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
   // 댓글 스크롤 밑으로 이동
   const scrollToBottom = () => {
     commentsEndRef.current?.scrollIntoView({ behavior: "auto" });
   };
   useEffect(() => {
     scrollToBottom();
-  }, [LastMessages]);
+  }, [lastMessages]);
 
   return (
     <div>
-      {LastMessages ? (
+      {lastMessages ? (
         <ChatBox>
-          {LastMessages.map((lastmessage, idx) => {
+          {lastMessages.map((lastmessage, idx) => {
             const ChatTime = moment(lastmessage.time).format(
               "YYYY-M-D hh:mm:ss"
             );
@@ -38,7 +38,7 @@ const ChatMessage = () => {
             const SendTime = MinuteDiff > -60 * 12 ? RecentlySendChat : SendMsg;
             return (
               <div key={idx}>
-                {lastmessage.sender === NickName ? (
+                {lastmessage.sender === nickName ? (
                   <div>
                     <BubbleTop user="my">{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="my">

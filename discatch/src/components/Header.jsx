@@ -151,15 +151,15 @@ const Header = (props) => {
       history.goBack();
     }
   };
-  const [ToastStatus, setToastStatus] = useState(false);
+  const [toastState, setToastState] = useState(false);
 
   useEffect(() => {
-    if (ToastStatus) {
+    if (toastState) {
       setTimeout(() => {
-        setToastStatus(false);
+        setToastState(false);
       }, 1500);
     }
-  }, [ToastStatus]);
+  }, [toastState]);
 
   if (!userInfo) {
     return <div></div>;
@@ -207,7 +207,7 @@ const Header = (props) => {
 
           <Bell
             onClick={() => {
-              setToastStatus(true);
+              setToastState(true);
             }}
           />
         </SideBtnBox>
@@ -224,7 +224,7 @@ const Header = (props) => {
       ) : (
         ""
       )} */}
-      {ToastStatus && <Toast message="버전2에서 준비중입니다." />}
+      {toastState && <Toast message="버전2에서 준비중입니다." />}
     </HeaderStyle>
   );
 };

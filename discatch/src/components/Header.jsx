@@ -319,6 +319,7 @@ const SelectStyle = styled.select`
   font-weight: bold;
   font-size: 12px;
   background: #fefdf8;
+  cursor: pointer;
   &:focus {
     outline: none;
   }

@@ -126,6 +126,7 @@ const Comment = ({ path }) => {
                   color: userLike ? "red" : "gray",
                   position: "relative",
                   bottom: "2px",
+                  cursor: "pointer",
                 }}
               />
             </Grid>

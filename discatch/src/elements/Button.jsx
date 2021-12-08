@@ -60,6 +60,7 @@ const FloatButton = styled.button`
   position: fixed;
   margin-left: 300px;
   bottom: 100px;
+  cursor: pointer;
   @media screen and (max-width: 320px) {
     right: 50px;
   }

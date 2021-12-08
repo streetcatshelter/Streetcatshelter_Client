@@ -52,7 +52,7 @@ const CatPost = ({ cat, path, location }) => {
           </div>
           {path === "detail" && (
             <MoreHorizontalBtn
-              style={{ color: "rgb(249, 200, 82)", marginRight: "15px" }}
+              style={{ color: "rgb(249, 200, 82)", marginRight: "15px", cursor: "pointer" }}
               onClick={() =>
                 history.push({
                   pathname: `/catinfoedit/${catId}`,
@@ -76,6 +76,7 @@ const CatPost = ({ cat, path, location }) => {
                 position: "relative",
                 left: "12px",
                 color: userLiked ? "red" : "gray",
+                cursor: 'pointer',
               }}
             />
           </LikeBox>
@@ -96,6 +97,7 @@ const CatPostStyle = styled.div`
   height: 80px;
   display: flex;
   margin: 5px auto;
+  cursor: pointer;
   p {
     margin: 0px;
     line-height: 20px;
@@ -120,6 +122,7 @@ const RightBox = styled.div`
   flex-direction: column;
   width: 80%;
   height: 80px;
+  cursor:auto;
   @media screen and (max-width: 400px) {
     width: 75%;
   }
@@ -140,8 +143,8 @@ const Header = styled.div`
   width: 100%;
   height: 40px;
   margin: auto;
-  cursor: pointer;
   p {
+    cursor: pointer;
     font-size: 14px;
     margin-left: 5px;
     :nth-child(2) {
@@ -150,6 +153,7 @@ const Header = styled.div`
   }
 `;
 const BodyBox = styled.div`
+  cursor:pointer;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -179,7 +183,7 @@ const TagBox = styled.div`
 `;
 const LikeBox = styled.div`
   width: 24px;
-
+  cursor: auto;
   margin: auto;
   width: 15%;
   @media screen and (max-width: 320px) {

@@ -40,11 +40,11 @@ const CatDetailInfo = (props) => {
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
   let location;
-  if (village === userInfo.locationList[0]?.split(' ')[2]) {
+  if (userInfo.locationList && village === userInfo.locationList[0]?.split(' ')[2]) {
     location = userInfo.locationList[0];
-  } else if (village === userInfo.locationList[1]?.split(' ')[2]) {
+  } else if (userInfo.locationList && village === userInfo.locationList[1]?.split(' ')[2]) {
     location = userInfo.locationList[1];
-  } else if (village === userInfo.locationList[2]?.split(' ')[2]) {
+  } else if (userInfo.locationList && village === userInfo.locationList[2]?.split(' ')[2]) {
     location = userInfo.locationList[2];
   }
 

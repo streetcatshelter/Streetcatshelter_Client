@@ -233,7 +233,6 @@ export const __getCalendar =
     try {
       console.log(catId, year, month);
       const { data } = await catApi.getCatCalendar(catId, month, year);
-      console.log(data);
       dispatch(getCalendar(data.date));
     } catch (err) {
       console.error(err);

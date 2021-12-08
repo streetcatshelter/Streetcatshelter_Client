@@ -33,7 +33,7 @@ const CatDetailInfoWrite = (props) => {
   const detail = useSelector((state) => state.cat.detail);
   const catName = useSelector((state) => state.cat.catinfo.catName);
   const CatId = useSelector((state) => state.cat.catinfo.catId);
-  const HashTags = useSelector((state) => state.cat.hashtag);
+  const hashTags = useSelector((state) => state.cat.hashtag);
   const preview = useSelector((state) => state.image.preview);
   const catId = edit ? CatId : props.match.params.catId;
   const [fileNum, setFileNum] = useState(0);
@@ -86,7 +86,7 @@ const CatDetailInfoWrite = (props) => {
       edit
         ? dispatch(
             __editCatDetailInfo(
-              HashTags,
+              hashTags,
               diary,
               food,
               snack,
@@ -97,7 +97,7 @@ const CatDetailInfoWrite = (props) => {
           )
         : dispatch(
             __createCatDetailInfo(
-              HashTags,
+              hashTags,
               diary,
               food,
               latitude,
@@ -372,7 +372,7 @@ const CatDetailInfoWrite = (props) => {
             onKeyPress={(e) => e.which === 13 && publish(tag)}
           />
 
-          {HashTags ? (
+          {hashTags ? (
             <Grid
               display="flex"
               width="95%"
@@ -384,7 +384,7 @@ const CatDetailInfoWrite = (props) => {
                 `;
               }}
             >
-              {HashTags.map((hashtag, idx) => {
+              {hashTags.map((hashtag, idx) => {
                 return (
                   <Grid
                     key={idx}

@@ -17,7 +17,6 @@ import { imgActions } from "../../redux/modules/image";
 
 const UserInfo = () => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.mypage.userInfo);
   const [nickName, setNickName] = useState(UserInfo.nickname);
   const village = useSelector((state) => state.mypage.userVillage);
   const [fileUrl, setFileUrl] = useState(null);

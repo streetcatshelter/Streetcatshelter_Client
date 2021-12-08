@@ -230,7 +230,12 @@ const CatInfoWrite = (props) => {
           }}
         >
           <label htmlFor="imgFile">
-            <Camera width="100%" height="100px" color="white" style={{ cursor:'pointer' }}/>
+            <Camera
+              width="100%"
+              height="100px"
+              color="white"
+              style={{ cursor: "pointer" }}
+            />
           </label>
           <Text>이곳을 클릭하여 사진을 등록해 주세요!</Text>
           <Input
@@ -348,7 +353,11 @@ const CatInfoWrite = (props) => {
               type="text"
               value={catTag}
               changeEvent={$catTag}
-              onKeyPress={(e) => e.which === 13 && publish(catTag)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  publish(catTag);
+                }
+              }}
             />
 
             {hashTags ? (

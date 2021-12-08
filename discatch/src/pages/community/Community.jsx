@@ -47,13 +47,6 @@ const Community = (props) => {
     }
   }, [villageState]);
 
-  useEffect(() => {
-    dispatch(pageLoading(true));
-    setTimeout(() => {
-      dispatch(pageLoading(false));
-    }, 300);
-  }, [dispatch]);
-
   return (
     <>
       <SecondSpinner visible={isLoaded} />
@@ -62,15 +55,15 @@ const Community = (props) => {
           <Grid
             addstyle={() => {
               return css`
-                width:100%;
-                max-width:420px;
-                height:80vh;
-                display:flex;
-                flex-direction:column;
-                justify-content:center;
-                overflow:hidden;
+                width: 100%;
+                max-width: 420px;
+                height: 80vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                overflow: hidden;
                 @media screen and (max-height: 736px) {
-                  height:78vh;
+                  height: 78vh;
                 }
               `;
             }}

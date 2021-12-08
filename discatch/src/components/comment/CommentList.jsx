@@ -23,7 +23,6 @@ import {
 
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
-  const pathName = useLocation().pathname.split("/")[3];
   const [toastState, setToastState] = useState(false);
 
   useEffect(() => {
@@ -33,19 +32,10 @@ const CommentList = ({ props, path, catId, communityId }) => {
       }, 1500);
     }
   }, [toastState]);
-  let community;
 
-  const cCommunity = useSelector((state) => state.community.catInfo);
-  const gCommunity = useSelector((state) => state.community.gathering);
-  const sCommunity = useSelector((state) => state.community.sharing);
-
-  if (pathName === "catinfo") {
-    community = cCommunity;
-  } else if (pathName === "gathering") {
-    community = gCommunity;
-  } else if (pathName === "sharing") {
-    community = sCommunity;
-  }
+  const communityDetailCmt = useSelector(
+    (state) => state.community.communityDetail?.commentList
+  );
 
   const [comments, setComment] = React.useState("");
   let commentList;
@@ -53,7 +43,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
   if (path === "CatDetail" || path === "CatDetailInfo") {
     commentList = props;
   } else {
-    commentList = community.data?.commentList;
+    commentList = communityDetailCmt;
   }
 
   const $comment = (event) => {
@@ -93,6 +83,11 @@ const CommentList = ({ props, path, catId, communityId }) => {
           type="text"
           value={comments}
           placeholder="댓글 달기..."
+          keyPress={(e) => {
+            if (e.key === "Enter") {
+              addCommentBtn();
+            }
+          }}
           addstyle={() => {
             return css`
               position: relative;

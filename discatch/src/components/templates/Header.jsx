@@ -20,6 +20,7 @@ import { history } from "../../redux/configureStore";
 import { searchMap } from "../../redux/modules/map";
 import { mypageActions } from "../../redux/modules/mypage";
 import { changeToast } from "../../redux/modules/chat";
+import { setInitialState } from "../../redux/modules/cat";
 
 const Header = (props) => {
   const dispatch = useDispatch();

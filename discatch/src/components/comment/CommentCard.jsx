@@ -77,7 +77,7 @@ const CommentCard = ({ comment, communityId }) => {
           </Right>
         </Header>
         <Text
-          width="280px"
+          width="95%"
           margin="0 0 0 10px"
           padding="4px"
           addstyle={() => {

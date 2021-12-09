@@ -118,7 +118,6 @@ const CommunityPostWrite = (props) => {
   // 취소하기
   const cancelBtn = () => {
     history.push({pathname:`${backPath}`, state: { location }});
-    dispatch(imgActions.setInitialState());
   }
 
   // 마지막 사진 삭제하기
@@ -151,6 +150,11 @@ const CommunityPostWrite = (props) => {
   // 유저 정보 가져오기
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
+  }, [dispatch]);
+
+  // 사진 정보 초기화
+  useEffect(() => {
+    dispatch(imgActions.setInitialState());
   }, [dispatch]);
 
   // 토스트 모달

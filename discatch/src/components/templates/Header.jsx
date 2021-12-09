@@ -57,6 +57,10 @@ const Header = (props) => {
     location = userInfo?.locationList[0]?.split(" ")[2];
   }
 
+  if (location?.split(" ").length === 3) {
+    location = location?.split(" ")[2];
+  }
+  
   const sameLocationList = userInfo.locationList?.filter(
     (v) => v.split(" ")[2] === location
   );

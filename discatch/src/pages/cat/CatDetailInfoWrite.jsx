@@ -147,6 +147,11 @@ const CatDetailInfoWrite = (props) => {
     }
   }, []);
 
+  // 사진 정보 초기화
+  useEffect(() => {
+    dispatch(imgActions.setInitialState());
+  }, [dispatch]);
+
   // 토스트 모달
   useEffect(() => {
     if (maxPhotoState) {
@@ -342,7 +347,7 @@ const CatDetailInfoWrite = (props) => {
           margin="5px auto"
           padding="5px 10px"
           width="90%"
-          height="80px"
+          height="20vh"
           type="text"
           value={diary}
           placeholder="다이어리를 입력해주세요."
@@ -350,6 +355,9 @@ const CatDetailInfoWrite = (props) => {
             return css`
               border: 1px solid rgb(${(props) => props.theme.palette.olive});
               border-radius: 10px;
+              resize: none;
+              display: flex;
+              justify-content: center;
             `;
           }}
         ></TextArea>

@@ -25,6 +25,7 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const locationA = useLocation();
   const path = props.path;
+  const token = localStorage.getItem("token");
   const userInfo = useSelector((state) => state.mypage.userInfo);
   let location;
   const firstLocation = locationA.state?.location;
@@ -96,7 +97,11 @@ const Header = (props) => {
   }, [firstLocation, dispatch]);
 
   useEffect(() => {
-    dispatch(mypageActions._getUserInfo());
+    if (!token) {
+      return;
+    } else {
+      dispatch(mypageActions._getUserInfo());
+    }
   }, [dispatch]);
 
   let options;

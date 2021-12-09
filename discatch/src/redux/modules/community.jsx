@@ -120,11 +120,11 @@ export const editCommunityDB = (
   return function (dispatch, getState, { history }) {
     const imgFile = getState().image.file;
     let path;
-    if (category.split(" ")[1] === "정보글") {
+    if (category?.split(" ")[1] === "정보글") {
       path = "catinfo";
-    } else if (category.split(" ")[1] === "동네") {
+    } else if (category?.split(" ")[1] === "동네") {
       path = "gathering";
-    } else if (category.split(" ")[1] === "고양이") {
+    } else if (category?.split(" ")[1] === "고양이") {
       path = "sharing";
     }
     let newImageUrl = [];
@@ -133,13 +133,15 @@ export const editCommunityDB = (
       dispatch(
         imgActions.uploadImagesDB(() => {
           let imageUrl = getState().image.imageUrls;
-          newImageUrl.push(
-            imageList[0]?.image,
-            imageList[1]?.image,
-            imageList[2]?.image,
-            imageList[3]?.image,
-            imageList[4]?.image
-          );
+          if (imageList) {
+            newImageUrl.push(
+              imageList[0]?.image,
+              imageList[1]?.image,
+              imageList[2]?.image,
+              imageList[3]?.image,
+              imageList[4]?.image
+            );
+          }
 
           newImages = newImageUrl.filter((element, i) => element !== undefined);
           newImages.push(

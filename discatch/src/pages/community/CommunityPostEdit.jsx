@@ -29,66 +29,15 @@ const CommunityPostEdit = (props) => {
   const path = useLocation();
   const preview = useSelector((state) => state.image.preview);
   const communityId = path.pathname.split('/')[5];
-  const pathName = path.pathname.split('/')[3];
-  let category, contents, imageList, location, title, username;
-  const { cCategory, cContents, cImageList, cLocation, cTitle, cUsername } =
+  const { category, contents, imageList, location, title, username } =
     useSelector((state) => ({
-      cCategory: state.community.catInfo.data?.category,
-      cContents: state.community.catInfo.data?.contents,
-      cImageList: state.community.catInfo.data?.communityImageList
-        ? state.community.catInfo.data?.communityImageList
-        : Array(),
-      cLocation: state.community.catInfo.data?.location,
-      cTitle: state.community.catInfo.data?.title,
-      cUsername: state.community.catInfo.data?.username,
-    }));
-
-    const { gCategory, gContents, gImageList, gLocation, gTitle, gUsername } =
-    useSelector((state) => ({
-      gCategory: state.community.gathering.data?.category,
-      gContents: state.community.gathering.data?.contents,
-      gImageList: state.community.gathering.data?.communityImageList
-        ? state.community.gathering.data?.communityImageList
-        : Array(),
-      gLocation: state.community.gathering.data?.location,
-      gTitle: state.community.gathering.data?.title,
-      gUsername: state.community.gathering.data?.username,
-    }));
-
-    const { sCategory, sContents, sImageList, sLocation, sTitle, sUsername } =
-    useSelector((state) => ({
-      sCategory: state.community.sharing.data?.category,
-      sContents: state.community.sharing.data?.contents,
-      sImageList: state.community.sharing.data?.communityImageList
-        ? state.community.sharing.data?.communityImageList
-        : Array(),
-      sLocation: state.community.sharing.data?.location,
-      sTitle: state.community.sharing.data?.title,
-      sUsername: state.community.sharing.data?.username,
-    }));
-
-    if (pathName === 'catinfo') {
-      category = cCategory;
-      contents = cContents;
-      imageList = cImageList;
-      location = cLocation;
-      title = cTitle;
-      username = cUsername;
-    } else if (pathName === 'gathering') {
-      category = gCategory;
-      contents = gContents;
-      imageList = gImageList;
-      location = gLocation;
-      title = gTitle;
-      username = gUsername;
-    } else {
-      category = sCategory;
-      contents = sContents;
-      imageList = sImageList;
-      location = sLocation;
-      title = sTitle;
-      username = sUsername;
-    }
+      category: state.community.communityDetail?.category,
+      contents: state.community.communityDetail?.contents,
+      iamgeList: state.community.communityDetail?.communityImageList,
+      location: state.community.communityDetail?.location,
+      title: state.community.communityDetail?.title,
+      username: state.community.communityDetail?.username,
+    }))
   
   const imageNum = imageList?.length;
 
@@ -361,7 +310,7 @@ const CommunityPostEdit = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-              {(imageList[0] || preview[0 - imageNum]) && (
+              {imageList && (imageList[0] || preview[0 - imageNum]) && (
                 <CommunityPreview
                   preview={preview}
                   imageList={imageList}
@@ -369,7 +318,7 @@ const CommunityPostEdit = (props) => {
                   previewNum={0}
                 />
               )}
-              {(imageList[1] || preview[1 - imageNum]) && (
+              {imageList && (imageList[1] || preview[1 - imageNum]) && (
                 <CommunityPreview
                   preview={preview}
                   imageList={imageList}
@@ -377,7 +326,7 @@ const CommunityPostEdit = (props) => {
                   previewNum={1}
                 />
               )}
-              {(imageList[2] || preview[2 - imageNum]) && (
+              {imageList && (imageList[2] || preview[2 - imageNum]) && (
                 <CommunityPreview
                   preview={preview}
                   imageList={imageList}
@@ -385,7 +334,7 @@ const CommunityPostEdit = (props) => {
                   previewNum={2}
                 />
               )}
-              {(imageList[3] || preview[3 - imageNum]) && (
+              {imageList && (imageList[3] || preview[3 - imageNum]) && (
                 <CommunityPreview
                   preview={preview}
                   imageList={imageList}
@@ -393,7 +342,7 @@ const CommunityPostEdit = (props) => {
                   previewNum={3}
                 />
               )}
-              {(imageList[4] || preview[4 - imageNum]) && (
+              {imageList && (imageList[4] || preview[4 - imageNum]) && (
                 <CommunityPreview
                   preview={preview}
                   imageList={imageList}

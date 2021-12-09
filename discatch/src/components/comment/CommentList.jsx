@@ -8,9 +8,6 @@ import { Comment, CommentCard, Toast } from "..";
 // STYLE
 import { css } from "styled-components";
 
-// ROUTE
-import { useLocation } from "react-router-dom";
-
 // ELEMENTS
 import { Grid, Button, TextArea } from "../../elements/index";
 

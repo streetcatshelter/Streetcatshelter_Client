@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // MOMENT
@@ -7,7 +7,6 @@ import moment from "moment";
 
 // COMPONENTS
 import { EditModalSlide } from "../";
-import { Toast } from "../";
 
 // ELEMENTS
 import { Text } from "../../elements/index";
@@ -30,7 +29,6 @@ const CommentCard = ({ comment, communityId }) => {
   const userInfo = useSelector((state) => state.mypage.userInfo);
   const [profileModal, setProfileModal] = useState(false);
   const createdAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
-  const [commentState, setCommentState] = useState(false);
 
   const OpenProfile = () => {
     setProfileModal(!profileModal);
@@ -43,30 +41,16 @@ const CommentCard = ({ comment, communityId }) => {
   };
 
   const deleteCommunityComment = () => {
-    // setCommentState(true);
-    setTimeout(() => {
-      dispatch(deleteCommunityCommentDB(commentId, communityId));
-    }, 1000);
+    dispatch(deleteCommunityCommentDB(commentId, communityId));
   };
 
   const deleteComment = () => {
-    setCommentState(true);
-    setTimeout(() => {
-      dispatch(__deleteComment(commentId));
-    }, 1000);
+    dispatch(__deleteComment(commentId));
   };
 
   const deleteBtn = () => {
     communityId ? deleteCommunityComment() : deleteComment();
   };
-
-  useEffect(() => {
-    if (commentState) {
-      setTimeout(() => {
-        setCommentState(false);
-      }, 1500);
-    }
-  }, [commentState]);
 
   return (
     <>
@@ -130,7 +114,6 @@ const CommentCard = ({ comment, communityId }) => {
           SecondClick={MakeChat}
         />
       )}
-      {commentState && <Toast message="댓글을 삭제했어요!" />}
     </>
   );
 };

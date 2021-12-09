@@ -231,7 +231,6 @@ export const __getCalendar =
   (catId, year, month) =>
   async (dispatch, getState, { history }) => {
     try {
-      console.log(catId, year, month);
       const { data } = await catApi.getCatCalendar(catId, month, year);
       dispatch(getCalendar(data.date));
     } catch (err) {
@@ -243,9 +242,7 @@ export const __getCalendarDetail =
   (catId, day, month, year) =>
   async (dispatch, getState, { history }) => {
     try {
-      console.log(catId, day, month, year);
       const { data } = await catApi.getCalendarDetail(catId, day, month, year);
-      console.log(data);
       dispatch(getDetailCalendar(data));
     } catch (err) {
       console.error(err);
@@ -399,9 +396,7 @@ const cat = createSlice({
       state.gallery = action.payload;
     },
 
-    deleteCatDetail: (state, action) => {
-      console.log("삭제 요청 완료");
-    },
+    deleteCatDetail: (state, action) => {},
 
     addHashTag: (state, action) => {
       state.hashtag.push(action.payload);

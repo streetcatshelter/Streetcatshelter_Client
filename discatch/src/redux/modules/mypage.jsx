@@ -242,7 +242,6 @@ const mypage = createSlice({
     },
 
     deleteUserLikedCat: (state, action) => {
-      console.log(" 호출됨");
       return {
         ...state,
         likedAllCat: state.likedAllCat.filter(

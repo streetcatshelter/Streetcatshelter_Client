@@ -54,7 +54,7 @@ export const __createCatInfo = (
 
 // 기본 정보 수정
 export const __editCatInfo =
-  (catName, catTag, neutering, catId) =>
+  (catName, hashTags, neutering, catId) =>
   async (dispatch, getState, { history }) => {
     const imgFile = getState().image.file;
     if (imgFile.length) {
@@ -64,7 +64,7 @@ export const __editCatInfo =
           const catInfo = {
             catImage: imageUrl,
             catName: catName,
-            catTag: catTag,
+            catTag: hashTags,
             neutering: neutering,
           };
           instance
@@ -83,7 +83,7 @@ export const __editCatInfo =
       const catInfo = {
         catImage: imageUrl,
         catName: catName,
-        catTag: catTag,
+        catTag: hashTags,
         neutering: neutering,
       };
       try {

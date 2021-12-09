@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Toast } from "./";
+import { Toast } from "../";
 
 // STYLE
 import styled from "styled-components";
@@ -16,10 +16,10 @@ import { useLocation } from "react-router-dom";
 import { ArrowLeft, Bell, Search } from "react-feather";
 
 // REDUX
-import { history } from "../redux/configureStore";
-import { searchMap } from "../redux/modules/map";
-import { mypageActions } from "../redux/modules/mypage";
-import { changeToast } from "../redux/modules/chat";
+import { history } from "../../redux/configureStore";
+import { searchMap } from "../../redux/modules/map";
+import { mypageActions } from "../../redux/modules/mypage";
+import { changeToast } from "../../redux/modules/chat";
 
 const Header = (props) => {
   const dispatch = useDispatch();

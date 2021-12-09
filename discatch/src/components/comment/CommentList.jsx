@@ -89,7 +89,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
             if (e.key === "Enter") {
               e.preventDefault();
               addCommentBtn();
-            } 
+            }
           }}
           addstyle={() => {
             return css`

@@ -18,7 +18,7 @@ const Header = styled.div`
   font-size: 16px;
   font-weight: 900;
   text-align: center;
-  border-bottom: 0.2px solid rgba(203, 207, 94, 1);
+  border-bottom: 0.2px solid #fbd986;
   @media screen and (min-height: 1366px) {
     height: 60px;
   }

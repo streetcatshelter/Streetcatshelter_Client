@@ -38,7 +38,6 @@ const CatDetail = (props) => {
   const cat = useSelector((state) => state.cat.catinfo);
   const commentList = useSelector((state) => state.comment.list);
   const deleteToast = useSelector((state) => state.cat.deleteToast);
-  console.log(deleteToast);
   const userInfo = useSelector((state) => state.mypage.userInfo);
 
   // 동네 이름 설정

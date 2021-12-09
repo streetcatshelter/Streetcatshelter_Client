@@ -158,6 +158,11 @@ const CatInfoWrite = (props) => {
     }
   }, [edit, catInfo.catTagList, catInfo.catImage, dispatch]);
 
+  // 사진 정보 초기화
+  useEffect(() => {
+    dispatch(imgActions.setInitialState());
+  }, [dispatch]);
+
   // 토스트 모달
   useEffect(() => {
     if (maxTextState) {

@@ -12,6 +12,7 @@ const TextArea = ({ value, placeholder, changeEvent, keyPress, onInput, ...props
   const path = useLocation();
   const pathCheck = path.pathname.split("/")[4] ? path.pathname.split("/")[4] : path.pathname.split("/")[1];
 
+  // textarea의 높이 자동 조절
   const handleResizeHeight = useCallback(() => {
     if (ref === null || ref.current === null) {
       return;
@@ -28,19 +29,15 @@ const TextArea = ({ value, placeholder, changeEvent, keyPress, onInput, ...props
     ref.current.style.height = ref.current.scrollHeight + "px";
   }, []);
 
-  if (pathCheck === "postdetail" || 
-      pathCheck === "catdetail" || 
-      pathCheck === "catdetailinfo" || 
-      pathCheck === '1' ||
-      pathCheck === '2' ) {
+  if (pathCheck === "write" || 
+      pathCheck === "postedit" ||
+      pathCheck === "catdetailinfowrite") {
     return (
       <TextAreaStyle
         value={value}
         placeholder={placeholder}
         onChange={changeEvent}
         onKeyPress={keyPress}
-        ref={ref}
-        onInput={handleResizeHeight}
         {...props}
       />
     );
@@ -51,6 +48,8 @@ const TextArea = ({ value, placeholder, changeEvent, keyPress, onInput, ...props
         placeholder={placeholder}
         onChange={changeEvent}
         onKeyPress={keyPress}
+        ref={ref}
+        onInput={handleResizeHeight}
         {...props}
       />
     );

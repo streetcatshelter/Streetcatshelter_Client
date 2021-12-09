@@ -33,7 +33,7 @@ const Menu = (props) => {
   const pathLocation = props.props.props.match.params.village
     ? props.props.props.match.params.village
     : props.props.props.match.params.location;
-    
+
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   let location;
   location = userLocation ? userLocation : preLocation;
@@ -42,20 +42,17 @@ const Menu = (props) => {
     location = pathLocation;
   } else if (location === undefined && pathLocation === undefined) {
     location = firstLocation;
-  }
+  } 
 
   if (
-    path === "/catdetail/:menu/:village/:catId" ||
     path === "/catdetailinfo/:village/:catDetailId" ||
     path === "/catdetail/:menu/:village/:catId/1" ||
     path === "/community/:village/:category/postdetail/:communityId"
   ) {
     location = pathName.pathname.split("/")[2];
+  } else if (path === "/catdetail/:menu/:village/:catId") {
+    location = pathName.pathname.split("/")[3];
   } else if (path === "/catdetailinfowrite/:catId") {
-    location = location?.split(" ")[2];
-  }
-
-  if (location?.split(" ").length === 3) {
     location = location?.split(" ")[2];
   }
 
@@ -66,6 +63,10 @@ const Menu = (props) => {
     location !== userInfo?.locationList[2]?.split(" ")[2]
   ) {
     location = preLocation;
+  }
+
+  if (location?.split(" ").length === 3) {
+    location = location?.split(" ")[2];
   }
 
   const catId = props.props.props.location.pathname.split("/")[3];

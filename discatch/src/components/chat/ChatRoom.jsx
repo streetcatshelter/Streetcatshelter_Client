@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // SOCKET
 import * as StompJs from "@stomp/stompjs";
 import * as SockJS from "sockjs-client";
-
+import Stomp from "stompjs";
 // ELEMENTS
 import { Image, Grid } from "../../elements";
 
@@ -27,7 +27,7 @@ const ChatRoom = (props) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const chatInfo = useSelector((state) => state.chat.chatinfo);
-  const username = useSelector((state) => state.mypage.userInfo.username);
+  const ninkname = useSelector((state) => state.mypage.userInfo.nickname);
 
   //토스트모달
   const [toastState, setToastState] = useState(false);
@@ -40,7 +40,6 @@ const ChatRoom = (props) => {
     }
   }, [toastState]);
 
-  const client = useRef({});
   const [message, setMessage] = useState("");
 
   //header 마지막 활동 시간
@@ -54,71 +53,162 @@ const ChatRoom = (props) => {
   const recentlyUpdated = moment(LastActivity).fromNow();
   const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
 
-  useEffect(() => {
-    connect();
-    return () => disconnect();
-  }, []);
+  // useEffect(() => {
+  //   connect();
+  //   return () => disconnect();
+  // }, []);
 
-  const connect = () => {
-    client.current = new StompJs.Client({
-      // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
-      webSocketFactory: () => new SockJS("http://52.78.241.50/ws-stomp"), // proxy를 통한 접속
-      connectHeaders: {
-        token: token,
-      },
-      debug: function (str) {
-        console.log(str);
-      },
-      reconnectDelay: 5000,
-      heartbeatIncoming: 4000,
-      heartbeatOutgoing: 4000,
-      onConnect: () => {
-        subscribe();
-      },
-      onStompError: (frame) => {
-        console.error(frame);
-      },
-    });
-    client.current.activate();
-  };
+  // const connect = () => {
+  //   client.current = new StompJs.Client({
+  //     // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
+  //     webSocketFactory: () => new SockJS("http://52.78.241.50/ws-stomp"), // proxy를 통한 접속
+  //     connectHeaders: {
+  //       token: token,
+  //     },
+  //     debug: function (str) {
+  //       console.log(str);
+  //     },
+  //     reconnectDelay: 5000,
+  //     heartbeatIncoming: 4000,
+  //     heartbeatOutgoing: 4000,
+  //     onConnect: () => {
+  //       subscribe();
+  //     },
+  //     onStompError: (frame) => {
+  //       console.error(frame);
+  //     },
+  //   });
+  //   client.current.activate();
+  // };
 
-  const disconnect = () => {
-    client.current.deactivate();
-  };
+  // const disconnect = () => {
+  //   client.current.deactivate();
+  // };
 
-  const subscribe = () => {
-    client.current.subscribe(
-      `/sub/chat/room/${props.roomId}`,
-      function (response) {
-        const res = JSON.parse(response.body);
-        const message = {
-          message: res.message,
-          sender: res.userName,
-          time: res.time,
-          mine: null,
-        };
-        dispatch(pushChatMessage(message));
-      }
-    );
-  };
+  // const subscribe = () => {
+  //   client.current.subscribe(
+  //     `/sub/chat/room/${props.roomId}`,
+  //     function (response) {
+  //       const res = JSON.parse(response.body);
+  //       const message = {
+  //         message: res.message,
+  //         sender: res.userName,
+  //         time: res.time,
+  //         mine: null,
+  //       };
+  //       dispatch(pushChatMessage(message));
+  //     }
+  //   );
+  // };
 
-  const publish = (message) => {
-    if (!client.current.connected) {
-      return;
+  // const publish = (message) => {
+  //   if (!client.current.connected) {
+  //     return;
+  //   }
+  //   if (message.length > 1) {
+  //     client.current.publish({
+  //       destination: "/pub/api/chat/message",
+  //       token: token,
+  //       body: JSON.stringify({
+  //         message: message,
+  //         roomId: props.roomId,
+  //         userName: username,
+  //       }),
+  //     });
+
+  //     setMessage("");
+  //   } else {
+  //     setToastState(true);
+  //   }
+  // };
+  const sock = new SockJS("http://52.78.241.50/ws-stomp");
+  const ws = Stomp.over(sock);
+
+  React.useEffect(() => {
+    wsConnectSubscribe();
+    return () => {
+      wsDisConnectUnsubscribe();
+    };
+  }, [props.roomId]);
+
+  // 채팅방시작하기, 채팅방 클릭 시 roomId에 해당하는 방을 구독
+  const wsConnectSubscribe = () => {
+    try {
+      // ws.debug = null;
+      ws.connect(
+        {
+          token: token,
+        },
+        () => {
+          ws.subscribe(
+            `/sub/chat/room/${props.roomId}`,
+            (data) => {
+              const res = JSON.parse(data.body);
+              const message = {
+                message: res.message,
+                sender: res.ninkname,
+                time: res.time,
+                mine: null,
+              };
+              dispatch(pushChatMessage(message));
+            },
+            {
+              token: token,
+            }
+          );
+        }
+      );
+    } catch (e) {
+      console.log("error", e);
     }
-    if (message.length > 1) {
-      client.current.publish({
-        destination: "/pub/api/chat/message",
-        headers: { token: token },
-        body: JSON.stringify({
-          message: message,
-          roomId: props.roomId,
-          userName: username,
-        }),
-      });
+  };
 
+  // 다른 방을 클릭하거나 뒤로가기 버튼 클릭시 연결해제 및 구독해제
+  const wsDisConnectUnsubscribe = () => {
+    try {
+      ws.debug = null;
+      ws.disconnect(
+        () => {
+          ws.unsubscribe("sub-0");
+          clearTimeout(waitForConnection);
+        },
+        { token: token }
+      );
+    } catch (e) {
+      console.log("연결 구독 해체 에러", e);
+    }
+  };
+  // 웹소켓이 연결될 때 까지 실행하는 함수
+  const waitForConnection = (ws, callback) => {
+    setTimeout(() => {
+      if (ws.ws.readyState === 1) {
+        callback();
+      } else {
+        waitForConnection(ws, callback);
+      }
+    }, 0.1);
+  };
+  const sendMessage = (e) => {
+    e.preventDefault();
+    try {
+      // send할 데이터
+      const data = {
+        message: message,
+        roomId: props.roomId,
+        ninkname: ninkname,
+      };
+      console.log(data);
+      waitForConnection(ws, () => {
+        ws.debug = null;
+
+        ws.send(
+          "/pub/api/chat/message",
+          { token: token },
+          JSON.stringify(data)
+        );
+      });
       setMessage("");
-    } else {
+    } catch (e) {
       setToastState(true);
     }
   };
@@ -161,9 +251,13 @@ const ChatRoom = (props) => {
           placeholder={""}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={(e) => e.which === 13 && publish(message)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              sendMessage(e);
+            }
+          }}
         />
-        <SendButton onClick={() => publish(message)}>
+        <SendButton onClick={sendMessage}>
           <SendText>
             <p>전송</p>
           </SendText>

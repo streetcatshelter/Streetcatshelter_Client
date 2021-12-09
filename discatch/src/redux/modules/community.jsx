@@ -399,7 +399,13 @@ const community = createSlice({
       }
     },
     likeToggle: (state, action) => {
-      state.communityDetail.liked = !state.communityDetail.liked;
+      if (!state.communityDetail.liked) {
+        state.communityDetail.liked = true;
+        state.communityDetail.cntLikeit = state.communityDetail.cntLikeit + 1;
+      } else {
+        state.communityDetail.liked = false;
+        state.communityDetail.cntLikeit = state.communityDetail.cntLikeit - 1;
+      }
     },
   },
 });

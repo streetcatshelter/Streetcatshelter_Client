@@ -37,10 +37,10 @@ const CatDetail = (props) => {
   const [menu, setMenu] = useState("캘린더");
   const userInfo = useSelector((state) => state.mypage.userInfo);
 
+  // 동네 이름 설정
   if (location === undefined) {
     location = props.match.params.village;
   }
-
   if (userInfo.locationList && location === userInfo?.locationList[0]?.split(' ')[2]) {
     location = userInfo?.locationList[0];
   } else if (userInfo.locationList && location === userInfo?.locationList[1]?.split(' ')[2]) {
@@ -49,10 +49,12 @@ const CatDetail = (props) => {
     location = userInfo?.locationList[2];
   }
 
+  // 고양이 정보 가져오기
   useEffect(() => {
     dispatch(__getCatInfo(catId));
   }, [catId, dispatch]);
 
+  // 댓글 가져오기
   useEffect(() => {
     dispatch(__getComment(catId));
   }, [catId, commentList.length, dispatch]);

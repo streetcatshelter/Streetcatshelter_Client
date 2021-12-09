@@ -33,15 +33,19 @@ const CommunityPostEdit = (props) => {
     useSelector((state) => ({
       category: state.community.communityDetail?.category,
       contents: state.community.communityDetail?.contents,
-      iamgeList: state.community.communityDetail?.communityImageList,
+      imageList: state.community.communityDetail?.communityImageList,
       location: state.community.communityDetail?.location,
       title: state.community.communityDetail?.title,
       username: state.community.communityDetail?.username,
     }))
   
+  // 글 작성 시 업로드한 사진 개수
   const imageNum = imageList?.length;
 
+  // 총 사진 개수
   const [fileNum, setFileNum] = useState(imageNum);
+
+  // 토스트 모달
   const [titleState, setTitleState] = useState(false);
   const [contentState, setContentState] = useState(false);
   const [photoState, setPhotoState] = useState(false);
@@ -49,10 +53,9 @@ const CommunityPostEdit = (props) => {
   const [prePhotoState, setPrePhotoState] = useState(false);
   const [editState, setEditState] = useState(false);
 
-  // S3
+  // S3 (사진 추가)
   const handleInputFile = (e) => {
     e.preventDefault();
-
     if (fileNum < 5) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
@@ -64,16 +67,19 @@ const CommunityPostEdit = (props) => {
     }
   };
 
+  // 제목 수정
   const [editTitle, setEditTitle] = React.useState(title);
   const $title = (e) => {
     setEditTitle(e.target.value);
   };
 
+  // 내용 수정
   const [editcontents, setEditContents] = React.useState(contents);
   const $contents = (e) => {
     setEditContents(e.target.value);
   };
 
+  // 커뮤니티 글 수정하기
   const editBtn = () => {
     if (editTitle === '') {
       setTitleState(true);
@@ -99,6 +105,7 @@ const CommunityPostEdit = (props) => {
     }
   };
 
+  // 마지막 사진 삭제하기
   const delLastImageBtn = () => {
     if (preview.length === 5) {
       dispatch(imgActions.delPreview(fileNum - 1));
@@ -127,6 +134,7 @@ const CommunityPostEdit = (props) => {
     }
   };
 
+  // path에 사용할 카테고리 설정 
   let pathCategory;
   if (category?.split(' ')[1] === '정보글') {
     pathCategory = 'catinfo';
@@ -136,10 +144,12 @@ const CommunityPostEdit = (props) => {
     pathCategory = 'sharing';
   }
   
+  // 커뮤니티 상세 페이지 가져오기 
   useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [category, communityId, dispatch]);
 
+  // 토스트 모달
   useEffect(() => {
     if (titleState) {
       setTimeout(() => {

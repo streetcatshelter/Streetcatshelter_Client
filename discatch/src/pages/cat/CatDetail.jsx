@@ -145,7 +145,7 @@ const CatDetail = (props) => {
             clickEvent={() => {
               history.push({
                 pathname: `/map/${location?.split(" ")[2]}/${catId}`,
-                state: { catId, location },
+                state: { catId, location : location?.split(" ")[2] },
               });
             }}
           >

@@ -18,17 +18,6 @@ const _getUserInfo =
     }
   };
 
-const _getLevelUp =
-  () =>
-  async (dispatch, getState, { history }) => {
-    try {
-      const { data } = await myPageApi.getLevelUp();
-    } catch (e) {
-      console.log(e);
-      dispatch(userActions._logout());
-    }
-  };
-
 const _getCalender =
   (year, month) =>
   async (dispatch, getState, { history }) => {
@@ -265,7 +254,6 @@ export const mypageActions = {
   _getUserInfo,
   _getUserProfile,
   _editMyInfo,
-  _getLevelUp,
 };
 
 export const {

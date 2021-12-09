@@ -1,7 +1,6 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
 import instance, { communityApi } from "../../shared/axios";
-import { changeToast } from "./chat";
 
 // REDUX
 import { imgActions } from "./image";
@@ -231,7 +230,7 @@ export const deleteCommunityCommentDB =
     }
   };
 
-// 기본 정보 좋아요
+// 커뮤니티 디테일 정보 좋아요
 export const communityLikeToggleDB =
   (communityId) =>
   async (dispatch, getState, { history }) => {
@@ -348,27 +347,6 @@ const community = createSlice({
         itemLoaded: false,
       };
     },
-
-    editCatInfo: (state, action) => {
-      console.log("수정 요청 완료!");
-    },
-    editGathering: (state, action) => {
-      console.log("수정 요청 완료!");
-    },
-    editSharing: (state, action) => {
-      console.log("수정 요청 완료!");
-    },
-
-    deleteCatInfo: (state, action) => {
-      console.log("삭제 요청 완료!");
-    },
-    deleteGathering: (state, action) => {
-      console.log("삭제 요청 완료!");
-    },
-    deleteSharing: (state, action) => {
-      console.log("삭제 요청 완료!");
-    },
-
     pageLoading: (state, action) => {
       state.pageLoaded = action.payload;
     },
@@ -398,6 +376,7 @@ const community = createSlice({
         state.communityDetail.commentList.splice(idx, 1);
       }
     },
+    // 커뮤니티 디테일 정보 좋아요
     likeToggle: (state, action) => {
       if (!state.communityDetail.liked) {
         state.communityDetail.liked = true;
@@ -420,12 +399,6 @@ export const {
   getMoreCatInfo,
   getMoreGathering,
   getMoreSharing,
-  editCatInfo,
-  editGathering,
-  editSharing,
-  deleteCatInfo,
-  deleteGathering,
-  deleteSharing,
   pageLoading,
   startReset,
   itemLoading,

@@ -1,13 +1,15 @@
-// TEMPLATES
+//Router
 import Router from "./Router";
-import Header from "./Header";
-import Menu from "./Menu";
-import Template from "./Template";
-import EditModalSlide from "./EditModalSlide";
-import SecondHeader from "./SecondHeader";
-import ContentHeader from "./ContentHeader";
-import EmptyPost from "./EmptyPost";
-import Toast from "./Toast";
+
+// TEMPLATES
+import Header from "./templates/Header";
+import Menu from "./templates/Menu";
+import Template from "./templates/Template";
+import EditModalSlide from "./templates/EditModalSlide";
+import SecondHeader from "./templates/SecondHeader";
+import ContentHeader from "./templates/ContentHeader";
+import EmptyPost from "./templates/EmptyPost";
+import Toast from "./templates/Toast";
 
 // SLIDER
 import Slide from "./slider/Slide";
@@ -56,13 +58,13 @@ import ChatRoom from "./chat/ChatRoom";
 import ChatMessage from "./chat/ChatMessage";
 
 // LOGIN
-import GoogleLoginBtn from "./GoogleLoginBtn";
+import GoogleLoginBtn from "./login/GoogleLoginBtn";
 
 //SPINNER
 import Spinner from "./spinner/Spinner";
 import SecondSpinner from "./spinner/SecondSpinner";
 
-import EventAlram from "./EventAlram";
+import EventAlram from "./alram/EventAlram";
 
 export {
   // TEMPLATES

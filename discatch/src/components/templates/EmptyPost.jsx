@@ -3,7 +3,7 @@ import React from "react";
 
 // STYLE
 import styled from "styled-components";
-import nocatimage from "../styles/images/nocatimage.jpg";
+import nocatimage from "../../styles/images/nocatimage.jpg";
 
 const EmptyPost = ({ path }) => {
   return (
@@ -31,9 +31,10 @@ const EmptyPost = ({ path }) => {
           <div style={{ width: "100%", marginTop: "20px" }}>
             <p>아직 등록된 고양이가 없다옹! 😹</p>
             <p>
-              <span>"아래 등록 버튼"</span>을 눌러{" "}
-              <p>동네의 고양이를 등록하면 </p>
+              <span>"아래 등록 버튼"</span>을 눌러
             </p>
+            <p>동네의 고양이를 등록하면 </p>
+
             <p>우리 동네 고양이를 동네 집사들과</p>
             <p>함께 사랑할 수 있다옹! </p>
           </div>

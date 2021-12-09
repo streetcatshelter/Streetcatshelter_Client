@@ -70,6 +70,7 @@ const CalendarModal = (props) => {
                 return (
                   <EventBox
                     key={idx}
+                    path={path}
                     onClick={() => {
                       if (path === "mypage") {
                         history.push({
@@ -221,6 +222,10 @@ const EventBox = styled.div`
   margin: auto;
   display: flex;
   border-bottom: 0.2px solid rgba(203, 207, 94, 1);
+  cursor:${(props) => props.path === "mypage" && " pointer"} ;
+  &:hover {
+    background: ${(props) => props.path === "mypage" && "#fff4d9"} 
+  }}
 `;
 
 const CatLeft = styled.div`

@@ -15,10 +15,10 @@ const Notice = () => {
   const noticeList = useSelector((state) => state.mypage.noticelist);
   return (
     <Wrapper>
-      <Content>
+      <ContentHead>
         <Title style={{ fontSize: "14px", textAlign: "center" }}>제목</Title>
         <DateBox style={{ fontSize: "14px", fontWeight: "900" }}>날짜</DateBox>
-      </Content>
+      </ContentHead>
       {noticeList.map((notice, idx) => {
         const modifiedAt = moment(notice.modifiedAt).format("YYYY-M-DD");
         return (
@@ -40,6 +40,14 @@ const Notice = () => {
 };
 
 const Wrapper = styled.div``;
+const ContentHead = styled.div`
+  height: 50px;
+  width: 100%;
+  border-bottom: 0.2px solid #b5bb19;
+  line-height: 16px;
+  cursor: pointer;
+  display: flex;
+`;
 const Content = styled.div`
   height: 50px;
   width: 100%;
@@ -47,6 +55,9 @@ const Content = styled.div`
   line-height: 16px;
   cursor: pointer;
   display: flex;
+  &:hover {
+    background: #fff4d9;
+  }
 `;
 const Title = styled.div`
   font-weight: 900;

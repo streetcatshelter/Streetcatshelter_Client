@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
@@ -77,7 +77,7 @@ const CatDetail = (props) => {
         dispatch(_deleteToast(false));
       }, 1500);
     }
-  }, [deleteToast]);
+  }, [deleteToast, dispatch]);
   return (
     <>
       <Template props={props}>

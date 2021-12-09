@@ -1,23 +1,13 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 // COMPONENTS
-import { Template, Location, SecondSpinner } from "../../components";
+import { Template, Location } from "../../components";
 
 const Map = (props) => {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 300);
-  }, []);
-
   return (
     <>
       <Template props={props} page="map">
-        <SecondSpinner visible={loading} />
         <Location props={props} />
       </Template>
     </>

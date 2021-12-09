@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 // COMPONENTS
-import { EditModalSlide } from "../components";
+import { EditModalSlide } from "../../components";
 
 // MOMENT
 import moment from "moment";
 
 // REDUX
-import { chatActions } from "../redux/modules/chat";
-import { history } from "../redux/configureStore";
+import { chatActions } from "../../redux/modules/chat";
+import { history } from "../../redux/configureStore";
 
 const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const dispatch = useDispatch();

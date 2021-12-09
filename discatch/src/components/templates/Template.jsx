@@ -5,7 +5,7 @@ import React from "react";
 import styled from "styled-components";
 
 // COMPONENTS
-import { Header, Menu } from "./";
+import { Header, Menu } from "../";
 
 const Template = (props) => {
   const path = props.props?.match.path;

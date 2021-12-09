@@ -27,7 +27,7 @@ const ChatRoom = (props) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const chatInfo = useSelector((state) => state.chat.chatinfo);
-  const ninkname = useSelector((state) => state.mypage.userInfo.nickname);
+  const nickname = useSelector((state) => state.mypage.userInfo.nickname);
 
   //토스트모달
   const [toastState, setToastState] = useState(false);
@@ -129,7 +129,7 @@ const ChatRoom = (props) => {
     return () => {
       wsDisConnectUnsubscribe();
     };
-  }, [props.roomId]);
+  }, []);
 
   // 채팅방시작하기, 채팅방 클릭 시 roomId에 해당하는 방을 구독
   const wsConnectSubscribe = () => {
@@ -146,12 +146,13 @@ const ChatRoom = (props) => {
               const res = JSON.parse(data.body);
               const message = {
                 message: res.message,
-                sender: res.ninkname,
+                sender: res.nickname,
                 time: res.time,
                 mine: null,
               };
               dispatch(pushChatMessage(message));
             },
+
             {
               token: token,
             }
@@ -195,7 +196,7 @@ const ChatRoom = (props) => {
       const data = {
         message: message,
         roomId: props.roomId,
-        ninkname: ninkname,
+        nickname: nickname,
       };
       console.log(data);
       waitForConnection(ws, () => {

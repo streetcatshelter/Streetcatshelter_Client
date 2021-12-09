@@ -20,33 +20,29 @@ import {
 
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
+
+  // 토스트 모달
   const [toastState, setToastState] = useState(false);
 
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    }
-  }, [toastState]);
-
+  // 커뮤니티 댓글 리스트
   const communityDetailCmt = useSelector(
     (state) => state.community.communityDetail?.commentList
   );
 
-  const [comments, setComment] = React.useState("");
+  // 댓글 리스트
   let commentList;
-
   if (path === "CatDetail" || path === "CatDetailInfo") {
     commentList = props;
   } else {
     commentList = communityDetailCmt;
   }
 
+  const [comments, setComment] = React.useState("");
   const $comment = (event) => {
     setComment(event.target.value);
   };
 
+  // 댓글 추가하기
   const addCommentBtn = () => {
     if (comments === "") {
       setToastState(true);
@@ -61,6 +57,15 @@ const CommentList = ({ props, path, catId, communityId }) => {
       setComment("");
     }
   };
+
+  // 토스트 모달
+  useEffect(() => {
+    if (toastState) {
+      setTimeout(() => {
+        setToastState(false);
+      }, 1500);
+    }
+  }, [toastState]);
 
   return (
     <>

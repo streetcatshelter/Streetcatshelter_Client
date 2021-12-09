@@ -29,11 +29,13 @@ const Location = (props) => {
   const path = useLocation();
   const catId = props.props.match.params.id;
   const pathLength = path.pathname.split('/').length;
+  const catList = useSelector((state) => state.cat.list);
+
+  // 동네 이름
   let location;
   const villageKeyword = useSelector((state) => state.map.keywordList[0]);
   location = villageKeyword;
   const villageList = useSelector((state) => state.mypage.userVillage);
-
   if (location === villageList[0]?.split(' ')[2]) {
     location = villageList[0];
   } else if (location === villageList[1]?.split(' ')[2]) {
@@ -42,27 +44,15 @@ const Location = (props) => {
     location = villageList[2];
   }
 
-  const catList = useSelector((state) => state.cat.list);
+  // 고양이 정보 작성 페이지로 이동할 때 넘겨줄 위도와 경도
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
 
-  useEffect(() => {
-    dispatch(__getAllCatLocation(location));
-  }, [location, dispatch]);
-
+  // 토스트 모달
   const [toastState, setToastState] = useState(false);
   const [keywordToastState, setKeywordToastState] = useState(false);
 
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    } else if (keywordToastState) {
-      setTimeout(() => {
-        setKeywordToastState(false);
-      }, 1500);
-    }
-  }, [toastState, keywordToastState]);
-
+  // 고양이 지도에 표시하기
   const showCats = () => {
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
     mapOption = {
@@ -176,6 +166,7 @@ const Location = (props) => {
     }
   };
 
+  // 고양이 정보를 이용해 마커를 표시할 때 사용하는 배열 생성
   const positions = [];
   const makePosition = () => {
     for (let i = 0; i < catList.length; i++) {
@@ -193,20 +184,20 @@ const Location = (props) => {
   };
   const position = useMemo(() => makePosition(), [catList]);
 
+  // 검색에 필요한 정보
   const [searchKeyword, setSearchKeyword] = useState("");
   const [Pagination, SetPagination] = useState("");
   const [Places, setPlaces] = useState([]);
-
   const PlaceVisible = Places.length === 0 ? 0 : 1;
   const [listvisible, setListVisible] = useState(0);
   const [modal, setModal] = useState(0);
-
   const typeVillageKeyword = location + searchKeyword;
 
   const ChangeKeyword = (e) => {
     setSearchKeyword(e.target.value);
   };
 
+  // 검색하기
   const CreateKeyword = () => {
     setSearchKeyword("");
     if (searchKeyword === "") {
@@ -221,9 +212,7 @@ const Location = (props) => {
       level: 2,
     };
     const map = new kakao.maps.Map(container, options);
-
     const ps = new kakao.maps.services.Places();
-
     ps.keywordSearch(typeVillageKeyword, placesSearchCB);
 
     function placesSearchCB(data, status, pagination) {
@@ -384,12 +373,28 @@ const Location = (props) => {
     setSearchKeyword("");
   };
 
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  // 모든 고양이 기본 정보 가져오기
+  useEffect(() => {
+    dispatch(__getAllCatLocation(location));
+  }, [location, dispatch]);
 
+  // 고양이 지도에 표시하기
   useEffect(() => {
     showCats();
   }, [catList, position, location, dispatch]);
+  
+  // 토스트 모달
+  useEffect(() => {
+    if (toastState) {
+      setTimeout(() => {
+        setToastState(false);
+      }, 1500);
+    } else if (keywordToastState) {
+      setTimeout(() => {
+        setKeywordToastState(false);
+      }, 1500);
+    }
+  }, [toastState, keywordToastState]);
 
   return (
     <MapWrap>
@@ -626,7 +631,6 @@ const CloseModal = styled(X)`
   cursor: pointer;
   z-index: 1000;
 `;
-
 const Window = styled.div`
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   max-width: 200px;

@@ -21,13 +21,14 @@ const Comment = ({ path }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const commentList = useSelector((state) => state.comment.list);
-
   const communityDetail = useSelector(
     (state) => state.community.communityDetail
   );
+  const communityId = communityDetail.communityId;
 
+  // 커뮤니티 좋아요 토글
   const updateLikes = () => {
-    dispatch(communityLikeToggleDB(communityDetail.communityId));
+    dispatch(communityLikeToggleDB(communityId));
   };
 
   return (

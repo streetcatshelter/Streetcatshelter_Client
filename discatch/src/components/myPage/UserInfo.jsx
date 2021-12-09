@@ -27,7 +27,39 @@ const UserInfo = () => {
   const [editToastState, setEditToastState] = useState(false);
   const [secondToastState, setSecondToastState] = useState(false);
   const [userToastState, setUserToastState] = useState(false);
+  
+  // 닉네임 수정하기
+  const changeNickName = (e) => {
+    const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
+    if (regExp.test(e.target.value) || e.target.value.search(/\s/) !== -1) {
+      setEditToastState(true);
+    } else {
+      setNickName(e.target.value);
+    }
+  };
 
+  // 내 정보 수정하기
+  const EditMyInfo = () => {
+    if (nickName === "" || nickName === null || nickName === undefined) {
+      setToastState(true);
+    } else if (village.length === 0) {
+      setSecondToastState(true);
+    } else {
+      dispatch(mypageActions._editMyInfo(nickName, village, setUserToastState));
+    }
+  };
+
+  // 프로필 이미지 설정 
+  const processImage = (e) => {
+    e.preventDefault();
+    const imageFile = e.target.files[0];
+    const imageUrl = URL.createObjectURL(imageFile);
+    dispatch(imgActions.setInitialState(imageUrl));
+    dispatch(imgActions.setFile(imageFile));
+    setFileUrl(imageUrl);
+  };
+
+  // 토스트 모달
   useEffect(() => {
     if (toastState) {
       setTimeout(() => {
@@ -47,34 +79,6 @@ const UserInfo = () => {
       }, 1500);
     }
   }, [toastState, secondToastState, editToastState, userToastState]);
-
-  const changeNickName = (e) => {
-    const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
-    if (regExp.test(e.target.value) || e.target.value.search(/\s/) !== -1) {
-      setEditToastState(true);
-    } else {
-      setNickName(e.target.value);
-    }
-  };
-
-  const EditMyInfo = () => {
-    if (nickName === "" || nickName === null || nickName === undefined) {
-      setToastState(true);
-    } else if (village.length === 0) {
-      setSecondToastState(true);
-    } else {
-      dispatch(mypageActions._editMyInfo(nickName, village, setUserToastState));
-    }
-  };
-
-  const processImage = (e) => {
-    e.preventDefault();
-    const imageFile = e.target.files[0];
-    const imageUrl = URL.createObjectURL(imageFile);
-    dispatch(imgActions.setInitialState(imageUrl));
-    dispatch(imgActions.setFile(imageFile));
-    setFileUrl(imageUrl);
-  };
 
   return (
     <React.Fragment>

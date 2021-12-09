@@ -27,27 +27,29 @@ const CommentCard = ({ comment, communityId }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
   const userInfo = useSelector((state) => state.mypage.userInfo);
-  const [profileModal, setProfileModal] = useState(false);
   const createdAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
+
+  // 프로필 모달
+  const [profileModal, setProfileModal] = useState(false);
 
   const OpenProfile = () => {
     setProfileModal(!profileModal);
   };
 
+  // 채팅방 생성하기
   const MakeChat = () => {
     const chatuser = { chatUser: [comment.nickname, userInfo.nickname] };
     dispatch(chatActions._createRoom(chatuser));
     setProfileModal(!profileModal);
   };
 
+  // 댓글 삭제하기
   const deleteCommunityComment = () => {
     dispatch(deleteCommunityCommentDB(commentId, communityId));
   };
-
   const deleteComment = () => {
     dispatch(__deleteComment(commentId));
   };
-
   const deleteBtn = () => {
     communityId ? deleteCommunityComment() : deleteComment();
   };

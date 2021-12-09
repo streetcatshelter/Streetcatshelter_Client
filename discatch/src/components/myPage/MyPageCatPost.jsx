@@ -15,12 +15,17 @@ import { FileText, MessageCircle } from "react-feather";
 import { history } from "../../redux/configureStore";
 
 const MyPageCatPost = ({ LikedCat, location }) => {
-  const lastActivity =
-    LikedCat && moment(LikedCat.lastActivity).format("YYYY-MM-DD hh:mm");
-  const myActivity =
-    LikedCat && moment(LikedCat.myActivity).format("YYYY-MM-DD hh:mm");
   const userInfo = useSelector((state) => state.mypage.userInfo);
 
+  // 최근 활동
+  const lastActivity =
+    LikedCat && moment(LikedCat.lastActivity).format("YYYY-MM-DD hh:mm");
+
+  // 내 활동
+  const myActivity =
+    LikedCat && moment(LikedCat.myActivity).format("YYYY-MM-DD hh:mm");
+
+  // 동네 이름
   let userLocation = LikedCat.location;
   if (
     userLocation !== userInfo.locationList[0]?.split(" ")[2] &&

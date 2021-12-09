@@ -71,6 +71,7 @@ const CatInfoWrite = (props) => {
   const [catTag, setCatTag] = useState("");
   const latitude = props.history.location.state?.latitude;
   const longitude = props.history?.location.state?.longitude;
+  const catId = catInfo.catId;
 
   const $neutering = (e) => {
     setNeutering(e.target.value);
@@ -110,7 +111,7 @@ const CatInfoWrite = (props) => {
       setNeuteringState(true);
     } else {
       edit
-        ? dispatch(__editCatInfo(catName, hashTags, neutering, catInfo.catId))
+        ? dispatch(__editCatInfo(catName, hashTags, neutering, catId))
         : dispatch(
             __createCatInfo(
               catName,
@@ -157,11 +158,6 @@ const CatInfoWrite = (props) => {
       }
     }
   }, [edit, catInfo.catTagList, catInfo.catImage, dispatch]);
-
-  // 사진 정보 초기화
-  useEffect(() => {
-    dispatch(imgActions.setInitialState());
-  }, [dispatch]);
 
   // 토스트 모달
   useEffect(() => {

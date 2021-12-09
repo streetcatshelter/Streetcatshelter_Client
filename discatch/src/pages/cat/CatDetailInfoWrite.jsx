@@ -147,11 +147,6 @@ const CatDetailInfoWrite = (props) => {
     }
   }, []);
 
-  // 사진 정보 초기화
-  useEffect(() => {
-    dispatch(imgActions.setInitialState());
-  }, [dispatch]);
-
   // 토스트 모달
   useEffect(() => {
     if (maxPhotoState) {

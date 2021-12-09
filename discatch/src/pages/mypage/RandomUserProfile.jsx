@@ -81,12 +81,20 @@ const RandomUserProfile = (props) => {
               <LikeCatWrapper>
                 {userRandomProfile.cat.map((cat, idx) => {
                   const location = cat.catLocation;
+                  let fullLocation;
+                  if (location === userRandomProfile?.location[0]?.split(' ')[2]) {
+                    fullLocation = userRandomProfile?.location[0];
+                  } else if (location === userRandomProfile?.location[1]?.split(' ')[2]) {
+                    fullLocation = userRandomProfile?.location[1];
+                  } else if (location === userRandomProfile?.location[2]?.split(' ')[2]) {
+                    fullLocation = userRandomProfile?.location[2];
+                  }
                   return (
                     <LikeCat
                       onClick={() => {
                         history.push({
                           pathname: `/catdetail/calendar/${location}/${cat.catId}/3`,
-                          state: { location },
+                          state: { location : fullLocation},
                         });
                       }}
                     >

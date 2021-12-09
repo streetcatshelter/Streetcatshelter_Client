@@ -44,7 +44,7 @@ const Header = (props) => {
   } else if (path === "/catdetail/:menu/:village/:catId") {
     location = locationA.pathname.split("/")[3];
   }
-
+  
   if (userInfo.locationList && !(userInfo.locationList.join('').includes(location))) {
     location = userInfo?.locationList[0]?.split(" ")[2];
   }

@@ -56,13 +56,8 @@ const Menu = (props) => {
     location = location?.split(" ")[2];
   }
 
-  if (
-    userInfo.locationList &&
-    location !== userInfo?.locationList[0]?.split(" ")[2] &&
-    location !== userInfo?.locationList[1]?.split(" ")[2] &&
-    location !== userInfo?.locationList[2]?.split(" ")[2]
-  ) {
-    location = preLocation;
+  if (userInfo.locationList && !(userInfo.locationList.join('').includes(location))) {
+    location = userInfo?.locationList[0]?.split(" ")[2];
   }
 
   if (location?.split(" ").length === 3) {

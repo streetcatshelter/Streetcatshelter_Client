@@ -32,9 +32,9 @@ const CommentList = ({ props, path, catId, communityId }) => {
   // 댓글 리스트
   let commentList;
   if (path === "CatDetail" || path === "CatDetailInfo") {
-    commentList = props;
+    commentList = [...props].reverse();
   } else {
-    commentList = communityDetailCmt;
+    commentList = [...communityDetailCmt].reverse();
   }
 
   const [comments, setComment] = React.useState("");

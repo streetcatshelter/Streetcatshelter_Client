@@ -14,14 +14,14 @@ import { mypageActions } from "../../redux/modules/mypage";
 
 const RandomUserProfile = (props) => {
   const dispatch = useDispatch();
-  const UserRandomId = props.match.params?.userRandomId;
+  const userRandomId = props.match.params?.userRandomId;
   const userRandomProfile = useSelector(
     (state) => state.mypage.userRandomProfile
   );
 
   useEffect(() => {
-    dispatch(mypageActions._getUserProfile(UserRandomId));
-  }, [UserRandomId]);
+    dispatch(mypageActions._getUserProfile(userRandomId));
+  }, [userRandomId, dispatch]);
 
   return (
     <Template props={props}>

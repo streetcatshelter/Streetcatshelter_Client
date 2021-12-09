@@ -25,7 +25,6 @@ import {
 } from "../../redux/modules/community";
 
 const CommunityPostDetail = (props) => {
-  const path = props.location.pathname.split("/")[3];
   const pathLocation = props.location.pathname.split("/")[2];
   const dispatch = useDispatch();
   const communityId = props.match.params.communityId;
@@ -34,7 +33,7 @@ const CommunityPostDetail = (props) => {
   const communityDetail = useSelector(
     (state) => state.community.communityDetail
   );
-  console.log(communityDetail);
+
   const deleteCommunity = () => {
     setDeleteState(true);
     setTimeout(() => {
@@ -55,7 +54,7 @@ const CommunityPostDetail = (props) => {
 
   useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
-  }, [communityId]);
+  }, [communityId, dispatch]);
 
   useEffect(() => {
     if (deleteState) {

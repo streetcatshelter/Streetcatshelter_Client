@@ -18,14 +18,14 @@ import { userActions } from "../../redux/modules/user";
 const Profile = (props) => {
   const dispatch = useDispatch();
   const location = props.location;
-  const UserInfo = useSelector((state) => state.mypage.userInfo);
-  const nickName = UserInfo.nickname === "string" ? "" : UserInfo.nickname;
+  const userInfo = useSelector((state) => state.mypage.userInfo);
+  const nickName = userInfo.nickname === "string" ? "" : userInfo.nickname;
 
   const logout = () => {
     dispatch(userActions._logout());
   };
 
-  if (!UserInfo) {
+  if (!userInfo) {
     return <div></div>;
   }
   return (
@@ -35,7 +35,7 @@ const Profile = (props) => {
         height="70px"
         borderRadius="35px"
         margin="auto"
-        src={UserInfo.profileImageUrl}
+        src={userInfo.profileImageUrl}
       />
       <Grid margin="0px 0px 0px 20px" width="70%">
         <Grid>
@@ -46,7 +46,7 @@ const Profile = (props) => {
             positon="relative"
           >
             <Text fontWeight="800" margin="5px 0px">
-              {UserInfo.username}({nickName})
+              {userInfo.username}({nickName})
             </Text>
 
             <EditModalSlide
@@ -63,11 +63,11 @@ const Profile = (props) => {
           </Grid>
         </Grid>
         <Grid>
-          <Text fontWeight="900">{UserInfo.userLevel}</Text>
+          <Text fontWeight="900">{userInfo.userLevel}</Text>
         </Grid>
-        {UserInfo.locationList ? (
+        {userInfo.locationList ? (
           <Grid display="flex">
-            {UserInfo.locationList.map((location, idx) => {
+            {userInfo.locationList.map((location, idx) => {
               return (
                 <Text margin="0px 5px 0px 0px" size="12px" key={idx}>
                   {location.split(" ")[2]}

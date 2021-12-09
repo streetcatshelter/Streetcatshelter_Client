@@ -38,7 +38,7 @@ const CatDetailInfoWrite = (props) => {
   const catId = edit ? CatId : props.match.params.catId;
   const [fileNum, setFileNum] = useState(0);
 
-  // S3
+  // S3 (사진 추가)
   const handleInputFile = (e) => {
     e.preventDefault();
     if (fileNum < 3) {
@@ -52,33 +52,37 @@ const CatDetailInfoWrite = (props) => {
     }
   };
 
+  // 고양이 상세 정보 작성에 필요한 정보
   const [tag, setTag] = useState("");
+  const [diary, setDiary] = useState(edit ? detail.diary : "");
+  const [food, setFood] = useState(edit ? detail.food : false);
+  const [snack, setSnack] = useState(edit ? detail.snack : false);
+  const [water, setWater] = useState(edit ? detail.water : false);
+  const catDetailId = detail.catDetailId;
+  const catImages = detail.catImages;
+  const latitude = edit ? "" : props.location.state.latitude;
+  const longitude = edit ? "" : props.location.state.longitude;
+
   const $tag = (e) => {
     setTag(e.target.value);
   };
-
-  const [diary, setDiary] = useState(edit ? detail.diary : "");
   const $diary = (e) => {
     setDiary(e.target.value);
   };
 
-  const [food, setFood] = useState(edit ? detail.food : false);
-  const [snack, setSnack] = useState(edit ? detail.snack : false);
-  const [water, setWater] = useState(edit ? detail.water : false);
-
+  // 토스트 모달
   const [maxPhotoState, setMaxPhotoState] = useState(false);
   const [diaryState, setDiaryState] = useState(false);
   const [tagState, setTagState] = useState(false);
   const [accessState, setAccessState] = useState(false);
 
+  // 동네 이름
   let location = edit
     ? props.location.state?.village
     : props.location.state.location;
-  const latitude = edit ? "" : props.location.state.latitude;
-  const longitude = edit ? "" : props.location.state.longitude;
-
   location = location?.split(" ")[2];
 
+  // 고양이 상세 정보 작성하기
   const createBtn = () => {
     if (diary === "") {
       setDiaryState(true);
@@ -91,8 +95,8 @@ const CatDetailInfoWrite = (props) => {
               food,
               snack,
               water,
-              detail.catDetailId,
-              detail.catImages
+              catDetailId,
+              catImages
             )
           )
         : dispatch(
@@ -110,6 +114,7 @@ const CatDetailInfoWrite = (props) => {
       history.push(`/catdetail/${location}/${catId}`);
     }
   };
+
   const publish = (catTag) => {
     if (catTag !== "") {
       dispatch(addHashTag(catTag));
@@ -122,9 +127,9 @@ const CatDetailInfoWrite = (props) => {
   const DeleteHashTag = (hashtag) => {
     dispatch(deleteHashTag(hashtag));
   };
+
   useEffect(() => {
     dispatch(setInitialState([]));
-
     if (edit) {
       if (detail.catTags) {
         let tag;
@@ -141,6 +146,7 @@ const CatDetailInfoWrite = (props) => {
     }
   }, []);
 
+  // 토스트 모달
   useEffect(() => {
     if (maxPhotoState) {
       setTimeout(() => {

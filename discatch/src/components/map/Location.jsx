@@ -3,6 +3,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { searchKeywordMap } from "../../redux/modules/map";
 
+// COMPONENTS
 import { Toast } from "../";
 
 // ROUTE
@@ -516,7 +517,6 @@ const Location = (props) => {
                   });
                   markers.setMap(map);
                   }
-                  console.log(position)
                   let bounds = new kakao.maps.LatLngBounds();
                   bounds.extend(new kakao.maps.LatLng(item.y, item.x));
                   

@@ -25,25 +25,36 @@ import {
 } from "../../redux/modules/community";
 
 const CommunityPostDetail = (props) => {
-  const pathLocation = props.location.pathname.split("/")[2];
   const dispatch = useDispatch();
-  const communityId = props.match.params.communityId;
+
+  // 동네 이름
+  const pathLocation = props.location.pathname.split("/")[2];
+
+  // 로딩 여부
   const isLoaded = useSelector((state) => state.community.itemDetailLoaded);
+
+  // 토스트 모달
   const [deleteState, setDeleteState] = useState(false);
+  
+  // 커뮤니티 글 정보
+  const communityId = props.match.params.communityId;
   const communityDetail = useSelector(
     (state) => state.community.communityDetail
   );
+  const category = communityDetail.category;
   const location = props.match.params.village;
 
+  // 커뮤니티 글 삭제
   const deleteCommunity = () => {
     setDeleteState(true);
     setTimeout(() => {
       dispatch(
-        deleteCommunityDB(communityId, communityDetail.category, location)
+        deleteCommunityDB(communityId, category, location)
       );
     }, 1000);
   };
 
+  // path에 사용할 카테고리 설정 
   let pathCategory;
   if (communityDetail.category?.split(" ")[1] === "정보글") {
     pathCategory = "catinfo";
@@ -53,10 +64,12 @@ const CommunityPostDetail = (props) => {
     pathCategory = "sharing";
   }
 
+  // 커뮤니티 상세 정보 가져오기
   useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
 
+  // 토스트 모달
   useEffect(() => {
     if (deleteState) {
       setTimeout(() => {

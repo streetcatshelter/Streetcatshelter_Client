@@ -29,8 +29,10 @@ import {
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit = props.match.path?.split("/")[1] === "catinfoedit" ? true : false;
-  const pathLocation = props.match.params.location;
   const catInfo = useSelector((state) => state.cat.catinfo);
+
+  // 동네 이름
+  const pathLocation = props.match.params.location;
   let location = pathLocation;
   const villageList = useSelector((state) => state.mypage.userVillage);
   if (location === villageList[0]?.split(" ")[2]) {
@@ -41,8 +43,7 @@ const CatInfoWrite = (props) => {
     location = villageList[2];
   }
 
-  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
-  const hashTags = useSelector((state) => state.cat.hashtag);
+  // 사진
   const [fileUrl, setFileUrl] = useState(null);
 
   // S3
@@ -62,7 +63,23 @@ const CatInfoWrite = (props) => {
     { key: 4, value: "NO" },
   ];
 
+  // 고양이 기본 정보 작성에 필요한 정보
   const [catName, setCatName] = useState(edit ? catInfo.catName : "");
+  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
+  const hashTags = useSelector((state) => state.cat.hashtag);
+  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "");
+  const [catTag, setCatTag] = useState("");
+  const latitude = props.history.location.state?.latitude;
+  const longitude = props.history?.location.state?.longitude;
+
+  const $neutering = (e) => {
+    setNeutering(e.target.value);
+  };
+  const $catTag = (e) => {
+    setCatTag(e.target.value);
+  };
+
+  // 토스트 모달
   const [maxTextState, setMaxTextState] = useState(false);
   const [photoState, setPhotoState] = useState(false);
   const [nameState, setNameState] = useState(false);
@@ -71,6 +88,7 @@ const CatInfoWrite = (props) => {
   const [accessState, setAccessState] = useState(false);
   const [editToastState, setEditToastState] = useState(false);
 
+  // 고양이 이름 정규표현식  
   const $catName = (e) => {
     const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
     if (regExp.test(e.target.value) || e.target.value.search(/\s/) !== -1) {
@@ -81,20 +99,8 @@ const CatInfoWrite = (props) => {
       setCatName(e.target.value);
     }
   };
-
-  const [neutering, setNeutering] = useState(edit ? catInfo.neutering : "");
-  const $neutering = (e) => {
-    setNeutering(e.target.value);
-  };
-
-  const [catTag, setCatTag] = useState("");
-  const $catTag = (e) => {
-    setCatTag(e.target.value);
-  };
-
-  const latitude = props.history.location.state?.latitude;
-  const longitude = props.history?.location.state?.longitude;
-
+  
+  // 고양이 기본 정보 작성하기
   const createBtn = () => {
     if (!edit && fileUrl === null) {
       setPhotoState(true);
@@ -119,6 +125,7 @@ const CatInfoWrite = (props) => {
           );
     }
   };
+
   const publish = (catTag) => {
     if (catTag !== "") {
       dispatch(addHashTag(catTag));
@@ -134,7 +141,6 @@ const CatInfoWrite = (props) => {
 
   useEffect(() => {
     dispatch(setInitialState([]));
-
     if (edit) {
       if (catInfo.catTagList) {
         dispatch(imgActions.uploadImage(catInfo.catImage));
@@ -152,6 +158,7 @@ const CatInfoWrite = (props) => {
     }
   }, [edit, catInfo.catTagList, catInfo.catImage, dispatch]);
 
+  // 토스트 모달
   useEffect(() => {
     if (maxTextState) {
       setTimeout(() => {

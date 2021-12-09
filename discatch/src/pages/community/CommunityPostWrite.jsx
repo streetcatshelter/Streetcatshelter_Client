@@ -35,8 +35,10 @@ const CommunityPostWrite = (props) => {
     state.image.preview ? state.image.preview : Array(1)
   );
 
+  // 동네 이름
   let location = detailLocation;
 
+  // path에 사용할 카테고리 설정 
   let firstCategory;
   if (pathName[3] === "catinfo") {
     firstCategory = "고양이 정보글";
@@ -46,10 +48,10 @@ const CommunityPostWrite = (props) => {
     firstCategory = `${detailLocation} 고양이 용품 나눔`;
   }
 
+  // 사진 개수
   const [fileNum, setFileNum] = useState(0);
-  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
 
-  // S3
+  // S3 (사진 추가)
   const handleInputFile = (e) => {
     e.preventDefault();
     if (fileNum < 5) {
@@ -63,13 +65,20 @@ const CommunityPostWrite = (props) => {
     }
   };
 
+  // 토스트 모달
   const maxPhotoAlert = () => {
     if (fileNum === 5) {
       setMaxPhotoState(true);
     }
   }
 
+  // 글 작성시 필요한 정보
+  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
   const [category, setCategory] = React.useState(firstCategory);
+  const [title, setTitle] = React.useState('');
+  const [contents, setContents] = React.useState('');
+
+  // 토스트 모달
   const [titleState, setTitleState] = useState(false);
   const [contentState, setContentState] = useState(false);
   const [photoState, setPhotoState] = useState(false);
@@ -85,16 +94,15 @@ const CommunityPostWrite = (props) => {
     setCategory(e.currentTarget.value);
   };
 
-  const [title, setTitle] = React.useState('');
   const $title = (e) => {
     setTitle(e.target.value);
   };
 
-  const [contents, setContents] = React.useState('');
   const $contents = (e) => {
     setContents(e.target.value);
   };
 
+  // 커뮤니티 글 작성하기
   const writeBtn = () => {
     if (title === '') {
       setTitleState(true);
@@ -107,11 +115,13 @@ const CommunityPostWrite = (props) => {
     }
   };
 
+  // 취소하기
   const cancelBtn = () => {
     history.push({pathname:`${backPath}`, state: { location }});
     dispatch(imgActions.setInitialState());
   }
 
+  // 마지막 사진 삭제하기
   const delLastImageBtn = () => {
     if (preview.length === 5) {
       dispatch(imgActions.delPreview(4));
@@ -138,10 +148,12 @@ const CommunityPostWrite = (props) => {
     }
   };
 
+  // 유저 정보 가져오기
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, [dispatch]);
 
+  // 토스트 모달
   useEffect(() => {
     if (titleState) {
       setTimeout(() => {

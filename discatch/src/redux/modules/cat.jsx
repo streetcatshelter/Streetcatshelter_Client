@@ -279,9 +279,7 @@ export const __catLike =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catLike(catId);
-      path === "detail"
-        ? dispatch(__getCatInfo(catId))
-        : dispatch(likeToggle(catId));
+      dispatch(likeToggle({ catId: catId, path: path }));
     } catch (err) {
       console.error(err);
     }
@@ -419,8 +417,14 @@ const cat = createSlice({
     },
 
     likeToggle: (state, action) => {
-      const idx = state.list.findIndex((c) => c.catId === action.payload);
-      state.list[idx].userLiked = !state.list[idx].userLiked;
+      if (action.payload.path === "detail") {
+        state.catinfo.userLiked = !state.catinfo.userLiked;
+      } else {
+        const idx = state.list.findIndex(
+          (c) => c.catId === action.payload.catId
+        );
+        state.list[idx].userLiked = !state.list[idx].userLiked;
+      }
     },
   },
 });

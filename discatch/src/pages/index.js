@@ -1,6 +1,4 @@
 import test from "./test";
-import NotFound from "./NotFound";
-import Slider from "./Slider";
 
 // MYPAGE
 import MyPageCat from "./mypage/MyPageCat";
@@ -30,11 +28,17 @@ import CommunityPostWrite from "./community/CommunityPostWrite";
 import CommunityPostEdit from "./community/CommunityPostEdit";
 
 // MAP
-import Map from "./Map";
+import Map from "./map/Map";
 
 // CHAT
 import ChatMainPage from "./chat/ChatMainPage";
 import ChatRoomPage from "./chat/ChatRoomPage";
+
+//NOTFOUND(404)
+import NotFound from "./notFound/NotFound";
+
+//ONBOADRINGSLIDER
+import Slider from "./slider/Slider";
 
 export {
   test,

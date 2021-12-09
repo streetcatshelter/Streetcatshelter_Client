@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 // COMPONENTS
-import { Template, Location, SecondSpinner } from "../components";
+import { Template, Location, SecondSpinner } from "../../components";
 
 const Map = (props) => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const Map = (props) => {
       setLoading(false);
     }, 300);
   }, []);
-  
+
   return (
     <>
       <Template props={props} page="map">

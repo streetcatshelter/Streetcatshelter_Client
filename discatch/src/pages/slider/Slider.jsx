@@ -2,14 +2,14 @@
 import React, { useState, useEffect, useRef } from "react";
 
 // COMPONENTS
-import { Slide, Template } from "../components";
+import { Slide, Template } from "../../components";
 
 // STYLE
 import styled from "styled-components";
 import { ChevronLeft, ChevronRight, X } from "react-feather";
 
 // REDUX
-import { history } from "../redux/configureStore";
+import { history } from "../../redux/configureStore";
 
 const TOTAL_SLIDES = 4;
 

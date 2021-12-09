@@ -2,16 +2,16 @@
 import React from "react";
 
 // COMPONENTS
-import { Template } from "../components";
+import { Template } from "../../components";
 
 // ELEMENTS
-import { Button, Text } from "../elements";
+import { Button, Text } from "../../elements";
 
 // IMAGE
-import NotFoundCatImage from "../styles/images/NotFoundCat.svg";
+import NotFoundCatImage from "../../styles/images/NotFoundCat.svg";
 
 // REDUX
-import { history } from "../redux/configureStore";
+import { history } from "../../redux/configureStore";
 
 const NotFound = (props) => {
   return (

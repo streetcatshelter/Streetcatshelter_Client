@@ -33,7 +33,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
   let commentList;
   if (path === "CatDetail" || path === "CatDetailInfo") {
     commentList = [...props].reverse();
-  } else {
+  } else if (communityDetailCmt) {
     commentList = [...communityDetailCmt].reverse();
   }
 
@@ -87,8 +87,9 @@ const CommentList = ({ props, path, catId, communityId }) => {
           placeholder="댓글 달기..."
           keyPress={(e) => {
             if (e.key === "Enter") {
+              e.preventDefault();
               addCommentBtn();
-            }
+            } 
           }}
           addstyle={() => {
             return css`

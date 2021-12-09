@@ -15,6 +15,7 @@ import {
   CommentList,
   Spinner,
   ContentHeader,
+  SecondHeader,
 } from "../../components";
 
 // ICON
@@ -90,6 +91,7 @@ const CatDetailInfo = (props) => {
     <>
       <Spinner visible={isLoaded} />
       <Template props={props}>
+        <SecondHeader title="집사일기" />
         <ContentHeader
           path="catdetail"
           FirstBtn="수정"

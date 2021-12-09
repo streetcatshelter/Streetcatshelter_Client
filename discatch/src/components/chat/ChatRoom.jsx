@@ -146,7 +146,7 @@ const ChatRoom = (props) => {
               const res = JSON.parse(data.body);
               const message = {
                 message: res.message,
-                sender: res.nickname,
+                sender: res.sender.nickname,
                 time: res.time,
                 mine: null,
               };
@@ -194,13 +194,14 @@ const ChatRoom = (props) => {
     try {
       // send할 데이터
       const data = {
+        type: 2,
         message: message,
         roomId: props.roomId,
         nickname: nickname,
       };
-      console.log(data);
+      // console.log(data);
       waitForConnection(ws, () => {
-        ws.debug = null;
+        // ws.debug = null;
 
         ws.send(
           "/pub/api/chat/message",

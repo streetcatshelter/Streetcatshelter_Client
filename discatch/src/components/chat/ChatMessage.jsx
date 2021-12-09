@@ -26,23 +26,23 @@ const ChatMessage = () => {
       {lastMessages ? (
         <ChatBox>
           {lastMessages.map((lastmessage, idx) => {
-            const ChatTime = moment(lastmessage.time).format(
-              "YYYY-M-D hh:mm:ss"
-            );
-            const MinuteDiff = moment(ChatTime).diff(moment(), "minutes");
-            // format 1, 전송한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-            const SendMsg = moment(ChatTime).format(" YYYY- M-D hh:mm");
-            // format 2, 전송한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
-            const RecentlySendChat = moment(ChatTime).fromNow();
-
-            const SendTime = MinuteDiff > -60 * 12 ? RecentlySendChat : SendMsg;
+            console.log(lastmessage);
+            // const createdAt = moment(lastmessage.time).format(
+            //   "YYYY-MM-DD hh:mm"
+            // );
+            // const hourDiff = moment(createdAt).diff(moment(), "hours");
+            // // format 1, 수정한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
+            // const updated = moment(createdAt).format(" YYYY-M-D hh:mm");
+            // // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
+            // const recentlyUpdated = moment(createdAt).fromNow();
+            // const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
             return (
               <div key={idx}>
                 {lastmessage.sender === nickName ? (
                   <div>
                     <BubbleTop user="my">{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="my">
-                      <p>{SendTime}</p>
+                      <p>{lastmessage.time}</p>
                       <Bubble user="my">{lastmessage.message} </Bubble>
                     </BubbleBox>
                   </div>
@@ -51,7 +51,7 @@ const ChatMessage = () => {
                     <BubbleTop>{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="friend">
                       <Bubble user="friend">{lastmessage.message} </Bubble>
-                      <p>{SendTime}</p>
+                      <p>{lastmessage.time}</p>
                     </BubbleBox>
                   </div>
                 )}

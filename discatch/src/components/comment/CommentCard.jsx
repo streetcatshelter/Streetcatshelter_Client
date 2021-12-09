@@ -28,18 +28,18 @@ const CommentCard = ({ comment, communityId }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
   const userInfo = useSelector((state) => state.mypage.userInfo);
-  const [ProfileModal, setProfileModal] = useState(false);
+  const [profileModal, setProfileModal] = useState(false);
   const createdAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
   const [commentState, setCommentState] = useState(false);
 
   const OpenProfile = () => {
-    setProfileModal(!ProfileModal);
+    setProfileModal(!profileModal);
   };
 
   const MakeChat = () => {
     const chatuser = { chatUser: [comment.nickname, userInfo.nickname] };
     dispatch(chatActions._createRoom(chatuser));
-    setProfileModal(!ProfileModal);
+    setProfileModal(!profileModal);
   };
 
   const deleteCommunityComment = () => {
@@ -110,7 +110,7 @@ const CommentCard = ({ comment, communityId }) => {
           FirstBtn="내프로필보기"
           SecondBtn="내프로필수정"
           Profile="profile"
-          openModal={ProfileModal}
+          openModal={profileModal}
           FirstClick={() => {
             history.push(`/user/${comment.userRandomId}`);
           }}
@@ -123,7 +123,7 @@ const CommentCard = ({ comment, communityId }) => {
           FirstBtn="프로필보기"
           SecondBtn="채팅하기"
           Profile="profile"
-          openModal={ProfileModal}
+          openModal={profileModal}
           FirstClick={() => {
             history.push(`/user/${comment.userRandomId}`);
           }}

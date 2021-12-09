@@ -1,6 +1,7 @@
 // LIBRARY
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import {
@@ -16,13 +17,11 @@ import {
 import styled from "styled-components";
 
 // REDUX
-
-import { useDispatch, useSelector } from "react-redux";
 import { mypageActions, resetList } from "../../redux/modules/mypage";
 
 const MyPage = (props) => {
-  const location = props.location.state?.location;
   const dispatch = useDispatch();
+  const location = props.location.state?.location;
   const likedAllCat = useSelector((state) => state.mypage.likedAllCat);
   const isLoaded = useSelector((state) => state.mypage.itemLoaded);
   const [page, setPage] = useState(1);
@@ -35,7 +34,7 @@ const MyPage = (props) => {
     dispatch(resetList());
     setPage(1);
     dispatch(mypageActions._getLikedAllCat());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고 catList의 length가 10의 배수인 경우

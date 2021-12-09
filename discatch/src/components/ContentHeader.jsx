@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 // STYLE
 import styled from "styled-components";
 
-// ROUTE
-import { useLocation } from "react-router-dom";
-
 // COMPONENTS
 import { EditModalSlide } from "../components";
 
@@ -20,9 +17,7 @@ import { history } from "../redux/configureStore";
 
 const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
   const dispatch = useDispatch();
-  const pathName = useLocation();
-  const pName = pathName.pathname.split("/")[3];
-  const [ProfileModal, setProfileModal] = useState(false);
+  const [profileModal, setProfileModal] = useState(false);
 
   const userNickName = useSelector((state) => state.mypage.userInfo?.nickname);
   const location = useSelector(
@@ -44,12 +39,12 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
 
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
   const OpenProfile = () => {
-    setProfileModal(!ProfileModal);
+    setProfileModal(!profileModal);
   };
   const MakeChat = () => {
     const chatuser = { chatUser: [userNickName, nickname] };
     dispatch(chatActions._createRoom(chatuser));
-    setProfileModal(!ProfileModal);
+    setProfileModal(!profileModal);
   };
 
   let locationName = "";
@@ -95,7 +90,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
           FirstBtn="프로필보기"
           SecondBtn="채팅하기"
           Profile="profile"
-          openModal={ProfileModal}
+          openModal={profileModal}
           FirstClick={() => {
             history.push(`/user/${userRandomId}`);
           }}
@@ -106,7 +101,7 @@ const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
           FirstBtn="내프로필보기"
           SecondBtn="내프로필수정"
           Profile="profile"
-          openModal={ProfileModal}
+          openModal={profileModal}
           FirstClick={() => {
             history.push(`/user/${userRandomId}`);
           }}

@@ -27,7 +27,15 @@ const CommentCard = ({ comment, communityId }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
   const userInfo = useSelector((state) => state.mypage.userInfo);
+
+  //댓글 생성 시간
   const createdAt = moment(comment.createdAt).format("YYYY-MM-DD hh:mm");
+  const hourDiff = moment(createdAt).diff(moment(), "hours");
+  // format 1, 수정한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
+  const updated = moment(createdAt).format(" YYYY. M. D hh:mm");
+  // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
+  const recentlyUpdated = moment(createdAt).fromNow();
+  const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
 
   // 프로필 모달
   const [profileModal, setProfileModal] = useState(false);
@@ -67,7 +75,7 @@ const CommentCard = ({ comment, communityId }) => {
               <p>{comment.nickname}</p>
             </Profile>
 
-            {comment.createdAt ? <span>{createdAt}</span> : ""}
+            {comment.createdAt ? <span>{sendtime}</span> : ""}
           </Left>
 
           <Right>
@@ -122,7 +130,8 @@ const CommentCard = ({ comment, communityId }) => {
 
 const Wrap = styled.div`
   width: 95%;
-  margin: 0 auto 20px;
+  margin: 10px auto;
+  border-bottom: 0.2px solid rgb(203, 207, 94);
 `;
 const Header = styled.div`
   display: flex;

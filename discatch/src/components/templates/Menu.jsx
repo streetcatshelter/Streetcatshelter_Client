@@ -43,9 +43,9 @@ const Menu = (props) => {
   }
 
   if (
-    path === "/catdetail/:village/:catId" ||
+    path === "/catdetail/:menu/:village/:catId" ||
     path === "/catdetailinfo/:village/:catDetailId" ||
-    path === "/catdetail/:village/:catId/1" ||
+    path === "/catdetail/:menu/:village/:catId/1" ||
     path === "/community/:village/:category/postdetail/:communityId"
   ) {
     location = pathName.pathname.split("/")[2];
@@ -101,7 +101,7 @@ const Menu = (props) => {
       setToastState(true);
     } else {
       if (
-        path === "/catdetail/:village/:catId" ||
+        path === "/catdetail//:menu/:village/:catId" ||
         path === "/catdetailinfo/:village/:catDetailId"
       ) {
         history.push({

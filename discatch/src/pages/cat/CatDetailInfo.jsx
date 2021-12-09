@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
@@ -15,7 +15,6 @@ import {
   CommentList,
   Spinner,
   ContentHeader,
-  Toast,
 } from "../../components";
 
 // ICON
@@ -27,7 +26,6 @@ import {
   __getCatDetail,
   __deleteCatDetail,
   __catDetailLike,
-  _deleteToast,
 } from "../../redux/modules/cat";
 import { __getDetailComment } from "../../redux/modules/comment";
 import { history } from "../../redux/configureStore";
@@ -40,8 +38,7 @@ const CatDetailInfo = (props) => {
   const catDetailId = props.match.params.catDetailId;
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
-  const deleteToast = useSelector((state) => state.cat.deleteToast);
-  console.log(deleteToast);
+
   // 동네 이름 설정
   let location;
   if (
@@ -88,15 +85,6 @@ const CatDetailInfo = (props) => {
       state: { location },
     });
   };
-
-  // 토스트 모달
-  useEffect(() => {
-    if (deleteToast) {
-      setTimeout(() => {
-        dispatch(_deleteToast(false));
-      }, 1500);
-    }
-  }, [deleteToast]);
 
   return (
     <>
@@ -268,7 +256,6 @@ const CatDetailInfo = (props) => {
           path="CatDetailInfo"
           catId={catDetailId}
         />
-        {deleteToast && <Toast message="게시물 삭제 완료!" />}
       </Template>
     </>
   );

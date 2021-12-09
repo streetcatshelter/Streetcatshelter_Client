@@ -88,7 +88,7 @@ const CatInfoWrite = (props) => {
   const [accessState, setAccessState] = useState(false);
   const [editToastState, setEditToastState] = useState(false);
 
-  // 고양이 이름 정규표현식  
+  // 고양이 이름 정규표현식
   const $catName = (e) => {
     const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
     if (regExp.test(e.target.value) || e.target.value.search(/\s/) !== -1) {
@@ -99,7 +99,7 @@ const CatInfoWrite = (props) => {
       setCatName(e.target.value);
     }
   };
-  
+
   // 고양이 기본 정보 작성하기
   const createBtn = () => {
     if (!edit && fileUrl === null) {

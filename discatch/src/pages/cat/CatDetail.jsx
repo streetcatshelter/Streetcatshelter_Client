@@ -14,6 +14,7 @@ import {
   CatGallery,
   CommentList,
   CatPost,
+  Toast,
 } from "../../components";
 
 // ELEMENTS
@@ -25,27 +26,39 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
 import { history } from "../../redux/configureStore";
-import { __getCatInfo } from "../../redux/modules/cat";
+import { __getCatInfo, _deleteToast } from "../../redux/modules/cat";
 import { __getComment } from "../../redux/modules/comment";
 
 const CatDetail = (props) => {
   const dispatch = useDispatch();
   let location = props.location.state?.location;
-  const catId = props.match.params.catId;
+  const catId = props.match.params?.catId;
+  const menu = props.match.params?.menu;
+  const village = props.match.params?.village;
   const cat = useSelector((state) => state.cat.catinfo);
   const commentList = useSelector((state) => state.comment.list);
-  const [menu, setMenu] = useState("캘린더");
+  const deleteToast = useSelector((state) => state.cat.deleteToast);
+  console.log(deleteToast);
   const userInfo = useSelector((state) => state.mypage.userInfo);
 
   // 동네 이름 설정
   if (location === undefined) {
     location = props.match.params.village;
   }
-  if (userInfo.locationList && location === userInfo?.locationList[0]?.split(' ')[2]) {
+  if (
+    userInfo.locationList &&
+    location === userInfo?.locationList[0]?.split(" ")[2]
+  ) {
     location = userInfo?.locationList[0];
-  } else if (userInfo.locationList && location === userInfo?.locationList[1]?.split(' ')[2]) {
+  } else if (
+    userInfo.locationList &&
+    location === userInfo?.locationList[1]?.split(" ")[2]
+  ) {
     location = userInfo?.locationList[1];
-  } else if (userInfo.locationList && location === userInfo?.locationList[2]?.split(' ')[2]) {
+  } else if (
+    userInfo.locationList &&
+    location === userInfo?.locationList[2]?.split(" ")[2]
+  ) {
     location = userInfo?.locationList[2];
   }
 
@@ -59,9 +72,17 @@ const CatDetail = (props) => {
     dispatch(__getComment(catId));
   }, [catId, commentList.length, dispatch]);
 
+  useEffect(() => {
+    if (deleteToast) {
+      setTimeout(() => {
+        dispatch(_deleteToast(false));
+      }, 1500);
+    }
+  }, [deleteToast]);
   return (
     <>
       <Template props={props}>
+        {deleteToast && <Toast message="게시물 삭제 완료!" />}
         <CatPost cat={cat} location={location} path="detail" />
         <Grid
           alignItems="center"
@@ -75,9 +96,9 @@ const CatDetail = (props) => {
         >
           <Button
             clickEvent={() => {
-              setMenu("캘린더");
+              history.push(`/catdetail/calendar/${village}/${catId}`);
             }}
-            color={menu === "캘린더" ? "olive" : "black"}
+            color={menu === "calendar" ? "olive" : "black"}
             margin="0 8%"
             fontSize="1em"
             fontWeight="800"
@@ -87,9 +108,9 @@ const CatDetail = (props) => {
 
           <Button
             clickEvent={() => {
-              setMenu("집사일기");
+              history.push(`/catdetail/diary/${village}/${catId}`);
             }}
-            color={menu === "집사일기" ? "olive" : "black"}
+            color={menu === "diary" ? "olive" : "black"}
             fontSize="1em"
             fontWeight="800"
           >
@@ -98,9 +119,9 @@ const CatDetail = (props) => {
 
           <Button
             clickEvent={() => {
-              setMenu("갤러리");
+              history.push(`/catdetail/gallery/${village}/${catId}`);
             }}
-            color={menu === "갤러리" ? "olive" : "black"}
+            color={menu === "gallery" ? "olive" : "black"}
             margin="0 0 0 8%"
             fontSize="1em"
             fontWeight="800"
@@ -109,11 +130,11 @@ const CatDetail = (props) => {
           </Button>
         </Grid>
 
-        {menu === "캘린더" ? (
+        {menu === "calendar" ? (
           <CatCalendar catId={catId} location={location} />
-        ) : menu === "집사일기" ? (
+        ) : menu === "diary" ? (
           <CatDiary catId={catId} location={location} />
-        ) : menu === "갤러리" ? (
+        ) : menu === "gallery" ? (
           <CatGallery catId={catId} location={location} />
         ) : null}
         {userInfo.locationList &&

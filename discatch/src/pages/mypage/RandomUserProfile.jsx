@@ -85,7 +85,7 @@ const RandomUserProfile = (props) => {
                     <LikeCat
                       onClick={() => {
                         history.push({
-                          pathname: `/catdetail/${location}/${cat.catId}`,
+                          pathname: `/catdetail/calendar/${location}/${cat.catId}`,
                           state: { location },
                         });
                       }}

@@ -72,7 +72,6 @@ export const __editCatInfo =
             .then((res) => {
               dispatch(imgActions.setInitialState());
               dispatch(setInitialState([]));
-              history.push("/");
             })
             .catch((err) => {
               console.error(err);
@@ -91,7 +90,8 @@ export const __editCatInfo =
         const { data } = await catApi.editCatInfo(catInfo, catId);
         dispatch(imgActions.setInitialState());
         dispatch(setInitialState([]));
-        history.push("/");
+
+        history.goBack();
       } catch (err) {
         console.error(err);
       }
@@ -132,6 +132,7 @@ export const __createCatDetailInfo = (
             .then((res) => {
               dispatch(imgActions.setInitialState());
               dispatch(setInitialState([]));
+              dispatch(__getDiary(catId));
             })
             .catch((err) => {
               console.error(err);
@@ -146,7 +147,7 @@ export const __createCatDetailInfo = (
 
 // 상세 정보 수정
 export const __editCatDetailInfo =
-  (hashTags, diary, food, snack, water, catDetailId, catImages) =>
+  (hashTags, diary, food, snack, water, catDetailId, catImages, catId) =>
   async (dispatch, getState, { history }) => {
     try {
       const detailInfo = {
@@ -159,6 +160,7 @@ export const __editCatDetailInfo =
       };
       const { data } = await catApi.editCatDetailInfo(detailInfo, catDetailId);
       dispatch(setInitialState([]));
+      dispatch(__getDiary(catId));
     } catch (err) {
       console.error(err);
     }

@@ -94,7 +94,7 @@ const RandomUserProfile = (props) => {
                       onClick={() => {
                         history.push({
                           pathname: `/catdetail/calendar/${location}/${cat.catId}/3`,
-                          state: { location : fullLocation},
+                          state: { location : fullLocation },
                         });
                       }}
                     >

@@ -17,8 +17,7 @@ const _loginKakao =
       };
       dispatch(loginKakao(userInfo));
       setToken(data.token);
-      const str_userInfo = JSON.stringify(userInfo);
-      localStorage.setItem("userInfo", str_userInfo);
+
       history.push("/");
     } catch (e) {
       console.log(e);
@@ -38,8 +37,7 @@ const _loginNaver =
       };
       dispatch(loginNaver(userInfo));
       setToken(data.token);
-      const str_userInfo = JSON.stringify(userInfo);
-      localStorage.setItem("userInfo", str_userInfo);
+
       history.push("/");
     } catch (e) {
       console.log(e);
@@ -59,8 +57,7 @@ const _loginGoogle =
       };
       dispatch(loginGoogle(userInfo));
       setToken(data.token);
-      const str_userInfo = JSON.stringify(userInfo);
-      localStorage.setItem("userInfo", str_userInfo);
+
       history.push("/");
     } catch (e) {
       console.log(e);

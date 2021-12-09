@@ -35,22 +35,18 @@ const Header = (props) => {
   location = userLocation ? userLocation : firstLocation;
 
   if (
-    path === "/catdetail/:menu/:village/:catId" ||
     path === "/catdetailinfo/:village/:catDetailId" ||
     path === "/catdetail/:menu/:village/:catId/1" ||
     path === "/community/:menu/:village/:category/postdetail/:communityId" ||
     path === "/catinfowrite/:location"
   ) {
     location = locationA.pathname.split("/")[2];
+  } else if (path === "/catdetail/:menu/:village/:catId") {
+    location = locationA.pathname.split("/")[3];
   }
 
-  if (
-    userInfo.locationList &&
-    location !== userInfo?.locationList[0]?.split(" ")[2] &&
-    location !== userInfo?.locationList[1]?.split(" ")[2] &&
-    location !== userInfo?.locationList[2]?.split(" ")[2]
-  ) {
-    location = firstLocation;
+  if (userInfo.locationList && !(userInfo.locationList.join('').includes(location))) {
+    location = userInfo?.locationList[0]?.split(" ")[2];
   }
 
   if (userInfo.locationList && location === undefined) {

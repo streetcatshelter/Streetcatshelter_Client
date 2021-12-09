@@ -143,6 +143,11 @@ const Router = () => {
         exact
       />
       <Route
+        path="/catdetail/:menu/:village/:catId/3"
+        component={Auth(CatDetail, true)}
+        exact
+      />
+      <Route
         path="/catdetailinfo"
         component={Auth(CatDetailInfo, true)}
         exact

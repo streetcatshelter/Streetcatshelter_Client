@@ -13,7 +13,8 @@ import { useLocation } from "react-router-dom";
 const CommunityPreview = (preview) => {
     let previewImage; 
     const path = useLocation();
-    const pathLength = path.pathname.split('/').length
+    const pathLength = path.pathname.split('/').length;
+    console.log(pathLength);
     let newImage = preview?.preview[preview?.previewNum]?.preview;
     if (pathLength === 6) {
       newImage = preview?.preview[preview?.previewNum - preview.imageNum]?.preview;

@@ -38,6 +38,9 @@ import { history } from "../../redux/configureStore";
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
+  const path = useLocation();
+
+  // 카테고리에 따른 커뮤니티 리스트
   const communityList = useSelector((state) =>
     params.category === "catinfo"
       ? state.community.catInfo
@@ -45,38 +48,44 @@ const CommunityDetail = (props) => {
       ? state.community.gathering
       : state.community.sharing
   );
+  // 로딩 여부
   const loading = useSelector((state) => state.community.itemLoaded);
+
+  // 토스트 모달
   const toastState = useSelector((state) => state.community.toast);
 
+  // 무한 스크롤
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
     threshold: 0,
     triggerOnce: true,
   });
 
-  const pathLocation = props.match.params.village;
-  let location = pathLocation;
+  // 동네 이름
+  const location = props.match.params.village;
 
-  const path = useLocation();
+  // pathname에 따른 카테고리 분류 
   let category = null;
   let nextPath = null;
-  if (path.pathname === `/community/${pathLocation}/catinfo`) {
+  if (path.pathname === `/community/${location}/catinfo`) {
     category = "고양이 정보글";
     nextPath = "catinfo";
-  } else if (path.pathname === `/community/${pathLocation}/gathering`) {
-    category = `${pathLocation} 동네 모임`;
+  } else if (path.pathname === `/community/${location}/gathering`) {
+    category = `${location} 동네 모임`;
     nextPath = "gathering";
-  } else if (path.pathname === `/community/${pathLocation}/sharing`) {
-    category = `${pathLocation} 고양이 용품 나눔`;
+  } else if (path.pathname === `/community/${location}/sharing`) {
+    category = `${location} 고양이 용품 나눔`;
     nextPath = "sharing";
   }
 
+  // 커뮤니티 글 가져오기
   useEffect(() => {
-    setPage(1);
     dispatch(resetList());
+    setPage(1);
     dispatch(getCommunityDB(category, location, page));
   }, [category, location, dispatch]);
 
+  // 커뮤니티 글 추가로 가져오기
   useEffect(() => {
     if (
       inView &&
@@ -90,13 +99,14 @@ const CommunityDetail = (props) => {
     }
   }, [inView, dispatch]);
 
+  // 토스트 모달
   useEffect(() => {
     if (toastState) {
       setTimeout(() => {
         dispatch(errorToast(false));
       }, 1500);
     }
-  }, [toastState]);
+  }, [toastState, dispatch]);
 
   return (
     <Template props={props}>
@@ -118,7 +128,7 @@ const CommunityDetail = (props) => {
       <SecondSpinner visible={loading} path="scroll" />
       <Button
         clickEvent={() =>
-          history.push(`/community/${pathLocation}/${nextPath}/write`)
+          history.push(`/community/${location}/${nextPath}/write`)
         }
         is_float="is_float"
       >

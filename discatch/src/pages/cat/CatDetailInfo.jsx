@@ -39,6 +39,8 @@ const CatDetailInfo = (props) => {
   const catDetailId = props.match.params.catDetailId;
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
+
+  // 동네 이름 설정
   let location;
   if (userInfo.locationList && village === userInfo.locationList[0]?.split(' ')[2]) {
     location = userInfo.locationList[0];
@@ -48,20 +50,25 @@ const CatDetailInfo = (props) => {
     location = userInfo.locationList[2];
   }
 
+  // 토스트 모달
   const [deleteState, setDeleteState] = useState(false);
 
+  // 좋아요 토글
   const likeToggle = () => {
     dispatch(__catDetailLike(catDetailId));
   };
 
+  // 고양이 상세 정보 가져오기
   useEffect(() => {
     dispatch(__getCatDetail(catDetailId));
   }, [catDetailId, dispatch]);
 
+  // 댓글 가져오기
   useEffect(() => {
     dispatch(__getDetailComment(catDetailId));
   }, [catDetailId, commentList.length, dispatch]);
 
+  // 고양이 상세 정보 삭제하기
   const deleteCatDetail = () => {
     setDeleteState(true);
     setTimeout(() => {
@@ -69,6 +76,7 @@ const CatDetailInfo = (props) => {
     }, 1000);
   };
 
+  // 고양이 상세 정보 수정 페이지로 이동
   const editCatDetail = () => {
     history.push({
       pathname: `/catdetailinfoedit/${catDetailId}`,
@@ -76,6 +84,7 @@ const CatDetailInfo = (props) => {
     });
   };
 
+  // 토스트 모달
   useEffect(() => {
     if (deleteState) {
       setTimeout(() => {

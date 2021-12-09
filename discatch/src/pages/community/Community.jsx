@@ -1,6 +1,6 @@
 // LIBRARY
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 // STYLE
 import { css } from "styled-components";
@@ -25,17 +25,23 @@ import Community2 from "../../styles/images/Community2.png";
 import Community3 from "../../styles/images/Community3.png";
 
 const Community = (props) => {
+  // 페이지 로딩 여부
   const isLoaded = useSelector((state) => state.community.pageLoaded);
+
+  // 동네 이름
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   const village = userLocation ? userLocation : props.location.state?.location;
-  const [villageState, setVillageState] = useState(false);
 
+  // 동네 이름이 없는 경우 유저 정보 수정 페이지로 이동
   const requestLocationInfo = () => {
     setVillageState(true);
     setTimeout(() => {
       history.push("/userinfoedit");
     }, 1000);
   };
+
+  // 토스트 모달
+  const [villageState, setVillageState] = useState(false);
 
   useEffect(() => {
     if (villageState) {

@@ -19,17 +19,11 @@ import { __getCatLocation, __getMoreCatLocation, resetList } from "../../redux/m
 
 const Home = (props) => {
   const dispatch = useDispatch();
+  // 로딩 여부
   const isLoaded = useSelector((state) => state.cat.postLoaded);
+
   //토스트모달
   const [toastState, setToastState] = useState(false);
-
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    }
-  }, [toastState]);
 
   //무한 스크롤
   const [page, setPage] = useState(1);
@@ -38,11 +32,12 @@ const Home = (props) => {
     triggerOnce: true,
   });
 
-  const stateLocation = props.location.state?.location;
   const catList = useSelector((state) => state.cat.list);
+
+  // 동네 이름
+  const stateLocation = props.location.state?.location;
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   const villageList = useSelector((state) => state.mypage.userVillage);
-
   let location = stateLocation ? stateLocation : villageList[0];
   if (villageList[0] && userLocation === villageList[0]?.split(" ")[2]) {
     location = villageList[0];
@@ -52,15 +47,19 @@ const Home = (props) => {
     location = villageList[2];
   }
 
+  // 마이페이지의 첫번째 동네 이름
   const userVillage = useSelector((state) => state.mypage.userVillage[0]);
 
+  // path에 사용할 동네 이름
   const pathLocation = userLocation ? userLocation : userVillage?.split(" ")[2];
 
+  // 동네 이름이 없는 경우 유저 정보 수정 페이지로 이동
   const requestLocationInfo = () => {
     history.push("/userinfoedit");
     setToastState(true);
   };
 
+  // 고양이 기본 정보 가져오기
   useEffect(() => {
     dispatch(resetList());
     if (location?.length !== 3 && location !== undefined) {
@@ -69,6 +68,7 @@ const Home = (props) => {
     }
   }, [location, dispatch]);
 
+  // 고양이 기본 정보 추가로 가져오기
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고 catList의 length가 10의 배수인 경우
     if (inView && catList.length > 9 && catList.length / 10 === page) {
@@ -78,6 +78,15 @@ const Home = (props) => {
       return;
     }
   }, [inView]);
+
+  // 토스트 모달
+  useEffect(() => {
+    if (toastState) {
+      setTimeout(() => {
+        setToastState(false);
+      }, 1500);
+    }
+  }, [toastState]);
 
   return (
     <>

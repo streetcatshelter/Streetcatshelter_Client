@@ -34,10 +34,9 @@ import Map from "./map/Map";
 import ChatMainPage from "./chat/ChatMainPage";
 import ChatRoomPage from "./chat/ChatRoomPage";
 
-//NOTFOUND(404)
+//NOTFOUND
 import NotFound from "./notFound/NotFound";
 
-//ONBOADRINGSLIDER
 import Slider from "./slider/Slider";
 
 export {

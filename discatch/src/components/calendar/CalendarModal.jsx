@@ -21,7 +21,7 @@ const CalendarModal = (props) => {
   );
   const catId = useSelector((state) => state.cat.catinfo?.catId);
   const catName = useSelector((state) => state.cat.catinfo?.catName);
-  
+
   useEffect(() => {
     path === "mypage"
       ? dispatch(mypageActions._getCalenderDetail(year, month, elm))
@@ -71,10 +71,14 @@ const CalendarModal = (props) => {
                   <EventBox
                     key={idx}
                     onClick={() => {
-                      history.push({
-                        pathname: `/catdetail/${eachCatWork.location}/${eachCatWork.catId}/1`,
-                        state: { location: eachCatWork.location },
-                      });
+                      if (path === "mypage") {
+                        history.push({
+                          pathname: `/catdetail/calendar/${eachCatWork.location}/${eachCatWork.catId}/1`,
+                          state: { location: eachCatWork.location },
+                        });
+                      } else {
+                        return;
+                      }
                     }}
                   >
                     <CatLeft>

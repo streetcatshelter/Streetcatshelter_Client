@@ -25,7 +25,7 @@ const CatPost = ({ cat, path, location }) => {
   const catDetailBtn = () => {
     if (path !== "detail") {
       history.push({
-        pathname: `/catdetail/${location.split(" ")[2]}/${cat.catId}`,
+        pathname: `/catdetail/calendar/${location.split(" ")[2]}/${cat.catId}`,
         state: { location },
       });
     } else return;
@@ -34,19 +34,29 @@ const CatPost = ({ cat, path, location }) => {
   return (
     <CatPostStyle>
       <LeftBox>
-        <CatImage src={cat.catImage} alt={cat.catImage} onClick={catDetailBtn} />
+        <CatImage
+          src={cat.catImage}
+          alt={cat.catImage}
+          onClick={catDetailBtn}
+        />
       </LeftBox>
 
       <RightBox>
         <Header>
           <div style={{ display: "flex" }}>
-            <p onClick={catDetailBtn}>이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}</p>
+            <p onClick={catDetailBtn}>
+              이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}
+            </p>
 
             <p onClick={catDetailBtn}> 중성화: {cat.neutering}</p>
           </div>
           {path === "detail" && (
             <MoreHorizontalBtn
-              style={{ color: "rgb(249, 200, 82)", marginRight: "15px", cursor: "pointer" }}
+              style={{
+                color: "rgb(249, 200, 82)",
+                marginRight: "15px",
+                cursor: "pointer",
+              }}
               onClick={() =>
                 history.push({
                   pathname: `/catinfoedit/${catId}`,

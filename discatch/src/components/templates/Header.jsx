@@ -35,10 +35,10 @@ const Header = (props) => {
   location = userLocation ? userLocation : firstLocation;
 
   if (
-    path === "/catdetail/:village/:catId" ||
+    path === "/catdetail/:menu/:village/:catId" ||
     path === "/catdetailinfo/:village/:catDetailId" ||
-    path === "/catdetail/:village/:catId/1" ||
-    path === "/community/:village/:category/postdetail/:communityId" ||
+    path === "/catdetail/:menu/:village/:catId/1" ||
+    path === "/community/:menu/:village/:category/postdetail/:communityId" ||
     path === "/catinfowrite/:location"
   ) {
     location = locationA.pathname.split("/")[2];
@@ -144,9 +144,9 @@ const Header = (props) => {
         pathname: `/community/${location}/${category}`,
         state: { location },
       });
-    } else if (path === "/catdetail/:village/:catId/1") {
+    } else if (path === "/catdetail/:menu/:village/:catId/1") {
       history.push({ pathname: "/mypage", state: { location } });
-    } else if (path === "/catdetail/:village/:catId") {
+    } else if (path === "/catdetail/:menu/:village/:catId") {
       history.push({ pathname: "/", state: { location } });
     } else if (path === "/community/:village/:category/write") {
       history.push({

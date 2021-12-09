@@ -125,19 +125,20 @@ const Router = () => {
         component={Auth(CatDetailInfoWrite, true)}
         exact
       />
-      <Route path="/catdetail" component={Auth(CatDetail, true)} exact />
+
       <Route
-        path="/catdetail/:village/:catId"
+        path="/catdetail/:menu/:village/:catId"
+        component={Auth(CatDetail, true)}
+        exact
+      />
+
+      <Route
+        path="/catdetail/:menu/:village/:catId/1"
         component={Auth(CatDetail, true)}
         exact
       />
       <Route
-        path="/catdetail/:village/:catId/1"
-        component={Auth(CatDetail, true)}
-        exact
-      />
-      <Route
-        path="/catdetail/:village/:catId/2"
+        path="/catdetail/:menu/:village/:catId/2"
         component={Auth(CatDetail, true)}
         exact
       />

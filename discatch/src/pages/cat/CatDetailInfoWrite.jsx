@@ -96,7 +96,8 @@ const CatDetailInfoWrite = (props) => {
               snack,
               water,
               catDetailId,
-              catImages
+              catImages,
+              catId
             )
           )
         : dispatch(
@@ -111,7 +112,7 @@ const CatDetailInfoWrite = (props) => {
               catId
             )
           );
-      history.push(`/catdetail/${location}/${catId}`);
+      history.push(`/catdetail/diary/${location}/${catId}`);
     }
   };
 

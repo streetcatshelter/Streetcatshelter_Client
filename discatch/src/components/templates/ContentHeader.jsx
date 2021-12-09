@@ -15,26 +15,40 @@ import moment from "moment";
 import { chatActions } from "../../redux/modules/chat";
 import { history } from "../../redux/configureStore";
 
-const ContentHeader = ({ FirstBtn, FirstClick, SecondBtn, SecondClick }) => {
+const ContentHeader = ({
+  FirstBtn,
+  FirstClick,
+  SecondBtn,
+  SecondClick,
+  path,
+}) => {
   const dispatch = useDispatch();
   const [profileModal, setProfileModal] = useState(false);
 
   const userNickName = useSelector((state) => state.mypage.userInfo?.nickname);
-  const location = useSelector(
-    (state) => state.community.communityDetail.location
+  const location = useSelector((state) =>
+    path === "catdetail" ? null : state.community.communityDetail.location
   );
-  const nickname = useSelector(
-    (state) => state.community.communityDetail.nickname
+  const nickname = useSelector((state) =>
+    path === "catdetail"
+      ? state.cat.detail.nickname
+      : state.community.communityDetail.nickname
   );
-  const createdAt = useSelector(
-    (state) => state.community.communityDetail.createdAt
+  const createdAt = useSelector((state) =>
+    path === "catdetail"
+      ? state.cat.detail.createdAt
+      : state.community.communityDetail.createdAt
   );
-  const profileImageUrl = useSelector(
-    (state) => state.community.communityDetail.profileImageUrl
+  const profileImageUrl = useSelector((state) =>
+    path === "catdetail"
+      ? state.cat.detail.profileImageUrl
+      : state.community.communityDetail.profileImageUrl
   );
 
-  const userRandomId = useSelector(
-    (state) => state.community.communityDetail.userRandomId
+  const userRandomId = useSelector((state) =>
+    path === "catdetail"
+      ? state.cat.detail.userRandomId
+      : state.community.communityDetail.userRandomId
   );
 
   const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
@@ -145,9 +159,7 @@ const UserInfoBoxCenter = styled.div`
   }
   span {
     font-size: 12px;
-    :nth-child(2) {
-      margin-left: 10px;
-    }
+    margin-right: 10px;
   }
 `;
 

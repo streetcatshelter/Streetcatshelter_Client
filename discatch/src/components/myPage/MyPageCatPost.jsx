@@ -39,7 +39,7 @@ const MyPageCatPost = ({ LikedCat, location }) => {
     <CatPost
       onClick={() => {
         history.push({
-          pathname: `/catdetail/${LikedCat.location}/${LikedCat.catId}/1`,
+          pathname: `/catdetail/calendar/${LikedCat.location}/${LikedCat.catId}/1`,
           state: { location: userLocation },
         });
       }}

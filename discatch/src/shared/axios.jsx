@@ -128,6 +128,8 @@ export const communityApi = {
     instance.post(`/community/comment/${communityId}`, { contents }),
   deleteCommunityComment: (communityId) =>
     instance.delete(`/community/comment/${communityId}`),
+  communityLikeToggle: (communityId) =>
+    instance.post(`/community/likeit/${communityId}`),
 };
 
 export default instance;

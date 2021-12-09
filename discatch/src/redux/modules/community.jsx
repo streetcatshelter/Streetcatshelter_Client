@@ -231,19 +231,17 @@ export const deleteCommunityCommentDB =
     }
   };
 
-// 커뮤니티 글 좋아요
-export const communityLikeToggleDB = (communityId) => {
-  return function (dispatch, getState, { history }) {
-    instance
-      .post(`/community/likeit/${communityId}`)
-      .then((res) => {
-        dispatch(getOneCommunityDB(communityId));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+// 기본 정보 좋아요
+export const communityLikeToggleDB =
+  (communityId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const data = await communityApi.communityLikeToggle(communityId);
+      dispatch(likeToggle());
+    } catch (err) {
+      console.error(err);
+    }
   };
-};
 
 // INITIAL STATE
 const initialState = {
@@ -370,33 +368,7 @@ const community = createSlice({
     deleteSharing: (state, action) => {
       console.log("삭제 요청 완료!");
     },
-    addCatInfoComment: (state, action) => {
-      state.catInfo = action.payload;
-    },
-    getCatInfoComment: (state, action) => {
-      state.catInfo = action.payload;
-    },
-    addGatheringComment: (state, action) => {
-      state.gathering = action.payload;
-    },
-    getGatheringComment: (state, action) => {
-      state.gathering = action.payload;
-    },
-    addSharingComment: (state, action) => {
-      state.sharing = action.payload;
-    },
-    getSharingComment: (state, action) => {
-      state.sharing = action.payload;
-    },
-    deleteCatInfoComment: (state, action) => {
-      state.catInfo = action.payload;
-    },
-    deleteGatheringComment: (state, action) => {
-      state.gathering = action.payload;
-    },
-    deleteSharingComment: (state, action) => {
-      state.sharing = action.payload;
-    },
+
     pageLoading: (state, action) => {
       state.pageLoaded = action.payload;
     },
@@ -426,6 +398,9 @@ const community = createSlice({
         state.communityDetail.commentList.splice(idx, 1);
       }
     },
+    likeToggle: (state, action) => {
+      state.communityDetail.liked = !state.communityDetail.liked;
+    },
   },
 });
 
@@ -445,16 +420,6 @@ export const {
   deleteCatInfo,
   deleteGathering,
   deleteSharing,
-
-  addCatInfoComment,
-  addGatheringComment,
-  addSharingComment,
-  getCatInfoComment,
-  getGatheringComment,
-  getSharingComment,
-  deleteCatInfoComment,
-  deleteGatheringComment,
-  deleteSharingComment,
   pageLoading,
   startReset,
   itemLoading,
@@ -463,6 +428,7 @@ export const {
   errorToast,
   getOneCommunity,
   deleteComment,
+  likeToggle,
 } = community.actions;
 
 export default community;

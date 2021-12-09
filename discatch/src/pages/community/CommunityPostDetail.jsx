@@ -35,7 +35,7 @@ const CommunityPostDetail = (props) => {
 
   // 토스트 모달
   const [deleteState, setDeleteState] = useState(false);
-  
+
   // 커뮤니티 글 정보
   const communityId = props.match.params.communityId;
   const communityDetail = useSelector(
@@ -48,13 +48,11 @@ const CommunityPostDetail = (props) => {
   const deleteCommunity = () => {
     setDeleteState(true);
     setTimeout(() => {
-      dispatch(
-        deleteCommunityDB(communityId, category, location)
-      );
+      dispatch(deleteCommunityDB(communityId, category, location));
     }, 1000);
   };
 
-  // path에 사용할 카테고리 설정 
+  // path에 사용할 카테고리 설정
   let pathCategory;
   if (communityDetail.category?.split(" ")[1] === "정보글") {
     pathCategory = "catinfo";
@@ -80,41 +78,41 @@ const CommunityPostDetail = (props) => {
 
   return (
     <Template props={props}>
-      <SecondSpinner visible={isLoaded}>
-        <ContentHeader
-          FirstBtn="수정"
-          SecondBtn="삭제"
-          FirstClick={() => {
-            history.push({
-              pathname: `/community/${pathLocation}/${pathCategory}/postedit/${communityId}`,
-              state: { location: pathLocation },
-            });
-          }}
-          SecondClick={deleteCommunity}
-        />
+      <SecondSpinner visible={isLoaded} />
+      <ContentHeader
+        FirstBtn="수정"
+        SecondBtn="삭제"
+        FirstClick={() => {
+          history.push({
+            pathname: `/community/${pathLocation}/${pathCategory}/postedit/${communityId}`,
+            state: { location: pathLocation },
+          });
+        }}
+        SecondClick={deleteCommunity}
+      />
 
-        <div>
-          <Title>
-            <p> {communityDetail.title} </p>
-          </Title>
+      <div>
+        <Title>
+          <p> {communityDetail.title} </p>
+        </Title>
 
-          <ImageBox>
-            {communityDetail.communityImageList?.map((catImage, idx) => {
-              return (
-                <CatImageBox key={idx}>
-                  <CatImage src={catImage.image} alt="catImage" key={idx} />
-                </CatImageBox>
-              );
-            })}
-          </ImageBox>
+        <ImageBox>
+          {communityDetail.communityImageList?.map((catImage, idx) => {
+            return (
+              <CatImageBox key={idx}>
+                <CatImage src={catImage.image} alt="catImage" key={idx} />
+              </CatImageBox>
+            );
+          })}
+        </ImageBox>
 
-          <Text margin="15px">{communityDetail.contents}</Text>
+        <Text margin="15px">{communityDetail.contents}</Text>
 
-          <div style={{ margin: "10px 0px" }}>
-            <CommentList props={props} communityId={communityId} />
-          </div>
+        <div style={{ margin: "10px 0px" }}>
+          <CommentList props={props} communityId={communityId} />
         </div>
-      </SecondSpinner>
+      </div>
+
       {deleteState && <Toast message="게시물 삭제 완료!" />}
     </Template>
   );

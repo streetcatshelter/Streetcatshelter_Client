@@ -291,7 +291,7 @@ export const __catDetailLike =
   async (dispatch, getState, { history }) => {
     try {
       const { data } = await catApi.catDetailLike(catDetailId);
-      dispatch(__getCatDetail(catDetailId));
+      // dispatch(__getCatDetail(catDetailId));
     } catch (err) {
       console.error(err);
     }
@@ -304,6 +304,7 @@ export const __deleteCatDetail =
     try {
       const { data } = await catApi.deleteCatDetail(catDetailId);
       history.goBack();
+      dispatch(_deleteToast(true));
     } catch (err) {
       console.error(err);
     }
@@ -321,6 +322,7 @@ const initialState = {
   hashtag: [],
   postLoaded: false,
   calendardetail: [],
+  deleteToast: false,
 };
 
 const cat = createSlice({
@@ -394,8 +396,6 @@ const cat = createSlice({
       state.gallery = action.payload;
     },
 
-    deleteCatDetail: (state, action) => {},
-
     addHashTag: (state, action) => {
       state.hashtag.push(action.payload);
     },
@@ -426,6 +426,9 @@ const cat = createSlice({
         state.list[idx].userLiked = !state.list[idx].userLiked;
       }
     },
+    _deleteToast: (state, action) => {
+      state.deleteToast = action.payload;
+    },
   },
 });
 
@@ -449,6 +452,7 @@ export const {
   postLoading,
   resetList,
   likeToggle,
+  _deleteToast,
 } = cat.actions;
 
 export default cat;

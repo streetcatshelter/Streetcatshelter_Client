@@ -27,6 +27,7 @@ import {
   __getCatDetail,
   __deleteCatDetail,
   __catDetailLike,
+  _deleteToast,
 } from "../../redux/modules/cat";
 import { __getDetailComment } from "../../redux/modules/comment";
 import { history } from "../../redux/configureStore";
@@ -39,19 +40,26 @@ const CatDetailInfo = (props) => {
   const catDetailId = props.match.params.catDetailId;
   const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
-
+  const deleteToast = useSelector((state) => state.cat.deleteToast);
+  console.log(deleteToast);
   // 동네 이름 설정
   let location;
-  if (userInfo.locationList && village === userInfo.locationList[0]?.split(' ')[2]) {
+  if (
+    userInfo.locationList &&
+    village === userInfo.locationList[0]?.split(" ")[2]
+  ) {
     location = userInfo.locationList[0];
-  } else if (userInfo.locationList && village === userInfo.locationList[1]?.split(' ')[2]) {
+  } else if (
+    userInfo.locationList &&
+    village === userInfo.locationList[1]?.split(" ")[2]
+  ) {
     location = userInfo.locationList[1];
-  } else if (userInfo.locationList && village === userInfo.locationList[2]?.split(' ')[2]) {
+  } else if (
+    userInfo.locationList &&
+    village === userInfo.locationList[2]?.split(" ")[2]
+  ) {
     location = userInfo.locationList[2];
   }
-
-  // 토스트 모달
-  const [deleteState, setDeleteState] = useState(false);
 
   // 좋아요 토글
   const likeToggle = () => {
@@ -70,10 +78,7 @@ const CatDetailInfo = (props) => {
 
   // 고양이 상세 정보 삭제하기
   const deleteCatDetail = () => {
-    setDeleteState(true);
-    setTimeout(() => {
-      dispatch(__deleteCatDetail(catDetailId));
-    }, 1000);
+    dispatch(__deleteCatDetail(catDetailId));
   };
 
   // 고양이 상세 정보 수정 페이지로 이동
@@ -86,12 +91,12 @@ const CatDetailInfo = (props) => {
 
   // 토스트 모달
   useEffect(() => {
-    if (deleteState) {
+    if (deleteToast) {
       setTimeout(() => {
-        setDeleteState(false);
+        dispatch(_deleteToast(false));
       }, 1500);
     }
-  }, [deleteState]);
+  }, [deleteToast]);
 
   return (
     <>
@@ -108,8 +113,8 @@ const CatDetailInfo = (props) => {
           {detail.catImages &&
             detail.catImages.map((catImage, idx) => {
               return (
-                <CatImageBox>
-                  <CatImage src={catImage} alt="catImage" key={idx} />
+                <CatImageBox key={idx}>
+                  <CatImage src={catImage} alt="catImage" />
                 </CatImageBox>
               );
             })}
@@ -193,6 +198,7 @@ const CatDetailInfo = (props) => {
                 detail.catTags.map((tag, idx) => {
                   return (
                     <Grid
+                      key={idx}
                       width="auto"
                       bgColor="yellow"
                       height="25px"
@@ -207,7 +213,7 @@ const CatDetailInfo = (props) => {
                         `;
                       }}
                     >
-                      <Text key={idx}>#{tag}</Text>
+                      <Text>#{tag}</Text>
                     </Grid>
                   );
                 })
@@ -262,7 +268,7 @@ const CatDetailInfo = (props) => {
           path="CatDetailInfo"
           catId={catDetailId}
         />
-        {deleteState && <Toast message="게시물 삭제 완료!" />}
+        {deleteToast && <Toast message="게시물 삭제 완료!" />}
       </Template>
     </>
   );

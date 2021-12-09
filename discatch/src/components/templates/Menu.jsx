@@ -22,17 +22,19 @@ import { Toast } from "../";
 const Menu = (props) => {
   const pathName = useLocation();
   const path = props.props.props.match.path;
-  const preLocation = props.props.props?.location.state?.location;
   const userInfo = useSelector((state) => state.mypage.userInfo);
+
+  // 동네 이름 설정
+  const preLocation = props.props.props?.location.state?.location;
   const firstLocation = userInfo.locationList
     ? userInfo?.locationList[0]?.split(" ")[2]
     : null;
+
   const pathLocation = props.props.props.match.params.village
     ? props.props.props.match.params.village
     : props.props.props.match.params.location;
-
+    
   const userLocation = useSelector((state) => state.map.keywordList[0]);
-
   let location;
   location = userLocation ? userLocation : preLocation;
 
@@ -67,16 +69,11 @@ const Menu = (props) => {
   }
 
   const catId = props.props.props.location.pathname.split("/")[3];
+
+  // 토스트 모달
   const [toastState, setToastState] = useState(false);
-
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    }
-  }, [toastState]);
-
+  
+  // 홈으로 이동
   const moveToHome = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
@@ -86,6 +83,7 @@ const Menu = (props) => {
     }
   };
 
+  // 커뮤니티로 이동
   const moveToCommunity = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
@@ -95,6 +93,7 @@ const Menu = (props) => {
     }
   };
 
+  // 지도로 이동
   const moveToMap = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
@@ -108,12 +107,15 @@ const Menu = (props) => {
           pathname: `/map/${location}/${catId}`,
           state: { catId, location },
         });
+      } else if (path === "/catdetail/:village/:catId/2") {
+        history.goBack();
       } else {
         history.push({ pathname: `/map/${location}`, state: { location } });
       }
     }
   };
 
+  // 채팅으로 이동
   const moveToChat = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
@@ -123,6 +125,7 @@ const Menu = (props) => {
     }
   };
 
+  // 내정보로 이동
   const moveToInfo = () => {
     if (location === undefined) {
       history.push("/userinfoedit");
@@ -131,6 +134,15 @@ const Menu = (props) => {
       history.push({ pathname: "/mypage", state: { location } });
     }
   };
+
+  // 토스트 모달 
+  useEffect(() => {
+    if (toastState) {
+      setTimeout(() => {
+        setToastState(false);
+      }, 1500);
+    }
+  }, [toastState]);
 
   return (
     <MenuStyle>

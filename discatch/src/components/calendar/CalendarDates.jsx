@@ -17,6 +17,7 @@ const CalendarDates = (props) => {
   const Calendar = useSelector((state) =>
     props.path === "mypage" ? state.mypage.calendar : state.cat.calendar
   );
+  //일한 날인지 아닌지 구분하기위해 변수를 선언 일한날이면 해당날짜가 클릭되면 모달이 열림
   let WorkDay = [];
   return (
     <>

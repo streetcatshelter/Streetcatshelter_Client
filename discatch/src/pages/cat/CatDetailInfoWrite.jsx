@@ -129,6 +129,11 @@ const CatDetailInfoWrite = (props) => {
     dispatch(deleteHashTag(hashtag));
   };
 
+  // 사진 정보 초기화
+  useEffect(() => {
+    dispatch(imgActions.setInitialState());
+  }, [dispatch]);
+
   useEffect(() => {
     dispatch(setInitialState([]));
     if (edit) {

@@ -33,12 +33,13 @@ const CommunityPostDetail = (props) => {
   const communityDetail = useSelector(
     (state) => state.community.communityDetail
   );
+  const location = props.match.params.village;
 
   const deleteCommunity = () => {
     setDeleteState(true);
     setTimeout(() => {
       dispatch(
-        deleteCommunityDB(communityId, communityDetail.category, Location)
+        deleteCommunityDB(communityId, communityDetail.category, location)
       );
     }, 1000);
   };

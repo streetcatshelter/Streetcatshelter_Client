@@ -79,6 +79,9 @@ const CardStyle = styled.div`
   @media screen and (max-height: 736px) {
     margin: 15px auto;
   }
+  &:hover {
+    filter: brightness(90%);
+  }
 `;
 
 export default CommunityCategoryCard;

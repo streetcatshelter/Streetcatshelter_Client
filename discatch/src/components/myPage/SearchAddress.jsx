@@ -21,18 +21,6 @@ const SearchAddress = (props) => {
   const [toastState, setToastState] = useState(false);
   const [secondToastState, setSecondToastState] = useState(false);
 
-  useEffect(() => {
-    if (setSecondToastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    } else if (secondToastState) {
-      setTimeout(() => {
-        setSecondToastState(false);
-      }, 1500);
-    }
-  }, [toastState, secondToastState]);
-
   const onChangeOpenPost = () => {
     if (isOpenPost === false && props.Village.length === 3) {
       setToastState(true);
@@ -41,6 +29,7 @@ const SearchAddress = (props) => {
     }
   };
 
+  // 주소 등록하기
   const onCompletePost = (data) => {
     let fullAddr = `${data.sido} ${data.sigungu} ${data.bname}`;
     if (fullAddr.split(" ").length === 4) {
@@ -83,6 +72,19 @@ const SearchAddress = (props) => {
     minHeight: " 450px",
     borderRadius: "20px",
   };
+
+  // 토스트 모달
+  useEffect(() => {
+    if (setSecondToastState) {
+      setTimeout(() => {
+        setToastState(false);
+      }, 1500);
+    } else if (secondToastState) {
+      setTimeout(() => {
+        setSecondToastState(false);
+      }, 1500);
+    }
+  }, [toastState, secondToastState]);
 
   return (
     <>

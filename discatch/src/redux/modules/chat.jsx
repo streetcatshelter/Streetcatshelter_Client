@@ -32,6 +32,7 @@ const _getMessage =
   async (dispatch, getState, { history }) => {
     try {
       dispatch(loading(true));
+      console.log(page);
       const { data } = await chatApi.getMessage(roomId, page);
       console.log(data);
       dispatch(setChatMessage(data));
@@ -44,6 +45,7 @@ const _getMoreMessage =
   async (dispatch, getState, { history }) => {
     try {
       dispatch(loading(true));
+      console.log(page);
       const { data } = await chatApi.getMoreMessage(roomId, page);
       console.log(data);
       dispatch(setChatMessage(data));

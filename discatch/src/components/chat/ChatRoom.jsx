@@ -53,74 +53,6 @@ const ChatRoom = (props) => {
   const recentlyUpdated = moment(LastActivity).fromNow();
   const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
 
-  // useEffect(() => {
-  //   connect();
-  //   return () => disconnect();
-  // }, []);
-
-  // const connect = () => {
-  //   client.current = new StompJs.Client({
-  //     // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
-  //     webSocketFactory: () => new SockJS("http://52.78.241.50/ws-stomp"), // proxy를 통한 접속
-  //     connectHeaders: {
-  //       token: token,
-  //     },
-  //     debug: function (str) {
-  //       console.log(str);
-  //     },
-  //     reconnectDelay: 5000,
-  //     heartbeatIncoming: 4000,
-  //     heartbeatOutgoing: 4000,
-  //     onConnect: () => {
-  //       subscribe();
-  //     },
-  //     onStompError: (frame) => {
-  //       console.error(frame);
-  //     },
-  //   });
-  //   client.current.activate();
-  // };
-
-  // const disconnect = () => {
-  //   client.current.deactivate();
-  // };
-
-  // const subscribe = () => {
-  //   client.current.subscribe(
-  //     `/sub/chat/room/${props.roomId}`,
-  //     function (response) {
-  //       const res = JSON.parse(response.body);
-  //       const message = {
-  //         message: res.message,
-  //         sender: res.userName,
-  //         time: res.time,
-  //         mine: null,
-  //       };
-  //       dispatch(pushChatMessage(message));
-  //     }
-  //   );
-  // };
-
-  // const publish = (message) => {
-  //   if (!client.current.connected) {
-  //     return;
-  //   }
-  //   if (message.length > 1) {
-  //     client.current.publish({
-  //       destination: "/pub/api/chat/message",
-  //       token: token,
-  //       body: JSON.stringify({
-  //         message: message,
-  //         roomId: props.roomId,
-  //         userName: username,
-  //       }),
-  //     });
-
-  //     setMessage("");
-  //   } else {
-  //     setToastState(true);
-  //   }
-  // };
   const sock = new SockJS("http://52.78.241.50/ws-stomp");
   const ws = Stomp.over(sock);
 
@@ -144,13 +76,14 @@ const ChatRoom = (props) => {
             `/sub/chat/room/${props.roomId}`,
             (data) => {
               const res = JSON.parse(data.body);
-              const message = {
+              const submessage = {
                 message: res.message,
                 sender: res.sender.nickname,
                 time: res.time,
                 mine: null,
               };
-              dispatch(pushChatMessage(message));
+
+              dispatch(pushChatMessage(submessage));
             },
 
             {
@@ -190,28 +123,34 @@ const ChatRoom = (props) => {
     }, 0.1);
   };
   const sendMessage = (e) => {
-    e.preventDefault();
-    try {
-      // send할 데이터
-      const data = {
-        type: 2,
-        message: message,
-        roomId: props.roomId,
-        nickname: nickname,
-      };
-      // console.log(data);
-      waitForConnection(ws, () => {
-        // ws.debug = null;
-
-        ws.send(
-          "/pub/api/chat/message",
-          { token: token },
-          JSON.stringify(data)
-        );
-      });
-      setMessage("");
-    } catch (e) {
+    //공백정규식
+    let tmp = message.replace(/\s|　/gi, "");
+    //공백일때 워닝 토스트 띄움
+    if (tmp === "") {
       setToastState(true);
+    } else {
+      try {
+        // send할 데이터
+        const data = {
+          type: 2,
+          message: message,
+          roomId: props.roomId,
+          nickname: nickname,
+        };
+        // console.log(data);
+        waitForConnection(ws, () => {
+          // ws.debug = null;
+
+          ws.send(
+            "/pub/api/chat/message",
+            { token: token },
+            JSON.stringify(data)
+          );
+        });
+        setMessage("");
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -254,7 +193,8 @@ const ChatRoom = (props) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={(e) => {
-            if (e.key === "Enter") {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
               sendMessage(e);
             }
           }}

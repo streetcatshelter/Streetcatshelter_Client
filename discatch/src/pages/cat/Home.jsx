@@ -4,7 +4,14 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, CatPost, SecondHeader, SecondSpinner, EmptyPost, Toast } from "../../components";
+import {
+  Template,
+  CatPost,
+  SecondHeader,
+  SecondSpinner,
+  EmptyPost,
+  Toast,
+} from "../../components";
 
 // ELEMENTS
 import { Button } from "../../elements";
@@ -15,7 +22,11 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
 import { history } from "../../redux/configureStore";
-import { __getCatLocation, __getMoreCatLocation, resetList } from "../../redux/modules/cat";
+import {
+  __getCatLocation,
+  __getMoreCatLocation,
+  resetList,
+} from "../../redux/modules/cat";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -71,7 +82,7 @@ const Home = (props) => {
   // 고양이 기본 정보 추가로 가져오기
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고 catList의 length가 10의 배수인 경우
-    if (inView && catList.length > 9 && catList.length / 10 === page) {
+    if (inView) {
       setPage((prevState) => prevState + 1);
       dispatch(__getMoreCatLocation(location, page + 1));
     } else {
@@ -96,9 +107,21 @@ const Home = (props) => {
           <SecondHeader title={`${pathLocation} 고양이들을 소개합니다!`} />
           {catList && catList.length > 0 ? (
             catList.map((cat, idx) => {
-              return (
+              return idx > 0 && idx % 9 === 0 ? (
                 <div style={{ width: "100%" }} key={idx} ref={ref}>
-                  <CatPost cat={cat} pathLocation={pathLocation} location={location} />
+                  <CatPost
+                    cat={cat}
+                    pathLocation={pathLocation}
+                    location={location}
+                  />
+                </div>
+              ) : (
+                <div style={{ width: "100%" }} key={idx}>
+                  <CatPost
+                    cat={cat}
+                    pathLocation={pathLocation}
+                    location={location}
+                  />
                 </div>
               );
             })
@@ -115,7 +138,10 @@ const Home = (props) => {
               });
             }}
           >
-            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px", cursor: "pointer" }} />
+            <FontAwesomeIcon
+              icon={faPencilAlt}
+              style={{ width: "20px", cursor: "pointer" }}
+            />
           </Button>{" "}
         </Template>
       ) : (
@@ -127,7 +153,10 @@ const Home = (props) => {
               requestLocationInfo();
             }}
           >
-            <FontAwesomeIcon icon={faPencilAlt} style={{ width: "20px", cursor: "pointer" }} />
+            <FontAwesomeIcon
+              icon={faPencilAlt}
+              style={{ width: "20px", cursor: "pointer" }}
+            />
           </Button>
         </Template>
       )}

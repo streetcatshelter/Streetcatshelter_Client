@@ -14,18 +14,6 @@ const _getRooms =
     }
   };
 
-const _getRoomInfo =
-  (roomId) =>
-  async (dispatch, getState, { history }) => {
-    try {
-      dispatch(loading(true));
-      const { data } = await chatApi.getRoomInfo(roomId);
-      dispatch(setChatInfo(data));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
 const _createRoom =
   (chatuser) =>
   async (dispatch, getState, { history }) => {
@@ -39,17 +27,44 @@ const _createRoom =
     }
   };
 
-const _getAllMessage =
-  (roomId) =>
+const _getMessage =
+  (roomId, page) =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(loading(true));
-      const { data } = await chatApi.getAllMessage(roomId);
+      const { data } = await chatApi.getMessage(roomId, page);
+      console.log(data);
       dispatch(setChatMessage(data));
     } catch (e) {
       console.log(e);
     }
   };
+const _getMoreMessage =
+  (roomId, page) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(loading(true));
+      const { data } = await chatApi.getMoreMessage(roomId, page);
+      console.log(data);
+      dispatch(setChatMessage(data));
+      console.log(page);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+const _getRoomInfo =
+  (roomId) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      dispatch(loading(true));
+      const { data } = await chatApi.getRoomInfo(roomId);
+      dispatch(setChatInfo(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
 const _deleteRoom =
   (roomId, location) =>
   async (dispatch, getState, { history }) => {
@@ -86,9 +101,13 @@ const chat = createSlice({
       state.chatinfo = action.payload;
     },
     setChatMessage: (state, action) => {
-      state.chatmessage = action.payload;
-      state.isLoaded = false;
+      return {
+        ...state,
+        chatmessage: [...action.payload, ...state.chatmessage],
+        isLoaded: false,
+      };
     },
+
     pushChatMessage: (state, action) => {
       state.chatmessage.push(action.payload);
     },
@@ -107,6 +126,10 @@ const chat = createSlice({
     changeToast: (state, action) => {
       state.toast = action.payload;
     },
+
+    resetAllMessage: (state, action) => {
+      state.chatmessage = [];
+    },
   },
 });
 
@@ -114,7 +137,8 @@ export const chatActions = {
   _getRooms,
   _createRoom,
   _getRoomInfo,
-  _getAllMessage,
+  _getMessage,
+  _getMoreMessage,
   _deleteRoom,
 };
 export const {
@@ -125,5 +149,6 @@ export const {
   loading,
   deleteRoom,
   changeToast,
+  resetAllMessage,
 } = chat.actions;
 export default chat;

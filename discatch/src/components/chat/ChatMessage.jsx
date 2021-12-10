@@ -1,6 +1,7 @@
 // LIBRARY
-import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useInView } from "react-intersection-observer";
+import { useDispatch, useSelector } from "react-redux";
 
 // MOMENT
 import "moment/locale/ko";
@@ -9,49 +10,107 @@ import moment from "moment";
 // STYLE
 import styled from "styled-components";
 
-const ChatMessage = () => {
+import { chatActions } from "../../redux/modules/chat";
+import { resetAllMessage } from "../../redux/modules/chat";
+const ChatMessage = ({ roomId, cntChat }) => {
+  const dispatch = useDispatch();
   const commentsEndRef = useRef(null);
   const lastMessages = useSelector((state) => state.chat.chatmessage);
   const nickName = useSelector((state) => state.mypage.userInfo.nickname);
+
+  const Page =
+    cntChat > 0 && cntChat % 20 === 0
+      ? parseInt(cntChat / 20)
+      : cntChat > 0 && cntChat % 20 > 0
+      ? parseInt(cntChat / 20) + 1
+      : 1;
+
+  //무한 스크롤
+  const [page, setPage] = useState(Page);
+
   // 댓글 스크롤 밑으로 이동
+
   const scrollToBottom = () => {
     commentsEndRef.current?.scrollIntoView({ behavior: "auto" });
   };
+
   useEffect(() => {
     scrollToBottom();
   }, [lastMessages]);
+
+  useEffect(() => {
+    dispatch(resetAllMessage());
+    setPage(Page);
+    dispatch(chatActions._getMessage(roomId, Page));
+  }, [roomId]);
+
+  // const [target, setTarget] = useState(null);
+
+  // const useInfinteScroll = ({
+  //   root = null,
+  //   target,
+  //   onIntersect,
+  //   threshold = 0,
+  //   rootMargin = "200px",
+  // }) => {
+  //   useEffect(() => {
+  //     const observer = new IntersectionObserver(onIntersect, {
+  //       root,
+  //       rootMargin,
+  //       threshold,
+  //     });
+  //     if (!target) {
+  //       return;
+  //     }
+  //     observer.observe(target);
+  //     return () => {
+  //       observer.unobserve(target);
+  //     };
+  //   }, [target, root, rootMargin, onIntersect, threshold]);
+  // };
+
+  // useInfinteScroll({
+  //   target,
+  //   onIntersect: ([{ isIntersecting }]) => {
+  //     if (isIntersecting && page !== 1) {
+  //       setPage((prevState) => prevState - 1);
+  //       dispatch(chatActions._getMoreMessage(roomId, page - 1));
+  //     }
+  //   },
+  // });
 
   return (
     <div>
       {lastMessages ? (
         <ChatBox>
           {lastMessages.map((lastmessage, idx) => {
-            console.log(lastmessage);
-            // const createdAt = moment(lastmessage.time).format(
-            //   "YYYY-MM-DD hh:mm"
-            // );
-            // const hourDiff = moment(createdAt).diff(moment(), "hours");
-            // // format 1, 수정한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-            // const updated = moment(createdAt).format(" YYYY-M-D hh:mm");
-            // // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
-            // const recentlyUpdated = moment(createdAt).fromNow();
-            // const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
+            //시간 수정
+            const createdAt = moment(lastmessage.time).format(
+              "YYYY-MM-DD hh:mm"
+            );
+            const hourDiff = moment(createdAt).diff(moment(), "hours");
+            // format 1, 보낸지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
+            const updated = moment(createdAt).format(" YYYY-M-D hh:mm");
+            // format 2, 보낸지 하루 이내일 경우 : 'n 분 전, n 시간 전'
+            const recentlyUpdated = moment(createdAt).fromNow();
+            //시간 경과에 따라 시간포맷변경(하루기준)
+            const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
             return (
               <div key={idx}>
                 {lastmessage.sender === nickName ? (
                   <div>
                     <BubbleTop user="my">{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="my">
-                      <p>{lastmessage.time}</p>
+                      <p>{sendtime}</p>
                       <Bubble user="my">{lastmessage.message} </Bubble>
                     </BubbleBox>
                   </div>
                 ) : (
                   <div>
-                    <BubbleTop>{lastmessage.sender}</BubbleTop>
+                    <BubbleTop>{lastmessage.sender}!!!</BubbleTop>
                     <BubbleBox user="friend">
                       <Bubble user="friend">{lastmessage.message} </Bubble>
-                      <p>{lastmessage.time}</p>
+                      <p>{sendtime}</p>
                     </BubbleBox>
                   </div>
                 )}
@@ -105,22 +164,11 @@ const BubbleBox = styled.div`
       font-size: 8px;
     }
   }
-  @keyframes fadeIn {
-    from {
-      tranform: translateX(10px);
-      opacity: 0;
-    }
-    to {
-      transfrom: none;
-      opacity: 1;
-    }
-  }
-  animation: fadeIn 0.3s linear;
 `;
 const Bubble = styled.div`
   margin: 5px 0;
   display: inline-block;
-  max-width: 300px;
+  max-width: 70%;
   font-size: 12px;
   @media screen and (max-width: 320px) {
     font-size: 10px;
@@ -142,6 +190,17 @@ const Bubble = styled.div`
       float: left;
       clear: both;
       color: #000000;`}
+  @keyframes fadeIn {
+    from {
+      tranform: translateX(10px);
+      opacity: 0;
+    }
+    to {
+      transfrom: none;
+      opacity: 1;
+    }
+  }
+  animation: fadeIn 0.3s linear;
 `;
 
 export default ChatMessage;

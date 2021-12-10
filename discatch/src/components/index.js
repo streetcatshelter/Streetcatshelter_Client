@@ -54,7 +54,7 @@ import Location from "./map/Location";
 
 // CHAT
 import ChatMain from "./chat/ChatMain";
-import ChatRoom from "./chat/ChatRoom";
+import ChatSend from "./chat/ChatSend";
 import ChatMessage from "./chat/ChatMessage";
 
 // LOGIN
@@ -114,7 +114,8 @@ export {
   Location,
   // CHAT
   ChatMain,
-  ChatRoom,
+  ChatSend,
+  // ChatRoom,
   ChatMessage,
   // LOGIN
   GoogleLoginBtn,

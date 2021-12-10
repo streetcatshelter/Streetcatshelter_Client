@@ -29,7 +29,7 @@ const CommunityPost = ({ community }) => {
   } else {
     name = community.nickname;
   }
-  const createdAt = moment(community.createdAt).format("YYYY-M-D hh:mm");
+  const createdAt = moment(community.createdAt).format("YYYY-MM-DD HH:MM");
 
   return (
     <CommunityPostStyle

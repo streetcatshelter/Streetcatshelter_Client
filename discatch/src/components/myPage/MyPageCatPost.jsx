@@ -19,11 +19,11 @@ const MyPageCatPost = ({ LikedCat, location }) => {
 
   // 최근 활동
   const lastActivity =
-    LikedCat && moment(LikedCat.lastActivity).format("YYYY-MM-DD hh:mm");
+    LikedCat && moment(LikedCat.lastActivity).format("YYYY-MM-DD HH:MM");
 
   // 내 활동
   const myActivity =
-    LikedCat && moment(LikedCat.myActivity).format("YYYY-MM-DD hh:mm");
+    LikedCat && moment(LikedCat.myActivity).format("YYYY-MM-DD HH:MM");
 
   // 동네 이름
   let userLocation = LikedCat.location;

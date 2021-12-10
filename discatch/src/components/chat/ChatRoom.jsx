@@ -29,9 +29,8 @@ const ChatRoom = (props) => {
   const chatInfo = useSelector((state) => state.chat.chatinfo);
   const nickname = useSelector((state) => state.mypage.userInfo.nickname);
 
-  //토스트모달
+  //토스트모달 (공백, 특수문자 입력시  경고창)
   const [toastState, setToastState] = useState(false);
-
   useEffect(() => {
     if (toastState) {
       setTimeout(() => {
@@ -40,17 +39,17 @@ const ChatRoom = (props) => {
     }
   }, [toastState]);
 
+  // 메세지 state
   const [message, setMessage] = useState("");
 
   //header 마지막 활동 시간
-  const LastActivity = moment(chatInfo.lastActivity).format(
-    "YYYY-M-D HH:mm:ss"
-  );
+  const LastActivity = moment(chatInfo.lastActivity).format("YYYY-MM-DD HH:MM");
   const hourDiff = moment(LastActivity).diff(moment(), "hours");
-  // format 1, 수정한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-  const updated = moment(LastActivity).format(" YYYY. M. D hh:mm");
-  // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
+  // format 1, 활동한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
+  const updated = moment(LastActivity).format("YYYY-MM-DD HH:MM");
+  // format 2, 활동한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
   const recentlyUpdated = moment(LastActivity).fromNow();
+  //시간 경과에 따라 시간포맷변경(하루기준)
   const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
 
   const sock = new SockJS("http://52.78.241.50/ws-stomp");
@@ -82,8 +81,9 @@ const ChatRoom = (props) => {
                 time: res.time,
                 mine: null,
               };
-
-              dispatch(pushChatMessage(submessage));
+              if (data) {
+                dispatch(pushChatMessage(submessage));
+              }
             },
 
             {
@@ -319,6 +319,7 @@ const InfoBlock = styled.div`
     :nth-child(2) {
       margin: 0;
       font-size: 12px;
+      font-weight: 700;
       color: #999999;
     }
   }

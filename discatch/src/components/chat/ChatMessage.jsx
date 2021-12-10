@@ -14,18 +14,21 @@ import { chatActions } from "../../redux/modules/chat";
 import { resetAllMessage } from "../../redux/modules/chat";
 const ChatMessage = ({ roomId, cntChat }) => {
   const dispatch = useDispatch();
-  const commentsEndRef = useRef(null);
   const lastMessages = useSelector((state) => state.chat.chatmessage);
   const isLoaded = useSelector((state) => state.chat.isLoaded);
   const nickName = useSelector((state) => state.mypage.userInfo.nickname);
-
+  //스크롤 마지막으로 고정하기위한 ref
+  const commentsEndRef = useRef(null);
+  //전체 메세지 수를 통해 전체 페이지를 구함
   const Page =
     cntChat > 0 && cntChat % 20 === 0
       ? parseInt(cntChat / 20)
       : cntChat > 0 && cntChat % 20 > 0
       ? parseInt(cntChat / 20) + 1
       : 1;
+  const [page, setPage] = useState(Page);
 
+  // 스크롤 마지막으로 고정
   const scrollToBottom = () => {
     commentsEndRef.current?.scrollIntoView({ behavior: "auto" });
   };
@@ -34,44 +37,42 @@ const ChatMessage = ({ roomId, cntChat }) => {
     scrollToBottom();
   }, [lastMessages]);
 
+  // 마지막 페이지 요청
   useEffect(() => {
     dispatch(resetAllMessage());
     setPage(Page);
-
     dispatch(chatActions._getMessage(roomId, Page));
   }, [roomId]);
 
-  const [page, setPage] = useState(Page);
-
+  //채팅 무한 스크롤
   const observerRef = useRef();
-
+  //ref연결되어있는 node가 보이면 -1 페이지 요청
   const observer = (node) => {
     if (isLoaded) return;
     if (observerRef.current) observerRef.current.disconnect();
-
     observerRef.current = new IntersectionObserver(([entry]) => {
+      //페이지가 1이면 요청 중지
       if (entry.isIntersecting && page !== 1) {
         setPage((page) => page - 1);
         dispatch(chatActions._getMessage(roomId, page - 1));
       }
     });
-
     node && observerRef.current.observe(node);
   };
 
   return (
     <div>
-      {lastMessages ? (
+      {lastMessages && (
         <ChatBox>
           <div ref={observer} />
           {lastMessages.map((lastmessage, idx) => {
             //시간 수정
             const createdAt = moment(lastmessage.time).format(
-              "YYYY-MM-DD hh:mm"
+              "YYYY-MM-DD HH:MM"
             );
             const hourDiff = moment(createdAt).diff(moment(), "hours");
             // format 1, 보낸지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-            const updated = moment(createdAt).format(" YYYY-M-D hh:mm");
+            const updated = moment(createdAt).format("YYYY-MM-DD HH:MM");
             // format 2, 보낸지 하루 이내일 경우 : 'n 분 전, n 시간 전'
             const recentlyUpdated = moment(createdAt).fromNow();
             //시간 경과에 따라 시간포맷변경(하루기준)
@@ -81,9 +82,7 @@ const ChatMessage = ({ roomId, cntChat }) => {
               <div key={idx}>
                 {lastmessage.sender === nickName ? (
                   <div>
-                    <BubbleTop user="my">
-                      {lastmessage.sender}타겟이다
-                    </BubbleTop>
+                    <BubbleTop user="my">{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="my">
                       <p>{sendtime}</p>
                       <Bubble user="my">{lastmessage.message} </Bubble>
@@ -91,7 +90,7 @@ const ChatMessage = ({ roomId, cntChat }) => {
                   </div>
                 ) : (
                   <div>
-                    <BubbleTop>{lastmessage.sender}타겟이다</BubbleTop>
+                    <BubbleTop>{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="friend">
                       <Bubble user="friend">{lastmessage.message} </Bubble>
                       <p>{sendtime}</p>
@@ -102,8 +101,6 @@ const ChatMessage = ({ roomId, cntChat }) => {
             );
           })}
         </ChatBox>
-      ) : (
-        ""
       )}
       <div ref={commentsEndRef} />
     </div>

@@ -21,7 +21,7 @@ import { history } from "../../redux/configureStore";
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;
   const createdAt = diary.createdAt
-    ? moment(diary.createdAt).format("YYYY-MM-DD hh:mm")
+    ? moment(diary.createdAt).format("YYYY-MM-DD HH:MM")
     : "";
 
   return (

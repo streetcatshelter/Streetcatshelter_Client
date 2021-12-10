@@ -30,7 +30,7 @@ const ChatMain = (props) => {
           <>
             {rooms.map((room, idx) => {
               const LastActivity = moment(room.lastActivity).format(
-                "YYYY-M-D hh:mm"
+                "YYYY-MM-DD HH:MM"
               );
               return (
                 <ChatRoom key={idx}>

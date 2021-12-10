@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 const NoticeDesc = () => {
   const noticeDetail = useSelector((state) => state.mypage.noticedetail);
-  const modifiedAt = moment(noticeDetail.modifiedAt).format("YYYY-M-D");
+  const modifiedAt = moment(noticeDetail.modifiedAt).format("YYYY-MM-DD");
 
   if (!noticeDetail) {
     return <div></div>;

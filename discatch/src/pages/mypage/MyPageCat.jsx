@@ -37,8 +37,8 @@ const MyPage = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
-    // 사용자가 마지막 요소를 보고 있고 catList의 length가 10의 배수인 경우
-    if (inView && likedAllCat.length > 9 && likedAllCat.length / 10 === page) {
+    // 사용자가 마지막 요소를 볼때
+    if (inView) {
       setPage((prevState) => prevState + 1);
       dispatch(mypageActions._getMoreLikedAllCat(page + 1));
     } else {
@@ -64,8 +64,12 @@ const MyPage = (props) => {
             <div>
               {likedAllCat && likedAllCat.length > 0 ? (
                 likedAllCat.map((LikedCat, idx) => {
-                  return (
+                  return idx === likedAllCat.length - 1 ? (
                     <div style={{ width: "100%" }} key={idx} ref={ref}>
+                      <MyPageCatPost LikedCat={LikedCat} location={location} />
+                    </div>
+                  ) : (
+                    <div style={{ width: "100%" }} key={idx}>
                       <MyPageCatPost LikedCat={LikedCat} location={location} />
                     </div>
                   );

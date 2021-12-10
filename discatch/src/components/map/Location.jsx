@@ -100,7 +100,7 @@ const Location = (props) => {
                       justify-content: center; 
                       align-items: center;">
             <button 
-              onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
+              onclick="location.href='/catdetail/calendar/${villageKeyword}/${position[i].catId}/2'" 
               style="width: 70px;
                      height: 70px;
                      box-shadow: 3px 3px lightgray;
@@ -291,7 +291,7 @@ const Location = (props) => {
                         justify-content: center; 
                         align-items: center;">
               <button 
-                onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
+                onclick="location.href='/catdetail/calendar/${villageKeyword}/${position[i].catId}/2'" 
                 style="width: 70px;
                       height: 70px;
                       box-shadow: 3px 3px lightgray;
@@ -375,12 +375,15 @@ const Location = (props) => {
 
   // 모든 고양이 기본 정보 가져오기
   useEffect(() => {
+    setModal(0);
     dispatch(__getAllCatLocation(location));
   }, [location, dispatch]);
 
   // 고양이 지도에 표시하기
   useEffect(() => {
-    showCats();
+    if (catList && position && location) {
+      showCats();
+    }
   }, [catList, position, location, dispatch]);
   
   // 토스트 모달
@@ -496,7 +499,7 @@ const Location = (props) => {
                                   justify-content: center; 
                                   align-items: center;">
                         <button 
-                          onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
+                          onclick="location.href='/catdetail/calendar/${villageKeyword}/${position[i].catId}/2'" 
                           style="width: 70px;
                                 height: 70px;
                                 box-shadow: 3px 3px lightgray;

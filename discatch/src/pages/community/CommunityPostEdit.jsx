@@ -195,14 +195,6 @@ const CommunityPostEdit = (props) => {
     }
   }, [prePhotoState]);
 
-  useEffect(() => {
-    if (editState) {
-      setTimeout(() => {
-        setEditState(false);
-      }, 1500);
-    }
-  }, [editState]);
-
   return (
     <Template props={props}>
       <SecondHeader title="커뮤니티글 수정" />

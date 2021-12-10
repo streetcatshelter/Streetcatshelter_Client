@@ -50,7 +50,7 @@ export const myPageApi = {
     instance.get(`/mypage/calendar?year=${year}&month=${month}`),
   getCalendarDetail: (year, month, elm) =>
     instance.get(`/mypage/calendar/day/${elm}?year=${year}&month=${month}`),
-  getLikedAllCat: (page) => instance.get(`/mypage/mycat/?page=${page}&size=20`),
+  getLikedAllCat: () => instance.get(`/mypage/mycat/?page=1&size=10`),
   getMoreLikedAllCat: (page) =>
     instance.get(`/mypage/mycat/?page=${page}&size=10`),
   getUserInfo: () => instance.get("/mypage/user/information"),

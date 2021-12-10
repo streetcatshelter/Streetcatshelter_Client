@@ -27,12 +27,15 @@ const UserInfo = () => {
   const [editToastState, setEditToastState] = useState(false);
   const [secondToastState, setSecondToastState] = useState(false);
   const [userToastState, setUserToastState] = useState(false);
+  const [maxTextState, setMaxTextState] = useState(false);
   
   // 닉네임 수정하기
   const changeNickName = (e) => {
-    const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
+    const regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\ '\"\\(\=]/gi;
     if (regExp.test(e.target.value) || e.target.value.search(/\s/) !== -1) {
       setEditToastState(true);
+    } else if (e.target.value.length > 8) {
+      setMaxTextState(true);
     } else {
       setNickName(e.target.value);
     }
@@ -77,23 +80,15 @@ const UserInfo = () => {
       setTimeout(() => {
         setUserToastState(false);
       }, 1500);
+    } else if (maxTextState) {
+      setTimeout(() => {
+        setMaxTextState(false);
+      }, 1500);
     }
-  }, [toastState, secondToastState, editToastState, userToastState]);
+  }, [toastState, secondToastState, editToastState, userToastState, maxTextState]);
 
   return (
     <React.Fragment>
-      {toastState ? (
-        <Toast message="닉네임을 입력해주세요!" />
-      ) : secondToastState ? (
-        <Toast message="동네를 입력해주세요!" />
-      ) : editToastState ? (
-        <Toast message="특수문자 및 공백을 사용할 수 없습니다." />
-      ) : userToastState ? (
-        <Toast message="사용자 정보 수정에 실패했어요!" message2="다시 시도해주세요!"/>
-      ) : (
-        ""
-      )}
-
       <Wrapper>
         <Inner>
           <p>닉네임</p>
@@ -101,12 +96,12 @@ const UserInfo = () => {
             type="text"
             placeholder="닉네임을 입력해주세요."
             onChange={changeNickName}
-            defaultValue={nickName}
+            value={nickName ? nickName : ''}
           />
         </Inner>
         <Inner>
           <p>프로필사진</p>
-          <ImageLabel for="imgFile">
+          <ImageLabel htmlFor="imgFile">
             <p>프로필 사진 업로드하기</p>
             <Upload />
           </ImageLabel>
@@ -139,6 +134,7 @@ const UserInfo = () => {
                 };
                 return (
                   <div
+                    key={key}
                     style={{ display: "flex", width: "90px", height: "20px" }}
                   >
                     <div> {village.split(" ")[2]}</div>
@@ -165,6 +161,11 @@ const UserInfo = () => {
           </button>
         </Inner>
       </Wrapper>
+      {toastState && <Toast message="닉네임을 입력해주세요!" />}
+      {secondToastState && <Toast message="동네를 입력해주세요!" />}
+      {editToastState && <Toast message="특수문자 및 공백을 사용할 수 없습니다." />}
+      {userToastState && <Toast message="사용자 정보 수정에 실패했어요!" message2="다시 시도해주세요!" />}
+      {maxTextState && <Toast message="최대 8글자까지 입력 가능해요!" />}
     </React.Fragment>
   );
 };

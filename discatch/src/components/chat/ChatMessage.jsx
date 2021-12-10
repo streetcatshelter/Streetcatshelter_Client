@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,6 +16,7 @@ const ChatMessage = ({ roomId, cntChat }) => {
   const dispatch = useDispatch();
   const commentsEndRef = useRef(null);
   const lastMessages = useSelector((state) => state.chat.chatmessage);
+  const isLoaded = useSelector((state) => state.chat.isLoaded);
   const nickName = useSelector((state) => state.mypage.userInfo.nickname);
 
   const Page =
@@ -24,11 +25,6 @@ const ChatMessage = ({ roomId, cntChat }) => {
       : cntChat > 0 && cntChat % 20 > 0
       ? parseInt(cntChat / 20) + 1
       : 1;
-
-  //무한 스크롤
-  const [page, setPage] = useState(Page);
-
-  // 댓글 스크롤 밑으로 이동
 
   const scrollToBottom = () => {
     commentsEndRef.current?.scrollIntoView({ behavior: "auto" });
@@ -41,48 +37,33 @@ const ChatMessage = ({ roomId, cntChat }) => {
   useEffect(() => {
     dispatch(resetAllMessage());
     setPage(Page);
+
     dispatch(chatActions._getMessage(roomId, Page));
   }, [roomId]);
 
-  // const [target, setTarget] = useState(null);
+  const [page, setPage] = useState(Page);
 
-  // const useInfinteScroll = ({
-  //   root = null,
-  //   target,
-  //   onIntersect,
-  //   threshold = 0,
-  //   rootMargin = "200px",
-  // }) => {
-  //   useEffect(() => {
-  //     const observer = new IntersectionObserver(onIntersect, {
-  //       root,
-  //       rootMargin,
-  //       threshold,
-  //     });
-  //     if (!target) {
-  //       return;
-  //     }
-  //     observer.observe(target);
-  //     return () => {
-  //       observer.unobserve(target);
-  //     };
-  //   }, [target, root, rootMargin, onIntersect, threshold]);
-  // };
+  const observerRef = useRef();
 
-  // useInfinteScroll({
-  //   target,
-  //   onIntersect: ([{ isIntersecting }]) => {
-  //     if (isIntersecting && page !== 1) {
-  //       setPage((prevState) => prevState - 1);
-  //       dispatch(chatActions._getMoreMessage(roomId, page - 1));
-  //     }
-  //   },
-  // });
+  const observer = (node) => {
+    if (isLoaded) return;
+    if (observerRef.current) observerRef.current.disconnect();
+
+    observerRef.current = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && page !== 1) {
+        setPage((page) => page - 1);
+        dispatch(chatActions._getMessage(roomId, page - 1));
+      }
+    });
+
+    node && observerRef.current.observe(node);
+  };
 
   return (
     <div>
       {lastMessages ? (
         <ChatBox>
+          <div ref={observer} />
           {lastMessages.map((lastmessage, idx) => {
             //시간 수정
             const createdAt = moment(lastmessage.time).format(
@@ -95,11 +76,14 @@ const ChatMessage = ({ roomId, cntChat }) => {
             const recentlyUpdated = moment(createdAt).fromNow();
             //시간 경과에 따라 시간포맷변경(하루기준)
             const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
+
             return (
               <div key={idx}>
                 {lastmessage.sender === nickName ? (
                   <div>
-                    <BubbleTop user="my">{lastmessage.sender}</BubbleTop>
+                    <BubbleTop user="my">
+                      {lastmessage.sender}타겟이다
+                    </BubbleTop>
                     <BubbleBox user="my">
                       <p>{sendtime}</p>
                       <Bubble user="my">{lastmessage.message} </Bubble>
@@ -107,7 +91,7 @@ const ChatMessage = ({ roomId, cntChat }) => {
                   </div>
                 ) : (
                   <div>
-                    <BubbleTop>{lastmessage.sender}!!!</BubbleTop>
+                    <BubbleTop>{lastmessage.sender}타겟이다</BubbleTop>
                     <BubbleBox user="friend">
                       <Bubble user="friend">{lastmessage.message} </Bubble>
                       <p>{sendtime}</p>

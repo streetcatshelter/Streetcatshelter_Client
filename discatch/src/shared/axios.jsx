@@ -35,7 +35,11 @@ export const chatApi = {
   getRooms: () => instance.get(`/api/chat/rooms`),
   getRoomInfo: (roomId) => instance.get(`/api/chat/enter/${roomId}`),
   createRoom: (chatuser) => instance.post("/api/chat/create", chatuser),
-  getAllMessage: (roomId) => instance.get(`/api/chat/message/${roomId}`),
+
+  getMessage: (roomId, page) =>
+    instance.get(`/api/chat/message/${roomId}?page=${page}&size=20`),
+  getMoreMessage: (roomId, page) =>
+    instance.get(`/api/chat/message/${roomId}?page=${page}&size=20`),
   deleteRoom: (roomId) => instance.put(`/api/chat/quit/${roomId}`),
 };
 
@@ -46,7 +50,7 @@ export const myPageApi = {
     instance.get(`/mypage/calendar?year=${year}&month=${month}`),
   getCalendarDetail: (year, month, elm) =>
     instance.get(`/mypage/calendar/day/${elm}?year=${year}&month=${month}`),
-  getLikedAllCat: () => instance.get(`/mypage/mycat/?page=1&size=10`),
+  getLikedAllCat: (page) => instance.get(`/mypage/mycat/?page=${page}&size=20`),
   getMoreLikedAllCat: (page) =>
     instance.get(`/mypage/mycat/?page=${page}&size=10`),
   getUserInfo: () => instance.get("/mypage/user/information"),

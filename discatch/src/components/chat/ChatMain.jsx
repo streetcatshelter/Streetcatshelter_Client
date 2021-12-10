@@ -38,7 +38,13 @@ const ChatMain = (props) => {
                     <LeftBox>
                       <ProfileImg
                         onClick={() => {
-                          history.push(`api/chat/enter/${room.roomId}`);
+                          history.push({
+                            pathname: `api/chat/enter/${room.roomId}`,
+                            state: {
+                              location: location,
+                              cntChat: room.cntChat,
+                            },
+                          });
                         }}
                         src={room.opponentImage}
                         alt={room.opponentImage}
@@ -48,7 +54,13 @@ const ChatMain = (props) => {
                       <InfoHead>
                         <InfoInner
                           onClick={() => {
-                            history.push(`api/chat/enter/${room.roomId}`);
+                            history.push({
+                              pathname: `api/chat/enter/${room.roomId}`,
+                              state: {
+                                location: location,
+                                cntChat: room.cntChat,
+                              },
+                            });
                           }}
                         >
                           <p>{room.opponent}</p>
@@ -82,7 +94,10 @@ const ChatMain = (props) => {
                         onClick={() => {
                           history.push({
                             pathname: `api/chat/enter/${room.roomId}`,
-                            state: { location },
+                            state: {
+                              location: location,
+                              cntChat: room.cntChat,
+                            },
                           });
                         }}
                       >

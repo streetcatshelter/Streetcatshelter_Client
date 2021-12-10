@@ -31,6 +31,10 @@ const Header = (props) => {
   const firstLocation = locationA.state?.location;
   const category = locationA.pathname.split("/")[3];
 
+  // 토스트 모달
+  const [toastState, setToastState] = useState(false);
+  const chatToastState = useSelector((state) => state.chat.toast);
+
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   location = userLocation ? userLocation : firstLocation;
 
@@ -144,6 +148,8 @@ const Header = (props) => {
         pathname: `/community/${location}/${category}`,
         state: { location },
       });
+    } else if (path === "/catdetail/:menu/:village/:catId/2") {
+      history.push({ pathname: `/map/${location}`, state: { location } });
     } else if (path === "/catdetail/:menu/:village/:catId/1") {
       history.push({ pathname: "/mypage", state: { location } });
     } else if (path === "/catdetail/:menu/:village/:catId") {
@@ -158,8 +164,7 @@ const Header = (props) => {
     }
   };
 
-  const [toastState, setToastState] = useState(false);
-  const chatToastState = useSelector((state) => state.chat.toast);
+  // 토스트 모달 
   useEffect(() => {
     if (toastState) {
       setTimeout(() => {

@@ -100,7 +100,7 @@ const Location = (props) => {
                       justify-content: center; 
                       align-items: center;">
             <button 
-              onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
+              onclick="location.href='/catdetail/calendar/${villageKeyword}/${position[i].catId}/2'" 
               style="width: 70px;
                      height: 70px;
                      box-shadow: 3px 3px lightgray;
@@ -291,7 +291,7 @@ const Location = (props) => {
                         justify-content: center; 
                         align-items: center;">
               <button 
-                onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
+                onclick="location.href='/catdetail/calendar/${villageKeyword}/${position[i].catId}/2'" 
                 style="width: 70px;
                       height: 70px;
                       box-shadow: 3px 3px lightgray;
@@ -496,7 +496,7 @@ const Location = (props) => {
                                   justify-content: center; 
                                   align-items: center;">
                         <button 
-                          onclick="location.href='/catdetail/${villageKeyword}/${position[i].catId}/2'" 
+                          onclick="location.href='/catdetail/calendar/${villageKeyword}/${position[i].catId}/2'" 
                           style="width: 70px;
                                 height: 70px;
                                 box-shadow: 3px 3px lightgray;

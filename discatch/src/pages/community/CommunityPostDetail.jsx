@@ -67,15 +67,6 @@ const CommunityPostDetail = (props) => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
 
-  // 토스트 모달
-  useEffect(() => {
-    if (deleteState) {
-      setTimeout(() => {
-        setDeleteState(false);
-      }, 1500);
-    }
-  }, [deleteState]);
-
   return (
     <Template props={props}>
       <SecondSpinner visible={isLoaded} />

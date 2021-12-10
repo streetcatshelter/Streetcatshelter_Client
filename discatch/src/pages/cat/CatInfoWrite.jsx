@@ -91,7 +91,7 @@ const CatInfoWrite = (props) => {
 
   // 고양이 이름 정규표현식
   const $catName = (e) => {
-    const regExp = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
+    const regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\ '\"\\(\=]/gi;
     if (regExp.test(e.target.value) || e.target.value.search(/\s/) !== -1) {
       setEditToastState(true);
     } else if (e.target.value.length > 8) {

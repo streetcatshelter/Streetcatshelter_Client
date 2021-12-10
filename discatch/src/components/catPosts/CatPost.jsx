@@ -18,10 +18,12 @@ const CatPost = ({ cat, path, location }) => {
   const catId = cat.catId;
   const userLiked = cat.userLiked;
 
+  // 고양이 기본 정보 게시물 좋아요 토글
   const likeToggle = () => {
     dispatch(__catLike(catId, path));
   };
 
+  // 고양이 게시물 상세보기
   const catDetailBtn = () => {
     if (path !== "detail") {
       history.push({
@@ -34,19 +36,13 @@ const CatPost = ({ cat, path, location }) => {
   return (
     <CatPostStyle>
       <LeftBox>
-        <CatImage
-          src={cat.catImage}
-          alt={cat.catImage}
-          onClick={catDetailBtn}
-        />
+        <CatImage src={cat.catImage} alt={cat.catImage} onClick={catDetailBtn} />
       </LeftBox>
 
       <RightBox>
         <Header>
           <div style={{ display: "flex" }}>
-            <p onClick={catDetailBtn}>
-              이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}
-            </p>
+            <p onClick={catDetailBtn}>이름: {cat.catName ? cat.catName : "이름을 지어주세요!"}</p>
 
             <p onClick={catDetailBtn}> 중성화: {cat.neutering}</p>
           </div>

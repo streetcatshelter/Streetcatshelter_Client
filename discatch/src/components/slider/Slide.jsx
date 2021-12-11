@@ -4,7 +4,7 @@ import React from "react";
 // STYLE
 import styled from "styled-components";
 
-// ICON
+// IMAGES
 import onboadingImg1 from "../../styles/images/map_list.gif";
 import onboadingImg2 from "../../styles/images/CommunityOnboarding.png";
 import onboadingImg3 from "../../styles/images/ChatOnboarding.png";

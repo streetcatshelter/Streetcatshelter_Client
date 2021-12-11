@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import store, { history } from "./redux/configureStore";
-import "./styles/fonts/notosanskr/notosanskr.css";
 
 ReactDOM.render(
   <Provider store={store}>

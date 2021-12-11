@@ -71,6 +71,7 @@ const CatDetail = (props) => {
     dispatch(__getComment(catId));
   }, [catId, commentList.length, dispatch]);
 
+  //삭제시 확인 토스트
   useEffect(() => {
     if (deleteToast) {
       setTimeout(() => {
@@ -145,7 +146,7 @@ const CatDetail = (props) => {
             clickEvent={() => {
               history.push({
                 pathname: `/map/${location?.split(" ")[2]}/${catId}`,
-                state: { catId, location : location?.split(" ")[2] },
+                state: { catId, location: location?.split(" ")[2] },
               });
             }}
           >

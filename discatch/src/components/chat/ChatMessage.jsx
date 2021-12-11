@@ -38,11 +38,14 @@ const ChatMessage = ({ roomId, cntChat }) => {
   }, [lastMessages]);
 
   // 마지막 페이지 요청
+  //페이지가 없을경우 undefined로 요청가는것을 방지하기위한 조건문 추가
   useEffect(() => {
     dispatch(resetAllMessage());
-    setPage(Page);
-    dispatch(chatActions._getMessage(roomId, Page));
-  }, [roomId]);
+    if (Page) {
+      setPage(Page);
+      dispatch(chatActions._getMessage(roomId, Page));
+    }
+  }, [roomId, Page]);
 
   //채팅 무한 스크롤
   const observerRef = useRef();

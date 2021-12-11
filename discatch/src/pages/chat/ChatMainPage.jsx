@@ -15,9 +15,10 @@ import { useDispatch } from "react-redux";
 import { chatActions } from "../../redux/modules/chat";
 
 const ChatMainPage = (props) => {
+  const dispatch = useDispatch();
   const isLoaded = useSelector((state) => state.chat.isLoaded);
 
-  const dispatch = useDispatch();
+  //채팅리스트가져오기
   useEffect(() => {
     dispatch(chatActions._getRooms());
   }, []);

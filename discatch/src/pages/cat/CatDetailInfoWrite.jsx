@@ -115,7 +115,7 @@ const CatDetailInfoWrite = (props) => {
       history.push(`/catdetail/diary/${location}/${catId}`);
     }
   };
-
+  //태그 입력
   const publish = (catTag) => {
     if (catTag !== "") {
       dispatch(addHashTag(catTag));
@@ -124,7 +124,7 @@ const CatDetailInfoWrite = (props) => {
       setTagState(true);
     }
   };
-
+  //태그삭제
   const DeleteHashTag = (hashtag) => {
     dispatch(deleteHashTag(hashtag));
   };
@@ -134,6 +134,7 @@ const CatDetailInfoWrite = (props) => {
     dispatch(imgActions.setInitialState());
   }, [dispatch]);
 
+  //수정모드시 태그 가져오기
   useEffect(() => {
     dispatch(setInitialState([]));
     if (edit) {

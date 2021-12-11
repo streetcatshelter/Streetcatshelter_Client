@@ -34,7 +34,7 @@ const ChatRoomPage = (props) => {
   const nickname = useSelector((state) => state.mypage.userInfo.nickname);
   const isLoaded = useSelector((state) => state.chat.isLoaded);
   const location = props.location.state?.location;
-  const cntChat = props.location.state?.cntChat;
+  const cntChat = useSelector((state) => state.chat.chatinfo?.cntChat);
   const roomId = props.match.params.roomId;
 
   //header 마지막 활동 시간
@@ -47,20 +47,16 @@ const ChatRoomPage = (props) => {
   //시간 경과에 따라 시간포맷변경(하루기준)
   const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
 
-  const sock = new SockJS("http://52.78.241.50/ws-stomp");
-  const ws = Stomp.over(sock);
-
+  //채팅방 정보 가져오기
   useEffect(() => {
     dispatch(chatActions._getRoomInfo(roomId));
   }, [roomId, dispatch]);
 
-  useEffect(() => {
-    wsConnectSubscribe();
-    return () => {
-      wsDisConnectUnsubscribe();
-    };
-  }, []);
+  //소켓연결
+  const sock = new SockJS("http://52.78.241.50/ws-stomp");
+  const ws = Stomp.over(sock);
 
+  //랜더시 구독시작 뒤로가기시 소켓연결 구독해제
   useEffect(() => {
     wsConnectSubscribe();
     return () => {
@@ -71,7 +67,7 @@ const ChatRoomPage = (props) => {
   // 채팅방시작하기, 채팅방 클릭 시 roomId에 해당하는 방을 구독
   const wsConnectSubscribe = () => {
     try {
-      // ws.debug = null;
+      ws.debug = null;
       ws.connect(
         {
           token: token,
@@ -130,6 +126,7 @@ const ChatRoomPage = (props) => {
     }, 0.1);
   };
 
+  //메세지 발신시 구독 요청
   const sendMessage = (message) => {
     try {
       // send할 데이터
@@ -139,9 +136,9 @@ const ChatRoomPage = (props) => {
         roomId: roomId,
         nickname: nickname,
       };
-      // console.log(data);
+
       waitForConnection(ws, () => {
-        // ws.debug = null;
+        ws.debug = null;
 
         ws.send(
           "/pub/api/chat/message",

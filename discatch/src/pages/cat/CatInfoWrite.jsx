@@ -55,7 +55,7 @@ const CatInfoWrite = (props) => {
     dispatch(imgActions.setFile(file));
     setFileUrl(imageUrl);
   };
-
+  //중성화 셀렉트박스
   const Options = [
     { key: 1, value: "중성화 여부" },
     { key: 2, value: "알수없음" },
@@ -126,7 +126,7 @@ const CatInfoWrite = (props) => {
           );
     }
   };
-
+  //해쉬태그 입력하기
   const publish = (catTag) => {
     if (catTag !== "") {
       dispatch(addHashTag(catTag));
@@ -135,11 +135,11 @@ const CatInfoWrite = (props) => {
       setTagState(true);
     }
   };
-
+  //해쉬태그 삭제
   const DeleteHashTag = (hashtag) => {
     dispatch(deleteHashTag(hashtag));
   };
-
+  //수정모드시 태그 셋팅
   useEffect(() => {
     dispatch(setInitialState([]));
     if (edit) {
@@ -324,13 +324,6 @@ const CatInfoWrite = (props) => {
             <Text fontWeight="bold"> 2. 중성화 여부 </Text>
             <Select value={neutering} onChange={$neutering}>
               {Options.map((item, index) => {
-                // if (item.key === 1) {
-                //   return (
-                //     <option key={item.key} value={item.value} disabled>
-                //       {item.value}
-                //     </option>
-                //   );
-                // } else {
                 return (
                   <option key={item.key} value={item.value}>
                     {item.value}
@@ -342,7 +335,7 @@ const CatInfoWrite = (props) => {
           </Grid>
           <Grid margin="10px auto">
             <Text fontWeight="bold"> 3. 해쉬태그 </Text>
-            <Text margin="0px 5px" size="10px">
+            <Text margin="0px 5px" size="12px">
               "빈칸"없이 입력 후 엔터를 치세요.
               <br /> 해쉬태그를 삭제하고싶으시면 생성된 태그를 클릭해주세요!
             </Text>

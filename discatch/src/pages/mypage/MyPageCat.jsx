@@ -24,17 +24,20 @@ const MyPage = (props) => {
   const location = props.location.state?.location;
   const likedAllCat = useSelector((state) => state.mypage.likedAllCat);
   const isLoaded = useSelector((state) => state.mypage.itemLoaded);
-  const [page, setPage] = useState(1);
-  const [ref, inView] = useInView({
-    threshold: 0,
-    triggerOnce: true,
-  });
 
+  //좋아요를 누른 고양이 가져오기
   useEffect(() => {
     dispatch(resetList());
     setPage(1);
     dispatch(mypageActions._getLikedAllCat());
   }, [dispatch]);
+
+  //무한스크롤
+  const [page, setPage] = useState(1);
+  const [ref, inView] = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     // 사용자가 마지막 요소를 볼때

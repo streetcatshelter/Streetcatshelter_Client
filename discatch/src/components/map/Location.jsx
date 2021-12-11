@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 // STYLE
 import styled, { css } from "styled-components";
 import { X } from "react-feather";
+import { RefreshCcw } from "react-feather";
 
 // ELEMENTS
 import { Button } from "../../elements";
@@ -50,8 +51,9 @@ const Location = (props) => {
 
   // 토스트 모달
   const [toastState, setToastState] = useState(false);
+  const [searchToastState, setSearchToastState] = useState(false);
   const [keywordToastState, setKeywordToastState] = useState(false);
-
+  
   // 고양이 지도에 표시하기
   const showCats = () => {
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
@@ -201,6 +203,7 @@ const Location = (props) => {
   const CreateKeyword = () => {
     setSearchKeyword("");
     if (searchKeyword === "") {
+      setSearchToastState(true);
       return;
     }
     dispatch(searchKeywordMap(searchKeyword));
@@ -396,8 +399,12 @@ const Location = (props) => {
       setTimeout(() => {
         setKeywordToastState(false);
       }, 1500);
+    } else if (searchToastState) {
+      setTimeout(() => {
+        setSearchToastState(false);
+      }, 1500);
     }
-  }, [toastState, keywordToastState]);
+  }, [toastState, keywordToastState, searchToastState]);
 
   return (
     <MapWrap>
@@ -411,11 +418,22 @@ const Location = (props) => {
           margin: "10px auto",
         }}
       >
+        <RefreshCcw 
+          onClick={()=>history.go(0)}
+          size="50"
+          style={{
+            position:"relative", 
+            top: "50px", 
+            zIndex:'2', 
+            width:'40px', 
+            cursor: "pointer"
+          }}
+        />
         <input
           style={{
             width: "250px",
             border: "none",
-            marginLeft: "10px",
+            marginRight: "20px",
           }}
           type="text"
           placeholder="검색어를 입력하세요."
@@ -622,9 +640,10 @@ const Location = (props) => {
         <Toast message="검색 결과가 없습니다." />
       ) : toastState ? (
         <Toast message="지도에 위치를 표시해 주세요!" />
-      ) : (
-        ""
-      )}
+      ) : searchToastState ? (
+        <Toast message="검색어를 입력해 주세요!" />
+      ) : ""
+      }
     </MapWrap>
   );
 };

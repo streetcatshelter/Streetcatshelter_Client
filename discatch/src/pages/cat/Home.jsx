@@ -141,7 +141,13 @@ const Home = (props) => {
           >
             <FontAwesomeIcon
               icon={faPencilAlt}
-              style={{ width: "20px", cursor: "pointer" }}
+              style={{
+                position: "relative",
+                width: "20px",
+                cursor: "pointer",
+                height: "20px",
+                marginBottom: "10px",
+              }}
             />
           </Button>{" "}
         </Template>
@@ -156,7 +162,13 @@ const Home = (props) => {
           >
             <FontAwesomeIcon
               icon={faPencilAlt}
-              style={{ width: "20px", cursor: "pointer" }}
+              style={{
+                position: "relative",
+                width: "20px",
+                cursor: "pointer",
+                height: "20px",
+                marginBottom: "10px",
+              }}
             />
           </Button>
         </Template>

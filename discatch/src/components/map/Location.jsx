@@ -15,7 +15,7 @@ import { X } from "react-feather";
 import { RefreshCcw } from "react-feather";
 
 // ELEMENTS
-import { Button } from "../../elements";
+import { Button, Grid } from "../../elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -408,14 +408,19 @@ const Location = (props) => {
 
   return (
     <MapWrap>
-      <div
-        style={{
-          display: "flex",
-          border: "1px solid #FBD986",
-          width: "300px",
-          height: "30px",
-          borderRadius: "15px",
-          margin: "10px auto",
+      <Grid
+        addstyle={() => {
+          return css`
+            display: flex;
+            width: 300px;
+            border: 1px solid #FBD986;
+            height: 30px;
+            border-radius: 15px;
+            margin: 10px auto;
+            @media screen and (max-width: 280px) {
+              width: 250px;
+            }
+          `;
         }}
       >
         <RefreshCcw 
@@ -434,6 +439,7 @@ const Location = (props) => {
             width: "250px",
             border: "none",
             marginRight: "20px",
+            outline: "none",
           }}
           type="text"
           placeholder="검색어를 입력하세요."
@@ -446,6 +452,7 @@ const Location = (props) => {
             backgroundColor: "#FBD986",
             width: "50px",
             borderRadius: "15px",
+            cursor: "pointer",
           }}
           type="submit"
           onClick={CreateKeyword}
@@ -455,13 +462,12 @@ const Location = (props) => {
               margin: "5px auto",
               textAlign: "center",
               fontWeight: "900",
-              cursor: "pointer",
             }}
           >
             검색
           </p>
         </button>
-      </div>
+      </Grid>
       <div id="myMap" style={{ width: "100%", height: "500px" }} />
 
       {modal ? (

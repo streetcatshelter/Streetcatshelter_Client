@@ -6,17 +6,20 @@ disCATch Link:
 
 ## **🔍 프로젝트 소개**
 
-<p>무심코 동네에서 봤던 고양이들을 자주 보고싶은 마음이 드셨던적이 있으신가요? disCATch는 그런 분들을 위해 고양이를 제보하고 고양이 돌봄을 공유하는 서비스입니다. 함께 좋은 마음으로 고양이를 돌보아 어제보다 더 나은 묘생권을 위해 오늘부터 <span style="font-weight: bold">disCATch</span> 하세요!</p>
-![ogLogo](https://user-images.githubusercontent.com/85476908/145684586-29d700ca-8cb5-4d43-96fe-f970e9a95839.png)
+<p>무심코 동네에서 봤던 고양이들을 자주 보고싶은 마음이 드셨던적이 있으신가요? <br/>disCATch는 그런 분들을 위해 고양이를 제보하고 고양이 돌봄을 공유하는 서비스입니다. <br/>함께 좋은 마음으로 고양이를 돌보아 어제보다 더 나은 묘생권을 위해 오늘부터<b>disCATch</b> 하세요!
 
-### **프론트엔드**
+<img src="https://user-images.githubusercontent.com/85476908/145684737-5030a8d7-7643-436a-9fb0-72a713d3ef34.png" /> 
 
+### **👨‍👨‍👦‍👦팀원소개**
+
+#### **프론트엔드**
+[React]
 - 이선민 : https://github.com/sunm-in
 - 정진우 : https://github.com/happyeveryone96
 - 최수임 : https://github.com/leechoiswim1
 
-### **백엔드**
-
+#### **백엔드**
+[Spring]
 - BackEnd github : https://github.com/streetcatshelter/Streetcatshelter_Server
 - 김인섭 : https://github.com/Inseobkim3053
 - 채병훈 : https://github.com/timchae
@@ -53,16 +56,14 @@ disCATch Link:
 <img src="https://img.shields.io/badge/HTML5-CA4245.svg?&style=for-the-badge&logo=HTML5&logoColor=white" /> &nbsp;
 <img src="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white" /> &nbsp;
 
-## **📌 주요 기능**
-
-<!-- 튜토리얼 & 소셜로그인 -->
-<h3 style="font-weight: bold"></h3>
+## ** 🐱서비스 소개🐱 **
+## **📌 주요 기능 **
+<!-- 온보딩 & 소셜로그인 -->
+  
 
 <h3 style="font-weight: bold">온보딩</h3>
 
-<p>
 
-</p>
 
 <h3 style="font-weight: bold">소셜로그인</h3>
 
@@ -91,7 +92,7 @@ disCATch Link:
 <!-- 지도 & 채팅 -->
 <h3 style="font-weight: bold">지도 & 채팅</h3>
 
-지도, 채팅방 목록, 채팅방, 프로필보기/채팅방삭제
+지도, 지도 검색, 채팅기능, 프로필보기/채팅방삭제
 
 <br>
 
@@ -100,3 +101,6 @@ disCATch Link:
 
 내정보(고양이보기), 내정보(내활동), 내정보(공지사항), 내활동-캘린더모달 <br>
 공지사항 상세페이지, 내정보(프로필수정), 프로필 수정페이지
+
+<!-- 토스트 -->
+<h3 style="font-weight: bold">토스트</h3>

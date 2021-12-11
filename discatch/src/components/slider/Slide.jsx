@@ -105,14 +105,14 @@ const InnerBox = styled.div`
   img {
     margin: -10px auto 5px auto;
     width: 280px;
-    height: 530px;
+    height: 500px;
     @media screen and (max-width: 375px) {
       width: 230px;
-      height: 436px;
+      height: 410px;
     }
     @media screen and (max-width: 320px) {
-      width: 210;
-      height: 398px;
+      width: 210px;
+      height: 374px;
     }
   }
   p {

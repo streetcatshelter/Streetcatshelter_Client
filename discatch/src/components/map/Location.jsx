@@ -11,8 +11,6 @@ import { useLocation } from "react-router-dom";
 
 // STYLE
 import styled, { css } from "styled-components";
-import { X } from "react-feather";
-import { RefreshCcw } from "react-feather";
 
 // ELEMENTS
 import { Button, Grid } from "../../elements";
@@ -20,6 +18,8 @@ import { Button, Grid } from "../../elements";
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { X } from "react-feather";
+import { RefreshCcw } from "react-feather";
 
 // REDUX
 import { history } from "../../redux/configureStore";

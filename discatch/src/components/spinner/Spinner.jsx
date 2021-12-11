@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 
 // STYLE
 import styled from "styled-components";
+
+// IMAGES
 import SpinnerCat from "../../styles/images/spinnerCat.png";
 
 const Spinner = (props) => {

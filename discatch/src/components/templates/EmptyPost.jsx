@@ -3,6 +3,8 @@ import React from "react";
 
 // STYLE
 import styled from "styled-components";
+
+// IMAGES
 import nocatimage from "../../styles/images/nocatimage.jpg";
 
 const EmptyPost = ({ path }) => {

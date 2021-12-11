@@ -11,14 +11,15 @@ import { useLocation } from "react-router-dom";
 
 // STYLE
 import styled, { css } from "styled-components";
-import { X } from "react-feather";
 
 // ELEMENTS
-import { Button } from "../../elements";
+import { Button, Grid } from "../../elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { X } from "react-feather";
+import { RefreshCcw } from "react-feather";
 
 // REDUX
 import { history } from "../../redux/configureStore";
@@ -50,8 +51,9 @@ const Location = (props) => {
 
   // 토스트 모달
   const [toastState, setToastState] = useState(false);
+  const [searchToastState, setSearchToastState] = useState(false);
   const [keywordToastState, setKeywordToastState] = useState(false);
-
+  
   // 고양이 지도에 표시하기
   const showCats = () => {
     const mapContainer = document.getElementById("myMap"), // 지도를 표시할 div
@@ -201,6 +203,7 @@ const Location = (props) => {
   const CreateKeyword = () => {
     setSearchKeyword("");
     if (searchKeyword === "") {
+      setSearchToastState(true);
       return;
     }
     dispatch(searchKeywordMap(searchKeyword));
@@ -396,26 +399,47 @@ const Location = (props) => {
       setTimeout(() => {
         setKeywordToastState(false);
       }, 1500);
+    } else if (searchToastState) {
+      setTimeout(() => {
+        setSearchToastState(false);
+      }, 1500);
     }
-  }, [toastState, keywordToastState]);
+  }, [toastState, keywordToastState, searchToastState]);
 
   return (
     <MapWrap>
-      <div
-        style={{
-          display: "flex",
-          border: "1px solid #FBD986",
-          width: "300px",
-          height: "30px",
-          borderRadius: "15px",
-          margin: "10px auto",
+      <Grid
+        addstyle={() => {
+          return css`
+            display: flex;
+            width: 300px;
+            border: 1px solid #FBD986;
+            height: 30px;
+            border-radius: 15px;
+            margin: 10px auto;
+            @media screen and (max-width: 280px) {
+              width: 250px;
+            }
+          `;
         }}
       >
+        <RefreshCcw 
+          onClick={()=>history.go(0)}
+          size="50"
+          style={{
+            position:"relative", 
+            top: "50px", 
+            zIndex:'2', 
+            width:'40px', 
+            cursor: "pointer"
+          }}
+        />
         <input
           style={{
             width: "250px",
             border: "none",
-            marginLeft: "10px",
+            marginRight: "20px",
+            outline: "none",
           }}
           type="text"
           placeholder="검색어를 입력하세요."
@@ -428,6 +452,7 @@ const Location = (props) => {
             backgroundColor: "#FBD986",
             width: "50px",
             borderRadius: "15px",
+            cursor: "pointer",
           }}
           type="submit"
           onClick={CreateKeyword}
@@ -437,13 +462,12 @@ const Location = (props) => {
               margin: "5px auto",
               textAlign: "center",
               fontWeight: "900",
-              cursor: "pointer",
             }}
           >
             검색
           </p>
         </button>
-      </div>
+      </Grid>
       <div id="myMap" style={{ width: "100%", height: "500px" }} />
 
       {modal ? (
@@ -622,9 +646,10 @@ const Location = (props) => {
         <Toast message="검색 결과가 없습니다." />
       ) : toastState ? (
         <Toast message="지도에 위치를 표시해 주세요!" />
-      ) : (
-        ""
-      )}
+      ) : searchToastState ? (
+        <Toast message="검색어를 입력해 주세요!" />
+      ) : ""
+      }
     </MapWrap>
   );
 };

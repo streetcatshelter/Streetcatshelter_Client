@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// LIBRARY
+import React, { useEffect, useState } from "react";
+
 // STYLE
+import styled from "styled-components";
 
 // COMPONENTS
 import { Toast } from "../";
-import styled from "styled-components";
+
 const ChatSend = ({ sendMessage }) => {
   //토스트모달 (공백, 특수문자 입력시  경고창)
   const [toastState, setToastState] = useState(false);

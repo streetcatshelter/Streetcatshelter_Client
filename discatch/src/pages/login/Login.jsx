@@ -15,7 +15,7 @@ import {
   oauthNaverURL,
 } from "../../shared/oauthenv";
 
-// ICON
+// IMAGES
 import Kakao from "../../styles/images/icon-Kakao.png";
 import Naver from "../../styles/images/icon-Naver(G).png";
 

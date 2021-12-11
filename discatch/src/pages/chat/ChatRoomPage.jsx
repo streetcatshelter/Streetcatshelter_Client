@@ -8,8 +8,10 @@ import Stomp from "stompjs";
 
 // STYLE
 import styled from "styled-components";
+
 // ELEMENTS
 import { Grid, Image } from "../../elements/index";
+
 // COMPONENTS
 import {
   Template,

@@ -1,6 +1,5 @@
 // LIBRARY
 import React, { useEffect, useState, useRef } from "react";
-import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 
 // MOMENT
@@ -10,8 +9,10 @@ import moment from "moment";
 // STYLE
 import styled from "styled-components";
 
+// REDUX
 import { chatActions } from "../../redux/modules/chat";
 import { resetAllMessage } from "../../redux/modules/chat";
+
 const ChatMessage = ({ roomId, cntChat }) => {
   const dispatch = useDispatch();
   const lastMessages = useSelector((state) => state.chat.chatmessage);

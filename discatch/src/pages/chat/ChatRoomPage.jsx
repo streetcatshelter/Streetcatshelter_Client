@@ -34,7 +34,7 @@ const ChatRoomPage = (props) => {
   const nickname = useSelector((state) => state.mypage.userInfo.nickname);
   const isLoaded = useSelector((state) => state.chat.isLoaded);
   const location = props.location.state?.location;
-  const cntChat = props.location.state?.cntChat;
+  const cntChat = useSelector((state) => state.chat.chatinfo?.cntChat);
   const roomId = props.match.params.roomId;
 
   //header 마지막 활동 시간

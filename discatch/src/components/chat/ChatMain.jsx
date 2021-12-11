@@ -42,7 +42,6 @@ const ChatMain = (props) => {
                             pathname: `api/chat/enter/${room.roomId}`,
                             state: {
                               location: location,
-                              cntChat: room.cntChat,
                             },
                           });
                         }}
@@ -58,7 +57,6 @@ const ChatMain = (props) => {
                               pathname: `api/chat/enter/${room.roomId}`,
                               state: {
                                 location: location,
-                                cntChat: room.cntChat,
                               },
                             });
                           }}
@@ -96,7 +94,6 @@ const ChatMain = (props) => {
                             pathname: `api/chat/enter/${room.roomId}`,
                             state: {
                               location: location,
-                              cntChat: room.cntChat,
                             },
                           });
                         }}

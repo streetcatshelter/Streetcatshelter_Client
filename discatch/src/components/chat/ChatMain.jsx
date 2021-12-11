@@ -19,6 +19,8 @@ const ChatMain = ({ props, room, key, sendtime }) => {
   const dispatch = useDispatch();
   const location = props.location.state.location;
   const [openModal, setOpenModal] = useState(false);
+
+  //방 삭제, 유저프로필 모달 버튼
   const OpenModal = () => {
     setOpenModal((openModal) => !openModal);
   };

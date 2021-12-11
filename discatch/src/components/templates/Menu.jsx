@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { flexBox } from "../../shared/style";
 import styled, { css } from "styled-components";
 
+// COMPONENTS
+import { Toast } from "../";
+
 // ELEMENTS
 import { Grid, Text } from "../../elements";
 
@@ -18,7 +21,6 @@ import { useLocation } from "react-router-dom";
 // REDUX
 import { history } from "../../redux/configureStore";
 
-import { Toast } from "../";
 const Menu = (props) => {
   const pathName = useLocation();
   const path = props.props.props.match.path;

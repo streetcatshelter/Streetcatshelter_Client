@@ -1,8 +1,8 @@
 // LIBRARY
 import React from "react";
-import styled from "styled-components";
 
 // STYLE
+import styled from "styled-components";
 import { borderBox } from "../shared/style";
 
 const Grid = ({ children, clickEvent, ...props }) => {

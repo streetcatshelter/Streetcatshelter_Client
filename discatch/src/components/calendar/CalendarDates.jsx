@@ -1,5 +1,6 @@
 // LIBRARY
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 // COMPONENTS
 import CalendarModal from "./CalendarModal";
@@ -9,7 +10,6 @@ import { Gitlab } from "react-feather";
 
 // STYLE
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 
 const CalendarDates = (props) => {
   const { lastDate, firstDate, elm, findToday, month, year, idx } = props;

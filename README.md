@@ -1,24 +1,26 @@
-# disCATch - 고양이를 제보합시다!
+# disCATch - 동네 고양이 돌봄 플랫폼!😻
 
-### 무심코 지나가면서 봤던 고양이들을 함께 좋은 마음으로 돌볼 수 있도록 제보하고 공유하는 서비스입니다.
+
 
 <br>
 
 ## **🔍 프로젝트 소개**
 
----
+<p>무심코 동네에서 봤던 고양이들을 자주 보고싶은 마음이 드셨던적이 있으신가요? disCATch는 그런 분들을 위해 고양이를 제보하고 고양이 돌봄을 공유하는 서비스입니다. 함께 좋은 마음으로 고양이를 돌보아 어제보다 더 나은 묘생권을 위해 오늘부터 <span style="font-weight: bold">disCATch</span> 하세요!</p>
+
 
 ### **프론트엔드**
-
+- 이선민 : https://github.com/sunm-in
 - 정진우 : https://github.com/happyeveryone96
 - 최수임 : https://github.com/leechoiswim1
-- 이선민 : https://github.com/sunm-in
+
 
 ### **백엔드**
 
 - BackEnd github : https://github.com/streetcatshelter/Streetcatshelter_Server
-- 채병훈 : https://github.com/timchae
 - 김인섭 : https://github.com/Inseobkim3053
+- 채병훈 : https://github.com/timchae
+
 
 <br>
 

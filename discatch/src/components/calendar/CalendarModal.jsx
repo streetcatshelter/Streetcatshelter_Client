@@ -49,7 +49,7 @@ const CalendarModal = (props) => {
                   </p>
                 ) : (
                   <p>
-                    {catName} 활동일지
+                    {catName} 를 위한 집사일기
                     <br />
                     <span>
                       ({year}년{month}월{elm}일)
@@ -193,6 +193,7 @@ const ViewDate = styled.div`
     font-size: 16px;
     font-weight: 900;
     margin: auto;
+    text-align: center;
     span {
       font-size: 12px;
     }

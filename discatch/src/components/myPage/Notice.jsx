@@ -20,7 +20,7 @@ const Notice = () => {
         <DateBox style={{ fontSize: "14px", fontWeight: "900" }}>날짜</DateBox>
       </ContentHead>
       {noticeList.map((notice, idx) => {
-        const modifiedAt = moment(notice.modifiedAt).format("YYYY-M-DD");
+        const modifiedAt = moment(notice.modifiedAt).format("YYYY-MM-DD");
         return (
           <Content
             key={idx}

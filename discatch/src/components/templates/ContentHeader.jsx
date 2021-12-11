@@ -51,7 +51,7 @@ const ContentHeader = ({
       : state.community.communityDetail.userRandomId
   );
 
-  const CreatedAt = moment(createdAt).format("YYYY-M-D hh:mm");
+  const CreatedAt = moment(createdAt).format("YYYY-MM-DD HH:MM");
   const OpenProfile = () => {
     setProfileModal(!profileModal);
   };

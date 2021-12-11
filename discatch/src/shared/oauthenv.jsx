@@ -17,5 +17,17 @@ const dev_oauthNaverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${
 // const dev_oauthGoogleURL = `
 /* == production       - Redirect URI  */
 /* == production       - kakao oauth url */
+const redirect_kakao_uri = "http://discatch-274d1.web.app/user/kakao/callback";
+const redirect_naver_uri = "http://discatch-274d1.web.app/user/naver/callback";
+const oauthKaKaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_LOGIN_API_KEY}&redirect_uri=${dev_redirect_kakao_uri}&response_type=code`;
+const oauthNaverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${NAVER_API_KEY}&redirect_uri=${dev_redirect_naver_uri}&response_type=code`;
 
-export { dev_oauthKaKaoURL, dev_oauthNaverURL, GOOGLE_API_KEY };
+export {
+  dev_oauthKaKaoURL,
+  dev_oauthNaverURL,
+  GOOGLE_API_KEY,
+  redirect_kakao_uri,
+  redirect_naver_uri,
+  oauthKaKaoURL,
+  oauthNaverURL,
+};

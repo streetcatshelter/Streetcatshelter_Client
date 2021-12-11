@@ -12,7 +12,7 @@ const GoogleLoginBtn = () => {
         background="#FFFFFF"
         onClick={() => {
           window.open(
-            "https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email&response_type=code&client_id=942030155154-umcoqj12iejta6r6nulph49tnt0o9fop.apps.googleusercontent.com&redirect_uri=http://localhost:3000/user/google/callback",
+            "https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email&response_type=code&client_id=942030155154-umcoqj12iejta6r6nulph49tnt0o9fop.apps.googleusercontent.com&redirect_uri=http://discatch-274d1.web.app/user/google/callback",
             "_blank"
           );
         }}

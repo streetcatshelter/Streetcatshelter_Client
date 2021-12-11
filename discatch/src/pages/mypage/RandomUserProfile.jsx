@@ -19,6 +19,7 @@ const RandomUserProfile = (props) => {
     (state) => state.mypage.userRandomProfile
   );
 
+  //회원 프로필 정보 가져오기
   useEffect(() => {
     dispatch(mypageActions._getUserProfile(userRandomId));
   }, [userRandomId, dispatch]);
@@ -82,11 +83,17 @@ const RandomUserProfile = (props) => {
                 {userRandomProfile.cat.map((cat, idx) => {
                   const location = cat.catLocation;
                   let fullLocation;
-                  if (location === userRandomProfile?.location[0]?.split(' ')[2]) {
+                  if (
+                    location === userRandomProfile?.location[0]?.split(" ")[2]
+                  ) {
                     fullLocation = userRandomProfile?.location[0];
-                  } else if (location === userRandomProfile?.location[1]?.split(' ')[2]) {
+                  } else if (
+                    location === userRandomProfile?.location[1]?.split(" ")[2]
+                  ) {
                     fullLocation = userRandomProfile?.location[1];
-                  } else if (location === userRandomProfile?.location[2]?.split(' ')[2]) {
+                  } else if (
+                    location === userRandomProfile?.location[2]?.split(" ")[2]
+                  ) {
                     fullLocation = userRandomProfile?.location[2];
                   }
                   return (
@@ -94,7 +101,7 @@ const RandomUserProfile = (props) => {
                       onClick={() => {
                         history.push({
                           pathname: `/catdetail/calendar/${location}/${cat.catId}/3`,
-                          state: { location : fullLocation },
+                          state: { location: fullLocation },
                         });
                       }}
                     >

@@ -20,7 +20,7 @@ const Notice = () => {
         <DateBox style={{ fontSize: "14px", fontWeight: "900" }}>날짜</DateBox>
       </ContentHead>
       {noticeList.map((notice, idx) => {
-        const modifiedAt = moment(notice.modifiedAt).format("YYYY-MM-DD");
+        const modifiedAt = moment(notice.modifiedAt).format("YY-MM-DD");
         return (
           <Content
             key={idx}
@@ -61,7 +61,7 @@ const Content = styled.div`
 `;
 const Title = styled.div`
   font-weight: 900;
-  font-size: 12px;
+  font-size: 14px;
   margin: auto;
   width: 68%;
   p {
@@ -70,7 +70,7 @@ const Title = styled.div`
 `;
 const DateBox = styled.div`
   font-weight: normal;
-  font-size: 10px;
+  font-size: 12px;
   margin: auto;
   width: 20%;
   text-align: center;

@@ -17,6 +17,7 @@ const Slider = (props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
 
+  //슬라이드 조작 함수
   const nextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
       // 더 이상 넘어갈 슬라이드가 없으면 슬라이드를 초기화합니다.
@@ -37,6 +38,8 @@ const Slider = (props) => {
     slideRef.current.style.transition = "all 0.5s ease-in-out";
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
   }, [currentSlide]);
+
+  //로그인페이지로 가는 함수
   const GoHome = () => {
     const Onboarding = localStorage.getItem("onboarding");
     history.push("/login");

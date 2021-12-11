@@ -34,40 +34,54 @@ const Wrap = styled.div`
   margin-top: 10px;
 `;
 const Header = styled.div`
-  height: 45px;
-  border-bottom: 0.5px solid #b5bb19;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  border-bottom: 0.5px solid #b5bb19;
   padding: 0px 10px;
+
   p {
     margin: 0px;
     font-size: 16px;
     font-weight: 900;
+    width: 75%;
+    word-break: break-all;
     :nth-child(2) {
       font-size: 12px;
       font-weight: 700;
+      width: 25%;
+      text-align: center;
     }
     @media screen and (max-width: 320px) {
-      font-size: 12px;
+      font-size: 14px;
       :nth-child(2) {
         font-size: 10px;
       }
     }
   }
   @media screen and (max-width: 320px) {
-    height: 30px;
+    height: 35x;
   }
 `;
 const Body = styled.div`
   padding: 10px;
+  width: 95%;
+  margin: auto;
   p {
     margin: 5px;
-    line-height: 20px;
+    line-height: 25px;
     font-size: 14px;
     word-break: break-all;
     white-space: normal;
     @media screen and (max-width: 320px) {
       font-size: 12px;
     }
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
 `;
 

@@ -223,6 +223,8 @@ const ActiveBox = styled.div`
       :nth-child(2) {
         background: #f9c852;
         width: auto;
+        min-width: 15px;
+        min-height: 15px;
         height: auto;
         border-radius: 50%;
         text-align: center;

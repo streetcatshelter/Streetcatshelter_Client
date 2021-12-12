@@ -42,7 +42,7 @@ const ChatMainPage = (props) => {
                 );
                 const hourDiff = moment(LastActivity).diff(moment(), "hours");
                 // format 1, 활동한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-                const updated = moment(LastActivity).format("YYYY-MM-DD HH:MM");
+                const updated = moment(LastActivity).format("YYYY-MM-DD");
                 // format 2, 활동한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
                 const recentlyUpdated = moment(LastActivity).fromNow();
                 //시간 경과에 따라 시간포맷변경(하루기준)

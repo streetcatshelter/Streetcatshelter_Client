@@ -142,7 +142,7 @@ const ProfileInfo = styled.div`
   p {
     font-size: 12px;
     :nth-child(1) {
-      font-weight: 900;
+      font-weight: 700;
       font-size: 14px;
     }
   }
@@ -151,7 +151,7 @@ const Location = styled.div`
   display: flex;
   p {
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 500;
     margin-right: 5px;
   }
 `;
@@ -218,15 +218,15 @@ const ActiveBox = styled.div`
       text-align: center;
       font-size: 12px;
       :nth-child(1) {
-        font-weight: 900;
+        font-weight: 500;
       }
       :nth-child(2) {
         background: #f9c852;
-        width: 18px;
-        height: 18px;
+        width: auto;
+        height: auto;
         border-radius: 50%;
         text-align: center;
-        font-weight: 900;
+        font-weight: 700;
       }
     }
   }
@@ -241,7 +241,7 @@ const ActiveDate = styled.div`
     font-size: 12px;
     width: 95%;
     :nth-child(1) {
-      font-weight: 900;
+      font-weight: 700;
     }
   }
 `;
@@ -250,7 +250,7 @@ const LikedCatBox = styled.div`
   margin: 15px auto 10px auto;
   p {
     font-size: 14px;
-    font-weight: 900;
+    font-weight: 700;
     margin: 5px 0px;
     :nth-child(2) {
       font-weight: 700;

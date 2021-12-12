@@ -90,7 +90,7 @@ export const catApi = {
   deleteCatDetail: (catDetailId) =>
     instance.delete(`/cat/detail/${catDetailId}`),
   catLike: (catId) => instance.post(`/cat/like/${catId}`),
-  catDetailLike: (catDetailId) =>
+  catDiaryLike: (catDetailId) =>
     instance.post(`/cat/detail/like/${catDetailId}`),
   editCatInfo: (catInfo, catId) => instance.put(`/cat/${catId}`, catInfo),
   editCatDetailInfo: (detailInfo, catDeatilId) =>

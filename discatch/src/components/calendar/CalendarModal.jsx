@@ -252,11 +252,12 @@ const CatRight = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 5px;
   p {
     margin: 5px;
     line-height: 20px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
   }
 `;
 

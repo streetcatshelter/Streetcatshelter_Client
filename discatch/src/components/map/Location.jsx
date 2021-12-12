@@ -426,6 +426,17 @@ const Location = (props) => {
           `;
         }}
       >
+        <RefreshCcw
+          onClick={() => history.go(0)}
+          size="50"
+          style={{
+            position: "relative",
+            top: "50px",
+            zIndex: "2",
+            width: "40px",
+            cursor: "pointer",
+          }}
+        />
         <input
           style={{
             width: "250px",
@@ -476,7 +487,6 @@ const Location = (props) => {
                   listvisible={listvisible}
                   onClick={() => {
                     setModal(!modal);
-                    showCats();
                   }}
                 />
               </div>

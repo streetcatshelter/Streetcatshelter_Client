@@ -11,7 +11,9 @@ import { Template, ProgressBar } from "../../components";
 // REDUX
 import { history } from "../../redux/configureStore";
 import { mypageActions } from "../../redux/modules/mypage";
-
+// MOMENT
+import "moment/locale/ko";
+import moment from "moment";
 const RandomUserProfile = (props) => {
   const dispatch = useDispatch();
   const userRandomId = props.match.params?.userRandomId;
@@ -24,6 +26,16 @@ const RandomUserProfile = (props) => {
     dispatch(mypageActions._getUserProfile(userRandomId));
   }, [userRandomId, dispatch]);
 
+  const createdAt = moment(
+    userRandomProfile.lastActivity !== null && userRandomProfile.lastActivity
+  ).format("YYYY-MM-DD HH:MM");
+  const hourDiff = moment(createdAt).diff(moment(), "hours");
+  // format 1, 보낸지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
+  const updated = moment(createdAt).format("YYYY-MM-DD HH:MM");
+  // format 2, 보낸지 하루 이내일 경우 : 'n 분 전, n 시간 전'
+  const recentlyUpdated = moment(createdAt).fromNow();
+  //시간 경과에 따라 시간포맷변경(하루기준)
+  const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
   return (
     <Template props={props}>
       <Wrapper>
@@ -68,11 +80,11 @@ const RandomUserProfile = (props) => {
               </div>
             </ActiveBox>
             <ActiveDate>
-              <p>최근 활동</p>
               <p>
-                {userRandomProfile.lastActivity === null
-                  ? "-"
-                  : userRandomProfile.lastActivity}
+                최근 활동 시간:
+                <span>
+                  {userRandomProfile.lastActivity === null ? "-" : sendtime}{" "}
+                </span>
               </p>
             </ActiveDate>
           </UserActive>
@@ -242,8 +254,12 @@ const ActiveDate = styled.div`
     margin: 5px auto;
     font-size: 12px;
     width: 95%;
-    :nth-child(1) {
-      font-weight: 700;
+    font-weight: 700;
+    span {
+      margin-left: 5px;
+      font-size: 12px;
+      width: 95%;
+      font-weight: 500;
     }
   }
 `;

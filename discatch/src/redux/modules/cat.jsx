@@ -288,12 +288,12 @@ export const __catLike =
   };
 
 // 상세 정보 좋아요
-export const __catDetailLike =
-  (catDetailId) =>
+export const __catDiaryLike =
+  (catDetailId, path) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.catDetailLike(catDetailId);
-      // dispatch(__getCatDetail(catDetailId));
+      const { data } = await catApi.catDiaryLike(catDetailId);
+      dispatch(likeToggle(path));
     } catch (err) {
       console.error(err);
     }
@@ -419,7 +419,10 @@ const cat = createSlice({
     },
 
     likeToggle: (state, action) => {
-      if (action.payload.path === "detail") {
+      console.log(action.payload);
+      if (action.payload === "diary") {
+        state.detail.userLiked = !state.detail.userLiked;
+      } else if (action.payload.path === "detail") {
         state.catinfo.userLiked = !state.catinfo.userLiked;
       } else {
         const idx = state.list.findIndex(

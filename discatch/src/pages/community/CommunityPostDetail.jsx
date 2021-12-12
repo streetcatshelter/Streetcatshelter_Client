@@ -12,10 +12,10 @@ import {
 } from "../../components";
 
 // ELEMENTS
-import { Text } from "../../elements";
+import { Grid, Text } from "../../elements";
 
 // STYLE
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // REDUX
 import { history } from "../../redux/configureStore";
@@ -83,9 +83,16 @@ const CommunityPostDetail = (props) => {
       />
 
       <div>
-        <Title>
+        <Text 
+          addstyle={() => {
+            return css`
+              margin: 12px;
+              font-size: 16px;
+              font-weight: 900;
+            `;
+          }}>
           <p> {communityDetail.title} </p>
-        </Title>
+        </Text>
 
         <ImageBox>
           {communityDetail.communityImageList?.map((catImage, idx) => {
@@ -96,8 +103,10 @@ const CommunityPostDetail = (props) => {
             );
           })}
         </ImageBox>
-
-        <Text margin="15px">{communityDetail.contents}</Text>
+       
+        <Text margin="15px" 
+              >{communityDetail.contents}
+        </Text>
 
         <div style={{ margin: "10px 0px" }}>
           <CommentList props={props} communityId={communityId} />
@@ -128,15 +137,6 @@ const CatImageBox = styled.div`
   width: 100%;
   padding-bottom: 100%;
   background: rgb(251, 216, 134);
-`;
-const Title = styled.div`
-  margin: 10px;
-  p {
-    font-size: 16px;
-    font-weight: 900;
-    margin: 0px;
-    width: auto;
-  }
 `;
 
 export default CommunityPostDetail;

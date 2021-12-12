@@ -67,6 +67,7 @@ const ContentHeader = ({
   } else if (location !== "undefined") {
     locationName = location;
   }
+
   return (
     <>
       <Wrapper>
@@ -82,7 +83,7 @@ const ContentHeader = ({
             <UserInfoBoxCenter onClick={OpenProfile}>
               <p>{nickname}</p>
               <InfoBoxBottom>
-                {locationName !== null && <p>{locationName?.split(" ")[2]}</p>}
+                {locationName !== null && <p>{locationName}</p>}
                 <p>{CreatedAt}</p>
               </InfoBoxBottom>
             </UserInfoBoxCenter>

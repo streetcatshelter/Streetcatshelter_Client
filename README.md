@@ -73,18 +73,25 @@ disCATch Link:
 - "소셜 로그인"(카카오, 네이버, 구글)을 통한 편리한 회원가입을 구축 
 <br>
 
+
 <!-- 캣 -->
 <h3 style="font-weight: bold">고양이정보</h3>
+
+<img src="https://user-images.githubusercontent.com/85476908/145732641-e5396419-e975-4ad5-9c59-0301d1e8c72e.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145732899-7ebe28f1-bbf7-463a-b01c-c3471365cd8f.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145732868-4630efeb-9db7-4f7b-9b46-c86fb4edd96b.png" width="235" height="400"/>
+<img src="https://user-images.githubusercontent.com/85476908/145733538-5e23642c-165d-4c84-b0a2-b8fea3f6330d.png" width="235" height="400"/>
 
 - 고양이 기본정보: 발견한 고양이의 대한 정보를 누구든 자유롭게 올리고 수정하여 고양이의 대한 가장 최근의 상태를 알 수 있게 함.<br>
 - 고양이 상세정보: "캘린더", 집사일기, 갤러리를 통해 돌봄활동을 한눈에 확인 할 수 있음. <br>
 - 고양이별 "댓글" : 자세한 소통 가능.<br>
 - 고양이 리스트: "무한스크롤" 기능
-
 <br>
+
 
 <!-- 커뮤니티 -->
 <h3 style="font-weight: bold">커뮤니티</h3>
+
+<img src="https://user-images.githubusercontent.com/85476908/145733604-f4cb71d5-72ac-4177-8f1b-283b6106ce88.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145733671-210a2eca-6ca3-4342-b565-5c0b436ff800.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145733731-871692d2-f045-43ae-81f3-ac156d9f04dc.png" width="235" height="400"/>
+
 카테고리를 나눠 회원끼리 소통할 수 있는 공간을 만듬.
 
 - 전체 커뮤니티: 커뮤니티(고양이 정보글)<br>
@@ -98,20 +105,28 @@ disCATch Link:
 <h3 style="font-weight: bold"> 지도</h3>
 "카카오맵"을 이용한 지도 시스템 구현 
 
+<img src="https://user-images.githubusercontent.com/85476908/145733747-32bb8147-ceb0-4ac5-8d85-e70b962f0425.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145733820-5fbfa20a-d053-4114-8f02-f0c0e8da5f22.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145733845-37e561cf-db12-4800-b978-3dc4f0502308.png" width="235" height="400"/>
+
 - 고양이 업로드: 고양이를 발견하면 지도에서 장소를 찾아 고양이를 올릴 수 있음.
 - 고양이 정보보기: 동네별 '고양이를 확인'가능 및 고양이 클릭시 고양이 정보로 이동.
 - 검색 기능 : 동네별 위치 '검색' 가능
+
 
 <br>
 <!-- 채팅 -->
 <h3 style="font-weight: bold"> 채팅</h3>
 
+<img src="https://user-images.githubusercontent.com/85476908/145733877-153346ff-7f5a-47d6-b7c0-94aa1056ee32.png" width="235" height="400"/>
+
 - "웹소켓"을 사용하여 회원간의 끊김없는 1:1 실시간 채팅이 가능함.
 - 채팅방 삭제 기능을 통해 깔끔한 채팅리스트 유지 가능.
 - 채팅 메시지: "무한스크롤" 기능    
 
+
 <!-- 내정보 -->
 <h3 style="font-weight: bold">내정보</h3>
+
+<img src="https://user-images.githubusercontent.com/85476908/145733900-ab6139e8-bbab-4089-8906-38a5f5b452ff.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145733912-e5d55bc8-e33f-4b51-a9b0-250f97c27ad5.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145733934-0aecf059-29d2-4b69-ba56-c19f995d4f8b.png" width="235" height="400"/><img src="https://user-images.githubusercontent.com/85476908/145733963-144b1860-9821-4e86-8da4-2f89939ca6f0.png" width="235" height="400"/>
 
 - "레벨 시스템"을 도입하여 활동별로 등급을 확인 할 수 있음.
 - "좋아요"한 고양이 (무한스크롤 기능)

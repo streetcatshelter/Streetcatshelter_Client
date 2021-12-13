@@ -83,15 +83,16 @@ const CommunityPostDetail = (props) => {
       />
 
       <div>
-        <Text 
+        <Text
           addstyle={() => {
             return css`
               margin: 12px;
               font-size: 16px;
               font-weight: 900;
             `;
-          }}>
-          <p> {communityDetail.title} </p>
+          }}
+        >
+          {communityDetail.title}
         </Text>
 
         <ImageBox>
@@ -103,10 +104,8 @@ const CommunityPostDetail = (props) => {
             );
           })}
         </ImageBox>
-       
-        <Text margin="15px" 
-              >{communityDetail.contents}
-        </Text>
+
+        <Text margin="15px">{communityDetail.contents}</Text>
 
         <div style={{ margin: "10px 0px" }}>
           <CommentList props={props} communityId={communityId} />

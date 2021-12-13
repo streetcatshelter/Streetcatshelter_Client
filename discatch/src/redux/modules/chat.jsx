@@ -9,20 +9,16 @@ const _getRooms =
       dispatch(loading(true));
       const { data } = await chatApi.getRooms();
       dispatch(setRooms(data));
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
 const _createRoom =
   (chatuser) =>
   async (dispatch, getState, { history }) => {
-    console.log(chatuser);
     try {
       const { data } = await chatApi.createRoom(chatuser);
       history.push(`/api/chat/enter/${data.roomId}`);
     } catch (e) {
-      console.log(e);
       dispatch(changeToast(true));
     }
   };
@@ -36,23 +32,18 @@ const _getMessage =
       const { data } = await chatApi.getMessage(roomId, page);
 
       dispatch(setChatMessage(data));
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 const _getMoreMessage =
   (roomId, page) =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(loading(true));
-      console.log(page);
+
       const { data } = await chatApi.getMoreMessage(roomId, page);
-      console.log(data);
+
       dispatch(setChatMessage(data));
-      console.log(page);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
 const _getRoomInfo =
@@ -62,9 +53,7 @@ const _getRoomInfo =
       dispatch(loading(true));
       const { data } = await chatApi.getRoomInfo(roomId);
       dispatch(setChatInfo(data));
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
 const _deleteRoom =
@@ -77,9 +66,7 @@ const _deleteRoom =
         state: { location },
       });
       dispatch(deleteRoom(roomId));
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 const initialState = {
   roomlist: [],
@@ -117,7 +104,6 @@ const chat = createSlice({
       state.isLoaded = action.payload;
     },
     deleteRoom: (state, action) => {
-      console.log(action.payload);
       return {
         ...state,
         roomlist: state.roomlist.filter(

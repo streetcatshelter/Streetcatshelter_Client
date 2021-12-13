@@ -419,7 +419,6 @@ const cat = createSlice({
     },
 
     likeToggle: (state, action) => {
-      console.log(action.payload);
       if (action.payload === "diary") {
         state.detail.userLiked = !state.detail.userLiked;
       } else if (action.payload.path === "detail") {

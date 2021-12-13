@@ -27,7 +27,7 @@ const ChatMain = ({ props, room, key, sendtime }) => {
 
   return (
     <React.Fragment>
-      <ChatRoom key={key}>
+      <ChatRoom>
         <InnerBox>
           <LeftBox>
             <ProfileImg

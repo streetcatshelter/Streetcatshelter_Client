@@ -3,8 +3,10 @@ import React from "react";
 
 // COMPONENTS
 import { Template } from "../../components";
+
 // STYLE
 import { css } from "styled-components";
+
 // ELEMENTS
 import { Button, Text, Grid, Image } from "../../elements";
 

@@ -80,7 +80,7 @@ const Home = (props) => {
   }, [location, dispatch]);
 
   // 고양이 기본 정보 추가로 가져오기
-  //무한스크롤
+  // 무한스크롤
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고 catList의 length가 10의 배수인 경우
     if (inView) {

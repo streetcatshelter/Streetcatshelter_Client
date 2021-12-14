@@ -40,6 +40,7 @@ const _getMessage =
       console.log(e);
     }
   };
+
 const _getMoreMessage =
   (roomId, page) =>
   async (dispatch, getState, { history }) => {
@@ -81,6 +82,7 @@ const _deleteRoom =
       console.log(e);
     }
   };
+
 const initialState = {
   roomlist: [],
   chatinfo: [],
@@ -109,7 +111,6 @@ const chat = createSlice({
         isLoaded: false,
       };
     },
-
     pushChatMessage: (state, action) => {
       state.chatmessage.push(action.payload);
     },
@@ -128,7 +129,6 @@ const chat = createSlice({
     changeToast: (state, action) => {
       state.toast = action.payload;
     },
-
     resetAllMessage: (state, action) => {
       state.chatmessage = [];
     },

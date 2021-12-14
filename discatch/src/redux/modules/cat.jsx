@@ -1,7 +1,6 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
 import instance, { catApi } from "../../shared/axios";
-import { deleteUserLikedCat } from "./mypage";
 
 // REDUX
 import { imgActions } from "./image";
@@ -90,7 +89,6 @@ export const __editCatInfo =
         const { data } = await catApi.editCatInfo(catInfo, catId);
         dispatch(imgActions.setInitialState());
         dispatch(setInitialState([]));
-
         history.goBack();
       } catch (err) {
         console.error(err);
@@ -239,6 +237,7 @@ export const __getCalendar =
       console.error(err);
     }
   };
+
 // 상세 페이지(캘린더디테일)
 export const __getCalendarDetail =
   (catId, day, month, year) =>

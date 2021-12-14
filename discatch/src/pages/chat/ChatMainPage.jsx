@@ -25,7 +25,7 @@ const ChatMainPage = (props) => {
   //채팅리스트가져오기
   useEffect(() => {
     dispatch(chatActions._getRooms());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

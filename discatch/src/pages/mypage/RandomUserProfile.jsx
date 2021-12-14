@@ -11,9 +11,11 @@ import { Template, ProgressBar } from "../../components";
 // REDUX
 import { history } from "../../redux/configureStore";
 import { mypageActions } from "../../redux/modules/mypage";
+
 // MOMENT
 import "moment/locale/ko";
 import moment from "moment";
+
 const RandomUserProfile = (props) => {
   const dispatch = useDispatch();
   const userRandomId = props.match.params?.userRandomId;
@@ -21,7 +23,7 @@ const RandomUserProfile = (props) => {
     (state) => state.mypage.userRandomProfile
   );
 
-  //회원 프로필 정보 가져오기
+  // 회원 프로필 정보 가져오기
   useEffect(() => {
     dispatch(mypageActions._getUserProfile(userRandomId));
   }, [userRandomId, dispatch]);
@@ -34,7 +36,7 @@ const RandomUserProfile = (props) => {
   const updated = moment(createdAt).format("YYYY-MM-DD HH:MM");
   // format 2, 보낸지 하루 이내일 경우 : 'n 분 전, n 시간 전'
   const recentlyUpdated = moment(createdAt).fromNow();
-  //시간 경과에 따라 시간포맷변경(하루기준)
+  // 시간 경과에 따라 시간포맷변경(하루기준)
   const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
   return (
     <Template props={props}>

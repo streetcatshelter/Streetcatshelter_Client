@@ -26,7 +26,7 @@ const CalendarModal = (props) => {
     path === "mypage"
       ? dispatch(mypageActions._getCalenderDetail(year, month, elm))
       : dispatch(__getCalendarDetail(catId, elm, month, year));
-  }, [year, month, elm, catId, dispatch]);
+  }, [year, month, elm, catId, path, dispatch]);
 
   return (
     <>
@@ -226,9 +226,8 @@ const EventBox = styled.div`
   cursor:${(props) => props.path === "mypage" && " pointer"} ;
   &:hover {
     background: ${(props) => props.path === "mypage" && "#fff4d9"} 
-  }}
+  }
 `;
-
 const CatLeft = styled.div`
   width: 20%;
   min-width: 60px;
@@ -246,7 +245,6 @@ const CatLeft = styled.div`
     }
   }
 `;
-
 const CatRight = styled.div`
   width: 80%;
   display: flex;
@@ -260,7 +258,6 @@ const CatRight = styled.div`
     font-weight: 500;
   }
 `;
-
 const CatWorkBox = styled.div`
   width: 100%;
   display: flex;

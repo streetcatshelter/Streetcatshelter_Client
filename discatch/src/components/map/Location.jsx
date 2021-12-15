@@ -143,6 +143,7 @@ const Location = (props) => {
         const latlng = mouseEvent.latLng;
         //위도 경도 값을 useState를 이용해서 useEffect 밖으로 빼냅니다.
         setLatitude(latlng.getLat());
+        setLongitude(latlng.getLng());
         //마커 위치를 클릭한 위치로 옮깁니다.
         marker.setPosition(latlng);
         //마커를 지도상에 보여줍니다.

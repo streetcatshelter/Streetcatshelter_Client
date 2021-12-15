@@ -19,6 +19,7 @@ disCATch Link:https://discatch.site
 [React]
 - 정진우 : https://github.com/happyeveryone96
 - 최수임 : https://github.com/leechoiswim1
+- 이선민 : https://github.com/sunm-in (12//01까지 프로젝트 진행)
 
 #### **백엔드**
 [Spring]

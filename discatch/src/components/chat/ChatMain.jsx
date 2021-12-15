@@ -15,7 +15,7 @@ import { EditModalSlide, EmptyPost } from "../../components";
 import { history } from "../../redux/configureStore";
 import { chatActions } from "../../redux/modules/chat";
 
-const ChatMain = ({ props, room, key, sendtime }) => {
+const ChatMain = ({ props, room, sendtime }) => {
   const dispatch = useDispatch();
   const location = props.location.state.location;
   const [openModal, setOpenModal] = useState(false);

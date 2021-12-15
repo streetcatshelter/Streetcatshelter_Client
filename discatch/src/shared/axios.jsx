@@ -8,7 +8,6 @@ axios.defaults.withCredentials = true;
 
 const instance = axios.create({
   baseURL: "http://52.78.241.50/",
-  // baseURL: 'http://3.35.139.51/',
 });
 
 instance.interceptors.request.use((config) => {

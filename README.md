@@ -17,7 +17,6 @@ disCATch Link:
 ## **👨‍👨‍👦‍👦팀원소개**
 #### **프론트엔드**
 [React]
-- 이선민 : https://github.com/sunm-in
 - 정진우 : https://github.com/happyeveryone96
 - 최수임 : https://github.com/leechoiswim1
 

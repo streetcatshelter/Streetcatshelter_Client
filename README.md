@@ -1,6 +1,6 @@
 # disCATch - 동네 고양이 돌봄 플랫폼!😻
 
-disCATch Link:https://dispatch.site
+disCATch Link:https://discatch.site
 
 <br>
 

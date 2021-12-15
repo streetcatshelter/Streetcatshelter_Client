@@ -136,22 +136,23 @@ const Location = (props) => {
         // 마커 위에 인포윈도우를 표시합니다
         infowindow.open(map, markers);
       });
-      markers.setMap(map);
+
+      // 지도에 마커를 표시합니다.
+      kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+        //클릭한 위도, 경도 정보를 가져옵니다.
+        const latlng = mouseEvent.latLng;
+        //위도 경도 값을 useState를 이용해서 useEffect 밖으로 빼냅니다.
+        setLatitude(latlng.getLat());
+        //마커 위치를 클릭한 위치로 옮깁니다.
+        marker.setPosition(latlng);
+        //마커를 지도상에 보여줍니다.
+        marker.setMap(map);
+        // 지도에 마커를 표시하면 인포윈도우 닫기
+        infowindow.close();
+      });
     }
 
-    // 지도에 마커를 표시합니다.
-    kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-      //클릭한 위도, 경도 정보를 가져옵니다.
-      const latlng = mouseEvent.latLng;
-      //위도 경도 값을 useState를 이용해서 useEffect 밖으로 빼냅니다.
-      setLatitude(latlng.getLat());
-      setLongitude(latlng.getLng());
-      //마커 위치를 클릭한 위치로 옮깁니다.
-      marker.setPosition(latlng);
-      //마커를 지도상에 보여줍니다.
-      marker.setMap(map);
-    });
-
+    // 사용자의 주소 지도에 표시
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(location, placesSearchCB);
 

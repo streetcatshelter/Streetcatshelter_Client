@@ -8,7 +8,7 @@ axios.defaults.withCredentials = true;
 
 const instance = axios.create({
   //배포 서버
-  baseURL: "https://discatchserver.shop",
+  baseURL: "https://discatchserver.shop/",
 });
 
 instance.interceptors.request.use((config) => {
@@ -19,6 +19,7 @@ instance.interceptors.request.use((config) => {
   config.headers["Content-Type"] = "application/json; charset=utf-8";
   config.headers["X-Requested-With"] = "XMLHttpRequest";
   config.headers["Accept"] = "*/*";
+
   return config;
 });
 

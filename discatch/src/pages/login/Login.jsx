@@ -39,7 +39,7 @@ const Login = (props) => {
               <LoginBtn
                 background="#F7E600"
                 onClick={() => {
-                  window.location.href = dev_oauthKaKaoURL;
+                  window.location.href = oauthKaKaoURL;
                 }}
               >
                 <Img
@@ -54,7 +54,7 @@ const Login = (props) => {
               <LoginBtn
                 background="#03c75a"
                 onClick={() => {
-                  window.location.href = dev_oauthNaverURL;
+                  window.location.href = oauthNaverURL;
                 }}
               >
                 <Img

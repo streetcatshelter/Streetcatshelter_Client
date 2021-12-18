@@ -164,7 +164,7 @@ const Window = styled.div`
   animation-timing-function: ease-out;
   animation-name: fadeIn;
   animation-fill-mode: forwards;
-  background: #fefdf8;
+  background: #ffffff;
   z-index: 1000;
   overflow: auto;
   @keyframes fadeIn {
@@ -200,6 +200,7 @@ const ViewDate = styled.div`
   }
 `;
 const CancleBox = styled.div`
+  cursor: pointer;
   position: fixed;
   top: 4%;
   left: 85%;
@@ -223,9 +224,9 @@ const EventBox = styled.div`
   margin: auto;
   display: flex;
   border-bottom: 0.2px solid rgba(203, 207, 94, 1);
-  cursor:${(props) => props.path === "mypage" && " pointer"} ;
+  cursor: ${(props) => props.path === "mypage" && " pointer"};
   &:hover {
-    background: ${(props) => props.path === "mypage" && "#fff4d9"} 
+    background: ${(props) => props.path === "mypage" && "#fff4d9"};
   }
 `;
 const CatLeft = styled.div`

@@ -322,7 +322,7 @@ const HeaderStyle = styled.header`
   max-width: 420px;
   width: 100%;
   height: 60px;
-  background: #fefdf8;
+  background: #ffffff;
   position: fixed;
   top: 0;
   z-index: 9;
@@ -335,7 +335,7 @@ const SelectStyle = styled.select`
   color: gray;
   font-weight: bold;
   font-size: 12px;
-  background: #fefdf8;
+  background: #ffffff;
   cursor: pointer;
   &:focus {
     outline: none;

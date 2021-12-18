@@ -255,7 +255,7 @@ const ChatWrap = styled.div`
 
 const Header = styled.div`
   position: fixed;
-  background: #fefdf8;
+  background: #ffffff;
   width: 390px;
   display: flex;
   height: 60px;

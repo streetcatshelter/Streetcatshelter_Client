@@ -93,7 +93,7 @@ const uploadImageDB = (callNext) => {
 
       const upload = new AWS.S3.ManagedUpload({
         params: {
-          Bucket: "discatch",
+          Bucket: "discatch.site",
           Key: img.name,
           Body: img,
         },

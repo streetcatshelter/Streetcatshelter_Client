@@ -87,7 +87,7 @@ const ButtonWrap = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록 처리합니다.
+  overflow: hidden; 
 `;
 const BtnWrap = styled.div`
   display: flex;

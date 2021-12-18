@@ -3,7 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { CommunityPreview, Template, SecondHeader } from "../../components";
+import {
+  CommunityPreview,
+  Template,
+  SecondHeader,
+  SecondSpinner,
+} from "../../components";
 import { Toast } from "../../components";
 
 // STYLE
@@ -20,15 +25,19 @@ import { useLocation } from "react-router-dom";
 
 // REDUX
 import { imgActions } from "../../redux/modules/image";
-import { editCommunityDB } from "../../redux/modules/community";
-import { getOneCommunityDB } from "../../redux/modules/community";
+import {
+  editCommunityDB,
+  getOneCommunityDB,
+} from "../../redux/modules/community";
+
 import { history } from "../../redux/configureStore";
 
 const CommunityPostEdit = (props) => {
+  const isLoaded = useSelector((state) => state.community.itemLoaded);
   const dispatch = useDispatch();
   const path = useLocation();
   const preview = useSelector((state) => state.image.preview);
-  const communityId = path.pathname.split('/')[5];
+  const communityId = path.pathname.split("/")[5];
   const { category, contents, imageList, location, title, username } =
     useSelector((state) => ({
       category: state.community.communityDetail?.category,
@@ -37,8 +46,8 @@ const CommunityPostEdit = (props) => {
       location: state.community.communityDetail?.location,
       title: state.community.communityDetail?.title,
       username: state.community.communityDetail?.username,
-    }))
-  
+    }));
+
   // 글 작성 시 업로드한 사진 개수
   const imageNum = imageList?.length;
 
@@ -51,7 +60,6 @@ const CommunityPostEdit = (props) => {
   const [photoState, setPhotoState] = useState(false);
   const [maxPhotoState, setMaxPhotoState] = useState(false);
   const [prePhotoState, setPrePhotoState] = useState(false);
-  const [editState, setEditState] = useState(false);
 
   // S3 (사진 추가)
   const handleInputFile = (e) => {
@@ -81,27 +89,23 @@ const CommunityPostEdit = (props) => {
 
   // 커뮤니티 글 수정하기
   const editBtn = () => {
-    if (editTitle === '') {
+    if (editTitle === "") {
       setTitleState(true);
-    } else if (editcontents === '') {
+    } else if (editcontents === "") {
       setContentState(true);
     } else {
-      setEditState(true);
-      setTimeout(() => {
-        dispatch(imgActions.setFiles(imageList, imageNum));
-        dispatch(
-          editCommunityDB(
-            communityId,
-            category,
-            editcontents,
-            location,
-            editTitle,
-            username,
-            imageList
-          )
-        );
-      }, 1000);
-      
+      dispatch(imgActions.setFiles(imageList, imageNum));
+      dispatch(
+        editCommunityDB(
+          communityId,
+          category,
+          editcontents,
+          location,
+          editTitle,
+          username,
+          imageList
+        )
+      );
     }
   };
 
@@ -134,17 +138,17 @@ const CommunityPostEdit = (props) => {
     }
   };
 
-  // path에 사용할 카테고리 설정 
+  // path에 사용할 카테고리 설정
   let pathCategory;
-  if (category?.split(' ')[1] === '정보글') {
-    pathCategory = 'catinfo';
-  } else if (category?.split(' ')[1] === '동네'){
-    pathCategory = 'gathering';
+  if (category?.split(" ")[1] === "정보글") {
+    pathCategory = "catinfo";
+  } else if (category?.split(" ")[1] === "동네") {
+    pathCategory = "gathering";
   } else {
-    pathCategory = 'sharing';
+    pathCategory = "sharing";
   }
-  
-  // 커뮤니티 상세 페이지 가져오기 
+
+  // 커뮤니티 상세 페이지 가져오기
   useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [category, communityId, dispatch]);
@@ -197,10 +201,11 @@ const CommunityPostEdit = (props) => {
 
   return (
     <Template props={props}>
+      <SecondSpinner visible={isLoaded} />
       <SecondHeader title="커뮤니티글 수정" />
-      <Grid 
-        bgColor="bgColor" 
-        margin="auto" 
+      <Grid
+        bgColor="white"
+        margin="auto"
         width="90%"
         addstyle={() => {
           return css`
@@ -217,7 +222,8 @@ const CommunityPostEdit = (props) => {
               height: 80vh;
             }
           `;
-        }}>
+        }}
+      >
         <CommunityEditStyle>
           <Grid width="100%" margin="15px auto " height="auto">
             <Input
@@ -435,7 +441,9 @@ const CommunityPostEdit = (props) => {
               bgColor="olive"
               onClick={() =>
                 history.push(
-                  `/community/${location?.split(' ')[2]}/${pathCategory}/postdetail/${communityId}`
+                  `/community/${
+                    location?.split(" ")[2]
+                  }/${pathCategory}/postdetail/${communityId}`
                 )
               }
               addstyle={() => {
@@ -456,9 +464,12 @@ const CommunityPostEdit = (props) => {
       {titleState && <Toast message="제목을 입력해주세요!" />}
       {contentState && <Toast message="내용을 입력해주세요!" />}
       {photoState && <Toast message="삭제할 사진이 없어요!" />}
-      {maxPhotoState && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
-      {prePhotoState && <Toast message="이전에 추가한 사진은 삭제할 수 없어요!" />}
-      {editState && <Toast message="게시글 수정 완료!" />}
+      {maxPhotoState && (
+        <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />
+      )}
+      {prePhotoState && (
+        <Toast message="이전에 추가한 사진은 삭제할 수 없어요!" />
+      )}
     </Template>
   );
 };

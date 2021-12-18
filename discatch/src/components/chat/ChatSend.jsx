@@ -64,7 +64,7 @@ const ChatSendBox = styled.div`
   bottom: 80px;
   display: flex;
   align-items: flex-end;
-  background: #fefdf8;
+  background: #ffffff;
   width: 380px;
   height: 80px;
   padding: 10px;
@@ -127,7 +127,7 @@ const ChatInput = styled.textarea`
   width: 85%;
   height: 60px;
   margin: auto;
-  background: #fefdf8;
+  background: #ffffff;
   resize: none;
   border: none;
   outline: none;

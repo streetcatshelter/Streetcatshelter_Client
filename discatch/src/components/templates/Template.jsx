@@ -38,7 +38,7 @@ const Background = styled.div`
   z-index: -1;
   width: 100vw;
   height: 100%;
-  background: #fefdf8;
+  background: #ffffff;
 `;
 const Wrapper = styled.div`
   width: 100%;
@@ -51,7 +51,7 @@ const Content = styled.div`
   max-width: 420px;
   width: 100vw;
   height: 100%;
-  background: #fefdf8;
+  background: #ffffff;
 `;
 
 export default Template;

@@ -51,8 +51,8 @@ const ButtonStyle = styled.button`
 const FloatButton = styled.button`
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   z-index: 10;
-  width: 50px;
-  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   background-color: #b5bb19;
   color: #ffffff;
   box-sizing: border-box;

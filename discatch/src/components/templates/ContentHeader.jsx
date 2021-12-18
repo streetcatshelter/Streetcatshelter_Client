@@ -72,7 +72,11 @@ const ContentHeader = ({
     <>
       <Wrapper>
         <UserInfoBox>
-          <Avatar src={profileImageUrl} alt="profileImage" />
+          <Avatar
+            src={profileImageUrl}
+            alt={profileImageUrl}
+            onClick={OpenProfile}
+          />
           <div
             style={{
               width: "100%",

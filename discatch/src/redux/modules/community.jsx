@@ -15,6 +15,7 @@ export const addCommunityDB = (
   nickName
 ) => {
   return function (dispatch, getState, { history }) {
+    dispatch(itemLoading(true));
     const path = category.split(" ");
     let pathName = null;
     if (path[1] === "정보글") {
@@ -39,6 +40,7 @@ export const addCommunityDB = (
           .post("/community/create", postInfo)
           .then((res) => {
             history.push(`/community/${detailLocation}/${pathName}`);
+            dispatch(itemLoading(false));
             dispatch(imgActions.setInitialState());
           })
           .catch((err) => {});
@@ -114,6 +116,8 @@ export const editCommunityDB = (
   imageList
 ) => {
   return function (dispatch, getState, { history }) {
+    dispatch(itemLoading(true));
+
     const imgFile = getState().image.file;
     let path;
     if (category?.split(" ")[1] === "정보글") {
@@ -160,6 +164,8 @@ export const editCommunityDB = (
               username: username,
             })
             .then((res) => {
+              dispatch(editToast(true));
+              dispatch(itemLoading(false));
               dispatch(imgActions.setInitialState());
               history.push(
                 `/community/${location}/${path}/postdetail/${communityId}`
@@ -191,6 +197,7 @@ export const deleteCommunityDB =
     }
     try {
       const data = await communityApi.deleteCommunity(communityId);
+      dispatch(deleteToast(true));
       history.push({
         pathname: `/community/${location}/${pathName}`,
         state: { location },
@@ -250,6 +257,8 @@ const initialState = {
   itemLoaded: false,
   itemDetailLoaded: false,
   toast: false,
+  editToast: false,
+  deleteToast: false,
 };
 
 // REDUCER
@@ -361,6 +370,12 @@ const community = createSlice({
     errorToast: (state, action) => {
       state.toast = action.payload;
     },
+    editToast: (state, action) => {
+      state.editToast = action.payload;
+    },
+    deleteToast: (state, action) => {
+      state.deleteToast = action.payload;
+    },
     getOneCommunity: (state, action) => {
       state.communityDetail = action.payload;
       state.itemDetailLoaded = false;
@@ -402,6 +417,8 @@ export const {
   itemDetailLoading,
   resetList,
   errorToast,
+  editToast,
+  deleteToast,
   getOneCommunity,
   deleteComment,
   likeToggle,

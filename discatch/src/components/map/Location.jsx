@@ -458,6 +458,7 @@ const Location = (props) => {
             border: "none",
             marginRight: "20px",
             outline: "none",
+            height: "25px",
           }}
           type="text"
           placeholder="검색어를 입력하세요."
@@ -468,7 +469,8 @@ const Location = (props) => {
           style={{
             border: 0,
             backgroundColor: "#FBD986",
-            width: "50px",
+            width: "80px",
+            height: "30px",
             borderRadius: "15px",
             cursor: "pointer",
           }}

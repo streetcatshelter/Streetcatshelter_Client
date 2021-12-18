@@ -97,7 +97,7 @@ const CalendarDates = (props) => {
 };
 
 const Form = styled.li`
-  background: #fefdf8;
+  background: #ffffff;
   list-style: none;
   position: relative;
   display: inline-block;

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, SecondHeader } from "../../components";
+import { Template, SecondHeader, SecondSpinner } from "../../components";
 import { CommunityPreview } from "../../components/index";
 import { Toast } from "../../components";
 
@@ -26,6 +26,7 @@ import { useLocation } from "react-router-dom";
 import { Camera } from "react-feather";
 
 const CommunityPostWrite = (props) => {
+  const isLoaded = useSelector((state) => state.community.itemLoaded);
   const dispatch = useDispatch();
   const path = useLocation();
   const pathName = path.pathname.split("/");
@@ -38,7 +39,7 @@ const CommunityPostWrite = (props) => {
   // 동네 이름
   let location = detailLocation;
 
-  // path에 사용할 카테고리 설정 
+  // path에 사용할 카테고리 설정
   let firstCategory;
   if (pathName[3] === "catinfo") {
     firstCategory = "고양이 정보글";
@@ -70,13 +71,13 @@ const CommunityPostWrite = (props) => {
     if (fileNum === 5) {
       setMaxPhotoState(true);
     }
-  }
+  };
 
   // 글 작성시 필요한 정보
   const nickName = useSelector((state) => state.mypage.userInfo.nickname);
   const [category, setCategory] = React.useState(firstCategory);
-  const [title, setTitle] = React.useState('');
-  const [contents, setContents] = React.useState('');
+  const [title, setTitle] = React.useState("");
+  const [contents, setContents] = React.useState("");
 
   // 토스트 모달
   const [titleState, setTitleState] = useState(false);
@@ -104,21 +105,28 @@ const CommunityPostWrite = (props) => {
 
   // 커뮤니티 글 작성하기
   const writeBtn = () => {
-    if (title === '') {
+    if (title === "") {
       setTitleState(true);
-    } else if (contents === '') {
+    } else if (contents === "") {
       setContentState(true);
     } else {
       dispatch(
-        addCommunityDB(category, contents, location, title, detailLocation, nickName)
+        addCommunityDB(
+          category,
+          contents,
+          location,
+          title,
+          detailLocation,
+          nickName
+        )
       );
     }
   };
 
   // 취소하기
   const cancelBtn = () => {
-    history.push({pathname:`${backPath}`, state: { location }});
-  }
+    history.push({ pathname: `${backPath}`, state: { location } });
+  };
 
   // 마지막 사진 삭제하기
   const delLastImageBtn = () => {
@@ -192,11 +200,11 @@ const CommunityPostWrite = (props) => {
 
   return (
     <Template props={props}>
+      <SecondSpinner visible={isLoaded} />
       <SecondHeader title="커뮤니티글 등록" />
-      <Grid 
-        bgColor="bgColor" 
-        margin="auto" 
-        width="90%" 
+      <Grid
+        margin="auto"
+        width="90%"
         height="auto"
         addstyle={() => {
           return css`
@@ -213,7 +221,8 @@ const CommunityPostWrite = (props) => {
               height: 80vh;
             }
           `;
-        }}>
+        }}
+      >
         <CommunityWriteStyle>
           <Grid width="96%" margin="15px auto " height="auto">
             <Select
@@ -420,7 +429,9 @@ const CommunityPostWrite = (props) => {
       {titleState && <Toast message="제목을 입력해주세요!" />}
       {contentState && <Toast message="내용을 입력해주세요!" />}
       {photoState && <Toast message="삭제할 사진이 없어요!" />}
-      {maxPhotoState && <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />}
+      {maxPhotoState && (
+        <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />
+      )}
     </Template>
   );
 };

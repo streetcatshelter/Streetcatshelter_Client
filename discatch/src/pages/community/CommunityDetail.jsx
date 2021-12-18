@@ -32,6 +32,7 @@ import {
   getMoreCommunityDB,
   resetList,
   errorToast,
+  deleteToast,
 } from "../../redux/modules/community";
 import { history } from "../../redux/configureStore";
 
@@ -53,7 +54,8 @@ const CommunityDetail = (props) => {
 
   // 토스트 모달
   const toastState = useSelector((state) => state.community.toast);
-
+  const deleteState = useSelector((state) => state.community.deleteToast);
+  console.log(deleteState);
   // 무한 스크롤
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
@@ -108,6 +110,14 @@ const CommunityDetail = (props) => {
     }
   }, [toastState, dispatch]);
 
+  useEffect(() => {
+    if (deleteState) {
+      setTimeout(() => {
+        dispatch(deleteToast(false));
+      }, 1500);
+    }
+  }, [deleteState]);
+
   return (
     <Template props={props}>
       {toastState && <Toast message="페이지에 오류가있어요" />}
@@ -143,6 +153,7 @@ const CommunityDetail = (props) => {
           }}
         />
       </Button>
+      {deleteState && <Toast message="게시물 삭제 완료!" />}
     </Template>
   );
 };

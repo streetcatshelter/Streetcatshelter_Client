@@ -35,7 +35,6 @@ const CommunityPostDetail = (props) => {
   const isLoaded = useSelector((state) => state.community.itemDetailLoaded);
 
   // 토스트 모달
-  const [deleteState, setDeleteState] = useState(false);
   const editState = useSelector((state) => state.community.editToast);
 
   // 커뮤니티 글 정보
@@ -48,10 +47,7 @@ const CommunityPostDetail = (props) => {
 
   // 커뮤니티 글 삭제
   const deleteCommunity = () => {
-    setDeleteState(true);
-    setTimeout(() => {
-      dispatch(deleteCommunityDB(communityId, category, location));
-    }, 1000);
+    dispatch(deleteCommunityDB(communityId, category, location));
   };
 
   // path에 사용할 카테고리 설정
@@ -122,7 +118,6 @@ const CommunityPostDetail = (props) => {
         </div>
       </div>
 
-      {deleteState && <Toast message="게시물 삭제 완료!" />}
       {editState && <Toast message="게시글 수정 완료!" />}
     </Template>
   );

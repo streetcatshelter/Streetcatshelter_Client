@@ -197,6 +197,7 @@ export const deleteCommunityDB =
     }
     try {
       const data = await communityApi.deleteCommunity(communityId);
+      dispatch(deleteToast(true));
       history.push({
         pathname: `/community/${location}/${pathName}`,
         state: { location },
@@ -257,6 +258,7 @@ const initialState = {
   itemDetailLoaded: false,
   toast: false,
   editToast: false,
+  deleteToast: false,
 };
 
 // REDUCER
@@ -371,6 +373,9 @@ const community = createSlice({
     editToast: (state, action) => {
       state.editToast = action.payload;
     },
+    deleteToast: (state, action) => {
+      state.deleteToast = action.payload;
+    },
     getOneCommunity: (state, action) => {
       state.communityDetail = action.payload;
       state.itemDetailLoaded = false;
@@ -413,6 +418,7 @@ export const {
   resetList,
   errorToast,
   editToast,
+  deleteToast,
   getOneCommunity,
   deleteComment,
   likeToggle,

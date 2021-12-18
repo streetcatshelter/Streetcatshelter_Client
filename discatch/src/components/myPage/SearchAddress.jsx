@@ -81,7 +81,7 @@ const SearchAddress = (props) => {
 
   // 토스트 모달
   useEffect(() => {
-    if (setSecondToastState) {
+    if (toastState) {
       setTimeout(() => {
         setToastState(false);
       }, 1500);
@@ -108,16 +108,13 @@ const SearchAddress = (props) => {
           />
         </Background>
       ) : null}
-      {toastState ? (
-        <Toast
-          message="최대 3동네까지 등록하실 수 있습니다"
+      {toastState && <Toast
+          message="최대 3동네까지 등록하실 수 있어요!"
           message2="수정을 원하시면 동네 삭제 후 다시 시도해주세요!"
-        />
-      ) : secondToastState ? (
-        <Toast message="이름이 같은 동은 한 곳만 등록 가능합니다." />
-      ) : (
-        ""
-      )}
+        />}
+      {secondToastState && <Toast
+        message="이름이 같은 동은 한 곳만 등록 가능해요!"
+      />}
     </>
   );
 };

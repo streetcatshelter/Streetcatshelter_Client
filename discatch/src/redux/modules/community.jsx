@@ -15,6 +15,7 @@ export const addCommunityDB = (
   nickName
 ) => {
   return function (dispatch, getState, { history }) {
+    dispatch(itemLoading(true));
     const path = category.split(" ");
     let pathName = null;
     if (path[1] === "정보글") {
@@ -39,6 +40,7 @@ export const addCommunityDB = (
           .post("/community/create", postInfo)
           .then((res) => {
             history.push(`/community/${detailLocation}/${pathName}`);
+            dispatch(itemLoading(false));
             dispatch(imgActions.setInitialState());
           })
           .catch((err) => {});

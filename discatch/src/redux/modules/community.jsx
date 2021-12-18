@@ -116,6 +116,8 @@ export const editCommunityDB = (
   imageList
 ) => {
   return function (dispatch, getState, { history }) {
+    dispatch(itemLoading(true));
+
     const imgFile = getState().image.file;
     let path;
     if (category?.split(" ")[1] === "정보글") {
@@ -162,6 +164,8 @@ export const editCommunityDB = (
               username: username,
             })
             .then((res) => {
+              dispatch(editToast(true));
+              dispatch(itemLoading(false));
               dispatch(imgActions.setInitialState());
               history.push(
                 `/community/${location}/${path}/postdetail/${communityId}`
@@ -252,6 +256,7 @@ const initialState = {
   itemLoaded: false,
   itemDetailLoaded: false,
   toast: false,
+  editToast: false,
 };
 
 // REDUCER
@@ -363,6 +368,9 @@ const community = createSlice({
     errorToast: (state, action) => {
       state.toast = action.payload;
     },
+    editToast: (state, action) => {
+      state.editToast = action.payload;
+    },
     getOneCommunity: (state, action) => {
       state.communityDetail = action.payload;
       state.itemDetailLoaded = false;
@@ -404,6 +412,7 @@ export const {
   itemDetailLoading,
   resetList,
   errorToast,
+  editToast,
   getOneCommunity,
   deleteComment,
   likeToggle,

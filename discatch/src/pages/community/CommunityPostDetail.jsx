@@ -12,7 +12,7 @@ import {
 } from "../../components";
 
 // ELEMENTS
-import { Grid, Text } from "../../elements";
+import { Text } from "../../elements";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -22,6 +22,7 @@ import { history } from "../../redux/configureStore";
 import {
   getOneCommunityDB,
   deleteCommunityDB,
+  editToast,
 } from "../../redux/modules/community";
 
 const CommunityPostDetail = (props) => {
@@ -35,6 +36,7 @@ const CommunityPostDetail = (props) => {
 
   // 토스트 모달
   const [deleteState, setDeleteState] = useState(false);
+  const editState = useSelector((state) => state.community.editToast);
 
   // 커뮤니티 글 정보
   const communityId = props.match.params.communityId;
@@ -66,6 +68,14 @@ const CommunityPostDetail = (props) => {
   useEffect(() => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
+
+  useEffect(() => {
+    if (editState) {
+      setTimeout(() => {
+        dispatch(editToast(false));
+      }, 1500);
+    }
+  }, [editState]);
 
   return (
     <Template props={props}>
@@ -113,6 +123,7 @@ const CommunityPostDetail = (props) => {
       </div>
 
       {deleteState && <Toast message="게시물 삭제 완료!" />}
+      {editState && <Toast message="게시글 수정 완료!" />}
     </Template>
   );
 };

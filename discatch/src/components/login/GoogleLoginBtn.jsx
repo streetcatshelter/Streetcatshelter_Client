@@ -5,7 +5,7 @@ import React from "react";
 import styled from "styled-components";
 import Google from "../../styles/images/icon-Google.png";
 // AUTH
-import { redirect_google_uri, GOOGLE_API_KEY } from "../../shared/oauthenv";
+import { dev_redirect_google_uri, GOOGLE_API_KEY } from "../../shared/oauthenv";
 const GoogleLoginBtn = () => {
   return (
     <div>
@@ -13,7 +13,7 @@ const GoogleLoginBtn = () => {
         background="#FFFFFF"
         onClick={() => {
           window.open(
-            `https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email&response_type=code&client_id=${GOOGLE_API_KEY}&redirect_uri=${redirect_google_uri}`,
+            `https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email&response_type=code&client_id=${GOOGLE_API_KEY}&redirect_uri=${dev_redirect_google_uri}`,
             "_blank"
           );
         }}

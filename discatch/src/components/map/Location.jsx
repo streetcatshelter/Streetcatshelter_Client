@@ -157,6 +157,19 @@ const Location = (props) => {
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(location, placesSearchCB);
 
+    // 지도에 마커를 표시합니다.
+    kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+      //클릭한 위도, 경도 정보를 가져옵니다.
+      const latlng = mouseEvent.latLng;
+      //위도 경도 값을 useState를 이용해서 useEffect 밖으로 빼냅니다.
+      setLatitude(latlng.getLat());
+      setLongitude(latlng.getLng());
+      //마커 위치를 클릭한 위치로 옮깁니다.
+      marker.setPosition(latlng);
+      //마커를 지도상에 보여줍니다.
+      marker.setMap(map);
+    });
+
     // 고양이 마커 가져오기
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {

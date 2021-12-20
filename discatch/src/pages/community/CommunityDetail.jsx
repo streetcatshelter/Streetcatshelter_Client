@@ -55,7 +55,7 @@ const CommunityDetail = (props) => {
   // 토스트 모달
   const toastState = useSelector((state) => state.community.toast);
   const deleteState = useSelector((state) => state.community.deleteToast);
-  console.log(deleteState);
+
   // 무한 스크롤
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
@@ -116,7 +116,7 @@ const CommunityDetail = (props) => {
         dispatch(deleteToast(false));
       }, 1500);
     }
-  }, [deleteState]);
+  }, [deleteState, dispatch]);
 
   return (
     <Template props={props}>

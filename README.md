@@ -59,7 +59,7 @@ disCATch Link : https://discatch.site <br>
 <img src="https://img.shields.io/badge/HTML5-CA4245.svg?&style=for-the-badge&logo=HTML5&logoColor=white" /> &nbsp;
 <img src="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white" /> &nbsp;
 
-## ** 🐱기능 소개 및 서비스 소개 🐱 **
+## 🐱기능 소개 및 서비스 소개 🐱 
 
 - 빠른 업로드를 위한 aws 람다를 통한 이미지 리사이징
 - 웹소켓을 통한 실시간 채팅 구현

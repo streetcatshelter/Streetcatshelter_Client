@@ -1,9 +1,8 @@
 // LIBRARY
 import React from "react";
-
 // STYLE
 import styled from "styled-components";
-import Google from "../../styles/images/icon-Google.png";
+import Google from "../../styles/images/icon-googleBtn.png";
 // AUTH
 import { redirect_google_uri, GOOGLE_API_KEY } from "../../shared/oauthenv";
 const GoogleLoginBtn = () => {
@@ -33,8 +32,9 @@ const GoogleLoginBtn = () => {
 
 const LoginBtn = styled.div`
   display: flex;
+  align-items:center;
   width: 250px;
-  height: 50px;
+  height: 55px;
   margin: 10px 0px;
   background: ${(props) => props.background};
   border-radius: 10px;

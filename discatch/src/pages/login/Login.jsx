@@ -51,7 +51,8 @@ const Login = (props) => {
                 />
                 <p>카카오로 로그인하기</p>
               </LoginBtn>
-              <LoginBtn
+              {/* <LoginBtn 
+                disabled="disabled"
                 background="#03c75a"
                 onClick={() => {
                   window.location.href = oauthNaverURL;
@@ -67,7 +68,7 @@ const Login = (props) => {
                 <p style={{ color: "#ffffff" }}>네이버로 로그인하기</p>
               </LoginBtn>
 
-              <GoogleLoginBtn />
+              <GoogleLoginBtn /> */}
             </LoginWrap>
           </Body>
         </Inner>
@@ -97,7 +98,7 @@ const Inner = styled.div`
   }
 `;
 const Head = styled.div`
-  height: 35%;
+  height: 60%;
   margin: auto;
   p {
     font-size: 45px;
@@ -138,14 +139,18 @@ const Img = styled.img`
   border-radius: ${(props) => props.borderRadius};
 `;
 const LoginWrap = styled.div`
+  height:40%;
+  align-items:center;
   display: flex;
-  flex-direction: column;
+
 `;
-const LoginBtn = styled.div`
+const LoginBtn = styled.button`
   display: flex;
+  align-items:center;
   width: 250px;
-  height: 50px;
+  height: 55px;
   margin: 10px 0px;
+  border:none;
   background: ${(props) => props.background};
   border-radius: 10px;
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));

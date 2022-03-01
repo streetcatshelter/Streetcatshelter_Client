@@ -196,7 +196,7 @@ export const deleteCommunityDB =
       pathName = "sharing";
     }
     try {
-      const data = await communityApi.deleteCommunity(communityId);
+      await communityApi.deleteCommunity(communityId);
       dispatch(deleteToast(true));
       history.push({
         pathname: `/community/${location}/${pathName}`,
@@ -212,7 +212,7 @@ export const addCommunityCommentDB =
   (contents, communityId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await communityApi.createCommunityComment(
+       await communityApi.createCommunityComment(
         contents,
         communityId
       );
@@ -227,7 +227,7 @@ export const deleteCommunityCommentDB =
   (commentId, communityId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await communityApi.deleteCommunityComment(commentId);
+       await communityApi.deleteCommunityComment(commentId);
       dispatch(deleteComment(commentId));
     } catch (err) {
       console.error(err);
@@ -239,7 +239,7 @@ export const communityLikeToggleDB =
   (communityId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const data = await communityApi.communityLikeToggle(communityId);
+      await communityApi.communityLikeToggle(communityId);
       dispatch(likeToggle());
     } catch (err) {
       console.error(err);

@@ -61,7 +61,7 @@ const _deleteRoom =
   (roomId, location) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await chatApi.deleteRoom(roomId);
+      await chatApi.deleteRoom(roomId);
       history.push({
         pathname: "/chat",
         state: { location },

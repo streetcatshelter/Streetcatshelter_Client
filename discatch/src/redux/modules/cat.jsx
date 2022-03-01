@@ -86,7 +86,7 @@ export const __editCatInfo =
         neutering: neutering,
       };
       try {
-        const { data } = await catApi.editCatInfo(catInfo, catId);
+        await catApi.editCatInfo(catInfo, catId);
         dispatch(imgActions.setInitialState());
         dispatch(setInitialState([]));
         history.goBack();
@@ -156,7 +156,7 @@ export const __editCatDetailInfo =
         snack: snack,
         water: water,
       };
-      const { data } = await catApi.editCatDetailInfo(detailInfo, catDetailId);
+      await catApi.editCatDetailInfo(detailInfo, catDetailId);
       dispatch(setInitialState([]));
       dispatch(__getDiary(catId));
     } catch (err) {
@@ -279,7 +279,7 @@ export const __catLike =
   (catId, path) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.catLike(catId);
+      await catApi.catLike(catId);
       dispatch(likeToggle({ catId: catId, path: path }));
     } catch (err) {
       console.error(err);
@@ -291,7 +291,7 @@ export const __catDiaryLike =
   (catDetailId, path) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.catDiaryLike(catDetailId);
+      await catApi.catDiaryLike(catDetailId);
       dispatch(likeToggle(path));
     } catch (err) {
       console.error(err);
@@ -303,7 +303,7 @@ export const __deleteCatDetail =
   (catDetailId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.deleteCatDetail(catDetailId);
+      await catApi.deleteCatDetail(catDetailId);
       history.goBack();
       dispatch(_deleteToast(true));
     } catch (err) {

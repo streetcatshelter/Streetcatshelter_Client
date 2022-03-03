@@ -43,7 +43,6 @@ export const addCommunityDB = (
             dispatch(itemLoading(false));
             dispatch(imgActions.setInitialState());
           })
-          .catch((err) => {});
       })
     );
   };
@@ -63,7 +62,7 @@ export const getCommunityDB =
       } else if (category.split(" ")[1] === "고양이") {
         dispatch(getSharing(data.data));
       }
-    } catch (err) {
+    } catch (e) {
       dispatch(errorToast(true));
     }
   };
@@ -86,9 +85,9 @@ export const getMoreCommunityDB =
       } else if (category.split(" ")[1] === "고양이") {
         dispatch(getMoreSharing(data.data));
       }
-    } catch (err) {
+    } catch (e) {
       dispatch(errorToast(true));
-      console.error(err);
+      console.error(e);
     }
   };
 
@@ -100,8 +99,8 @@ export const getOneCommunityDB =
       dispatch(itemDetailLoading(true));
       const data = await communityApi.getDetailCommunity(communityId);
       dispatch(getOneCommunity(data.data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -171,8 +170,8 @@ export const editCommunityDB = (
                 `/community/${location}/${path}/postdetail/${communityId}`
               );
             })
-            .catch((err) => {
-              console.log(err);
+            .catch((e) => {
+              console.error(e);
             });
         })
       );
@@ -202,8 +201,8 @@ export const deleteCommunityDB =
         pathname: `/community/${location}/${pathName}`,
         state: { location },
       });
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -217,8 +216,8 @@ export const addCommunityCommentDB =
         communityId
       );
       dispatch(getOneCommunityDB(communityId));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -229,8 +228,8 @@ export const deleteCommunityCommentDB =
     try {
        await communityApi.deleteCommunityComment(commentId);
       dispatch(deleteComment(commentId));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -241,8 +240,8 @@ export const communityLikeToggleDB =
     try {
       await communityApi.communityLikeToggle(communityId);
       dispatch(likeToggle());
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 

@@ -24,7 +24,9 @@ const _getCalender =
       dispatch(itemLoading(true));
       const { data } = await myPageApi.getCalendar(year, month);
       dispatch(setCalendar(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _getCalenderDetail =
@@ -37,7 +39,9 @@ const _getCalenderDetail =
       } else {
         return dispatch(setCalendarDetail(data));
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _getLikedAllCat =
@@ -47,7 +51,9 @@ const _getLikedAllCat =
       dispatch(itemLoading(true));
       const { data } = await myPageApi.getLikedAllCat();
       dispatch(setLikedAllCat(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _getMoreLikedAllCat =
@@ -57,7 +63,9 @@ const _getMoreLikedAllCat =
       dispatch(itemLoading(true));
       const { data } = await myPageApi.getMoreLikedAllCat(page);
       dispatch(setMoreLikedAllCat(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _getNotice =
@@ -67,7 +75,9 @@ const _getNotice =
       dispatch(itemLoading(true));
       const { data } = await myPageApi.getNotice();
       dispatch(setNotice(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _getOneNotice =
@@ -77,7 +87,9 @@ const _getOneNotice =
       dispatch(itemLoading(true));
       const { data } = await myPageApi.getOneNotice(id);
       dispatch(setOneNotice(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _getUserProfile =
@@ -87,7 +99,9 @@ const _getUserProfile =
       dispatch(userLoading(true));
       const { data } = await myPageApi.getUserProfile(userRandomId);
       dispatch(setUserProfile(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _editMyInfo = (nickName, village, setUserToastState) => {
@@ -109,8 +123,8 @@ const _editMyInfo = (nickName, village, setUserToastState) => {
               dispatch(imgActions.setInitialState());
               history.push("/mypage");
             })
-            .catch((err) => {
-              console.error(err);
+            .catch((e) => {
+              console.error(e);
               setUserToastState(true);
             });
         })
@@ -127,8 +141,8 @@ const _editMyInfo = (nickName, village, setUserToastState) => {
           dispatch(imgActions.setInitialState());
           history.push("/mypage");
         })
-        .catch((err) => {
-          console.error(err);
+        .catch((e) => {
+          console.error(e);
           setUserToastState(true);
         });
     }

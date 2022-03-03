@@ -42,8 +42,8 @@ export const __createCatInfo = (
                 state: { location: pathLocation },
               });
             })
-            .catch((err) => {
-              console.error(err);
+            .catch((e) => {
+              console.error(e);
             });
         })
       );
@@ -72,8 +72,8 @@ export const __editCatInfo =
               dispatch(imgActions.setInitialState());
               dispatch(setInitialState([]));
             })
-            .catch((err) => {
-              console.error(err);
+            .catch((e) => {
+              console.error(e);
             });
         })
       );
@@ -90,8 +90,8 @@ export const __editCatInfo =
         dispatch(imgActions.setInitialState());
         dispatch(setInitialState([]));
         history.goBack();
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        console.error(e);
       }
     }
   };
@@ -132,8 +132,8 @@ export const __createCatDetailInfo = (
               dispatch(setInitialState([]));
               dispatch(__getDiary(catId));
             })
-            .catch((err) => {
-              console.error(err);
+            .catch((e) => {
+              console.error(e);
             });
         })
       );
@@ -159,8 +159,8 @@ export const __editCatDetailInfo =
       await catApi.editCatDetailInfo(detailInfo, catDetailId);
       dispatch(setInitialState([]));
       dispatch(__getDiary(catId));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -172,8 +172,8 @@ export const __getAllCatLocation =
       dispatch(postLoading(true));
       const { data } = await catApi.getCatAllLocation(location);
       dispatch(getCatAllLocation(data, null));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -185,8 +185,8 @@ export const __getCatLocation =
       dispatch(postLoading(true));
       const { data } = await catApi.getCatLocation(location);
       dispatch(getCatLocation(data, null));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -198,8 +198,8 @@ export const __getMoreCatLocation =
       dispatch(postLoading(true));
       const { data } = await catApi.getMoreCatLocation(location, page);
       dispatch(getMoreCatLocation(data, null));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -210,8 +210,8 @@ export const __getCatDetail =
     try {
       const { data } = await catApi.getCatDetail(catDetailId);
       dispatch(getCatDetail(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -221,8 +221,8 @@ export const __getCatInfo =
     try {
       const { data } = await catApi.getCatInfo(catId);
       dispatch(getCatInfo(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -233,8 +233,8 @@ export const __getCalendar =
     try {
       const { data } = await catApi.getCatCalendar(catId, month, year);
       dispatch(getCalendar(data.date));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -245,8 +245,8 @@ export const __getCalendarDetail =
     try {
       const { data } = await catApi.getCalendarDetail(catId, day, month, year);
       dispatch(getDetailCalendar(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -257,8 +257,8 @@ export const __getDiary =
     try {
       const { data } = await catApi.getCatDiary(catId, size);
       dispatch(getDiary(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -269,8 +269,8 @@ export const __getGallery =
     try {
       const { data } = await catApi.getCatGallery(catId, size);
       dispatch(getGallery(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -281,8 +281,8 @@ export const __catLike =
     try {
       await catApi.catLike(catId);
       dispatch(likeToggle({ catId: catId, path: path }));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -293,8 +293,8 @@ export const __catDiaryLike =
     try {
       await catApi.catDiaryLike(catDetailId);
       dispatch(likeToggle(path));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -306,8 +306,8 @@ export const __deleteCatDetail =
       await catApi.deleteCatDetail(catDetailId);
       history.goBack();
       dispatch(_deleteToast(true));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 

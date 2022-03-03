@@ -9,8 +9,8 @@ export const __createCatComment =
     try {
       await catApi.createCatComment(catId, contents);
       dispatch(createCatComment({ contents }));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -24,8 +24,8 @@ export const __createCatDetailComment =
         contents
       );
       dispatch(createCatDetailComment({ contents }));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -36,8 +36,8 @@ export const __getComment =
     try {
       const { data } = await catApi.getComment(catId, size);
       dispatch(getComment(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -48,8 +48,8 @@ export const __getDetailComment =
     try {
       const { data } = await catApi.getDetailComment(catDetailId, size);
       dispatch(getDetailComment(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -60,8 +60,8 @@ export const __deleteComment =
     try {
       await catApi.deleteCatComment(commentId);
       dispatch(deleteCatComment(commentId));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 

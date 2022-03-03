@@ -9,7 +9,9 @@ const _getRooms =
       dispatch(loading(true));
       const { data } = await chatApi.getRooms();
       dispatch(setRooms(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _createRoom =
@@ -32,7 +34,9 @@ const _getMessage =
       const { data } = await chatApi.getMessage(roomId, page);
 
       dispatch(setChatMessage(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _getMoreMessage =
@@ -44,7 +48,9 @@ const _getMoreMessage =
       const { data } = await chatApi.getMoreMessage(roomId, page);
 
       dispatch(setChatMessage(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _getRoomInfo =
@@ -54,7 +60,9 @@ const _getRoomInfo =
       dispatch(loading(true));
       const { data } = await chatApi.getRoomInfo(roomId);
       dispatch(setChatInfo(data));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _deleteRoom =
@@ -67,7 +75,9 @@ const _deleteRoom =
         state: { location },
       });
       dispatch(deleteRoom(roomId));
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const initialState = {

@@ -102,6 +102,7 @@ const Button = styled.button`
   background: #fbd986;
   margin: auto;
   padding: 2px;
+  cursor: pointer;
   &:hover {
     transition: all 0.3s ease-in-out;
     background-color: #cbcf52;
@@ -129,6 +130,7 @@ const CloseButton = styled.button`
   padding: 3px;
   z-index: 999;
   margin: 10px;
+  cursor: pointer;
   &:hover {
     transition: all 0.3s ease-in-out;
     background-color: #cbcf52;

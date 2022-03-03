@@ -79,7 +79,7 @@ const Slide = (props) => {
 };
 
 const Background = styled.div`
-  width: 500%;
+  width: 100%;
   height: 100%;
 `;
 
@@ -94,7 +94,6 @@ const WrapperBox = styled.div`
 
 const InnerBox = styled.div`
   position: absolute;
-
   transform: translate(-50%, 0%);
   width: 100%;
   height: 100%;
@@ -187,15 +186,14 @@ const MainText = styled.div`
   }
 `;
 const Button = styled.button`
+  cursor: pointer;
   font-weight: 900;
   width: 240px;
   height: 50px;
   border-radius: 20px;
-  border: none;
   background: #fbd986;
   color: #000000;
   font-size: 18px;
-  cursor: pointer;
   border: 2px dashed #d19b61;
   &:hover {
     background: #b5bb19;

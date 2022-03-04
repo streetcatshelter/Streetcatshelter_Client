@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -17,6 +17,9 @@ import {
   __createCatComment,
   __createCatDetailComment,
 } from "../../redux/modules/comment";
+
+// HOOKS
+import useToast from "../../hooks/useToast";
 
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();
@@ -59,13 +62,7 @@ const CommentList = ({ props, path, catId, communityId }) => {
   };
 
   // 토스트 모달
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    }
-  }, [toastState]);
+  useToast(toastState, setToastState);
 
   return (
     <>

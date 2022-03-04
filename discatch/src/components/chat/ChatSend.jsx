@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // STYLE
 import styled from "styled-components";
@@ -7,16 +7,13 @@ import styled from "styled-components";
 // COMPONENTS
 import { Toast } from "../";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+
 const ChatSend = ({ sendMessage }) => {
   //토스트모달 (공백, 특수문자 입력시  경고창)
   const [toastState, setToastState] = useState(false);
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    }
-  }, [toastState]);
+  useToast(toastState, setToastState);
 
   // 메세지 state
   const [message, setMessage] = useState("");

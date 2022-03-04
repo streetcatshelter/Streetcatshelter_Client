@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 // STYLE
@@ -24,6 +24,9 @@ import Community1 from "../../styles/images/Community1.png";
 import Community2 from "../../styles/images/Community2.png";
 import Community3 from "../../styles/images/Community3.png";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+
 const Community = (props) => {
   // 페이지 로딩 여부
   const isLoaded = useSelector((state) => state.community.pageLoaded);
@@ -43,13 +46,7 @@ const Community = (props) => {
   // 토스트 모달
   const [villageState, setVillageState] = useState(false);
 
-  useEffect(() => {
-    if (villageState) {
-      setTimeout(() => {
-        setVillageState(false);
-      }, 1500);
-    }
-  }, [villageState]);
+  useToast(villageState, setVillageState);
 
   return (
     <>

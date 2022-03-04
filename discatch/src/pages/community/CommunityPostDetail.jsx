@@ -25,6 +25,9 @@ import {
   editToast,
 } from "../../redux/modules/community";
 
+// HOOKS
+import useDispatchToast from "../../hooks/useDispatchToast"; 
+
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();
 
@@ -65,13 +68,7 @@ const CommunityPostDetail = (props) => {
     dispatch(getOneCommunityDB(communityId));
   }, [communityId, dispatch]);
 
-  useEffect(() => {
-    if (editState) {
-      setTimeout(() => {
-        dispatch(editToast(false));
-      }, 1500);
-    }
-  }, [editState]);
+  useDispatchToast(editState, editToast);
 
   return (
     <Template props={props}>

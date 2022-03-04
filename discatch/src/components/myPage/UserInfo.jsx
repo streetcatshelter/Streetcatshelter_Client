@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
@@ -14,6 +14,9 @@ import { SearchAddress, Toast } from "..";
 // REDUX
 import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
 import { imgActions } from "../../redux/modules/image";
+
+// HOOKS
+import useToast from "../../hooks/useToast";
 
 const UserInfo = () => {
   const dispatch = useDispatch();
@@ -63,29 +66,11 @@ const UserInfo = () => {
   };
 
   // 토스트 모달
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    } else if (secondToastState) {
-      setTimeout(() => {
-        setSecondToastState(false);
-      }, 1500);
-    } else if (editToastState) {
-      setTimeout(() => {
-        setEditToastState(false);
-      }, 1500);
-    } else if (userToastState) {
-      setTimeout(() => {
-        setUserToastState(false);
-      }, 1500);
-    } else if (maxTextState) {
-      setTimeout(() => {
-        setMaxTextState(false);
-      }, 1500);
-    }
-  }, [toastState, secondToastState, editToastState, userToastState, maxTextState]);
+  useToast(toastState, setToastState);
+  useToast(secondToastState, setSecondToastState);
+  useToast(editToastState, setEditToastState);
+  useToast(userToastState, setUserToastState);
+  useToast(maxTextState, setMaxTextState);
 
   return (
     <React.Fragment>

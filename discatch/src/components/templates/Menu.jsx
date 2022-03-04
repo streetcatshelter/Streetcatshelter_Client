@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 // STYLE
@@ -20,6 +20,9 @@ import { useLocation } from "react-router-dom";
 
 // REDUX
 import { history } from "../../redux/configureStore";
+
+// HOOKS
+import useToast from "../../hooks/useToast";
 
 const Menu = (props) => {
   const pathName = useLocation();
@@ -134,13 +137,7 @@ const Menu = (props) => {
   };
 
   // 토스트 모달 
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    }
-  }, [toastState]);
+  useToast(toastState, setToastState);
 
   return (
     <MenuStyle>

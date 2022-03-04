@@ -25,6 +25,9 @@ import { useLocation } from "react-router-dom";
 // ICON
 import { Camera } from "react-feather";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+
 const CommunityPostWrite = (props) => {
   const isLoaded = useSelector((state) => state.community.itemLoaded);
   const dispatch = useDispatch();
@@ -166,37 +169,10 @@ const CommunityPostWrite = (props) => {
   }, [dispatch]);
 
   // 토스트 모달
-  useEffect(() => {
-    if (titleState) {
-      setTimeout(() => {
-        setTitleState(false);
-      }, 1500);
-    }
-  }, [titleState]);
-
-  useEffect(() => {
-    if (contentState) {
-      setTimeout(() => {
-        setContentState(false);
-      }, 1500);
-    }
-  }, [contentState]);
-
-  useEffect(() => {
-    if (photoState) {
-      setTimeout(() => {
-        setPhotoState(false);
-      }, 1500);
-    }
-  }, [photoState]);
-
-  useEffect(() => {
-    if (maxPhotoState) {
-      setTimeout(() => {
-        setMaxPhotoState(false);
-      }, 1500);
-    }
-  }, [maxPhotoState]);
+  useToast(titleState, setTitleState);
+  useToast(contentState, setContentState);
+  useToast(photoState, setPhotoState);
+  useToast(maxPhotoState, setMaxPhotoState);
 
   return (
     <Template props={props}>

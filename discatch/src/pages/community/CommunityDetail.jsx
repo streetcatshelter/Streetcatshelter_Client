@@ -36,6 +36,10 @@ import {
 } from "../../redux/modules/community";
 import { history } from "../../redux/configureStore";
 
+// HOOKS
+import useDispatchToast from "../../hooks/useDispatchToast"; 
+
+
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -102,21 +106,8 @@ const CommunityDetail = (props) => {
   }, [inView, dispatch]);
 
   // 토스트 모달
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        dispatch(errorToast(false));
-      }, 1500);
-    }
-  }, [toastState, dispatch]);
-
-  useEffect(() => {
-    if (deleteState) {
-      setTimeout(() => {
-        dispatch(deleteToast(false));
-      }, 1500);
-    }
-  }, [deleteState, dispatch]);
+  useDispatchToast(deleteState, deleteToast);
+  useDispatchToast(toastState, errorToast);
 
   return (
     <Template props={props}>

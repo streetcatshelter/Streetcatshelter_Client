@@ -26,6 +26,9 @@ import {
   setInitialState,
 } from "../../redux/modules/cat";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit = props.match.path?.split("/")[1] === "catinfoedit" ? true : false;
@@ -160,60 +163,14 @@ const CatInfoWrite = (props) => {
   }, [edit, catInfo.catTagList, catInfo.catImage, dispatch]);
 
   // 토스트 모달
-  useEffect(() => {
-    if (maxTextState) {
-      setTimeout(() => {
-        setMaxTextState(false);
-      }, 1500);
-    }
-  }, [maxTextState]);
+  useToast(maxTextState, setMaxTextState);
+  useToast(photoState, setPhotoState);
+  useToast(nameState, setNameState);
+  useToast(neuteringState, setNeuteringState);
+  useToast(tagState, setTagState);
+  useToast(accessState, setAccessState);
+  useToast(editToastState, setEditToastState);
 
-  useEffect(() => {
-    if (photoState) {
-      setTimeout(() => {
-        setPhotoState(false);
-      }, 1500);
-    }
-  }, [photoState]);
-
-  useEffect(() => {
-    if (nameState) {
-      setTimeout(() => {
-        setNameState(false);
-      }, 1500);
-    }
-  }, [nameState]);
-
-  useEffect(() => {
-    if (neuteringState) {
-      setTimeout(() => {
-        setNeuteringState(false);
-      }, 1500);
-    }
-  }, [neuteringState]);
-
-  useEffect(() => {
-    if (tagState) {
-      setTimeout(() => {
-        setTagState(false);
-      }, 1500);
-    }
-  }, [tagState]);
-
-  useEffect(() => {
-    if (accessState) {
-      setTimeout(() => {
-        setAccessState(false);
-      }, 1500);
-    }
-  }, [accessState]);
-  useEffect(() => {
-    if (editToastState) {
-      setTimeout(() => {
-        setEditToastState(false);
-      }, 1500);
-    }
-  }, [editToastState]);
 
   return (
     <Template props={props}>

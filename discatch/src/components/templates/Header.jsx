@@ -21,6 +21,10 @@ import { searchMap } from "../../redux/modules/map";
 import { mypageActions } from "../../redux/modules/mypage";
 import { changeToast } from "../../redux/modules/chat";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+import useDispatchToast from "../../hooks/useDispatchToast"; 
+
 const Header = (props) => {
   const dispatch = useDispatch();
   const locationA = useLocation();
@@ -172,20 +176,8 @@ const Header = (props) => {
   };
 
   // 토스트 모달
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    }
-  }, [toastState]);
-  useEffect(() => {
-    if (chatToastState) {
-      setTimeout(() => {
-        dispatch(changeToast(false));
-      }, 1500);
-    }
-  }, [chatToastState, dispatch]);
+  useDispatchToast(chatToastState, changeToast);
+  useToast(toastState, setToastState);
 
   if (!userInfo) {
     return <div></div>;

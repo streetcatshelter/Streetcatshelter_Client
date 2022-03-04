@@ -25,6 +25,9 @@ import { RefreshCcw } from "react-feather";
 import { history } from "../../redux/configureStore";
 import { __getAllCatLocation } from "../../redux/modules/cat";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+
 const Location = (props) => {
   const dispatch = useDispatch();
   const path = useLocation();
@@ -408,21 +411,9 @@ const Location = (props) => {
   }, [catList, position, location, dispatch]);
 
   // 토스트 모달
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    } else if (keywordToastState) {
-      setTimeout(() => {
-        setKeywordToastState(false);
-      }, 1500);
-    } else if (searchToastState) {
-      setTimeout(() => {
-        setSearchToastState(false);
-      }, 1500);
-    }
-  }, [toastState, keywordToastState, searchToastState]);
+  useToast(toastState, setToastState);
+  useToast(keywordToastState, setKeywordToastState);
+  useToast(searchToastState, setSearchToastState);
 
   return (
     <MapWrap>

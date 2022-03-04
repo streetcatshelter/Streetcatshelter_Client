@@ -29,6 +29,9 @@ import { history } from "../../redux/configureStore";
 import { __getCatInfo, _deleteToast } from "../../redux/modules/cat";
 import { __getComment } from "../../redux/modules/comment";
 
+// HOOKS
+import useDispatchToast from "../../hooks/useDispatchToast"; 
+
 const CatDetail = (props) => {
   const dispatch = useDispatch();
   let location = props.location.state?.location;
@@ -72,13 +75,7 @@ const CatDetail = (props) => {
   }, [catId, commentList.length, dispatch]);
 
   // 삭제 시 확인 토스트
-  useEffect(() => {
-    if (deleteToast) {
-      setTimeout(() => {
-        dispatch(_deleteToast(false));
-      }, 1500);
-    }
-  }, [deleteToast, dispatch]);
+  useDispatchToast(deleteToast, _deleteToast);
   
   return (
     <>

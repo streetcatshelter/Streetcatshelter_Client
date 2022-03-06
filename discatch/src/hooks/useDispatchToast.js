@@ -2,15 +2,15 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-function useToast(state, toast) {
+function useDispatchToast(state, action) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (state) {
       setTimeout(() => {
-        dispatch(toast(false));
+        dispatch(action(false));
       }, 1500);
     }
-  }, [state, toast, dispatch]);
+  }, [state, action, dispatch]);
 }
 
-export default useToast;
+export default useDispatchToast;

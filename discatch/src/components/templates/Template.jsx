@@ -20,7 +20,7 @@ const Template = (props) => {
         {props.page === "slider" || props.page === "login" ? (
           <Content margin="0px auto"> {props.children} </Content>
         ) : (
-          <Content margin="60px auto">
+          <Content margin="60px 0 60px -8px">
             <Header path={path} location={location} />
             <>{props.children}</>
             <Menu props={props} />

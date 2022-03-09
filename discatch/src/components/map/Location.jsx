@@ -688,15 +688,9 @@ const Location = (props) => {
           }}
         />
       </Button>
-      {keywordToastState ? (
-        <Toast message="검색 결과가 없습니다." />
-      ) : toastState ? (
-        <Toast message="지도에 위치를 표시해 주세요!" />
-      ) : searchToastState ? (
-        <Toast message="검색어를 입력해 주세요!" />
-      ) : (
-        ""
-      )}
+      {keywordToastState && <Toast message="검색 결과가 없습니다." />}
+      {toastState && <Toast message="지도에 위치를 표시해 주세요!" />}
+      {searchToastState && <Toast message="검색어를 입력해 주세요!" />}
     </MapWrap>
   );
 };

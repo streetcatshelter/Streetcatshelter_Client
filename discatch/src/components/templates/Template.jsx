@@ -20,7 +20,7 @@ const Template = (props) => {
         {props.page === "slider" || props.page === "login" ? (
           <Content margin="0px auto"> {props.children} </Content>
         ) : (
-          <Content margin="60px 0 60px -8px">
+          <Content margin="60px auto">
             <Header path={path} location={location} />
             <>{props.children}</>
             <Menu props={props} />
@@ -45,12 +45,14 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const Content = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: ${(props) => props.margin};
   max-width: 420px;
   width: 100vw;
   height: 100%;
+  right: 8px;
   background: #ffffff;
 `;
 

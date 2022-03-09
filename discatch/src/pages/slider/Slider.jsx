@@ -12,6 +12,7 @@ import { ChevronLeft, ChevronRight, X } from "react-feather";
 import { history } from "../../redux/configureStore";
 
 const TOTAL_SLIDES = 4;
+const slideList = [0,1,2,3,4];
 
 const Slider = (props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -55,22 +56,23 @@ const Slider = (props) => {
           </CloseButton>
         </ButtonWrap>
         <SliderContainer ref={slideRef}>
-          <Slide number="1" />
-          <Slide number="2" />
-          <Slide number="3" />
-          <Slide number="4" />
-          <Slide GoHome={GoHome} number="5" />
+          {slideList.map((slide, idx) => {
+            if (slide < TOTAL_SLIDES) {
+              return (<Slide number={slide+1} index={idx}/>)
+            } else {
+              return (<Slide GoHome={GoHome} number={slide+1} index={idx}/>)
+            }
+          })}
         </SliderContainer>
       </Container>
       <BtnWrap>
         <Button style={{ padding: "3px" }} onClick={prevSlide}>
           <ChevronLeft />
         </Button>
-        <Dot background={currentSlide === 0 ? "#D19B61" : "#FBD986"} />
-        <Dot background={currentSlide === 1 ? "#D19B61" : "#FBD986"} />
-        <Dot background={currentSlide === 2 ? "#D19B61" : "#FBD986"} />
-        <Dot background={currentSlide === 3 ? "#D19B61" : "#FBD986"} />
-        <Dot background={currentSlide === 4 ? "#D19B61" : "#FBD986"} />
+        {slideList.map((slide, idx) => {
+          return (
+            <Dot background={currentSlide === slide ? "#D19B61" : "#FBD986"} index={idx}/>
+          )})}
         <Button style={{ padding: "3px 4px" }} onClick={nextSlide}>
           <ChevronRight />
         </Button>
@@ -102,6 +104,7 @@ const Button = styled.button`
   background: #fbd986;
   margin: auto;
   padding: 2px;
+  cursor: pointer;
   &:hover {
     transition: all 0.3s ease-in-out;
     background-color: #cbcf52;
@@ -129,6 +132,7 @@ const CloseButton = styled.button`
   padding: 3px;
   z-index: 999;
   margin: 10px;
+  cursor: pointer;
   &:hover {
     transition: all 0.3s ease-in-out;
     background-color: #cbcf52;

@@ -69,7 +69,9 @@ const _logout =
       removeToken("TOKEN");
       dispatch(logout());
       history.push("/login");
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 const _setLogin =

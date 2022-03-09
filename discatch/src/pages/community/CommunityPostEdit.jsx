@@ -32,6 +32,9 @@ import {
 
 import { history } from "../../redux/configureStore";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+
 const CommunityPostEdit = (props) => {
   const isLoaded = useSelector((state) => state.community.itemLoaded);
   const dispatch = useDispatch();
@@ -159,46 +162,13 @@ const CommunityPostEdit = (props) => {
   }, [dispatch]);
 
   // 토스트 모달
-  useEffect(() => {
-    if (titleState) {
-      setTimeout(() => {
-        setTitleState(false);
-      }, 1500);
-    }
-  }, [titleState]);
+  useToast(titleState, setTitleState);
+  useToast(contentState, setContentState);
+  useToast(photoState, setPhotoState);
+  useToast(maxPhotoState, setMaxPhotoState);
+  useToast(prePhotoState, setPrePhotoState);
 
-  useEffect(() => {
-    if (contentState) {
-      setTimeout(() => {
-        setContentState(false);
-      }, 1500);
-    }
-  }, [contentState]);
-
-  useEffect(() => {
-    if (photoState) {
-      setTimeout(() => {
-        setPhotoState(false);
-      }, 1500);
-    }
-  }, [photoState]);
-
-  useEffect(() => {
-    if (maxPhotoState) {
-      setTimeout(() => {
-        setMaxPhotoState(false);
-      }, 1500);
-    }
-  }, [maxPhotoState]);
-
-  useEffect(() => {
-    if (prePhotoState) {
-      setTimeout(() => {
-        setPrePhotoState(false);
-      }, 1500);
-    }
-  }, [prePhotoState]);
-
+  
   return (
     <Template props={props}>
       <SecondSpinner visible={isLoaded} />

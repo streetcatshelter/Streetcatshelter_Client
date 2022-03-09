@@ -7,7 +7,7 @@ disCATch Link : https://discatch.site <br>
 
 ## **🔍 프로젝트 소개**
 
-<p>무심코 동네에서 봤던 고양이들을 자주 보고싶은 마음이 드셨던적이 있으신가요? <br/>disCATch는 그런 분들을 위해 고양이를 제보하고 고양이 돌봄을 공유하는 서비스입니다. <br/>함께 하는 마음으로 어제보다 더 나은 묘생권을 위해 오늘부터<b>disCATch</b> 하세요!
+<p>무심코 동네에서 봤던 고양이들을 자주 보고싶은 마음이 드셨던적이 있으신가요? <br/>disCATch는 그런 분들을 위해 고양이를 제보하고 고양이 돌봄을 공유하는 서비스입니다. <br/>함께 하는 마음으로 어제보다 더 나은 묘생권을 위해 오늘부터 <b>disCATch</b> 하세요!
   
 <img src="https://user-images.githubusercontent.com/85476908/145684737-5030a8d7-7643-436a-9fb0-72a713d3ef34.png" /> 
   
@@ -20,7 +20,7 @@ disCATch Link : https://discatch.site <br>
 [React]
 - 정진우 : https://github.com/happyeveryone96
 - 최수임 : https://github.com/leechoiswim1
-- 이선민 : https://github.com/sunm-in (12//01까지 프로젝트 진행)
+- 이선민 : https://github.com/sunm-in (12/01까지 프로젝트 진행)
 
 #### **백엔드**
 [Spring]
@@ -32,7 +32,7 @@ disCATch Link : https://discatch.site <br>
 
 ### **개발 기간**
 
-- 2021.09-2021.11
+- 2021.09-2021.12
 
 ### **소스 형상 관리**
 
@@ -61,8 +61,7 @@ disCATch Link : https://discatch.site <br>
 
 ## 🐱기능 소개 및 서비스 소개 🐱 
 
-- 빠른 업로드를 위한 aws 람다를 통한 이미지 리사이징
-- 웹소켓을 통한 실시간 채팅 구현
+- WebSocket을 통한 실시간 채팅 구현
 - 소셜 로그인
 - 무한 스크롤
 - 토스트 
@@ -119,7 +118,7 @@ disCATch Link : https://discatch.site <br>
 
 <img src="https://user-images.githubusercontent.com/85476908/145733877-153346ff-7f5a-47d6-b7c0-94aa1056ee32.png" width="235" height="400"/>
 
-- "웹소켓"을 사용하여 회원간의 끊김없는 1:1 실시간 채팅이 가능함.
+- "WebSocket"을 사용하여 회원간의 끊김없는 1:1 실시간 채팅이 가능함.
 - 채팅방 삭제 기능을 통해 깔끔한 채팅리스트 유지 가능.
 - 채팅 메시지: "무한스크롤" 기능    
 

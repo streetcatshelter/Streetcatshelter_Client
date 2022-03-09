@@ -14,7 +14,7 @@ import onboadingImg5 from "../../styles/images/TitleOnboarding.png";
 const Slide = (props) => {
   return (
     <Background>
-      {props.number === "1" ? (
+      {props.number === 1 ? (
         <WrapperBox>
           <InnerBox style={{ left: "50%" }}>
             <img src={onboadingImg1} alt="map_list" />
@@ -24,7 +24,7 @@ const Slide = (props) => {
             </p>{" "}
           </InnerBox>
         </WrapperBox>
-      ) : props.number === "2" ? (
+      ) : props.number === 2 ? (
         <WrapperBox>
           <InnerBox style={{ left: "150%" }}>
             <img src={onboadingImg2} alt="onboadingImg2" />
@@ -34,7 +34,7 @@ const Slide = (props) => {
             </p>{" "}
           </InnerBox>
         </WrapperBox>
-      ) : props.number === "3" ? (
+      ) : props.number === 3 ? (
         <WrapperBox>
           <InnerBox style={{ left: "250%" }}>
             <img src={onboadingImg3} alt="onboadingImg3" />
@@ -44,7 +44,7 @@ const Slide = (props) => {
             </p>{" "}
           </InnerBox>
         </WrapperBox>
-      ) : props.number === "4" ? (
+      ) : props.number === 4 ? (
         <WrapperBox>
           <InnerBox style={{ left: "350%" }}>
             <img src={onboadingImg4} alt="onboadingImg4" />
@@ -55,7 +55,7 @@ const Slide = (props) => {
           </InnerBox>
         </WrapperBox>
       ) : (
-        props.number === "5" && (
+        props.number === 5 && (
           <WrapperBox>
             <LastBox style={{ left: "450%" }}>
               <MainText>
@@ -79,7 +79,7 @@ const Slide = (props) => {
 };
 
 const Background = styled.div`
-  width: 500%;
+  width: 100%;
   height: 100%;
 `;
 
@@ -94,7 +94,6 @@ const WrapperBox = styled.div`
 
 const InnerBox = styled.div`
   position: absolute;
-
   transform: translate(-50%, 0%);
   width: 100%;
   height: 100%;
@@ -187,15 +186,14 @@ const MainText = styled.div`
   }
 `;
 const Button = styled.button`
+  cursor: pointer;
   font-weight: 900;
   width: 240px;
   height: 50px;
   border-radius: 20px;
-  border: none;
   background: #fbd986;
   color: #000000;
   font-size: 18px;
-  cursor: pointer;
   border: 2px dashed #d19b61;
   &:hover {
     background: #b5bb19;

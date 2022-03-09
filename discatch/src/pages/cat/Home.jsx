@@ -28,6 +28,9 @@ import {
   resetList,
 } from "../../redux/modules/cat";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+
 const Home = (props) => {
   const dispatch = useDispatch();
   // 로딩 여부
@@ -92,13 +95,7 @@ const Home = (props) => {
   }, [inView]);
 
   // 토스트 모달
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    }
-  }, [toastState]);
+  useToast(toastState, setToastState);
 
   return (
     <>

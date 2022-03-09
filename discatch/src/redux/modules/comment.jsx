@@ -7,11 +7,10 @@ export const __createCatComment =
   (catId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.createCatComment(catId, contents);
-
+      await catApi.createCatComment(catId, contents);
       dispatch(createCatComment({ contents }));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -20,13 +19,13 @@ export const __createCatDetailComment =
   (catDetailId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.createCatDetailComment(
+      await catApi.createCatDetailComment(
         catDetailId,
         contents
       );
       dispatch(createCatDetailComment({ contents }));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -37,8 +36,8 @@ export const __getComment =
     try {
       const { data } = await catApi.getComment(catId, size);
       dispatch(getComment(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -49,8 +48,8 @@ export const __getDetailComment =
     try {
       const { data } = await catApi.getDetailComment(catDetailId, size);
       dispatch(getDetailComment(data));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -59,10 +58,10 @@ export const __deleteComment =
   (commentId) =>
   async (dispatch, getState, { history }) => {
     try {
-      const { data } = await catApi.deleteCatComment(commentId);
+      await catApi.deleteCatComment(commentId);
       dispatch(deleteCatComment(commentId));
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 

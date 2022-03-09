@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { useDispatch } from "react-redux";
 
@@ -14,6 +14,9 @@ import { Search } from "react-feather";
 
 // REDUX
 import { saveVillage } from "../../redux/modules/mypage";
+
+// HOOKS
+import useToast from "../../hooks/useToast";
 
 const SearchAddress = (props) => {
   const dispatch = useDispatch();
@@ -80,17 +83,8 @@ const SearchAddress = (props) => {
   };
 
   // 토스트 모달
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => {
-        setToastState(false);
-      }, 1500);
-    } else if (secondToastState) {
-      setTimeout(() => {
-        setSecondToastState(false);
-      }, 1500);
-    }
-  }, [toastState, secondToastState]);
+  useToast(toastState, setToastState);
+  useToast(secondToastState, setSecondToastState);
 
   return (
     <>

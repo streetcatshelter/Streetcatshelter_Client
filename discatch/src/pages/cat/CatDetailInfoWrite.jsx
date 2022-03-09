@@ -26,6 +26,9 @@ import {
   setInitialState,
 } from "../../redux/modules/cat";
 
+// HOOKS
+import useToast from "../../hooks/useToast";
+
 const CatDetailInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit =
@@ -154,37 +157,10 @@ const CatDetailInfoWrite = (props) => {
   }, [edit, detail.catTags, dispatch]);
 
   // 토스트 모달
-  useEffect(() => {
-    if (maxPhotoState) {
-      setTimeout(() => {
-        setMaxPhotoState(false);
-      }, 1500);
-    }
-  }, [maxPhotoState]);
-
-  useEffect(() => {
-    if (diaryState) {
-      setTimeout(() => {
-        setDiaryState(false);
-      }, 1500);
-    }
-  }, [diaryState]);
-
-  useEffect(() => {
-    if (setTagState) {
-      setTimeout(() => {
-        setTagState(false);
-      }, 1500);
-    }
-  }, [tagState]);
-
-  useEffect(() => {
-    if (accessState) {
-      setTimeout(() => {
-        setAccessState(false);
-      }, 1500);
-    }
-  }, [accessState]);
+  useToast(maxPhotoState, setMaxPhotoState);
+  useToast(diaryState, setDiaryState);
+  useToast(tagState, setTagState);
+  useToast(accessState, setAccessState);
 
   return (
     <Template props={props}>

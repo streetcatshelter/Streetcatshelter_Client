@@ -70,7 +70,6 @@ const uploadImagesDB = (callNext) => {
         .then((data) => {
           dispatch(uploadImages(data.Location));
         })
-        .catch((error) => {});
     }
     callNext();
   };
@@ -105,7 +104,6 @@ const uploadImageDB = (callNext) => {
         .then((data) => {
           dispatch(uploadImage(data.Location));
         })
-        .catch((error) => {});
     }
     callNext();
   };

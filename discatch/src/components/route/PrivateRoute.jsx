@@ -5,9 +5,9 @@ import { Route } from 'react-router-dom';
 // AUTH
 import Auth from "shared/auth";
 
-function PrivateRoute({component, auth, path}) {
+function PrivateRoute({component, path}) {
   return (
-    <Route component={Auth(component, auth)} path={path} exact />
+    <Route component={Auth(component, true)} path={path} exact />
   )
 }
 

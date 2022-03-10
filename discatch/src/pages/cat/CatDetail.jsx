@@ -9,7 +9,7 @@ import { flexBox } from "shared/style";
 // COMPONENTS
 import {
   Template,
-  CatCalendar,
+  Calendar,
   CatDiary,
   CatGallery,
   CommentList,
@@ -129,7 +129,7 @@ const CatDetail = (props) => {
         </Grid>
 
         {menu === "calendar" ? (
-          <CatCalendar catId={catId} location={location} />
+          <Calendar path="CatCalendar" catId={catId} location={location} />
         ) : menu === "diary" ? (
           <CatDiary catId={catId} location={location} />
         ) : menu === "gallery" ? (

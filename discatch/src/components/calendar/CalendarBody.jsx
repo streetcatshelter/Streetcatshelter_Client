@@ -5,7 +5,7 @@ import React from "react";
 import CalendarDates from "./CalendarDates";
 
 // STYLE
-import styled from "styled-components";
+import * as S from "./Calendar.styled";
 
 const CalendarBody = (props) => {
   //props로 날짜관련 정보를 받아옴
@@ -20,7 +20,7 @@ const CalendarBody = (props) => {
   const findToday = year === YEAR && month === getMonth ? today : "";
 
   return (
-    <Form>
+    <S.Form>
       {totalDate.map((elm, idx) => {
         return (
           <CalendarDates
@@ -36,16 +36,8 @@ const CalendarBody = (props) => {
           ></CalendarDates>
         );
       })}
-    </Form>
+    </S.Form>
   );
 };
-
-const Form = styled.div`
-  grid-template-columns: repeat(7, 1fr);
-  border-radius: 2px;
-  width: 100%;
-  display: grid;
-  flex-flow: row wrap;
-`;
 
 export default CalendarBody;

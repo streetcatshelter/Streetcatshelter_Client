@@ -67,6 +67,11 @@ const CalendarModal = (props) => {
             </S.ModalHead>
             <S.ModalEvents>
               {workDetail.map((eachCatWork, idx) => {
+                const activities = [
+                  { work: eachCatWork.food, workName: "밥주기" },
+                  { work: eachCatWork.water, workName: "급수하기" },
+                  { work: eachCatWork.snack, workName: "간식주기" },
+                ];
                 return (
                   <S.ModalEventBox
                     key={idx}
@@ -95,29 +100,14 @@ const CalendarModal = (props) => {
 
                       <S.ModalCatWorkBox>
                         <p>활동: </p>
-                        {eachCatWork.food ? (
-                          <S.ModalCheckBox>
-                            <CheckSquare />
-                            <p>밥주기</p>
-                          </S.ModalCheckBox>
-                        ) : (
-                          ""
-                        )}
-                        {eachCatWork.water ? (
-                          <S.ModalCheckBox>
-                            <CheckSquare />
-                            <p>급수하기</p>
-                          </S.ModalCheckBox>
-                        ) : (
-                          ""
-                        )}
-                        {eachCatWork.snack ? (
-                          <S.ModalCheckBox>
-                            <CheckSquare />
-                            <p>간식주기</p>
-                          </S.ModalCheckBox>
-                        ) : (
-                          ""
+                        {activities.map(
+                          (activity) =>
+                            activity.work && (
+                              <S.ModalCheckBox>
+                                <CheckSquare />
+                                <p>{activity.workName}</p>
+                              </S.ModalCheckBox>
+                            )
                         )}
                       </S.ModalCatWorkBox>
                     </S.ModalCatRight>

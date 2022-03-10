@@ -9,11 +9,11 @@ import {
   SecondHeader,
   SecondSpinner,
   EmptyPost,
-} from "../../components";
+} from "components";
 
 // REDUX
 import { useDispatch } from "react-redux";
-import { chatActions } from "../../redux/modules/chat";
+import { chatActions } from "redux/modules/chat";
 
 // MOMENT
 import moment from "moment";

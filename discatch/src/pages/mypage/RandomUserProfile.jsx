@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 // COMPONENTS
-import { Template, ProgressBar } from "../../components";
+import { Template, ProgressBar } from "components";
 
 // REDUX
-import { history } from "../../redux/configureStore";
-import { mypageActions } from "../../redux/modules/mypage";
+import { history } from "redux/configureStore";
+import { mypageActions } from "redux/modules/mypage";
 
 // MOMENT
 import "moment/locale/ko";

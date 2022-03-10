@@ -1,6 +1,6 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
-import { chatApi } from "../../shared/axios";
+import { chatApi } from "shared/axios";
 
 const _getRooms =
   () =>

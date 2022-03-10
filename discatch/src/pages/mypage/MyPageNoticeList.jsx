@@ -12,10 +12,10 @@ import {
   Template,
   Notice,
   SecondSpinner,
-} from "../../components";
+} from "components";
 
 // REDUX
-import { mypageActions } from "../../redux/modules/mypage";
+import { mypageActions } from "redux/modules/mypage";
 
 const MyPageNoticeList = (props) => {
   const dispatch = useDispatch();

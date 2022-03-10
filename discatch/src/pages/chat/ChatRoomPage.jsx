@@ -10,7 +10,7 @@ import Stomp from "stompjs";
 import styled from "styled-components";
 
 // ELEMENTS
-import { Grid, Image } from "../../elements/index";
+import { Grid, Image } from "elements/index";
 
 // COMPONENTS
 import {
@@ -19,12 +19,12 @@ import {
   SecondSpinner,
   EditModalSlide,
   ChatSend,
-} from "../../components";
+} from "components";
 
 // REDUX
-import { history } from "../../redux/configureStore";
-import { chatActions } from "../../redux/modules/chat";
-import { pushChatMessage } from "../../redux/modules/chat";
+import { history } from "redux/configureStore";
+import { chatActions } from "redux/modules/chat";
+import { pushChatMessage } from "redux/modules/chat";
 
 // MOMENT
 import moment from "moment";

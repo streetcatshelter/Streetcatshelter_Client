@@ -11,25 +11,25 @@ import {
   SecondSpinner,
   EmptyPost,
   Toast,
-} from "../../components";
+} from "components";
 
 // ELEMENTS
-import { Button } from "../../elements";
+import { Button } from "elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 import {
   __getCatLocation,
   __getMoreCatLocation,
   resetList,
-} from "../../redux/modules/cat";
+} from "redux/modules/cat";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const Home = (props) => {
   const dispatch = useDispatch();

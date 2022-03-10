@@ -9,9 +9,9 @@ import styled from "styled-components";
 import { X, CheckSquare } from "react-feather";
 
 // REDUX
-import { mypageActions } from "../../redux/modules/mypage";
-import { __getCalendarDetail } from "../../redux/modules/cat";
-import { history } from "../../redux/configureStore";
+import { mypageActions } from "redux/modules/mypage";
+import { __getCalendarDetail } from "redux/modules/cat";
+import { history } from "redux/configureStore";
 
 const CalendarModal = (props) => {
   const { elm, month, year, setOpenModal, path } = props;

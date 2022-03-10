@@ -11,21 +11,21 @@ import {
   Template,
   SecondSpinner,
   Toast,
-} from "../../components";
+} from "components";
 
 // ELEMENTS
-import { Grid } from "../../elements/index";
+import { Grid } from "elements/index";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 
 // IMAGES
-import Community1 from "../../styles/images/Community1.png";
-import Community2 from "../../styles/images/Community2.png";
-import Community3 from "../../styles/images/Community3.png";
+import Community1 from "styles/images/Community1.png";
+import Community2 from "styles/images/Community2.png";
+import Community3 from "styles/images/Community3.png";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const Community = (props) => {
   // 페이지 로딩 여부

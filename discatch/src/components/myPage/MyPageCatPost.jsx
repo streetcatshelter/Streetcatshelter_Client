@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { FileText, MessageCircle } from "react-feather";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 
 const MyPageCatPost = ({ LikedCat, location }) => {
   const userInfo = useSelector((state) => state.mypage.userInfo);

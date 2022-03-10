@@ -2,19 +2,19 @@
 import React from "react";
 
 // COMPONENTS
-import { Template } from "../../components";
+import { Template } from "components";
 
 // STYLE
 import { css } from "styled-components";
 
 // ELEMENTS
-import { Button, Text, Grid, Image } from "../../elements";
+import { Button, Text, Grid, Image } from "elements";
 
 // IMAGE
-import NotFoundCatImage from "../../styles/images/NotFoundCat.png";
+import NotFoundCatImage from "styles/images/NotFoundCat.png";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 
 const NotFound = (props) => {
   return (

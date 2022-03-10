@@ -12,11 +12,11 @@ import { XCircle, Upload } from "react-feather";
 import { SearchAddress, Toast } from "..";
 
 // REDUX
-import { deleteVillage, mypageActions } from "../../redux/modules/mypage";
-import { imgActions } from "../../redux/modules/image";
+import { deleteVillage, mypageActions } from "redux/modules/mypage";
+import { imgActions } from "redux/modules/image";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const UserInfo = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const UserInfo = () => {
   const [secondToastState, setSecondToastState] = useState(false);
   const [userToastState, setUserToastState] = useState(false);
   const [maxTextState, setMaxTextState] = useState(false);
-  
+
   // 닉네임 수정하기
   const changeNickName = (e) => {
     const regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\ '\"\\(\=]/gi;
@@ -55,7 +55,7 @@ const UserInfo = () => {
     }
   };
 
-  // 프로필 이미지 설정 
+  // 프로필 이미지 설정
   const processImage = (e) => {
     e.preventDefault();
     const imageFile = e.target.files[0];
@@ -81,7 +81,7 @@ const UserInfo = () => {
             type="text"
             placeholder="닉네임을 입력해주세요."
             onChange={changeNickName}
-            value={nickName ? nickName : ''}
+            value={nickName ? nickName : ""}
           />
         </Inner>
         <Inner>
@@ -148,8 +148,15 @@ const UserInfo = () => {
       </Wrapper>
       {toastState && <Toast message="닉네임을 입력해주세요!" />}
       {secondToastState && <Toast message="동네를 입력해주세요!" />}
-      {editToastState && <Toast message="특수문자 및 공백을 사용할 수 없습니다." />}
-      {userToastState && <Toast message="사용자 정보 수정에 실패했어요!" message2="다시 시도해주세요!" />}
+      {editToastState && (
+        <Toast message="특수문자 및 공백을 사용할 수 없습니다." />
+      )}
+      {userToastState && (
+        <Toast
+          message="사용자 정보 수정에 실패했어요!"
+          message2="다시 시도해주세요!"
+        />
+      )}
       {maxTextState && <Toast message="최대 8글자까지 입력 가능해요!" />}
     </React.Fragment>
   );

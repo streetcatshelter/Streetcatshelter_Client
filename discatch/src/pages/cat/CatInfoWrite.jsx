@@ -3,31 +3,31 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { SecondHeader, Template, Toast } from "../../components";
+import { SecondHeader, Template, Toast } from "components";
 
 // ELEMENTS
-import { Grid, Image, Input, Button, Text } from "../../elements/index";
+import { Grid, Image, Input, Button, Text } from "elements/index";
 
 // STYLE
 import styled, { css } from "styled-components";
-import { flexBox } from "../../shared/style";
+import { flexBox } from "shared/style";
 
 // ICON
 import { Camera } from "react-feather";
 
 // REDUX
-import { imgActions } from "../../redux/modules/image";
-import { history } from "../../redux/configureStore";
+import { imgActions } from "redux/modules/image";
+import { history } from "redux/configureStore";
 import {
   __createCatInfo,
   __editCatInfo,
   addHashTag,
   deleteHashTag,
   setInitialState,
-} from "../../redux/modules/cat";
+} from "redux/modules/cat";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
@@ -170,7 +170,6 @@ const CatInfoWrite = (props) => {
   useToast(tagState, setTagState);
   useToast(accessState, setAccessState);
   useToast(editToastState, setEditToastState);
-
 
   return (
     <Template props={props}>

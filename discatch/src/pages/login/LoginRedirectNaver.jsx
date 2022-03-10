@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 // REDUX
-import { userActions } from "../../redux/modules/user";
+import { userActions } from "redux/modules/user";
 
 // * == ( Page > Login - redirect page for login ) -------------------- * //
 const LoginRedirect = () => {

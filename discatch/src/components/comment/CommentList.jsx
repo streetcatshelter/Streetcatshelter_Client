@@ -9,17 +9,17 @@ import { Comment, CommentCard, Toast } from "..";
 import { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button, TextArea } from "../../elements/index";
+import { Grid, Button, TextArea } from "elements/index";
 
 // REDUX
-import { addCommunityCommentDB } from "../../redux/modules/community";
+import { addCommunityCommentDB } from "redux/modules/community";
 import {
   __createCatComment,
   __createCatDetailComment,
-} from "../../redux/modules/comment";
+} from "redux/modules/comment";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const CommentList = ({ props, path, catId, communityId }) => {
   const dispatch = useDispatch();

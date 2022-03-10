@@ -5,7 +5,7 @@ import React from "react";
 import { Calendar } from "..";
 
 // ELEMENTS
-import { Grid } from "../../elements/index";
+import { Grid } from "elements/index";
 
 const CatCalendar = (props) => {
   const catId = props.catId;

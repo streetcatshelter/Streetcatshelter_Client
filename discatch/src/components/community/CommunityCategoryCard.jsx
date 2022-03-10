@@ -2,7 +2,7 @@
 import React from "react";
 
 // ELEMENTS
-import { Image, Text } from "../../elements/index";
+import { Image, Text } from "elements/index";
 
 // STYLE
 import styled, { css } from "styled-components";

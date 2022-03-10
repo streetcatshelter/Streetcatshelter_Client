@@ -5,11 +5,11 @@ import React from "react";
 import styled from "styled-components";
 
 // IMAGES
-import onboadingImg1 from "../../styles/images/map_list.gif";
-import onboadingImg2 from "../../styles/images/CommunityOnboarding.png";
-import onboadingImg3 from "../../styles/images/ChatOnboarding.png";
-import onboadingImg4 from "../../styles/images/ProfileOnboarding.png";
-import onboadingImg5 from "../../styles/images/TitleOnboarding.png";
+import onboadingImg1 from "styles/images/map_list.gif";
+import onboadingImg2 from "styles/images/CommunityOnboarding.png";
+import onboadingImg3 from "styles/images/ChatOnboarding.png";
+import onboadingImg4 from "styles/images/ProfileOnboarding.png";
+import onboadingImg5 from "styles/images/TitleOnboarding.png";
 
 const Slide = (props) => {
   return (

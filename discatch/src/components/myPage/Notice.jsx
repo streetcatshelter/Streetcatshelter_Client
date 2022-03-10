@@ -9,7 +9,7 @@ import moment from "moment";
 import styled from "styled-components";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 
 const Notice = () => {
   const noticeList = useSelector((state) => state.mypage.noticelist);

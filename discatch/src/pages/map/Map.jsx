@@ -2,7 +2,7 @@
 import React from "react";
 
 // COMPONENTS
-import { Template, Location } from "../../components";
+import { Template, Location } from "components";
 
 const Map = (props) => {
   return (

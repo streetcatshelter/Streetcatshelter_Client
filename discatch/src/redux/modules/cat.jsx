@@ -1,6 +1,6 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
-import instance, { catApi } from "../../shared/axios";
+import instance, { catApi } from "shared/axios";
 
 // REDUX
 import { imgActions } from "./image";

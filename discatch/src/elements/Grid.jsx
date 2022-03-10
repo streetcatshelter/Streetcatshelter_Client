@@ -3,7 +3,7 @@ import React from "react";
 
 // STYLE
 import styled from "styled-components";
-import { borderBox } from "../shared/style";
+import { borderBox } from "shared/style";
 
 const Grid = ({ children, clickEvent, ...props }) => {
   return (

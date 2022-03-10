@@ -11,13 +11,13 @@ import {
   MyPageCatPost,
   SecondSpinner,
   EmptyPost,
-} from "../../components";
+} from "components";
 
 // STYLE
 import styled from "styled-components";
 
 // REDUX
-import { mypageActions, resetList } from "../../redux/modules/mypage";
+import { mypageActions, resetList } from "redux/modules/mypage";
 
 const MyPage = (props) => {
   const dispatch = useDispatch();

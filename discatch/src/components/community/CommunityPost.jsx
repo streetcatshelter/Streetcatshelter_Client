@@ -10,7 +10,7 @@ import { MessageCircle, Eye } from "react-feather";
 import Avatar from "@material-ui/core/Avatar";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 
 // ROUTE
 import { useLocation } from "react-router-dom";

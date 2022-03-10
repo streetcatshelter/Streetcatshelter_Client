@@ -9,11 +9,11 @@ import styled from "styled-components";
 import { MoreHorizontal } from "react-feather";
 
 // COMPONENTS
-import { EditModalSlide, EmptyPost } from "../../components";
+import { EditModalSlide } from "components";
 
 // REDUX
-import { history } from "../../redux/configureStore";
-import { chatActions } from "../../redux/modules/chat";
+import { history } from "redux/configureStore";
+import { chatActions } from "redux/modules/chat";
 
 const ChatMain = ({ props, room, sendtime }) => {
   const dispatch = useDispatch();

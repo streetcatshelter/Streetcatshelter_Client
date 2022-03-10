@@ -3,11 +3,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
-import { flexBox } from "../../shared/style";
+import { flexBox } from "shared/style";
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Text, Button } from "../../elements";
+import { Grid, Text, Button } from "elements";
 
 // COMPONENTS
 import {
@@ -16,7 +16,7 @@ import {
   Spinner,
   ContentHeader,
   SecondHeader,
-} from "../../components";
+} from "components";
 
 // ICON
 import { CheckSquare } from "react-feather";
@@ -27,9 +27,9 @@ import {
   __getCatDetail,
   __deleteCatDetail,
   __catDiaryLike,
-} from "../../redux/modules/cat";
-import { __getDetailComment } from "../../redux/modules/comment";
-import { history } from "../../redux/configureStore";
+} from "redux/modules/cat";
+import { __getDetailComment } from "redux/modules/comment";
+import { history } from "redux/configureStore";
 
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();

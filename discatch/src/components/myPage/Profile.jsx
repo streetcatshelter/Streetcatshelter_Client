@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // ELEMENTS
-import { Image, Grid, Text } from "../../elements";
+import { Image, Grid, Text } from "elements";
 
 // STYLE
 import styled from "styled-components";
@@ -12,8 +12,8 @@ import styled from "styled-components";
 import { EditModalSlide } from "..";
 
 // REDUX
-import { history } from "../../redux/configureStore";
-import { userActions } from "../../redux/modules/user";
+import { history } from "redux/configureStore";
+import { userActions } from "redux/modules/user";
 
 const Profile = (props) => {
   const dispatch = useDispatch();

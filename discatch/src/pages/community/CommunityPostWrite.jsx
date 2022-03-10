@@ -3,21 +3,21 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, SecondHeader, SecondSpinner } from "../../components";
-import { CommunityPreview } from "../../components/index";
-import { Toast } from "../../components";
+import { Template, SecondHeader, SecondSpinner } from "components";
+import { CommunityPreview } from "components/index";
+import { Toast } from "components";
 
 // STYLE
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button, Input, TextArea, Text } from "../../elements/index";
+import { Grid, Button, Input, TextArea, Text } from "elements/index";
 
 // REDUX
-import { imgActions } from "../../redux/modules/image";
-import { addCommunityDB } from "../../redux/modules/community";
-import { mypageActions } from "../../redux/modules/mypage";
-import { history } from "../../redux/configureStore";
+import { imgActions } from "redux/modules/image";
+import { addCommunityDB } from "redux/modules/community";
+import { mypageActions } from "redux/modules/mypage";
+import { history } from "redux/configureStore";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
@@ -26,7 +26,7 @@ import { useLocation } from "react-router-dom";
 import { Camera } from "react-feather";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const CommunityPostWrite = (props) => {
   const isLoaded = useSelector((state) => state.community.itemLoaded);

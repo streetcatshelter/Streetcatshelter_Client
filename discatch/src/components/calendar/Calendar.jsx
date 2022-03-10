@@ -9,6 +9,9 @@ import { mypageActions } from "redux/modules/mypage";
 // REDUX
 import { __getCalendar } from "redux/modules/cat";
 
+// STYLE
+import * as S from "./Calendar.styled";
+
 const Calendar = (props) => {
   const dispatch = useDispatch();
 
@@ -93,11 +96,7 @@ const Calendar = (props) => {
   }, [props.path, dispatch, year, month, props.catId]);
 
   return (
-    <div
-      style={{
-        borderBottom: `1px solid ${({ theme }) => theme.colors.green}`,
-      }}
-    >
+    <S.CalendarWrap>
       <CalendarHead
         year={year}
         month={month}
@@ -113,7 +112,7 @@ const Calendar = (props) => {
         year={year}
         YEAR={YEAR}
       />
-    </div>
+    </S.CalendarWrap>
   );
 };
 export default Calendar;

@@ -1,6 +1,10 @@
 // STYLE
 import styled, { css } from "styled-components";
 
+export const CalendarWrap = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.green};
+`;
+
 export const Form = styled.div`
   grid-template-columns: repeat(7, 1fr);
   border-radius: 2px;
@@ -19,7 +23,7 @@ export const DateForm = styled.li`
   height: 55px;
   text-align: left;
   border-top: 1px solid ${({ theme }) => theme.colors.lightGray};
-  :nth-child(n + 1):nth-child(-n + 7) {
+  :nth-child(-n + 7) {
     border-top: none;
   }
   :nth-child(7n + 1),
@@ -44,13 +48,9 @@ export const Dot = styled.div`
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  ${({ background, theme }) => {
-    return css`
-      background: ${theme.colors}.${background};
-    `;
-  }};
+  background: ${(props) => props.background};
   margin: 2px;
-  display: ${(props) => props.work};
+  display: ${(props) => (props.work ? "block" : "none")};
 `;
 export const DateNum = styled.div`
   padding: auto;
@@ -103,11 +103,7 @@ export const HeadDot = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  ${({ background, theme }) => {
-    return css`
-      background: ${theme.colors}.${background};
-    `;
-  }};
+  background: ${(props) => props.background};
   margin: 5px;
   line-height: 20px;
 `;
@@ -176,6 +172,7 @@ export const ModalOverlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 export const ModalWindow = styled.div`
   position: absolute;

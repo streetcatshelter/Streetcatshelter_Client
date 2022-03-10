@@ -28,14 +28,13 @@ const CalendarModal = (props) => {
       : dispatch(__getCalendarDetail(catId, elm, month, year));
   }, [year, month, elm, catId, path, dispatch]);
 
+  const closeModalHandler = () => {
+    setOpenModal(false);
+  };
   return (
     <>
       <S.ModalBackground>
-        <S.ModalOverlay
-          onClick={() => {
-            setOpenModal(false);
-          }}
-        />
+        <S.ModalOverlay onClick={closeModalHandler} />
         <S.ModalWindow>
           <S.ModalWrapper>
             <S.ModalHead>
@@ -58,11 +57,7 @@ const CalendarModal = (props) => {
                 )}
               </S.ModalViewDate>
               <S.ModalCancleBox>
-                <X
-                  onClick={() => {
-                    setOpenModal(false);
-                  }}
-                />
+                <X onClick={closeModalHandler} />
               </S.ModalCancleBox>
             </S.ModalHead>
             <S.ModalEvents>
@@ -82,8 +77,6 @@ const CalendarModal = (props) => {
                           pathname: `/catdetail/calendar/${eachCatWork.location}/${eachCatWork.catId}/1`,
                           state: { location: eachCatWork.location },
                         });
-                      } else {
-                        return;
                       }
                     }}
                   >
@@ -91,11 +84,7 @@ const CalendarModal = (props) => {
                       <img src={eachCatWork.catImage} alt="catImage" />
                     </S.ModalCatLeft>
                     <S.ModalCatRight>
-                      {path === "mypage" ? (
-                        <p>이름: {eachCatWork.catName}</p>
-                      ) : (
-                        ""
-                      )}
+                      {path === "mypage" && <p>이름: {eachCatWork.catName}</p>}
                       <p>동네: {eachCatWork.location}</p>
 
                       <S.ModalCatWorkBox>

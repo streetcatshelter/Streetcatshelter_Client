@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
-import styled from "styled-components";
+import * as S from "./Calendar.styled";
 
 // ICON
 import { X, CheckSquare } from "react-feather";
@@ -30,16 +30,16 @@ const CalendarModal = (props) => {
 
   return (
     <>
-      <Background>
-        <Overlay
+      <S.ModalBackground>
+        <S.ModalOverlay
           onClick={() => {
             setOpenModal(false);
           }}
         />
-        <Window>
-          <Wrapper>
-            <Head>
-              <ViewDate>
+        <S.ModalWindow>
+          <S.ModalWrapper>
+            <S.ModalHead>
+              <S.ModalViewDate>
                 {path === "mypage" ? (
                   <p>
                     집사일기
@@ -56,19 +56,24 @@ const CalendarModal = (props) => {
                     </span>
                   </p>
                 )}
-              </ViewDate>
-              <CancleBox>
+              </S.ModalViewDate>
+              <S.ModalCancleBox>
                 <X
                   onClick={() => {
                     setOpenModal(false);
                   }}
                 />
-              </CancleBox>
-            </Head>
-            <Events>
+              </S.ModalCancleBox>
+            </S.ModalHead>
+            <S.ModalEvents>
               {workDetail.map((eachCatWork, idx) => {
+                const activities = [
+                  { work: eachCatWork.food, workName: "밥주기" },
+                  { work: eachCatWork.water, workName: "급수하기" },
+                  { work: eachCatWork.snack, workName: "간식주기" },
+                ];
                 return (
-                  <EventBox
+                  <S.ModalEventBox
                     key={idx}
                     path={path}
                     onClick={() => {
@@ -82,10 +87,10 @@ const CalendarModal = (props) => {
                       }
                     }}
                   >
-                    <CatLeft>
+                    <S.ModalCatLeft>
                       <img src={eachCatWork.catImage} alt="catImage" />
-                    </CatLeft>
-                    <CatRight>
+                    </S.ModalCatLeft>
+                    <S.ModalCatRight>
                       {path === "mypage" ? (
                         <p>이름: {eachCatWork.catName}</p>
                       ) : (
@@ -93,187 +98,28 @@ const CalendarModal = (props) => {
                       )}
                       <p>동네: {eachCatWork.location}</p>
 
-                      <CatWorkBox>
+                      <S.ModalCatWorkBox>
                         <p>활동: </p>
-                        {eachCatWork.food ? (
-                          <CheckBox>
-                            <CheckSquare />
-                            <p>밥주기</p>
-                          </CheckBox>
-                        ) : (
-                          ""
+                        {activities.map(
+                          (activity) =>
+                            activity.work && (
+                              <S.ModalCheckBox>
+                                <CheckSquare />
+                                <p>{activity.workName}</p>
+                              </S.ModalCheckBox>
+                            )
                         )}
-                        {eachCatWork.water ? (
-                          <CheckBox>
-                            <CheckSquare />
-                            <p>급수하기</p>
-                          </CheckBox>
-                        ) : (
-                          ""
-                        )}
-                        {eachCatWork.snack ? (
-                          <CheckBox>
-                            <CheckSquare />
-                            <p>간식주기</p>
-                          </CheckBox>
-                        ) : (
-                          ""
-                        )}
-                      </CatWorkBox>
-                    </CatRight>
-                  </EventBox>
+                      </S.ModalCatWorkBox>
+                    </S.ModalCatRight>
+                  </S.ModalEventBox>
                 );
               })}
-            </Events>
-          </Wrapper>
-        </Window>
-      </Background>
+            </S.ModalEvents>
+          </S.ModalWrapper>
+        </S.ModalWindow>
+      </S.ModalBackground>
     </>
   );
 };
-
-const Background = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 100vw;
-  height: 100%;
-`;
-const Overlay = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Window = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  max-width: 420px;
-  width: 100vw;
-  height: 50vh;
-  min-height: 450px;
-  border-radius: 20px;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
-  animation-name: fadeIn;
-  animation-fill-mode: forwards;
-  background: #ffffff;
-  z-index: 1000;
-  overflow: auto;
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-`;
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-const Head = styled.div`
-  height: 15%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const ViewDate = styled.div`
-  p {
-    width: 100%;
-    font-size: 16px;
-    font-weight: 900;
-    margin: auto;
-    text-align: center;
-    span {
-      font-size: 12px;
-    }
-  }
-`;
-const CancleBox = styled.div`
-  cursor: pointer;
-  position: fixed;
-  top: 4%;
-  left: 85%;
-  svg {
-    width: 20px;
-    height: 20px;
-    margin: auto;
-    padding: 5px;
-    border-radius: 50%;
-    background: #fbd986;
-  }
-`;
-const Events = styled.div`
-  height: 85%;
-  width: 100%;
-  margin: auto;
-`;
-const EventBox = styled.div`
-  width: 90%;
-  height: 100px;
-  margin: auto;
-  display: flex;
-  border-bottom: 0.2px solid rgba(203, 207, 94, 1);
-  cursor: ${(props) => props.path === "mypage" && " pointer"};
-  &:hover {
-    background: ${(props) => props.path === "mypage" && "#fff4d9"};
-  }
-`;
-const CatLeft = styled.div`
-  width: 20%;
-  min-width: 60px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    @media screen and (max-width: 320px) {
-      width: 60px;
-      height: 60px;
-    }
-  }
-`;
-const CatRight = styled.div`
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 5px;
-  p {
-    margin: 5px;
-    line-height: 20px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-`;
-const CatWorkBox = styled.div`
-  width: 100%;
-  display: flex;
-`;
-const CheckBox = styled.div`
-  display: flex;
-  svg {
-    width: 18px;
-    height: 18px;
-    margin: 5px 0px;
-  }
-  p {
-    font-size: 12px;
-    margin: 5px 0px;
-  }
-`;
 
 export default CalendarModal;

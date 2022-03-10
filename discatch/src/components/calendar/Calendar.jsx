@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 // COMPONENTS
 import { CalendarHead, CalendarBody } from "..";
@@ -24,36 +24,39 @@ const Calendar = (props) => {
   const [totalDate, setTotalDate] = useState([]);
 
   //날짜만들기 함수
-  const changeDate = (month) => {
-    //이전 날짜
-    let PVLastDate = new Date(YEAR, month - 1, 0).getDate();
-    let PVLastDay = new Date(YEAR, month - 1, 0).getDay();
+  const changeDate = useCallback(
+    (month) => {
+      //이전 날짜
+      let PVLastDate = new Date(YEAR, month - 1, 0).getDate();
+      let PVLastDay = new Date(YEAR, month - 1, 0).getDay();
 
-    //다음 날짜
-    const ThisLasyDay = new Date(YEAR, month, 0).getDay();
-    const ThisLasyDate = new Date(YEAR, month, 0).getDate();
+      //다음 날짜
+      const ThisLasyDay = new Date(YEAR, month, 0).getDay();
+      const ThisLasyDate = new Date(YEAR, month, 0).getDate();
 
-    //이전 날짜 만들기
-    let PVLD = [];
-    if (PVLastDay !== 6) {
-      for (let i = 0; i < PVLastDay + 1; i++) {
-        PVLD.unshift(PVLastDate - i);
+      //이전 날짜 만들기
+      let PVLD = [];
+      if (PVLastDay !== 6) {
+        for (let i = 0; i < PVLastDay + 1; i++) {
+          PVLD.unshift(PVLastDate - i);
+        }
       }
-    }
-    //다음 날짜 만들기
-    let TLD = [];
-    for (let i = 1; i < 7 - ThisLasyDay; i++) {
-      if (i === 0) {
-        return TLD;
+      //다음 날짜 만들기
+      let TLD = [];
+      for (let i = 1; i < 7 - ThisLasyDay; i++) {
+        if (i === 0) {
+          return TLD;
+        }
+        TLD.push(i);
       }
-      TLD.push(i);
-    }
 
-    //현재날짜
-    let TD = [];
-    TD = [...Array(ThisLasyDate + 1).keys()].slice(1);
-    return PVLD.concat(TD, TLD);
-  };
+      //현재날짜
+      let TD = [];
+      TD = [...Array(ThisLasyDate + 1).keys()].slice(1);
+      return PVLD.concat(TD, TLD);
+    },
+    [YEAR]
+  );
 
   //현재 날짜의 달로 스테이트를 바꿔주는 함수
   const goToday = () => {
@@ -75,24 +78,24 @@ const Calendar = (props) => {
   //최초 초기달을 현재 달로 함.
   useEffect(() => {
     setTotalDate(changeDate(MONTH));
-  }, []);
+  }, [changeDate, MONTH]);
 
   //요청에 따라 날짜함수에 넣어 날짜를 가져옴.
   useEffect(() => {
     setTotalDate(changeDate(month));
-  }, [month]);
+  }, [changeDate, month]);
 
   //상위 컴포넌트의 path에 따라 서버에 캘린더데이터를 요청함
   useEffect(() => {
     props.path === "mypage"
       ? dispatch(mypageActions._getCalender(year, month))
       : dispatch(__getCalendar(props.catId, year, month));
-  }, [dispatch, year, month, props.catId]);
+  }, [props.path, dispatch, year, month, props.catId]);
 
   return (
     <div
       style={{
-        borderBottom: "1px solid #B5BB19",
+        borderBottom: `1px solid ${({ theme }) => theme.colors.green}`,
       }}
     >
       <CalendarHead

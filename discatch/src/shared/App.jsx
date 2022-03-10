@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 // STYLE
-import theme from "../shared/style";
+import theme from "shared/style";
 
 //COMPONENTS
-import { Router, Spinner } from "../components";
+import { Router, Spinner } from "components";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,9 @@ function App() {
     let timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
-    return ()=>{ clearTimeout(timer) }
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

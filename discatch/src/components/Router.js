@@ -1,10 +1,10 @@
 // LIBRARY
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import { history } from "../redux/configureStore";
+import { history } from "redux/configureStore";
 
 // AUTH
-import Auth from "../shared/auth";
+import Auth from "shared/auth";
 
 // PAGES
 import {
@@ -33,7 +33,7 @@ import {
   LoginRedirectNaver,
   LoginRedirectGoogle,
   RandomUserProfile,
-} from "../pages";
+} from "pages";
 
 // * == ( Router ) -------------------- * //
 const Router = () => {

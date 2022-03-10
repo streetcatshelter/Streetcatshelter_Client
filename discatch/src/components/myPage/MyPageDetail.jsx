@@ -2,13 +2,13 @@
 import React from "react";
 
 // ELEMENTS
-import { Grid } from "../../elements";
+import { Grid } from "elements";
 
 // STYLE
 import styled from "styled-components";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 
 const MyPageDetail = (props) => {
   const location = props.location;
@@ -17,7 +17,7 @@ const MyPageDetail = (props) => {
       <Grid>
         <MenuBtn
           onClick={() => {
-            history.push({pathname:'/mypage', state : { location }});
+            history.push({ pathname: "/mypage", state: { location } });
           }}
           color={props.menu === "myCat" ? " #B5BB19" : "black"}
         >
@@ -25,7 +25,7 @@ const MyPageDetail = (props) => {
         </MenuBtn>
         <MenuBtn
           onClick={() => {
-            history.push({pathname:'/mypage/work', state : { location }});
+            history.push({ pathname: "/mypage/work", state: { location } });
           }}
           color={props.menu === "myWork" ? " #B5BB19" : "black"}
         >
@@ -33,7 +33,7 @@ const MyPageDetail = (props) => {
         </MenuBtn>
         <MenuBtn
           onClick={() => {
-            history.push({pathname:'/mypage/notice', state : { location }});
+            history.push({ pathname: "/mypage/notice", state: { location } });
           }}
           color={props.menu === "notice" ? " #B5BB19" : "black"}
         >

@@ -1,6 +1,6 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
-import instance, { communityApi } from "../../shared/axios";
+import instance, { communityApi } from "shared/axios";
 
 // REDUX
 import { imgActions } from "./image";
@@ -36,13 +36,11 @@ export const addCommunityDB = (
           title: title,
           username: nickName,
         };
-        instance
-          .post("/community/create", postInfo)
-          .then((res) => {
-            history.push(`/community/${detailLocation}/${pathName}`);
-            dispatch(itemLoading(false));
-            dispatch(imgActions.setInitialState());
-          })
+        instance.post("/community/create", postInfo).then((res) => {
+          history.push(`/community/${detailLocation}/${pathName}`);
+          dispatch(itemLoading(false));
+          dispatch(imgActions.setInitialState());
+        });
       })
     );
   };
@@ -211,10 +209,7 @@ export const addCommunityCommentDB =
   (contents, communityId) =>
   async (dispatch, getState, { history }) => {
     try {
-       await communityApi.createCommunityComment(
-        contents,
-        communityId
-      );
+      await communityApi.createCommunityComment(contents, communityId);
       dispatch(getOneCommunityDB(communityId));
     } catch (e) {
       console.error(e);
@@ -226,7 +221,7 @@ export const deleteCommunityCommentDB =
   (commentId, communityId) =>
   async (dispatch, getState, { history }) => {
     try {
-       await communityApi.deleteCommunityComment(commentId);
+      await communityApi.deleteCommunityComment(commentId);
       dispatch(deleteComment(commentId));
     } catch (e) {
       console.error(e);

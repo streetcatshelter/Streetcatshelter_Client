@@ -13,17 +13,17 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 // ICON
-import { ArrowLeft, Bell, Search } from "react-feather";
+import { ArrowLeft, Bell } from "react-feather";
 
 // REDUX
-import { history } from "../../redux/configureStore";
-import { searchMap } from "../../redux/modules/map";
-import { mypageActions } from "../../redux/modules/mypage";
-import { changeToast } from "../../redux/modules/chat";
+import { history } from "redux/configureStore";
+import { searchMap } from "redux/modules/map";
+import { mypageActions } from "redux/modules/mypage";
+import { changeToast } from "redux/modules/chat";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
-import useDispatchToast from "../../hooks/useDispatchToast"; 
+import useToast from "hooks/useToast";
+import useDispatchToast from "hooks/useDispatchToast";
 
 const Header = (props) => {
   const dispatch = useDispatch();

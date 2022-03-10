@@ -11,13 +11,13 @@ import {
   SecondSpinner,
   EmptyPost,
   Toast,
-} from "../../components";
+} from "components";
 
 // STYLE
 import styled from "styled-components";
 
 // ELEMENTS
-import { Button } from "../../elements/index";
+import { Button } from "elements/index";
 
 // ROUTE
 import { useLocation, useParams } from "react-router-dom";
@@ -33,12 +33,11 @@ import {
   resetList,
   errorToast,
   deleteToast,
-} from "../../redux/modules/community";
-import { history } from "../../redux/configureStore";
+} from "redux/modules/community";
+import { history } from "redux/configureStore";
 
 // HOOKS
-import useDispatchToast from "../../hooks/useDispatchToast"; 
-
+import useDispatchToast from "hooks/useDispatchToast";
 
 const CommunityDetail = (props) => {
   const dispatch = useDispatch();

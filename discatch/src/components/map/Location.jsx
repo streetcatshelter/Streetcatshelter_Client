@@ -1,7 +1,7 @@
 /*global kakao*/
 import React, { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { searchKeywordMap } from "../../redux/modules/map";
+import { searchKeywordMap } from "redux/modules/map";
 
 // COMPONENTS
 import { Toast } from "../";
@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Button, Grid } from "../../elements";
+import { Button, Grid } from "elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,11 +22,11 @@ import { X } from "react-feather";
 import { RefreshCcw } from "react-feather";
 
 // REDUX
-import { history } from "../../redux/configureStore";
-import { __getAllCatLocation } from "../../redux/modules/cat";
+import { history } from "redux/configureStore";
+import { __getAllCatLocation } from "redux/modules/cat";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const Location = (props) => {
   const dispatch = useDispatch();

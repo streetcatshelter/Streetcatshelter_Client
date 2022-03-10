@@ -1,6 +1,6 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
-import { catApi } from "../../shared/axios";
+import { catApi } from "shared/axios";
 
 // detail 댓글 작성
 export const __createCatComment =
@@ -19,10 +19,7 @@ export const __createCatDetailComment =
   (catDetailId, contents) =>
   async (dispatch, getState, { history }) => {
     try {
-      await catApi.createCatDetailComment(
-        catDetailId,
-        contents
-      );
+      await catApi.createCatDetailComment(catDetailId, contents);
       dispatch(createCatDetailComment({ contents }));
     } catch (e) {
       console.error(e);

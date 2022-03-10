@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 // COMPONENTS
 import { CalendarHead, CalendarBody } from "..";
 import { useDispatch } from "react-redux";
-import { mypageActions } from "../../redux/modules/mypage";
+import { mypageActions } from "redux/modules/mypage";
 
 // REDUX
-import { __getCalendar } from "../../redux/modules/cat";
+import { __getCalendar } from "redux/modules/cat";
 
 const Calendar = (props) => {
   const dispatch = useDispatch();

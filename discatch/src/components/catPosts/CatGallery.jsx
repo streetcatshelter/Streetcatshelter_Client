@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 // REDUX
-import { __getGallery } from "../../redux/modules/cat";
-import { history } from "../../redux/configureStore";
+import { __getGallery } from "redux/modules/cat";
+import { history } from "redux/configureStore";
 
 const CatGallery = (props) => {
   const dispatch = useDispatch();
@@ -40,7 +40,11 @@ const CatGallery = (props) => {
               cursor: "pointer",
             }}
             onClick={() =>
-              history.push(`/catdetailinfo/${location.split(' ')[2]}/${gallery.catDetailId}`)
+              history.push(
+                `/catdetailinfo/${location.split(" ")[2]}/${
+                  gallery.catDetailId
+                }`
+              )
             }
           >
             <img

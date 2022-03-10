@@ -1,6 +1,6 @@
 // LIBRARY
 import { createSlice } from "@reduxjs/toolkit";
-import instance, { myPageApi } from "../../shared/axios";
+import instance, { myPageApi } from "shared/axios";
 
 // REUDX
 import { userActions } from "../modules/user";

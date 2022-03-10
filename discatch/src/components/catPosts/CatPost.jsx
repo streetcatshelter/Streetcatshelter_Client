@@ -10,8 +10,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { MoreHorizontal } from "react-feather";
 
 // REDUX
-import { history } from "../../redux/configureStore";
-import { __catLike } from "../../redux/modules/cat";
+import { history } from "redux/configureStore";
+import { __catLike } from "redux/modules/cat";
 
 const CatPost = ({ cat, path, location }) => {
   const dispatch = useDispatch();

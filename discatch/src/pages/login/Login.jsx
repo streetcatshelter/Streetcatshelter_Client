@@ -2,7 +2,7 @@
 import React from "react";
 
 // COMPONENTS
-import { Template, GoogleLoginBtn } from "../../components";
+import { Template, GoogleLoginBtn } from "components";
 
 // STYLE
 import styled from "styled-components";
@@ -13,11 +13,11 @@ import {
   dev_oauthNaverURL,
   oauthKaKaoURL,
   oauthNaverURL,
-} from "../../shared/oauthenv";
+} from "shared/oauthenv";
 
 // IMAGES
-import Kakao from "../../styles/images/icon-Kakao.png";
-import Naver from "../../styles/images/icon-Naver(G).png";
+import Kakao from "styles/images/icon-Kakao.png";
+import Naver from "styles/images/icon-Naver(G).png";
 
 const Login = (props) => {
   return (
@@ -139,18 +139,17 @@ const Img = styled.img`
   border-radius: ${(props) => props.borderRadius};
 `;
 const LoginWrap = styled.div`
-  height:40%;
-  align-items:center;
+  height: 40%;
+  align-items: center;
   display: flex;
-
 `;
 const LoginBtn = styled.button`
   display: flex;
-  align-items:center;
+  align-items: center;
   width: 250px;
   height: 55px;
   margin: 10px 0px;
-  border:none;
+  border: none;
   background: ${(props) => props.background};
   border-radius: 10px;
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));

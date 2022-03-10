@@ -2,9 +2,9 @@
 import React from "react";
 // STYLE
 import styled from "styled-components";
-import Google from "../../styles/images/icon-googleBtn.png";
+import Google from "styles/images/icon-googleBtn.png";
 // AUTH
-import { redirect_google_uri, GOOGLE_API_KEY } from "../../shared/oauthenv";
+import { redirect_google_uri, GOOGLE_API_KEY } from "shared/oauthenv";
 const GoogleLoginBtn = () => {
   return (
     <div>
@@ -32,7 +32,7 @@ const GoogleLoginBtn = () => {
 
 const LoginBtn = styled.div`
   display: flex;
-  align-items:center;
+  align-items: center;
   width: 250px;
   height: 55px;
   margin: 10px 0px;

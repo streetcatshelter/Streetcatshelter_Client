@@ -9,7 +9,7 @@ import moment from "moment";
 import { EditModalSlide } from "../";
 
 // ELEMENTS
-import { Text } from "../../elements/index";
+import { Text } from "elements/index";
 
 // STYLE
 import styled, { css } from "styled-components";
@@ -18,10 +18,10 @@ import styled, { css } from "styled-components";
 import { Trash2 } from "react-feather";
 
 // REDUX
-import { deleteCommunityCommentDB } from "../../redux/modules/community";
-import { chatActions } from "../../redux/modules/chat";
-import { __deleteComment } from "../../redux/modules/comment";
-import { history } from "../../redux/configureStore";
+import { deleteCommunityCommentDB } from "redux/modules/community";
+import { chatActions } from "redux/modules/chat";
+import { __deleteComment } from "redux/modules/comment";
+import { history } from "redux/configureStore";
 
 const CommentCard = ({ comment, communityId }) => {
   const dispatch = useDispatch();

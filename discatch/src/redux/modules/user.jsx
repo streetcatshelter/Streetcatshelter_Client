@@ -1,9 +1,9 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
-import { userApi } from "../../shared/axios";
+import { userApi } from "shared/axios";
 
 // TOKEN
-import { setToken, removeToken } from "../../shared/token";
+import { setToken, removeToken } from "shared/token";
 
 const _loginKakao =
   (authorization_code) =>

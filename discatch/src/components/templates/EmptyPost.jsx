@@ -5,7 +5,7 @@ import React from "react";
 import styled from "styled-components";
 
 // IMAGES
-import nocatimage from "../../styles/images/nocatimage.png";
+import nocatimage from "styles/images/nocatimage.png";
 
 const EmptyPost = ({ path }) => {
   return (

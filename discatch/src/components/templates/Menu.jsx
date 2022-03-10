@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 // STYLE
-import { flexBox } from "../../shared/style";
+import { flexBox } from "shared/style";
 import styled, { css } from "styled-components";
 
 // COMPONENTS
 import { Toast } from "../";
 
 // ELEMENTS
-import { Grid, Text } from "../../elements";
+import { Grid, Text } from "elements";
 
 // ICON
 import { Home, Users, Compass, Send, User } from "react-feather";
@@ -19,10 +19,10 @@ import { Home, Users, Compass, Send, User } from "react-feather";
 import { useLocation } from "react-router-dom";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const Menu = (props) => {
   const pathName = useLocation();
@@ -47,7 +47,7 @@ const Menu = (props) => {
     location = pathLocation;
   } else if (location === undefined && pathLocation === undefined) {
     location = firstLocation;
-  } 
+  }
 
   if (
     path === "/catdetailinfo/:village/:catDetailId" ||
@@ -61,7 +61,10 @@ const Menu = (props) => {
     location = location?.split(" ")[2];
   }
 
-  if (userInfo.locationList && !(userInfo.locationList.join('').includes(location))) {
+  if (
+    userInfo.locationList &&
+    !userInfo.locationList.join("").includes(location)
+  ) {
     location = userInfo?.locationList[0]?.split(" ")[2];
   }
 
@@ -73,7 +76,7 @@ const Menu = (props) => {
 
   // 토스트 모달
   const [toastState, setToastState] = useState(false);
-  
+
   // 홈으로 이동
   const moveToHome = () => {
     if (location === undefined) {
@@ -136,7 +139,7 @@ const Menu = (props) => {
     }
   };
 
-  // 토스트 모달 
+  // 토스트 모달
   useToast(toastState, setToastState);
 
   return (

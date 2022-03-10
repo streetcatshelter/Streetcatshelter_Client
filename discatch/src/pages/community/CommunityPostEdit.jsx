@@ -8,14 +8,14 @@ import {
   Template,
   SecondHeader,
   SecondSpinner,
-} from "../../components";
-import { Toast } from "../../components";
+} from "components";
+import { Toast } from "components";
 
 // STYLE
 import styled, { css } from "styled-components";
 
 // ELEMENTS
-import { Grid, Button, Input, TextArea, Text } from "../../elements/index";
+import { Grid, Button, Input, TextArea, Text } from "elements/index";
 
 // ICON
 import { Camera } from "react-feather";
@@ -24,16 +24,13 @@ import { Camera } from "react-feather";
 import { useLocation } from "react-router-dom";
 
 // REDUX
-import { imgActions } from "../../redux/modules/image";
-import {
-  editCommunityDB,
-  getOneCommunityDB,
-} from "../../redux/modules/community";
+import { imgActions } from "redux/modules/image";
+import { editCommunityDB, getOneCommunityDB } from "redux/modules/community";
 
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const CommunityPostEdit = (props) => {
   const isLoaded = useSelector((state) => state.community.itemLoaded);
@@ -168,7 +165,6 @@ const CommunityPostEdit = (props) => {
   useToast(maxPhotoState, setMaxPhotoState);
   useToast(prePhotoState, setPrePhotoState);
 
-  
   return (
     <Template props={props}>
       <SecondSpinner visible={isLoaded} />

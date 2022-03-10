@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { Toast } from "../";
 
 // HOOKS
-import useToast from "../../hooks/useToast";
+import useToast from "hooks/useToast";
 
 const ChatSend = ({ sendMessage }) => {
   //토스트모달 (공백, 특수문자 입력시  경고창)

@@ -10,8 +10,8 @@ import moment from "moment";
 import styled from "styled-components";
 
 // REDUX
-import { chatActions } from "../../redux/modules/chat";
-import { resetAllMessage } from "../../redux/modules/chat";
+import { chatActions } from "redux/modules/chat";
+import { resetAllMessage } from "redux/modules/chat";
 
 const ChatMessage = ({ roomId, cntChat }) => {
   const dispatch = useDispatch();

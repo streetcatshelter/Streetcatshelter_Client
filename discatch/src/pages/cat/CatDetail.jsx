@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // STYLE
 import { css } from "styled-components";
-import { flexBox } from "../../shared/style";
+import { flexBox } from "shared/style";
 
 // COMPONENTS
 import {
@@ -15,22 +15,22 @@ import {
   CommentList,
   CatPost,
   Toast,
-} from "../../components";
+} from "components";
 
 // ELEMENTS
-import { Button, Grid } from "../../elements";
+import { Button, Grid } from "elements";
 
 // ICON
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
-import { history } from "../../redux/configureStore";
-import { __getCatInfo, _deleteToast } from "../../redux/modules/cat";
-import { __getComment } from "../../redux/modules/comment";
+import { history } from "redux/configureStore";
+import { __getCatInfo, _deleteToast } from "redux/modules/cat";
+import { __getComment } from "redux/modules/comment";
 
 // HOOKS
-import useDispatchToast from "../../hooks/useDispatchToast"; 
+import useDispatchToast from "hooks/useDispatchToast";
 
 const CatDetail = (props) => {
   const dispatch = useDispatch();
@@ -76,7 +76,7 @@ const CatDetail = (props) => {
 
   // 삭제 시 확인 토스트
   useDispatchToast(deleteToast, _deleteToast);
-  
+
   return (
     <>
       <Template props={props}>

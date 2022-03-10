@@ -9,24 +9,24 @@ import {
   ContentHeader,
   SecondSpinner,
   Toast,
-} from "../../components";
+} from "components";
 
 // ELEMENTS
-import { Text } from "../../elements";
+import { Text } from "elements";
 
 // STYLE
 import styled, { css } from "styled-components";
 
 // REDUX
-import { history } from "../../redux/configureStore";
+import { history } from "redux/configureStore";
 import {
   getOneCommunityDB,
   deleteCommunityDB,
   editToast,
-} from "../../redux/modules/community";
+} from "redux/modules/community";
 
 // HOOKS
-import useDispatchToast from "../../hooks/useDispatchToast"; 
+import useDispatchToast from "hooks/useDispatchToast";
 
 const CommunityPostDetail = (props) => {
   const dispatch = useDispatch();

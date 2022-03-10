@@ -53,15 +53,15 @@ const CalendarDates = (props) => {
                     const workIcons = [
                       {
                         work: workDate.food,
-                        background: `${({ theme }) => theme.colors.lightBrown}`,
+                        background: "lightBrown",
                       },
                       {
                         work: workDate.water,
-                        background: `${({ theme }) => theme.colors.skyBlue}`,
+                        background: "skyBlue",
                       },
                       {
                         work: workDate.snack,
-                        background: `${({ theme }) => theme.colors.lightGreen}`,
+                        background: "lightGreen",
                       },
                     ];
                     return (

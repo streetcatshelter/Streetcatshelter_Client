@@ -10,6 +10,11 @@ import { Gitlab } from "react-feather";
 const CalendarHead = (props) => {
   const { year, month, goToday, setMonth, setYear } = props;
   const DAY = ["일", "월", "화", "수", "목", "금", "토"];
+  const workColors = [
+    { work: "먹이", color: "lightBrown" },
+    { work: "급수", color: "skyBlue" },
+    { work: "간식", color: "lightGreen" },
+  ];
 
   const next = () => {
     setYear(month === 12 ? year + 1 : year);
@@ -37,12 +42,12 @@ const CalendarHead = (props) => {
       <S.HeadDots>
         <Gitlab width="10px" />
         <p>발견</p>
-        <S.HeadDot background="#D19B61" />
-        <p>먹이</p>
-        <S.HeadDot background="skyblue" />
-        <p>급수</p>
-        <S.HeadDot background="#CBCF52" />
-        <p>간식</p>
+        {workColors.map((workColor) => (
+          <>
+            <S.HeadDot background={workColor.color} />
+            <p>{workColor.work}</p>
+          </>
+        ))}
       </S.HeadDots>
       <S.HeadDays>
         {DAY.map((elm, idx) => {

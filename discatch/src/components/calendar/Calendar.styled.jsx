@@ -44,7 +44,11 @@ export const Dot = styled.div`
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: ${(props) => props.background};
+  ${({ background, theme }) => {
+    return css`
+      background: ${theme.colors}.${background};
+    `;
+  }};
   margin: 2px;
   display: ${(props) => props.work};
 `;
@@ -99,7 +103,11 @@ export const HeadDot = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background: ${(props) => props.background};
+  ${({ background, theme }) => {
+    return css`
+      background: ${theme.colors}.${background};
+    `;
+  }};
   margin: 5px;
   line-height: 20px;
 `;
@@ -246,10 +254,12 @@ export const ModalEventBox = styled.div`
   border-bottom: 0.2px solid ${({ theme }) => theme.colors.lightGreen};
   cursor: ${(props) => props.path === "mypage" && " pointer"};
   &:hover {
-    background: ${({ theme }) => {
-      return css`
-        ${(props) => props.path === "mypage" && `${theme.colors.ivory}`}
-      `;
+    ${({ theme, path }) => {
+      if (path === "mypage") {
+        return css`
+          background: ${theme.colors.ivory};
+        `;
+      }
     }};
   }
 `;

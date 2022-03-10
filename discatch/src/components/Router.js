@@ -1,10 +1,11 @@
 // LIBRARY
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { history } from "redux/configureStore";
 
-// AUTH
-import Auth from "shared/auth";
+// COMPONENTS
+import PrivateRoute from "components/route/PrivateRoute";
+import PublicRoute from "components/route/PublicRoute";
 
 // PAGES
 import {
@@ -36,169 +37,69 @@ import {
 
 // * == ( Router ) -------------------- * //
 const Router = () => {
+  const Onboarding = localStorage.getItem("onboarding");
   useEffect(() => {
-    const Onboarding = localStorage.getItem("onboarding");
-    if (!Onboarding || Onboarding === null) history.push("/slider");
-  }, []);
+    if (!Onboarding || Onboarding === null) {
+      history.push("/slider");
+    } else {
+      history.push("login");
+    }
+  });
 
   return (
     <Switch>
       {/* == Login */}
-      <Route path="/login" component={Auth(Login, false)} exact />
-      <Route
-        path="/user/kakao/callback"
-        component={Auth(LoginRedirectKakao, false)}
-        exact
-      />
-      <Route
-        path="/user/naver/callback"
-        component={Auth(LoginRedirectNaver, false)}
-        exact
-      />
-      <Route
-        path="/user/google/callback"
-        component={Auth(LoginRedirectGoogle, false)}
-        exact
-      />
+      <PublicRoute component={Login} path={"/login"} exact/>
+      <PublicRoute component={LoginRedirectKakao} path={"/user/kakao/callback"} exact/>
+      <PublicRoute component={LoginRedirectNaver} path={"/user/naver/callback"} exact/>
+      <PublicRoute component={LoginRedirectGoogle} path={"/user/google/callback"} exact/>
 
       {/* == Home */}
-      <Route path="/" component={Auth(Home, true)} exact />
+      <PrivateRoute component={Home} path={"/"} exact/>
 
       {/* == Slider */}
-      <Route path="/slider" exact component={Slider} />
+      <PublicRoute component={Slider} path={"/slider"} exact/>
 
       {/* == MyPage */}
-      <Route path="/mypage" component={Auth(MyPageCat, true)} exact />
-      <Route
-        path="/user/:userRandomId"
-        component={Auth(RandomUserProfile, true)}
-        exact
-      />
-      <Route
-        path="/mypage/notice"
-        component={Auth(MyPageNoticeList, true)}
-        exact
-      />
-      <Route
-        path="/mypage/notice/:noticeId"
-        component={Auth(MyPageNotices, true)}
-        exact
-      />
-      <Route path="/mypage/work" component={Auth(MyPageWork, true)} exact />
-      <Route path="/userinfowrite" exact component={UserInfoWrite} />
-      <Route path="/userinfoedit" exact component={UserInfoWrite} />
-      <Route
-        path="/userinfowrite"
-        component={Auth(UserInfoWrite, true)}
-        exact
-      />
-      <Route path="/userinfoedit" component={Auth(UserInfoWrite, true)} exact />
+      <PrivateRoute component={MyPageCat} path={"/mypage"} exact/>
+      <PrivateRoute component={RandomUserProfile} path={"/user/:userRandomId"} exact/>
+      <PrivateRoute component={MyPageNoticeList} path={"/mypage/notice"} exact/>
+      <PrivateRoute component={MyPageNotices} path={"/mypage/notice/:noticeId"} exact/>
+      <PrivateRoute component={MyPageWork} path={"/mypage/work"} exact/>
+      <PrivateRoute component={UserInfoWrite} path={"/userinfowrite"} exact/>
+      <PrivateRoute component={UserInfoWrite} path={"/userinfoedit"} exact/>
 
       {/* == Cat */}
-      <Route path="/catinfowrite" component={Auth(CatInfoWrite, true)} exact />
-      <Route
-        path="/catinfoedit/:catId"
-        component={Auth(CatInfoWrite, true)}
-        exact
-      />
-      <Route
-        path="/catinfowrite/:location"
-        component={Auth(CatInfoWrite, true)}
-        exact
-      />
-      <Route
-        path="/catdetailinfowrite"
-        component={Auth(CatDetailInfoWrite, true)}
-        exact
-      />
-      <Route
-        path="/catdetailinfowrite/:catId"
-        component={Auth(CatDetailInfoWrite, true)}
-        exact
-      />
-      <Route
-        path="/catdetailinfoedit/:catDetailId"
-        component={Auth(CatDetailInfoWrite, true)}
-        exact
-      />
-
-      <Route
-        path="/catdetail/:menu/:village/:catId"
-        component={Auth(CatDetail, true)}
-        exact
-      />
-
-      <Route
-        path="/catdetail/:menu/:village/:catId/1"
-        component={Auth(CatDetail, true)}
-        exact
-      />
-      <Route
-        path="/catdetail/:menu/:village/:catId/2"
-        component={Auth(CatDetail, true)}
-        exact
-      />
-      <Route
-        path="/catdetail/:menu/:village/:catId/3"
-        component={Auth(CatDetail, true)}
-        exact
-      />
-      <Route
-        path="/catdetailinfo"
-        component={Auth(CatDetailInfo, true)}
-        exact
-      />
-      <Route
-        path="/catdetailinfo/:village/:catDetailId"
-        exact
-        component={Auth(CatDetailInfo, true)}
-      />
+      <PrivateRoute component={CatInfoWrite} path={"/catinfowrite"} exact/>
+      <PrivateRoute component={CatInfoWrite} path={"/catinfoedit/:catId"} exact/>
+      <PrivateRoute component={CatInfoWrite} path={"/catinfowrite/:location"} exact/>
+      <PrivateRoute component={CatDetailInfoWrite} path={"/catdetailinfowrite"} exact/>
+      <PrivateRoute component={CatDetailInfoWrite} path={"/catdetailinfowrite/:catId"} exact/>
+      <PrivateRoute component={CatDetailInfoWrite} path={"/catdetailinfoedit/:catDetailId"} exact/>
+      <PrivateRoute component={CatDetail} path={"/catdetail/:menu/:village/:catId"} exact/>
+      <PrivateRoute component={CatDetail} path={"/catdetail/:menu/:village/:catId/1"} exact/>
+      <PrivateRoute component={CatDetail} path={"/catdetail/:menu/:village/:catId/2"} exact/>
+      <PrivateRoute component={CatDetail} path={"/catdetail/:menu/:village/:catId/3"} exact/>
+      <PrivateRoute component={CatDetailInfo} path={"/catdetailinfo"} exact/>
+      <PrivateRoute component={CatDetailInfo} path={"/catdetailinfo/:village/:catDetailId"} exact/>
 
       {/* == Community */}
-      <Route
-        path="/community/:village/:category/write"
-        component={Auth(CommunityPostWriteEdit, true)}
-        exact
-      />
-      <Route
-        path="/communitypostedit"
-        component={Auth(CommunityPostWriteEdit, true)}
-        exact
-      />
-      <Route
-        path="/community/:village/:category/postedit/:communityId"
-        component={Auth(CommunityPostWriteEdit, true)}
-        exact
-      />
-      <Route
-        path="/community/:village/:category"
-        component={Auth(CommunityDetail, true)}
-        exact
-      />
-      <Route
-        path="/communitypostdetail"
-        component={Auth(CommunityPostDetail, true)}
-        exact
-      />
-      <Route
-        path="/community/:village/:category/postdetail/:communityId"
-        component={Auth(CommunityPostDetail, true)}
-        exact
-      />
-      <Route path="/community" component={Auth(Community, true)} exact />
+      <PrivateRoute component={CommunityPostWriteEdit} path={"/community/:village/:category/write"} exact/>
+      <PrivateRoute component={CommunityPostWriteEdit} path={"/communitypostedit"} exact/>
+      <PrivateRoute component={CommunityPostWriteEdit} path={"/community/:village/:category/postedit/:communityId"} exact/>
+      <PrivateRoute component={CommunityDetail} path={"/community/:village/:category"} exact/>
+      <PrivateRoute component={CommunityPostDetail} path={"/communitypostdetail"} exact/>
+      <PrivateRoute component={CommunityPostDetail} path={"/community/:village/:category/postdetail/:communityId"} exact/>
+      <PrivateRoute component={Community} path={"/community"} exact/>
 
       {/* Map */}
-      <Route path="/map/:village" component={Auth(Map, true)} exact />
-      <Route path="/map/:village/:id" component={Auth(Map, true)} exact />
+      <PrivateRoute component={Map} path={"/map/:village"} exact/>
+      <PrivateRoute component={Map} path={"/map/:village/:id"} exact/>
 
       {/* Chat */}
-      <Route path="/chat" component={Auth(ChatMainPage, true)} exact />
-      <Route
-        path="/api/chat/enter/:roomId"
-        component={Auth(ChatRoomPage, true)}
-        exact
-      />
-      <Route path={"*"} exact component={NotFound} />
+      <PrivateRoute component={ChatMainPage} path={"/chat"} exact/>
+      <PrivateRoute component={ChatRoomPage} path={"/api/chat/enter/:roomId"} exact/>
+      <PublicRoute component={NotFound} path={"*"} exact/>
     </Switch>
   );
 };

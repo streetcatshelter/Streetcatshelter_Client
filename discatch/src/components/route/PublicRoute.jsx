@@ -7,7 +7,7 @@ import Auth from "shared/auth";
 
 function PublicRoute({component, path}) {
   return (
-    <Route component={Auth(component, false)} path={path} exact />
+    <Route component={Auth(component, false)} path={path} />
   )
 }
 

@@ -23,8 +23,7 @@ import CatInfoWrite from "./cat/CatInfoWrite";
 import Community from "./community/Community";
 import CommunityDetail from "./community/CommunityDetail";
 import CommunityPostDetail from "./community/CommunityPostDetail";
-import CommunityPostWrite from "./community/CommunityPostWrite";
-import CommunityPostEdit from "./community/CommunityPostEdit";
+import CommunityPostWriteEdit from "./community/CommunityPostWriteEdit";
 
 // MAP
 import Map from "./map/Map";
@@ -62,8 +61,7 @@ export {
   // COMMUNITY
   Community,
   CommunityDetail,
-  CommunityPostWrite,
-  CommunityPostEdit,
+  CommunityPostWriteEdit,
   CommunityPostDetail,
   // MAP
   Map,

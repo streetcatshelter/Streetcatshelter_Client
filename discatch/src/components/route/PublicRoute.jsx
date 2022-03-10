@@ -5,9 +5,9 @@ import { Route } from 'react-router-dom';
 // AUTH
 import Auth from "shared/auth";
 
-function PublicRoute({component, auth, path}) {
+function PublicRoute({component, path}) {
   return (
-    <Route component={Auth(component, auth)} path={path} exact />
+    <Route component={Auth(component, false)} path={path} exact />
   )
 }
 

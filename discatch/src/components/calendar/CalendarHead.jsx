@@ -2,7 +2,7 @@
 import React from "react";
 
 // STYLE
-import styled from "styled-components";
+import * as S from "./Calendar.styled";
 
 // ICON
 import { Gitlab } from "react-feather";
@@ -19,105 +19,38 @@ const CalendarHead = (props) => {
     setYear(month === 1 ? year - 1 : year);
     setMonth(month === 1 ? 12 : month - 1);
   };
-  
+
   return (
-    <Form>
-      <Nav>
-        <Year>
+    <S.HeadForm>
+      <S.HeadNav>
+        <S.HeadYear>
           {year}년 {month}월
-        </Year>
-        <BtnBox>
-          <Btn onClick={previous}>&lt;</Btn>
-          <Btn style={{ width: "50px" }} onClick={() => goToday()}>
+        </S.HeadYear>
+        <S.HeadBtnBox>
+          <S.HeadBtn onClick={previous}>&lt;</S.HeadBtn>
+          <S.HeadBtn style={{ width: "50px" }} onClick={() => goToday()}>
             오늘
-          </Btn>
-          <Btn onClick={next}>&gt;</Btn>
-        </BtnBox>
-      </Nav>
-      <Dots>
+          </S.HeadBtn>
+          <S.HeadBtn onClick={next}>&gt;</S.HeadBtn>
+        </S.HeadBtnBox>
+      </S.HeadNav>
+      <S.HeadDots>
         <Gitlab width="10px" />
         <p>발견</p>
-        <Dot background="#D19B61" />
+        <S.HeadDot background="#D19B61" />
         <p>먹이</p>
-        <Dot background="skyblue" />
+        <S.HeadDot background="skyblue" />
         <p>급수</p>
-        <Dot background="#CBCF52" />
+        <S.HeadDot background="#CBCF52" />
         <p>간식</p>
-      </Dots>
-      <Days>
+      </S.HeadDots>
+      <S.HeadDays>
         {DAY.map((elm, idx) => {
-          return <Day key={idx}>{elm}</Day>;
+          return <S.HeadDay key={idx}>{elm}</S.HeadDay>;
         })}
-      </Days>
-    </Form>
+      </S.HeadDays>
+    </S.HeadForm>
   );
 };
-
-const Dots = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  line-height: 20px;
-  p {
-    font-size: 12px;
-    line-height: 20px;
-    margin: 0px;
-  }
-`;
-const Dot = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background: ${(props) => props.background};
-  margin: 5px;
-  line-height: 20px;
-`;
-const Form = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-bottom: 1px solid #b5bb19;
-  border-radius: 2px;
-`;
-const Nav = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.7vw;
-`;
-const Year = styled.div`
-  font-size: 16px;
-  font-weight: 700;
-`;
-const BtnBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100px;
-`;
-const Btn = styled.li`
-  list-style: none;
-  padding: auto;
-  width: 30px;
-  border: 0.5px solid #e4e3e6;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 12px;
-  cursor: pointer;
-`;
-const Days = styled.div`
-  display: flex;
-  margin-bottom: 5px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-`;
-const Day = styled.li`
-  list-style: none;
-  text-align: center;
-  font-size: 12px;
-  :nth-child(7n + 1),
-  :nth-child(7n) {
-    color: #969696;
-  }
-`;
 
 export default CalendarHead;

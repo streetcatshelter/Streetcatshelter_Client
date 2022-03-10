@@ -20,13 +20,13 @@ const CalendarDates = (props) => {
   //일한 날인지 아닌지 구분하기위해 변수를 선언 일한날이면 해당날짜가 클릭되면 모달이 열림
   let WorkDay = [];
 
-  const workModalHandler = () => {
+  const workModalOpenHandler = () => {
     WorkDay.length > 0 && setOpenModal(true);
   };
 
   return (
     <>
-      <S.DateForm onClick={workModalHandler}>
+      <S.DateForm onClick={workModalOpenHandler}>
         {(props.firstDate > 0 && props.idx > props.firstDate - 1) ||
         props.idx < props.lastDate ? (
           ""
@@ -53,15 +53,15 @@ const CalendarDates = (props) => {
                     const workIcons = [
                       {
                         work: workDate.food,
-                        background: "lightBrown",
+                        background: ({ theme }) => theme.colors.lightBrown,
                       },
                       {
                         work: workDate.water,
-                        background: "skyBlue",
+                        background: ({ theme }) => theme.colors.skyBlue,
                       },
                       {
                         work: workDate.snack,
-                        background: "lightGreen",
+                        background: ({ theme }) => theme.colors.lightGreen,
                       },
                     ];
                     return (

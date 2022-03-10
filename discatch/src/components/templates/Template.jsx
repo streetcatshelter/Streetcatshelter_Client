@@ -45,14 +45,12 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const Content = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   margin: ${(props) => props.margin};
   max-width: 420px;
   width: 100vw;
   height: 100%;
-  right: 8px;
   background: #ffffff;
 `;
 

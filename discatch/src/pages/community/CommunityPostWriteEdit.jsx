@@ -3,8 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
-import { Template, SecondHeader, SecondSpinner } from "components";
-import { CommunityPreview } from "components/index";
+import {
+  CommunityPreview,
+  Template,
+  SecondHeader,
+  SecondSpinner,
+} from "../../components";
 import { Toast } from "components";
 
 // STYLE
@@ -13,36 +17,58 @@ import styled, { css } from "styled-components";
 // ELEMENTS
 import { Grid, Button, Input, TextArea, Text } from "elements/index";
 
-// REDUX
-import { imgActions } from "redux/modules/image";
-import { addCommunityDB } from "redux/modules/community";
-import { mypageActions } from "redux/modules/mypage";
-import { history } from "redux/configureStore";
+// ICON
+import { Camera } from "react-feather";
 
 // ROUTE
 import { useLocation } from "react-router-dom";
 
-// ICON
-import { Camera } from "react-feather";
+// REDUX
+import { imgActions } from "redux/modules/image";
+import { addCommunityDB } from "redux/modules/community";
+import { mypageActions } from "redux/modules/mypage";
+import {
+  editCommunityDB,
+  getOneCommunityDB,
+} from "redux/modules/community";
+
+import { history } from "redux/configureStore";
 
 // HOOKS
 import useToast from "hooks/useToast";
 
-const CommunityPostWrite = (props) => {
-  const isLoaded = useSelector((state) => state.community.itemLoaded);
+const CommunityPostWriteEdit = (props) => {
   const dispatch = useDispatch();
+  const imgNum = [0,1,2,3,4];
+  const write = props.location.pathname?.split('/')[4] === 'write';
   const path = useLocation();
-  const pathName = path.pathname.split("/");
+  const pathName = path.pathname?.split("/");
   const backPath = `/${pathName[1]}/${pathName[2]}/${pathName[3]}`;
   const detailLocation = pathName[2];
-  const preview = useSelector((state) =>
-    state.image.preview ? state.image.preview : Array(1)
-  );
+  const isLoaded = useSelector((state) => state.community.itemLoaded);
+  const preview = useSelector((state) => state.image.preview);
+  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
+  const { category, contents, imageList, location, title, username } =
+    useSelector((state) => ({
+      category: state.community.communityDetail?.category,
+      contents: state.community.communityDetail?.contents,
+      imageList: state.community.communityDetail?.communityImageList,
+      location: state.community.communityDetail?.location,
+      title: state.community.communityDetail?.title,
+      username: state.community.communityDetail?.username,
+    }));
 
-  // 동네 이름
-  let location = detailLocation;
+  // path에 사용할 카테고리 설정(edit)
+  let pathCategory;
+  if (category?.split(" ")[1] === "정보글") {
+    pathCategory = "catinfo";
+  } else if (category?.split(" ")[1] === "동네") {
+    pathCategory = "gathering";
+  } else {
+    pathCategory = "sharing";
+  }
 
-  // path에 사용할 카테고리 설정
+  // path에 사용할 카테고리 설정(write)
   let firstCategory;
   if (pathName[3] === "catinfo") {
     firstCategory = "고양이 정보글";
@@ -51,9 +77,22 @@ const CommunityPostWrite = (props) => {
   } else {
     firstCategory = `${detailLocation} 고양이 용품 나눔`;
   }
+  const communityId = path.pathname?.split("/")[5];
+  
+  const [writeCategory, setCategory] = React.useState(firstCategory);
 
-  // 사진 개수
-  const [fileNum, setFileNum] = useState(0);
+  // 글 작성 시 업로드한 사진 개수
+  const imageNum = imageList?.length;
+
+  // 총 사진 개수
+  const [fileNum, setFileNum] = useState(write ? 0 : imageNum);
+
+  // 토스트 모달
+  const [titleState, setTitleState] = useState(false);
+  const [contentState, setContentState] = useState(false);
+  const [photoState, setPhotoState] = useState(false);
+  const [maxPhotoState, setMaxPhotoState] = useState(false);
+  const [prePhotoState, setPrePhotoState] = useState(false);
 
   // S3 (사진 추가)
   const handleInputFile = (e) => {
@@ -69,90 +108,58 @@ const CommunityPostWrite = (props) => {
     }
   };
 
-  // 토스트 모달
-  const maxPhotoAlert = () => {
-    if (fileNum === 5) {
-      setMaxPhotoState(true);
-    }
-  };
-
-  // 글 작성시 필요한 정보
-  const nickName = useSelector((state) => state.mypage.userInfo.nickname);
-  const [category, setCategory] = React.useState(firstCategory);
-  const [title, setTitle] = React.useState("");
-  const [contents, setContents] = React.useState("");
-
-  // 토스트 모달
-  const [titleState, setTitleState] = useState(false);
-  const [contentState, setContentState] = useState(false);
-  const [photoState, setPhotoState] = useState(false);
-  const [maxPhotoState, setMaxPhotoState] = useState(false);
-
-  const Options = [
-    { key: 1, value: "고양이 정보글" },
-    { key: 2, value: `${detailLocation} 동네 모임` },
-    { key: 3, value: `${detailLocation} 고양이 용품 나눔` },
-  ];
-
-  const onChangeHandler = (e) => {
-    setCategory(e.currentTarget.value);
-  };
-
+  // 제목 수정
+  const [Title, setTitle] = React.useState(write ? '' : title);
   const $title = (e) => {
     setTitle(e.target.value);
   };
 
+  // 내용 수정
+  const [Contents, setContents] = React.useState(write ? '' : contents);
   const $contents = (e) => {
     setContents(e.target.value);
   };
 
-  // 커뮤니티 글 작성하기
-  const writeBtn = () => {
-    if (title === "") {
+  // 커뮤니티 글 수정하기
+  const editBtn = () => {
+    if (Title === "") {
       setTitleState(true);
-    } else if (contents === "") {
+    } else if (Contents === "") {
       setContentState(true);
     } else {
       dispatch(
-        addCommunityDB(
+        editCommunityDB(
+          communityId,
           category,
-          contents,
+          Contents,
           location,
-          title,
-          detailLocation,
-          nickName
+          Title,
+          username,
+          imageList
         )
       );
     }
   };
 
-  // 취소하기
-  const cancelBtn = () => {
-    history.push({ pathname: `${backPath}`, state: { location } });
-  };
-
   // 마지막 사진 삭제하기
+  const dispatchImg = () => {
+    dispatch(imgActions.delPreview(fileNum - 1));
+    dispatch(imgActions.delFile(fileNum - 1));
+    setFileNum(fileNum - 1);
+  }
   const delLastImageBtn = () => {
     if (preview.length === 5) {
-      dispatch(imgActions.delPreview(4));
-      dispatch(imgActions.delFile(4));
-      setFileNum(fileNum - 1);
+      dispatchImg()
     } else if (preview.length === 4) {
-      dispatch(imgActions.delPreview(3));
-      dispatch(imgActions.delFile(3));
-      setFileNum(fileNum - 1);
+      dispatchImg()
     } else if (preview.length === 3) {
-      dispatch(imgActions.delPreview(2));
-      dispatch(imgActions.delFile(2));
-      setFileNum(fileNum - 1);
+      dispatchImg()
     } else if (preview.length === 2) {
-      dispatch(imgActions.delPreview(1));
-      dispatch(imgActions.delFile(1));
-      setFileNum(fileNum - 1);
+      dispatchImg()
     } else if (preview.length === 1) {
-      dispatch(imgActions.delPreview(0));
-      dispatch(imgActions.delFile(0));
-      setFileNum(fileNum - 1);
+      dispatchImg()
+    } else if (!write && preview.length === 0 && imageNum !== 0) {
+      setPrePhotoState(true);
     } else {
       setPhotoState(true);
     }
@@ -162,6 +169,11 @@ const CommunityPostWrite = (props) => {
   useEffect(() => {
     dispatch(mypageActions._getUserInfo());
   }, [dispatch]);
+
+  // 커뮤니티 상세 페이지 가져오기
+  useEffect(() => {
+    dispatch(getOneCommunityDB(communityId));
+  }, [category, communityId, dispatch]);
 
   // 사진 정보 초기화
   useEffect(() => {
@@ -173,19 +185,51 @@ const CommunityPostWrite = (props) => {
   useToast(contentState, setContentState);
   useToast(photoState, setPhotoState);
   useToast(maxPhotoState, setMaxPhotoState);
+  useToast(prePhotoState, setPrePhotoState);
+
+  const Options = [
+    { key: 1, value: "고양이 정보글" },
+    { key: 2, value: `${detailLocation} 동네 모임` },
+    { key: 3, value: `${detailLocation} 고양이 용품 나눔` },
+  ];
+
+  const onChangeHandler = (e) => {
+    setCategory(e.currentTarget.value);
+  };
+
+  const writeBtn = () => {
+    if (title === "") {
+      setTitleState(true);
+    } else if (contents === "") {
+      setContentState(true);
+    } else {
+      dispatch(
+        addCommunityDB(
+          writeCategory,
+          Contents,
+          Title,
+          detailLocation,
+          nickName
+        )
+      );
+    }
+  };
 
   return (
     <Template props={props}>
       <SecondSpinner visible={isLoaded} />
-      <SecondHeader title="커뮤니티글 등록" />
+      {write ? 
+        <SecondHeader title="커뮤니티글 작성" /> : 
+        <SecondHeader title="커뮤니티글 수정" />
+      }
       <Grid
+        bgColor="white"
         margin="auto"
         width="90%"
-        height="auto"
         addstyle={() => {
           return css`
             @media screen and (max-height: 640px) {
-              height: 80vh;
+              height: 82vh;
             }
             @media screen and (max-height: 600px) {
               height: 90vh;
@@ -199,11 +243,12 @@ const CommunityPostWrite = (props) => {
           `;
         }}
       >
-        <CommunityWriteStyle>
-          <Grid width="96%" margin="15px auto " height="auto">
+        <CommunityEditStyle>
+          <Grid width="100%" margin="15px auto " height="auto">
+            {write ? 
             <Select
               onChange={onChangeHandler}
-              value={category}
+              value={writeCategory}
               style={{ height: "32px" }}
             >
               {Options.map((item, index) => (
@@ -211,15 +256,31 @@ const CommunityPostWrite = (props) => {
                   {item.value}
                 </option>
               ))}
-            </Select>
+            </Select> : 
+            <Input
+              disabled
+              value={category}
+              width="90%"
+              padding=" 7px 10px"
+              margin="auto"
+              addstyle={() => {
+                return css`
+                  display: flex;
+                  border-radius: 10px;
+                  justify-content: center;
+                `;
+              }}
+            />}
+            
           </Grid>
-          <Grid width="100%" margin="5px auto" height="auto">
+          <Grid width="100%" margin="15px auto" height="auto">
             <Input
               onChange={$title}
               placeholder="제목을 입력해주세요."
               padding=" 7px 10px"
               width="90%"
               margin="auto"
+              value={Title}
               addstyle={() => {
                 return css`
                   display: flex;
@@ -271,7 +332,6 @@ const CommunityPostWrite = (props) => {
                       <Camera width="50%" height=" 50%" color="white" />
                     </UploadButton>
                   </Grid>
-
                   <Upload
                     id="imgFile"
                     name="imgFile"
@@ -280,7 +340,6 @@ const CommunityPostWrite = (props) => {
                     accept="image/png, image/jpeg"
                     style={{ display: "none" }}
                     onChange={handleInputFile}
-                    onClick={maxPhotoAlert}
                   />
                   <Text
                     size="9px"
@@ -296,21 +355,25 @@ const CommunityPostWrite = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-              {preview[0] && (
-                <CommunityPreview preview={preview} previewNum={0} />
-              )}
-              {preview[1] && (
-                <CommunityPreview preview={preview} previewNum={1} />
-              )}
-              {preview[2] && (
-                <CommunityPreview preview={preview} previewNum={2} />
-              )}
-              {preview[3] && (
-                <CommunityPreview preview={preview} previewNum={3} />
-              )}
-              {preview[4] && (
-                <CommunityPreview preview={preview} previewNum={4} />
-              )}
+              {imgNum.map((img, idx) => {
+                if (write && preview[img]) {
+                  return (
+                    <CommunityPreview 
+                      key={idx} 
+                      preview={preview} 
+                      previewNum={img} 
+                    />)
+                } else if (!write && imageList && (imageList[img] || preview[img - imageNum])) {
+                  return (
+                    <CommunityPreview
+                      key={idx}
+                      preview={preview}
+                      imageList={imageList}
+                      imageNum={imageNum}
+                      previewNum={img}
+                    />)
+                }
+              })}
             </Grid>
             <Grid
               width="93%"
@@ -334,8 +397,9 @@ const CommunityPostWrite = (props) => {
             </Grid>
             <TextArea
               onChange={$contents}
+              value={Contents}
               placeholder="내용을 입력해주세요."
-              height="190px"
+              height="180px"
               padding=" 7px 10px"
               width="90%"
               addstyle={() => {
@@ -351,7 +415,7 @@ const CommunityPostWrite = (props) => {
 
           <Grid
             width="225px"
-            height="20px"
+            height="30px"
             display="flex"
             margin="20px auto 0px auto"
             addstyle={() => {
@@ -367,7 +431,7 @@ const CommunityPostWrite = (props) => {
               bgColor="olive"
               fontSize="18px"
               fontWeight="800"
-              onClick={writeBtn}
+              onClick={write ? writeBtn : editBtn}
               addstyle={() => {
                 return css`
                   display: flex;
@@ -378,7 +442,7 @@ const CommunityPostWrite = (props) => {
                 `;
               }}
             >
-              작성하기
+              {write ? '작성하기' : '완료하기'}
             </Button>
             <Button
               width="100px"
@@ -386,7 +450,15 @@ const CommunityPostWrite = (props) => {
               fontSize="18px"
               fontWeight="800"
               bgColor="olive"
-              onClick={cancelBtn}
+              onClick={() =>
+                {write ? 
+                  history.push({ pathname: `${backPath}`, state: { location } }) : 
+                  history.push(
+                    `/community/${
+                      location?.split(" ")[2]
+                    }/${pathCategory}/postdetail/${communityId}`
+                  )}
+              }
               addstyle={() => {
                 return css`
                   display: flex;
@@ -400,7 +472,7 @@ const CommunityPostWrite = (props) => {
               취소하기
             </Button>
           </Grid>
-        </CommunityWriteStyle>
+        </CommunityEditStyle>
       </Grid>
       {titleState && <Toast message="제목을 입력해주세요!" />}
       {contentState && <Toast message="내용을 입력해주세요!" />}
@@ -408,22 +480,18 @@ const CommunityPostWrite = (props) => {
       {maxPhotoState && (
         <Toast message="사진은 최대 5장까지 등록할 수 있어요!" />
       )}
+      {prePhotoState && (
+        <Toast message="이전에 추가한 사진은 삭제할 수 없어요!" />
+      )}
     </Template>
   );
 };
 
-const CommunityWriteStyle = styled.div`
+const CommunityEditStyle = styled.div`
   width: 100%;
   height: 60vh;
   margin: 10px auto;
   border-radius: 30px;
-`;
-const Select = styled.select`
-  background: rgb(${(props) => props.theme.palette.bgColor});
-  height: 50px;
-  border: 1px solid rgb(${(props) => props.theme.palette.olive});
-  width: 100%;
-  border-radius: 10px;
 `;
 const Upload = styled.input`
   background-color: white;
@@ -448,5 +516,16 @@ const UploadButton = styled.label`
   float: right;
   margin-bottom: 40px;
 `;
+const Select = styled.select`
+  font-size: 12px;
+  padding: 0 0 0 4px;
+  position: relative;
+  left: 18px;
+  background: rgb(${(props) => props.theme.palette.bgColor});
+  height: 50px;
+  border: 1px solid rgb(${(props) => props.theme.palette.olive});
+  width: 90%;
+  border-radius: 10px;
+`;
 
-export default CommunityPostWrite;
+export default CommunityPostWriteEdit;

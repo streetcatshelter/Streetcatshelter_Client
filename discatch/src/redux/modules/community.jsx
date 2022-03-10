@@ -1,22 +1,22 @@
 // API
 import { createSlice } from "@reduxjs/toolkit";
-import instance, { communityApi } from "shared/axios";
+import instance, { communityApi } from "../../shared/axios";
 
 // REDUX
 import { imgActions } from "./image";
 
 // 커뮤니티 글 등록
 export const addCommunityDB = (
-  category,
-  contents,
-  location,
-  title,
+  writeCategory,
+  Contents,
+  Title,
   detailLocation,
   nickName
 ) => {
   return function (dispatch, getState, { history }) {
     dispatch(itemLoading(true));
-    const path = category.split(" ");
+    const path = writeCategory?.split(" ");
+    console.log(path);
     let pathName = null;
     if (path[1] === "정보글") {
       pathName = "catinfo";
@@ -29,18 +29,20 @@ export const addCommunityDB = (
       imgActions.uploadImagesDB(() => {
         const imageUrl = getState().image.imageUrls;
         const postInfo = {
-          category: category,
-          contents: contents,
+          category: writeCategory,
+          contents: Contents,
           image: imageUrl,
-          location: location,
-          title: title,
+          location: detailLocation,
+          title: Title,
           username: nickName,
         };
-        instance.post("/community/create", postInfo).then((res) => {
-          history.push(`/community/${detailLocation}/${pathName}`);
-          dispatch(itemLoading(false));
-          dispatch(imgActions.setInitialState());
-        });
+        instance
+          .post("/community/create", postInfo)
+          .then((res) => {
+            history.push(`/community/${detailLocation}/${pathName}`);
+            dispatch(itemLoading(false));
+            dispatch(imgActions.setInitialState());
+          })
       })
     );
   };
@@ -209,7 +211,10 @@ export const addCommunityCommentDB =
   (contents, communityId) =>
   async (dispatch, getState, { history }) => {
     try {
-      await communityApi.createCommunityComment(contents, communityId);
+       await communityApi.createCommunityComment(
+        contents,
+        communityId
+      );
       dispatch(getOneCommunityDB(communityId));
     } catch (e) {
       console.error(e);
@@ -221,7 +226,7 @@ export const deleteCommunityCommentDB =
   (commentId, communityId) =>
   async (dispatch, getState, { history }) => {
     try {
-      await communityApi.deleteCommunityComment(commentId);
+       await communityApi.deleteCommunityComment(commentId);
       dispatch(deleteComment(commentId));
     } catch (e) {
       console.error(e);

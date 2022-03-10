@@ -13,8 +13,7 @@ import { useLocation } from "react-router-dom";
 const CommunityPreview = (preview) => {
   const path = useLocation();
   // pathLength가 5인 경우 작성 페이지, 6인 경우 수정 페이지
-  const pathLength = path.pathname.split("/").length;
-
+  const pathLength = path.pathname?.split("/").length;
   let previewImage;
   let newImage = preview?.preview[preview?.previewNum]?.preview;
 

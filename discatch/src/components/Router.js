@@ -19,8 +19,7 @@ import {
   CatDetailInfoWrite,
   CatDetail,
   CatDetailInfo,
-  CommunityPostWrite,
-  CommunityPostEdit,
+  CommunityPostWriteEdit,
   CommunityDetail,
   NotFound,
   CommunityPostDetail,
@@ -158,17 +157,17 @@ const Router = () => {
       {/* == Community */}
       <Route
         path="/community/:village/:category/write"
-        component={Auth(CommunityPostWrite, true)}
+        component={Auth(CommunityPostWriteEdit, true)}
         exact
       />
       <Route
         path="/communitypostedit"
-        component={Auth(CommunityPostEdit, true)}
+        component={Auth(CommunityPostWriteEdit, true)}
         exact
       />
       <Route
         path="/community/:village/:category/postedit/:communityId"
-        component={Auth(CommunityPostEdit, true)}
+        component={Auth(CommunityPostWriteEdit, true)}
         exact
       />
       <Route

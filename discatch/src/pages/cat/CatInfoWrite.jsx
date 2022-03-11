@@ -29,9 +29,6 @@ import {
 // HOOKS
 import useToast from "hooks/useToast";
 
-// UTILS
-import locationCheck from "utils/locationCheck";
-
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit = props.match.path?.split("/")[1] === "catinfoedit" ? true : false;
@@ -41,7 +38,13 @@ const CatInfoWrite = (props) => {
   const pathLocation = props.match.params.location;
   let location = pathLocation;
   const villageList = useSelector((state) => state.mypage.userVillage);
-  location = locationCheck(location, null, null, villageList, null, 'CatInfoWrite');
+  if (location === villageList[0]?.split(" ")[2]) {
+    location = villageList[0];
+  } else if (location === villageList[1]?.split(" ")[2]) {
+    location = villageList[1];
+  } else if (location === villageList[2]?.split(" ")[2]) {
+    location = villageList[2];
+  }
 
   // 사진
   const [fileUrl, setFileUrl] = useState(null);

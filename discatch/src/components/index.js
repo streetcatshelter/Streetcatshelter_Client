@@ -33,10 +33,9 @@ import CalendarDates from "./calendar/CalendarDates";
 import CalendarModal from "./calendar/CalendarModal";
 
 // CATPOSTS
-import CatPost from "./catPosts/CatPost";
-import CatDiary from "./catPosts/CatDiary";
-import CatGallery from "./catPosts/CatGallery";
-import Diary from "./catPosts/Diary";
+import CatPost from "./catPosts/catPost/CatPost";
+import CatDiary from "./catPosts/catDiary/CatDiary";
+import CatGallery from "./catPosts/catGallery/CatGallery";
 
 // COMMENT
 import Comment from "./comment/Comment";
@@ -97,7 +96,6 @@ export {
   CatPost,
   CatDiary,
   CatGallery,
-  Diary,
   // COMMENT
   Comment,
   CommentList,

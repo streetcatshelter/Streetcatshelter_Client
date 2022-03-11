@@ -12,17 +12,15 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { css } from "styled-components";
 import { flexBox } from "shared/style";
 
-// MOMENT
-import moment from "moment";
-
 // REDUX
 import { history } from "redux/configureStore";
 
+//utils
+import { dateFormat } from "utils";
+
 const Diary = ({ diary, location }) => {
   const catDetailId = diary.catDetailId;
-  const createdAt = diary.createdAt
-    ? moment(diary.createdAt).format("YYYY-MM-DD HH:MM")
-    : "";
+  const createdAt = dateFormat(diary.createdAt);
 
   return (
     <Grid

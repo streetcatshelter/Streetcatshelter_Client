@@ -2,8 +2,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-// MOMENT
-import moment from "moment";
+//utils
+import { dateFormat } from "utils";
 
 // STYLE
 import styled from "styled-components";
@@ -20,7 +20,7 @@ const Notice = () => {
         <DateBox style={{ fontSize: "14px", fontWeight: "900" }}>날짜</DateBox>
       </ContentHead>
       {noticeList.map((notice, idx) => {
-        const modifiedAt = moment(notice.modifiedAt).format("YY-MM-DD");
+        const modifiedAt = dateFormat(notice.modifiedAt).split(" ")[0];
         return (
           <Content
             key={idx}

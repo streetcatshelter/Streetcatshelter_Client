@@ -26,8 +26,8 @@ import { history } from "redux/configureStore";
 import { chatActions } from "redux/modules/chat";
 import { pushChatMessage } from "redux/modules/chat";
 
-// MOMENT
-import moment from "moment";
+//utils
+import { checkedOverDay } from "utils";
 
 const ChatRoomPage = (props) => {
   const dispatch = useDispatch();
@@ -38,16 +38,6 @@ const ChatRoomPage = (props) => {
   const location = props.location.state?.location;
   const cntChat = useSelector((state) => state.chat.chatinfo?.cntChat);
   const roomId = props.match.params.roomId;
-
-  //header 마지막 활동 시간
-  const LastActivity = moment(chatInfo.lastActivity).format("YYYY-MM-DD HH:MM");
-  const hourDiff = moment(LastActivity).diff(moment(), "hours");
-  // format 1, 활동한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-  const updated = moment(LastActivity).format("YYYY-MM-DD HH:MM");
-  // format 2, 활동한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
-  const recentlyUpdated = moment(LastActivity).fromNow();
-  //시간 경과에 따라 시간포맷변경(하루기준)
-  const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
 
   //채팅방 정보 가져오기
   useEffect(() => {
@@ -161,7 +151,11 @@ const ChatRoomPage = (props) => {
             />
             <InfoBlock>
               <p>{chatInfo.opponent}</p>
-              {chatInfo.lastActivity ? <p>{sendtime}에 활동</p> : ""}
+              {chatInfo.lastActivity ? (
+                <p>{checkedOverDay(chatInfo.lastActivity)}에 활동</p>
+              ) : (
+                ""
+              )}
             </InfoBlock>
           </InfoBox>
 

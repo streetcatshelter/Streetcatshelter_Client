@@ -15,8 +15,8 @@ import { history } from "redux/configureStore";
 // ROUTE
 import { useLocation } from "react-router-dom";
 
-// MOMENT
-import moment from "moment";
+//utils
+import { dateFormat } from "utils";
 
 const CommunityPost = ({ community }) => {
   const path = useLocation();
@@ -29,7 +29,6 @@ const CommunityPost = ({ community }) => {
   } else {
     name = community.nickname;
   }
-  const createdAt = moment(community.createdAt).format("YYYY-MM-DD HH:MM");
 
   return (
     <CommunityPostStyle
@@ -47,7 +46,7 @@ const CommunityPost = ({ community }) => {
           />
           <p>{name}</p>
         </RightBox>
-        <p>{createdAt}</p>
+        <p>{dateFormat(community.createdAt)}</p>
       </UserInfoBox>
 
       <ContentBox>

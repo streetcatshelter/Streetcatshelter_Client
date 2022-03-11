@@ -12,9 +12,8 @@ import { Template, ProgressBar } from "components";
 import { history } from "redux/configureStore";
 import { mypageActions } from "redux/modules/mypage";
 
-// MOMENT
-import "moment/locale/ko";
-import moment from "moment";
+// utils
+import { checkedOverDay } from "utils";
 
 const RandomUserProfile = (props) => {
   const dispatch = useDispatch();
@@ -28,16 +27,6 @@ const RandomUserProfile = (props) => {
     dispatch(mypageActions._getUserProfile(userRandomId));
   }, [userRandomId, dispatch]);
 
-  const createdAt = moment(
-    userRandomProfile.lastActivity !== null && userRandomProfile.lastActivity
-  ).format("YYYY-MM-DD HH:MM");
-  const hourDiff = moment(createdAt).diff(moment(), "hours");
-  // format 1, 보낸지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-  const updated = moment(createdAt).format("YYYY-MM-DD HH:MM");
-  // format 2, 보낸지 하루 이내일 경우 : 'n 분 전, n 시간 전'
-  const recentlyUpdated = moment(createdAt).fromNow();
-  // 시간 경과에 따라 시간포맷변경(하루기준)
-  const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
   return (
     <Template props={props}>
       <Wrapper>
@@ -85,7 +74,9 @@ const RandomUserProfile = (props) => {
               <p>
                 최근 활동 시간:
                 <span>
-                  {userRandomProfile.lastActivity === null ? "-" : sendtime}{" "}
+                  {userRandomProfile.lastActivity === null
+                    ? "-"
+                    : checkedOverDay(userRandomProfile.lastActivity)}
                 </span>
               </p>
             </ActiveDate>

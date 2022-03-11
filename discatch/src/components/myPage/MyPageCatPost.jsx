@@ -2,8 +2,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-// MOMENT
-import moment from "moment";
+//utils
+import { dateFormat } from "utils";
 
 // STYLE
 import styled from "styled-components";
@@ -16,14 +16,6 @@ import { history } from "redux/configureStore";
 
 const MyPageCatPost = ({ LikedCat, location }) => {
   const userInfo = useSelector((state) => state.mypage.userInfo);
-
-  // 최근 활동
-  const lastActivity =
-    LikedCat && moment(LikedCat.lastActivity).format("YYYY-MM-DD HH:MM");
-
-  // 내 활동
-  const myActivity =
-    LikedCat && moment(LikedCat.myActivity).format("YYYY-MM-DD HH:MM");
 
   // 동네 이름
   let userLocation = LikedCat.location;
@@ -64,8 +56,11 @@ const MyPageCatPost = ({ LikedCat, location }) => {
         >
           이름 : {LikedCat.catName}
         </p>
-        <p>최근활동: {lastActivity}</p>
-        <p>나의 최근활동: {myActivity === null ? "-" : myActivity}</p>
+        <p>최근활동: {dateFormat(LikedCat.lastActivity)}</p>
+        <p>
+          나의 최근활동:{" "}
+          {LikedCat.myActivity !== null && dateFormat(LikedCat.myActivity)}
+        </p>
         <InfoIcon>
           <FileText width="15px" height="15px" /> <p>{LikedCat.cntCatDetail}</p>
           <MessageCircle width="15px" height="15px" />{" "}

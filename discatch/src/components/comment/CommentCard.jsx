@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// MOMENT
-import moment from "moment";
+//utils
+import { checkedOverDay } from "utils";
 
 // COMPONENTS
 import { EditModalSlide } from "../";
@@ -27,15 +27,6 @@ const CommentCard = ({ comment, communityId }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
   const userInfo = useSelector((state) => state.mypage.userInfo);
-
-  //댓글 생성 시간
-  const createdAt = moment(comment.createdAt).format("YYYY-MM-DD HH:MM");
-  const hourDiff = moment(createdAt).diff(moment(), "hours");
-  // format 1, 수정한 지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-  const updated = moment(createdAt).format("YYYY-MM-DD HH:MM");
-  // format 2, 수정한 지 하루 이내일 경우 : 'n 분 전, n 시간 전'
-  const recentlyUpdated = moment(createdAt).fromNow();
-  const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
 
   // 프로필 모달
   const [profileModal, setProfileModal] = useState(false);
@@ -75,7 +66,11 @@ const CommentCard = ({ comment, communityId }) => {
               <p>{comment.nickname}</p>
             </Profile>
 
-            {comment.createdAt ? <span>{sendtime}</span> : ""}
+            {comment.createdAt ? (
+              <span>{checkedOverDay(comment.createdAt)}</span>
+            ) : (
+              ""
+            )}
           </Left>
 
           <Right>

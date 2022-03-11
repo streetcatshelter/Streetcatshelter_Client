@@ -8,8 +8,8 @@ import styled from "styled-components";
 // COMPONENTS
 import { EditModalSlide } from "components";
 
-// MOMENT
-import moment from "moment";
+// utils
+import { dateFormat } from "utils";
 
 // REDUX
 import { chatActions } from "redux/modules/chat";
@@ -51,7 +51,6 @@ const ContentHeader = ({
       : state.community.communityDetail.userRandomId
   );
 
-  const CreatedAt = moment(createdAt).format("YYYY-MM-DD HH:MM");
   const OpenProfile = () => {
     setProfileModal(!profileModal);
   };
@@ -88,7 +87,7 @@ const ContentHeader = ({
               <p>{nickname}</p>
               <InfoBoxBottom>
                 {locationName !== null && <p>{locationName}</p>}
-                <p>{CreatedAt}</p>
+                <p>{dateFormat(createdAt)}</p>
               </InfoBoxBottom>
             </UserInfoBoxCenter>
             {nickname === userNickName && (

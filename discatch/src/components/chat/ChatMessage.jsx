@@ -2,16 +2,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// MOMENT
-import "moment/locale/ko";
-import moment from "moment";
-
 // STYLE
 import styled from "styled-components";
 
 // REDUX
 import { chatActions } from "redux/modules/chat";
 import { resetAllMessage } from "redux/modules/chat";
+
+//utils
+import { checkedOverDay } from "utils";
 
 const ChatMessage = ({ roomId, cntChat }) => {
   const dispatch = useDispatch();
@@ -70,25 +69,13 @@ const ChatMessage = ({ roomId, cntChat }) => {
         <ChatBox>
           <div ref={observer} />
           {lastMessages.map((lastmessage, idx) => {
-            //시간 수정
-            const createdAt = moment(lastmessage.time).format(
-              "YYYY-MM-DD HH:MM"
-            );
-            const hourDiff = moment(createdAt).diff(moment(), "hours");
-            // format 1, 보낸지 하루 경과했을 경우 : YYYY.MM.DD hh:mm
-            const updated = moment(createdAt).format("YYYY-MM-DD HH:MM");
-            // format 2, 보낸지 하루 이내일 경우 : 'n 분 전, n 시간 전'
-            const recentlyUpdated = moment(createdAt).fromNow();
-            //시간 경과에 따라 시간포맷변경(하루기준)
-            const sendtime = hourDiff > -22 ? recentlyUpdated : updated;
-
             return (
               <div key={idx}>
                 {lastmessage.sender === nickName ? (
                   <div>
                     <BubbleTop user="my">{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="my">
-                      <p>{sendtime}</p>
+                      <p>{checkedOverDay(lastmessage.time)}</p>
                       <Bubble user="my">{lastmessage.message} </Bubble>
                     </BubbleBox>
                   </div>
@@ -97,7 +84,7 @@ const ChatMessage = ({ roomId, cntChat }) => {
                     <BubbleTop>{lastmessage.sender}</BubbleTop>
                     <BubbleBox user="friend">
                       <Bubble user="friend">{lastmessage.message} </Bubble>
-                      <p>{sendtime}</p>
+                      <p>{checkedOverDay(lastmessage.time)}</p>
                     </BubbleBox>
                   </div>
                 )}

@@ -20,7 +20,6 @@
     "http": "^0.0.1-security",
     "jwt-decode": "^3.1.2",
     "middleware": "^1.0.0",
-    "moment": "^2.29.1",
     "prettier": "^2.3.2",
     "proxy": "^1.0.2",
     "react": "^17.0.2",

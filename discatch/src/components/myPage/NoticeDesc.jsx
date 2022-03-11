@@ -2,16 +2,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-// MOMENT
-import moment from "moment";
+// utils
+import { dateFormat } from "utils";
 
 // STYLE
 import styled from "styled-components";
 
 const NoticeDesc = () => {
   const noticeDetail = useSelector((state) => state.mypage.noticedetail);
-  const modifiedAt = moment(noticeDetail.modifiedAt).format("YYYY-MM-DD");
-
+  const modifiedAt = dateFormat(noticeDetail.modifiedAt).split(" ")[0];
   if (!noticeDetail) {
     return <div></div>;
   }

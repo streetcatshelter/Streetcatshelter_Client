@@ -31,6 +31,9 @@ import {
 // HOOKS
 import useToast from "hooks/useToast";
 
+// UTILS
+import locationCheck from "utils/locationCheck";
+
 const Home = (props) => {
   const dispatch = useDispatch();
   // 로딩 여부
@@ -53,14 +56,8 @@ const Home = (props) => {
   const userLocation = useSelector((state) => state.map.keywordList[0]);
   const villageList = useSelector((state) => state.mypage.userVillage);
   let location = stateLocation ? stateLocation : villageList[0];
-  if (villageList[0] && userLocation === villageList[0]?.split(" ")[2]) {
-    location = villageList[0];
-  } else if (villageList[1] && userLocation === villageList[1]?.split(" ")[2]) {
-    location = villageList[1];
-  } else if (villageList[2] && userLocation === villageList[2]?.split(" ")[2]) {
-    location = villageList[2];
-  }
-
+  location = locationCheck(location, null, null, villageList, userLocation, 'Home');
+  
   // 마이페이지의 첫번째 동네 이름
   const userVillage = useSelector((state) => state.mypage.userVillage[0]);
 

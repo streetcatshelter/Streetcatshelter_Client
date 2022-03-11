@@ -31,20 +31,33 @@ import {
 import { __getDetailComment } from "redux/modules/comment";
 import { history } from "redux/configureStore";
 
-// UTILS
-import locationCheck from "utils/locationCheck";
-
 const CatDetailInfo = (props) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.mypage.userInfo);
   const isLoaded = useSelector((state) => state.mypage.isLoaded);
   const commentList = useSelector((state) => state.comment.list);
   const catDetailId = props.match.params.catDetailId;
-  let location = props.match.params.village;
+  const village = props.match.params.village;
   const detail = useSelector((state) => state.cat.detail);
 
   // 동네 이름 설정
-  location = locationCheck(location, userInfo, null, null, null, 'CatDetailInfo');
+  let location;
+  if (
+    userInfo.locationList &&
+    village === userInfo.locationList[0]?.split(" ")[2]
+  ) {
+    location = userInfo.locationList[0];
+  } else if (
+    userInfo.locationList &&
+    village === userInfo.locationList[1]?.split(" ")[2]
+  ) {
+    location = userInfo.locationList[1];
+  } else if (
+    userInfo.locationList &&
+    village === userInfo.locationList[2]?.split(" ")[2]
+  ) {
+    location = userInfo.locationList[2];
+  }
 
   // 고양이 상세 정보 좋아요 토글
   const likeToggle = () => {

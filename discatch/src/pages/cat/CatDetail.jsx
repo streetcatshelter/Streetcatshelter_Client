@@ -32,6 +32,9 @@ import { __getComment } from "redux/modules/comment";
 // HOOKS
 import useDispatchToast from "hooks/useDispatchToast";
 
+// UTILS
+import locationCheck from "utils/locationCheck";
+
 const CatDetail = (props) => {
   const dispatch = useDispatch();
   let location = props.location.state?.location;
@@ -43,27 +46,10 @@ const CatDetail = (props) => {
   const deleteToast = useSelector((state) => state.cat.deleteToast);
   const userInfo = useSelector((state) => state.mypage.userInfo);
 
+  console.log(location);
   // 동네 이름 설정
-  if (location === undefined) {
-    location = props.match.params.village;
-  }
-  if (
-    userInfo.locationList &&
-    location === userInfo?.locationList[0]?.split(" ")[2]
-  ) {
-    location = userInfo?.locationList[0];
-  } else if (
-    userInfo.locationList &&
-    location === userInfo?.locationList[1]?.split(" ")[2]
-  ) {
-    location = userInfo?.locationList[1];
-  } else if (
-    userInfo.locationList &&
-    location === userInfo?.locationList[2]?.split(" ")[2]
-  ) {
-    location = userInfo?.locationList[2];
-  }
-
+  location = locationCheck(location, userInfo, props, null, null, 'CatDetail');
+  console.log(location);
   // 고양이 정보 가져오기
   useEffect(() => {
     dispatch(__getCatInfo(catId));

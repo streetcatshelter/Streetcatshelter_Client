@@ -34,7 +34,15 @@ const rootReducer = combineReducers({
 });
 
 // history 넣기, 로거사용
-const middleware = [thunk.withExtraArgument({ history }), logger];
+const middleware = [thunk.withExtraArgument({ history })];
+
+// 현재 환경
+const env = process.env.NODE_ENV;
+
+//개발 환경에서만 보여주는 logger
+if (env === "development") {
+  middleware.push(logger);
+}
 
 // 미들웨어와 리듀서 묶어서 store생성
 const store = createStore(rootReducer, applyMiddleware(...middleware));

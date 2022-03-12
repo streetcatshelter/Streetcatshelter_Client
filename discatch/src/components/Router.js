@@ -39,11 +39,7 @@ import {
 const Router = () => {
   const Onboarding = localStorage.getItem("onboarding");
   useEffect(() => {
-    if (!Onboarding || Onboarding === null) {
-      history.push("/slider");
-    } else {
-      history.push("login");
-    }
+    if (!Onboarding || Onboarding === null) history.push("/slider"); 
   });
 
   return (

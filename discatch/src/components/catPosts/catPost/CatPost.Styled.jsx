@@ -114,6 +114,6 @@ export const LikeBox = styled.div`
 export const FavoriteIconBtn = styled(FavoriteIcon)`
   position: relative;
   left: 12px;
-  color: ${(props) => (props.userLiked ? "red" : "gray")};
+  color: ${(props) => (props.userliked === "true" ? "red" : "gray")};
   cursor: pointer;
 `;

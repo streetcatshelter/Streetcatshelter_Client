@@ -1,75 +1,48 @@
 // LIBRARY
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 
 // STYLE
 import styled from "styled-components";
 
-// ROUTE
-import { useLocation } from "react-router-dom";
-
-const TextArea = ({ value, placeholder, changeEvent, keyPress, onInput, ...props }) => {
-  const ref = useRef(null);
-  const path = useLocation();
-  const pathCheck = path.pathname.split("/")[4] ? path.pathname.split("/")[4] : path.pathname.split("/")[1];
-
-  // textarea의 높이 자동 조절
-  const handleResizeHeight = useCallback(() => {
-    if (ref === null || ref.current === null) {
-      return;
-    }
-    ref.current.style.height = '12px';
-    ref.current.style.height = ref.current.scrollHeight + "px";
-  }, []);
-
+import { textareaHeightHandler } from "utils";
+const TextArea = ({
+  value,
+  placeholder,
+  changeEvent,
+  keyPress,
+  onInput,
+  textareaRef,
+  ...props
+}) => {
   useEffect(() => {
-    if (ref === null || ref.current === null) {
-      return;
-    }
-    ref.current.style.height = "12px";
-    ref.current.style.height = ref.current.scrollHeight + "px";
-  }, []);
+    textareaHeightHandler(textareaRef);
+  }, [value, textareaRef]);
 
-  if (pathCheck === "write" || 
-      pathCheck === "postedit" ||
-      pathCheck === "catdetailinfowrite") {
-    return (
-      <TextAreaStyle
-        value={value}
-        placeholder={placeholder}
-        onChange={changeEvent}
-        onKeyPress={keyPress}
-        {...props}
-      />
-    );
-  } else {
-    return (
-      <TextAreaStyle
-        value={value}
-        placeholder={placeholder}
-        onChange={changeEvent}
-        onKeyPress={keyPress}
-        ref={ref}
-        onInput={handleResizeHeight}
-        {...props}
-      />
-    );
-  }
+  return (
+    <TextAreaStyle
+      value={value}
+      placeholder={placeholder}
+      onChange={changeEvent}
+      onKeyPress={keyPress}
+      ref={textareaRef}
+      {...props}
+    />
+  );
 };
 
 const TextAreaStyle = styled.textarea`
   margin: ${(props) => props.margin};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  max-height: 100px;
+  resize: none;
   background: ${(props) => props.bgColor};
   color: ${(props) => `rgb(${props.theme.palette[props.color]})`};
   font-size: ${(props) => props.fontSize};
-  border: 1px solid #cbcf5e;
+  border: 1px solid ${({ theme }) => theme.colors.lightGreen};
   border-radius: ${(props) => props.radius};
   padding: ${(props) => props.padding};
   ${(props) => props.addstyle()};
-  &:focus {
-    outline: none;
-  }
 `;
 
 TextArea.defaultProps = {

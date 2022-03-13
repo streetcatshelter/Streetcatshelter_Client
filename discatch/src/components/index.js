@@ -38,9 +38,9 @@ import CatDiary from "./catPosts/catDiary/CatDiary";
 import CatGallery from "./catPosts/catGallery/CatGallery";
 
 // COMMENT
-import Comment from "./comment/Comment";
+import CommentHead from "./comment/commentHead/CommentHead";
 import CommentList from "./comment/CommentList";
-import CommentCard from "./comment/CommentCard";
+import CommentCard from "./comment/commentCard/CommentCard";
 
 // COMMUNITY
 import CommunityCategoryCard from "./community/CommunityCategoryCard";
@@ -97,7 +97,7 @@ export {
   CatDiary,
   CatGallery,
   // COMMENT
-  Comment,
+  CommentHead,
   CommentList,
   CommentCard,
   // COMMUNITY

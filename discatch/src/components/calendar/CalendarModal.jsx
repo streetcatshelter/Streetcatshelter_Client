@@ -92,7 +92,7 @@ const CalendarModal = (props) => {
                         {activities.map(
                           (activity) =>
                             activity.work && (
-                              <S.ModalCheckBox>
+                              <S.ModalCheckBox key={activity.workName}>
                                 <CheckSquare />
                                 <p>{activity.workName}</p>
                               </S.ModalCheckBox>

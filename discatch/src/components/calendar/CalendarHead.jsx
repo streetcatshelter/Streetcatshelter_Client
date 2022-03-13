@@ -39,10 +39,10 @@ const CalendarHead = (props) => {
         <Gitlab width="10px" />
         <p>발견</p>
         {WORK_DUTIES.map((workColor) => (
-          <>
+          <S.HeadDotWrap key={`headDot${workColor.color}`}>
             <S.HeadDot background={workColor.color} />
             <p>{workColor.work}</p>
-          </>
+          </S.HeadDotWrap>
         ))}
       </S.HeadDots>
       <S.HeadDays>

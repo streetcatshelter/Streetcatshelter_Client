@@ -62,7 +62,10 @@ const CatPost = ({ cat, path, location }) => {
             })}
           </S.TagOutBox>
           <S.LikeBox>
-            <S.FavoriteIconBtn onClick={likeToggle} userLiked={userLiked} />
+            <S.FavoriteIconBtn
+              onClick={likeToggle}
+              userliked={userLiked?.toString()}
+            />
           </S.LikeBox>
         </S.BodyBox>
       </S.RightBox>

@@ -17,6 +17,9 @@ const CatDiary = ({ location, catId }) => {
   const dispatch = useDispatch();
   const diaryList = useSelector((state) => state.cat.diary);
 
+  const goToDetail = (catDetailId) => {
+    history.push(`/catdetailinfo/${location?.split(" ")[2]}/${catDetailId}`);
+  };
   useEffect(() => {
     dispatch(__getDiary(catId));
   }, [catId, dispatch]);
@@ -27,12 +30,8 @@ const CatDiary = ({ location, catId }) => {
         const createdAt = dateFormat(diary.createdAt);
         return (
           <S.CardWrap
-            key={idx}
-            onClick={() =>
-              history.push(
-                `/catdetailinfo/${location?.split(" ")[2]}/${diary.catDetailId}`
-              )
-            }
+            key={diary.catDetailId}
+            onClick={() => goToDetail(diary.catDetailId)}
           >
             <S.CardHeader>
               <S.HeaderUserInfo>

@@ -64,7 +64,7 @@ const CatPost = ({ cat, path, location }) => {
           <S.LikeBox>
             <S.FavoriteIconBtn
               onClick={likeToggle}
-              userliked={userLiked.toString()}
+              userliked={userLiked?.toString()}
             />
           </S.LikeBox>
         </S.BodyBox>

@@ -6,13 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkedOverDay } from "utils";
 
 // COMPONENTS
-import { EditModalSlide } from "../";
-
-// ELEMENTS
-import { Text } from "elements/index";
+import { EditModalSlide } from "components";
 
 // STYLE
-import styled, { css } from "styled-components";
+import * as S from "./CommentCard.styled";
 
 // ICON
 import { Trash2 } from "react-feather";
@@ -27,7 +24,6 @@ const CommentCard = ({ comment, communityId }) => {
   const dispatch = useDispatch();
   const commentId = comment.commentId;
   const userInfo = useSelector((state) => state.mypage.userInfo);
-
   // 프로필 모달
   const [profileModal, setProfileModal] = useState(false);
 
@@ -55,45 +51,30 @@ const CommentCard = ({ comment, communityId }) => {
 
   return (
     <>
-      <Wrap>
-        <Header>
-          <Left>
-            <Profile onClick={OpenProfile}>
+      <S.Wrap>
+        <S.Header>
+          <S.UserInfoBox>
+            <S.Profile onClick={OpenProfile}>
               <img
                 src={comment.profileImageUrl}
                 alt={comment.profileImageUrl}
               />
               <p>{comment.nickname}</p>
-            </Profile>
+            </S.Profile>
 
-            {comment.createdAt ? (
+            {comment.createdAt && (
               <span>{checkedOverDay(comment.createdAt)}</span>
-            ) : (
-              ""
             )}
-          </Left>
+          </S.UserInfoBox>
 
-          <Right>
-            {userInfo.nickname === comment.nickname ? (
+          <S.DeleteBox>
+            {userInfo.nickname === comment.nickname && (
               <Trash2 size="14px" color="red" onClick={deleteBtn} />
-            ) : (
-              ""
             )}
-          </Right>
-        </Header>
-        <Text
-          width="95%"
-          margin="0 0 0 10px"
-          padding="4px"
-          addstyle={() => {
-            return css`
-              border-radius: 10px;
-            `;
-          }}
-        >
-          {comment.contents}
-        </Text>
-      </Wrap>
+          </S.DeleteBox>
+        </S.Header>
+        <S.CommentText>{comment.contents}</S.CommentText>
+      </S.Wrap>
       {userInfo.nickname === comment.nickname ? (
         <EditModalSlide
           FirstBtn="내프로필보기"
@@ -122,51 +103,5 @@ const CommentCard = ({ comment, communityId }) => {
     </>
   );
 };
-
-const Wrap = styled.div`
-  width: 95%;
-  margin: 10px auto;
-  border-bottom: 0.2px solid rgb(203, 207, 94);
-`;
-const Header = styled.div`
-  display: flex;
-  line-height: 15px;
-  justify-content: space-between;
-`;
-const Left = styled.div`
-  display: flex;
-  span {
-    font-size: 10px;
-    line-height: 30px;
-    margin-left: 5px;
-  }
-`;
-const Profile = styled.div`
-  display: flex;
-  cursor: pointer;
-  img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-  }
-  p {
-    font-size: 14px;
-    margin: 0px 5px;
-    line-height: 30px;
-    font-weight: bold;
-  }
-`;
-const Right = styled.div`
-  display: flex;
-  line-height: 15px;
-  cursor: pointer;
-  align-items: center;
-  svg {
-    line-height: 14px;
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
-  }
-`;
 
 export default CommentCard;

@@ -88,6 +88,9 @@ export const TodayCSS = styled.div`
     `;
   }}
 `;
+export const HeadDotWrap = styled.div`
+  display: flex;
+`;
 
 export const HeadDots = styled.div`
   display: flex;

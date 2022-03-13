@@ -34,8 +34,8 @@ const Calendar = (props) => {
       let PVLastDay = new Date(YEAR, month - 1, 0).getDay();
 
       //다음 날짜
-      const ThisLasyDay = new Date(YEAR, month, 0).getDay();
-      const ThisLasyDate = new Date(YEAR, month, 0).getDate();
+      const ThisNextDay = new Date(YEAR, month, 0).getDay();
+      const ThisNextDate = new Date(YEAR, month, 0).getDate();
 
       //이전 날짜 만들기
       let PVLD = [];
@@ -46,7 +46,7 @@ const Calendar = (props) => {
       }
       //다음 날짜 만들기
       let TLD = [];
-      for (let i = 1; i < 7 - ThisLasyDay; i++) {
+      for (let i = 1; i < 7 - ThisNextDay; i++) {
         if (i === 0) {
           return TLD;
         }
@@ -55,7 +55,7 @@ const Calendar = (props) => {
 
       //현재날짜
       let TD = [];
-      TD = [...Array(ThisLasyDate + 1).keys()].slice(1);
+      TD = [...Array(ThisNextDate + 1).keys()].slice(1);
       return PVLD.concat(TD, TLD);
     },
     [YEAR]

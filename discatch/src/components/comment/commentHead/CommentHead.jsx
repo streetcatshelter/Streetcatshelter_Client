@@ -25,7 +25,7 @@ const CommentHead = ({ path, catId, communityId }) => {
   const location = useLocation();
   const communityPath = location.pathname.split("/")[1] === "community";
   const [toastState, setToastState] = useState(false);
-  const [comments, setComment] = useState(null);
+  const [comments, setComment] = useState("");
   const textareaRef = useRef(null);
 
   const communityDetail = useSelector(

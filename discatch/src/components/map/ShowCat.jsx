@@ -1,12 +1,4 @@
-const ShowCat = (
-  villageKeyword,
-  catLists,
-  location,
-  kakao,
-  setLatitude,
-  setLongitude,
-  newMap
-) => {
+const ShowCat = (villageKeyword, catLists, location, kakao, newMap) => {
   console.log(catLists);
   // 지도 마커 표시하기
   const imageSrc =
@@ -67,8 +59,8 @@ const ShowCat = (
       infowindow.open(newMap, marker);
     });
 
-    // 지도에 마커를 표시합니다.
-    kakao.maps.event.addListener(newMap, "click", function (mouseEvent) {
+    // 지도를 클릭하면 인포 윈도우가 닫힙니다.
+    kakao.maps.event.addListener(newMap, "click", function () {
       infowindow.close();
     });
   }
@@ -88,22 +80,6 @@ const ShowCat = (
       newMap.setBounds(bounds);
     }
   }
-  // 지도에 마커를 표시합니다.
-  kakao.maps.event.addListener(newMap, "click", function (mouseEvent) {
-    const markers = new kakao.maps.Marker({
-      map: newMap, // 마커를 표시할 지도
-    });
-    //클릭한 위도, 경도 정보를 가져옵니다.
-    const latlng = mouseEvent.latLng;
-    //위도 경도 값을 useState를 이용해서 useEffect 밖으로 빼냅니다.
-    setLatitude(latlng.getLat());
-    setLongitude(latlng.getLng());
-    //마커 위치를 클릭한 위치로 옮깁니다.
-    markers.setPosition(latlng);
-    //마커를 지도상에 보여줍니다.
-    markers.setMap(newMap);
-    // 지도에 마커를 표시하면 인포윈도우 닫기
-  });
 };
 
 export default ShowCat;

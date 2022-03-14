@@ -71,7 +71,7 @@ export const Window = styled.div`
   animation-name: fadeIn;
   animation-fill-mode: forwards;
   background: rgba(255, 255, 255, 0.7);
-  z-index: 1000;
+  z-index: 1;
   overflow: auto;
   @keyframes fadeIn {
     from {
@@ -131,37 +131,19 @@ export const ListDesc = styled.div`
   }
 `;
 export const TotalPage = styled.p`
-  display: flex;
   font-weight: 900;
   margin: 5px 0px;
-  span {
-    background: #fbd986;
-    display: block;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    padding: 1px 1px 2px 1px;
-  }
+  background: ${(props) => props.currentPage && props.theme.colors.lightYellow};
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  padding: 1px 1px 2px 1px;
 `;
 export const PagenationWrap = styled.div`
   margin: 10px auto;
   text-align: center;
-  a {
-    display: inline-block;
-    margin: 2px;
-    text-decoration: none;
-    color: #000000;
-    width: 15px;
-    height: 15px;
-  }
-  .on {
-    font-weight: 900;
-    cursor: pointer;
-    background: #fbd986;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-  }
+  display: flex;
 `;
 
 export const InfoWindow = styled.div`

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-
-// STYLE
 import * as S from "./Location.styled";
+
 const MapModal = ({ placeList, pagination }) => {
-  console.log(placeList);
-  console.log(pagination);
   const totalPage = pagination.totalCount / pagination.perPage;
   const [currentPage, setCurrentPage] = useState(1);
   const pages = [];

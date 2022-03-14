@@ -8,6 +8,7 @@ const SearchPlace = (
   setPagination
 ) => {
   let markers = [];
+
   // 장소 검색 객체를 생성합니다
   let ps = new kakao.maps.services.Places();
   // 키워드로 장소를 검색합니다
@@ -26,8 +27,6 @@ const SearchPlace = (
   }
   function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-      // 정상적으로 검색이 완료됐으면
-      // 검색 목록과 마커를 표출합니다
       displayPlaces(data);
       setPagination(pagination);
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
@@ -40,12 +39,10 @@ const SearchPlace = (
   }
   function displayPlaces(places) {
     setModal(true);
+
     let bounds = new kakao.maps.LatLngBounds();
 
-    // 검색 결과 목록에 추가된 항목들을 제거합니다
     setPlaceList("");
-
-    // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
 
     for (let i = 0; i < places.length; i++) {

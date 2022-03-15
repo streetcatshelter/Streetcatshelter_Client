@@ -1,7 +1,7 @@
 // LIBRARY
 import React from "react";
 import styled from "styled-components";
-
+import { Edit } from "react-feather";
 // STYLE
 import { borderBox } from "shared/style";
 
@@ -9,7 +9,9 @@ const Button = ({ is_float, children, clickEvent, ...props }) => {
   if (is_float) {
     return (
       <React.Fragment>
-        <FloatButton onClick={clickEvent}>{children}</FloatButton>{" "}
+        <FloatButton onClick={clickEvent}>
+          <Edit />
+        </FloatButton>
       </React.Fragment>
     );
   }
@@ -53,8 +55,8 @@ const FloatButton = styled.button`
   z-index: 10;
   min-width: 50px;
   min-height: 50px;
-  background-color: #b5bb19;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.lightGreen};
+  color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   font-size: 36px;
   font-weight: 800;
@@ -65,6 +67,9 @@ const FloatButton = styled.button`
   margin-left: 300px;
   bottom: 100px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media screen and (max-width: 320px) {
     right: 50px;
   }

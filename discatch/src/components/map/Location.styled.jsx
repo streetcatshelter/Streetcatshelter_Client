@@ -87,12 +87,10 @@ export const Window = styled.div`
   }
 `;
 export const ListWrap = styled.div`
-  display: ${(props) => (props.visible ? "block" : "none")};
   width: 90%;
   height: 95%;
   margin: 10px auto;
   padding: 5px;
-  overflow-y: auto;
   z-index: 1;
   font-size: 12px;
   border-radius: 10px;
@@ -109,10 +107,11 @@ export const MapWrap = styled.div`
 `;
 export const List = styled.div`
   margin-top: 20px;
+  padding: 10px 0px;
   display: flex;
   cursor: pointer;
   &:hover {
-    background: rgba(251, 216, 134, 0.7);
+    background: ${({ theme }) => theme.colors.lightYellow};
     border-radius: 10px;
   }
 `;

@@ -35,6 +35,7 @@ const Location = (props) => {
   //지도
   const [newMap, setNewMap] = useState("");
   const [location, setLocation] = useState("");
+
   // 고양이 정보 작성 페이지로 이동할 때 넘겨줄 위도와 경도
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -49,7 +50,7 @@ const Location = (props) => {
   const [modal, setModal] = useState(false);
   const [placeList, setPlaceList] = useState([]);
   const [pagination, setPagination] = useState([]);
-  console.log(placeList);
+
   const ChangeKeyword = (e) => {
     setSearchKeyword(e.target.value);
   };

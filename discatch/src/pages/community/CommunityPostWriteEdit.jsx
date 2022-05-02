@@ -37,6 +37,9 @@ import { history } from "redux/configureStore";
 // HOOKS
 import useToast from "hooks/useToast";
 
+// UTILS
+import handleInput from "utils/handleInput";
+
 const CommunityPostWriteEdit = (props) => {
   const dispatch = useDispatch();
   const imgNum = [0,1,2,3,4];
@@ -96,16 +99,7 @@ const CommunityPostWriteEdit = (props) => {
 
   // S3 (사진 추가)
   const handleInputFile = (e) => {
-    e.preventDefault();
-    if (fileNum < 5) {
-      const file = e.target.files[0];
-      const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setPreview(imageUrl, fileNum));
-      dispatch(imgActions.setFiles(file, fileNum));
-      setFileNum(fileNum + 1);
-    } else {
-      setMaxPhotoState(true);
-    }
+    handleInput(e, 5, fileNum, dispatch, setFileNum, null, setMaxPhotoState, 'CommunityPostWriteEdit')
   };
 
   // 제목 수정

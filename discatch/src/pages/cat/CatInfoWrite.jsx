@@ -31,6 +31,7 @@ import useToast from "hooks/useToast";
 
 // UTILS
 import locationCheck from "utils/locationCheck";
+import handleInput from "utils/handleInput";
 
 const CatInfoWrite = (props) => {
   const dispatch = useDispatch();
@@ -48,13 +49,9 @@ const CatInfoWrite = (props) => {
 
   // S3
   const handleInputFile = (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    const imageUrl = URL.createObjectURL(file);
-    dispatch(imgActions.setInitialState(imageUrl));
-    dispatch(imgActions.setFile(file));
-    setFileUrl(imageUrl);
+    handleInput(e, null, null, dispatch, null, setFileUrl, null, 'CatInfoWrite')
   };
+
   // 중성화 셀렉트박스
   const Options = [
     { key: 1, value: "중성화 여부" },

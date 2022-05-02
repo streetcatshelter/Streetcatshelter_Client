@@ -29,6 +29,9 @@ import {
 // HOOKS
 import useToast from "hooks/useToast";
 
+// UTILS
+import handleInput from "utils/handleInput";
+
 const CatDetailInfoWrite = (props) => {
   const dispatch = useDispatch();
   const edit =
@@ -41,18 +44,15 @@ const CatDetailInfoWrite = (props) => {
   const catId = edit ? CatId : props.match.params.catId;
   const [fileNum, setFileNum] = useState(0);
 
+    // 토스트 모달
+    const [maxPhotoState, setMaxPhotoState] = useState(false);
+    const [diaryState, setDiaryState] = useState(false);
+    const [tagState, setTagState] = useState(false);
+    const [accessState, setAccessState] = useState(false);
+    
   // S3 (사진 추가)
   const handleInputFile = (e) => {
-    e.preventDefault();
-    if (fileNum < 3) {
-      const file = e.target.files[0];
-      const imageUrl = URL.createObjectURL(file);
-      dispatch(imgActions.setPreview(imageUrl, fileNum));
-      dispatch(imgActions.setFiles(file, fileNum));
-      setFileNum(fileNum + 1);
-    } else {
-      setMaxPhotoState(true);
-    }
+    handleInput(e, 3, fileNum, dispatch, setFileNum, null, setMaxPhotoState, 'CatDetailInfoWrite');
   };
 
   // 고양이 상세 정보 작성에 필요한 정보
@@ -73,11 +73,7 @@ const CatDetailInfoWrite = (props) => {
     setDiary(e.target.value);
   };
 
-  // 토스트 모달
-  const [maxPhotoState, setMaxPhotoState] = useState(false);
-  const [diaryState, setDiaryState] = useState(false);
-  const [tagState, setTagState] = useState(false);
-  const [accessState, setAccessState] = useState(false);
+
 
   // 동네 이름
   let location = edit

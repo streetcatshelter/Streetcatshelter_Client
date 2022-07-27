@@ -1,6 +1,6 @@
 # disCATch - 동네 고양이 돌봄 플랫폼!😻
 
-disCATch Link : https://discatch.site <br> (백엔드 서버 이슈)
+disCATch Link : https://discatch.site (백엔드 서버 이슈)<br> 
 시연 영상 : https://www.youtube.com/watch?v=YD5qV2veBbY
 
 <br>
